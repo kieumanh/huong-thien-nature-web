@@ -15,7 +15,7 @@ for (const file of referenced) {
   catch { problems.push(`Missing referenced media: ${file}`); }
 }
 
-for (const phrase of ['Hương Thiền', 'Kiều Mạnh', 'interest-form', 'sitemap', 'seven-layers']) {
+for (const phrase of ['Hương Thiền', 'Kiều Mạnh', 'interest-form', 'sitemap', 'Bảy tầng']) {
   const source = phrase === 'sitemap' ? await readFile(join(root, 'public/sitemap.xml'), 'utf8') : home;
   if (!source.includes(phrase)) problems.push(`Required content is missing: ${phrase}`);
 }

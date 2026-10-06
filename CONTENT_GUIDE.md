@@ -19,6 +19,17 @@ Hương Thiền Nature brings together meditation, mindfulness and natural wellb
 | `Cộng hưởng từ trường thực vật.png` | Plant-connection reflection. No claim that people can detect a plant's electromagnetic field is made. |
 | `Những cách nhận thông điệp từ thiên nhiên.png` | Prompts for observing, listening, sensing, noticing patterns and reflecting on dreams. Reframed as personal meaning-making. |
 
+## Current website artwork
+
+The previous educational infographics are no longer shown in the interface. Their underlying contemplative ideas remain in accessible written form. The redesigned site uses a new, coordinated set of editorial illustrations:
+
+| Asset | Placement |
+|---|---|
+| `hero-canopy-v2.webp` | Forest path in the homepage hero and nature reflection cards. |
+| `practice-cushion-v2.webp` | Quiet outdoor meditation setting. |
+| `woodland-stream-v2.webp` | Nature listening and observation. |
+| `fern-study-v2.webp` | Botanical observation and the nature journal. |
+
 ## Editorial guardrails
 
 - Use invitations: “notice”, “you may experience”, “reflect”, “for some people”.
