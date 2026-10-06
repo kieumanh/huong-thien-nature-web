@@ -3,6 +3,7 @@
 ## What is prepared
 
 - Static Astro source prepared for Cloudflare Pages (`npm run build`, output `dist`).
+- Direct-deploy command targets the Pages project `huong-thien-nature-web` (`npm run deploy:pages`).
 - Wrangler Workers dry-run retained as an independent compatibility/build check.
 - Production domain and canonical URLs set to `huongthiennature.com`.
 - Bilingual homepage routes, SEO metadata, robots and sitemap.
@@ -21,6 +22,7 @@
 - [x] Confirm the GitHub repository is public; the project owner explicitly chose public visibility.
 - [ ] Connect the reviewed repository to Cloudflare Pages with build command `npm run build` and output directory `dist`; use its `pages.dev` URL as the phase-one demo.
 - [ ] Verify the Pages build and inspect its preview deployment.
+- [ ] For a direct deployment, configure `CLOUDFLARE_API_TOKEN` securely with Pages Write permission before running `npm run deploy:pages`.
 - [ ] Attach the root and `www` hostnames in Cloudflare, choose one canonical host and test HTTPS/redirects after the zone is active.
 - [ ] Verify sitemap, robots, canonical URLs, `hreflang`, social previews and Search Console after the domain is live.
 
@@ -44,4 +46,4 @@
 
 ## Current blockers to an actual production launch
 
-`astro check` and `astro build` pass, the source audit passes, and Wrangler dry-run accepts the generated static assets. Cloudflare account authentication is still required to create/connect the Pages project and inspect its DNS/TLS settings. The repository `kieumanh/huong-thien-nature-web` is public by the owner's explicit choice.
+`astro check` and `astro build` pass, the source audit passes, and Wrangler dry-run accepts the generated static assets. The source and build output are ready, but an authenticated Cloudflare deployment is still required to publish this version and inspect its DNS/TLS settings. The repository `kieumanh/huong-thien-nature-web` is public by the owner's explicit choice.
