@@ -1,0 +1,27 @@
+{
+  "name": "huong-thien-nature-web",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "audit": "node scripts/audit-source.mjs",
+    "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=huong-thien-nature",
+    "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run"
+  },
+  "dependencies": {
+    "astro": "^6.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.4",
+    "@tailwindcss/vite": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.8.0",
+    "vite": "^7.3.7",
+    "wrangler": "^4.0.0"
+  }
+}
