@@ -1,6 +1,6 @@
 {
   "name": "huong-thien-nature-web",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "type": "module",
   "scripts": {
@@ -10,8 +10,11 @@
     "check": "astro check",
     "audit": "node scripts/audit-source.mjs",
     "audit:build": "node scripts/audit-build.mjs",
-    "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=huong-thien-nature-web",
-    "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run"
+    "test:contact": "node --test tests/contact.test.ts",
+    "build:pages-functions": "wrangler pages functions build --outdir .wrangler/contact-build",
+    "dev:pages": "npm run build && wrangler pages dev --ip 127.0.0.1 --port 8788",
+    "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=huong-thien-nature-web --branch=main",
+    "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run --config wrangler.worker.jsonc"
   },
   "dependencies": {
     "astro": "^6.0.0"

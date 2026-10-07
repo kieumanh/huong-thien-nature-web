@@ -1,0 +1,7 @@
+# Local Cloudflare Pages Functions configuration. Copy to .dev.vars.
+# Leave credentials out of Git. Enter real values in .dev.vars or Cloudflare settings.
+RESEND_API_KEY=
+CONTACT_TO_EMAIL=
+CONTACT_FROM_EMAIL=
+TURNSTILE_SITE_KEY=
+TURNSTILE_SECRET_KEY=

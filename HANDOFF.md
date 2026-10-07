@@ -31,12 +31,14 @@ npm run check
 npm run audit
 npm run build
 npm run audit:build
+npm run test:contact
+npm run build:pages-functions
 npm run dev -- --host 0.0.0.0 --port 4321
 ```
 
 Hai biến XDG giúp các công cụ ghi cấu hình/cache vào vùng được phép của môi trường cloud. Trên máy cá nhân có thể dùng vị trí mặc định. Cloud task đã được cô lập; sử dụng checkout hiện có, không tạo Git worktree trừ khi được yêu cầu.
 
-Kiểm tra `/vi`, `/en`, `/robots.txt`, `/sitemap.xml` và ảnh trong `/media/`. Xem bản build bằng `npm run preview`. Kiểm tra tương thích Workers tùy chọn: `npm exec -- wrangler deploy --dry-run`.
+Kiểm tra `/vi`, `/en`, `/robots.txt`, `/sitemap.xml` và ảnh trong `/media/`. Xem bản build bằng `npm run preview`. Khi phát triển form gửi tin, dùng `npm run dev:pages` để chạy cả Pages Functions tại cổng 8788. Kiểm tra tương thích Worker static tùy chọn: `npm run deploy:worker-dry-run`.
 
 ## Triển khai
 
@@ -46,7 +48,7 @@ Triển khai trực tiếp bằng `npm run deploy:pages` cần thông tin xác t
 
 ## Phạm vi hiện tại và công việc tiếp theo
 
-Form quan tâm chỉ là bản xem trước trong một khung có thể mở/đóng, dùng dữ liệu mẫu, không gửi hoặc lưu thông tin. Biểu mẫu khóa khi không có JavaScript; kiểm tra dữ liệu và thao tác xem trước chạy cục bộ. Chưa có backend, tài khoản thành viên, thanh toán, lịch đặt chỗ hoặc cơ sở dữ liệu. Trước khi thu thập dữ liệu thật, cần xây dựng endpoint, xác minh Turnstile, lưu trữ an toàn, email giao dịch và nội dung đồng ý/quyền riêng tư.
+Form liên hệ đã có endpoint gửi email qua Resend, xác minh Turnstile ở máy chủ và ô đồng ý. Cần năm binding trong `CONTACT_SETUP.md` trước khi gửi thật; thiếu cấu hình hoặc JavaScript thì form khóa. Email nhận do chủ dự án cấu hình; địa chỉ không nằm trong frontend. Chưa có tài khoản thành viên, thanh toán, lịch đặt chỗ hoặc cơ sở dữ liệu. Kiểm thử dùng mock không chứng minh thư đã vào hộp nhận.
 
 Tiếp tục rà soát giao diện trên thiết bị thực, khả năng truy cập, nội dung song ngữ và quyền sử dụng hình ảnh; xác minh deployment Pages, DNS/TLS và tên miền theo `DEPLOYMENT.md`.
 

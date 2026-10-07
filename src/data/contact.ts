@@ -1,0 +1,38 @@
+export const contactCopy = {
+  vi: {
+    title: 'Gửi một lời nhắn', name: 'Tên của bạn', email: 'Địa chỉ email',
+    interest: 'Bạn muốn trao đổi về…', options: ['Chọn một mục', 'Thực tập thiền', 'Retreat', 'Khóa học', 'Cộng đồng', 'Nội dung khác'],
+    message: 'Lời nhắn của bạn', messageHint: 'Từ 10 đến 5.000 ký tự. Bạn có thể chia sẻ câu hỏi hoặc điều mình quan tâm.',
+    consent: 'Tôi đồng ý để Hương Thiền Nature sử dụng thông tin trên để phản hồi lời nhắn này.',
+    privacy: 'Tên, email và nội dung sẽ được chuyển qua dịch vụ email đến nhóm Hương Thiền Nature để phản hồi. Bạn không tự động đăng ký nhận bản tin. Vui lòng không gửi thông tin nhạy cảm.',
+    send: 'Gửi lời nhắn', sending: 'Đang gửi…',
+    loading: 'Đang chuẩn bị biểu mẫu…', ready: 'Bạn có thể gửi lời nhắn sau khi hoàn tất xác minh.',
+    success: 'Lời nhắn đã được tiếp nhận. Cảm ơn bạn đã kết nối với Hương Thiền Nature.',
+    unavailable: 'Biểu mẫu hiện chưa sẵn sàng. Bạn có thể thử lại sau.',
+    verification_failed: 'Vui lòng hoàn tất xác minh lại rồi gửi lời nhắn.',
+    invalid_data: 'Vui lòng kiểm tra tên, email, nội dung và ô đồng ý trước khi gửi.',
+    busy: 'Hệ thống đang bận. Vui lòng đợi một chút rồi thử lại.',
+    send_failed: 'Chưa thể xác nhận lời nhắn đã được tiếp nhận. Nội dung vẫn được giữ lại; bạn có thể thử gửi lại.',
+    noScript: 'Biểu mẫu cần JavaScript để xác minh và gửi lời nhắn. Vui lòng bật JavaScript rồi tải lại trang.',
+    honeypot: 'Để trống trường này',
+  },
+  en: {
+    title: 'Send a note', name: 'Your name', email: 'Email address',
+    interest: 'I would like to ask about…', options: ['Choose a topic', 'Meditation practice', 'Retreats', 'Courses', 'Community', 'Something else'],
+    message: 'Your message', messageHint: '10 to 5,000 characters. Share a question or what you are interested in.',
+    consent: 'I agree that Hương Thiền Nature may use these details to respond to this message.',
+    privacy: 'Your name, email and message will be sent through an email service to the Hương Thiền Nature team to respond. This does not subscribe you to a newsletter. Please do not include sensitive information.',
+    send: 'Send message', sending: 'Sending…',
+    loading: 'Preparing the form…', ready: 'Complete the verification to send your message.',
+    success: 'Your message has been accepted. Thank you for connecting with Hương Thiền Nature.',
+    unavailable: 'The form is not available right now. Please try again later.',
+    verification_failed: 'Please complete the verification again before sending.',
+    invalid_data: 'Please check your name, email, message and consent before sending.',
+    busy: 'The service is busy. Please wait a moment and try again.',
+    send_failed: 'We could not confirm that your message was accepted. Your text is still here; you can try sending again.',
+    noScript: 'This form needs JavaScript for verification and sending. Please enable JavaScript and reload the page.',
+    honeypot: 'Leave this field blank',
+  },
+} as const;
+
+export const contactInterests = ['meditation', 'retreat', 'courses', 'membership', 'other'] as const;

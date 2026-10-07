@@ -4,7 +4,8 @@
 
 - Static Astro source prepared for Cloudflare Pages (`npm run build`, output `dist`).
 - Direct-deploy command targets the Pages project `huong-thien-nature-web` (`npm run deploy:pages`).
-- Wrangler Workers dry-run retained as an independent compatibility/build check.
+- Contact API in `functions/` for Resend and Turnstile; runtime bindings described in `CONTACT_SETUP.md`.
+- Wrangler Workers static dry-run retained in `wrangler.worker.jsonc` as an independent compatibility/build check.
 - Production domain and canonical URLs set to `huongthiennature.com`.
 - Bilingual homepage routes, SEO metadata, robots and sitemap.
 - Supplied project images converted to compressed WebP for the site.
@@ -15,10 +16,10 @@
 - [ ] Run `npm ci`, `npm run check`, `npm run audit`, `npm run build` and `npm run audit:build` in an environment with package access. Use Node.js 24 (`NODE_VERSION=24` in the Cloudflare build environment).
 - [ ] Review Vietnamese and English copy, founder titles, logo and image consent/cropping.
 - [ ] Review 320 px, tablet and desktop layouts; keyboard navigation; contrast; screen-reader labels; browser console.
-- [ ] Replace or wire the preview interest form. It currently does not transmit or store data.
+- [ ] Configure the contact form's five runtime bindings and verify a real email arrives at the designated recipient. API/provider acceptance alone does not verify delivery.
 - [ ] Add a privacy notice and service terms before collecting personal data or accepting payments.
 - [ ] Review all spiritual/wellbeing language and avoid medical or unsupported scientific claims.
-- [ ] Configure secure API secrets, Turnstile and email only when server-side form handling is implemented.
+- [ ] Enter Resend/Turnstile secrets securely in Pages and verify the sender domain. See `CONTACT_SETUP.md`.
 - [x] Confirm the GitHub repository is public; the project owner explicitly chose public visibility.
 - [ ] Connect the reviewed repository to Cloudflare Pages with build command `npm run build` and output directory `dist`; use its `pages.dev` URL as the phase-one demo.
 - [ ] Verify the Pages build and inspect its preview deployment.
@@ -29,11 +30,11 @@
 ## Launch checklist
 
 1. Push the reviewed source and media to the public GitHub repository.
-2. Connect the repository to Cloudflare Pages; build `main` with `npm run build` and publish `dist`. Use Node.js 24; no framework adapter or server bindings are needed.
-3. Confirm the Pages build, then test both language homepages, all six journal routes, article language switching, mobile navigation, imagery, 404, metadata and the preview form on the `pages.dev` demo. `/sitemap.xml` should contain eight localized URLs.
+2. Connect the repository to Cloudflare Pages; build `main` with `npm run build` and publish `dist` along with the checkout's `functions/`. Use Node.js 24; no framework adapter is needed. Configure the contact runtime bindings before testing sending.
+3. Confirm the Pages build, then test both language homepages, all six journal routes, article language switching, mobile navigation, imagery, 404, metadata and contact email delivery on the `pages.dev` demo. `/sitemap.xml` should contain eight localized URLs.
 4. Attach `huongthiennature.com` only after the zone and DNS records are active; choose one canonical host.
 5. Verify DNS resolution, HTTPS certificate, HTTP-to-HTTPS behavior and canonical redirects on the custom domain.
-6. Keep Workers dry-run as a compatibility check; Pages is the current demo host.
+6. Keep Workers dry-run as a static compatibility check only; use Pages for the contact API.
 7. Submit `/sitemap.xml` in Google Search Console and check indexing after the domain is live.
 8. Announce the domain only after the form's real behavior and privacy notice match what the page promises.
 

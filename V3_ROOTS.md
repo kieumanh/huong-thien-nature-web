@@ -2,7 +2,7 @@
 
 ## Cơ sở triển khai
 
-Phiên bản 0.3.0 phát triển từ mã nguồn đã có trên GitHub (`9cc3513`). Người dùng yêu cầu hoàn thiện theo định hướng V3 Roots và push GitHub. Hai liên kết ChatGPT được cung cấp không truy cập được từ môi trường cloud (cổng mạng trả HTTP 403), nên phiên bản này không khẳng định tái tạo các yêu cầu chưa đọc trong cuộc trò chuyện đó.
+Phiên bản 0.3.0 phát triển từ mã nguồn đã có trên GitHub (`9cc3513`); bản 0.3.1 bổ sung gửi liên hệ qua Pages Functions. Người dùng yêu cầu hoàn thiện theo định hướng V3 Roots và push GitHub. Hai liên kết ChatGPT được cung cấp không truy cập được từ môi trường cloud (cổng mạng trả HTTP 403), nên phiên bản này không khẳng định tái tạo các yêu cầu chưa đọc trong cuộc trò chuyện đó.
 
 “Roots” được triển khai như định hướng thiết kế: bắt rễ trong hiện tại, gần gũi với thiên nhiên, tông đất và xanh rừng, bố cục thoáng, hình ảnh được kế thừa, biểu tượng mầm cây/rễ dạng vector. Các nội dung và chức danh của Hương Thiền, Kiều Mạnh được giữ theo tài liệu repository.
 
@@ -14,7 +14,7 @@ Phiên bản 0.3.0 phát triển từ mã nguồn đã có trên GitHub (`9cc351
 - Chuyển ngôn ngữ giữ nguyên bài đang đọc; liên kết canonical, hreflang và sitemap thống nhất.
 - Header/footer và dữ liệu nội dung dùng chung, thuận tiện cập nhật sau này.
 - Menu di động đóng bằng Escape, trả focus về nút mở, đóng khi chọn liên kết hoặc nhấn ngoài menu; điều hướng vẫn dùng được khi không có JavaScript.
-- Biểu mẫu xem trước có dữ liệu mẫu, kiểm tra trường bắt buộc/email, trạng thái phản hồi dễ truy cập và không thực hiện yêu cầu mạng. Khi JavaScript không chạy, các trường và nút gửi được khóa.
+- Form liên hệ có lời nhắn, ô đồng ý, kiểm tra email và xác minh Turnstile. Pages Functions gửi qua Resend và tránh email trùng bằng idempotency key. Thiếu cấu hình hoặc JavaScript thì form khóa. Xem `CONTACT_SETUP.md`.
 - Trang lỗi 404 đồng bộ giao diện; sitemap tự tạo từ danh sách bài viết.
 - GitHub Actions kiểm tra nguồn, kiểu dữ liệu, build và liên kết mỗi khi push `main` hoặc mở pull request.
 
@@ -28,7 +28,9 @@ npm run check
 npm run audit
 npm run build
 npm run audit:build
-npm exec -- wrangler deploy --dry-run
+npm run test:contact
+npm run build:pages-functions
+npm run deploy:worker-dry-run
 npm run preview -- --host 0.0.0.0 --port 4322
 ```
 
@@ -42,9 +44,9 @@ Kiểm tra trình duyệt tùy chọn khi Python Playwright và Chromium đã c�
 python tests/browser-smoke.py
 ```
 
-Mặc định dùng preview ở cổng 4322; có thể đặt `APP_BASE_URL`, `CHROMIUM_EXECUTABLE` và `ROOTS_ARTIFACT_DIR`. Nếu không có Chromium hệ thống, dùng browser do Playwright cung cấp. Kết quả và ảnh chụp nằm trong `.artifacts/`, được Git bỏ qua. Bộ kiểm tra đi qua tám trang song ngữ, năm chiều rộng 320/375/768/1024/1440 px, menu, chuyển ngôn ngữ, biểu mẫu, 404 và trường hợp tắt JavaScript.
+Mặc định dùng preview ở cổng 4322; có thể đặt `APP_BASE_URL`, `CHROMIUM_EXECUTABLE` và `ROOTS_ARTIFACT_DIR`. Nếu không có Chromium hệ thống, dùng browser do Playwright cung cấp. Kết quả và ảnh chụp nằm trong `.artifacts/`, được Git bỏ qua. Bộ kiểm tra đi qua tám trang song ngữ, năm chiều rộng 320/375/768/1024/1440 px, menu, chuyển ngôn ngữ, form khi chưa cấu hình, 404 và trường hợp tắt JavaScript. Bộ `tests/contact-browser.py` kiểm tra luồng gửi với API/widget mock.
 
-## Kết quả xác minh trong môi trường phát triển
+## Kết quả xác minh bản V3 Roots 0.3.0 trong môi trường phát triển
 
 - Astro check: 16 tệp, không có lỗi, cảnh báo hoặc hint.
 - Source audit: 25 ID không trùng, 14 ảnh WebP có trong repository.
@@ -55,6 +57,6 @@ Mặc định dùng preview ở cổng 4322; có thể đặt `APP_BASE_URL`, `C
 
 ## Giới hạn và triển khai
 
-Chưa có backend hoặc danh sách nhận tin thực. Không có đăng nhập, thanh toán, lịch đặt chỗ hay lưu dữ liệu cá nhân. Các chức năng này cần một giai đoạn triển khai riêng; website hiển thị rõ trạng thái chưa mở đăng ký.
+Đã có backend gửi liên hệ qua email, nhưng cần cấu hình và xác minh delivery trên deployment thực. Không có danh sách nhận bản tin, đăng nhập, thanh toán, lịch đặt chỗ hay cơ sở dữ liệu. Form liên hệ không tự đăng ký người gửi vào bản tin.
 
 Cloudflare Pages dùng nhánh `main`, lệnh `npm run build`, đầu ra `dist`, Node.js 24. Push GitHub không phải bằng chứng triển khai Cloudflare thành công. Kiểm tra commit của deployment và hai tuyến ngôn ngữ sau khi Git integration chạy. Không đưa token vào mã nguồn, tài liệu hoặc gói ZIP.

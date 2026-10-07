@@ -1,0 +1,28 @@
+---
+import Arrow from './Arrow.astro';
+import { contactCopy, contactInterests } from '../data/contact';
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const t = contactCopy[lang];
+---
+<div class="contact-card">
+  <h3>{t.title}</h3>
+  <form id="interest-form" data-language={lang} aria-describedby="contact-privacy" aria-busy="true">
+    <fieldset disabled><legend class="sr-only">{t.title}</legend>
+      <label for="name">{t.name}</label><input id="name" name="name" autocomplete="name" maxlength="100" required />
+      <label for="email">{t.email}</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" required />
+      <label for="interest">{t.interest}</label><select id="interest" name="interest" required><option value="" selected disabled>{t.options[0]}</option>{contactInterests.map((value, index) => <option value={value}>{t.options[index + 1]}</option>)}</select>
+      <label for="message">{t.message}</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="5" required aria-describedby="message-hint"></textarea><p class="form-note" id="message-hint">{t.messageHint}</p>
+      <div class="contact-honeypot" aria-hidden="true"><label for="website">{t.honeypot}</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
+      <label class="contact-consent" for="consent"><input id="consent" name="consent" type="checkbox" required /><span>{t.consent}</span></label>
+      <div id="contact-verification" class="contact-verification"></div>
+      <button class="button" type="submit" disabled><span class="send-label">{t.send}</span><Arrow /></button>
+    </fieldset>
+    <p class="form-note contact-privacy" id="contact-privacy">{t.privacy}</p>
+    <p class="form-result" id="form-result" role="status" aria-live="polite">{t.loading}</p>
+    <noscript><p class="form-note">{t.noScript}</p></noscript>
+  </form>
+</div>
+<script>
+  import '../scripts/contact-form';
+</script>

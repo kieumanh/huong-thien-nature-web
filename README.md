@@ -6,17 +6,17 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 
 ## Current delivery
 
-- Public-facing experience: brand story, meditation practice, nature reflections, founders, three full journal articles in each language, three-stage roadmap and an explicitly non-sending interest form preview.
+- Public-facing experience: brand story, meditation practice, nature reflections, founders, three full journal articles in each language, three-stage roadmap and a contact form backed by Cloudflare Pages Functions.
 - Responsive Vietnamese and English routes: `/vi` and `/en`.
 - Astro static output for Pages (`npm run build`, output `dist`) with Tailwind CSS Vite integration.
-- Wrangler Workers Static Assets configuration retained for a separate compatibility dry-run.
+- Wrangler Pages configuration with Functions for contact email; Workers Static Assets configuration retained in `wrangler.worker.jsonc` for a separate compatibility dry-run.
 - Supplied imagery optimized to WebP and placed in `public/media/`.
 - SEO basics: canonical URLs, `hreflang`, Open Graph, Organization JSON-LD, robots and a generated sitemap with eight localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
 
-Validation commands: `npm run check`, `npm run audit`, `npm run build`, `npm run audit:build`, and `npm exec -- wrangler deploy --dry-run`. The build audit verifies the ten HTML pages, article content, translation links, sitemap coverage and local asset/anchor targets.
+Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, and `npm run build:pages-functions`. The build audit verifies the ten HTML pages, article content, translation links, sitemap coverage and local asset/anchor targets. `npm run deploy:worker-dry-run` checks optional static Worker compatibility.
 
-The interest form is deliberately a non-sending preview. Connect a server-side endpoint, consent text, Turnstile verification, secure storage and transactional email before accepting real booking or membership data. There is no login, payment, booking calendar, database or member area in this first phase.
+The contact form sends email through Resend after server-side Turnstile verification and explicit consent. It stays unavailable until its five runtime bindings are configured. See `CONTACT_SETUP.md` for setup; implementation tests use mocks and do not prove live email delivery. There is no login, payment, booking calendar, database or member area in this phase.
 
 ## Run locally
 
@@ -33,7 +33,9 @@ npm run audit:build
 npm run preview
 ```
 
-In Cloudflare Pages, set the build command to `npm run build` and the build output directory to `dist`. `wrangler.jsonc` is retained for a Workers Static Assets compatibility check; Pages is the current demo host. For a later on-demand backend, add the Cloudflare adapter and Worker bindings as a separate, reviewed phase.
+In Cloudflare Pages, set the build command to `npm run build` and the build output directory to `dist`. Keep `functions/` in the checkout so Pages deploys the contact API. `wrangler.jsonc` configures Pages; `wrangler.worker.jsonc` is only for a separate static compatibility check.
+
+For local contact development, use `npm run dev:pages`; Astro dev/preview alone has no contact API. Production sending requires the bindings described in `CONTACT_SETUP.md`.
 
 Node.js 24.19.0 and npm 11.9.0 were used for this edition. Set the Cloudflare build environment variable `NODE_VERSION=24` when the project does not already use Node.js 24. In restricted cloud environments, see `HANDOFF.md` for writable cache/configuration paths. The site uses system fonts and does not fetch Google Fonts.
 

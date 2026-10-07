@@ -22,5 +22,9 @@ jobs:
       - run: npm ci --no-fund --no-audit
       - run: npm run check
       - run: npm run audit
+      - run: npm run test:contact
       - run: npm run build
       - run: npm run audit:build
+      - run: npm run build:pages-functions
+        env:
+          WRANGLER_SEND_METRICS: 'false'

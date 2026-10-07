@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RootMark from '../../components/RootMark.astro';
+import ContactForm from '../../components/ContactForm.astro';
 import { languages, getCopy, type Language } from '../../data/site';
 import { articles, articlePath } from '../../data/articles';
 
@@ -91,32 +92,10 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
 
     <section id="connect" class="section contact" aria-labelledby="connect-title">
       <div class="shell contact-grid">
-        <div><span class="eyebrow">{t.contactEye}</span><h2 id="connect-title">{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><a class="button" href="#journal">{en ? 'Begin with a reflection' : 'Bắt đầu từ một tản văn'} <Arrow /></a><p class="small-copy contact-status"><span class="small-dot" aria-hidden="true"></span>{en ? 'Sign-up is not open yet. Updates will be shared here.' : 'Chưa mở đăng ký. Thông tin mới sẽ được cập nhật tại đây.'}</p></div>
-        <details class="preview-panel"><summary>{t.previewSummary}<span aria-hidden="true">+</span></summary><div class="contact-card"><h3>{t.previewTitle}</h3><p class="form-note" id="preview-notice">{t.formNotice}</p><form id="interest-form" aria-describedby="preview-notice">
-          <fieldset disabled><legend class="sr-only">{t.previewTitle}</legend>
-            <label for="name">{t.formName}</label><input id="name" name="name" value={t.previewName} autocomplete="off" maxlength="100" required />
-            <label for="email">{t.formEmail}</label><input id="email" name="email" type="email" value="friend@example.com" autocomplete="off" maxlength="254" required />
-            <label for="interest">{t.formInterest}</label><select id="interest" name="interest" required>{t.formOptions.map((option, index) => <option value={index === 0 ? '' : String(index)} disabled={index === 0} selected={index === 0}>{option}</option>)}</select>
-            <button class="button" type="submit">{t.formButton} <Arrow /></button>
-          </fieldset>
-          <p class="form-result" id="form-result" role="status" hidden>{t.formSuccess}</p>
-          <noscript><p class="form-note">{en ? 'Enable JavaScript to try this local preview. The form remains disabled and will not submit.' : 'Bật JavaScript để thử bản xem trước cục bộ. Biểu mẫu đang được khóa và sẽ không gửi dữ liệu.'}</p></noscript>
-        </form></div></details>
+        <div><span class="eyebrow">{t.contactEye}</span><h2 id="connect-title">{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><a class="quiet-link" href="#journal">{en ? 'Explore the reflections' : 'Khám phá tản văn'} <Arrow /></a></div>
+        <ContactForm lang={lang} />
       </div>
     </section>
   </main>
   <Footer lang={lang} />
-  <script>
-    const form = document.querySelector<HTMLFormElement>('#interest-form');
-    const result = document.querySelector<HTMLElement>('#form-result');
-    if (form && result) {
-      form.addEventListener('submit', event => {
-        event.preventDefault();
-        if (form.reportValidity()) result.hidden = false;
-      });
-      form.addEventListener('input', () => { result.hidden = true; });
-      const fieldset = form.querySelector('fieldset');
-      if (fieldset) fieldset.disabled = false;
-    }
-  </script>
 </BaseLayout>
