@@ -1,4 +1,4 @@
-import { contactCopy } from '../data/contact';
+import { contactCopy, contactRecipient } from '../data/contact';
 
 type Turnstile = {
   render: (container: HTMLElement, options: Record<string, unknown>) => string;
@@ -19,6 +19,10 @@ async function setup(form: HTMLFormElement) {
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const label = button.querySelector<HTMLElement>('.send-label')!;
   const verification = form.querySelector<HTMLElement>('#contact-verification')!;
+  const draftLinks = form.querySelector<HTMLElement>('.contact-draft-links')!;
+  const emailApp = form.querySelector<HTMLAnchorElement>('[data-email-app]')!;
+  const gmail = form.querySelector<HTMLAnchorElement>('[data-gmail]')!;
+  let emailMode = false;
   let token = '';
   let widget: string | undefined;
   let sending = false;
@@ -28,13 +32,26 @@ async function setup(form: HTMLFormElement) {
     result.textContent = message;
     result.dataset.kind = kind;
   };
-  const refreshButton = () => { button.disabled = sending || !token; };
+  const refreshButton = () => { button.disabled = sending || (!emailMode && !token); };
+  const useEmail = () => {
+    emailMode = true;
+    fieldset.disabled = false;
+    verification.hidden = true;
+    label.textContent = t.compose;
+    form.setAttribute('aria-busy', 'false');
+    form.dataset.delivery = 'email';
+    form.querySelector<HTMLElement>('#contact-privacy')!.textContent = t.emailPrivacy;
+    refreshButton();
+    status(t.unavailable);
+  };
   const resetVerification = () => {
     token = '';
     refreshButton();
     if (widget !== undefined) window.turnstile?.reset(widget);
   };
   form.addEventListener('input', () => {
+    draftLinks.hidden = true;
+    if (emailMode) status(t.unavailable);
     // Retrying an unchanged submission keeps its idempotency key; editing creates a new request.
     requestId = '';
     if (succeeded) {
@@ -45,8 +62,27 @@ async function setup(form: HTMLFormElement) {
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (sending || !form.reportValidity()) return;
-    if (!token) { status(t.verification_failed, 'error'); return; }
     const fields = new FormData(form);
+    if (emailMode) {
+      if (fields.get('website')) return;
+      const topic = form.querySelector<HTMLSelectElement>('#interest')!.selectedOptions[0].textContent;
+      const subject = `Hương Thiền Nature · ${topic}`;
+      const body = [
+        `Name / Tên: ${String(fields.get('name')).trim()}`,
+        `Email: ${String(fields.get('email')).trim()}`,
+        `Interest / Quan tâm: ${topic}`, '', String(fields.get('message')).trim(), '',
+        lang === 'vi' ? 'Tôi đồng ý sử dụng thông tin này để phản hồi lời nhắn.' : 'I consent to using these details to respond to this message.',
+      ].join('\n');
+      // Draft only: no message data leaves this page until a visitor chooses a link.
+      emailApp.href = `mailto:${contactRecipient}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      const params = new URLSearchParams({ view: 'cm', fs: '1', to: contactRecipient, su: subject, body });
+      gmail.href = `https://mail.google.com/mail/?${params}`;
+      draftLinks.hidden = false;
+      status(t.draftReady);
+      emailApp.focus();
+      return;
+    }
+    if (!token) { status(t.verification_failed, 'error'); return; }
     requestId ||= crypto.randomUUID();
     const body = {
       name: fields.get('name'), email: fields.get('email'), interest: fields.get('interest'),
@@ -73,7 +109,8 @@ async function setup(form: HTMLFormElement) {
       } else {
         const code = reply.code;
         const message = code === 'verification_failed' ? t.verification_failed : code === 'invalid_data' ? t.invalid_data : code === 'busy' ? t.busy : code === 'unavailable' ? t.unavailable : t.send_failed;
-        status(message, 'error');
+        if (code === 'unavailable') useEmail();
+        else status(message, 'error');
       }
     } catch {
       status(t.send_failed, 'error');
@@ -81,7 +118,7 @@ async function setup(form: HTMLFormElement) {
       sending = false;
       fieldset.disabled = false;
       form.setAttribute('aria-busy', 'false');
-      label.textContent = t.send;
+      label.textContent = emailMode ? t.compose : t.send;
       resetVerification();
     }
   });
@@ -107,18 +144,17 @@ async function setup(form: HTMLFormElement) {
       sitekey: config.siteKey, action: 'contact', theme: 'light', size: 'compact', language: lang,
       'response-field': false,
       callback: (value: string) => {
+        if (emailMode) return;
         token = value;
         refreshButton();
         if (!sending && !succeeded && result.textContent === t.verification_failed) status(t.ready);
       },
-      'expired-callback': () => { token = ''; refreshButton(); status(t.verification_failed, 'error'); },
-      'error-callback': () => { token = ''; refreshButton(); status(t.verification_failed, 'error'); },
+      'expired-callback': () => { if (!emailMode) { token = ''; refreshButton(); status(t.verification_failed, 'error'); } },
+      'error-callback': () => { if (!emailMode) { token = ''; refreshButton(); status(t.verification_failed, 'error'); } },
     });
     status(t.ready);
     form.setAttribute('aria-busy', 'false');
   } catch {
-    fieldset.disabled = true;
-    form.setAttribute('aria-busy', 'false');
-    status(t.unavailable, 'error');
+    useEmail();
   }
 }

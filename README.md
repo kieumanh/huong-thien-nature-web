@@ -1,4 +1,4 @@
-# Hương Thiền Nature — V3 Roots
+# Hương Thiền Nature — V3 Roots 0.3.2
 
 Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. The deployment target is GitHub → Cloudflare Pages (`pages.dev`); `https://huongthiennature.com` is the intended custom domain after DNS is ready.
 
@@ -14,10 +14,12 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 - SEO basics: canonical URLs, `hreflang`, Open Graph, Organization JSON-LD, robots and a generated sitemap with eight localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
 - Background music: the supplied `Lotus at First Light` MP3 loops at 25% initial volume. A fixed player supports pause/play and volume; the user's pause/volume choice is remembered, and playback position resumes within a session. Browsers that block audible autoplay start playback after an eligible interaction or an explicit Play click.
+- Music controls sit at the bottom left; a bottom-right back-to-top button appears at 30% of the scrollable document height, supports keyboard focus and respects reduced motion.
+- Release numbers follow `major.minor.patch` in `package.json`; the footer and application-version meta tag use the same number. See `CHANGELOG.md` for each release.
 
 Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, and `npm run build:pages-functions`. The build audit verifies the ten HTML pages, article content, translation links, sitemap coverage and local asset/anchor targets. `npm run deploy:worker-dry-run` checks optional static Worker compatibility.
 
-The contact form sends email through Resend after server-side Turnstile verification and explicit consent. It stays unavailable until its five runtime bindings are configured. See `CONTACT_SETUP.md` for setup; implementation tests use mocks and do not prove live email delivery. There is no login, payment, booking calendar, database or member area in this phase.
+The contact form sends email through Resend after server-side Turnstile verification and explicit consent when its five runtime bindings are configured. When that API or its initial verification setup is unavailable, visitors can use the form to prepare an email to `kieumanh2211@gmail.com`, then open their email app or Gmail to review and send it themselves. Preparing a draft never reports that it has been sent. A direct email link also works without JavaScript. See `CONTACT_SETUP.md` for setup; implementation tests do not prove live email delivery. There is no login, payment, booking calendar, database or member area in this phase.
 
 ## Run locally
 

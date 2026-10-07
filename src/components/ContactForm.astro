@@ -1,6 +1,6 @@
 ---
 import Arrow from './Arrow.astro';
-import { contactCopy, contactInterests } from '../data/contact';
+import { contactCopy, contactInterests, contactRecipient } from '../data/contact';
 import type { Language } from '../data/site';
 const { lang } = Astro.props as { lang: Language };
 const t = contactCopy[lang];
@@ -20,6 +20,11 @@ const t = contactCopy[lang];
     </fieldset>
     <p class="form-note contact-privacy" id="contact-privacy">{t.privacy}</p>
     <p class="form-result" id="form-result" role="status" aria-live="polite">{t.loading}</p>
+    <div class="contact-draft-links" hidden>
+      <a class="button button-ghost" data-email-app href={`mailto:${contactRecipient}`}>{t.emailApp} <Arrow /></a>
+      <a class="button button-ghost" data-gmail href="https://mail.google.com/mail/" target="_blank" rel="noopener noreferrer">{t.gmail} <Arrow /></a>
+    </div>
+    <p class="form-note contact-direct">{t.directEmail}: <a href={`mailto:${contactRecipient}`}>{contactRecipient}</a></p>
     <noscript><p class="form-note">{t.noScript}</p></noscript>
   </form>
 </div>

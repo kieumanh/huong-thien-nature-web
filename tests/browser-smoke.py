@@ -66,10 +66,11 @@ with sync_playwright() as p:
     report.append('Article language switch preserves the selected article')
     page.goto(base+'/vi/',wait_until='domcontentloaded')
     page.wait_for_function("document.querySelector('#interest-form').getAttribute('aria-busy') === 'false'")
-    assert page.locator('#name').is_disabled()
-    assert page.locator('#interest-form button').is_disabled()
-    assert page.locator('#form-result').get_attribute('data-kind')=='error'
-    report.append('Unconfigured contact service disables submission without reporting success')
+    assert page.locator('#name').is_enabled()
+    assert page.locator('#interest-form button').is_enabled()
+    assert page.locator('#interest-form').get_attribute('data-delivery')=='email'
+    assert page.locator('#form-result').get_attribute('data-kind')=='info'
+    report.append('Unconfigured contact service enables email drafting without reporting delivery')
     response=page.goto(base+'/missing-v3-roots-page',wait_until='domcontentloaded')
     assert response.status==404
     assert page.locator('h1').inner_text()=='Không tìm thấy trang.'
@@ -82,7 +83,8 @@ with sync_playwright() as p:
     assert np.locator('#interest-form button').is_disabled()
     assert np.locator('#interest-form noscript').is_visible()
     assert np.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
-    report.append('JavaScript disabled: navigation works and contact form cannot submit')
+    assert np.locator('.contact-direct a').get_attribute('href')=='mailto:kieumanh2211@gmail.com'
+    report.append('JavaScript disabled: navigation and direct email work; form cannot submit as GET')
     assert errors==[], 'Browser errors: '+str(errors)
     report.append('No JavaScript page errors')
     browser.close()

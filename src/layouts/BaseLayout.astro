@@ -1,6 +1,8 @@
 ---
 import '../styles/global.css';
 import BackgroundMusic from '../components/BackgroundMusic.astro';
+import BackToTop from '../components/BackToTop.astro';
+import { version } from '../../package.json';
 const { lang = 'vi', title, description, alternatePath, image = '/media/hero-canopy-v2.webp' } = Astro.props;
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
   ? Astro.url.pathname : `${Astro.url.pathname}/`;
@@ -16,6 +18,7 @@ const siteName = 'Hương Thiền Nature';
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#243f32" />
     <meta name="color-scheme" content="light" />
+    <meta name="application-version" content={version} />
     <meta name="description" content={description} />
     <link rel="canonical" href={url.href} />
     {alternatePath && <>
@@ -42,5 +45,5 @@ const siteName = 'Hương Thiền Nature';
       founder: [{ '@type': 'Person', name: 'Hương Thiền', jobTitle: 'Founder & Teacher' }, { '@type': 'Person', name: 'Kiều Mạnh', jobTitle: 'Co-founder & Teacher' }],
     })} />
   </head>
-  <body><BackgroundMusic lang={lang} /><slot /></body>
+  <body><BackgroundMusic lang={lang} /><slot /><BackToTop lang={lang} /></body>
 </html>

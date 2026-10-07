@@ -8,12 +8,16 @@ export const contactCopy = {
     send: 'Gửi lời nhắn', sending: 'Đang gửi…',
     loading: 'Đang chuẩn bị biểu mẫu…', ready: 'Bạn có thể gửi lời nhắn sau khi hoàn tất xác minh.',
     success: 'Lời nhắn đã được tiếp nhận. Cảm ơn bạn đã kết nối với Hương Thiền Nature.',
-    unavailable: 'Biểu mẫu hiện chưa sẵn sàng. Bạn có thể thử lại sau.',
+    unavailable: 'Bạn có thể soạn lời nhắn tại đây rồi gửi bằng ứng dụng email hoặc Gmail.',
+    compose: 'Soạn email', emailApp: 'Mở ứng dụng email', gmail: 'Mở Gmail',
+    emailPrivacy: 'Lời nhắn được soạn trên thiết bị của bạn. Khi mở ứng dụng email hoặc Gmail, nội dung sẽ được chuyển sang ứng dụng đó để bạn kiểm tra và gửi. Biểu mẫu không lưu lời nhắn và không đăng ký bản tin.',
+    draftReady: 'Email đã được soạn, chưa được gửi. Chọn ứng dụng email hoặc Gmail bên dưới, kiểm tra nội dung rồi bấm Gửi.',
+    directEmail: 'Hoặc gửi email trực tiếp',
     verification_failed: 'Vui lòng hoàn tất xác minh lại rồi gửi lời nhắn.',
     invalid_data: 'Vui lòng kiểm tra tên, email, nội dung và ô đồng ý trước khi gửi.',
     busy: 'Hệ thống đang bận. Vui lòng đợi một chút rồi thử lại.',
     send_failed: 'Chưa thể xác nhận lời nhắn đã được tiếp nhận. Nội dung vẫn được giữ lại; bạn có thể thử gửi lại.',
-    noScript: 'Biểu mẫu cần JavaScript để xác minh và gửi lời nhắn. Vui lòng bật JavaScript rồi tải lại trang.',
+    noScript: 'Bật JavaScript để soạn lời nhắn bằng biểu mẫu, hoặc dùng liên kết email bên dưới.',
     honeypot: 'Để trống trường này',
   },
   en: {
@@ -25,14 +29,20 @@ export const contactCopy = {
     send: 'Send message', sending: 'Sending…',
     loading: 'Preparing the form…', ready: 'Complete the verification to send your message.',
     success: 'Your message has been accepted. Thank you for connecting with Hương Thiền Nature.',
-    unavailable: 'The form is not available right now. Please try again later.',
+    unavailable: 'Compose your message here, then send it using your email app or Gmail.',
+    compose: 'Compose email', emailApp: 'Open email app', gmail: 'Open Gmail',
+    emailPrivacy: 'Your draft is prepared on your device. Opening your email app or Gmail transfers the content to that app for you to review and send. The form does not store your message or subscribe you to a newsletter.',
+    draftReady: 'Your email is drafted, but has not been sent. Choose your email app or Gmail below, review the message, then press Send.',
+    directEmail: 'Or email us directly',
     verification_failed: 'Please complete the verification again before sending.',
     invalid_data: 'Please check your name, email, message and consent before sending.',
     busy: 'The service is busy. Please wait a moment and try again.',
     send_failed: 'We could not confirm that your message was accepted. Your text is still here; you can try sending again.',
-    noScript: 'This form needs JavaScript for verification and sending. Please enable JavaScript and reload the page.',
+    noScript: 'Enable JavaScript to compose a message with the form, or use the email link below.',
     honeypot: 'Leave this field blank',
   },
 } as const;
 
 export const contactInterests = ['meditation', 'retreat', 'courses', 'membership', 'other'] as const;
+// Public contact address supplied by the site owner; never a provider credential.
+export const contactRecipient = 'kieumanh2211@gmail.com';
