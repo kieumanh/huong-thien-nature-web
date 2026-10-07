@@ -13,7 +13,7 @@ Mã nguồn và tài liệu trong repository `kieumanh/huong-thien-nature-web` l
 - Nội dung thương hiệu, thực tập thiền, thiên nhiên, người sáng lập, nhật ký và lộ trình.
 - Tailwind CSS, 14 ảnh WebP trong `public/media`, metadata SEO, robots và sitemap.
 - `CONTENT_GUIDE.md`: nguồn nội dung và định hướng biên tập.
-- `DEPLOYMENT.md`: quy trình Cloudflare Pages và các việc cần hoàn thành trước khi ra mắt.
+- `DEPLOYMENT.md`: quy trình Cloudflare Worker production và các việc cần hoàn thành trước khi ra mắt; Pages vẫn dùng cho demo.
 - `package-lock.json`: phiên bản dependencies để cài đặt lặp lại.
 
 ## Cài đặt và kiểm tra
@@ -33,24 +33,25 @@ npm run build
 npm run audit:build
 npm run test:contact
 npm run build:pages-functions
+npx wrangler deploy --dry-run --config wrangler.worker.jsonc
 npm run dev -- --host 0.0.0.0 --port 4321
 ```
 
 Hai biến XDG giúp các công cụ ghi cấu hình/cache vào vùng được phép của môi trường cloud. Trên máy cá nhân có thể dùng vị trí mặc định. Cloud task đã được cô lập; sử dụng checkout hiện có, không tạo Git worktree trừ khi được yêu cầu.
 
-Kiểm tra `/vi`, `/en`, `/robots.txt`, `/sitemap.xml` và ảnh trong `/media/`. Xem bản build bằng `npm run preview`. Khi phát triển form gửi tin, dùng `npm run dev:pages` để chạy cả Pages Functions tại cổng 8788. Kiểm tra tương thích Worker static tùy chọn: `npm run deploy:worker-dry-run`.
+Kiểm tra `/vi`, `/en`, `/robots.txt`, `/sitemap.xml` và ảnh trong `/media/`. Xem bản build bằng `npm run preview`. Dùng `npm run dev:worker` để chạy Worker cùng API liên hệ. `npm run deploy:worker-dry-run` build và đóng gói cấu hình Worker mà không xuất bản.
 
 ## Triển khai
 
-Cloudflare Pages: nhánh production `main`, lệnh build `npm run build`, thư mục đầu ra `dist`. Nếu dự án đã liên kết GitHub, kiểm tra deployment tương ứng với commit mới sau khi push.
+Production: Cloudflare Workers Builds, nhánh `main`, root `/`, build `npm run build`, deploy `npx wrangler deploy --config wrangler.worker.jsonc`; worker name `huong-thien-nature`. Worker serve static assets từ `dist` và giữ API liên hệ tại `/api/*`. Cloudflare Pages còn là môi trường demo riêng.
 
-Triển khai trực tiếp bằng `npm run deploy:pages` cần thông tin xác thực Cloudflare cho dự án `huong-thien-nature-web`. Không lưu token vào repository. Push GitHub và build cục bộ không chứng minh deployment Cloudflare đã thành công.
+Triển khai trực tiếp bằng `npm run deploy:worker` cần thông tin xác thực Cloudflare. Không lưu token vào repository. Push GitHub và build cục bộ không chứng minh deployment Cloudflare đã thành công.
 
 ## Phạm vi hiện tại và công việc tiếp theo
 
 Form liên hệ đã có endpoint gửi email qua Resend, xác minh Turnstile ở máy chủ và ô đồng ý. Cần năm binding trong `CONTACT_SETUP.md` trước khi gửi thật; thiếu cấu hình hoặc JavaScript thì form khóa. Email nhận do chủ dự án cấu hình; địa chỉ không nằm trong frontend. Chưa có tài khoản thành viên, thanh toán, lịch đặt chỗ hoặc cơ sở dữ liệu. Kiểm thử dùng mock không chứng minh thư đã vào hộp nhận.
 
-Tiếp tục rà soát giao diện trên thiết bị thực, khả năng truy cập, nội dung song ngữ và quyền sử dụng hình ảnh; xác minh deployment Pages, DNS/TLS và tên miền theo `DEPLOYMENT.md`.
+Tiếp tục rà soát giao diện trên thiết bị thực, khả năng truy cập, nội dung song ngữ và quyền sử dụng hình ảnh; xác minh deployment Worker, DNS/TLS và tên miền theo `DEPLOYMENT.md`.
 
 ## Gói mã nguồn
 

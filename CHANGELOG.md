@@ -1,3 +1,10 @@
+## 0.4.1 — Cloudflare Worker runtime
+
+- Chuyển API liên hệ từ Pages Functions sang Worker entrypoint dùng chung logic kiểm tra, Turnstile và Resend.
+- Worker phục vụ Astro static assets và chạy middleware riêng cho `/api/*`; custom domain được khai báo trong Wrangler.
+- Thêm lệnh phát triển, deploy và dry-run Worker có chỉ định tường minh `wrangler.worker.jsonc`.
+- Giữ cấu hình Pages độc lập để tiếp tục dùng `pages.dev` làm demo.
+
 ## 0.4.0 — Roots editorial library
 
 - Publish twelve complete Roots articles in Vietnamese and English, retaining the original three entries.

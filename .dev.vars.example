@@ -1,4 +1,4 @@
-# Local Cloudflare Pages Functions configuration. Copy to .dev.vars.
+# Local Cloudflare Worker configuration. Copy to .dev.vars for `npm run dev:worker`.
 # Leave credentials out of Git. Enter real values in .dev.vars or Cloudflare settings.
 RESEND_API_KEY=
 CONTACT_TO_EMAIL=

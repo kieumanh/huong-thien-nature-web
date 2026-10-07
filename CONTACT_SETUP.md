@@ -1,46 +1,37 @@
-# Cấu hình form liên hệ
+# Contact form configuration
 
-Production hiện được chuẩn bị chạy trên Cloudflare Worker `huong-thien-nature`. Astro vẫn build tĩnh vào `dist`; Worker chỉ xử lý `/api/*` và dùng Static Assets cho phần còn lại. Không cần database.
+In production the Cloudflare Worker serves the Astro static assets and routes `/api/contact` and `/api/contact-config` through `src/worker.ts`. The Worker reuses the shared validation, Turnstile verification and Resend sending logic in `functions/`; no database is used.
 
-## Binding cần đặt trong Cloudflare Worker
+## Runtime bindings on the Worker
 
-| Tên | Loại | Mục đích |
+In Cloudflare Dashboard, open **Workers & Pages → huong-thien-nature → Settings → Variables and Secrets**. Add these under Production:
+
+| Name | Type | Value |
 |---|---|---|
-| `CONTACT_TO_EMAIL` | Secret hoặc biến cấu hình | Hộp thư nhận liên hệ do chủ dự án chỉ định. |
-| `CONTACT_FROM_EMAIL` | Secret hoặc biến cấu hình | Sender đã được Resend xác minh. |
-| `RESEND_API_KEY` | Secret | API key Resend có quyền gửi email. |
-| `TURNSTILE_SITE_KEY` | Biến cấu hình | Site key Turnstile cho hostname thật. |
-| `TURNSTILE_SECRET_KEY` | Secret | Secret key Turnstile. |
+| `CONTACT_TO_EMAIL` | Text | The recipient inbox selected by the project owner; configure it only in Worker settings. |
+| `CONTACT_FROM_EMAIL` | Text | Sender email authorized by Resend, for example `Hương Thiền Nature <sender@verified-domain>` |
+| `RESEND_API_KEY` | Secret | Resend API key with sending permission |
+| `TURNSTILE_SITE_KEY` | Text | Public site key for the Turnstile widget |
+| `TURNSTILE_SECRET_KEY` | Secret | Secret key paired with that widget |
 
-Không commit các giá trị thật vào GitHub, `.env` hoặc tài liệu.
+In Turnstile, allow `huongthiennature.com` as a hostname and use the `contact` action expected by the API. Do not put secret values in source, `.dev.vars.example`, GitHub, or chat. `.dev.vars` is ignored by Git.
 
-## Thiết lập production
+For Resend, verify the sending domain and use an authorized sender. The Gmail address is the recipient only; it does not authorize Gmail as the sender domain. Configure the five runtime values before expecting a real email.
 
-1. Xác minh domain gửi trong Resend và tạo API key.
-2. Tạo Turnstile widget cho `huongthiennature.com` và action `contact`.
-3. Trong Worker `huong-thien-nature`, thêm năm binding trên.
-4. Deploy bằng `npm run deploy:worker`.
-5. Gửi thử một tin nhắn thật, kiểm tra receipt trong Resend và hộp thư nhận.
+## API behavior
 
-## Hành vi API
+- `GET /api/contact-config` returns `available` and the public Turnstile site key only; it does not expose the recipient or secrets.
+- `POST /api/contact` accepts same-origin JSON and validates name, email, interest, message, consent, honeypot, request ID and a 32 KiB body limit.
+- Turnstile is verified server-side. Invalid token, hostname or action is rejected.
+- Resend receives plain-text content and the sender's email as Reply-To. Personal data and provider responses are not logged.
+- Success is returned only after Resend accepts the message. Check the inbox/Spam and Resend event to verify actual delivery.
 
-- `GET /api/contact-config`: chỉ trả trạng thái cấu hình và Turnstile site key công khai.
-- `POST /api/contact`: chỉ nhận JSON same-origin, xác minh dữ liệu + Turnstile rồi gửi bằng Resend.
-- Worker không lưu database, không ghi nội dung cá nhân hay secret vào log.
-- Các đường dẫn `/api/*` không tồn tại trả 404 JSON.
-- Static pages/assets được Cloudflare Static Assets phục vụ, không chạy Worker script trừ `/api/*`.
-
-## Phát triển và kiểm tra
+## Local testing
 
 ```bash
-npm ci
-npm run check
-npm run test:contact
-npm run audit
-npm run build
-npm run audit:build
-npm run deploy:worker-dry-run
+cp .dev.vars.example .dev.vars
+# Enter local test values in .dev.vars using a secure editor.
 npm run dev:worker
 ```
 
-Cloudflare Pages và `functions/` hiện được giữ làm lớp tương thích/rollback trong giai đoạn chuyển đổi; production mục tiêu là Worker + Custom Domain.
+Use a hostname allowed by the Turnstile test widget. `npm run test:contact` uses mocked providers and does not send real mail. `npm run dev:pages` remains available for testing the separate Pages demo.

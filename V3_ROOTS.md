@@ -59,4 +59,4 @@ Mặc định dùng preview ở cổng 4322; có thể đặt `APP_BASE_URL`, `C
 
 Đã có backend gửi liên hệ qua email, nhưng cần cấu hình và xác minh delivery trên deployment thực. Không có danh sách nhận bản tin, đăng nhập, thanh toán, lịch đặt chỗ hay cơ sở dữ liệu. Form liên hệ không tự đăng ký người gửi vào bản tin.
 
-Cloudflare Pages dùng nhánh `main`, lệnh `npm run build`, đầu ra `dist`, Node.js 24. Push GitHub không phải bằng chứng triển khai Cloudflare thành công. Kiểm tra commit của deployment và hai tuyến ngôn ngữ sau khi Git integration chạy. Không đưa token vào mã nguồn, tài liệu hoặc gói ZIP.
+Từ bản 0.4.1, production dùng Cloudflare Workers Builds: nhánh `main`, build `npm run build`, deploy `npx wrangler deploy --config wrangler.worker.jsonc`, Node.js 24. Pages vẫn được giữ làm demo riêng với đầu ra `dist`. Push GitHub không phải bằng chứng triển khai Cloudflare thành công. Kiểm tra commit của deployment và hai tuyến ngôn ngữ sau khi Git integration chạy. Không đưa token vào mã nguồn, tài liệu hoặc gói ZIP.

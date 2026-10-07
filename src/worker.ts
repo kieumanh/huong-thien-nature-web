@@ -1,34 +1,32 @@
-import { onRequest as contact } from '../functions/api/contact.ts';
-import { onRequestGet as contactConfig } from '../functions/api/contact-config.ts';
+import { onRequest as handleContact } from '../functions/api/contact.ts';
+import { onRequestGet as handleContactConfig } from '../functions/api/contact-config.ts';
 import { json, type ContactEnv } from '../functions/_lib/contact.ts';
 
-interface AssetsBinding {
-  fetch(request: Request): Promise<Response>;
+interface WorkerEnv extends ContactEnv {
+  ASSETS: { fetch(request: Request): Promise<Response> };
 }
 
-interface Env extends ContactEnv {
-  ASSETS: AssetsBinding;
-}
+const worker = {
+  async fetch(request: Request, env: WorkerEnv): Promise<Response> {
+    const { pathname } = new URL(request.url);
 
-export default {
-  async fetch(request: Request, env: Env): Promise<Response> {
-    const url = new URL(request.url);
-
-    if (url.pathname === '/api/contact') {
-      return contact({ request, env });
+    if (pathname === '/api/contact') {
+      return handleContact({ request, env });
     }
 
-    if (url.pathname === '/api/contact-config') {
+    if (pathname === '/api/contact-config') {
       if (request.method !== 'GET') {
         return json({ ok: false, code: 'method_not_allowed' }, 405, { Allow: 'GET' });
       }
-      return contactConfig({ env });
+      return handleContactConfig({ env });
     }
 
-    if (url.pathname.startsWith('/api/')) {
+    if (pathname.startsWith('/api/')) {
       return json({ ok: false, code: 'not_found' }, 404);
     }
 
     return env.ASSETS.fetch(request);
   },
 };
+
+export default worker;
