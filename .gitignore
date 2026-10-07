@@ -10,3 +10,4 @@ dist/
 *.log
 .artifacts/
 __pycache__/
+public/content/roots-articles.json

@@ -16,14 +16,19 @@ const { article } = Astro.props as { article: Article };
 const t = getCopy(lang);
 const content = article.translations[lang];
 const alternatePath = articlePath(lang === 'vi' ? 'en' : 'vi', article.slug);
-const related = articles.filter(item => item.slug !== article.slug).slice(0, 3);
+const related = article.relatedSlugs
+  ? article.relatedSlugs.map(slug => articles.find(item => item.slug === slug)).filter((item): item is Article => Boolean(item) && item?.slug !== article.slug).slice(0, 3)
+  : articles.filter(item => item.slug !== article.slug).slice(0, 3);
 const origin = 'https://huongthiennature.com';
 const schema = {
   '@context': 'https://schema.org', '@type': 'BlogPosting',
   headline: content.title, description: content.description, inLanguage: lang,
   image: new URL(article.image, origin).href,
   mainEntityOfPage: origin + articlePath(lang, article.slug),
+  ...(article.publishedAt ? { datePublished: article.publishedAt, dateModified: article.updatedAt } : {}),
+  ...(article.phase === 'roots' ? { author: { '@type': 'Person', name: 'Kiều Mạnh' } } : {}),
   publisher: { '@type': 'Organization', name: 'Hương Thiền Nature', url: origin },
+  ...(article.keywords ? { keywords: article.keywords[lang] } : {}),
 };
 ---
 <BaseLayout lang={lang} title={`${content.title} | Hương Thiền Nature`} description={content.description} alternatePath={alternatePath} image={article.image} ogType="article">
@@ -41,14 +46,17 @@ const schema = {
         <div class="article-meta"><span>{content.category}</span><span>{article.minutes} {t.readTime}</span></div>
         <h1>{content.title}</h1>
         <p class="lead">{content.description}</p>
+        {article.phase === 'roots' && <p class="article-byline">{lang === 'vi' ? 'Kiều Mạnh · Biên tập từ Thiền Tinh Hoa' : 'Kiều Mạnh · Adapted from Thiền Tinh Hoa'} · <time datetime={article.publishedAt}>{lang === 'vi' ? '07/10/2026' : '7 October 2026'}</time></p>}
       </header>
-      <div class="shell article-cover"><img src={article.image} alt={content.imageAlt} width="720" height="540" fetchpriority="high" /></div>
+      <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={article.phase === 'roots' ? 1200 : 720} height={article.phase === 'roots' ? 800 : 540} fetchpriority="high" />{article.phase === 'roots' && <figcaption>{lang === 'vi' ? 'Minh họa màu nước được tạo bằng AI cho bộ bài Roots.' : 'AI-generated watercolor illustration for the Roots collection.'}</figcaption>}</figure>
       <div class="article-body">
         <p class="article-introduction">{content.introduction}</p>
         <nav class="article-toc" aria-label={lang === 'vi' ? 'Mục lục bài viết' : 'Article contents'}><h2>{lang === 'vi' ? 'Trong bài này' : 'In this article'}</h2><ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol></nav>
         {content.sections.map((section, index) => <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
+        {content.cta && <p class="article-cta"><a class="button" href={articlePath(lang, content.cta.slug)}>{content.cta.label} <Arrow /></a></p>}
+        {article.sources && <section class="article-sources" aria-labelledby="sources-title"><h2 id="sources-title">{lang === 'vi' ? 'Nguồn và đọc thêm' : 'Sources and further reading'}</h2><p>{lang === 'vi' ? 'Các bài Roots được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'Roots articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.'}</p><ul>{article.sources.map(source => <li>{source.url ? <a href={source.url}>{source.title}</a> : <span>{source.title}</span>}</li>)}</ul></section>}
         <a class="quiet-link" href={journalPath(lang)}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
       </div>
     </article>

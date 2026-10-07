@@ -17,6 +17,8 @@ const description = en
   ? 'Reflections on meditation, nature and everyday life. Find a story to read at your own pace.'
   : 'Những bài chia sẻ về thực tập thiền, thiên nhiên và đời sống. Chọn một bài viết để đọc theo nhịp của bạn.';
 const alternatePath = journalPath(en ? 'vi' : 'en');
+const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering-mind', 'everyday-mindfulness']
+  .map(slug => articles.find(article => article.slug === slug)!);
 ---
 <BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={description} alternatePath={alternatePath}>
   <Header lang={lang} alternatePath={alternatePath} isInnerPage />
@@ -27,6 +29,11 @@ const alternatePath = journalPath(en ? 'vi' : 'en');
       <h1>{title}</h1>
       <p class="lead">{description}</p>
       <p class="journal-count">{articles.length} {en ? 'articles to explore' : 'bài viết để khám phá'}</p>
+      <nav class="roots-reading-path" aria-label={en ? 'Suggested reading path' : 'Lộ trình đọc gợi ý'}>
+        <h2>{en ? 'Roots — start here' : 'Roots — bắt đầu từ đây'}</h2>
+        <p>{en ? 'Twelve new guides from first steps to everyday practice. Read in this order, or choose what you need today.' : 'Mười hai bài hướng dẫn mới, từ bước đầu đến thực hành trong đời sống. Đọc theo lộ trình hoặc chọn điều bạn cần hôm nay.'}</p>
+        <ol>{readingPath.map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
+      </nav>
     </header>
     <section class="shell journal-listing-articles" aria-label={en ? 'All journal articles' : 'Tất cả bài tản văn'}>
       <div class="journal-grid">
@@ -36,6 +43,7 @@ const alternatePath = journalPath(en ? 'vi' : 'en');
             <a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a>
             <div class="journal-card-copy">
               <div class="article-meta"><span>{content.category}</span><span>{article.minutes} {t.readTime}</span></div>
+              {article.phase === 'roots' && <span class="roots-tag">Roots · {en ? 'Beginner' : 'Nhập môn'}</span>}
               <h2><a href={articlePath(lang, article.slug)}>{content.title}</a></h2>
               <p>{content.description}</p>
               <a class="quiet-link" href={articlePath(lang, article.slug)} aria-label={`${t.journalLink}: ${content.title}`}>{t.journalLink} <Arrow /></a>

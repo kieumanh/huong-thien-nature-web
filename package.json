@@ -1,11 +1,11 @@
 {
   "name": "huong-thien-nature-web",
-  "version": "0.3.5",
+  "version": "0.4.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "node scripts/export-roots.mjs && astro build",
     "preview": "astro preview",
     "check": "astro check",
     "audit": "node scripts/audit-source.mjs",

@@ -1,4 +1,5 @@
 import type { Language } from './site';
+import { rootsArticles } from './roots-articles.ts';
 
 export type ArticleTranslation = {
   category: string;
@@ -9,6 +10,7 @@ export type ArticleTranslation = {
   sections: { title: string; paragraphs: string[] }[];
   practice: { title: string; steps: string[] };
   note: string;
+  cta?: { label: string; slug: string };
 };
 
 export type Article = {
@@ -16,9 +18,20 @@ export type Article = {
   image: string;
   minutes: number;
   translations: Record<Language, ArticleTranslation>;
+  id?: string;
+  viSlug?: string;
+  pillar?: string;
+  phase?: 'roots';
+  level?: 'beginner' | 'practitioner' | 'advanced';
+  keywords?: Record<Language, string>;
+  publishedAt?: string;
+  updatedAt?: string;
+  relatedSlugs?: string[];
+  sources?: { title: string; url?: string }[];
 };
 
 export const articles: Article[] = [
+  ...rootsArticles,
   {
     slug: 'returning-attention',
     image: '/media/practice-cushion-v2.webp',
@@ -186,7 +199,8 @@ export function articlePath(lang: Language, slug: string) {
     'seven-layers': 'bay-tang-trai-nghiem',
     'listening-to-nature': 'lang-nghe-thien-nhien',
   };
-  return `${journalPath(lang)}${lang === 'vi' ? vietnamese[slug] : slug}/`;
+  const article = articles.find(item => item.slug === slug);
+  return `${journalPath(lang)}${lang === 'vi' ? (article?.viSlug ?? vietnamese[slug] ?? slug) : slug}/`;
 }
 
 export function journalPath(lang: Language) {

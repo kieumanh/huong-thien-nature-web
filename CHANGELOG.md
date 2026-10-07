@@ -1,3 +1,11 @@
+## 0.4.0 — Roots editorial library
+
+- Publish twelve complete Roots articles in Vietnamese and English, retaining the original three entries.
+- Add six watercolor illustrations, practice exercises, localized CTAs, ordered related reading and an introductory reading path.
+- Add structured article metadata, publication/source attribution and a reusable content export.
+- Credit the manuscript by title only; exclude all Google Drive links from published code, pages and content exports.
+- Preserve v0.3.5 navigation/SEO improvements and existing localized URLs/contact behavior.
+
 ## 0.3.5 — Journal navigation and SEO
 
 - Exclude the new Google Drive-derived editorial collection and its generated content exports from this release; retain the three previously published bilingual articles.
