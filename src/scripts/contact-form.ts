@@ -41,6 +41,12 @@ async function setup(form: HTMLFormElement) {
     refreshButton();
     if (widget !== undefined) window.turnstile?.reset(widget);
   };
+  const verificationFailed = () => {
+    token = '';
+    refreshButton();
+    // A widget event cannot change the outcome of an email request already sent.
+    if (!sending && !succeeded) status(t.verification_failed, 'error');
+  };
   form.addEventListener('input', () => {
     // Retrying an unchanged submission keeps its idempotency key; editing creates a new request.
     requestId = '';
@@ -80,8 +86,7 @@ async function setup(form: HTMLFormElement) {
       } else {
         const code = reply.code;
         const message = code === 'verification_failed' ? t.verification_failed : code === 'invalid_data' ? t.invalid_data : code === 'busy' ? t.busy : code === 'unavailable' ? t.unavailable : t.send_failed;
-        if (code === 'unavailable') status(t.unavailable, 'error');
-        else status(message, 'error');
+        status(message, 'error');
       }
     } catch {
       status(t.send_failed, 'error');
@@ -119,8 +124,8 @@ async function setup(form: HTMLFormElement) {
         refreshButton();
         if (!sending && !succeeded && result.textContent === t.verification_failed) status(t.ready);
       },
-      'expired-callback': () => { token = ''; refreshButton(); status(t.verification_failed, 'error'); },
-      'error-callback': () => { token = ''; refreshButton(); status(t.verification_failed, 'error'); },
+      'expired-callback': verificationFailed,
+      'error-callback': verificationFailed,
     });
     status(t.ready);
     form.setAttribute('aria-busy', 'false');

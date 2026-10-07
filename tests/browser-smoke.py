@@ -3,12 +3,13 @@ import os
 import shutil
 from playwright.sync_api import sync_playwright
 import json
+from site_manifest import load_site_manifest
 
 base = os.environ.get('APP_BASE_URL', 'http://127.0.0.1:4322').rstrip('/')
 out = Path(os.environ.get('ROOTS_ARTIFACT_DIR', str(Path(__file__).resolve().parents[1] / '.artifacts')))
 out.mkdir(parents=True, exist_ok=True)
 report = []
-slugs = ['returning-attention', 'seven-layers', 'listening-to-nature']
+site = load_site_manifest()
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), headless=True, args=['--no-sandbox'])
     context = browser.new_context(viewport={'width':1440,'height':1000}, device_scale_factor=1, reduced_motion='reduce')
@@ -16,17 +17,16 @@ with sync_playwright() as p:
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     for lang in ['vi','en']:
-        folder = 'tan-van' if lang == 'vi' else 'journal'
-        localized_slugs = ['su-tro-lai-cung-la-thuc-tap','bay-tang-trai-nghiem','lang-nghe-thien-nhien'] if lang == 'vi' else slugs
-        for suffix in ['', folder+'/'] + [folder+'/'+slug+'/' for slug in localized_slugs]:
-            response = page.goto(base+'/'+lang+'/'+suffix, wait_until='domcontentloaded')
+        paths = ['/'+lang+'/', site['journals'][lang]] + [article['paths'][lang] for article in site['articles']]
+        for path in paths:
+            response = page.goto(base+path, wait_until='domcontentloaded')
             assert response.status == 200
             assert page.locator('html').get_attribute('lang') == lang
             assert page.locator('h1').count() == 1
             assert page.locator('main').count() == 1
             assert page.title().endswith('Hương Thiền Nature')
-            assert page.locator('link[rel="canonical"]').get_attribute('href') == 'https://huongthiennature.com/'+lang+'/'+suffix
-            report.append('Rendered '+lang+'/'+suffix)
+            assert page.locator('link[rel="canonical"]').get_attribute('href') == 'https://huongthiennature.com'+path
+            report.append('Rendered '+path)
     for width in [320,375,768,1024,1440]:
         page.set_viewport_size({'width':width,'height':900})
         for lang in ['vi','en']:

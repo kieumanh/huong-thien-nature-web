@@ -1,3 +1,10 @@
+## 0.4.4 — Error checks and cleanup
+
+- Sửa trạng thái Contact: sự kiện Turnstile hết hạn/báo lỗi không ghi đè trạng thái đang gửi hoặc kết quả gửi thành công. Xác minh vẫn được yêu cầu cho lần gửi tiếp theo.
+- Bỏ nhánh xử lý lỗi lặp và gộp hai callback xác minh dùng chung một hàm.
+- Loại bỏ bốn nhóm CSS không còn được dùng (`contact-status`, `contact-draft-links`, `contact-direct`, `footer-mark`); gộp các khai báo bị ghi đè cho nhạc, nút lên đầu trang và footer.
+- Sửa kiểm thử Tản văn còn dùng số lượng/vị trí của bộ ba bài cũ. Dùng manifest từ nguồn nội dung hiện tại, kiểm tra toàn bộ 30 trang bài viết song ngữ thay vì chỉ sáu trang bài cũ.
+
 ## 0.4.3 — Release package
 
 - Đóng gói mã nguồn mới nhất trên nhánh `main`, kế thừa thư viện Roots song ngữ và Cloudflare Worker runtime của bản 0.4.1.

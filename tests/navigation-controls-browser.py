@@ -2,11 +2,12 @@
 from pathlib import Path
 import os, shutil, json
 from playwright.sync_api import sync_playwright
+from site_manifest import load_site_manifest
 
 base = os.environ.get('APP_BASE_URL', 'http://127.0.0.1:8788').rstrip('/')
 out = Path(os.environ.get('ROOTS_ARTIFACT_DIR', str(Path(__file__).resolve().parents[1] / '.artifacts')))
 out.mkdir(parents=True, exist_ok=True)
-version = json.loads((Path(__file__).resolve().parents[1] / 'package.json').read_text())['version']
+version = load_site_manifest()['version']
 report = []
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), headless=True, args=['--no-sandbox'])

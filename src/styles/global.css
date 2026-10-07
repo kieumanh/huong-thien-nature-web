@@ -175,7 +175,6 @@ figcaption { margin-top: 15px; font-size: .72rem; color: var(--ink-soft); }
 .contact-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 95px; align-items: start; }
 .contact h2 { margin: 20px 0 25px; }
 .contact .button { margin-top: 28px; }
-.contact-status { display: flex; align-items: center; gap: 10px; margin-top: 23px; font-size: .76rem; }
 .contact-card { padding: 28px; background: var(--paper); border: 1px solid var(--line); border-radius: 3px; }
 .contact-card h3 { font-size: 1.5rem; margin-bottom: 10px; }
 .contact-card fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
@@ -193,10 +192,9 @@ figcaption { margin-top: 15px; font-size: .72rem; color: var(--ink-soft); }
 .form-result[data-kind="error"] { border-left-color: #8a3c2c; background: #f5e8df; color: #763425; }
 fieldset:disabled { opacity: .65; }
 
-.footer { padding: 50px 0 22px; background: #1e362b; color: #eaeedf; }
+.footer { padding: 50px 0 88px; background: #1e362b; color: #eaeedf; }
 .footer-top { display: flex; justify-content: space-between; gap: 40px; align-items: center; border-bottom: 1px solid rgba(250, 248, 241, .2); padding-bottom: 32px; }
 .footer-identity { display: flex; align-items: center; gap: 20px; }
-.footer-mark { width: 80px; height: 80px; color: #c1cfae; flex-shrink: 0; }
 .footer-brand { font: 1.7rem/1.3 var(--serif); }
 .footer-identity p { color: #c8d2bf; font-size: .75rem; margin-top: 7px; }
 .footer-links { display: flex; flex-wrap: wrap; gap: 20px; font-size: .8rem; }
@@ -305,7 +303,6 @@ fieldset:disabled { opacity: .65; }
   .pathway { gap: 18px; }
   .contact-grid { gap: 40px; }
   .footer-top { align-items: start; flex-direction: column; gap: 20px; }
-  .footer-mark { width: 65px; height: 65px; }
   .footer-brand { font-size: 1.45rem; }
   .footer-bottom { flex-wrap: wrap; gap: 16px; }
   .footer-bottom > span:nth-child(2) { display: none; }
@@ -331,19 +328,18 @@ fieldset:disabled { opacity: .65; }
   .footer-identity { gap: 12px; }
 }
 
-.music-dock { position: fixed; z-index: 40; left: 20px; bottom: max(20px, env(safe-area-inset-bottom)); display: flex; align-items: center; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
+.music-dock { position: fixed; z-index: 40; left: 20px; bottom: max(20px, env(safe-area-inset-bottom)); display: flex; align-items: center; border: 1px solid; border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
 .music-dock > audio { display: none; }
 .music-toggle { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 14px; background: none; border: 0; font-size: .75rem; color: inherit; }
-.music-state-dot { width: 6px; height: 6px; border-radius: 50%; background: #8b9187; }
-.music-toggle[aria-pressed="true"] .music-state-dot { background: var(--forest); box-shadow: 0 0 0 3px var(--sage); }
-.music-options > summary { display: grid; place-items: center; width: 44px; min-height: 48px; border-left: 1px solid var(--line); list-style: none; }
+.music-state-dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; opacity: .4; }
+.music-toggle[aria-pressed="true"] .music-state-dot { background: currentColor; box-shadow: 0 0 0 3px var(--floating-border); opacity: 1; }
+.music-options > summary { display: grid; place-items: center; width: 44px; min-height: 48px; border-left: 1px solid var(--floating-border); list-style: none; }
 .music-options > summary::-webkit-details-marker { display: none; }
-.music-panel { position: absolute; bottom: calc(100% + 10px); left: 0; width: 260px; padding: 20px; border: 1px solid var(--line); background: var(--paper); border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
+.music-panel { position: absolute; bottom: calc(100% + 10px); left: 0; width: 260px; padding: 20px; border: 1px solid var(--floating-border); background: var(--floating-bg); color: var(--floating-fg); border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
 .music-track { font: 1.1rem/1.4 var(--serif); margin-bottom: 18px; }
 .music-panel label { display: flex; justify-content: space-between; font-size: .8rem; }
-.music-panel input { width: 100%; min-height: 40px; accent-color: var(--forest); }
-.music-status { color: var(--ink-soft); font-size: .72rem; line-height: 1.6; margin-top: 10px; }
-.footer { padding-bottom: 88px; }
+.music-panel input { width: 100%; min-height: 40px; accent-color: var(--floating-fg); }
+.music-status { color: inherit; font-size: .72rem; line-height: 1.6; margin-top: 10px; }
 @media (max-width: 760px) { .music-dock { left: 12px; bottom: max(12px, env(safe-area-inset-bottom)); } }
 
 @media (prefers-reduced-motion: reduce) {
@@ -351,11 +347,8 @@ fieldset:disabled { opacity: .65; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 
-.contact-draft-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
-.contact-draft-links[hidden], .back-to-top[hidden] { display: none; }
-.contact-direct a { overflow-wrap: anywhere; text-decoration: underline; }
-.back-to-top { position: fixed; z-index: 40; right: 20px; bottom: max(20px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--forest); box-shadow: 0 5px 25px rgba(25,50,35,.14); }
-.back-to-top:hover { background: var(--sage); }
+.back-to-top { position: fixed; z-index: 40; right: 20px; bottom: max(20px, env(safe-area-inset-bottom)); display: grid; place-items: center; width: 48px; height: 48px; border: 1px solid; border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
+.back-to-top:hover { background: var(--floating-bg); filter: brightness(.94); }
 @media (max-width: 760px) { .back-to-top { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); } }
 
 .nav-links a.active { font-weight: 700; text-decoration: underline; text-underline-offset: 6px; }
@@ -398,11 +391,4 @@ fieldset:disabled { opacity: .65; }
 /* Opaque complementary surfaces preserve readable labels over text and images. */
 .music-dock, .back-to-top { --floating-bg: var(--forest); --floating-fg: var(--paper); --floating-border: rgba(250,248,241,.45); background: var(--floating-bg); color: var(--floating-fg); border-color: var(--floating-border); transition: background-color .15s, color .15s; }
 [data-floating-tone="light"] { --floating-bg: var(--paper); --floating-fg: var(--forest); --floating-border: rgba(36,63,50,.45); }
-.music-options > summary { border-color: var(--floating-border); }
-.music-panel { background: var(--floating-bg); color: var(--floating-fg); border-color: var(--floating-border); }
-.music-status { color: inherit; }
-.music-panel input { accent-color: var(--floating-fg); }
-.music-state-dot { background: currentColor; opacity: .4; }
-.music-toggle[aria-pressed="true"] .music-state-dot { background: currentColor; box-shadow: 0 0 0 3px var(--floating-border); opacity: 1; }
-.back-to-top:hover { background: var(--floating-bg); filter: brightness(.94); }
 .music-dock :focus-visible, .back-to-top:focus-visible { outline-color: var(--floating-fg); }

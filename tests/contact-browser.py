@@ -79,11 +79,20 @@ with sync_playwright() as p:
         assert body['website']=='' and body['message'].startswith('Tôi muốn')
         assert body['turnstileToken']=='test-only-widget-token'
         assert body['requestId']
+        for callback in ['expired-callback','error-callback']:
+            page.evaluate('(key)=>window.contactTestOptions[key]()',callback)
+            assert page.locator('#form-result').get_attribute('data-kind')=='info'
+            assert page.locator('#form-result').inner_text()==('Đang gửi…' if lang=='vi' else 'Sending…')
         pending.pop().fulfill(status=200,content_type='application/json',body='{"ok":true}')
         page.wait_for_function("document.querySelector('#form-result').dataset.kind === 'success'")
         assert page.locator('#name').input_value()==''
         assert page.locator('#message').input_value()==''
-        report.append(lang+': valid JSON submission, required fields/consent, sending state, duplicate prevention, success reset')
+        accepted=page.locator('#form-result').inner_text()
+        for callback in ['expired-callback','error-callback']:
+            page.evaluate('(key)=>window.contactTestOptions[key]()',callback)
+            assert page.locator('#form-result').get_attribute('data-kind')=='success'
+            assert page.locator('#form-result').inner_text()==accepted
+        report.append(lang+': valid submission, consent, duplicate prevention and success reset; widget expiry/errors preserve pending and accepted states')
     page.goto(base+'/vi/',wait_until='domcontentloaded')
     fill(page)
     page.locator('button[type="submit"]').click()

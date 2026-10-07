@@ -2,15 +2,17 @@
 from pathlib import Path
 import os, shutil, json
 from playwright.sync_api import sync_playwright
+from site_manifest import load_site_manifest
 
 base = os.environ.get('APP_BASE_URL', 'http://127.0.0.1:8788').rstrip('/')
 out = Path(os.environ.get('ROOTS_ARTIFACT_DIR', str(Path(__file__).resolve().parents[1] / '.artifacts')))
 out.mkdir(parents=True, exist_ok=True)
+site = load_site_manifest()
 report = []
 def journal(lang):
-    return '/vi/tan-van/' if lang == 'vi' else '/en/journal/'
+    return site['journals'][lang]
 def first_article(lang):
-    return journal(lang)+('su-tro-lai-cung-la-thuc-tap/' if lang == 'vi' else 'returning-attention/')
+    return site['articles'][0]['paths'][lang]
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), headless=True, args=['--no-sandbox'])
     page = browser.new_page(viewport={'width':1440,'height':900}, reduced_motion='reduce')
@@ -21,7 +23,7 @@ with sync_playwright() as p:
         page.locator(f'#main-nav a[href="{journal(lang)}"]').click()
         page.wait_for_url(base+journal(lang))
         assert page.locator('h1').inner_text() == ('Tản văn' if lang=='vi' else 'Journal')
-        assert page.locator('.journal-listing article').count() == 3
+        assert page.locator('.journal-listing article').count() == len(site['articles'])
         assert page.locator('#main-nav a[aria-current="page"]').get_attribute('href') == journal(lang)
         for link in page.locator('.journal-listing article h2 a').all():
             assert link.get_attribute('href').startswith(journal(lang))
@@ -32,7 +34,7 @@ with sync_playwright() as p:
         page.wait_for_url(base+journal(lang))
         page.locator('.language a[lang="'+('en' if lang=='vi' else 'vi')+'"]').click()
         page.wait_for_url(base+journal('en' if lang=='vi' else 'vi'))
-        report.append(lang+': main navigation opens listing, all three posts appear, article/back links and language switch work')
+        report.append(lang+': main navigation opens listing, all published posts appear, article/back links and language switch work')
     for width in [320,375,768,1440]:
         page.set_viewport_size({'width':width,'height':900})
         for lang in ['vi','en']:
@@ -53,7 +55,7 @@ with sync_playwright() as p:
     np.locator('#main-nav a[href="/vi/tan-van/"]').click()
     np.wait_for_url(base+'/vi/tan-van/')
     np.locator('.journal-listing article h2 a').first.click()
-    np.wait_for_url(base+'/vi/tan-van/su-tro-lai-cung-la-thuc-tap/')
+    np.wait_for_url(base+first_article('vi'))
     report.append('Listing and article navigation also work without JavaScript')
     page.set_viewport_size({'width':1440,'height':900})
     page.goto(base+'/vi/',wait_until='domcontentloaded')
@@ -87,8 +89,8 @@ with sync_playwright() as p:
     report.append('Controls choose independent opposing tones over dark and light regions of the same image')
     page.set_viewport_size({'width':375,'height':850})
     page.goto(base+'/vi/tan-van/',wait_until='domcontentloaded')
-    page.screenshot(path=str(out/'v0.3.3-journal-mobile.png'),full_page=True)
+    page.screenshot(path=str(out/f"v{site['version']}-journal-mobile.png"),full_page=True)
     assert errors == [], errors
     browser.close()
-out.joinpath('v0.3.3-journal-contrast-report.json').write_text(json.dumps(report,indent=2,ensure_ascii=False))
+out.joinpath(f"v{site['version']}-journal-contrast-report.json").write_text(json.dumps(report,indent=2,ensure_ascii=False))
 print('\n'.join(report))
