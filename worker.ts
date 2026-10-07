@@ -3,7 +3,7 @@ import { onRequestGet as handleContactConfig } from './functions/api/contact-con
 import type { ContactEnv } from './functions/_lib/contact.ts';
 
 interface Env extends ContactEnv {
-  ASSETS: Fetcher;
+  ASSETS: { fetch(input: RequestInfo | URL, init?: RequestInit): Promise<Response> };
 }
 
 export default {
