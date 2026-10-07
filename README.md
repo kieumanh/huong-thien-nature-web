@@ -1,15 +1,15 @@
 # Hương Thiền Nature — V3 Roots 0.4.0
 
-Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. The deployment target is GitHub → Cloudflare Pages (`pages.dev`); `https://huongthiennature.com` is the intended custom domain after DNS is ready.
+Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. The deployment target is GitHub → Cloudflare Workers Builds → Workers Static Assets, with `https://huongthiennature.com` as the intended custom domain.
 
 This edition continues the repository's existing content. The shared ChatGPT Work conversation could not be retrieved from the cloud environment, so it does not claim to reproduce unseen design requirements. See `V3_ROOTS.md` for scope and validation.
 
 ## Current delivery
 
-- Public-facing experience: brand story, meditation practice, nature reflections, founders, fifteen complete journal articles in each language (twelve new Roots guides and the original three), three-stage roadmap and a contact form backed by Cloudflare Pages Functions.
+- Public-facing experience: brand story, meditation practice, nature reflections, founders, fifteen complete journal articles in each language (twelve new Roots guides and the original three), three-stage roadmap and a contact form backed by the Cloudflare Worker API.
 - Responsive Vietnamese and English routes: `/vi` and `/en`.
-- Astro static output for Pages (`npm run build`, output `dist`) with Tailwind CSS Vite integration.
-- Wrangler Pages configuration with Functions for contact email; Workers Static Assets configuration retained in `wrangler.worker.jsonc` for a separate compatibility dry-run.
+- Astro static output (`npm run build`, output `dist`) served by Cloudflare Workers Static Assets with Tailwind CSS Vite integration.
+- Wrangler Worker configuration in `wrangler.jsonc`; `worker.ts` serves static assets and dispatches the contact API.
 - Supplied imagery optimized to WebP and placed in `public/media/`.
 - SEO: canonical URLs, `hreflang`, article Open Graph, Organization/BlogPosting/BreadcrumbList JSON-LD, robots and a generated sitemap with 34 localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
@@ -19,7 +19,7 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 - Music controls sit at the bottom left; a bottom-right back-to-top button appears at 30% of the scrollable document height, supports keyboard focus and respects reduced motion. Both controls independently select light or dark colors for contrast against the surface underneath, including local images.
 - Release numbers follow `major.minor.patch` in `package.json`; the footer and application-version meta tag use the same number. See `CHANGELOG.md` for each release.
 
-Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, and `npm run build:pages-functions`. The build audit verifies 36 HTML pages, article content, translation links, sitemap coverage, structured data, CTAs, bounded related reading and local asset/anchor targets. `npm run deploy:worker-dry-run` checks optional static Worker compatibility.
+Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, The build audit verifies 36 HTML pages, article content, translation links, sitemap coverage, structured data, CTAs, bounded related reading and local asset/anchor targets. `npx wrangler deploy --dry-run` checks the Worker bundle.
 
 The contact form sends messages to `kieumanh2211@gmail.com` through Resend after server-side Turnstile verification and explicit consent when its five runtime bindings are configured. Email-draft and mailto fallbacks were removed in v0.3.4. See `CONTACT_SETUP.md` for setup; implementation tests do not prove live email delivery. There is no login, payment, booking calendar, database or member area in this phase.
 
@@ -30,7 +30,7 @@ npm ci
 npm run dev
 ```
 
-## Build and preview for Cloudflare Pages
+## Build and preview for Cloudflare Workers
 
 ```bash
 npm run build
@@ -38,9 +38,9 @@ npm run audit:build
 npm run preview
 ```
 
-In Cloudflare Pages, set the build command to `npm run build` and the build output directory to `dist`. Keep `functions/` in the checkout so Pages deploys the contact API. `wrangler.jsonc` configures Pages; `wrangler.worker.jsonc` is only for a separate static compatibility check.
+Connect the repository to Cloudflare Workers Builds. Set build command `npm run build`, deploy command `npx wrangler deploy`, and Node.js 24. `wrangler.jsonc` configures the Worker. See `DEPLOYMENT.md` for domain cutover and contact bindings.
 
-For local contact development, use `npm run dev:pages`; Astro dev/preview alone has no contact API. Production sending requires the bindings described in `CONTACT_SETUP.md`.
+For local contact development, use `npm run dev:worker`; Astro dev/preview alone has no contact API; `dev:worker` runs the API through Wrangler. Production sending requires the Worker bindings described in `CONTACT_SETUP.md`.
 
 Optional music browser checks with Python Playwright/Chromium: `APP_BASE_URL=http://127.0.0.1:8788 python tests/music-browser.py`. Tests exercise the actual MP3 under allowed and blocked autoplay policies. JavaScript-disabled visitors get native audio controls.
 
@@ -52,9 +52,9 @@ Node.js 24.19.0 and npm 11.9.0 were used for this edition. Set the Cloudflare bu
 
 1. The source repository is public by the project owner's choice; confirm image permissions before expanding media use.
 2. Complete the release checks in `DEPLOYMENT.md`.
-3. Connect the repository to Cloudflare Pages; build command `npm run build`, output directory `dist`.
-4. Verify the `pages.dev` preview, both language routes, imagery and mobile layout.
-5. Attach `huongthiennature.com` to Pages after the Cloudflare zone is active and DNS is ready.
+3. Connect the repository to Cloudflare Workers Builds; use build command `npm run build` and deploy command `npx wrangler deploy`.
+4. Verify the Worker preview, both language routes, imagery and mobile layout.
+5. Attach `huongthiennature.com` as the Worker's Custom Domain after the Worker build and contact form are verified.
 6. Confirm HTTPS, DNS, canonical host, redirects, sitemap and form behavior before sharing the custom domain.
 
 ## Content and attribution
