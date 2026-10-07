@@ -1,15 +1,15 @@
 # Hương Thiền Nature — V3 Roots 0.4.0
 
-Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. The deployment target is GitHub → Cloudflare Pages (`pages.dev`); `https://huongthiennature.com` is the intended custom domain after DNS is ready.
+Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. The deployment target is GitHub → Cloudflare Workers Builds → Workers Static Assets, with `https://huongthiennature.com` as the intended custom domain.
 
 This edition continues the repository's existing content. The shared ChatGPT Work conversation could not be retrieved from the cloud environment, so it does not claim to reproduce unseen design requirements. See `V3_ROOTS.md` for scope and validation.
 
 ## Current delivery
 
-- Public-facing experience: brand story, meditation practice, nature reflections, founders, fifteen complete journal articles in each language (twelve new Roots guides and the original three), three-stage roadmap and a contact form backed by Cloudflare Pages Functions.
+- Public-facing experience: brand story, meditation practice, nature reflections, founders, fifteen complete journal articles in each language (twelve new Roots guides and the original three), three-stage roadmap and a contact form backed by the Cloudflare Worker API.
 - Responsive Vietnamese and English routes: `/vi` and `/en`.
-- Astro static output for Pages (`npm run build`, output `dist`) with Tailwind CSS Vite integration.
-- Wrangler Pages configuration with Functions for contact email; Workers Static Assets configuration retained in `wrangler.worker.jsonc` for a separate compatibility dry-run.
+- Astro static output (`npm run build`, output `dist`) served by Cloudflare Workers Static Assets with Tailwind CSS Vite integration.
+- Wrangler Worker configuration in `wrangler.jsonc`; `worker.ts` serves static assets and dispatches the contact API.
 - Supplied imagery optimized to WebP and placed in `public/media/`.
 - SEO: canonical URLs, `hreflang`, article Open Graph, Organization/BlogPosting/BreadcrumbList JSON-LD, robots and a generated sitemap with 34 localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
@@ -30,7 +30,7 @@ npm ci
 npm run dev
 ```
 
-## Build and preview for Cloudflare Pages
+## Build and preview for Cloudflare Workers
 
 ```bash
 npm run build
@@ -38,9 +38,9 @@ npm run audit:build
 npm run preview
 ```
 
-In Cloudflare Pages, set the build command to `npm run build` and the build output directory to `dist`. Keep `functions/` in the checkout so Pages deploys the contact API. `wrangler.jsonc` configures Pages; `wrangler.worker.jsonc` is only for a separate static compatibility check.
+Connect the repository to Cloudflare Workers Builds. Set build command `npm run build`, deploy command `npx wrangler deploy`, and Node.js 24. `wrangler.jsonc` configures the Worker. See `DEPLOYMENT.md` for domain cutover and contact bindings.
 
-For local contact development, use `npm run dev:pages`; Astro dev/preview alone has no contact API. Production sending requires the bindings described in `CONTACT_SETUP.md`.
+For local contact development, use `npm run dev:worker`; Astro dev/preview alone has no contact API; `dev:worker` runs the API through Wrangler. Production sending requires the Worker bindings described in `CONTACT_SETUP.md`.
 
 Optional music browser checks with Python Playwright/Chromium: `APP_BASE_URL=http://127.0.0.1:8788 python tests/music-browser.py`. Tests exercise the actual MP3 under allowed and blocked autoplay policies. JavaScript-disabled visitors get native audio controls.
 
