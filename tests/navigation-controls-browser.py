@@ -15,8 +15,8 @@ with sync_playwright() as p:
     for lang in ['vi', 'en']:
         page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('.music-toggle').disabled")
-        assert page.locator('meta[name="application-version"]').get_attribute('content') == '0.3.2'
-        assert 'V0.3.2' in page.locator('.footer-bottom').inner_text()
+        assert page.locator('meta[name="application-version"]').get_attribute('content') == '0.3.3'
+        assert 'V0.3.3' in page.locator('.footer-bottom').inner_text()
         button = page.locator('.back-to-top')
         assert button.is_hidden()
         for progress, visible in [(0.29, False), (0.31, True), (0.1, False), (0.7, True)]:
@@ -56,8 +56,8 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':375,'height':850})
     page.locator('#connect').scroll_into_view_if_needed()
     page.wait_for_function('!document.querySelector(".back-to-top").hidden')
-    page.screenshot(path=str(out/'v0.3.2-contact-controls-mobile.png'))
+    page.screenshot(path=str(out/'v0.3.3-contact-controls-mobile.png'))
     assert errors == [], errors
     browser.close()
-out.joinpath('v0.3.2-controls-report.json').write_text(json.dumps(report, indent=2, ensure_ascii=False))
+out.joinpath('v0.3.3-controls-report.json').write_text(json.dumps(report, indent=2, ensure_ascii=False))
 print('\n'.join(report))

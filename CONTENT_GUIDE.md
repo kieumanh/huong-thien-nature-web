@@ -38,6 +38,8 @@ The user supplied `Lotus_at_First_Light.mp3` for background playback. The origin
 
 ## Editorial guardrails
 
+Tản văn / Journal lists the articles in `src/data/articles.ts` at `/vi/journal/` and `/en/journal/`. To add a sharing article, supply a unique slug, local cover image, reading time and complete Vietnamese/English translations with title, description and body sections using the existing structure. The listing, homepage preview, article routes and sitemap are generated from that array; retain existing slugs when editing published articles. There is no publishing admin or database in this version.
+
 The three journal pieces now have full Vietnamese and English routes, covering returning attention, the seven-layer framework and sensory observation of nature. Their content develops the existing source material; it is not an imported transcript of the unavailable ChatGPT Work conversation. Bilingual text lives in `src/data/site.ts` and `src/data/articles.ts`.
 
 - Use invitations: “notice”, “you may experience”, “reflect”, “for some people”.

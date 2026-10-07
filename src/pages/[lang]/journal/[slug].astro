@@ -19,11 +19,11 @@ const alternatePath = articlePath(lang === 'vi' ? 'en' : 'vi', article.slug);
 const related = articles.filter(item => item.slug !== article.slug);
 ---
 <BaseLayout lang={lang} title={`${content.title} | Hương Thiền Nature`} description={content.description} alternatePath={alternatePath} image={article.image}>
-  <Header lang={lang} alternatePath={alternatePath} isArticle />
+  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
   <main id="main-content" tabindex="-1">
     <article class="article-page">
       <header class="article-header shell">
-        <nav class="breadcrumbs" aria-label={lang === 'vi' ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{t.home}</a><span aria-hidden="true">/</span><a href={`/${lang}/#journal`}>{t.journalHome}</a></nav>
+        <nav class="breadcrumbs" aria-label={lang === 'vi' ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{t.home}</a><span aria-hidden="true">/</span><a href={`/${lang}/journal/`}>{t.journalHome}</a></nav>
         <div class="article-meta"><span>{content.category}</span><span>{article.minutes} {t.readTime}</span></div>
         <h1>{content.title}</h1>
         <p class="lead">{content.description}</p>
@@ -34,7 +34,7 @@ const related = articles.filter(item => item.slug !== article.slug);
         {content.sections.map(section => <section><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
-        <a class="quiet-link" href={`/${lang}/#journal`}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
+        <a class="quiet-link" href={`/${lang}/journal/`}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
       </div>
     </article>
     <section class="section related-articles shell" aria-labelledby="related-title"><span class="eyebrow">{t.journalHome}</span><h2 id="related-title">{t.related}</h2><div class="related-grid">{related.map(item => <article class="related-card"><span class="article-meta">{item.translations[lang].category}</span><h3><a href={articlePath(lang, item.slug)}>{item.translations[lang].title}</a></h3><p>{item.translations[lang].description}</p><a class="quiet-link" href={articlePath(lang, item.slug)} aria-label={`${t.journalLink}: ${item.translations[lang].title}`}>{t.journalLink} <Arrow /></a></article>)}</div></section>

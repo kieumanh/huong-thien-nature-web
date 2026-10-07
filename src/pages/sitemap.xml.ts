@@ -5,6 +5,7 @@ export const GET: APIRoute = () => {
   const base = 'https://huongthiennature.com';
   const paths = [
     { vi: '/vi/', en: '/en/' },
+    { vi: '/vi/journal/', en: '/en/journal/' },
     ...articles.map(article => ({
       vi: articlePath('vi', article.slug), en: articlePath('en', article.slug),
     })),

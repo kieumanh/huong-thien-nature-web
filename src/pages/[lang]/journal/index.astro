@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import Arrow from '../../../components/Arrow.astro';
+import { languages, getCopy, type Language } from '../../../data/site';
+import { articles, articlePath } from '../../../data/articles';
+
+export function getStaticPaths() {
+  return languages.map(lang => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Language;
+const en = lang === 'en';
+const t = getCopy(lang);
+const title = en ? 'Journal' : 'Tản văn';
+const description = en
+  ? 'Reflections on meditation, nature and everyday life. Find a story to read at your own pace.'
+  : 'Những bài chia sẻ về thực tập thiền, thiên nhiên và đời sống. Chọn một bài viết để đọc theo nhịp của bạn.';
+const alternatePath = `/${en ? 'vi' : 'en'}/journal/`;
+---
+<BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={description} alternatePath={alternatePath}>
+  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <main id="main-content" tabindex="-1" class="journal-listing">
+    <header class="journal-listing-header shell">
+      <nav class="breadcrumbs" aria-label={en ? 'Breadcrumb' : 'Đường dẫn'}><a href={`/${lang}/`}>{t.home}</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+      <span class="eyebrow">{en ? 'Meditation · Nature · Life' : 'Thiền · Thiên nhiên · Đời sống'}</span>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+      <p class="journal-count">{articles.length} {en ? 'articles to explore' : 'bài viết để khám phá'}</p>
+    </header>
+    <section class="shell journal-listing-articles" aria-label={en ? 'All journal articles' : 'Tất cả bài tản văn'}>
+      <div class="journal-grid">
+        {articles.map(article => {
+          const content = article.translations[lang];
+          return <article class="journal-card">
+            <a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a>
+            <div class="journal-card-copy">
+              <div class="article-meta"><span>{content.category}</span><span>{article.minutes} {t.readTime}</span></div>
+              <h2><a href={articlePath(lang, article.slug)}>{content.title}</a></h2>
+              <p>{content.description}</p>
+              <a class="quiet-link" href={articlePath(lang, article.slug)} aria-label={`${t.journalLink}: ${content.title}`}>{t.journalLink} <Arrow /></a>
+            </div>
+          </article>;
+        })}
+      </div>
+    </section>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

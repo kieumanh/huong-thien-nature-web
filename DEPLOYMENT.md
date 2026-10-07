@@ -31,7 +31,7 @@
 
 1. Push the reviewed source and media to the public GitHub repository.
 2. Connect the repository to Cloudflare Pages; build `main` with `npm run build` and publish `dist` along with the checkout's `functions/`. Use Node.js 24; no framework adapter is needed. Configure the contact runtime bindings before testing sending.
-3. Confirm the Pages build, then test both language homepages, all six journal routes, article language switching, mobile navigation, imagery, 404, metadata and contact email delivery on the `pages.dev` demo. `/sitemap.xml` should contain eight localized URLs.
+3. Confirm the Pages build, then test both language homepages, both journal indexes and all six article routes, article language switching, mobile navigation, imagery, 404, metadata and contact email delivery on the `pages.dev` demo. `/sitemap.xml` should contain ten localized URLs.
 4. Attach `huongthiennature.com` only after the zone and DNS records are active; choose one canonical host.
 5. Verify DNS resolution, HTTPS certificate, HTTP-to-HTTPS behavior and canonical redirects on the custom domain.
 6. Keep Workers dry-run as a static compatibility check only; use Pages for the contact API.

@@ -2,7 +2,7 @@
 const { lang = 'vi' } = Astro.props;
 const label = lang === 'en' ? 'Back to top' : 'Về đầu trang';
 ---
-<button class="back-to-top" type="button" aria-label={label} title={label} hidden>
+<button class="back-to-top" data-floating-tone="dark" type="button" aria-label={label} title={label} hidden>
   <svg viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><path d="m6 12 6-6 6 6M12 6v13" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" /></svg>
 </button>
 <script>

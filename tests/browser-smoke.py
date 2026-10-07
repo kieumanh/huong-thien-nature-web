@@ -16,7 +16,7 @@ with sync_playwright() as p:
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     for lang in ['vi','en']:
-        for suffix in [''] + ['journal/'+slug+'/' for slug in slugs]:
+        for suffix in ['', 'journal/'] + ['journal/'+slug+'/' for slug in slugs]:
             response = page.goto(base+'/'+lang+'/'+suffix, wait_until='domcontentloaded')
             assert response.status == 200
             assert page.locator('html').get_attribute('lang') == lang

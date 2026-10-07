@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { readdir, readFile, access } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { articles as articleEntries } from '../src/data/articles.ts';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const base = 'https://huongthiennature.com';
@@ -14,10 +15,10 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, 10, 'Build must contain two homepages, six articles, root entry and 404');
+assert.equal(files.length, articleEntries.length * 2 + 6, 'Build must contain two homepages, two journal indexes, translated articles, root entry and 404');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, 8, 'Sitemap must list eight distinct localized pages');
+assert.equal(new Set(locations).size, (articleEntries.length + 2) * 2, 'Sitemap must list all localized homes, journal indexes and articles');
 let references = 0;
 let articles = 0;
 for (const file of files) {
@@ -36,9 +37,11 @@ for (const file of files) {
     assert(locations.includes(base + route), `Sitemap missing ${route}`);
     const alternate = route.replace(/^\/(vi|en)\//, lang === 'vi' ? '/en/' : '/vi/');
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
-    if (route.includes('/journal/')) {
+    if (/\/journal\/[^/]+\/$/.test(route)) {
       articles++;
       assert([...html.matchAll(/<h2\b/g)].length >= 4, `Article content missing on ${route}`);
+    } else if (route.endsWith('/journal/')) {
+      assert.equal([...html.matchAll(/<article\b/g)].length, articleEntries.length, `Journal listing must include every article on ${route}`);
     }
   }
   for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) JSON.parse(json);
@@ -59,5 +62,5 @@ for (const file of files) {
     references++;
   }
 }
-assert.equal(articles, 6, 'Both translations of every article must be generated');
+assert.equal(articles, articleEntries.length * 2, 'Both translations of every article must be generated');
 console.log(`Build audit passed: ${files.length} HTML pages, ${articles} articles, ${locations.length} sitemap URLs, ${references} local links/assets.`);
