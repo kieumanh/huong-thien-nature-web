@@ -41,7 +41,7 @@ with sync_playwright() as p:
             page.locator('.music-options').evaluate('el => el.open=false')
         report.append(lang+': left music/right back-to-top controls fit and do not overlap at 320/375/768/1440 px')
     page.set_viewport_size({'width':375,'height':850})
-    page.goto(base+'/vi/journal/seven-layers/',wait_until='domcontentloaded')
+    page.goto(base+'/vi/tan-van/bay-tang-trai-nghiem/',wait_until='domcontentloaded')
     page.evaluate('window.scrollTo({top:(document.documentElement.scrollHeight-innerHeight)*.5,behavior:"instant"})')
     page.wait_for_function('!document.querySelector(".back-to-top").hidden')
     page.locator('.back-to-top').click()

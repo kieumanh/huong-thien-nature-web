@@ -1,3 +1,7 @@
+## 0.3.4
+- Remove email draft and mailto fallback; retain server-side message delivery through Resend and Turnstile.
+- Localize Vietnamese journal listing and article URLs, translation links and sitemap; redirect legacy URLs.
+
 # Lịch sử phiên bản
 
 Phiên bản dùng `major.minor.patch`, hiển thị từ `package.json` tại footer và thẻ `application-version`. V3 Roots là tên định hướng thiết kế; số phát hành là số đi kèm. Thay đổi sửa lỗi/giao diện tăng patch, tính năng lớn tăng minor, thay đổi không tương thích tăng major.

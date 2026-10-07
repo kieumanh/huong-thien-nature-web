@@ -1,11 +1,11 @@
 import type { APIRoute } from 'astro';
-import { articles, articlePath } from '../data/articles';
+import { articles, articlePath, journalPath } from '../data/articles';
 
 export const GET: APIRoute = () => {
   const base = 'https://huongthiennature.com';
   const paths = [
     { vi: '/vi/', en: '/en/' },
-    { vi: '/vi/journal/', en: '/en/journal/' },
+    { vi: journalPath('vi'), en: journalPath('en') },
     ...articles.map(article => ({
       vi: articlePath('vi', article.slug), en: articlePath('en', article.slug),
     })),

@@ -116,70 +116,24 @@ with sync_playwright() as p:
     page.locator('#connect').scroll_into_view_if_needed()
     page.screenshot(path=str(out/'contact-form-mobile.png'))
     report.append('Contact form fits mobile, tablet and desktop widths')
-    # Fallback generates drafts locally; no email provider is called.
-    from urllib.parse import urlparse, parse_qs, unquote
+    # An unavailable service must never open a mail app or claim delivery.
     unavailable=context.new_page()
-    fallback_posts=[]
     configure(unavailable,False)
-    unavailable.route('**/api/contact', lambda route: (fallback_posts.append(route.request), route.abort()))
     for lang in ['vi','en']:
         unavailable.goto(base+'/'+lang+'/',wait_until='domcontentloaded')
-        unavailable.wait_for_function("document.querySelector('#interest-form').dataset.delivery === 'email'")
+        unavailable.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
         assert unavailable.locator('#name').is_enabled()
-        assert unavailable.locator('button[type="submit"]').is_enabled()
-        assert unavailable.locator('#form-result').get_attribute('data-kind')=='info'
-        assert unavailable.locator('#contact-verification').is_hidden()
-        fill(unavailable,lang)
-        unavailable.locator('#consent').uncheck()
-        unavailable.locator('button[type="submit"]').click()
-        assert unavailable.locator('.contact-draft-links').is_hidden()
-        unavailable.locator('#consent').check()
-        message='Nội dung có dấu, & ? # + và xuống dòng.\nXin chào Hương Thiền.'
-        unavailable.locator('#message').fill(message)
-        unavailable.locator('button[type="submit"]').click()
-        assert unavailable.locator('.contact-draft-links').is_visible()
-        uri=urlparse(unavailable.locator('[data-email-app]').get_attribute('href'))
-        assert uri.scheme=='mailto' and uri.path=='kieumanh2211@gmail.com'
-        draft=parse_qs(uri.query)
-        assert message in draft['body'][0]
-        assert 'visitor@example.com' in draft['body'][0]
-        gmail=parse_qs(urlparse(unavailable.locator('[data-gmail]').get_attribute('href')).query)
-        assert gmail['to']==['kieumanh2211@gmail.com'] and gmail['body']==draft['body']
-        assert unavailable.locator('[data-gmail]').get_attribute('rel')=='noopener noreferrer'
-        assert unavailable.locator('#form-result').get_attribute('data-kind')=='info'
-        assert unavailable.locator('#message').input_value()==message
-        unavailable.locator('#message').fill(message+' Nội dung mới.')
-        assert unavailable.locator('.contact-draft-links').is_hidden()
-        assert len(fallback_posts)==0
-    report.append('Both languages: missing configuration enables validated email/Gmail drafts, preserves Unicode, keeps content and never reports sending')
+        assert unavailable.locator('button[type="submit"]').is_disabled()
+        assert unavailable.locator('a[href^="mailto:"]').count()==0
+        assert unavailable.locator('[data-gmail]').count()==0
     configure(unavailable,True)
     unavailable.goto(base+'/vi/',wait_until='domcontentloaded')
     fill(unavailable)
-    unavailable.unroute('**/api/contact')
     unavailable.route('**/api/contact', lambda route: route.fulfill(status=503,content_type='application/json',body='{"ok":false,"code":"unavailable"}'))
     unavailable.locator('button[type="submit"]').click()
-    unavailable.wait_for_function("document.querySelector('#interest-form').dataset.delivery === 'email'")
+    unavailable.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
     assert unavailable.locator('#message').input_value().startswith('Tôi muốn')
-    unavailable.locator('button[type="submit"]').click()
-    assert unavailable.locator('.contact-draft-links').is_visible()
-    report.append('API unavailable during submission switches to drafting and preserves the message')
-    for failure in ['config-404','config-network','widget-network']:
-        broken=context.new_page()
-        configure(broken,True)
-        if failure=='config-404':
-            broken.unroute('**/api/contact-config')
-            broken.route('**/api/contact-config',lambda route: route.fulfill(status=404,content_type='text/html',body='<html>Not found</html>'))
-        elif failure=='config-network':
-            broken.unroute('**/api/contact-config')
-            broken.route('**/api/contact-config',lambda route: route.abort())
-        else:
-            broken.unroute('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit')
-            broken.route('https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit',lambda route: route.abort())
-        broken.goto(base+'/vi/',wait_until='domcontentloaded')
-        broken.wait_for_function("document.querySelector('#interest-form').dataset.delivery === 'email'")
-        assert broken.locator('button[type="submit"]').is_enabled()
-        broken.close()
-    report.append('Missing API, configuration network failure and blocked widget all leave email drafting available')
+    report.append('Unavailable service keeps message text, displays an error and never offers email drafting')
     assert errors==[],errors
     report.append('No JavaScript page errors')
     browser.close()

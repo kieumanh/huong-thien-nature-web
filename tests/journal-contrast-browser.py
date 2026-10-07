@@ -7,6 +7,10 @@ base = os.environ.get('APP_BASE_URL', 'http://127.0.0.1:8788').rstrip('/')
 out = Path(os.environ.get('ROOTS_ARTIFACT_DIR', str(Path(__file__).resolve().parents[1] / '.artifacts')))
 out.mkdir(parents=True, exist_ok=True)
 report = []
+def journal(lang):
+    return '/vi/tan-van/' if lang == 'vi' else '/en/journal/'
+def first_article(lang):
+    return journal(lang)+('su-tro-lai-cung-la-thuc-tap/' if lang == 'vi' else 'returning-attention/')
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), headless=True, args=['--no-sandbox'])
     page = browser.new_page(viewport={'width':1440,'height':900}, reduced_motion='reduce')
@@ -14,25 +18,25 @@ with sync_playwright() as p:
     page.on('pageerror', lambda e: errors.append(str(e)))
     for lang in ['vi','en']:
         page.goto(base+'/'+lang+'/',wait_until='domcontentloaded')
-        page.locator(f'#main-nav a[href="/{lang}/journal/"]').click()
-        page.wait_for_url(base+'/'+lang+'/journal/')
+        page.locator(f'#main-nav a[href="{journal(lang)}"]').click()
+        page.wait_for_url(base+journal(lang))
         assert page.locator('h1').inner_text() == ('Tản văn' if lang=='vi' else 'Journal')
         assert page.locator('.journal-listing article').count() == 3
-        assert page.locator('#main-nav a[aria-current="page"]').get_attribute('href') == '/'+lang+'/journal/'
+        assert page.locator('#main-nav a[aria-current="page"]').get_attribute('href') == journal(lang)
         for link in page.locator('.journal-listing article h2 a').all():
-            assert link.get_attribute('href').startswith('/'+lang+'/journal/')
+            assert link.get_attribute('href').startswith(journal(lang))
         page.locator('.journal-listing article h2 a').first.click()
-        page.wait_for_url(base+'/'+lang+'/journal/returning-attention/')
+        page.wait_for_url(base+first_article(lang))
         assert page.locator('.article-body section').count() >= 3
         page.locator('.article-body > a.quiet-link').click()
-        page.wait_for_url(base+'/'+lang+'/journal/')
+        page.wait_for_url(base+journal(lang))
         page.locator('.language a[lang="'+('en' if lang=='vi' else 'vi')+'"]').click()
-        page.wait_for_url(base+'/'+('en' if lang=='vi' else 'vi')+'/journal/')
+        page.wait_for_url(base+journal('en' if lang=='vi' else 'vi'))
         report.append(lang+': main navigation opens listing, all three posts appear, article/back links and language switch work')
     for width in [320,375,768,1440]:
         page.set_viewport_size({'width':width,'height':900})
         for lang in ['vi','en']:
-            page.goto(base+'/'+lang+'/journal/',wait_until='domcontentloaded')
+            page.goto(base+journal(lang),wait_until='domcontentloaded')
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             for image in page.locator('.journal-listing img').all():
                 image.scroll_into_view_if_needed()
@@ -46,10 +50,10 @@ with sync_playwright() as p:
     nojs=browser.new_context(java_script_enabled=False,viewport={'width':375,'height':900})
     np=nojs.new_page()
     np.goto(base+'/vi/',wait_until='domcontentloaded')
-    np.locator('#main-nav a[href="/vi/journal/"]').click()
-    np.wait_for_url(base+'/vi/journal/')
+    np.locator('#main-nav a[href="/vi/tan-van/"]').click()
+    np.wait_for_url(base+'/vi/tan-van/')
     np.locator('.journal-listing article h2 a').first.click()
-    np.wait_for_url(base+'/vi/journal/returning-attention/')
+    np.wait_for_url(base+'/vi/tan-van/su-tro-lai-cung-la-thuc-tap/')
     report.append('Listing and article navigation also work without JavaScript')
     page.set_viewport_size({'width':1440,'height':900})
     page.goto(base+'/vi/',wait_until='domcontentloaded')
@@ -82,7 +86,7 @@ with sync_playwright() as p:
     page.evaluate('window.dispatchEvent(new Event("resize"))')
     report.append('Controls choose independent opposing tones over dark and light regions of the same image')
     page.set_viewport_size({'width':375,'height':850})
-    page.goto(base+'/vi/journal/',wait_until='domcontentloaded')
+    page.goto(base+'/vi/tan-van/',wait_until='domcontentloaded')
     page.screenshot(path=str(out/'v0.3.3-journal-mobile.png'),full_page=True)
     assert errors == [], errors
     browser.close()

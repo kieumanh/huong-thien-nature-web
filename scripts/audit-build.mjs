@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readdir, readFile, access } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { articles as articleEntries } from '../src/data/articles.ts';
+import { articles as articleEntries, articlePath, journalPath } from '../src/data/articles.ts';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const base = 'https://huongthiennature.com';
@@ -35,12 +35,14 @@ for (const file of files) {
     assert.equal([...html.matchAll(/<main\b/g)].length, 1, `Expected one main landmark on ${route}`);
     assert(html.includes(`rel="canonical" href="${base}${route}"`), `Incorrect canonical on ${route}`);
     assert(locations.includes(base + route), `Sitemap missing ${route}`);
-    const alternate = route.replace(/^\/(vi|en)\//, lang === 'vi' ? '/en/' : '/vi/');
+    const other = lang === 'vi' ? 'en' : 'vi';
+    const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
+    const alternate = article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
-    if (/\/journal\/[^/]+\/$/.test(route)) {
+    if (/\/(journal|tan-van)\/[^/]+\/$/.test(route)) {
       articles++;
       assert([...html.matchAll(/<h2\b/g)].length >= 4, `Article content missing on ${route}`);
-    } else if (route.endsWith('/journal/')) {
+    } else if (route === journalPath(lang)) {
       assert.equal([...html.matchAll(/<article\b/g)].length, articleEntries.length, `Journal listing must include every article on ${route}`);
     }
   }
@@ -64,3 +66,13 @@ for (const file of files) {
 }
 assert.equal(articles, articleEntries.length * 2, 'Both translations of every article must be generated');
 console.log(`Build audit passed: ${files.length} HTML pages, ${articles} articles, ${locations.length} sitemap URLs, ${references} local links/assets.`);
+
+assert(!locations.some(url => url.includes('/vi/journal/')), 'Vietnamese sitemap must use localized URLs');
+const redirects = await readFile(join(dist, '_redirects'), 'utf8');
+for (const item of articleEntries) {
+  assert(redirects.includes(`/vi/journal/${item.slug}/ ${articlePath('vi', item.slug)} 301`), 'Legacy article must redirect');
+}
+for (const lang of ['vi','en']) {
+  const home = await readFile(join(dist, lang, 'index.html'), 'utf8');
+  assert(!home.includes('mailto:') && !home.includes('data-gmail'), 'Contact must use server delivery only');
+}

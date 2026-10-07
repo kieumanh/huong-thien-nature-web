@@ -28,9 +28,6 @@ Cấu hình trong môi trường Codex không tự tạo binding trên dự án 
 - Email dùng văn bản thuần; Reply-To là email người gửi. Không dùng input làm HTML hoặc subject tùy ý.
 - Thành công chỉ xuất hiện sau khi Resend trả receipt. Lỗi giữ nội dung; thử lại không sửa nội dung giữ idempotency key để tránh gửi trùng.
 - Form không tự đăng ký bản tin. Dữ liệu được chuyển qua nhà cung cấp email đến hộp nhận để phản hồi; ứng dụng không lưu database hay ghi dữ liệu cá nhân/token vào log.
-- Thiếu cấu hình, API cấu hình không chạy hoặc widget không tải được lúc khởi tạo: form chuyển sang chế độ **Soạn email**, giữ các ô nhập và kiểm tra dữ liệu/đồng ý. Lời nhắn được ghép trên trình duyệt để người dùng mở ứng dụng email hoặc Gmail, kiểm tra rồi tự bấm Gửi. Phương án này dùng email nhận công khai do chủ dự án cung cấp: `kieumanh2211@gmail.com`. Không báo đã gửi khi chỉ soạn bản nháp. Khi sửa nội dung, các liên kết bản nháp cũ được ẩn cho đến lần soạn tiếp theo.
-- API báo `unavailable` lúc gửi: chuyển sang chế độ Soạn email và giữ nội dung. Lỗi mạng/nhà cung cấp có trạng thái gửi không chắc chắn vẫn giữ thông báo lỗi và idempotency key để thử lại, tránh tự động tạo một lần gửi khác.
-- Không có JavaScript thì nút submit vẫn khóa để tránh GET chứa thông tin cá nhân; liên kết email trực tiếp luôn dùng được.
 
 ## Phát triển và kiểm tra
 
@@ -54,6 +51,9 @@ APP_BASE_URL=http://127.0.0.1:8788 python tests/contact-browser.py
 APP_BASE_URL=http://127.0.0.1:8788 python tests/browser-smoke.py
 ```
 
-`contact-browser.py` kiểm tra gửi thành công/lỗi với API và widget mock, cùng phương án soạn email khi thiếu cấu hình. `browser-smoke.py` kiểm tra các tuyến nội dung và điều hướng trên máy chủ chưa cấu hình. `tests/navigation-controls-browser.py` kiểm tra góc trái của nhạc và ngưỡng 30% của nút lên đầu trang. Các kiểm tra này không xác minh email đã vào Gmail.
+`contact-browser.py` kiểm tra gửi thành công/lỗi với API và widget mock, cùng trạng thái lỗi và giữ nội dung khi thiếu cấu hình. `browser-smoke.py` kiểm tra các tuyến nội dung và điều hướng trên máy chủ chưa cấu hình. `tests/navigation-controls-browser.py` kiểm tra góc trái của nhạc và ngưỡng 30% của nút lên đầu trang. Các kiểm tra này không xác minh email đã vào Gmail.
 
 `wrangler.jsonc` là cấu hình Pages. `wrangler.worker.jsonc` chỉ giữ phép kiểm tra Workers Static Assets tùy chọn, không triển khai Pages Functions. Không dùng Worker static đó để xuất bản form gửi tin.
+
+## v0.3.4
+Biểu mẫu chỉ gửi qua `/api/contact`. Đã bỏ nút mở Gmail, ứng dụng email và liên kết email trực tiếp. Khi thiếu cấu hình, hiển thị dịch vụ chưa sẵn sàng; không báo gửi thành công. Đặt `CONTACT_TO_EMAIL` trong Cloudflare bằng hộp thư mà chủ dự án chỉ định. Không thay đổi người nhận từ trình duyệt.

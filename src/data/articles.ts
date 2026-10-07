@@ -181,5 +181,14 @@ export const articles: Article[] = [
 ];
 
 export function articlePath(lang: Language, slug: string) {
-  return `/${lang}/journal/${slug}/`;
+  const vietnamese: Record<string, string> = {
+    'returning-attention': 'su-tro-lai-cung-la-thuc-tap',
+    'seven-layers': 'bay-tang-trai-nghiem',
+    'listening-to-nature': 'lang-nghe-thien-nhien',
+  };
+  return `${journalPath(lang)}${lang === 'vi' ? vietnamese[slug] : slug}/`;
+}
+
+export function journalPath(lang: Language) {
+  return lang === 'vi' ? '/vi/tan-van/' : '/en/journal/';
 }

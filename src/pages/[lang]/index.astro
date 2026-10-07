@@ -6,7 +6,7 @@ import Footer from '../../components/Footer.astro';
 import RootMark from '../../components/RootMark.astro';
 import ContactForm from '../../components/ContactForm.astro';
 import { languages, getCopy, type Language } from '../../data/site';
-import { articles, articlePath } from '../../data/articles';
+import { articles, articlePath, journalPath } from '../../data/articles';
 
 export function getStaticPaths() {
   return languages.map(lang => ({ params: { lang } }));
@@ -82,7 +82,7 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
           const translation = article.translations[lang];
           return <article class="journal-card"><a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a><div class="journal-card-copy"><div class="article-meta"><span>{translation.category}</span><span>{article.minutes} {t.readTime}</span></div><h3><a href={articlePath(lang, article.slug)}>{translation.title}</a></h3><p>{translation.description}</p><a class="quiet-link" href={articlePath(lang, article.slug)} aria-label={`${t.journalLink}: ${translation.title}`}>{t.journalLink} <Arrow /></a></div></article>;
         })}</div>
-        <div class="journal-all"><a class="button" href={`/${lang}/journal/`}>{en ? 'View all articles' : 'Xem tất cả tản văn'} <Arrow /></a></div>
+        <div class="journal-all"><a class="button" href={journalPath(lang)}>{en ? 'View all articles' : 'Xem tất cả tản văn'} <Arrow /></a></div>
         <aside id="layers" class="reflection-note"><span class="eyebrow">{en ? 'A personal lens' : 'Một góc nhìn cá nhân'}</span><p>{en ? 'The seven-layer framework is a prompt for reflection, not a clinical assessment or a universal scientific map. Each person has room for their own experience.' : 'Bảy tầng là khung chiêm nghiệm cá nhân, không phải công cụ đánh giá lâm sàng hay bản đồ khoa học phổ quát. Mỗi người có khoảng mở cho trải nghiệm riêng.'}</p><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{en ? 'Understand the framework' : 'Tìm hiểu khung chiêm nghiệm'} <span aria-hidden="true">→</span></a></aside>
       </div>
     </section>
@@ -93,7 +93,7 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
 
     <section id="connect" class="section contact" aria-labelledby="connect-title">
       <div class="shell contact-grid">
-        <div><span class="eyebrow">{t.contactEye}</span><h2 id="connect-title">{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><a class="quiet-link" href={`/${lang}/journal/`}>{en ? 'Explore the reflections' : 'Khám phá tản văn'} <Arrow /></a></div>
+        <div><span class="eyebrow">{t.contactEye}</span><h2 id="connect-title">{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><a class="quiet-link" href={journalPath(lang)}>{en ? 'Explore the reflections' : 'Khám phá tản văn'} <Arrow /></a></div>
         <ContactForm lang={lang} />
       </div>
     </section>

@@ -16,7 +16,9 @@ with sync_playwright() as p:
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     for lang in ['vi','en']:
-        for suffix in ['', 'journal/'] + ['journal/'+slug+'/' for slug in slugs]:
+        folder = 'tan-van' if lang == 'vi' else 'journal'
+        localized_slugs = ['su-tro-lai-cung-la-thuc-tap','bay-tang-trai-nghiem','lang-nghe-thien-nhien'] if lang == 'vi' else slugs
+        for suffix in ['', folder+'/'] + [folder+'/'+slug+'/' for slug in localized_slugs]:
             response = page.goto(base+'/'+lang+'/'+suffix, wait_until='domcontentloaded')
             assert response.status == 200
             assert page.locator('html').get_attribute('lang') == lang
@@ -58,7 +60,7 @@ with sync_playwright() as p:
     page.mouse.click(10, 500)
     assert toggle.get_attribute('aria-expanded')=='false'
     report.append('Mobile menu: open, Escape with focus return, anchor close, outside close')
-    page.goto(base+'/vi/journal/seven-layers/',wait_until='domcontentloaded')
+    page.goto(base+'/vi/tan-van/bay-tang-trai-nghiem/',wait_until='domcontentloaded')
     page.locator('.language a[lang="en"]').click()
     assert page.url==base+'/en/journal/seven-layers/'
     assert page.locator('html').get_attribute('lang')=='en'
@@ -67,10 +69,9 @@ with sync_playwright() as p:
     page.goto(base+'/vi/',wait_until='domcontentloaded')
     page.wait_for_function("document.querySelector('#interest-form').getAttribute('aria-busy') === 'false'")
     assert page.locator('#name').is_enabled()
-    assert page.locator('#interest-form button').is_enabled()
-    assert page.locator('#interest-form').get_attribute('data-delivery')=='email'
-    assert page.locator('#form-result').get_attribute('data-kind')=='info'
-    report.append('Unconfigured contact service enables email drafting without reporting delivery')
+    assert page.locator('#interest-form button').is_disabled()
+    assert page.locator('#form-result').get_attribute('data-kind')=='error'
+    report.append('Unconfigured contact service displays an error without reporting delivery')
     response=page.goto(base+'/missing-v3-roots-page',wait_until='domcontentloaded')
     assert response.status==404
     assert page.locator('h1').inner_text()=='Không tìm thấy trang.'
@@ -83,8 +84,8 @@ with sync_playwright() as p:
     assert np.locator('#interest-form button').is_disabled()
     assert np.locator('#interest-form noscript').is_visible()
     assert np.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
-    assert np.locator('.contact-direct a').get_attribute('href')=='mailto:kieumanh2211@gmail.com'
-    report.append('JavaScript disabled: navigation and direct email work; form cannot submit as GET')
+    assert np.locator('a[href^="mailto:"]').count()==0
+    report.append('JavaScript disabled: navigation works; form cannot submit as GET')
     assert errors==[], 'Browser errors: '+str(errors)
     report.append('No JavaScript page errors')
     browser.close()

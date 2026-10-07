@@ -1,4 +1,5 @@
 ---
+import { journalPath as journalUrl } from '../data/articles';
 import Arrow from './Arrow.astro';
 import { getCopy, type Language } from '../data/site';
 const { lang, alternatePath, isInnerPage = false } = Astro.props as {
@@ -6,7 +7,7 @@ const { lang, alternatePath, isInnerPage = false } = Astro.props as {
 };
 const t = getCopy(lang);
 const sections = ['story', 'practice', 'nature', 'people', 'journal', 'path'];
-const journalPath = `/${lang}/journal/`;
+const journalPath = journalUrl(lang);
 const sectionHref = (section: string) => section === 'journal' ? journalPath : isInnerPage ? `/${lang}/#${section}` : `#${section}`;
 ---
 <a class="skip-link" href="#main-content">{t.skip}</a>
