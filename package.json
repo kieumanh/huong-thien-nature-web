@@ -1,6 +1,6 @@
 {
   "name": "huong-thien-nature-web",
-  "version": "0.1.0",
+  "version": "0.3.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "audit": "node scripts/audit-source.mjs",
+    "audit:build": "node scripts/audit-build.mjs",
     "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=huong-thien-nature-web",
     "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run"
   },

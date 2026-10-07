@@ -21,6 +21,8 @@ Hương Thiền Nature brings together meditation, mindfulness and natural wellb
 
 ## Current website artwork
 
+V3 Roots reuses the supplied WebP artwork and adds a decorative vector seedling/root mark. Its visual language uses forest green, warm paper and earth tones, with readable system serif headings and sans-serif body text. No additional founder biography or credentials were invented.
+
 The previous educational infographics are no longer shown in the interface. Their underlying contemplative ideas remain in accessible written form. The redesigned site uses a new, coordinated set of editorial illustrations:
 
 | Asset | Placement |
@@ -31,6 +33,8 @@ The previous educational infographics are no longer shown in the interface. Thei
 | `fern-study-v2.webp` | Botanical observation and the nature journal. |
 
 ## Editorial guardrails
+
+The three journal pieces now have full Vietnamese and English routes, covering returning attention, the seven-layer framework and sensory observation of nature. Their content develops the existing source material; it is not an imported transcript of the unavailable ChatGPT Work conversation. Bilingual text lives in `src/data/site.ts` and `src/data/articles.ts`.
 
 - Use invitations: “notice”, “you may experience”, “reflect”, “for some people”.
 - Avoid promises of healing, diagnosis, guaranteed spiritual messages or measurable human/plant energy exchange.

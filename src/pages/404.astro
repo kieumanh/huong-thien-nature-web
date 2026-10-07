@@ -1,6 +1,11 @@
 ---
+import Arrow from '../components/Arrow.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
 ---
 <BaseLayout lang="vi" title="Không tìm thấy trang | Hương Thiền Nature" description="Trang bạn đang tìm không có ở đây.">
-  <main class="section"><div class="shell"><span class="eyebrow">404 · Lạc một nhịp</span><h1>Không tìm thấy trang.</h1><p class="lead">Có lẽ con đường này vừa rẽ sang một lối khác.</p><a class="button" href="/vi">Trở về trang chủ ↗</a></div></main>
+  <Header lang="vi" alternatePath="/en/" isArticle />
+  <main class="error-page" id="main-content" tabindex="-1"><div class="shell"><span class="eyebrow">404 · Lạc một nhịp</span><h1>Không tìm thấy trang.</h1><p class="lead">Có lẽ con đường này vừa rẽ sang một lối khác.</p><a class="button" href="/vi/">Trở về trang chủ <Arrow /></a></div></main>
+  <Footer lang="vi" />
 </BaseLayout>

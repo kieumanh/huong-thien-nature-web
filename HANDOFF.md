@@ -2,11 +2,14 @@
 
 ## Nguồn kế thừa
 
-Mã nguồn và tài liệu trong repository `kieumanh/huong-thien-nature-web` là cơ sở tiếp tục phát triển. Phiên bản nền đã kiểm tra: `7d92880e911847c2291a8e9f012ae4f72419de15`. Lịch sử hội thoại ChatGPT Work và các tệp gốc ngoài repository chưa được cung cấp trong môi trường này.
+Mã nguồn và tài liệu trong repository `kieumanh/huong-thien-nature-web` là cơ sở tiếp tục phát triển. Phiên bản V3 Roots tiếp tục từ commit `9cc35139162f750635f98d24fdc72e3267b79af3`. Liên kết hội thoại ChatGPT Work không truy cập được từ môi trường này; không khẳng định đã kế thừa các yêu cầu chưa đọc. Xem `V3_ROOTS.md` để biết phạm vi phiên bản.
 
 ## Thành phần đã có
 
 - Website Astro tĩnh, giao diện tiếng Việt `/vi` và tiếng Anh `/en`.
+- Giao diện V3 Roots: tông đất/xanh rừng, dấu rễ cây dạng vector, chữ hệ thống dễ đọc, menu có hỗ trợ bàn phím.
+- Ba bài tản văn đầy đủ ở mỗi ngôn ngữ, tổng cộng sáu trang bài viết; chuyển ngôn ngữ giữ nguyên bài.
+- Nội dung dùng chung trong `src/data`, bố cục dùng chung trong `src/components`; sitemap tự tạo từ danh sách bài viết.
 - Nội dung thương hiệu, thực tập thiền, thiên nhiên, người sáng lập, nhật ký và lộ trình.
 - Tailwind CSS, 14 ảnh WebP trong `public/media`, metadata SEO, robots và sitemap.
 - `CONTENT_GUIDE.md`: nguồn nội dung và định hướng biên tập.
@@ -27,6 +30,7 @@ npm ci --cache /workspace/.npm --no-fund --no-audit
 npm run check
 npm run audit
 npm run build
+npm run audit:build
 npm run dev -- --host 0.0.0.0 --port 4321
 ```
 
@@ -42,7 +46,7 @@ Triển khai trực tiếp bằng `npm run deploy:pages` cần thông tin xác t
 
 ## Phạm vi hiện tại và công việc tiếp theo
 
-Form quan tâm chỉ là bản xem trước, không gửi hoặc lưu thông tin. Chưa có backend, tài khoản thành viên, thanh toán, lịch đặt chỗ hoặc cơ sở dữ liệu. Trước khi thu thập dữ liệu thật, cần xây dựng endpoint, xác minh Turnstile, lưu trữ an toàn, email giao dịch và nội dung đồng ý/quyền riêng tư.
+Form quan tâm chỉ là bản xem trước trong một khung có thể mở/đóng, dùng dữ liệu mẫu, không gửi hoặc lưu thông tin. Biểu mẫu khóa khi không có JavaScript; kiểm tra dữ liệu và thao tác xem trước chạy cục bộ. Chưa có backend, tài khoản thành viên, thanh toán, lịch đặt chỗ hoặc cơ sở dữ liệu. Trước khi thu thập dữ liệu thật, cần xây dựng endpoint, xác minh Turnstile, lưu trữ an toàn, email giao dịch và nội dung đồng ý/quyền riêng tư.
 
 Tiếp tục rà soát giao diện trên thiết bị thực, khả năng truy cập, nội dung song ngữ và quyền sử dụng hình ảnh; xác minh deployment Pages, DNS/TLS và tên miền theo `DEPLOYMENT.md`.
 

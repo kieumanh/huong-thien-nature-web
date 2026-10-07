@@ -1,0 +1,59 @@
+---
+import Arrow from './Arrow.astro';
+import { getCopy, type Language } from '../data/site';
+const { lang, alternatePath, isArticle = false } = Astro.props as {
+  lang: Language; alternatePath: string; isArticle?: boolean;
+};
+const t = getCopy(lang);
+const sections = ['story', 'practice', 'nature', 'people', 'journal', 'path'];
+const sectionHref = (section: string) => isArticle ? `/${lang}/#${section}` : `#${section}`;
+---
+<a class="skip-link" href="#main-content">{t.skip}</a>
+<header class="topbar" id="top">
+  <div class="shell nav">
+    <a class="brand" href={`/${lang}/`} aria-label={`Hương Thiền Nature · ${t.home}`}>
+      <img src="/media/huong-thien-logo-forest.webp" alt="" width="48" height="48" />
+      <span class="brand-name">Hương Thiền<small>NATURE</small></span>
+    </a>
+    <nav class="nav-links" id="main-nav" aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
+      {sections.map((section, index) => <a href={sectionHref(section)}>{t.nav[index]}</a>)}
+    </nav>
+    <div class="nav-actions">
+      <nav class="language" aria-label={lang === 'vi' ? 'Ngôn ngữ' : 'Language'}>
+        <a class={lang === 'vi' ? 'active' : ''} aria-current={lang === 'vi' ? 'page' : undefined} href={lang === 'vi' ? undefined : alternatePath} lang="vi" aria-label="Tiếng Việt">VI</a>
+        <span aria-hidden="true">/</span>
+        <a class={lang === 'en' ? 'active' : ''} aria-current={lang === 'en' ? 'page' : undefined} href={lang === 'en' ? undefined : alternatePath} lang="en" aria-label="English">EN</a>
+      </nav>
+      <a class="nav-connect" href={sectionHref('connect')}>{lang === 'vi' ? 'Kết nối' : 'Connect'} <Arrow /></a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={lang === 'vi' ? 'Mở điều hướng' : 'Open navigation'} data-open-label={lang === 'vi' ? 'Mở điều hướng' : 'Open navigation'} data-close-label={lang === 'vi' ? 'Đóng điều hướng' : 'Close navigation'}>
+        <span aria-hidden="true"></span><span aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+</header>
+<script>
+  const button = document.querySelector<HTMLButtonElement>('.nav-toggle');
+  const menu = document.querySelector<HTMLElement>('#main-nav');
+  if (button && menu) {
+    const setOpen = (open: boolean) => {
+      menu.classList.toggle('open', open);
+      button.setAttribute('aria-expanded', String(open));
+      button.setAttribute('aria-label', (open ? button.dataset.closeLabel : button.dataset.openLabel) || 'Menu');
+    };
+    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
+        setOpen(false);
+        button.focus();
+      }
+    });
+    document.addEventListener('click', event => {
+      if (event.target instanceof Node && !menu.contains(event.target) && !button.contains(event.target)) setOpen(false);
+    });
+    matchMedia('(min-width: 1101px)').addEventListener('change', event => {
+      if (event.matches) setOpen(false);
+    });
+    document.documentElement.classList.add('js');
+  }
+</script>

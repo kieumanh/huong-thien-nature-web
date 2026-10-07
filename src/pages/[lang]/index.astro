@@ -1,41 +1,122 @@
 ---
+import Arrow from '../../components/Arrow.astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-export function getStaticPaths() { return [{ params: { lang: 'vi' } }, { params: { lang: 'en' } }]; }
-const lang = Astro.params.lang === 'en' ? 'en' : 'vi';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import RootMark from '../../components/RootMark.astro';
+import { languages, getCopy, type Language } from '../../data/site';
+import { articles, articlePath } from '../../data/articles';
+
+export function getStaticPaths() {
+  return languages.map(lang => ({ params: { lang } }));
+}
+const lang = Astro.params.lang as Language;
 const en = lang === 'en';
-const t = en ? {
-  title: 'Return to nature. Return to awareness.', desc: 'A gentle space for meditation, mindfulness and natural wellbeing, founded by Hương Thiền and Kiều Mạnh.',
-  nav: ['Our story','Practice','Nature','People','Journal','Our path'], eyebrow:'A practice of coming home', hero:'Return to nature.<br/><em>Return to awareness.</em>', lead:'A gentle space to pause, listen to the body and meet life as it is — one breath, one step, one day at a time.', explore:'Explore the practice', storyCta:'Our story', note:'A living practice rooted in care, attention and respect for nature.', introEyebrow:'The intention', introTitle:'A little more present. A little more at home.', introCopy:'Hương Thiền Nature brings meditation, mindfulness and nature-based wellbeing into everyday life. We share practices and reflections with warmth, curiosity and room for each person’s own experience.', introMark:'“The path begins where you are.”', pillars:[['01','Meditation','Simple, kind practices for meeting attention and returning to the present.'],['02','Mindfulness','Bring awareness into ordinary moments, relationships and work.'],['03','Natural wellbeing','Care for body and mind through grounded, nature-connected routines.']], practiceEye:'The practice', practiceTitle:'Attention wanders.<br/>We begin again.', practiceCopy:'Meditation is not about forcing the mind to become empty. Notice where attention has gone, then gently return to the anchor. The returning is the practice.', steps:[['01','Choose an anchor','The breath, the feeling of your feet, or a sound nearby.'],['02','Notice the drift','When you remember, name it softly: thinking, planning, remembering.'],['03','Come back kindly','Return to the anchor without scolding yourself. Repeat as often as needed.']], natureEye:'Learning with the living world', natureTitle:'Slow down enough to notice.', natureCopy:'A walk, a tree, the smell after rain: nature can invite us to pay attention and feel connected. These are invitations to observe and reflect, not promises of hidden powers.', natureNote:'Some of our visual materials use spiritual language such as “energy” or “resonance.” We present these as personal contemplative metaphors, not established scientific measurements or medical advice.', natureCards:[['Observe','Notice color, shape, movement and change. Let curiosity lead before interpretation.'],['Listen','Pause for wind, birds, water and the sounds of the place you are in.'],['Reflect','Write what you noticed and what it brought up for you. Hold each meaning lightly.']], peopleEye:'The people behind the practice', peopleTitle:'Rooted in lived practice. Shared with care.', founderRole:'Founder · Author · Teacher', founderCopy:'Hương Thiền is the author and founder who initiated Hương Thiền Nature. Her work invites people to explore meditation, mindfulness and a more attentive relationship with nature.', coRole:'Co-founder · Teacher', coCopy:'Kiều Mạnh is a teacher and co-founder, helping shape the learning journey and the practical foundations of the project.', journalEye:'Notes for the journey', journalTitle:'Ideas to return to.', journalCards:[['PRACTICE','The repetition that trains attention','Notice where the mind went. Return to the breath. The quiet repetition is the training.'],['REFLECTION','A seven-layer map of experience','A personal contemplative framework: body; energy and emotion; mind; values and intention; habit and karmic patterns; awareness; openness and dependent arising.'],['NATURE','Listening to nature with care','Observation can deepen connection. Meaning is personal; stay curious and keep both feet on the ground.']], phasesTitle:'Growing at a human pace', phases:[['01','Open the door','A bilingual home, practice library, founder story and thoughtful articles.'],['02','Gather and learn','Retreat enquiries, course registration, member space and learning resources.'],['03','Deepen the community','A richer course library, events and community tools shaped by real needs.']], phaseLabels:['Now','Next','Later'], contactEye:'Stay in touch', contactTitle:'A quiet beginning is still a beginning.', contactCopy:'Join the interest list for future meditation sessions, retreats and learning updates.', formName:'Your name', formEmail:'Email address', formInterest:'I am interested in…', formOptions:['Choose one','Meditation practice','Retreats','Courses','Membership'], formButton:'Join the interest list', formNotice:'Preview form only. It does not send or store your details yet; a secure service will be connected before launch.', formSuccess:'This preview does not submit personal data. The sign-up service will be connected before the public launch.', footer:'Meditation · Mindfulness · Natural wellbeing', disclaimer:'This site shares educational and contemplative practices. It does not replace medical or mental-health care. Every practice is optional; adapt it to your own needs.', top:'Back to top'
-} : {
-  title: 'Trở về thiên nhiên. Trở về tỉnh thức.', desc: 'Một không gian nhẹ nhàng cho thiền định, chánh niệm và chăm sóc sức khỏe tự nhiên, do Hương Thiền và Kiều Mạnh khởi xướng.',
-  nav: ['Câu chuyện','Thực hành','Thiên nhiên','Đội ngũ','Tản văn','Lộ trình'], eyebrow:'Thực tập trở về', hero:'Trở về thiên nhiên.<br/><em>Trở về tỉnh thức.</em>', lead:'Một không gian nhẹ nhàng để dừng lại, lắng nghe thân tâm và gặp cuộc sống như đang là — từng hơi thở, từng bước chân, từng ngày.', explore:'Khám phá thực hành', storyCta:'Câu chuyện của chúng tôi', note:'Thực tập sống động, bắt đầu từ sự chăm sóc, chú tâm và tôn trọng thiên nhiên.', introEyebrow:'Tâm nguyện', introTitle:'Có mặt thêm một chút. An trú thêm một chút.', introCopy:'Hương Thiền Nature đưa thiền định, chánh niệm và chăm sóc sức khỏe gần thiên nhiên vào đời sống thường ngày. Chúng tôi chia sẻ thực hành và suy ngẫm với sự ấm áp, tò mò và tôn trọng trải nghiệm riêng của mỗi người.', introMark:'“Con đường bắt đầu từ nơi bạn đang đứng.”', pillars:[['01','Thiền định','Những thực tập giản dị, hiền hòa để nhận biết sự chú tâm và trở về hiện tại.'],['02','Chánh niệm','Đưa sự tỉnh thức vào những khoảnh khắc bình thường, các mối quan hệ và công việc.'],['03','Chăm sóc tự nhiên','Nuôi dưỡng thân tâm qua những nếp sống vững chãi, gần gũi với thiên nhiên.']], practiceEye:'Thực tập', practiceTitle:'Tâm đi lang thang.<br/>Ta bắt đầu lại.', practiceCopy:'Thiền không phải là ép tâm trí trống rỗng. Hãy nhận ra sự chú ý đã đi đâu, rồi nhẹ nhàng quay về điểm tựa. Chính sự quay về là thực tập.', steps:[['01','Chọn một điểm tựa','Hơi thở, cảm giác bàn chân hoặc một âm thanh gần bên.'],['02','Nhận ra tâm đã đi','Khi chợt nhớ, hãy gọi tên dịu dàng: đang nghĩ, đang tính, đang nhớ.'],['03','Nhẹ nhàng quay lại','Trở về điểm tựa mà không trách mình. Lặp lại bao nhiêu lần cũng được.']], natureEye:'Học cùng thế giới sống', natureTitle:'Chậm lại để nhìn sâu hơn.', natureCopy:'Một bước đi, một thân cây, mùi đất sau mưa: thiên nhiên có thể mời ta chú tâm và cảm nhận sự kết nối. Đó là lời mời quan sát, chiêm nghiệm — không phải lời hứa về quyền năng bí ẩn.', natureNote:'Một số tư liệu hình ảnh dùng ngôn ngữ tâm linh như “năng lượng” hay “cộng hưởng”. Chúng tôi trình bày đây là ẩn dụ chiêm nghiệm cá nhân, không phải phép đo khoa học đã được xác lập hay lời khuyên y khoa.', natureCards:[['Quan sát','Nhận biết màu sắc, hình dáng, chuyển động và thay đổi. Để sự tò mò đến trước diễn giải.'],['Lắng nghe','Dừng lại để nghe tiếng gió, chim, nước và âm thanh nơi bạn đang có mặt.'],['Chiêm nghiệm','Viết lại điều đã nhận ra và cảm xúc khơi lên. Giữ mọi cách hiểu thật nhẹ nhàng.']], peopleEye:'Những người khởi xướng', peopleTitle:'Bắt rễ từ thực hành. Chia sẻ bằng sự chăm sóc.', founderRole:'Founder · Tác giả · Teacher', founderCopy:'Hương Thiền là tác giả và Founder đã khởi xướng dự án Hương Thiền Nature. Cô mời mọi người khám phá thiền định, chánh niệm và mối quan hệ tỉnh thức hơn với thiên nhiên.', coRole:'Co-founder · Teacher', coCopy:'Kiều Mạnh là Teacher kiêm Co-founder, cùng định hình hành trình học tập và những nền tảng thực hành của dự án.', journalEye:'Tản văn trên hành trình', journalTitle:'Những điều để trở về.', journalCards:[['THỰC TẬP','Sự lặp lại rèn luyện sự chú tâm','Nhận ra tâm đã đi đâu. Trở về với hơi thở. Sự lặp lại lặng lẽ ấy chính là rèn luyện.'],['CHIÊM NGHIỆM','Bản đồ bảy tầng trải nghiệm','Một khung chiêm nghiệm cá nhân: thân thể; năng lượng và cảm xúc; tâm trí; giá trị và ý chí; tập khí và nghiệp lực; tánh biết; tánh không và duyên khởi.'],['THIÊN NHIÊN','Lắng nghe thiên nhiên bằng sự tỉnh thức','Quan sát có thể làm sâu sắc sự kết nối. Ý nghĩa là riêng tư; hãy giữ lòng tò mò và đôi chân chạm đất.']], phasesTitle:'Phát triển theo nhịp người thật', phases:[['01','Mở cánh cửa','Trang giới thiệu song ngữ, thư viện thực tập, câu chuyện người sáng lập và bài viết chọn lọc.'],['02','Cùng học và gặp gỡ','Gửi yêu cầu retreat, đăng ký khóa học, không gian thành viên và tài nguyên học tập.'],['03','Nuôi dưỡng cộng đồng','Thư viện khóa học sâu hơn, sự kiện và công cụ cộng đồng theo nhu cầu thực tế.']], phaseLabels:['Hiện tại','Tiếp theo','Tương lai'], contactEye:'Kết nối', contactTitle:'Một khởi đầu tĩnh lặng cũng là khởi đầu.', contactCopy:'Đăng ký nhận thông tin về các buổi thiền, retreat và chương trình học trong tương lai.', formName:'Tên của bạn', formEmail:'Địa chỉ email', formInterest:'Bạn quan tâm đến…', formOptions:['Chọn một mục','Thực tập thiền','Retreat','Khóa học','Membership'], formButton:'Đăng ký nhận tin', formNotice:'Đây mới là biểu mẫu xem trước. Dữ liệu chưa được gửi hoặc lưu; hệ thống bảo mật sẽ được kết nối trước khi ra mắt.', formSuccess:'Bản xem trước chưa gửi dữ liệu cá nhân. Hệ thống đăng ký sẽ được kết nối trước khi website công khai.', footer:'Thiền định · Chánh niệm · Chăm sóc tự nhiên', disclaimer:'Website chia sẻ nội dung giáo dục và thực tập chiêm nghiệm, không thay thế chăm sóc y tế hay sức khỏe tâm thần. Mọi thực tập đều tùy chọn; hãy điều chỉnh theo nhu cầu của bạn.', top:'Trở về đầu trang'
-};
+const t = getCopy(lang);
+const alternatePath = `/${en ? 'vi' : 'en'}/`;
+const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-canopy-v2.webp'];
 ---
-<BaseLayout lang={lang} title={`${t.title} | Hương Thiền Nature`} description={t.desc}>
-  <div class="topbar" id="top"><div class="shell nav">
-    <a class="brand" href={`/${lang}`} aria-label="Hương Thiền Nature home"><img src="/media/huong-thien-logo-forest.webp" alt=""/><span class="brand-name">Hương Thiền<small>N A T U R E</small></span></a>
-    <nav class="nav-links" id="main-nav" aria-label={en ? 'Main navigation' : 'Điều hướng chính'}>
-      <a href="#story">{t.nav[0]}</a><a href="#practice">{t.nav[1]}</a><a href="#nature">{t.nav[2]}</a><a href="#people">{t.nav[3]}</a><a href="#journal">{t.nav[4]}</a><a href="#path">{t.nav[5]}</a>
-    </nav>
-    <div class="nav-actions"><div class="language"><a class={!en?'active':''} href="/vi" lang="vi">VI</a> · <a class={en?'active':''} href="/en" lang="en">EN</a></div><a class="button" href="#connect">{en?'Connect':'Kết nối'}</a><button class="nav-toggle" aria-expanded="false" aria-controls="main-nav">☰ <span class="sr-only">Menu</span></button></div>
-  </div></div>
-  <main>
-    <section class="hero"><div class="shell hero-inner"><div class="hero-copy"><span class="eyebrow">{t.eyebrow}</span><h1 set:html={t.hero}></h1><p class="lead">{t.lead}</p><div class="hero-actions"><a class="button" href="#practice">{t.explore} <span aria-hidden="true">↗</span></a><a class="button secondary" href="#story">{t.storyCta}</a></div><div class="hero-note"><img src="/media/huong-thien-founder.webp" alt=""/><span><strong>Hương Thiền Nature</strong><br/>{t.note}</span></div></div></div><div class="hero-stamp" aria-hidden="true">Hương Thiền<br/><span>Nature · Awareness</span></div><span class="scroll-cue">Scroll · {en?'Breathe':'Thở'}</span></section>
-    <section id="story" class="section"><div class="shell"><div class="intro-grid"><div><span class="eyebrow">{t.introEyebrow}</span><div class="intro-mark">{t.introMark}</div></div><div class="intro-copy"><h2>{t.introTitle}</h2><p class="lead">{t.introCopy}</p></div></div><div class="three-pillars">{t.pillars.map(([n,title,copy])=><article class="pillar"><small>{n}</small><h3>{title}</h3><p>{copy}</p></article>)}</div></div></section>
-    <section id="practice" class="section practice"><div class="shell practice-grid"><div class="practice-image"><img src="/media/practice-cushion-v2.webp" alt={en?'A woven meditation cushion in a quiet forest clearing.':'Một chiếc đệm thiền trong khoảng rừng yên tĩnh.'} loading="lazy"/></div><div><span class="eyebrow">{t.practiceEye}</span><h2 set:html={t.practiceTitle}></h2><p class="lead">{t.practiceCopy}</p><ol class="steps">{t.steps.map(([n,title,copy])=><li><b>{n}</b><div><strong>{title}</strong><span>{copy}</span></div></li>)}</ol><a class="button text" href="#connect">{en?'Find a practice':'Tìm một thực tập'} <span>↗</span></a></div></div></section>
-    <section id="nature" class="section nature"><div class="shell"><div class="section-head"><span class="eyebrow">{t.natureEye}</span><h2>{t.natureTitle}</h2><p>{t.natureCopy}</p></div><div class="nature-grid">{t.natureCards.map(([title,copy],i)=><article class="nature-card"><img src={i===0?'/media/fern-study-v2.webp':i===1?'/media/woodland-stream-v2.webp':'/media/hero-canopy-v2.webp'} alt="" loading="lazy"/><div><h3>{title}</h3><p>{copy}</p></div></article>)}</div><p class="note">{t.natureNote}</p></div></section>
-    <section id="people" class="section"><div class="shell people-grid"><div class="portrait-wrap"><img src="/media/huong-thien-founder.webp" alt={en?'Hương Thiền, founder and teacher of Hương Thiền Nature, in a garden.':'Hương Thiền, Founder và Teacher của Hương Thiền Nature, trong khu vườn.'} loading="lazy"/></div><div><div class="section-head"><span class="eyebrow">{t.peopleEye}</span><h2>{t.peopleTitle}</h2></div><div class="people-copy"><article class="person"><span class="role">{t.founderRole}</span><h3>Hương Thiền</h3><p>{t.founderCopy}</p></article><article class="person"><span class="role">{t.coRole}</span><h3>Kiều Mạnh</h3><p>{t.coCopy}</p></article></div></div></div></section>
-    <section id="journal" class="section journal"><div class="shell"><div class="section-head"><span class="eyebrow">{t.journalEye}</span><h2>{t.journalTitle}</h2></div><div class="journal-grid">{t.journalCards.map(([tag,title,copy],i)=><article class="story"><span class="tag">{tag}</span><h3>{title}</h3><p>{copy}</p><a class="button text" href={i===0?'#practice':i===1?'#layers':'#nature'}>{en?'Read the reflection':'Đọc thêm'} <span>↗</span></a></article>)}</div><div id="layers" class="pathway" style="margin-top:24px"><article class="story"><span class="tag">{en?'CONTEMPLATIVE FRAMEWORK':'KHUNG CHIÊM NGHIỆM'}</span><h3>{en?'Seven layers, one personal map':'Bảy tầng — một bản đồ riêng'}</h3><p>{en?'This evolving personal model is a prompt for reflection, not a clinical assessment or a universal scientific map of consciousness.':'Mô hình cá nhân đang được chiêm nghiệm, không phải công cụ đánh giá lâm sàng hay bản đồ ý thức khoa học phổ quát.'}</p><p class="form-note">{en?'This personal framework moves from body and emotion through mind, values and intention, habit patterns, awareness, and openness/dependent arising. The founder’s other expression names body, emotion, mind, spirit, karma, awareness and emptiness.':'Minh họa đi từ thân thể, cảm xúc qua tâm trí, giá trị và ý chí, tập khí, tánh biết đến tánh không/duyên khởi. Một cách diễn giải khác của tác giả gồm thân thể, cảm xúc, tâm trí, tinh thần, nhân quả, tánh biết và tánh không.'}</p><p class="form-note">{en?'The written comparison is an analogy, not evidence that distinct traditions teach an identical system.':'Đây là phép liên hệ, không phải bằng chứng các truyền thống khác nhau cùng giảng dạy một hệ thống đồng nhất.'}</p></article><article class="story"><span class="tag">{en?'PRACTICE NOTE':'GHI CHÚ THỰC TẬP'}</span><h3>{en?'Meditation is not blankness':'Thiền không phải làm rỗng tâm trí'}</h3><p>{en?'The useful moment is noticing that attention wandered and choosing to return — with patience.':'Khoảnh khắc có ích là nhận ra sự chú ý đã đi lang thang và chọn quay lại — với sự kiên nhẫn.'}</p></article><article class="story"><span class="tag">{en?'NATURE JOURNAL':'NHẬT KÝ THIÊN NHIÊN'}</span><h3>{en?'Let meaning stay spacious':'Để ý nghĩa được rộng mở'}</h3><p>{en?'A bird call or a changing sky may become a prompt to pause. The meaning we find is ours to explore, not proof of a message.':'Tiếng chim hay bầu trời đổi sắc có thể nhắc ta dừng lại. Ý nghĩa ta tìm thấy là điều để khám phá, không phải bằng chứng về một thông điệp.'}</p><img src="/media/fern-study-v2.webp" alt={en?'Ferns and moss after rain in a woodland.':'Dương xỉ và rêu trong khu rừng sau mưa.'} loading="lazy"/></article></div></div></section>
-    <section id="path" class="section"><div class="shell"><div class="section-head"><span class="eyebrow">{en?'A thoughtful roadmap':'Lộ trình có chủ ý'}</span><h2>{t.phasesTitle}</h2></div><div class="pathway">{t.phases.map(([num,title,copy],i)=><article class={`phase ${i===0?'current':''}`}><span class="num">{num}</span><h3>{title}</h3><p>{copy}</p><span class="tag">{t.phaseLabels[i]}</span></article>)}</div></div></section>
-    <section id="connect" class="section contact"><div class="shell contact-grid"><div><span class="eyebrow">{t.contactEye}</span><h2>{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><p class="muted">{en?'When registration opens, we will share the next step here.':'Khi mở đăng ký, chúng tôi sẽ cập nhật các bước tiếp theo tại đây.'}</p></div><form class="contact-card" id="interest-form"><label for="name">{t.formName}</label><input id="name" name="name" autocomplete="name" required/><label for="email">{t.formEmail}</label><input id="email" name="email" type="email" autocomplete="email" required/><label for="interest">{t.formInterest}</label><select id="interest" name="interest" required>{t.formOptions.map((option,i)=><option value={i===0?'':option} disabled={i===0} selected={i===0}>{option}</option>)}</select><label class="consent"><input type="checkbox" required/> <span>{en?'I agree to be contacted about this interest.':'Tôi đồng ý được liên hệ về nội dung quan tâm này.'}</span></label><button class="button" type="submit">{t.formButton} <span>↗</span></button><p class="form-note">{t.formNotice}</p><p class="form-result" id="form-result" role="status">{t.formSuccess}</p></form></div></section>
+<BaseLayout lang={lang} title={`${t.title} | Hương Thiền Nature`} description={t.desc} alternatePath={alternatePath}>
+  <Header lang={lang} alternatePath={alternatePath} />
+  <main id="main-content" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">{t.eyebrow}</span>
+          <h1 id="hero-title" set:html={t.hero} />
+          <p class="lead">{t.lead}</p>
+          <div class="hero-actions">
+            <a class="button" href="#practice">{t.explore} <Arrow /></a>
+            <a class="quiet-link" href="#story">{t.storyCta} <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="hero-footnote"><span class="small-dot" aria-hidden="true"></span><p>{t.note}</p></div>
+        </div>
+        <div class="hero-art">
+          <img class="hero-image" src="/media/hero-canopy-v2.webp" alt={en ? 'A winding path beneath a green woodland canopy.' : 'Con đường uốn qua những tán cây xanh trong rừng.'} width="720" height="480" fetchpriority="high" />
+          <div class="hero-art-label"><span>Hương Thiền Nature</span><span>{en ? 'A living practice' : 'Một thực tập sống động'}</span></div>
+          <div class="root-seal" aria-hidden="true"><RootMark /></div>
+        </div>
+      </div>
+      <div class="shell hero-bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Explore at your own pace' : 'Khám phá theo nhịp của bạn'} <span aria-hidden="true">↓</span></a></div>
+    </section>
+
+    <section id="story" class="section roots" aria-labelledby="story-title">
+      <div class="shell">
+        <div class="intro-grid">
+          <div class="intro-side"><span class="eyebrow">{t.introEyebrow}</span><RootMark class="intro-root" /><p class="intro-mark">{t.introMark}</p></div>
+          <div class="intro-copy"><h2 id="story-title">{t.introTitle}</h2><p class="lead">{t.introCopy}</p><p class="small-copy">{en ? 'No perfect state to reach. Just a little room to notice, to care and to begin again.' : 'Không cần đạt đến một trạng thái hoàn hảo. Chỉ cần một khoảng mở để nhận biết, chăm sóc và bắt đầu lại.'}</p></div>
+        </div>
+        <div class="three-pillars">
+          {t.pillars.map(([n, title, text], index) => <article class="pillar"><span class="index-number">{n}</span><h3>{title}</h3><p>{text}</p><a class="quiet-link" href={index === 2 ? '#nature' : '#practice'} aria-label={`${en ? 'Explore' : 'Khám phá'}: ${title}`}>{en ? 'Explore' : 'Khám phá'} <Arrow /></a></article>)}
+        </div>
+      </div>
+    </section>
+
+    <section id="practice" class="section practice" aria-labelledby="practice-title">
+      <div class="shell practice-grid">
+        <figure class="practice-image"><img src="/media/practice-cushion-v2.webp" alt={en ? 'A woven meditation cushion in a quiet forest clearing.' : 'Một chiếc đệm thiền trong khoảng rừng yên tĩnh.'} width="720" height="540" loading="lazy" /><figcaption>{t.practiceCaption}</figcaption></figure>
+        <div><span class="eyebrow">{t.practiceEye}</span><h2 id="practice-title" set:html={t.practiceTitle} /><p class="lead">{t.practiceCopy}</p><ol class="steps">{t.steps.map(([n, title, text]) => <li><span class="step-number" aria-hidden="true">{n}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol><a class="quiet-link" href={articlePath(lang, 'returning-attention')}>{en ? 'Try a one-minute practice' : 'Thử một phút thực tập'} <Arrow /></a></div>
+      </div>
+    </section>
+
+    <section id="nature" class="section nature" aria-labelledby="nature-title">
+      <div class="shell">
+        <div class="section-head split-head"><div><span class="eyebrow">{t.natureEye}</span><h2 id="nature-title">{t.natureTitle}</h2></div><p>{t.natureCopy}</p></div>
+        <div class="nature-grid">{t.natureCards.map(([title, text], index) => <article class="nature-card"><div class="nature-image"><img src={`/media/${natureImages[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" /><span aria-hidden="true">0{index + 1}</span></div><div class="nature-card-copy"><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+        <div class="nature-bottom"><p class="note">{t.natureNote}</p><a class="quiet-link" href={articlePath(lang, 'listening-to-nature')}>{en ? 'Take a mindful walk' : 'Một cuộc gặp với thiên nhiên'} <Arrow /></a></div>
+      </div>
+    </section>
+
+    <section id="people" class="section people" aria-labelledby="people-title">
+      <div class="shell people-grid">
+        <figure class="portrait-wrap"><img src="/media/huong-thien-founder.webp" alt={en ? 'Hương Thiền, founder of Hương Thiền Nature, in a garden.' : 'Hương Thiền, người sáng lập Hương Thiền Nature, trong khu vườn.'} width="540" height="1200" loading="lazy" /><figcaption>{t.portraitCaption}</figcaption></figure>
+        <div><span class="eyebrow">{t.peopleEye}</span><h2 id="people-title">{t.peopleTitle}</h2><div class="people-copy"><article class="person"><span class="role">{t.founderRole}</span><h3>Hương Thiền</h3><p>{t.founderCopy}</p></article><article class="person"><span class="role">{t.coRole}</span><h3>Kiều Mạnh</h3><p>{t.coCopy}</p></article></div></div>
+      </div>
+    </section>
+
+    <section id="journal" class="section journal" aria-labelledby="journal-title">
+      <div class="shell">
+        <div class="section-head split-head"><div><span class="eyebrow">{t.journalEye}</span><h2 id="journal-title">{t.journalTitle}</h2></div><p>{t.journalIntro}</p></div>
+        <div class="journal-grid">{articles.map(article => {
+          const translation = article.translations[lang];
+          return <article class="journal-card"><a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a><div class="journal-card-copy"><div class="article-meta"><span>{translation.category}</span><span>{article.minutes} {t.readTime}</span></div><h3><a href={articlePath(lang, article.slug)}>{translation.title}</a></h3><p>{translation.description}</p><a class="quiet-link" href={articlePath(lang, article.slug)} aria-label={`${t.journalLink}: ${translation.title}`}>{t.journalLink} <Arrow /></a></div></article>;
+        })}</div>
+        <aside id="layers" class="reflection-note"><span class="eyebrow">{en ? 'A personal lens' : 'Một góc nhìn cá nhân'}</span><p>{en ? 'The seven-layer framework is a prompt for reflection, not a clinical assessment or a universal scientific map. Each person has room for their own experience.' : 'Bảy tầng là khung chiêm nghiệm cá nhân, không phải công cụ đánh giá lâm sàng hay bản đồ khoa học phổ quát. Mỗi người có khoảng mở cho trải nghiệm riêng.'}</p><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{en ? 'Understand the framework' : 'Tìm hiểu khung chiêm nghiệm'} <span aria-hidden="true">→</span></a></aside>
+      </div>
+    </section>
+
+    <section id="path" class="section roadmap" aria-labelledby="path-title">
+      <div class="shell"><div class="section-head"><span class="eyebrow">{en ? 'A thoughtful roadmap' : 'Lộ trình có chủ ý'}</span><h2 id="path-title">{t.phasesTitle}</h2></div><div class="pathway">{t.phases.map(([number, title, text], index) => <article class={`phase ${index === 0 ? 'current' : ''}`}><div class="phase-top"><span class="index-number">{number}</span><span class="phase-label">{t.phaseLabels[index]}</span></div><h3>{title}</h3><p>{text}</p></article>)}</div></div>
+    </section>
+
+    <section id="connect" class="section contact" aria-labelledby="connect-title">
+      <div class="shell contact-grid">
+        <div><span class="eyebrow">{t.contactEye}</span><h2 id="connect-title">{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><a class="button" href="#journal">{en ? 'Begin with a reflection' : 'Bắt đầu từ một tản văn'} <Arrow /></a><p class="small-copy contact-status"><span class="small-dot" aria-hidden="true"></span>{en ? 'Sign-up is not open yet. Updates will be shared here.' : 'Chưa mở đăng ký. Thông tin mới sẽ được cập nhật tại đây.'}</p></div>
+        <details class="preview-panel"><summary>{t.previewSummary}<span aria-hidden="true">+</span></summary><div class="contact-card"><h3>{t.previewTitle}</h3><p class="form-note" id="preview-notice">{t.formNotice}</p><form id="interest-form" aria-describedby="preview-notice">
+          <fieldset disabled><legend class="sr-only">{t.previewTitle}</legend>
+            <label for="name">{t.formName}</label><input id="name" name="name" value={t.previewName} autocomplete="off" maxlength="100" required />
+            <label for="email">{t.formEmail}</label><input id="email" name="email" type="email" value="friend@example.com" autocomplete="off" maxlength="254" required />
+            <label for="interest">{t.formInterest}</label><select id="interest" name="interest" required>{t.formOptions.map((option, index) => <option value={index === 0 ? '' : String(index)} disabled={index === 0} selected={index === 0}>{option}</option>)}</select>
+            <button class="button" type="submit">{t.formButton} <Arrow /></button>
+          </fieldset>
+          <p class="form-result" id="form-result" role="status" hidden>{t.formSuccess}</p>
+          <noscript><p class="form-note">{en ? 'Enable JavaScript to try this local preview. The form remains disabled and will not submit.' : 'Bật JavaScript để thử bản xem trước cục bộ. Biểu mẫu đang được khóa và sẽ không gửi dữ liệu.'}</p></noscript>
+        </form></div></details>
+      </div>
+    </section>
   </main>
-  <footer class="footer"><div class="shell"><div class="footer-top"><div><div class="footer-brand">Hương Thiền Nature</div><p>{t.footer}</p></div><div class="footer-links"><a href="#story">{t.nav[0]}</a><a href="#practice">{t.nav[1]}</a><a href="#journal">{t.nav[4]}</a><a href="#connect">{en?'Contact':'Liên hệ'}</a><span class="language"><a class={!en?'active':''} href="/vi">VI</a> · <a class={en?'active':''} href="/en">EN</a></span></div></div><p class="notice">{t.disclaimer}</p><div class="footer-bottom"><span>© {new Date().getFullYear()} Hương Thiền Nature</span><a href="#top">{t.top} ↑</a></div></div></footer>
+  <Footer lang={lang} />
   <script>
-    const menuButton = document.querySelector('.nav-toggle');
-    const menu = document.querySelector('.nav-links');
-    menuButton?.addEventListener('click', () => { const open = menu?.classList.toggle('open'); menuButton.setAttribute('aria-expanded', String(Boolean(open))); });
-    menu?.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => { menu.classList.remove('open'); menuButton?.setAttribute('aria-expanded','false'); }));
     const form = document.querySelector<HTMLFormElement>('#interest-form');
-    form?.addEventListener('submit', (event) => { event.preventDefault(); if (form.reportValidity()) document.querySelector('#form-result')?.classList.add('form-result--shown'); });
+    const result = document.querySelector<HTMLElement>('#form-result');
+    if (form && result) {
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        if (form.reportValidity()) result.hidden = false;
+      });
+      form.addEventListener('input', () => { result.hidden = true; });
+      const fieldset = form.querySelector('fieldset');
+      if (fieldset) fieldset.disabled = false;
+    }
   </script>
 </BaseLayout>

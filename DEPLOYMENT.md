@@ -12,7 +12,7 @@
 
 ## Pre-publication gates
 
-- [ ] Run `npm install`, `npm run check`, and `npm run build` in an environment with package access.
+- [ ] Run `npm ci`, `npm run check`, `npm run audit`, `npm run build` and `npm run audit:build` in an environment with package access. Use Node.js 24 (`NODE_VERSION=24` in the Cloudflare build environment).
 - [ ] Review Vietnamese and English copy, founder titles, logo and image consent/cropping.
 - [ ] Review 320 px, tablet and desktop layouts; keyboard navigation; contrast; screen-reader labels; browser console.
 - [ ] Replace or wire the preview interest form. It currently does not transmit or store data.
@@ -29,8 +29,8 @@
 ## Launch checklist
 
 1. Push the reviewed source and media to the public GitHub repository.
-2. Connect the repository to Cloudflare Pages; build `main` with `npm run build` and publish `dist`.
-3. Confirm the Pages build, then test both languages, mobile navigation, imagery, 404, metadata and the preview form on the `pages.dev` demo.
+2. Connect the repository to Cloudflare Pages; build `main` with `npm run build` and publish `dist`. Use Node.js 24; no framework adapter or server bindings are needed.
+3. Confirm the Pages build, then test both language homepages, all six journal routes, article language switching, mobile navigation, imagery, 404, metadata and the preview form on the `pages.dev` demo. `/sitemap.xml` should contain eight localized URLs.
 4. Attach `huongthiennature.com` only after the zone and DNS records are active; choose one canonical host.
 5. Verify DNS resolution, HTTPS certificate, HTTP-to-HTTPS behavior and canonical redirects on the custom domain.
 6. Keep Workers dry-run as a compatibility check; Pages is the current demo host.
@@ -47,3 +47,5 @@
 ## Current blockers to an actual production launch
 
 `astro check` and `astro build` pass, the source audit passes, and Wrangler dry-run accepts the generated static assets. The source and build output are ready, but an authenticated Cloudflare deployment is still required to publish this version and inspect its DNS/TLS settings. The repository `kieumanh/huong-thien-nature-web` is public by the owner's explicit choice.
+
+GitHub push confirms source publication only. It does not prove a Cloudflare deployment ran or that its build runtime is configured correctly. Check the deployment's commit SHA and both homepages after automatic Git integration runs.

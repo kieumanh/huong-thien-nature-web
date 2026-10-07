@@ -1,0 +1,21 @@
+---
+import RootMark from './RootMark.astro';
+import { getCopy, type Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const t = getCopy(lang);
+---
+<footer class="footer">
+  <div class="shell">
+    <div class="footer-top">
+      <div class="footer-identity"><RootMark class="footer-mark" /><div><div class="footer-brand">Hương Thiền Nature</div><p>{t.footer}</p></div></div>
+      <nav class="footer-links" aria-label={lang === 'vi' ? 'Liên kết cuối trang' : 'Footer navigation'}>
+        <a href={`/${lang}/#story`}>{t.nav[0]}</a>
+        <a href={`/${lang}/#practice`}>{t.nav[1]}</a>
+        <a href={`/${lang}/#journal`}>{t.nav[4]}</a>
+        <a href={`/${lang}/#connect`}>{lang === 'vi' ? 'Kết nối' : 'Connect'}</a>
+      </nav>
+    </div>
+    <p class="notice">{t.disclaimer}</p>
+    <div class="footer-bottom"><span>© {new Date().getFullYear()} Hương Thiền Nature</span><span>{t.rootsNote}</span><a href="#top">{t.top} <span aria-hidden="true">↑</span></a></div>
+  </div>
+</footer>

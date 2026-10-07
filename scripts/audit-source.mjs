@@ -2,7 +2,10 @@ import { readdir, readFile, access } from 'node:fs/promises';
 import { join } from 'node:path';
 
 const root = new URL('../', import.meta.url).pathname;
-const home = await readFile(join(root, 'src/pages/[lang]/index.astro'), 'utf8');
+const home = (await Promise.all([
+  'src/pages/[lang]/index.astro', 'src/components/Header.astro',
+  'src/components/Footer.astro', 'src/data/site.ts', 'src/data/articles.ts',
+].map(file => readFile(join(root, file), 'utf8')))).join('\n');
 const problems = [];
 const ids = [...home.matchAll(/\bid="([^"]+)"/g)].map((match) => match[1]);
 const idSet = new Set(ids);
@@ -15,9 +18,8 @@ for (const file of referenced) {
   catch { problems.push(`Missing referenced media: ${file}`); }
 }
 
-for (const phrase of ['Hương Thiền', 'Kiều Mạnh', 'interest-form', 'sitemap', 'Bảy tầng']) {
-  const source = phrase === 'sitemap' ? await readFile(join(root, 'public/sitemap.xml'), 'utf8') : home;
-  if (!source.includes(phrase)) problems.push(`Required content is missing: ${phrase}`);
+for (const phrase of ['Hương Thiền', 'Kiều Mạnh', 'interest-form', 'Bảy tầng']) {
+  if (!home.includes(phrase)) problems.push(`Required content is missing: ${phrase}`);
 }
 
 const mediaFiles = await readdir(join(root, 'public/media'));
