@@ -13,6 +13,7 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 - Supplied imagery optimized to WebP and placed in `public/media/`.
 - SEO basics: canonical URLs, `hreflang`, Open Graph, Organization JSON-LD, robots and a generated sitemap with eight localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
+- Background music: the supplied `Lotus at First Light` MP3 loops at 25% initial volume. A fixed player supports pause/play and volume; the user's pause/volume choice is remembered, and playback position resumes within a session. Browsers that block audible autoplay start playback after an eligible interaction or an explicit Play click.
 
 Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, and `npm run build:pages-functions`. The build audit verifies the ten HTML pages, article content, translation links, sitemap coverage and local asset/anchor targets. `npm run deploy:worker-dry-run` checks optional static Worker compatibility.
 
@@ -36,6 +37,8 @@ npm run preview
 In Cloudflare Pages, set the build command to `npm run build` and the build output directory to `dist`. Keep `functions/` in the checkout so Pages deploys the contact API. `wrangler.jsonc` configures Pages; `wrangler.worker.jsonc` is only for a separate static compatibility check.
 
 For local contact development, use `npm run dev:pages`; Astro dev/preview alone has no contact API. Production sending requires the bindings described in `CONTACT_SETUP.md`.
+
+Optional music browser checks with Python Playwright/Chromium: `APP_BASE_URL=http://127.0.0.1:8788 python tests/music-browser.py`. Tests exercise the actual MP3 under allowed and blocked autoplay policies. JavaScript-disabled visitors get native audio controls.
 
 Node.js 24.19.0 and npm 11.9.0 were used for this edition. Set the Cloudflare build environment variable `NODE_VERSION=24` when the project does not already use Node.js 24. In restricted cloud environments, see `HANDOFF.md` for writable cache/configuration paths. The site uses system fonts and does not fetch Google Fonts.
 

@@ -54,7 +54,7 @@ with sync_playwright() as p:
         payloads.append(route.request.post_data_json)
     page.route('**/api/contact',capture)
     for lang in ['vi','en']:
-        page.goto(base+'/'+lang+'/', wait_until='networkidle')
+        page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('#name').disabled")
         assert page.locator('#name').input_value()==''
         assert not page.locator('button[type="submit"]').is_disabled()
@@ -84,7 +84,7 @@ with sync_playwright() as p:
         assert page.locator('#name').input_value()==''
         assert page.locator('#message').input_value()==''
         report.append(lang+': valid JSON submission, required fields/consent, sending state, duplicate prevention, success reset')
-    page.goto(base+'/vi/',wait_until='networkidle')
+    page.goto(base+'/vi/',wait_until='domcontentloaded')
     fill(page)
     page.locator('button[type="submit"]').click()
     assert len(pending)==1
@@ -118,7 +118,7 @@ with sync_playwright() as p:
     report.append('Contact form fits mobile, tablet and desktop widths')
     unavailable=context.new_page()
     configure(unavailable,False)
-    unavailable.goto(base+'/vi/',wait_until='networkidle')
+    unavailable.goto(base+'/vi/',wait_until='domcontentloaded')
     unavailable.wait_for_function("document.querySelector('#interest-form').getAttribute('aria-busy') === 'false'")
     assert unavailable.locator('#name').is_disabled()
     assert unavailable.locator('button[type="submit"]').is_disabled()

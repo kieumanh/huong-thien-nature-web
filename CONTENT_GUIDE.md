@@ -32,6 +32,10 @@ The previous educational infographics are no longer shown in the interface. Thei
 | `woodland-stream-v2.webp` | Nature listening and observation. |
 | `fern-study-v2.webp` | Botanical observation and the nature journal. |
 
+## Background music
+
+The user supplied `Lotus_at_First_Light.mp3` for background playback. The original audio is retained at `public/audio/lotus-at-first-light.mp3` (approximately 2 minutes 42 seconds). No artist or license attribution has been invented. Playback loops, with visible pause and volume controls; audible autoplay follows the browser's permission rules and respects a saved pause choice.
+
 ## Editorial guardrails
 
 The three journal pieces now have full Vietnamese and English routes, covering returning attention, the seven-layer framework and sensory observation of nature. Their content develops the existing source material; it is not an imported transcript of the unavailable ChatGPT Work conversation. Bilingual text lives in `src/data/site.ts` and `src/data/articles.ts`.

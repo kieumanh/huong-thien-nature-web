@@ -331,6 +331,21 @@ fieldset:disabled { opacity: .65; }
   .footer-identity { gap: 12px; }
 }
 
+.music-dock { position: fixed; z-index: 40; right: 20px; bottom: max(20px, env(safe-area-inset-bottom)); display: flex; align-items: center; background: var(--paper); color: var(--ink); border: 1px solid var(--line); border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
+.music-dock > audio { display: none; }
+.music-toggle { display: flex; align-items: center; gap: 10px; min-height: 48px; padding: 10px 14px; background: none; border: 0; font-size: .75rem; color: inherit; }
+.music-state-dot { width: 6px; height: 6px; border-radius: 50%; background: #8b9187; }
+.music-toggle[aria-pressed="true"] .music-state-dot { background: var(--forest); box-shadow: 0 0 0 3px var(--sage); }
+.music-options > summary { display: grid; place-items: center; width: 44px; min-height: 48px; border-left: 1px solid var(--line); list-style: none; }
+.music-options > summary::-webkit-details-marker { display: none; }
+.music-panel { position: absolute; bottom: calc(100% + 10px); right: 0; width: 260px; padding: 20px; border: 1px solid var(--line); background: var(--paper); border-radius: 8px; box-shadow: 0 5px 25px rgba(25,50,35,.14); }
+.music-track { font: 1.1rem/1.4 var(--serif); margin-bottom: 18px; }
+.music-panel label { display: flex; justify-content: space-between; font-size: .8rem; }
+.music-panel input { width: 100%; min-height: 40px; accent-color: var(--forest); }
+.music-status { color: var(--ink-soft); font-size: .72rem; line-height: 1.6; margin-top: 10px; }
+.footer { padding-bottom: 88px; }
+@media (max-width: 760px) { .music-dock { right: 12px; bottom: max(12px, env(safe-area-inset-bottom)); } }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }

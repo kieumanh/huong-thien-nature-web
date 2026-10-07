@@ -17,7 +17,7 @@ with sync_playwright() as p:
     page.on('pageerror', lambda error: errors.append(str(error)))
     for lang in ['vi','en']:
         for suffix in [''] + ['journal/'+slug+'/' for slug in slugs]:
-            response = page.goto(base+'/'+lang+'/'+suffix, wait_until='networkidle')
+            response = page.goto(base+'/'+lang+'/'+suffix, wait_until='domcontentloaded')
             assert response.status == 200
             assert page.locator('html').get_attribute('lang') == lang
             assert page.locator('h1').count() == 1
@@ -28,7 +28,7 @@ with sync_playwright() as p:
     for width in [320,375,768,1024,1440]:
         page.set_viewport_size({'width':width,'height':900})
         for lang in ['vi','en']:
-            page.goto(base+'/'+lang+'/', wait_until='networkidle')
+            page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
             assert page.evaluate('document.documentElement.scrollWidth <= window.innerWidth'), 'Overflow '+str(width)+' '+lang
             for image in page.locator('img').all():
                 image.scroll_into_view_if_needed()
@@ -41,7 +41,7 @@ with sync_playwright() as p:
                 page.screenshot(path=str(out/('v3-roots-'+str(width)+'.png')), full_page=True)
         report.append('No overflow or broken images at '+str(width)+' px, both languages')
     page.set_viewport_size({'width':375,'height':850})
-    page.goto(base+'/vi/',wait_until='networkidle')
+    page.goto(base+'/vi/',wait_until='domcontentloaded')
     toggle = page.locator('.nav-toggle')
     toggle.click()
     assert toggle.get_attribute('aria-expanded')=='true'
@@ -58,29 +58,29 @@ with sync_playwright() as p:
     page.mouse.click(10, 500)
     assert toggle.get_attribute('aria-expanded')=='false'
     report.append('Mobile menu: open, Escape with focus return, anchor close, outside close')
-    page.goto(base+'/vi/journal/seven-layers/',wait_until='networkidle')
+    page.goto(base+'/vi/journal/seven-layers/',wait_until='domcontentloaded')
     page.locator('.language a[lang="en"]').click()
     assert page.url==base+'/en/journal/seven-layers/'
     assert page.locator('html').get_attribute('lang')=='en'
     page.screenshot(path=str(out/'v3-roots-article.png'),full_page=True)
     report.append('Article language switch preserves the selected article')
-    page.goto(base+'/vi/',wait_until='networkidle')
+    page.goto(base+'/vi/',wait_until='domcontentloaded')
     page.wait_for_function("document.querySelector('#interest-form').getAttribute('aria-busy') === 'false'")
     assert page.locator('#name').is_disabled()
     assert page.locator('#interest-form button').is_disabled()
     assert page.locator('#form-result').get_attribute('data-kind')=='error'
     report.append('Unconfigured contact service disables submission without reporting success')
-    response=page.goto(base+'/missing-v3-roots-page',wait_until='networkidle')
+    response=page.goto(base+'/missing-v3-roots-page',wait_until='domcontentloaded')
     assert response.status==404
     assert page.locator('h1').inner_text()=='Không tìm thấy trang.'
     report.append('Custom 404 returns HTTP 404')
     nojs=browser.new_context(java_script_enabled=False,viewport={'width':375,'height':850})
     np=nojs.new_page()
-    np.goto(base+'/vi/',wait_until='networkidle')
+    np.goto(base+'/vi/',wait_until='domcontentloaded')
     assert np.locator('#main-nav a').first.is_visible()
     assert np.locator('#name').is_disabled()
     assert np.locator('#interest-form button').is_disabled()
-    assert np.locator('noscript').is_visible()
+    assert np.locator('#interest-form noscript').is_visible()
     assert np.evaluate('document.documentElement.scrollWidth <= window.innerWidth')
     report.append('JavaScript disabled: navigation works and contact form cannot submit')
     assert errors==[], 'Browser errors: '+str(errors)

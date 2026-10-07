@@ -1,0 +1,72 @@
+"""Exercise the supplied MP3 with real playback and both browser autoplay policies."""
+from pathlib import Path
+import os, shutil, json
+from playwright.sync_api import sync_playwright
+base=os.environ.get('APP_BASE_URL','http://127.0.0.1:8788').rstrip('/')
+out=Path(os.environ.get('ROOTS_ARTIFACT_DIR',str(Path(__file__).resolve().parents[1]/'.artifacts')))
+out.mkdir(parents=True,exist_ok=True)
+report=[]
+with sync_playwright() as p:
+    launch=dict(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'),headless=True)
+    allowed=p.chromium.launch(**launch,args=['--no-sandbox','--autoplay-policy=no-user-gesture-required'])
+    page=allowed.new_page(viewport={'width':1440,'height':900})
+    errors=[]
+    page.on('pageerror',lambda e:errors.append(str(e)))
+    page.goto(base+'/vi/',wait_until='domcontentloaded')
+    page.wait_for_function('!document.querySelector("#background-music").paused && document.querySelector("#background-music").currentTime > 0')
+    assert page.locator('.music-toggle').get_attribute('aria-pressed')=='true'
+    assert page.locator('#background-music').evaluate('a=>a.loop && a.volume===0.25')
+    page.wait_for_function('document.querySelector("#background-music").duration > 160')
+    report.append('Actual MP3 decodes and autoplays when allowed, loops, defaults to 25% volume')
+    page.locator('.music-toggle').click()
+    assert page.locator('#background-music').evaluate('a=>a.paused')
+    page.locator('.music-options summary').click()
+    page.locator('#music-volume').fill('40')
+    assert page.locator('#background-music').evaluate('a=>a.volume===0.4')
+    assert page.locator('#music-volume-value').inner_text()=='40%'
+    page.keyboard.press('Escape')
+    assert not page.locator('.music-options').evaluate('el=>el.open')
+    page.goto(base+'/en/journal/seven-layers/',wait_until='domcontentloaded')
+    assert page.locator('#background-music').evaluate('a=>a.paused && a.volume===0.4')
+    page.locator('h1').click()
+    assert page.locator('#background-music').evaluate('a=>a.paused')
+    report.append('Pause and volume are remembered on article/language navigation; later gestures do not override pause')
+    page.locator('.music-toggle').click()
+    page.wait_for_function('!document.querySelector("#background-music").paused')
+    page.locator('#background-music').evaluate('a=>a.currentTime=30')
+    page.goto(base+'/vi/',wait_until='domcontentloaded')
+    page.wait_for_function('document.querySelector("#background-music").currentTime >= 29')
+    report.append('Playback position resumes across page navigation within the session')
+    for width in [320,375,768,1440]:
+        page.set_viewport_size({'width':width,'height':900})
+        page.locator('.music-options').evaluate('el=>el.open=true')
+        panel=page.locator('.music-panel').bounding_box()
+        assert panel and panel['x']>=0 and panel['x']+panel['width']<=width
+        assert page.evaluate('document.documentElement.scrollWidth<=innerWidth')
+    report.append('Player and volume panel fit 320/375/768/1440 px')
+    assert errors==[],errors
+    allowed.close()
+    blocked=p.chromium.launch(**launch,args=['--no-sandbox','--autoplay-policy=document-user-activation-required'])
+    page=blocked.new_page(viewport={'width':375,'height':850})
+    page.goto(base+'/vi/',wait_until='domcontentloaded')
+    page.wait_for_function('document.querySelector(".music-status").textContent.includes("tương tác đầu tiên")')
+    assert page.locator('#background-music').evaluate('a=>a.paused')
+    page.locator('h1').click()
+    page.wait_for_function('!document.querySelector("#background-music").paused')
+    report.append('Blocked autoplay starts after the first trusted pointer interaction')
+    page.locator('.music-toggle').click()
+    page.locator('h1').click()
+    assert page.locator('#background-music').evaluate('a=>a.paused')
+    page.locator('.music-toggle').click()
+    page.wait_for_function('!document.querySelector("#background-music").paused')
+    report.append('Explicit pause stays paused; explicit play restarts audio under blocked policy')
+    fresh=blocked.new_context(java_script_enabled=False,viewport={'width':320,'height':850})
+    np=fresh.new_page()
+    np.goto(base+'/vi/',wait_until='domcontentloaded')
+    assert np.locator('audio[controls]').is_visible()
+    assert np.locator('audio[controls]').get_attribute('src')=='/audio/lotus-at-first-light.mp3'
+    assert np.evaluate('document.documentElement.scrollWidth<=innerWidth')
+    report.append('JavaScript disabled: native audio controls are available')
+    blocked.close()
+out.joinpath('music-browser-report.json').write_text(json.dumps(report,indent=2))
+print('\n'.join(report))

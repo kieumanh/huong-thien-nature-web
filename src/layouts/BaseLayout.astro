@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import BackgroundMusic from '../components/BackgroundMusic.astro';
 const { lang = 'vi', title, description, alternatePath, image = '/media/hero-canopy-v2.webp' } = Astro.props;
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
   ? Astro.url.pathname : `${Astro.url.pathname}/`;
@@ -41,5 +42,5 @@ const siteName = 'Hương Thiền Nature';
       founder: [{ '@type': 'Person', name: 'Hương Thiền', jobTitle: 'Founder & Teacher' }, { '@type': 'Person', name: 'Kiều Mạnh', jobTitle: 'Co-founder & Teacher' }],
     })} />
   </head>
-  <body><slot /></body>
+  <body><BackgroundMusic lang={lang} /><slot /></body>
 </html>

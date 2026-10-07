@@ -1,0 +1,19 @@
+---
+const { lang = 'vi' } = Astro.props;
+const en = lang === 'en';
+---
+<aside class="music-dock" aria-label={en ? 'Background music' : 'Nhạc nền'}>
+  <audio id="background-music" src="/audio/lotus-at-first-light.mp3" loop preload="metadata" aria-label="Lotus at First Light" />
+  <button class="music-toggle" type="button" aria-controls="background-music" aria-pressed="false" data-language={lang} disabled>
+    <svg class="music-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><ellipse cx="6" cy="18" rx="3" ry="2" stroke="currentColor" stroke-width="1.5" /><ellipse cx="17" cy="16" rx="3" ry="2" stroke="currentColor" stroke-width="1.5" /></svg>
+    <span>{en ? 'Background music' : 'Nhạc nền'}</span><span class="music-state-dot" aria-hidden="true"></span>
+  </button>
+  <details class="music-options">
+    <summary aria-label={en ? 'Music settings' : 'Điều chỉnh nhạc nền'}><svg viewBox="0 0 24 24" width="19" height="19" fill="none" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.5" /><circle cx="9" cy="8" r="3" fill="currentColor" /><circle cx="15" cy="16" r="3" fill="currentColor" /></svg></summary>
+    <div class="music-panel"><p class="music-track">Lotus at First Light</p><label for="music-volume">{en ? 'Volume' : 'Âm lượng'} <output id="music-volume-value" for="music-volume">25%</output></label><input id="music-volume" type="range" min="0" max="100" step="1" value="25" /><p class="music-status" role="status" aria-live="polite">{en ? 'Music starts automatically when your browser allows it.' : 'Nhạc tự phát khi trình duyệt cho phép.'}</p></div>
+  </details>
+  <noscript><style>.music-toggle,.music-options{display:none}.music-dock audio[controls]{display:block;width:260px}</style><audio src="/audio/lotus-at-first-light.mp3" loop controls preload="metadata" aria-label="Lotus at First Light" /></noscript>
+</aside>
+<script>
+  import '../scripts/background-music';
+</script>
