@@ -1,3 +1,10 @@
+## 0.3.5 — Journal navigation and SEO
+
+- Exclude the new Google Drive-derived editorial collection and its generated content exports from this release; retain the three previously published bilingual articles.
+- Add article contents with accessible section links, BlogPosting/BreadcrumbList structured data and article Open Graph metadata.
+- Keep related reading bounded and the homepage journal preview limited to three entries.
+- Preserve localized URLs, existing media, contact behavior and the current publication platform.
+
 ## 0.3.4
 - Remove email draft and mailto fallback; retain server-side message delivery through Resend and Turnstile.
 - Localize Vietnamese journal listing and article URLs, translation links and sitemap; redirect legacy URLs.

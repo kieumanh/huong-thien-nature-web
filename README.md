@@ -1,4 +1,4 @@
-# Hương Thiền Nature — V3 Roots 0.3.3
+# Hương Thiền Nature — V3 Roots 0.3.5
 
 Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. The deployment target is GitHub → Cloudflare Pages (`pages.dev`); `https://huongthiennature.com` is the intended custom domain after DNS is ready.
 
@@ -11,10 +11,11 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 - Astro static output for Pages (`npm run build`, output `dist`) with Tailwind CSS Vite integration.
 - Wrangler Pages configuration with Functions for contact email; Workers Static Assets configuration retained in `wrangler.worker.jsonc` for a separate compatibility dry-run.
 - Supplied imagery optimized to WebP and placed in `public/media/`.
+- Article pages include a linked table of contents and BlogPosting/BreadcrumbList structured data. The new Google Drive-derived collection is excluded from v0.3.5.
 - SEO basics: canonical URLs, `hreflang`, Open Graph, Organization JSON-LD, robots and a generated sitemap with ten localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
 - Background music: the supplied `Lotus at First Light` MP3 loops at 25% initial volume. A fixed player supports pause/play and volume; the user's pause/volume choice is remembered, and playback position resumes within a session. Browsers that block audible autoplay start playback after an eligible interaction or an explicit Play click.
-- Tản văn / Journal has its own bilingual article listing at `/vi/journal/` and `/en/journal/`, linked from the main navigation, homepage and article breadcrumbs. The three existing articles retain their original URLs.
+- Tản văn / Journal has its own bilingual article listing at `/vi/tan-van/` and `/en/journal/`, linked from the main navigation, homepage and article breadcrumbs. The three existing articles retain their original URLs.
 - Music controls sit at the bottom left; a bottom-right back-to-top button appears at 30% of the scrollable document height, supports keyboard focus and respects reduced motion. Both controls independently select light or dark colors for contrast against the surface underneath, including local images.
 - Release numbers follow `major.minor.patch` in `package.json`; the footer and application-version meta tag use the same number. See `CHANGELOG.md` for each release.
 

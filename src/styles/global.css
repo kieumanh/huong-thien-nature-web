@@ -380,3 +380,16 @@ fieldset:disabled { opacity: .65; }
 .music-toggle[aria-pressed="true"] .music-state-dot { background: currentColor; box-shadow: 0 0 0 3px var(--floating-border); opacity: 1; }
 .back-to-top:hover { background: var(--floating-bg); filter: brightness(.94); }
 .music-dock :focus-visible, .back-to-top:focus-visible { outline-color: var(--floating-fg); }
+
+/* Article contents improve navigation through the existing journal. */
+.article-toc { margin-top: 30px; padding: 24px; background: var(--cream); border: 1px solid var(--line); border-radius: 3px; }
+.article-body .article-toc h2 { font-size: 1.3rem; margin: 0 0 14px; }
+.article-toc ol { padding-left: 22px; margin: 0; }
+.article-toc li { margin-top: 10px; padding-left: 5px; font-size: .9rem; }
+.article-toc a { text-decoration: underline; text-underline-offset: 4px; }
+.article-body section[id] { scroll-margin-top: 110px; }
+@media (max-width: 600px) {
+  .article-toc { padding: 20px; }
+  .article-header h1 { font-size: clamp(2rem, 7vw, 2.6rem); }
+  .article-body h2 { font-size: 1.65rem; }
+}

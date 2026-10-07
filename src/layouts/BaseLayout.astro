@@ -3,7 +3,7 @@ import '../styles/global.css';
 import BackgroundMusic from '../components/BackgroundMusic.astro';
 import BackToTop from '../components/BackToTop.astro';
 import { version } from '../../package.json';
-const { lang = 'vi', title, description, alternatePath, image = '/media/hero-canopy-v2.webp' } = Astro.props;
+const { lang = 'vi', title, description, alternatePath, image = '/media/hero-canopy-v2.webp', ogType = 'website' } = Astro.props;
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
   ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const url = new URL(pathname, 'https://huongthiennature.com');
@@ -26,7 +26,7 @@ const siteName = 'Hương Thiền Nature';
       <link rel="alternate" hreflang="en" href={`https://huongthiennature.com${enPath}`} />
       <link rel="alternate" hreflang="x-default" href={`https://huongthiennature.com${viPath}`} />
     </>}
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:site_name" content={siteName} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

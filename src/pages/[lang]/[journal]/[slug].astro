@@ -16,9 +16,23 @@ const { article } = Astro.props as { article: Article };
 const t = getCopy(lang);
 const content = article.translations[lang];
 const alternatePath = articlePath(lang === 'vi' ? 'en' : 'vi', article.slug);
-const related = articles.filter(item => item.slug !== article.slug);
+const related = articles.filter(item => item.slug !== article.slug).slice(0, 3);
+const origin = 'https://huongthiennature.com';
+const schema = {
+  '@context': 'https://schema.org', '@type': 'BlogPosting',
+  headline: content.title, description: content.description, inLanguage: lang,
+  image: new URL(article.image, origin).href,
+  mainEntityOfPage: origin + articlePath(lang, article.slug),
+  publisher: { '@type': 'Organization', name: 'Hương Thiền Nature', url: origin },
+};
 ---
-<BaseLayout lang={lang} title={`${content.title} | Hương Thiền Nature`} description={content.description} alternatePath={alternatePath} image={article.image}>
+<BaseLayout lang={lang} title={`${content.title} | Hương Thiền Nature`} description={content.description} alternatePath={alternatePath} image={article.image} ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: t.home, item: `${origin}/${lang}/` },
+    { '@type': 'ListItem', position: 2, name: t.journalHome, item: origin + journalPath(lang) },
+    { '@type': 'ListItem', position: 3, name: content.title, item: origin + articlePath(lang, article.slug) },
+  ] }).replace(/</g, '\\u003c')} />
   <Header lang={lang} alternatePath={alternatePath} isInnerPage />
   <main id="main-content" tabindex="-1">
     <article class="article-page">
@@ -31,7 +45,8 @@ const related = articles.filter(item => item.slug !== article.slug);
       <div class="shell article-cover"><img src={article.image} alt={content.imageAlt} width="720" height="540" fetchpriority="high" /></div>
       <div class="article-body">
         <p class="article-introduction">{content.introduction}</p>
-        {content.sections.map(section => <section><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
+        <nav class="article-toc" aria-label={lang === 'vi' ? 'Mục lục bài viết' : 'Article contents'}><h2>{lang === 'vi' ? 'Trong bài này' : 'In this article'}</h2><ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol></nav>
+        {content.sections.map((section, index) => <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
         <a class="quiet-link" href={journalPath(lang)}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
