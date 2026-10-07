@@ -6,6 +6,7 @@ from playwright.sync_api import sync_playwright
 base = os.environ.get('APP_BASE_URL', 'http://127.0.0.1:8788').rstrip('/')
 out = Path(os.environ.get('ROOTS_ARTIFACT_DIR', str(Path(__file__).resolve().parents[1] / '.artifacts')))
 out.mkdir(parents=True, exist_ok=True)
+version = json.loads((Path(__file__).resolve().parents[1] / 'package.json').read_text())['version']
 report = []
 with sync_playwright() as p:
     browser = p.chromium.launch(executable_path=os.environ.get('CHROMIUM_EXECUTABLE') or shutil.which('chromium'), headless=True, args=['--no-sandbox'])
@@ -15,8 +16,8 @@ with sync_playwright() as p:
     for lang in ['vi', 'en']:
         page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('.music-toggle').disabled")
-        assert page.locator('meta[name="application-version"]').get_attribute('content') == '0.3.3'
-        assert 'V0.3.3' in page.locator('.footer-bottom').inner_text()
+        assert page.locator('meta[name="application-version"]').get_attribute('content') == version
+        assert 'V'+version in page.locator('.footer-bottom').inner_text()
         button = page.locator('.back-to-top')
         assert button.is_hidden()
         for progress, visible in [(0.29, False), (0.31, True), (0.1, False), (0.7, True)]:
@@ -56,8 +57,8 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':375,'height':850})
     page.locator('#connect').scroll_into_view_if_needed()
     page.wait_for_function('!document.querySelector(".back-to-top").hidden')
-    page.screenshot(path=str(out/'v0.3.3-contact-controls-mobile.png'))
+    page.screenshot(path=str(out/f'v{version}-contact-controls-mobile.png'))
     assert errors == [], errors
     browser.close()
-out.joinpath('v0.3.3-controls-report.json').write_text(json.dumps(report, indent=2, ensure_ascii=False))
+out.joinpath(f'v{version}-controls-report.json').write_text(json.dumps(report, indent=2, ensure_ascii=False))
 print('\n'.join(report))

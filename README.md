@@ -1,4 +1,4 @@
-# Hương Thiền Nature — V3 Roots 0.4.1
+# Hương Thiền Nature — V3 Roots 0.4.3
 
 Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. Production targets GitHub → Cloudflare Worker with Static Assets on `https://huongthiennature.com`; Cloudflare Pages remains available as a separate `pages.dev` demo.
 
