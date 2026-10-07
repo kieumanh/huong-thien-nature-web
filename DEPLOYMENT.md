@@ -1,52 +1,47 @@
-# Step 7 — review, Pages demo, domain and maintenance
+# Production deployment — Cloudflare Worker
 
-## What is prepared
+## Trạng thái kiến trúc
 
-- Static Astro source prepared for Cloudflare Pages (`npm run build`, output `dist`).
-- Direct-deploy command targets the Pages project `huong-thien-nature-web` (`npm run deploy:pages`).
-- Contact API in `functions/` for Resend and Turnstile; runtime bindings described in `CONTACT_SETUP.md`.
-- Wrangler Workers static dry-run retained in `wrangler.worker.jsonc` as an independent compatibility/build check.
-- Production domain and canonical URLs set to `huongthiennature.com`.
-- Bilingual homepage routes, SEO metadata, robots and sitemap.
-- Supplied project images converted to compressed WebP for the site.
-- A phase-one maintenance and release checklist.
+- Source: GitHub `kieumanh/huong-thien-nature-web`, branch `main`.
+- Frontend: Astro static, build command `npm run build`, output `dist`.
+- Production Worker: `huong-thien-nature`.
+- Runtime API: `/api/contact` và `/api/contact-config`.
+- Production hostname: `huongthiennature.com`.
+- Custom Domain được khai báo trong `wrangler.worker.jsonc`.
+- Static Assets được phục vụ trực tiếp; Worker script chạy trước chỉ cho `/api/*`.
 
-## Pre-publication gates
+## Cổng kiểm tra trước deploy
 
-- [ ] Run `npm ci`, `npm run check`, `npm run audit`, `npm run build` and `npm run audit:build` in an environment with package access. Use Node.js 24 (`NODE_VERSION=24` in the Cloudflare build environment).
-- [ ] Review Vietnamese and English copy, founder titles, logo and image consent/cropping.
-- [ ] Review 320 px, tablet and desktop layouts; keyboard navigation; contrast; screen-reader labels; browser console.
-- [ ] Configure the contact form's five runtime bindings and verify a real email arrives at the designated recipient. API/provider acceptance alone does not verify delivery.
-- [ ] Add a privacy notice and service terms before collecting personal data or accepting payments.
-- [ ] Review all spiritual/wellbeing language and avoid medical or unsupported scientific claims.
-- [ ] Enter Resend/Turnstile secrets securely in Pages and verify the sender domain. See `CONTACT_SETUP.md`.
-- [x] Confirm the GitHub repository is public; the project owner explicitly chose public visibility.
-- [ ] Connect the reviewed repository to Cloudflare Pages with build command `npm run build` and output directory `dist`; use its `pages.dev` URL as the phase-one demo.
-- [ ] Verify the Pages build and inspect its preview deployment.
-- [ ] For a direct deployment, configure `CLOUDFLARE_API_TOKEN` securely with Pages Write permission before running `npm run deploy:pages`.
-- [ ] Attach the root and `www` hostnames in Cloudflare, choose one canonical host and test HTTPS/redirects after the zone is active.
-- [ ] Verify sitemap, robots, canonical URLs, `hreflang`, social previews and Search Console after the domain is live.
+```bash
+npm ci
+npm run check
+npm run audit
+npm run test:contact
+npm run build
+npm run audit:build
+npm run deploy:worker-dry-run
+```
 
-## Launch checklist
+GitHub Actions chạy cùng các kiểm tra trên sau mỗi push lên `main`.
 
-1. Push the reviewed source and media to the public GitHub repository.
-2. Connect the repository to Cloudflare Pages; build `main` with `npm run build` and publish `dist` along with the checkout's `functions/`. Use Node.js 24; no framework adapter is needed. Configure the contact runtime bindings before testing sending.
-3. Confirm the Pages build, then test both language homepages, both journal indexes and all six article routes, article language switching, mobile navigation, imagery, 404, metadata and contact email delivery on the `pages.dev` demo. `/sitemap.xml` should contain ten localized URLs.
-4. Attach `huongthiennature.com` only after the zone and DNS records are active; choose one canonical host.
-5. Verify DNS resolution, HTTPS certificate, HTTP-to-HTTPS behavior and canonical redirects on the custom domain.
-6. Keep Workers dry-run as a static compatibility check only; use Pages for the contact API.
-7. Submit `/sitemap.xml` in Google Search Console and check indexing after the domain is live.
-8. Announce the domain only after the form's real behavior and privacy notice match what the page promises.
+## Deploy production
 
-## Ongoing care
+1. Đăng nhập Cloudflare/Wrangler bằng tài khoản sở hữu zone `huongthiennature.com`.
+2. Tạo/kiểm tra Worker `huong-thien-nature`.
+3. Đặt các binding Resend + Turnstile theo `CONTACT_SETUP.md`.
+4. Chạy `npm run deploy:worker`.
+5. Wrangler sẽ triển khai code + `dist` và yêu cầu Cloudflare gắn Custom Domain `huongthiennature.com`.
+6. Kiểm tra HTTPS, `/vi/`, `/en/`, sitemap, robots, 404 và hai API contact.
+7. Gửi một form thật để xác nhận email đến hộp nhận.
 
-- **Weekly:** test forms/links and check for broken assets or deployment errors.
-- **Monthly:** publish or update a useful article in both languages; review SEO snippets, sitemap and mobile speed.
-- **Quarterly:** review accessibility, consent language, founder/team details, services and phase priorities.
-- **Each release:** record the commit, what changed, what was checked and how to roll back.
+## DNS và domain
 
-## Current blockers to an actual production launch
+Custom Domain phù hợp khi Worker là origin. Cloudflare tự tạo bản ghi/certificate cần thiết sau khi domain được gắn. Nếu hostname đang có CNAME xung đột, phải bỏ CNAME đó trước khi tạo Custom Domain.
 
-`astro check` and `astro build` pass, the source audit passes, and Wrangler dry-run accepts the generated static assets. The source and build output are ready, but an authenticated Cloudflare deployment is still required to publish this version and inspect its DNS/TLS settings. The repository `kieumanh/huong-thien-nature-web` is public by the owner's explicit choice.
+## Rollback
 
-GitHub push confirms source publication only. It does not prove a Cloudflare deployment ran or that its build runtime is configured correctly. Check the deployment's commit SHA and both homepages after automatic Git integration runs.
+Cloudflare Pages scripts/config vẫn được giữ tạm thời như đường lui trong giai đoạn chuyển đổi. Không xóa Pages project cho đến khi Worker production, API contact và domain đã được xác minh thực tế.
+
+## Điều còn cần quyền Cloudflare
+
+Repo đã sẵn sàng cho Worker deployment. Việc tạo Worker thật, thêm secrets/bindings, cấp chứng chỉ và gắn Custom Domain cần phiên đăng nhập Cloudflare hoặc API token có quyền tương ứng.
