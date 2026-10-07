@@ -19,7 +19,7 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 - Music controls sit at the bottom left; a bottom-right back-to-top button appears at 30% of the scrollable document height, supports keyboard focus and respects reduced motion. Both controls independently select light or dark colors for contrast against the surface underneath, including local images.
 - Release numbers follow `major.minor.patch` in `package.json`; the footer and application-version meta tag use the same number. See `CHANGELOG.md` for each release.
 
-Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, and `npm run build:pages-functions`. The build audit verifies 36 HTML pages, article content, translation links, sitemap coverage, structured data, CTAs, bounded related reading and local asset/anchor targets. `npm run deploy:worker-dry-run` checks optional static Worker compatibility.
+Validation commands: `npm run check`, `npm run test:contact`, `npm run audit`, `npm run build`, `npm run audit:build`, The build audit verifies 36 HTML pages, article content, translation links, sitemap coverage, structured data, CTAs, bounded related reading and local asset/anchor targets. `npx wrangler deploy --dry-run` checks the Worker bundle.
 
 The contact form sends messages to `kieumanh2211@gmail.com` through Resend after server-side Turnstile verification and explicit consent when its five runtime bindings are configured. Email-draft and mailto fallbacks were removed in v0.3.4. See `CONTACT_SETUP.md` for setup; implementation tests do not prove live email delivery. There is no login, payment, booking calendar, database or member area in this phase.
 
@@ -52,9 +52,9 @@ Node.js 24.19.0 and npm 11.9.0 were used for this edition. Set the Cloudflare bu
 
 1. The source repository is public by the project owner's choice; confirm image permissions before expanding media use.
 2. Complete the release checks in `DEPLOYMENT.md`.
-3. Connect the repository to Cloudflare Pages; build command `npm run build`, output directory `dist`.
-4. Verify the `pages.dev` preview, both language routes, imagery and mobile layout.
-5. Attach `huongthiennature.com` to Pages after the Cloudflare zone is active and DNS is ready.
+3. Connect the repository to Cloudflare Workers Builds; use build command `npm run build` and deploy command `npx wrangler deploy`.
+4. Verify the Worker preview, both language routes, imagery and mobile layout.
+5. Attach `huongthiennature.com` as the Worker's Custom Domain after the Worker build and contact form are verified.
 6. Confirm HTTPS, DNS, canonical host, redirects, sitemap and form behavior before sharing the custom domain.
 
 ## Content and attribution
