@@ -1,3 +1,11 @@
+## 0.4.7 — Homepage discovery
+
+- Giữ phong cách Roots, cập nhật CTA đầu trang để mở bài nhập môn, thêm ô tìm kiếm và từ khóa gợi ý ngay trên homepage.
+- Thêm lộ trình đọc ba bước cho người mới; giới thiệu ba bài Roots về tâm nhiều suy nghĩ, làm vườn và lòng tử tế, có đường dẫn đến thư viện đầy đủ.
+- Nội dung song ngữ và lựa chọn bài homepage được gom tại `src/data/home.ts`; bỏ hai trường copy cũ không còn dùng.
+- Sửa audit liên kết để kiểm tra đường dẫn trang riêng với query/hash, hỗ trợ các liên kết tìm kiếm có `?q=`.
+- Bổ sung kiểm thử trình duyệt cho homepage, tìm kiếm, đổi ngôn ngữ, lỗi tải dữ liệu, responsive và phương án điều hướng khi tắt JavaScript.
+
 ## 0.4.6 — Release package
 
 - Đóng gói mã nguồn mới nhất trên `main`, kế thừa tính năng tìm kiếm song ngữ của bản 0.4.5 và các sửa lỗi Contact/CSS của bản 0.4.4.

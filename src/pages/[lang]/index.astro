@@ -5,8 +5,10 @@ import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import RootMark from '../../components/RootMark.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import HomeDiscovery from '../../components/HomeDiscovery.astro';
 import { languages, getCopy, type Language } from '../../data/site';
-import { articles, articlePath, journalPath } from '../../data/articles';
+import { articlePath, journalPath } from '../../data/articles';
+import { homeCopy, beginnerArticles, featuredArticles } from '../../data/home';
 
 export function getStaticPaths() {
   return languages.map(lang => ({ params: { lang } }));
@@ -14,6 +16,7 @@ export function getStaticPaths() {
 const lang = Astro.params.lang as Language;
 const en = lang === 'en';
 const t = getCopy(lang);
+const home = homeCopy[lang];
 const alternatePath = `/${en ? 'vi' : 'en'}/`;
 const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-canopy-v2.webp'];
 ---
@@ -27,8 +30,8 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
           <h1 id="hero-title" set:html={t.hero} />
           <p class="lead">{t.lead}</p>
           <div class="hero-actions">
-            <a class="button" href="#practice">{t.explore} <Arrow /></a>
-            <a class="quiet-link" href="#story">{t.storyCta} <span aria-hidden="true">→</span></a>
+            <a class="button" href={articlePath(lang, beginnerArticles[0].slug)}>{home.start} <Arrow /></a>
+            <a class="quiet-link" href="#practice">{t.explore} <span aria-hidden="true">→</span></a>
           </div>
           <div class="hero-footnote"><span class="small-dot" aria-hidden="true"></span><p>{t.note}</p></div>
         </div>
@@ -38,8 +41,10 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
           <div class="root-seal" aria-hidden="true"><RootMark /></div>
         </div>
       </div>
-      <div class="shell hero-bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Explore at your own pace' : 'Khám phá theo nhịp của bạn'} <span aria-hidden="true">↓</span></a></div>
+      <div class="shell hero-bottom"><span>{t.rootsNote}</span><a href="#story">{t.storyCta} <span aria-hidden="true">↓</span></a></div>
     </section>
+
+    <HomeDiscovery lang={lang} />
 
     <section id="story" class="section roots" aria-labelledby="story-title">
       <div class="shell">
@@ -77,8 +82,8 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
 
     <section id="journal" class="section journal" aria-labelledby="journal-title">
       <div class="shell">
-        <div class="section-head split-head"><div><span class="eyebrow">{t.journalEye}</span><h2 id="journal-title">{t.journalTitle}</h2></div><p>{t.journalIntro}</p></div>
-        <div class="journal-grid">{articles.slice(0, 3).map(article => {
+        <div class="section-head split-head"><div><span class="eyebrow">{t.journalEye}</span><h2 id="journal-title">{home.featuredTitle}</h2></div><p>{home.featuredDescription}</p></div>
+        <div class="journal-grid">{featuredArticles.map(article => {
           const translation = article.translations[lang];
           return <article class="journal-card"><a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a><div class="journal-card-copy"><div class="article-meta"><span>{translation.category}</span><span>{article.minutes} {t.readTime}</span></div><h3><a href={articlePath(lang, article.slug)}>{translation.title}</a></h3><p>{translation.description}</p><a class="quiet-link" href={articlePath(lang, article.slug)} aria-label={`${t.journalLink}: ${translation.title}`}>{t.journalLink} <Arrow /></a></div></article>;
         })}</div>

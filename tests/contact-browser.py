@@ -57,21 +57,21 @@ with sync_playwright() as p:
         page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('#name').disabled")
         assert page.locator('#name').input_value()==''
-        assert not page.locator('button[type="submit"]').is_disabled()
+        assert not page.locator('#interest-form button[type="submit"]').is_disabled()
         fill(page,lang)
         page.locator('#consent').uncheck()
-        page.locator('button[type="submit"]').click()
+        page.locator('#interest-form button[type="submit"]').click()
         assert len(pending)==0, 'Consent must be required'
         page.locator('#consent').check()
         page.locator('#message').fill('short')
-        page.locator('button[type="submit"]').click()
+        page.locator('#interest-form button[type="submit"]').click()
         assert len(pending)==0, 'Short message must not submit'
         page.locator('#message').fill('Tôi muốn tìm hiểu thực tập. Đây là lời nhắn thử nghiệm.')
-        page.locator('button[type="submit"]').click()
+        page.locator('#interest-form button[type="submit"]').click()
         page.wait_for_function("document.querySelector('#interest-form').getAttribute('aria-busy') === 'true'")
         assert len(pending)==1
         assert page.locator('#name').is_disabled()
-        assert page.locator('button[type="submit"]').is_disabled()
+        assert page.locator('#interest-form button[type="submit"]').is_disabled()
         page.locator('#interest-form').evaluate("form => form.dispatchEvent(new Event('submit', {bubbles:true,cancelable:true}))")
         assert len(pending)==1, 'Double submission must be prevented'
         body=payloads[-1]
@@ -95,28 +95,28 @@ with sync_playwright() as p:
         report.append(lang+': valid submission, consent, duplicate prevention and success reset; widget expiry/errors preserve pending and accepted states')
     page.goto(base+'/vi/',wait_until='domcontentloaded')
     fill(page)
-    page.locator('button[type="submit"]').click()
+    page.locator('#interest-form button[type="submit"]').click()
     assert len(pending)==1
     original_key=payloads[-1]['requestId']
     pending.pop().fulfill(status=502,content_type='application/json',body='{"ok":false,"code":"send_failed"}')
     page.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
     assert page.locator('#message').input_value().startswith('Tôi muốn')
     assert 'Chưa thể xác nhận' in page.locator('#form-result').inner_text()
-    page.locator('button[type="submit"]').click()
+    page.locator('#interest-form button[type="submit"]').click()
     assert len(pending)==1 and payloads[-1]['requestId']==original_key
     pending.pop().fulfill(status=429,content_type='application/json',body='{"ok":false,"code":"busy"}')
     page.wait_for_function("document.querySelector('#form-result').textContent.includes('đang bận')")
     page.locator('#message').fill('Nội dung đã thay đổi. Đây là một câu hỏi mới.')
-    page.locator('button[type="submit"]').click()
+    page.locator('#interest-form button[type="submit"]').click()
     assert len(pending)==1 and payloads[-1]['requestId']!=original_key
     pending.pop().abort('failed')
     page.wait_for_function("document.querySelector('#form-result').textContent.includes('Chưa thể xác nhận')")
     report.append('Failures preserve content; unchanged retry reuses idempotency key; edited submission gets new key; network errors never show success')
     page.evaluate("window.contactTestOptions['expired-callback']()")
-    assert page.locator('button[type="submit"]').is_disabled()
+    assert page.locator('#interest-form button[type="submit"]').is_disabled()
     assert 'hoàn tất xác minh lại' in page.locator('#form-result').inner_text()
     page.evaluate("window.contactTestOptions.callback('fresh-test-only-token')")
-    assert not page.locator('button[type="submit"]').is_disabled()
+    assert not page.locator('#interest-form button[type="submit"]').is_disabled()
     report.append('Expired verification disables submit; a fresh challenge restores it')
     for width in [320,375,768,1440]:
         page.set_viewport_size({'width':width,'height':900})
@@ -132,14 +132,14 @@ with sync_playwright() as p:
         unavailable.goto(base+'/'+lang+'/',wait_until='domcontentloaded')
         unavailable.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
         assert unavailable.locator('#name').is_enabled()
-        assert unavailable.locator('button[type="submit"]').is_disabled()
+        assert unavailable.locator('#interest-form button[type="submit"]').is_disabled()
         assert unavailable.locator('a[href^="mailto:"]').count()==0
         assert unavailable.locator('[data-gmail]').count()==0
     configure(unavailable,True)
     unavailable.goto(base+'/vi/',wait_until='domcontentloaded')
     fill(unavailable)
     unavailable.route('**/api/contact', lambda route: route.fulfill(status=503,content_type='application/json',body='{"ok":false,"code":"unavailable"}'))
-    unavailable.locator('button[type="submit"]').click()
+    unavailable.locator('#interest-form button[type="submit"]').click()
     unavailable.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
     assert unavailable.locator('#message').input_value().startswith('Tôi muốn')
     report.append('Unavailable service keeps message text, displays an error and never offers email drafting')

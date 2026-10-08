@@ -1,0 +1,31 @@
+---
+import Arrow from './Arrow.astro';
+import { homeCopy, beginnerArticles } from '../data/home';
+import { articles, articlePath, journalPath } from '../data/articles';
+import { getCopy, type Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const t = homeCopy[lang];
+const site = getCopy(lang);
+const searchPath = lang === 'vi' ? '/vi/timkiem/' : '/en/search/';
+---
+<section class="home-discovery shell" aria-labelledby="discovery-title">
+  <div class="home-discovery-search">
+    <span class="eyebrow">{t.searchEyebrow}</span>
+    <h2 id="discovery-title">{t.searchTitle}</h2>
+    <p>{t.searchDescription}</p>
+    <form class="home-search-form" action={searchPath} method="get" role="search" aria-label={t.searchLabel}>
+      <label for="home-search-query">{t.searchLabel}</label>
+      <div class="home-search-fields"><input id="home-search-query" name="q" type="search" maxlength="120" required placeholder={t.searchPlaceholder} autocomplete="off" /><button class="button" type="submit">{t.searchButton} <Arrow /></button></div>
+    </form>
+    <nav class="home-search-suggestions" aria-label={t.suggestionsLabel}>{t.suggestions.map(query => <a href={`${searchPath}?q=${encodeURIComponent(query)}`}>{query}</a>)}</nav>
+    <div class="home-library-summary"><span>{articles.length} {t.library}</span><a class="quiet-link" href={journalPath(lang)}>{t.browse} <Arrow /></a></div>
+  </div>
+  <div class="home-reading" id="begin-reading">
+    <span class="eyebrow">{t.readingEyebrow}</span>
+    <h2>{t.readingTitle}</h2>
+    <p>{t.readingDescription}</p>
+    <ol class="home-reading-list">
+      {beginnerArticles.map((article, index) => <li><span class="home-reading-number" aria-hidden="true">0{index + 1}</span><div><span class="home-reading-label">{t.stepLabels[index]} · {article.minutes} {site.readTime}</span><h3><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></h3></div><Arrow /></li>)}
+    </ol>
+  </div>
+</section>

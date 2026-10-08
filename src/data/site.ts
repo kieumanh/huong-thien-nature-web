@@ -86,7 +86,6 @@ export const copy = {
     "coRole": "Đồng sáng lập · Người hướng dẫn",
     "coCopy": "Kiều Mạnh là Teacher kiêm Co-founder, cùng định hình hành trình học tập và những nền tảng thực hành của dự án.",
     "journalEye": "Tản văn trên hành trình",
-    "journalTitle": "Những điều để trở về.",
     "phasesTitle": "Phát triển theo nhịp người thật",
     "phases": [
       [
@@ -118,7 +117,6 @@ export const copy = {
     "top": "Trở về đầu trang",
     "rootsNote": "Chậm lại. Chạm đất. Có mặt.",
     "journalLink": "Đọc tản văn",
-    "journalIntro": "Những ghi chép có thể mang vào đời sống: một cách thực tập, một góc chiêm nghiệm, một cuộc gặp với thiên nhiên.",
     "practiceCaption": "Không cần một nơi hoàn hảo. Chỉ cần một khoảnh khắc có mặt.",
     "portraitCaption": "Hương Thiền · Người khởi xướng Hương Thiền Nature",
     "skip": "Đến nội dung chính",
@@ -210,7 +208,6 @@ export const copy = {
     "coRole": "Co-founder · Teacher",
     "coCopy": "Kiều Mạnh is a teacher and co-founder, helping shape the learning journey and the practical foundations of the project.",
     "journalEye": "Notes for the journey",
-    "journalTitle": "Ideas to return to.",
     "phasesTitle": "Growing at a human pace",
     "phases": [
       [
@@ -242,7 +239,6 @@ export const copy = {
     "top": "Back to top",
     "rootsNote": "Slow down. Touch the earth. Be here.",
     "journalLink": "Read the reflection",
-    "journalIntro": "Notes to bring into daily life: a practice, a reflection and an encounter with the living world.",
     "practiceCaption": "You do not need a perfect place. Just a moment of presence.",
     "portraitCaption": "Hương Thiền · Founder of Hương Thiền Nature",
     "skip": "Skip to main content",

@@ -49,7 +49,9 @@ for (const file of files) {
   for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) JSON.parse(json);
   for (const [, href] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     if (!href.startsWith('/') && !href.startsWith('#')) continue;
-    const [pathname, fragment] = href.split('#');
+    const parsed = new URL(href.replaceAll('&amp;', '&'), new URL(route, base));
+    const pathname = href.startsWith('#') ? '' : parsed.pathname;
+    const fragment = decodeURIComponent(parsed.hash.slice(1));
     let target = file;
     if (pathname) {
       assert(!pathname.includes('..'), `Invalid local path: ${href}`);

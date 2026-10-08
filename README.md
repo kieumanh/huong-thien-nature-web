@@ -1,6 +1,6 @@
-# Hương Thiền Nature — V3 Roots 0.4.6
+# Hương Thiền Nature — V3 Roots 0.4.7
 
-Error-check and cleanup results for v0.4.4: [CODE_REVIEW.md](CODE_REVIEW.md).
+Current release review: [REVIEW_V0.4.7.md](REVIEW_V0.4.7.md). Historical cleanup results for v0.4.4: [CODE_REVIEW.md](CODE_REVIEW.md).
 
 Bilingual Vietnamese/English Astro website for the Hương Thiền Nature project. V3 Roots uses an earth-and-forest palette, readable system typography, a botanical root emblem and an editorial layout. Production targets GitHub → Cloudflare Worker with Static Assets on `https://huongthiennature.com`; Cloudflare Pages remains available as a separate `pages.dev` demo.
 
@@ -9,11 +9,12 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 ## Current delivery
 
 - Public-facing experience: brand story, meditation practice, nature reflections, founders, fifteen complete journal articles in each language (twelve new Roots guides and the original three), three-stage roadmap and a contact form served by the Worker.
+- Homepage: native keyword search and suggestions, a three-step beginner reading path, a direct Roots entry point and three selected Roots reflections. Homepage copy and selected articles live in `src/data/home.ts`.
 - Responsive Vietnamese and English routes: `/vi` and `/en`.
 - Astro static output (`npm run build`, output `dist`) with Tailwind CSS Vite integration; Worker serves the assets and handles `/api/contact` and `/api/contact-config`.
 - `wrangler.worker.jsonc` is the production Worker configuration. `wrangler.jsonc` remains the independent Pages demo configuration.
 - Supplied imagery optimized to WebP and placed in `public/media/`.
-- SEO: canonical URLs, `hreflang`, article Open Graph, Organization/BlogPosting/BreadcrumbList JSON-LD, robots and a generated sitemap with 34 localized URLs.
+- SEO: canonical URLs, `hreflang`, article Open Graph, Organization/BlogPosting/BreadcrumbList JSON-LD, robots and a generated sitemap with 36 localized URLs.
 - Shared header/footer, typed bilingual content, article language switching, keyboard navigation, and navigation that works without JavaScript.
 - Background music: the supplied `Lotus at First Light` MP3 loops at 25% initial volume. A fixed player supports pause/play and volume; the user's pause/volume choice is remembered, and playback position resumes within a session. Browsers that block audible autoplay start playback after an eligible interaction or an explicit Play click.
 - Tản văn / Journal has its own bilingual article listing at `/vi/tan-van/` and `/en/journal/`, with a Roots reading path, linked from the main navigation, homepage and article breadcrumbs. The original three articles retain their v0.3.4 URLs and earlier redirects. The homepage features three articles, with a link to the full library.
@@ -21,7 +22,7 @@ This edition continues the repository's existing content. The shared ChatGPT Wor
 - Music controls sit at the bottom left; a bottom-right back-to-top button appears at 30% of the scrollable document height, supports keyboard focus and respects reduced motion. Both controls independently select light or dark colors for contrast against the surface underneath, including local images.
 - Release numbers follow `major.minor.patch` in `package.json`; the footer and application-version meta tag use the same number. See `CHANGELOG.md` for each release.
 
-Validation commands: `npm run check`, `npm run test:contact`, `npm run test:worker`, `npm run audit`, `npm run build`, `npm run audit:build`, `npm run build:pages-functions`, and `npm run deploy:worker-dry-run`. The build audit verifies 36 HTML pages, article content, translation links, sitemap coverage, structured data, CTAs, bounded related reading and local asset/anchor targets.
+Validation commands: `npm run check`, `npm run test:contact`, `npm run test:search`, `npm run test:worker`, `npm run audit`, `npm run build`, `npm run audit:build`, `npm run build:pages-functions`, and `npm run deploy:worker-dry-run`. The build audit verifies 38 HTML pages, article content, translation links, sitemap coverage, structured data, CTAs, bounded related reading and local asset/anchor targets.
 
 The contact form sends messages to the privately configured recipient through Resend after server-side Turnstile verification and explicit consent when its five runtime bindings are configured. Email-draft and mailto fallbacks were removed in v0.3.4. See `CONTACT_SETUP.md` for setup; implementation tests do not prove live email delivery. There is no login, payment, booking calendar, database or member area in this phase.
 
@@ -47,6 +48,8 @@ For the separate Pages demo, use `npm run dev:pages` locally or connect the repo
 For local contact development, use `npm run dev:pages`; Astro dev/preview alone has no contact API. Production sending requires the bindings described in `CONTACT_SETUP.md`.
 
 Optional music browser checks with Python Playwright/Chromium: `APP_BASE_URL=http://127.0.0.1:8788 python tests/music-browser.py`. Tests exercise the actual MP3 under allowed and blocked autoplay policies. JavaScript-disabled visitors get native audio controls.
+
+Homepage and search browser checks: `APP_BASE_URL=http://127.0.0.1:8788 python tests/homepage-search-browser.py`. These exercise the reading path, actual keyword results, suggestions, language switching, failed index loading, mobile layouts and the fallback when JavaScript is disabled.
 
 Journal and contrasting controls: `APP_BASE_URL=http://127.0.0.1:8788 python tests/journal-contrast-browser.py` checks article navigation, both listing translations, mobile layouts, light/dark sections and independent image contrast under each control.
 
