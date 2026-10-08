@@ -2,8 +2,6 @@
    No WebGL dependency, no changes to global nav, search, contact or article routes. */
 .hybrid-hero {
   --hybrid-scroll: 0;
-  --hybrid-pointer-x: 0;
-  --hybrid-pointer-y: 0;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -114,7 +112,7 @@
   .hybrid-scene__foliage { width: 68vw; }
 }
 @media (max-width: 760px) {
-  .hybrid-hero { min-height: min(790px,calc(100svh - 76px)); min-height: max(610px,calc(100svh - 76px)); padding: 70px 0 20px; }
+  .hybrid-hero { min-height: max(610px,calc(100svh - 76px)); padding: 70px 0 20px; }
   .hybrid-hero .hybrid-hero__layout, .hybrid-hero .hybrid-hero__bottom { width: calc(100% - 40px); }
   .hybrid-hero .hybrid-hero__layout { display: flex; min-height: 0; flex: 1; align-items: center; }
   .hybrid-hero .hybrid-hero__copy { width: 100%; }
@@ -136,3 +134,5 @@
   .hybrid-scene__canopy, .hybrid-scene__foliage, .hybrid-scene__sun { transform: none; will-change: auto; }
   .hybrid-home .nature-card img, .hybrid-home .journal-image img, .hybrid-home .practice-image img { transition: none; }
 }
+
+.hybrid-data-saver .hybrid-scene__mist { animation: none; }
