@@ -1,0 +1,21 @@
+---
+const {lang} = Astro.props;
+const en = lang === 'en';
+const scenes = en ? [
+ {src:'hoian-rice-field.jpg',alt:'A farmer in a conical hat tending green rice in a field near Hoi An.',place:'Hội An · Pixabay'},
+ {src:'highland-rice.jpg',alt:'Rice terraces surrounded by green hills in Vietnam.',place:'Vietnam · Pixabay'},
+ {src:'hoian-rice-aerial.jpg',alt:'A winding rural road crosses green rice fields in Hoi An.',place:'Quảng Nam · Unsplash'},
+ {src:'rice-landscape.jpg',alt:'Terraced green rice fields in a mountainous part of Vietnam.',place:'Vietnam highlands · Pixabay'},
+] : [
+ {src:'hoian-rice-field.jpg',alt:'Người nông dân đội nón giữa ruộng lúa xanh ở Hội An.',place:'Hội An · Pixabay'},
+ {src:'highland-rice.jpg',alt:'Những thửa ruộng bậc thang giữa đồi xanh Việt Nam.',place:'Việt Nam · Pixabay'},
+ {src:'hoian-rice-aerial.jpg',alt:'Con đường làng uốn qua những thửa lúa xanh ở Hội An.',place:'Quảng Nam · Unsplash'},
+ {src:'rice-landscape.jpg',alt:'Ruộng bậc thang xanh ở một vùng núi Việt Nam.',place:'Vùng cao Việt Nam · Pixabay'},
+];
+---
+<section class="section rice-landscapes" id="rice-landscapes" aria-labelledby="rice-landscapes-title">
+ <div class="shell">
+  <div class="section-head split-head"><div><span class="eyebrow">{en ? 'A living landscape' : 'Một miền quê đang sống'}</span><h2 id="rice-landscapes-title">{en ? 'Rice seasons, remembered in light.' : 'Mùa lúa, qua những sắc màu của đất trời.'}</h2></div></div>
+  <div class="rice-gallery">{scenes.map((scene,i)=><figure class={`rice-frame rice-frame--${i+1}`}><img src={`/media/${scene.src}`} alt={`${scene.alt} ${en ? "Source" : "Nguồn"}: ${scene.place}.`} loading="lazy" decoding="async"/></figure>)}</div>
+ </div>
+</section>

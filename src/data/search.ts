@@ -10,9 +10,10 @@ const plain = (value: unknown): string => {
 export function buildSearchIndex(lang: Language): SearchEntry[] {
   const t = getCopy(lang);
   const sections = [
+    { title: lang === 'vi' ? 'Hành trình Đỗ Thị Kim Hương' : 'The journey of Đỗ Thị Kim Hương', description: t.founderCopy, url: `/${lang}/#journey`, text: plain([t.founderCopy, 'Quảng Nam 13 22 28 Tịnh độ Thích Nhất Hạnh Carla Phương Cao Patriji Hoàng Thị Phương Thảo PSSM Việt Nam Học Thiền Đà Nẵng Đại học Sư phạm Nha Trang Farm Botanicals Eco-Retreat Academy']) },
     { title: t.introTitle, description: t.introCopy, url: `/${lang}/#story`, text: plain([t.introCopy,t.pillars]) },
     { title: plain(t.practiceTitle), description: t.practiceCopy, url: `/${lang}/#practice`, text: plain([t.practiceCopy,t.steps]) },
-    { title: t.natureTitle, description: t.natureCopy, url: `/${lang}/#nature`, text: plain(t.natureCopy) },
+    { title: t.natureTitle, description: t.natureCopy, url: `/${lang}/#nature`, text: plain([t.natureCopy,t.natureCards,t.natureNote]) },
     { title: lang === 'vi' ? 'Hương Thiền và Kiều Mạnh' : 'Hương Thiền and Kiều Mạnh', description: t.founderCopy, url: `/${lang}/#people`, text: plain([t.founderCopy,t.coCopy]) },
     { title: t.phasesTitle, description: lang === 'vi' ? 'Ba giai đoạn phát triển Hương Thiền Nature.' : 'The three stages of Hương Thiền Nature.', url: `/${lang}/#path`, text: plain(t.phases) },
     { title: t.contactTitle, description: t.contactCopy, url: `/${lang}/#connect`, text: t.contactCopy },

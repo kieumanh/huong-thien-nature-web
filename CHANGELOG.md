@@ -76,3 +76,9 @@ Phiên bản dùng `major.minor.patch`, hiển thị từ `package.json` tại f
 
 - API liên hệ Cloudflare Pages Functions, Resend và Turnstile; gửi trực tiếp cần cấu hình runtime.
 - Nhạc nền Lotus at First Light, bật/tắt, âm lượng và ghi nhớ lựa chọn. Tính năng nhạc đã phát hành trước khi quy ước tăng số cho từng bản cập nhật được áp dụng.
+
+### Homepage storytelling integration — v0.4.7
+- Integrated bilingual founder story, learning milestone timeline and Farm & Botanicals → Eco-Retreat → Academy direction.
+- Added responsive Hybrid Nature motion with reduced-motion and data-saver support.
+- Replaced selected couple imagery and hero with nature scenes; source credits retained in code and alt text.
+- Preserved v0.4.7 Roots search, beginner reading path, featured articles and contact form.
