@@ -15,10 +15,10 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, articleEntries.length * 2 + 6, 'Build must contain two homepages, two journal indexes, translated articles, root entry and 404');
+assert.equal(files.length, articleEntries.length * 2 + 8, 'Build must contain two homepages, two journal indexes, translated articles, root entry and 404');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, (articleEntries.length + 2) * 2, 'Sitemap must list all localized homes, journal indexes and articles');
+assert.equal(new Set(locations).size, (articleEntries.length + 3) * 2, 'Sitemap must list all localized homes, journal indexes and articles');
 let references = 0;
 let articles = 0;
 for (const file of files) {
@@ -37,7 +37,7 @@ for (const file of files) {
     assert(locations.includes(base + route), `Sitemap missing ${route}`);
     const other = lang === 'vi' ? 'en' : 'vi';
     const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
-    const alternate = article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : `/${other}/`;
+    const alternate = article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
     if (/\/(journal|tan-van)\/[^/]+\/$/.test(route)) {
       articles++;

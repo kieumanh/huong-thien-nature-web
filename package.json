@@ -1,6 +1,6 @@
 {
   "name": "huong-thien-nature-web",
-  "version": "0.4.4",
+  "version": "0.4.5",
   "private": true,
   "type": "module",
   "scripts": {
@@ -17,7 +17,8 @@
     "deploy:pages": "npm run build && wrangler pages deploy dist --project-name=huong-thien-nature-web --branch=main",
     "dev:worker": "npm run build && wrangler dev --config wrangler.worker.jsonc",
     "deploy:worker": "npm run build && wrangler deploy --config wrangler.worker.jsonc",
-    "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run --config wrangler.worker.jsonc"
+    "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run --config wrangler.worker.jsonc",
+    "test:search": "node --test tests/search.test.ts"
   },
   "dependencies": {
     "astro": "^6.0.0"

@@ -6,6 +6,7 @@ export const GET: APIRoute = () => {
   const paths = [
     { vi: '/vi/', en: '/en/' },
     { vi: journalPath('vi'), en: journalPath('en') },
+    { vi: '/vi/timkiem/', en: '/en/search/' },
     ...articles.map(article => ({
       vi: articlePath('vi', article.slug), en: articlePath('en', article.slug),
     })),

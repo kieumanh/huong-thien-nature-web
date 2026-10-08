@@ -1,3 +1,9 @@
+# v0.4.5
+
+- Add responsive navigation search and separate Vietnamese/English results pages.
+- Search all articles and project sections, with accent-insensitive Vietnamese matching.
+- Preserve v0.4.4 contact fixes; validate search in CI.
+
 ## 0.4.4 — Error checks and cleanup
 
 - Sửa trạng thái Contact: sự kiện Turnstile hết hạn/báo lỗi không ghi đè trạng thái đang gửi hoặc kết quả gửi thành công. Xác minh vẫn được yêu cầu cho lần gửi tiếp theo.

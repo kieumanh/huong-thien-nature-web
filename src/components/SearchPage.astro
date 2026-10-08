@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import type { Language } from '../data/site';
+const { lang }=Astro.props as {lang:Language};
+const en=lang==='en';
+const title=en?'Search':'Tìm kiếm';
+const path=en?'/en/search/':'/vi/timkiem/';
+const alternatePath=en?'/vi/timkiem/':'/en/search/';
+---
+<BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={en?'Search meditation guides, nature reflections and the Hương Thiền Nature project.':'Tìm bài viết, thực tập thiền, thiên nhiên và thông tin Hương Thiền Nature.'} alternatePath={alternatePath}>
+  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <main id="main-content" tabindex="-1" class="shell search-page" data-search-page data-language={lang}>
+    <span class="eyebrow">{en?'Explore our library':'Khám phá thư viện'}</span>
+    <h1>{title}</h1>
+    <p class="lead">{en?'Find a reflection or a practice for where you are today.':'Tìm một bài chia sẻ hoặc thực tập phù hợp với bạn hôm nay.'}</p>
+    <form class="search-form" action={path} method="get" role="search">
+      <label for="search-query" class="sr-only">{en?'Keyword':'Từ khóa'}</label>
+      <input id="search-query" name="q" type="search" maxlength="120" required placeholder={en?'Try “breath” or “mindfulness”':'Thử “hơi thở” hoặc “chánh niệm”'} autocomplete="off" />
+      <button type="submit" class="button">{title}</button>
+    </form>
+    <p id="search-status" class="search-status" role="status" aria-live="polite">{en?'Enter a keyword to search articles and site information.':'Nhập từ khóa để tìm bài viết và thông tin trên website. Bạn có thể gõ tiếng Việt có dấu hoặc không dấu.'}</p>
+    <div id="search-results" class="search-results"></div>
+    <noscript><p>{en?'Enable JavaScript to search. You can also browse the journal.':'Bật JavaScript để tìm kiếm. Bạn cũng có thể xem toàn bộ tản văn.'} <a href={en?'/en/journal/':'/vi/tan-van/'}>{en?'Browse articles':'Xem tản văn'}</a></p></noscript>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>
+<script>import '../scripts/search-page';</script>
