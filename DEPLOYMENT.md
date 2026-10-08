@@ -1,4 +1,4 @@
-# Cloudflare Worker deployment — Hương Thiền Nature 0.4.4
+# Cloudflare Worker deployment — Hương Thiền Nature 0.4.6
 
 Production architecture: GitHub `main` → Cloudflare Workers Builds → Astro build in `dist` → Worker Static Assets. The Worker handles `/api/contact` and `/api/contact-config`; all other requests are served from the static asset binding. Cloudflare Pages remains a separate optional demo and is not the production Worker configuration.
 
@@ -8,7 +8,7 @@ Production architecture: GitHub `main` → Cloudflare Workers Builds → Astro b
 - `src/worker.ts`: Worker router. It reuses the existing validated Resend/Turnstile API handlers.
 - `wrangler.jsonc`: Pages demo configuration; do not use it for a Worker deploy.
 - Worker name: `huong-thien-nature`.
-- Website release: `0.4.4` (Worker runtime introduced in 0.4.1).
+- Website release: `0.4.6` (Worker runtime introduced in 0.4.1).
 
 ## Configure Workers Builds
 

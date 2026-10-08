@@ -1,3 +1,8 @@
+## 0.4.6 — Release package
+
+- Đóng gói mã nguồn mới nhất trên `main`, kế thừa tính năng tìm kiếm song ngữ của bản 0.4.5 và các sửa lỗi Contact/CSS của bản 0.4.4.
+- Đồng bộ số phiên bản trong package, lockfile, giao diện và tài liệu triển khai; gắn nhãn Git `v0.4.6`.
+
 # v0.4.5
 
 - Add responsive navigation search and separate Vietnamese/English results pages.
