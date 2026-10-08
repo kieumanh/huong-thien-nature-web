@@ -485,3 +485,20 @@ fieldset:disabled { opacity: .65; }
 .search-result-content .product-stock { font-size: .72rem; }
 .search-result-content .quiet-link { margin-top: 14px; }
 @media(max-width:480px) { .search-result--product { grid-template-columns: 1fr; gap: 18px; } .search-result-photo img { height: 230px; } }
+
+/* V2: botanical details and a quiet reading indicator. */
+.reading-progress { position: fixed; top: 0; inset-inline: 0; height: 4px; z-index: 1000; pointer-events: none; background: rgba(237,181,130,.16); }
+.reading-progress span { display: block; width: 100%; height: 100%; background: #e8a568; transform: scaleX(0); transform-origin: left; }
+.contact-card { max-width: 620px; width: 100%; justify-self: end; padding: clamp(20px,2.4vw,28px); }
+.contact-card h3 { font-size: 1.55rem; margin-bottom: 12px; }
+.contact-card label { margin-top: 10px; }
+.contact-card input, .contact-card select, .contact-card textarea { padding: 9px 12px; min-height: 44px; }
+.contact-card textarea { min-height: 80px; }
+.contact-card .contact-consent { margin: 12px 0; line-height: 1.5; }
+.contact-card .button { margin-top: 12px; }
+.contact-card .form-result { margin-top: 12px; padding: 9px 12px; }
+.form-result[hidden] { display: none; }
+.footer { background-image: url('/media/botanical-sprig.svg'); background-position: right 4% bottom; background-size: 130px auto; background-repeat: no-repeat; }
+
+.contact-fields label { margin-top: 0; }
+@media(max-width:430px) { .contact-card { padding: 20px 16px; } }

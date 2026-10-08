@@ -36,6 +36,7 @@ async function setup(form: HTMLFormElement) {
   let requestId = '';
   let succeeded = false;
   const status = (message: string, kind: 'info' | 'success' | 'error' = 'info') => {
+    result.hidden = message === t.ready;
     result.textContent = message;
     result.dataset.kind = kind;
   };

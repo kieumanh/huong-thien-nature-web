@@ -8,21 +8,19 @@ const t = contactCopy[lang];
 ---
 <div class="contact-card">
   <h3>{t.title}</h3>
-  <p class="contact-intro">{lang === "vi" ? "Chia sẻ câu hỏi hoặc điều bạn muốn trao đổi cùng Hương Thiền." : "Share a question or something you would like to discuss with Hương Thiền."}</p>
-  <form id="interest-form" data-language={lang} data-products={JSON.stringify(products.map(product => ({ slug: product.slug, name: product.translations[lang].name })))} aria-describedby="contact-privacy" aria-busy="true">
+  <form id="interest-form" data-language={lang} data-products={JSON.stringify(products.map(product => ({ slug: product.slug, name: product.translations[lang].name })))} aria-busy="true">
     <fieldset disabled><legend class="sr-only">{t.title}</legend>
       <div class="contact-fields">
         <div class="contact-field"><label for="name">{t.name}</label><input id="name" name="name" autocomplete="name" maxlength="100" placeholder={lang === 'vi' ? 'Tên của bạn' : 'Your name'} required /></div>
         <div class="contact-field"><label for="email">{t.email}</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required /></div>
       </div>
       <label for="interest">{t.interest}</label><select id="interest" name="interest" required><option value="" selected disabled>{t.options[0]}</option>{contactInterests.map((value, index) => <option value={value}>{t.options[index + 1]}</option>)}</select>
-      <label for="message">{t.message}</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="3" placeholder={lang === 'vi' ? 'Bạn muốn chia sẻ điều gì?' : 'What would you like to share?'} required aria-describedby="message-hint"></textarea><p class="form-note" id="message-hint">{t.messageHint}</p>
+      <label for="message">{t.message}</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="3" placeholder={lang === 'vi' ? 'Bạn muốn chia sẻ điều gì?' : 'What would you like to share?'} required></textarea>
       <div class="contact-honeypot" aria-hidden="true"><label for="website">{t.honeypot}</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
       <label class="contact-consent" for="consent"><input id="consent" name="consent" type="checkbox" required /><span>{t.consent}</span></label>
       <div id="contact-verification" class="contact-verification"></div>
       <button class="button" type="submit" disabled><span class="send-label">{t.send}</span><Arrow /></button>
     </fieldset>
-    <p class="form-note contact-privacy" id="contact-privacy">{t.privacy}</p>
     <p class="form-result" id="form-result" role="status" aria-live="polite">{t.loading}</p>
     <noscript><p class="form-note">{t.noScript}</p></noscript>
   </form>
