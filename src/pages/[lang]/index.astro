@@ -1,5 +1,6 @@
 ---
 import Arrow from '../../components/Arrow.astro';
+import '../../styles/hybrid-nature.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
@@ -19,11 +20,19 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
 ---
 <BaseLayout lang={lang} title={`${t.title} | Hương Thiền Nature`} description={t.desc} alternatePath={alternatePath}>
   <Header lang={lang} alternatePath={alternatePath} />
-  <main id="main-content" tabindex="-1">
-    <section class="hero" aria-labelledby="hero-title">
-      <div class="shell hero-grid">
-        <div class="hero-copy">
-          <span class="eyebrow">{t.eyebrow}</span>
+  <main id="main-content" class="hybrid-home" tabindex="-1">
+    <section class="hero hybrid-hero" aria-labelledby="hero-title">
+      <div class="hybrid-scene" aria-hidden="true">
+        <img class="hybrid-scene__canopy" src="/media/hero-canopy-v2.webp" alt="" width="720" height="480" fetchpriority="high" decoding="async" />
+        <div class="hybrid-scene__veil"></div>
+        <div class="hybrid-scene__sun"></div>
+        <div class="hybrid-scene__mist hybrid-scene__mist--one"></div>
+        <div class="hybrid-scene__mist hybrid-scene__mist--two"></div>
+        <div class="hybrid-scene__foliage"></div>
+      </div>
+      <div class="hybrid-hero__layout">
+        <div class="hybrid-hero__copy">
+          <span class="hybrid-hero__eyebrow">{t.eyebrow}</span>
           <h1 id="hero-title" set:html={t.hero} />
           <p class="lead">{t.lead}</p>
           <div class="hero-actions">
@@ -32,14 +41,15 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
           </div>
           <div class="hero-footnote"><span class="small-dot" aria-hidden="true"></span><p>{t.note}</p></div>
         </div>
-        <div class="hero-art">
-          <img class="hero-image" src="/media/hero-canopy-v2.webp" alt={en ? 'A winding path beneath a green woodland canopy.' : 'Con đường uốn qua những tán cây xanh trong rừng.'} width="720" height="480" fetchpriority="high" />
-          <div class="hero-art-label"><span>Hương Thiền Nature</span><span>{en ? 'A living practice' : 'Một thực tập sống động'}</span></div>
-          <div class="root-seal" aria-hidden="true"><RootMark /></div>
-        </div>
       </div>
-      <div class="shell hero-bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Explore at your own pace' : 'Khám phá theo nhịp của bạn'} <span aria-hidden="true">↓</span></a></div>
+      <span class="hybrid-hero__index" aria-hidden="true">HƯƠNG THIỀN · NATURE</span>
+      <div class="hybrid-hero__bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Explore at your own pace' : 'Khám phá theo nhịp của bạn'} <span aria-hidden="true">↓</span></a></div>
     </section>
+    <aside class="hybrid-breath" aria-label={en ? 'An invitation to pause' : 'Lời mời dừng lại'}>
+      <span class="hybrid-breath__mark" aria-hidden="true"></span>
+      <p>{en ? 'Pause for a breath. Nature is already here.' : 'Dừng lại một nhịp thở. Thiên nhiên vẫn đang ở đây.'}</p>
+      <small>{en ? 'Breathe · Feel · Return' : 'Thở · Cảm nhận · Trở về'}</small>
+    </aside>
 
     <section id="story" class="section roots" aria-labelledby="story-title">
       <div class="shell">
@@ -99,4 +109,5 @@ const natureImages = ['fern-study-v2.webp', 'woodland-stream-v2.webp', 'hero-can
     </section>
   </main>
   <Footer lang={lang} />
+  <script>import "../../scripts/hybrid-nature";</script>
 </BaseLayout>
