@@ -33,6 +33,9 @@ if (home) {
       scheduled = false;
       const progress = Math.max(0, Math.min(1, -hero.getBoundingClientRect().top / Math.max(1, hero.offsetHeight)));
       hero.style.setProperty('--hybrid-scroll', progress.toFixed(3));
+      hero.style.setProperty('--hybrid-image-offset-y', (progress * 65).toFixed(1) + 'px');
+      hero.style.setProperty('--hybrid-sun-offset-y', (progress * 45).toFixed(1) + 'px');
+      hero.style.setProperty('--hybrid-foliage-offset-y', (-progress * 35).toFixed(1) + 'px');
     };
     const schedule = () => {
       if (!scheduled) {
@@ -49,12 +52,12 @@ if (home) {
         if (!bounds.width || !bounds.height) return;
         const x = (event.clientX - bounds.left) / bounds.width * 2 - 1;
         const y = (event.clientY - bounds.top) / bounds.height * 2 - 1;
-        hero.style.setProperty('--hybrid-pointer-x', Math.max(-1, Math.min(1, x)).toFixed(3));
-        hero.style.setProperty('--hybrid-pointer-y', Math.max(-1, Math.min(1, y)).toFixed(3));
+        hero.style.setProperty('--hybrid-pointer-offset-x', (Math.max(-1, Math.min(1, x)) * 9).toFixed(1) + 'px');
+        hero.style.setProperty('--hybrid-foliage-offset-x', (Math.max(-1, Math.min(1, x)) * -17).toFixed(1) + 'px');
       }, { passive: true });
       hero.addEventListener('pointerleave', () => {
-        hero.style.setProperty('--hybrid-pointer-x', '0');
-        hero.style.setProperty('--hybrid-pointer-y', '0');
+        hero.style.setProperty('--hybrid-pointer-offset-x', '0px');
+        hero.style.setProperty('--hybrid-foliage-offset-x', '0px');
       });
     }
   }
