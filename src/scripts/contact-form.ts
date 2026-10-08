@@ -19,6 +19,17 @@ async function setup(form: HTMLFormElement) {
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const label = button.querySelector<HTMLElement>('.send-label')!;
   const verification = form.querySelector<HTMLElement>('#contact-verification')!;
+  const productSlug = new URLSearchParams(window.location.search).get('product');
+  if (productSlug) {
+    const entries = JSON.parse(form.dataset.products || '[]') as { slug: string; name: string }[];
+    const product = entries.find(entry => entry.slug === productSlug);
+    const message = form.querySelector<HTMLTextAreaElement>('[name="message"]');
+    const interest = form.querySelector<HTMLSelectElement>('[name="interest"]');
+    if (product && message && !message.value) {
+      message.value = lang === 'vi' ? `Tôi muốn hỏi thêm về sản phẩm ${product.name}.` : `I would like to ask about ${product.name}.`;
+      if (interest) interest.value = 'other';
+    }
+  }
   let token = '';
   let widget: string | undefined;
   let sending = false;

@@ -1,5 +1,6 @@
 import { articles, articlePath } from './articles.ts';
 import { getCopy, type Language } from './site.ts';
+import { products, productPath, shopPath, productCategories } from './products.ts';
 export type SearchEntry = { title: string; description: string; url: string; category: string; text: string };
 const plain = (value: unknown): string => {
   if (typeof value === 'string') return value.replace(/<[^>]*>/g, ' ');
@@ -18,5 +19,11 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
     { title: t.phasesTitle, description: lang === 'vi' ? 'Ba giai đoạn phát triển Hương Thiền Nature.' : 'The three stages of Hương Thiền Nature.', url: `/${lang}/#path`, text: plain(t.phases) },
     { title: t.contactTitle, description: t.contactCopy, url: `/${lang}/#connect`, text: t.contactCopy },
   ].map(entry => ({ ...entry, category: lang === 'vi' ? 'Hương Thiền Nature' : 'About us' }));
-  return [...sections,...articles.map(article => ({title:article.translations[lang].title,description:article.translations[lang].description,url:articlePath(lang,article.slug),category:article.translations[lang].category,text:plain([article.translations[lang],article.keywords?.[lang]])}))];
+  const shopCategory = lang === 'vi' ? 'Cửa hàng' : 'Shop';
+  const catalogue = { title: shopCategory, description: lang === 'vi' ? 'Catalogue gia vị, ngũ cốc và thức uống với giá tham khảo.' : 'Seasonings, grains and drinks with suggested demo prices.', url: shopPath(lang), category: shopCategory, text: lang === 'vi' ? 'Farm Botanicals sản phẩm thực phẩm chay' : 'Farm Botanicals plant-based pantry products' };
+  const productEntries = products.map(product => {
+    const copy = product.translations[lang];
+    return { title: copy.name, description: copy.subtitle, url: productPath(lang, product.slug), category: shopCategory, text: plain([copy, productCategories.find(category => category.id === product.category)?.[lang]]) };
+  });
+  return [...sections,...articles.map(article => ({title:article.translations[lang].title,description:article.translations[lang].description,url:articlePath(lang,article.slug),category:article.translations[lang].category,text:plain([article.translations[lang],article.keywords?.[lang]])})), catalogue, ...productEntries];
 }

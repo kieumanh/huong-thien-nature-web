@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { articles, articlePath, journalPath } from '../data/articles';
+import { products, productPath, shopPath } from '../data/products';
 
 export const GET: APIRoute = () => {
   const base = 'https://huongthiennature.com';
@@ -7,6 +8,8 @@ export const GET: APIRoute = () => {
     { vi: '/vi/', en: '/en/' },
     { vi: journalPath('vi'), en: journalPath('en') },
     { vi: '/vi/timkiem/', en: '/en/search/' },
+    { vi: shopPath('vi'), en: shopPath('en') },
+    ...products.map(product => ({ vi: productPath('vi', product.slug), en: productPath('en', product.slug) })),
     ...articles.map(article => ({
       vi: articlePath('vi', article.slug), en: articlePath('en', article.slug),
     })),

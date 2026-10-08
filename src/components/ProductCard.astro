@@ -1,0 +1,25 @@
+---
+import Arrow from './Arrow.astro';
+import { productPath, productCategories, formatPrice, type Product } from '../data/products';
+import type { Language } from '../data/site';
+const { product, lang, heading = 'h2' } = Astro.props as { product: Product; lang: Language; heading?: 'h2' | 'h3' };
+const copy = product.translations[lang];
+const Heading = heading;
+const category = productCategories.find(item => item.id === product.category)!;
+---
+<article class="product-card" data-product-card data-category={product.category} data-search={`${copy.name} ${copy.subtitle} ${copy.ingredients} ${category[lang]}`}>
+  <a class="product-image" href={productPath(lang, product.slug)} aria-label={copy.name}>
+    <img src={product.image} alt={copy.alt} width={product.width} height={product.height} loading="lazy" decoding="async" />
+    {product.pending && <span class="product-pending">{lang === 'vi' ? 'Chờ xác nhận' : 'Awaiting confirmation'}</span>}
+  </a>
+  <div class="product-card-copy">
+    <span class="product-category">{category[lang]}</span>
+    <Heading><a href={productPath(lang, product.slug)}>{copy.name}</a></Heading>
+    <p class="product-subtitle">{copy.subtitle}</p>
+    <p class="product-unit">{copy.unit}</p>
+    <div class="product-card-bottom">
+      <p class="product-price"><span>{lang === 'vi' ? 'Giá tham khảo' : 'Demo price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
+      <a class="product-link" href={productPath(lang, product.slug)} aria-label={`${lang === 'vi' ? 'Xem chi tiết' : 'View details'}: ${copy.name}`}>{lang === 'vi' ? 'Chi tiết' : 'Details'} <Arrow /></a>
+    </div>
+  </div>
+</article>

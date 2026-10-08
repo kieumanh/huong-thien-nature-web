@@ -2,13 +2,14 @@
 import Arrow from './Arrow.astro';
 import { contactCopy, contactInterests } from '../data/contact';
 import type { Language } from '../data/site';
+import { products } from '../data/products';
 const { lang } = Astro.props as { lang: Language };
 const t = contactCopy[lang];
 ---
 <div class="contact-card">
   <h3>{t.title}</h3>
   <p class="contact-intro">{lang === "vi" ? "Chia sẻ câu hỏi hoặc điều bạn muốn trao đổi cùng Hương Thiền." : "Share a question or something you would like to discuss with Hương Thiền."}</p>
-  <form id="interest-form" data-language={lang} aria-describedby="contact-privacy" aria-busy="true">
+  <form id="interest-form" data-language={lang} data-products={JSON.stringify(products.map(product => ({ slug: product.slug, name: product.translations[lang].name })))} aria-describedby="contact-privacy" aria-busy="true">
     <fieldset disabled><legend class="sr-only">{t.title}</legend>
       <div class="contact-fields">
         <div class="contact-field"><label for="name">{t.name}</label><input id="name" name="name" autocomplete="name" maxlength="100" placeholder={lang === 'vi' ? 'Tên của bạn' : 'Your name'} required /></div>

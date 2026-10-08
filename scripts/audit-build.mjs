@@ -3,6 +3,7 @@ import { readdir, readFile, access } from 'node:fs/promises';
 import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articles as articleEntries, articlePath, journalPath } from '../src/data/articles.ts';
+import { products, productPath, shopPath } from '../src/data/products.ts';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const base = 'https://huongthiennature.com';
@@ -15,10 +16,10 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, articleEntries.length * 2 + 8, 'Build must contain two homepages, two journal indexes, translated articles, root entry and 404');
+assert.equal(files.length, articleEntries.length * 2 + 8 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, (articleEntries.length + 3) * 2, 'Sitemap must list all localized homes, journal indexes and articles');
+assert.equal(new Set(locations).size, (articleEntries.length + products.length + 4) * 2, 'Sitemap must list all localized pages and products');
 let references = 0;
 let articles = 0;
 for (const file of files) {
@@ -37,8 +38,19 @@ for (const file of files) {
     assert(locations.includes(base + route), `Sitemap missing ${route}`);
     const other = lang === 'vi' ? 'en' : 'vi';
     const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
-    const alternate = article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
+    const product = products.find(item => productPath(lang, item.slug) === route);
+    const alternate = product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
+    assert(html.includes(`href="${shopPath(lang)}"`), `Shop navigation missing on ${route}`);
+    if (route === shopPath(lang)) {
+      assert.equal([...html.matchAll(/data-product-card/g)].length, products.length, `Catalogue must include every supplied product on ${route}`);
+      for (const item of products) assert(html.includes(`href="${productPath(lang, item.slug)}"`), `Missing product link: ${item.slug}`);
+    }
+    if (product) {
+      assert(html.includes(`?product=${product.slug}#connect`), `Product enquiry must retain product identity on ${route}`);
+      assert(html.includes('product-information') && html.includes('shop-demo-note'), `Missing product details or demo notice on ${route}`);
+      assert(!html.includes('"@type":"Offer"'), `Demo prices must not be advertised as live offers on ${route}`);
+    }
     if (/\/(journal|tan-van)\/[^/]+\/$/.test(route)) {
       articles++;
       assert([...html.matchAll(/<h2\b/g)].length >= 4, `Article content missing on ${route}`);

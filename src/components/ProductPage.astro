@@ -1,0 +1,46 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Arrow from './Arrow.astro';
+import ProductCard from './ProductCard.astro';
+import { products, productCategories, shopPath, productPath, formatPrice, type Product } from '../data/products';
+import type { Language } from '../data/site';
+import '../styles/shop.css';
+const { product, lang } = Astro.props as { product: Product; lang: Language };
+const vi = lang === 'vi';
+const copy = product.translations[lang];
+const alternatePath = productPath(vi ? 'en' : 'vi', product.slug);
+const category = productCategories.find(item => item.id === product.category)!;
+const related = products.filter(item => item.slug !== product.slug && !item.pending).sort((a, b) => Number(b.category === product.category) - Number(a.category === product.category)).slice(0, 3);
+---
+<BaseLayout lang={lang} title={`${copy.name} | ${vi ? 'Cửa hàng' : 'Shop'} Hương Thiền Nature`} description={copy.description} alternatePath={alternatePath} image={product.image}>
+  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <main id="main-content" tabindex="-1" class="shop-page product-page">
+    <div class="shell">
+      <nav class="shop-breadcrumbs" aria-label={vi ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{vi ? 'Trang chủ' : 'Home'}</a><span aria-hidden="true">/</span><a href={shopPath(lang)}>{vi ? 'Cửa hàng' : 'Shop'}</a><span aria-hidden="true">/</span><span aria-current="page">{copy.name}</span></nav>
+      <article class="product-overview">
+        <div class="product-detail-photo"><img src={product.image} alt={copy.alt} width={product.width} height={product.height} fetchpriority="high" /></div>
+        <div class="product-summary">
+          <span class="eyebrow">{category[lang]} · CATALOGUE</span>
+          <h1>{copy.name}</h1><p class="product-detail-subtitle">{copy.subtitle}</p>
+          <p class="product-description">{copy.description}</p>
+          <p class="product-unit">{copy.unit}</p>
+          <p class="product-price product-detail-price"><span>{vi ? 'Giá tham khảo cho demo' : 'Suggested demo price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
+          <p class="shop-demo-note">{vi ? 'Giá và quy cách cần được Hương Thiền xác nhận trước khi đặt mua.' : 'Price and pack size must be confirmed by Hương Thiền before purchase.'}</p>
+          {product.pending && <p class="product-pending-note">{vi ? 'Sản phẩm đang chờ xác nhận tên, thành phần và quy cách. Nội dung hiện là bản trưng bày tạm.' : 'Product identity, ingredients and pack size await confirmation. This is a provisional display entry.'}</p>}
+          <a class="button" href={`/${lang}/?product=${product.slug}#connect`}>{vi ? 'Hỏi về sản phẩm này' : 'Ask about this product'} <Arrow /></a>
+          <a class="product-back" href={shopPath(lang)}>{vi ? '← Trở lại cửa hàng' : '← Back to the shop'}</a>
+        </div>
+      </article>
+      <div class="product-information">
+        <section><span class="product-section-number">01</span><h2>{vi ? 'Thành phần' : 'Ingredients'}</h2><p>{copy.ingredients}</p></section>
+        <section><span class="product-section-number">02</span><h2>{vi ? 'Gợi ý sử dụng' : 'How to use'}</h2><ul>{copy.use.map(step => <li>{step}</li>)}</ul></section>
+        <section><span class="product-section-number">03</span><h2>{vi ? 'Bảo quản & lưu ý' : 'Storage & notes'}</h2><p>{copy.storage}</p><p>{copy.note}</p><p class="shop-demo-note">{vi ? 'Ảnh dùng để minh hoạ sản phẩm; ngày in trên ảnh không đại diện cho lô hàng đang bán.' : 'Photographs illustrate products; dates visible in photos do not describe current stock.'}</p></section>
+      </div>
+      <section class="product-related" aria-labelledby="related-title"><div class="shop-section-head"><h2 id="related-title">{vi ? 'Ghé xem thêm' : 'Keep exploring'}</h2><a class="quiet-link" href={shopPath(lang)}>{vi ? 'Toàn bộ catalogue' : 'Full catalogue'} <Arrow /></a></div><div class="shop-grid">{related.map(item => <ProductCard product={item} lang={lang} heading="h3" />)}</div></section>
+    </div>
+  </main>
+  <Footer lang={lang} />
+  {!product.pending && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: copy.name, description: copy.description, image: `https://huongthiennature.com${product.image}`, url: `https://huongthiennature.com${productPath(lang, product.slug)}`, category: category[lang] })} />}
+</BaseLayout>

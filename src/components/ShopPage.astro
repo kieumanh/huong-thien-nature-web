@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Arrow from './Arrow.astro';
+import ProductCard from './ProductCard.astro';
+import { products, productCategories, shopPath, productPath } from '../data/products';
+import type { Language } from '../data/site';
+import '../styles/shop.css';
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const title = vi ? 'Cửa hàng' : 'Shop';
+const description = vi ? 'Khám phá catalogue gia vị, ngũ cốc và thức uống cho gian bếp chay. Xem ảnh thật, giá tham khảo và thông tin từng sản phẩm.' : 'Explore seasonings, grains and drinks for your plant-based pantry, with real photographs, demo prices and individual product pages.';
+const alternatePath = shopPath(vi ? 'en' : 'vi');
+const featured = products[0];
+---
+<BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={description} alternatePath={alternatePath} image={featured.image}>
+  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <main id="main-content" tabindex="-1" class="shop-page">
+    <section class="shop-hero shell" aria-labelledby="shop-title">
+      <div class="shop-hero-copy">
+        <nav class="shop-breadcrumbs" aria-label={vi ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{vi ? 'Trang chủ' : 'Home'}</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
+        <span class="eyebrow">FARM & BOTANICALS · {vi ? 'CỬA HÀNG' : 'SHOP'}</span>
+        <h1 id="shop-title">{vi ? 'Một góc bếp,\nnhiều điều lành.' : 'A little pantry,\na gentler everyday.'}</h1>
+        <p class="lead">{vi ? 'Bắt đầu từ những nguyên liệu gần gũi. Khám phá gia vị, ngũ cốc và thức uống để chăm chút bữa ăn chay theo cách của bạn.' : 'Begin with familiar ingredients. Explore seasonings, grains and drinks for plant-based meals made your way.'}</p>
+        <a class="button" href="#shop-products">{vi ? 'Khám phá sản phẩm' : 'Explore the catalogue'} <Arrow /></a>
+        <p class="shop-hero-note">{vi ? 'Catalogue trưng bày · Giá tham khảo cho bản demo' : 'Display catalogue · Suggested demo prices'}</p>
+      </div>
+      <a class="shop-featured" href={productPath(lang, featured.slug)} aria-label={featured.translations[lang].name}>
+        <img src={featured.image} alt={featured.translations[lang].alt} width={featured.width} height={featured.height} fetchpriority="high" />
+        <span class="shop-featured-label"><span>{vi ? 'Từ gian bếp nhỏ' : 'From a little kitchen'}</span><strong>{featured.translations[lang].name}</strong><Arrow /></span>
+      </a>
+    </section>
+    <section class="shop-catalogue shell" id="shop-products" aria-labelledby="catalogue-title" data-shop-catalogue data-lang={lang}>
+      <div class="shop-section-head"><div><span class="eyebrow">{vi ? 'CHỌN THEO NHU CẦU' : 'FIND YOUR EVERYDAY ESSENTIALS'}</span><h2 id="catalogue-title">{vi ? 'Gian hàng tự nhiên' : 'The natural pantry'}</h2></div><p>{vi ? 'Xem kỹ một sản phẩm, bắt đầu một bữa ăn.' : 'Meet an ingredient. Make a meal.'}</p></div>
+      <div class="shop-controls" hidden>
+        <div class="shop-filters" role="group" aria-label={vi ? 'Lọc nhóm sản phẩm' : 'Filter product categories'}>
+          <button type="button" data-filter="all" aria-pressed="true">{vi ? 'Tất cả' : 'All'} <span>{products.length}</span></button>
+          {productCategories.map(category => <button type="button" data-filter={category.id} aria-pressed="false">{category[lang]} <span>{products.filter(product => product.category === category.id).length}</span></button>)}
+        </div>
+        <label class="shop-search" for="shop-search"><span>{vi ? 'Tìm trong cửa hàng' : 'Search the shop'}</span><input id="shop-search" type="search" maxlength="120" placeholder={vi ? 'Tên hoặc thành phần…' : 'Name or ingredient…'} autocomplete="off" aria-controls="shop-grid" /></label>
+      </div>
+      <div class="shop-results"><p data-shop-count role="status" aria-live="polite" aria-atomic="true">{products.length} {vi ? 'sản phẩm' : 'products'}</p><p>{vi ? 'Tất cả giá bên dưới là giá demo, cần xác nhận trước khi đặt mua.' : 'All prices below are demo estimates and must be confirmed before purchase.'}</p></div>
+      <div class="shop-grid" id="shop-grid">{products.map(product => <ProductCard product={product} lang={lang} />)}</div>
+      <div class="shop-empty" hidden><h3>{vi ? 'Chưa tìm thấy sản phẩm' : 'No products found'}</h3><p>{vi ? 'Thử tên ngắn hơn hoặc chọn nhóm khác.' : 'Try a shorter name or another category.'}</p><button type="button" class="button" data-shop-reset>{vi ? 'Xem tất cả sản phẩm' : 'Show all products'}</button></div>
+      <noscript><p class="shop-demo-note">{vi ? 'Bạn có thể xem toàn bộ sản phẩm và mở trang chi tiết khi JavaScript tắt.' : 'All products and detail pages remain available with JavaScript disabled.'}</p></noscript>
+    </section>
+    <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'MAKE ROOM FOR A GOOD MEAL'}</span><h2>{vi ? 'Bạn đang tìm một nguyên liệu?' : 'Looking for an ingredient?'}</h2><p>{vi ? 'Gửi lời nhắn để hỏi thêm về sản phẩm, quy cách và giá chính thức.' : 'Send a message to ask about products, pack sizes and confirmed prices.'}</p></div><a class="button" href={`/${lang}/#connect`}>{vi ? 'Kết nối Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
+  </main>
+  <Footer lang={lang} />
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: products.map((product, index) => ({ '@type': 'ListItem', position: index + 1, name: product.translations[lang].name, url: `https://huongthiennature.com${productPath(lang, product.slug)}` })) })} />
+</BaseLayout>
+<script>
+  import '../scripts/shop-catalogue';
+</script>
