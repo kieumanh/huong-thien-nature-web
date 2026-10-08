@@ -21,6 +21,10 @@ if (catalogue) {
   };
   buttons.forEach(button => button.addEventListener('click', () => { filter = button.dataset.filter || 'all'; update(); }));
   input?.addEventListener('input', update);
+  catalogue.querySelector<HTMLFormElement>('[data-shop-search]')?.addEventListener('submit', event => {
+    event.preventDefault();
+    update();
+  });
   catalogue.querySelector('[data-shop-reset]')?.addEventListener('click', () => {
     filter = 'all';
     if (input) input.value = '';

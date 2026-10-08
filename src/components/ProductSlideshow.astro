@@ -1,0 +1,22 @@
+---
+import Arrow from './Arrow.astro';
+import { products, productPath } from '../data/products';
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+---
+<div class="product-slideshow" data-product-slideshow data-lang={lang} role="region" aria-roledescription={vi ? 'Trình chiếu' : 'Carousel'} aria-label={vi ? 'Sản phẩm trong cửa hàng' : 'Shop products'}>
+  <div class="product-slides" id="featured-products">
+    {products.map((product, index) => <a class="shop-featured product-slide" href={productPath(lang, product.slug)} hidden={index !== 0} data-slide aria-label={`${product.translations[lang].name} — ${vi ? 'Xem chi tiết' : 'View details'}`}>
+      <img src={product.image} alt={product.translations[lang].alt} width={product.width} height={product.height} fetchpriority={index === 0 ? 'high' : 'auto'} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+      <span class="shop-featured-label"><span>{vi ? 'Từ gian bếp nhỏ' : 'From a little kitchen'} · {index + 1}/{products.length}</span><strong>{product.translations[lang].name}</strong><Arrow /></span>
+    </a>)}
+  </div>
+  <div class="slideshow-controls" hidden>
+    <button type="button" data-slide-prev aria-label={vi ? 'Sản phẩm trước' : 'Previous product'} aria-controls="featured-products">←</button>
+    <span class="slideshow-counter" data-slide-counter aria-live="off">1 / {products.length}</span>
+    <button type="button" data-slide-next aria-label={vi ? 'Sản phẩm tiếp theo' : 'Next product'} aria-controls="featured-products">→</button>
+    <button type="button" class="slideshow-pause" data-slide-pause aria-pressed="false">{vi ? 'Tạm dừng' : 'Pause'}</button>
+  </div>
+</div>
+<script>import '../scripts/product-slideshow';</script>

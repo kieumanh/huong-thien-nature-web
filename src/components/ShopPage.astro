@@ -4,6 +4,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Arrow from './Arrow.astro';
 import ProductCard from './ProductCard.astro';
+import ProductSlideshow from './ProductSlideshow.astro';
 import { products, productCategories, shopPath, productPath } from '../data/products';
 import type { Language } from '../data/site';
 import '../styles/shop.css';
@@ -26,19 +27,20 @@ const featured = products[0];
         <a class="button" href="#shop-products">{vi ? 'Khám phá sản phẩm' : 'Explore the catalogue'} <Arrow /></a>
         <p class="shop-hero-note">{vi ? 'Catalogue trưng bày · Giá tham khảo cho bản demo' : 'Display catalogue · Suggested demo prices'}</p>
       </div>
-      <a class="shop-featured" href={productPath(lang, featured.slug)} aria-label={featured.translations[lang].name}>
-        <img src={featured.image} alt={featured.translations[lang].alt} width={featured.width} height={featured.height} fetchpriority="high" />
-        <span class="shop-featured-label"><span>{vi ? 'Từ gian bếp nhỏ' : 'From a little kitchen'}</span><strong>{featured.translations[lang].name}</strong><Arrow /></span>
-      </a>
+      <ProductSlideshow lang={lang} />
     </section>
     <section class="shop-catalogue shell" id="shop-products" aria-labelledby="catalogue-title" data-shop-catalogue data-lang={lang}>
-      <div class="shop-section-head"><div><span class="eyebrow">{vi ? 'CHỌN THEO NHU CẦU' : 'FIND YOUR EVERYDAY ESSENTIALS'}</span><h2 id="catalogue-title">{vi ? 'Gian hàng tự nhiên' : 'The natural pantry'}</h2></div><p>{vi ? 'Xem kỹ một sản phẩm, bắt đầu một bữa ăn.' : 'Meet an ingredient. Make a meal.'}</p></div>
+      <div class="shop-section-head"><div><span class="eyebrow">{vi ? 'CHỌN THEO NHU CẦU' : 'FIND YOUR EVERYDAY ESSENTIALS'}</span><h2 id="catalogue-title">{vi ? 'Gian hàng tự nhiên' : 'The natural pantry'}</h2></div></div>
       <div class="shop-controls" hidden>
         <div class="shop-filters" role="group" aria-label={vi ? 'Lọc nhóm sản phẩm' : 'Filter product categories'}>
           <button type="button" data-filter="all" aria-pressed="true">{vi ? 'Tất cả' : 'All'} <span>{products.length}</span></button>
           {productCategories.map(category => <button type="button" data-filter={category.id} aria-pressed="false">{category[lang]} <span>{products.filter(product => product.category === category.id).length}</span></button>)}
         </div>
-        <label class="shop-search" for="shop-search"><span>{vi ? 'Tìm trong cửa hàng' : 'Search the shop'}</span><input id="shop-search" type="search" maxlength="120" placeholder={vi ? 'Tên hoặc thành phần…' : 'Name or ingredient…'} autocomplete="off" aria-controls="shop-grid" /></label>
+        <form class="shop-search" role="search" data-shop-search aria-label={vi ? 'Tìm sản phẩm' : 'Search products'}>
+          <label class="sr-only" for="shop-search">{vi ? 'Tìm trong cửa hàng' : 'Search the shop'}</label>
+          <input id="shop-search" name="q" type="search" maxlength="120" placeholder={vi ? 'Tên, thành phần, từ khóa…' : 'Name, ingredient, keyword…'} autocomplete="off" aria-controls="shop-grid" />
+          <button class="button" type="submit"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7" /><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg><span>{vi ? 'Tìm kiếm' : 'Search'}</span></button>
+        </form>
       </div>
       <div class="shop-results"><p data-shop-count role="status" aria-live="polite" aria-atomic="true">{products.length} {vi ? 'sản phẩm' : 'products'}</p><p>{vi ? 'Tất cả giá bên dưới là giá demo, cần xác nhận trước khi đặt mua.' : 'All prices below are demo estimates and must be confirmed before purchase.'}</p></div>
       <div class="shop-grid" id="shop-grid">{products.map(product => <ProductCard product={product} lang={lang} />)}</div>
