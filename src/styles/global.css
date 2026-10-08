@@ -471,3 +471,17 @@ fieldset:disabled { opacity: .65; }
   .js .nav-links.open { display: grid; grid-template-columns: 1fr 1fr; gap: 5px 25px; }
   .js .nav-links a { padding: 12px 0; font-size: .95rem; }
 }
+
+/* Product search results share the catalogue stock vocabulary. */
+.product-stock { width: fit-content; display: block; border-radius: 20px; padding: 5px 10px; font-size: .72rem; line-height: 1.5; margin-top: 10px; background: #eee9d9; color: #64532e; }
+.product-stock[data-stock="in_stock"] { background: #e3ecdd; color: #244b31; }
+.product-stock[data-stock="out_of_stock"] { background: #f1e2dd; color: #7b3f32; }
+.search-result--product { display: grid; grid-template-columns: 170px minmax(0,1fr); gap: 24px; align-items: start; }
+.search-result-photo { display: block; border-radius: 12px; overflow: hidden; background: #edece2; }
+.search-result-photo img { display: block; width: 100%; height: 200px; object-fit: contain; }
+.search-result-content { min-width: 0; }
+.search-result-content .search-product-unit { margin-top: 12px; font-size: .76rem; }
+.search-result-content .search-product-price { margin-top: 8px; font-weight: 600; color: var(--forest); }
+.search-result-content .product-stock { font-size: .72rem; }
+.search-result-content .quiet-link { margin-top: 14px; }
+@media(max-width:480px) { .search-result--product { grid-template-columns: 1fr; gap: 18px; } .search-result-photo img { height: 230px; } }

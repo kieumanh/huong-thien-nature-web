@@ -4,7 +4,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Arrow from './Arrow.astro';
 import ProductCard from './ProductCard.astro';
-import { products, productCategories, shopPath, productPath, formatPrice, type Product } from '../data/products';
+import { products, productCategories, shopPath, productPath, formatPrice, stockLabel, type Product } from '../data/products';
 import type { Language } from '../data/site';
 import '../styles/shop.css';
 const { product, lang } = Astro.props as { product: Product; lang: Language };
@@ -12,7 +12,7 @@ const vi = lang === 'vi';
 const copy = product.translations[lang];
 const alternatePath = productPath(vi ? 'en' : 'vi', product.slug);
 const category = productCategories.find(item => item.id === product.category)!;
-const related = products.filter(item => item.slug !== product.slug && !item.pending).sort((a, b) => Number(b.category === product.category) - Number(a.category === product.category)).slice(0, 3);
+const related = products.filter(item => item.slug !== product.slug).sort((a, b) => Number(b.category === product.category) - Number(a.category === product.category)).slice(0, 3);
 ---
 <BaseLayout lang={lang} title={`${copy.name} | ${vi ? 'Cửa hàng' : 'Shop'} Hương Thiền Nature`} description={copy.description} alternatePath={alternatePath} image={product.image}>
   <Header lang={lang} alternatePath={alternatePath} isInnerPage />
@@ -26,9 +26,11 @@ const related = products.filter(item => item.slug !== product.slug && !item.pend
           <h1>{copy.name}</h1><p class="product-detail-subtitle">{copy.subtitle}</p>
           <p class="product-description">{copy.description}</p>
           <p class="product-unit">{copy.unit}</p>
+          <p class="product-stock" data-stock={product.stock}>{stockLabel(product.stock, lang)}</p>
+          <ul class="product-keywords" aria-label={vi ? 'Từ khóa sản phẩm' : 'Product keywords'}>{product.keywords[lang].map(keyword => <li><a href={`${vi ? '/vi/timkiem/' : '/en/search/'}?q=${encodeURIComponent(keyword)}`}>{keyword}</a></li>)}</ul>
           <p class="product-price product-detail-price"><span>{vi ? 'Giá tham khảo cho demo' : 'Suggested demo price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
           <p class="shop-demo-note">{vi ? 'Giá và quy cách cần được Hương Thiền xác nhận trước khi đặt mua.' : 'Price and pack size must be confirmed by Hương Thiền before purchase.'}</p>
-          {product.pending && <p class="product-pending-note">{vi ? 'Sản phẩm đang chờ xác nhận tên, thành phần và quy cách. Nội dung hiện là bản trưng bày tạm.' : 'Product identity, ingredients and pack size await confirmation. This is a provisional display entry.'}</p>}
+
           <a class="button" href={`/${lang}/?product=${product.slug}#connect`}>{vi ? 'Hỏi về sản phẩm này' : 'Ask about this product'} <Arrow /></a>
           <a class="product-back" href={shopPath(lang)}>{vi ? '← Trở lại cửa hàng' : '← Back to the shop'}</a>
         </div>
@@ -42,5 +44,5 @@ const related = products.filter(item => item.slug !== product.slug && !item.pend
     </div>
   </main>
   <Footer lang={lang} />
-  {!product.pending && <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: copy.name, description: copy.description, image: `https://huongthiennature.com${product.image}`, url: `https://huongthiennature.com${productPath(lang, product.slug)}`, category: category[lang] })} />}
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: copy.name, description: copy.description, image: `https://huongthiennature.com${product.image}`, url: `https://huongthiennature.com${productPath(lang, product.slug)}`, category: category[lang] })} />
 </BaseLayout>

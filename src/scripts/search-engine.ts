@@ -1,4 +1,4 @@
-export type SearchRecord = { title: string; description: string; url: string; category: string; text: string };
+export type SearchRecord = { title: string; description: string; url: string; category: string; text: string; product?: { image: string; imageAlt: string; price: number; priceLabel: string; unit: string; stock: 'in_stock' | 'out_of_stock' | 'unknown'; stockLabel: string } };
 export function normalizeSearch(value: string): string {
   return value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g,'d').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
 }

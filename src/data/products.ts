@@ -7,19 +7,21 @@ export const productCategories = [
   { id: 'seasoning', vi: 'Gia vị', en: 'Seasonings' },
   { id: 'pantry', vi: 'Ngũ cốc & thực phẩm khô', en: 'Grains & pantry' },
   { id: 'drinks', vi: 'Thức uống', en: 'Drinks' },
-  { id: 'pending', vi: 'Chờ xác nhận', en: 'Awaiting confirmation' },
 ] as const;
 export type ProductCopy = { name: string; subtitle: string; description: string; unit: string; ingredients: string; use: string[]; storage: string; note: string; alt: string };
 export type Product = {
   slug: string; category: typeof productCategories[number]['id']; price: number;
-  image: string; width: number; height: number; pending?: boolean;
+  image: string; width: number; height: number; stock: 'in_stock' | 'out_of_stock' | 'unknown';
+  keywords: Record<Language, string[]>;
   // Research and price rationale stay in source; these are proposed demo prices, not live offers.
   sources: string[]; priceBasis: string;
   translations: Record<Language, ProductCopy>;
 };
+export const stockLabel = (stock: Product['stock'], lang: Language): string => ({ in_stock: { vi: 'Còn hàng', en: 'In stock' }, out_of_stock: { vi: 'Hết hàng', en: 'Out of stock' }, unknown: { vi: 'Cần xác nhận tồn kho', en: 'Stock confirmation needed' } })[stock][lang];
 const photo = (slug: string) => `/media/shop/${slug}.webp`;
 export const products: Product[] = [
   {
+    stock: 'unknown', keywords: { vi: ["kokkoh", "koh koh", "sữa ngũ cốc", "sữa hạt", "mè đen", "hạt sen"], en: ["kokkoh", "koh koh", "grain drink", "plant milk", "black sesame", "lotus seeds"] },
     slug: 'sua-kokkoh', category: 'drinks', price: 70000, image: photo('sua-kokkoh'), width: 750, height: 1000,
     sources: ['https://thucduongbaoan.com.vn/sp-category/do-kho/bot-thuc-duong/'], priceBasis: 'Supplier category lists KohKoh at 70,000 VND; photographed package reads 500 g. Confirm current pack and quote before sale.',
     translations: {
@@ -28,6 +30,7 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["sachi", "bột nêm", "hạt nêm chay", "gia vị rau củ", "nấu chay"], en: ["sachi", "vegan seasoning", "vegetable seasoning", "plant based cooking"] },
     slug: 'bot-nem-sachi', category: 'seasoning', price: 95000, image: photo('bot-nem-sachi'), width: 1000, height: 450,
     sources: ['https://sachigroup.vn/product/bot-nem-sachi/'], priceBasis: 'Manufacturer lists vegan seasoning at 95,000–170,000 VND; 95,000 VND proposed for the photographed 200 g jar.',
     translations: {
@@ -36,6 +39,7 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["muối hồng", "himalaya", "himalayan", "muối ăn", "gia vị"], en: ["pink salt", "himalayan salt", "salt crystals", "seasoning"] },
     slug: 'muoi-hong-himalaya', category: 'seasoning', price: 77000, image: photo('muoi-hong-himalaya'), width: 800, height: 800,
     sources: ['https://www.foodland.vn/muoi-hong-himalaya-min-tui-500g'], priceBasis: '77,000 VND per 500 g from a comparable retail product, not a quote for the photographed brand.',
     translations: {
@@ -44,6 +48,7 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["cacao", "ca cao", "cocoa", "bột cacao", "đồ uống", "làm bánh"], en: ["cacao", "cocoa", "cacao powder", "baking", "hot drink"] },
     slug: 'bot-cacao', category: 'drinks', price: 180000, image: photo('bot-cacao'), width: 450, height: 1000,
     sources: ['https://www.hocthiendanang.com/phuong-tien'], priceBasis: 'Reference catalogue lists a different pure cacao brand at 180,000 VND/500 g; proposed comparative price only.',
     translations: {
@@ -52,6 +57,7 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["rong biển", "rong biển khô", "nấu canh", "canh chay", "seaweed"], en: ["seaweed", "dried seaweed", "soup", "pantry"] },
     slug: 'rong-bien-nau-canh', category: 'pantry', price: 65000, image: photo('rong-bien-nau-canh'), width: 750, height: 1000,
     sources: ['https://thucduongbaoan.com.vn/sp/rong-bien-nau-canh/'], priceBasis: 'Supplier lists soup seaweed at 65,000 VND; photo label reads 100 g.',
     translations: {
@@ -60,6 +66,7 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["tamari", "nước tương", "xì dầu", "đậu nành", "nước chấm"], en: ["tamari", "soy sauce", "fermented soy", "dipping sauce"] },
     slug: 'tuong-tamari', category: 'seasoning', price: 85000, image: photo('tuong-tamari'), width: 750, height: 1000,
     sources: ['https://thucduongbaoan.com.vn/sp/tuong-tamari-lau-nam/'], priceBasis: 'Supplier range is 85,000–165,000 VND for bottle variants; 85,000 VND proposed for the photographed 250 ml option.',
     translations: {
@@ -68,6 +75,7 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["tương cổ truyền", "trí túc", "tương đậu", "đậu nành", "nước chấm"], en: ["traditional soy sauce", "tri tuc", "fermented soybean", "condiment"] },
     slug: 'tuong-co-truyen', category: 'seasoning', price: 65000, image: photo('tuong-co-truyen'), width: 1000, height: 749,
     sources: [], priceBasis: 'Editorial demo proposal for a 500 ml fermented-soy condiment; no current matching supplier quote verified.',
     translations: {
@@ -76,27 +84,12 @@ export const products: Product[] = [
     },
   },
   {
+    stock: 'unknown', keywords: { vi: ["đậu phộng", "lạc", "hạt lạc", "đậu phộng sống", "sữa hạt", "bơ đậu phộng"], en: ["peanut", "peanuts", "raw peanuts", "groundnuts", "peanut butter"] },
     slug: 'dau-phong-song', category: 'pantry', price: 60000, image: photo('dau-phong-song'), width: 750, height: 1000,
     sources: ['https://thucduongbaoan.com.vn/sp/dau-phong/'], priceBasis: 'Supplier lists raw peanuts at 60,000 VND; photo label reads 500 g.',
     translations: {
       vi: { name: 'Đậu phộng sống', subtitle: 'Nguyên liệu cho nhiều món chay thân thuộc', description: 'Đậu phộng nguyên hạt chưa chế biến, đóng túi 500 g. Có thể rang, luộc hoặc dùng trong các công thức sữa hạt và sốt đậu phộng.', unit: 'Túi 500 g', ingredients: 'Theo nhãn ảnh: đậu phộng nguyên hạt.', use: ['Nấu chín trước khi ăn: rang hoặc luộc theo công thức phù hợp.', 'Dùng để làm sữa đậu phộng, bơ đậu phộng hoặc sốt cho món chay.'], storage: 'Giữ kín, khô và mát. Không dùng hạt có dấu hiệu mốc hoặc mùi bất thường.', note: 'Có đậu phộng. Sản phẩm sống cần được chế biến trước khi dùng.', alt: 'Túi đậu phộng sống Bảo An 500 g, hạt còn lớp vỏ lụa màu nâu nhạt.' },
       en: { name: 'Raw peanuts', subtitle: 'A familiar ingredient for plant-based recipes', description: 'Whole raw peanuts in a 500 g pouch. Roast, boil or use in peanut milk and sauce recipes.', unit: '500 g pouch', ingredients: 'Whole peanuts, according to the photo label.', use: ['Cook before eating: roast or boil using a suitable recipe.', 'Use for peanut milk, peanut butter or plant-based sauces.'], storage: 'Keep sealed, cool and dry. Do not use nuts showing mould or unusual odours.', note: 'Contains peanuts. This raw product needs cooking before use.', alt: 'A 500 g Bảo An raw peanut pouch with light-brown peanut skins visible.' },
-    },
-  },
-  {
-    slug: 'hat-ngu-coc-do', category: 'pending', price: 60000, image: photo('hat-ngu-coc-do'), width: 750, height: 1000, pending: true,
-    sources: [], priceBasis: 'Placeholder estimate per 1 kg. Grains resemble red brown rice but their identity and pack size are unconfirmed.',
-    translations: {
-      vi: { name: 'Hạt ngũ cốc đỏ · tên tạm', subtitle: 'Ảnh trưng bày đang chờ xác nhận loại hạt', description: 'Ảnh đính kèm cho thấy hạt ngũ cốc màu đỏ nâu trong một bao lớn. Chưa có nhãn để xác nhận tên giống, nguồn gốc hoặc quy cách; thông tin sẽ được cập nhật khi nhận diện xong.', unit: 'Quy cách demo: 1 kg', ingredients: 'Chờ xác nhận từ chủ sản phẩm.', use: ['Chờ xác nhận đúng loại hạt để bổ sung hướng dẫn sơ chế và cách nấu.'], storage: 'Hướng dẫn bảo quản sẽ được bổ sung sau khi xác nhận sản phẩm.', note: 'Tên và quy cách hiện là tên tạm cho catalogue; giá chỉ phục vụ trình bày demo.', alt: 'Bàn tay cầm hạt ngũ cốc màu đỏ nâu trong bao; ảnh không có nhãn xác định loại hạt.' },
-      en: { name: 'Red grains · provisional name', subtitle: 'Display photograph awaiting grain identification', description: 'The attachment shows reddish-brown grains in a large bag. There is no label confirming their variety, origin or pack size; details will be updated after identification.', unit: 'Demo pack: 1 kg', ingredients: 'Awaiting confirmation from the product owner.', use: ['Preparation and cooking instructions will be added after the grain type is confirmed.'], storage: 'Storage instructions will be added after product confirmation.', note: 'The name and pack size are provisional catalogue placeholders; the price is for demo display only.', alt: 'A hand holding reddish-brown grains in an unlabelled bulk bag.' },
-    },
-  },
-  {
-    slug: 'gia-vi-dang-long', category: 'pending', price: 95000, image: photo('gia-vi-dang-long'), width: 750, height: 1000, pending: true,
-    sources: [], priceBasis: 'Placeholder 95,000 VND/bottle; liquid type, producer and volume cannot be verified from the unlabelled photograph.',
-    translations: {
-      vi: { name: 'Chai gia vị · tên tạm', subtitle: 'Ảnh trưng bày đang chờ bổ sung nhãn', description: 'Chai chứa chất lỏng sẫm màu trong ảnh chưa có nhãn. Không thể xác định chính xác loại sản phẩm, thành phần hoặc dung tích từ ảnh; đây là vị trí trưng bày tạm trong catalogue.', unit: '1 chai · dung tích chờ xác nhận', ingredients: 'Chưa xác nhận loại sản phẩm và thành phần.', use: ['Hướng dẫn sử dụng sẽ được bổ sung khi có ảnh nhãn hoặc thông tin từ chủ sản phẩm.'], storage: 'Chờ xác nhận hướng dẫn của nhà sản xuất.', note: 'Tên là tên tạm, giá là con số demo. Cần xác nhận sản phẩm trước khi tư vấn sử dụng.', alt: 'Một chai không nhãn chứa chất lỏng sẫm màu, được cầm trên tay ngoài vườn.' },
-      en: { name: 'Bottled condiment · provisional name', subtitle: 'Display photograph awaiting a product label', description: 'The photograph shows an unlabelled bottle containing a dark liquid. Its identity, ingredients and volume cannot be confirmed from the image; this is a provisional catalogue entry.', unit: '1 bottle · volume unconfirmed', ingredients: 'Product type and ingredients are not yet confirmed.', use: ['Instructions will be added when a label photo or product-owner information is available.'], storage: 'Awaiting the manufacturer’s storage instructions.', note: 'This is a provisional name and demo price. Confirm the product before giving usage advice.', alt: 'An unlabelled bottle containing a dark liquid, held by hand in a garden.' },
     },
   },
 ];
