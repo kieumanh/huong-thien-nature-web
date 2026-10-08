@@ -21,7 +21,7 @@
   width: 100%; height: 112%; inset: -4% 0 auto;
   object-fit: cover; object-position: center 48%;
   filter: brightness(.7) saturate(.78) contrast(1.07);
-  transform: translate3d(calc(var(--hybrid-pointer-x) * 9px),calc(var(--hybrid-scroll) * 65px + var(--hybrid-pointer-y) * 5px),0) scale(1.085);
+  transform: translate3d(var(--hybrid-pointer-offset-x, 0px),var(--hybrid-image-offset-y, 0px),0) scale(1.085);
   will-change: transform;
 }
 .hybrid-scene__veil {
@@ -34,7 +34,7 @@
   border-radius: 50%;
   background: radial-gradient(circle,rgba(255,230,159,.47) 0%,rgba(224,202,136,.23) 23%,transparent 66%);
   filter: blur(16px);
-  transform: translate3d(0,calc(var(--hybrid-scroll) * 45px),0);
+  transform: translate3d(0,var(--hybrid-sun-offset-y, 0px),0);
   mix-blend-mode: screen;
 }
 .hybrid-scene__mist {
@@ -50,7 +50,7 @@
   background: url('/media/fern-study-v2.webp') center / cover no-repeat;
   opacity: .18; filter: saturate(.52) blur(2px);
   mask-image: linear-gradient(110deg,transparent 0%,black 55%);
-  transform: translate3d(calc(var(--hybrid-pointer-x) * -17px),calc(var(--hybrid-scroll) * -35px),0) rotate(-9deg);
+  transform: translate3d(var(--hybrid-foliage-offset-x, 0px),var(--hybrid-foliage-offset-y, 0px),0) rotate(-9deg);
 }
 @keyframes hybrid-drift { from { transform: translateX(-3%) scale(1); } to { transform: translateX(5%) scale(1.15); } }
 .hybrid-hero .hybrid-hero__layout {
