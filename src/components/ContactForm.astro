@@ -15,7 +15,7 @@ const t = contactCopy[lang];
         <div class="contact-field"><label for="email">{t.email}</label><input id="email" name="email" type="email" autocomplete="email" maxlength="254" placeholder="you@example.com" required /></div>
       </div>
       <label for="interest">{t.interest}</label><select id="interest" name="interest" required><option value="" selected disabled>{t.options[0]}</option>{contactInterests.map((value, index) => <option value={value}>{t.options[index + 1]}</option>)}</select>
-      <label for="message">{t.message}</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="4" placeholder={lang === 'vi' ? 'Bạn muốn chia sẻ điều gì?' : 'What would you like to share?'} required aria-describedby="message-hint"></textarea><p class="form-note" id="message-hint">{t.messageHint}</p>
+      <label for="message">{t.message}</label><textarea id="message" name="message" minlength="10" maxlength="5000" rows="3" placeholder={lang === 'vi' ? 'Bạn muốn chia sẻ điều gì?' : 'What would you like to share?'} required aria-describedby="message-hint"></textarea><p class="form-note" id="message-hint">{t.messageHint}</p>
       <div class="contact-honeypot" aria-hidden="true"><label for="website">{t.honeypot}</label><input id="website" name="website" tabindex="-1" autocomplete="off" /></div>
       <label class="contact-consent" for="consent"><input id="consent" name="consent" type="checkbox" required /><span>{t.consent}</span></label>
       <div id="contact-verification" class="contact-verification"></div>

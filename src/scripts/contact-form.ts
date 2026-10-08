@@ -117,7 +117,7 @@ async function setup(form: HTMLFormElement) {
     fieldset.disabled = false;
     widget = window.turnstile.render(verification, {
       // The compact widget fits a padded form even on a 320 px screen.
-      sitekey: config.siteKey, action: 'contact', theme: 'light', size: 'compact', language: lang,
+      sitekey: config.siteKey, action: 'contact', theme: 'light', size: window.matchMedia('(min-width: 480px)').matches ? 'normal' : 'compact', language: lang,
       'response-field': false,
       callback: (value: string) => {
         token = value;
