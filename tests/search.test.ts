@@ -19,5 +19,13 @@ test('product aliases find rich results with images, prices and explicit stock s
 });
 test('full body is searchable and empty queries have no matches',()=>{const entry={title:'Other',description:'Intro',category:'Practice',url:'/en/journal/test/',text:'quiet garden practice'};assert.equal(searchRecords([entry],'quiet garden').length,1);assert.equal(searchRecords([entry],'quiet missing').length,0);assert.equal(searchRecords([entry],'').length,0);assert.equal(searchRecords([entry],'<script>alert(1)</script>').length,0);});
 test('title matches rank before body matches',()=>{const a={title:'Other',description:'',category:'',url:'/a',text:'breath'},b={...a,title:'Breath',url:'/b'};assert.equal(searchRecords([a,b],'breath')[0].url,'/b');});
-
+test('title prefix ranks ahead of a later title occurrence for broad queries',()=>{
+  const startsWith={title:'Thiền cho người mới bắt đầu',description:'',category:'',url:'/guide',text:''};
+  const endsWith={title:'Hương Thiền và cộng đồng',description:'',category:'',url:'/about',text:''};
+  assert.equal(searchRecords([endsWith,startsWith],'thiền')[0].url,'/guide');
+});
+test('an introductory meditation query leads with a directly relevant article',()=>{
+  const results=searchRecords(buildSearchIndex('vi'),'thiền');
+  assert.match(results[0]?.title ?? '',/^Thiền/i);
+});
 test('founder journey and all ecosystem pillars are searchable',()=>{for(const lang of ['vi','en'] as const){const data=buildSearchIndex(lang);assert(searchRecords(data,'Do Thi Kim Huong').some(row=>row.url.endsWith('#journey')));for(const query of ['Farm Botanicals','Eco-Retreat','Academy']){assert(searchRecords(data,query).some(row=>row.url.endsWith('#nature')));}}});
