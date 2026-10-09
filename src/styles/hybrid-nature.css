@@ -66,7 +66,7 @@
   line-height: 1.065; font-weight: 400; letter-spacing: -.055em; color: #fefbf3;
   text-shadow: 0 10px 50px rgba(0,0,0,.19);
 }
-.hybrid-home .hybrid-hero h1 em { color: #e8d2a4; font-style: italic; }
+.hybrid-hero h1 em { color: #e8d2a4; font-style: italic; }
 .hybrid-hero .lead { max-width: 590px; color: #f0f1dc; font-size: clamp(1.02rem,1.35vw,1.25rem); line-height: 1.76; }
 .hybrid-hero .hero-actions { margin-top: 38px; gap: 18px 32px; }
 .hybrid-hero .button {
@@ -136,3 +136,74 @@
 }
 
 .hybrid-data-saver .hybrid-scene__mist { animation: none; }
+
+/* Line-drawn leaves sit in the margins, outside the reading column. */
+.hybrid-home > .section { position: relative; isolation: isolate; }
+.hybrid-home > .section::before { content: ''; position: absolute; z-index: -1; inset: 22px auto auto 0; width: clamp(85px,12vw,190px); height: 300px; background: url('/media/botanical-sprig.svg') left top / contain no-repeat; opacity: .16; pointer-events: none; }
+.hybrid-home > .section:nth-of-type(even)::before { left: auto; right: 0; transform: scaleX(-1); }
+.hybrid-home .section > .shell { position: relative; }
+.hybrid-breath { background-image: url('/media/botanical-sprig.svg'); background-position: right 8% center; background-size: 90px auto; background-repeat: no-repeat; }
+@media (prefers-reduced-motion: no-preference) {
+ .hybrid-motion [data-hybrid-reveal] { transition-delay: var(--reveal-delay,0ms); }
+ .hybrid-home .nature-image img, .hybrid-home .journal-image img { transition: transform .7s ease; }
+ .hybrid-home .nature-card:hover img, .hybrid-home .journal-card:hover img { transform: scale(1.035); }
+}
+@media (max-width:760px) {
+ .hybrid-home > .section::before { width: 80px; height: 170px; opacity: .1; }
+ .hybrid-breath { background-size: 55px auto; background-position: right center; }
+}
+
+/* Keep the emphasized half of the hero title readable against the forest image. */
+.hybrid-home .hybrid-hero h1 em {
+  color: #fff0c9;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .42);
+}
+
+
+/* Three ecosystem pyramids: a focused visual chapter with restrained motion. */
+.hybrid-home #nature { overflow: hidden; }
+.hybrid-home .ecosystem-pyramids { align-items: start; gap: clamp(20px, 4vw, 56px); }
+.hybrid-home .eco-pyramid { min-width: 0; }
+.hybrid-home .eco-pyramid:nth-child(2) { padding-top: 44px; }
+.hybrid-home .eco-pyramid:nth-child(3) { padding-top: 86px; }
+.hybrid-home .eco-pyramid-visual {
+  position: relative; isolation: isolate; overflow: visible; width: min(100%, 365px);
+  aspect-ratio: 1.04; height: auto; margin-inline: auto; perspective: 900px;
+}
+.hybrid-home .eco-pyramid-visual img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%); filter: saturate(.72) brightness(.78);
+  border-radius: 0; transform: translateZ(0); transition: transform .9s cubic-bezier(.2,.7,.2,1), filter .9s ease;
+}
+.hybrid-home .eco-pyramid-visual::before,
+.hybrid-home .eco-pyramid-visual::after {
+  position: absolute; z-index: 1; inset: 0; clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  content: ""; pointer-events: none;
+}
+.hybrid-home .eco-pyramid-visual::before { background: linear-gradient(130deg, rgba(230,220,187,.18), transparent 48%), linear-gradient(180deg, rgba(20,43,32,.03), rgba(15,34,27,.65)); }
+.hybrid-home .eco-pyramid-visual::after { background: linear-gradient(to bottom, transparent 33%, rgba(250,248,241,.72) 33.2%, rgba(250,248,241,.72) 33.7%, transparent 34%), linear-gradient(to bottom, transparent 66%, rgba(250,248,241,.62) 66.2%, rgba(250,248,241,.62) 66.7%, transparent 67%); }
+.hybrid-home .eco-pyramid-value {
+  position: absolute; z-index: 2; top: 55%; left: 50%; transform: translate(-50%,-50%);
+  color: #fffaf0; background: rgba(27,52,40,.58); padding: 7px 12px; border: 1px solid rgba(255,250,240,.35);
+  border-radius: 99px; font: .7rem/1.2 var(--sans); letter-spacing: .2em;
+}
+.hybrid-home .eco-pyramid-index {
+  position: absolute; z-index: 2; right: 1%; bottom: -17px; left: auto;
+  color: #e4dfca; background: none; padding: 0; font: .7rem/1.2 var(--sans); letter-spacing: .18em;
+}
+.hybrid-home .eco-pyramid-copy { max-width: 390px; margin: 14px auto 0; padding: 20px 4px 0; border-top: 1px solid rgba(250,248,241,.28); }
+.hybrid-home .eco-pyramid-copy h3 { min-height: 2.6em; font: 500 clamp(1.35rem,2vw,1.8rem)/1.3 var(--serif); }
+.hybrid-home .eco-pyramid-copy p { max-width: 46ch; color: #d6ddcc; font-size: .86rem; line-height: 1.8; }
+@media (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference) {
+  .hybrid-home .eco-pyramid:hover .eco-pyramid-visual img { transform: translateY(-6px) scale(1.025); filter: saturate(.86) brightness(.9); }
+}
+@media (max-width:760px) {
+  .hybrid-home .ecosystem-pyramids { grid-template-columns: 1fr; gap: 28px; }
+  .hybrid-home .eco-pyramid:nth-child(2), .hybrid-home .eco-pyramid:nth-child(3) { padding-top: 0; }
+  .hybrid-home .eco-pyramid-visual { width: min(84vw, 340px); }
+  .hybrid-home .eco-pyramid-copy { margin-top: 20px; }
+  .hybrid-home .eco-pyramid-copy h3 { min-height: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hybrid-home .eco-pyramid-visual img { transition: none; }
+}

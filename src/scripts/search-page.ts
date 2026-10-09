@@ -21,7 +21,20 @@ if(root) {
         const category=document.createElement('p');category.className='eyebrow';category.textContent=entry.category;
         const heading=document.createElement('h2'),link=document.createElement('a');link.href=entry.url;link.textContent=entry.title;heading.append(link);
         const description=document.createElement('p');description.textContent=entry.description;
-        card.append(category,heading,description);list.append(card);
+        const content=document.createElement('div');content.className='search-result-content';
+        content.append(category,heading,description);
+        if(entry.product && entry.product.image.startsWith('/media/shop/')) {
+          card.classList.add('search-result--product');
+          const photoLink=document.createElement('a');photoLink.href=entry.url;photoLink.className='search-result-photo';
+          const image=document.createElement('img');image.src=entry.product.image;image.alt=entry.product.imageAlt;image.loading='lazy';image.decoding='async';image.width=240;image.height=240;
+          photoLink.append(image);card.append(photoLink);
+          const unit=document.createElement('p');unit.className='search-product-unit';unit.textContent=entry.product.unit;
+          const price=document.createElement('p');price.className='search-product-price';price.textContent=`${en?'Demo price':'Giá tham khảo'}: ${entry.product.priceLabel}`;
+          const stock=document.createElement('p');stock.className='product-stock';stock.dataset.stock=entry.product.stock;stock.textContent=entry.product.stockLabel;
+          const detail=document.createElement('a');detail.className='quiet-link';detail.href=entry.url;detail.textContent=en?'View product →':'Xem sản phẩm →';
+          content.append(unit,price,stock,detail);
+        }
+        card.append(content);list.append(card);
       }
     }).catch(()=>{status.textContent=en?'Search could not load. Please refresh and try again.':'Chưa tải được dữ liệu tìm kiếm. Vui lòng tải lại trang và thử lại.';});
   }

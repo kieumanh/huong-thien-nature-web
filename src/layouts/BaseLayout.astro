@@ -45,8 +45,9 @@ const siteName = 'Hương Thiền Nature';
       founder: [{ '@type': 'Person', name: 'Hương Thiền', jobTitle: 'Founder & Teacher' }, { '@type': 'Person', name: 'Kiều Mạnh', jobTitle: 'Co-founder & Teacher' }],
     })} />
   </head>
-  <body><BackgroundMusic lang={lang} /><slot /><BackToTop lang={lang} /></body>
+  <body><div class="reading-progress" role="progressbar" aria-label={lang === 'vi' ? 'Tiến trình đọc trang' : 'Page reading progress'} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><BackgroundMusic lang={lang} /><slot /><BackToTop lang={lang} /></body>
   <script>
     import '../scripts/floating-contrast';
+    import '../scripts/reading-progress';
   </script>
 </html>

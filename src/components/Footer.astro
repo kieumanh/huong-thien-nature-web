@@ -2,6 +2,7 @@
 import { journalPath as journalUrl } from '../data/articles';
 import { version } from '../../package.json';
 import { getCopy, type Language } from '../data/site';
+import { shopPath } from '../data/products';
 const { lang } = Astro.props as { lang: Language };
 const t = getCopy(lang);
 ---
@@ -13,6 +14,7 @@ const t = getCopy(lang);
         <a href={`/${lang}/#story`}>{t.nav[0]}</a>
         <a href={`/${lang}/#practice`}>{t.nav[1]}</a>
         <a href={journalUrl(lang)}>{t.nav[4]}</a>
+        <a href={shopPath(lang)}>{lang === 'vi' ? 'Cửa hàng' : 'Shop'}</a>
         <a href={`/${lang}/#connect`}>{lang === 'vi' ? 'Kết nối' : 'Connect'}</a>
       </nav>
     </div>

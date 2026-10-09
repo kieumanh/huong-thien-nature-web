@@ -1,3 +1,24 @@
+## 2.0.2 — Ba kim tự tháp hệ sinh thái
+
+- Gộp nội dung Thân, Tâm, Trí vào một khu vực với ba kim tự tháp: Farm & Botanicals, Eco-Retreat và Academy.
+- Thêm reveal khi cuộn và chuyển động ảnh rất nhẹ khi hover; trên điện thoại xếp dọc, chế độ giảm chuyển động/tiết kiệm dữ liệu giữ nội dung tĩnh.
+- Tách rõ catalogue Farm & Botanicals (giá tham khảo, cần xác nhận) khỏi Eco-Retreat, Academy và Membership là các định hướng chưa mở đăng ký.
+- Chỉnh lời giới thiệu, tản văn và liên hệ để mỗi phần có nhiệm vụ riêng; giữ giọng giản dị, không hứa hẹn kết quả thiền hay công dụng sức khỏe.
+- Thêm kiểm thử nội dung song ngữ cho ba trung tâm và phạm vi catalogue/định hướng.
+
+## 0.4.7 — Homepage discovery
+
+- Giữ phong cách Roots, cập nhật CTA đầu trang để mở bài nhập môn, thêm ô tìm kiếm và từ khóa gợi ý ngay trên homepage.
+- Thêm lộ trình đọc ba bước cho người mới; giới thiệu ba bài Roots về tâm nhiều suy nghĩ, làm vườn và lòng tử tế, có đường dẫn đến thư viện đầy đủ.
+- Nội dung song ngữ và lựa chọn bài homepage được gom tại `src/data/home.ts`; bỏ hai trường copy cũ không còn dùng.
+- Sửa audit liên kết để kiểm tra đường dẫn trang riêng với query/hash, hỗ trợ các liên kết tìm kiếm có `?q=`.
+- Bổ sung kiểm thử trình duyệt cho homepage, tìm kiếm, đổi ngôn ngữ, lỗi tải dữ liệu, responsive và phương án điều hướng khi tắt JavaScript.
+
+## 0.4.6 — Release package
+
+- Đóng gói mã nguồn mới nhất trên `main`, kế thừa tính năng tìm kiếm song ngữ của bản 0.4.5 và các sửa lỗi Contact/CSS của bản 0.4.4.
+- Đồng bộ số phiên bản trong package, lockfile, giao diện và tài liệu triển khai; gắn nhãn Git `v0.4.6`.
+
 # v0.4.5
 
 - Add responsive navigation search and separate Vietnamese/English results pages.
@@ -63,3 +84,9 @@ Phiên bản dùng `major.minor.patch`, hiển thị từ `package.json` tại f
 
 - API liên hệ Cloudflare Pages Functions, Resend và Turnstile; gửi trực tiếp cần cấu hình runtime.
 - Nhạc nền Lotus at First Light, bật/tắt, âm lượng và ghi nhớ lựa chọn. Tính năng nhạc đã phát hành trước khi quy ước tăng số cho từng bản cập nhật được áp dụng.
+
+### Homepage storytelling integration — v0.4.7
+- Integrated bilingual founder story, learning milestone timeline and Farm & Botanicals → Eco-Retreat → Academy direction.
+- Added responsive Hybrid Nature motion with reduced-motion and data-saver support.
+- Replaced selected couple imagery and hero with nature scenes; source credits retained in code and alt text.
+- Preserved v0.4.7 Roots search, beginner reading path, featured articles and contact form.

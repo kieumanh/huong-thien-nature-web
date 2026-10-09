@@ -9,7 +9,7 @@ if (home) {
   document.documentElement.classList.toggle('hybrid-data-saver', dataSaver);
 
   const targets = home.querySelectorAll<HTMLElement>(
-    '#story .intro-copy, #story .pillar, #practice .practice-image, #practice .steps li, #nature .section-head, #nature .nature-card, #people .portrait-wrap, #people .person, #journal .journal-card, #path .phase, #connect .contact-grid'
+    '.home-discovery-search, .home-reading, .rice-gallery .rice-frame, .visitor-questions details, .section-head, #journey .journey-opening, #journey .journey-chapters article, #journey .journey-gallery, #journey .learning-record, .begin-here .pillar, #story .intro-copy, #story .pillar, #practice .practice-image, #practice .steps li, #nature .section-head, #nature .nature-card, #people .portrait-wrap, #people .person, #journal .journal-card, #path .phase, #connect .contact-grid'
   );
   if (activate() && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {
@@ -20,8 +20,9 @@ if (home) {
         }
       }
     }, { rootMargin: '0px 0px -5% 0px', threshold: 0.08 });
-    for (const target of targets) {
+    for (const [index, target] of Array.from(targets).entries()) {
       target.setAttribute('data-hybrid-reveal', '');
+      target.style.setProperty('--reveal-delay', `${(index % 3) * 70}ms`);
       observer.observe(target);
     }
     document.documentElement.classList.add('hybrid-motion');
