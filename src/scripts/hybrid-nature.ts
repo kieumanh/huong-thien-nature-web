@@ -9,7 +9,7 @@ if (home) {
   document.documentElement.classList.toggle('hybrid-data-saver', dataSaver);
 
   const targets = home.querySelectorAll<HTMLElement>(
-    '.home-discovery-search, .home-reading, .rice-gallery .rice-frame, .visitor-questions details, .section-head, #journey .journey-opening, #journey .journey-chapters article, #journey .journey-gallery, #journey .learning-record, .begin-here .pillar, #story .intro-copy, #story .pillar, #practice .practice-image, #practice .steps li, #nature .section-head, #nature .nature-card, #people .portrait-wrap, #people .person, #journal .journal-card, #path .phase, #connect .contact-grid'
+    '.home-discovery-content, .home-beginner-links, .rice-gallery .rice-frame, .visitor-questions details, .section-head, #journey .journey-opening, #journey .journey-chapters article, #journey .journey-gallery, #journey .learning-record, .begin-here .pillar, #story .intro-copy, #story .pillar, #practice .practice-image, #practice .steps li, #nature .section-head, #nature .solar-pillar, #people .portrait-wrap, #people .person, #journal .journal-card, #path .phase, #connect .contact-grid'
   );
   if (activate() && 'IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries) => {

@@ -1,3 +1,9 @@
+## 2.0.4 — Hệ mặt trời Thân · Tâm · Trí
+
+- Thay ba kim tự tháp và các quỹ đạo riêng bằng một hệ mặt trời chung, với Hương Thiền Nature ở trung tâm và ba hành tinh đại diện cho Thân, Tâm, Trí.
+- Tinh gọn khu khám phá trên trang chủ: một ô tìm kiếm, từ khóa gợi ý và ba lối đọc ngắn gọn.
+- Nút nổi chọn màu nền tương phản tốt nhất theo vùng nó đang phủ; kiểm tra nhiều điểm trên nút để phù hợp cả nền ảnh và nền chuyển sắc.
+
 ## 2.0.3 — Hệ sinh thái chuyển động quanh ba trọng tâm
 
 - Ba kim tự tháp là tâm điểm của ba quỹ đạo tròn, với các giá trị chuyển động quanh Thân – Tâm – Trí.

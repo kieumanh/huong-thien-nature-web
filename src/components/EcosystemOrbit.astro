@@ -3,21 +3,34 @@ import type { Language } from '../data/site';
 const { lang, cards, images } = Astro.props as { lang: Language; cards: string[][]; images: string[] };
 const en = lang === 'en';
 const values = en ? ['BODY', 'HEART', 'MIND'] : ['THÂN', 'TÂM', 'TRÍ'];
-const satellites = en ? [['Living soil', 'Nourishment'], ['Rest', 'Connection'], ['Learning', 'Practice']] : [['Đất lành', 'Dưỡng nuôi'], ['Nghỉ ngơi', 'Kết nối'], ['Học hỏi', 'Thực hành']];
+const orbitDurations = ['26s', '42s', '58s'];
 ---
 <div class="ecosystem-motion" data-ecosystem>
-  <div class="nature-grid ecosystem-pyramids">
-    {cards.map(([title, text], index) => <article class={`nature-card eco-pyramid eco-pyramid--${index + 1}`} data-hybrid-reveal>
-      <div class="ecosystem-orbit">
-        <div class="ecosystem-ring" aria-hidden="true"></div>
-        <div class="ecosystem-ring ecosystem-ring--inner" aria-hidden="true"></div>
-        <div class="nature-image eco-pyramid-visual"><img src={`/media/${images[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" /><span class="eco-pyramid-value" aria-hidden="true">{values[index]}</span></div>
-        {satellites[index].map((label, satellite) => <div class={`ecosystem-satellite ecosystem-satellite--${satellite + 1}`}><span class="ecosystem-label">{label}</span></div>)}
-      </div>
-      <div class="nature-card-copy eco-pyramid-copy"><span class="ecosystem-number" aria-hidden="true">0{index + 1} · {values[index]}</span><h3>{title}</h3><p>{text}</p></div>
+  <figure class="ecosystem-solar-system" aria-label={en ? 'Hương Thiền Nature at the centre, with three planets for Body, Heart and Mind.' : 'Hương Thiền Nature ở trung tâm, cùng ba hành tinh Thân, Tâm và Trí.'}>
+    <div class="solar-system-scene" aria-hidden="true">
+      <div class="solar-system-starfield"></div>
+      {[0, 1, 2].map((index) => <div class={`solar-orbit solar-orbit--${index + 1}`} style={`--orbit-duration:${orbitDurations[index]};--orbit-delay:${index * -8}s`}>
+        <div class="solar-orbit-line"></div>
+        <div class="solar-planet-counter">
+          <div class={`solar-planet solar-planet--${index + 1}`}>
+            <img src={`/media/${images[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" />
+            <span>{values[index]}</span>
+          </div>
+        </div>
+      </div>)}
+      <div class="solar-sun"><span class="solar-sun__symbol" aria-hidden="true">✦</span><span>Hương Thiền<br/>Nature</span></div>
+    </div>
+    <figcaption class="solar-system-caption">{en ? 'One shared home, held by care for body, heart and mind.' : 'Một mái nhà chung, được nuôi dưỡng từ Thân, chăm sóc Tâm và mở sáng Trí.'}</figcaption>
+  </figure>
+
+  <div class="solar-system-pillars">
+    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`} data-hybrid-reveal>
+      <span class="solar-pillar__index">0{index + 1} · {values[index]}</span>
+      <h3>{title}</h3>
+      <p>{text}</p>
     </article>)}
   </div>
-  <div class="ecosystem-controls"><p>{en ? 'Three centres, connected through daily care.' : 'Ba trọng tâm, kết nối qua sự chăm sóc mỗi ngày.'}</p><button type="button" data-orbit-toggle data-pause={en ? 'Pause motion' : 'Dừng chuyển động'} data-resume={en ? 'Resume motion' : 'Tiếp tục chuyển động'} aria-pressed="false" hidden>{en ? 'Pause motion' : 'Dừng chuyển động'}</button></div>
+  <div class="ecosystem-controls"><p>{en ? 'Three paths, one living ecosystem.' : 'Ba hành trình, cùng nuôi dưỡng một hệ sinh thái.'}</p><button type="button" data-orbit-toggle data-pause={en ? 'Pause motion' : 'Dừng chuyển động'} data-resume={en ? 'Resume motion' : 'Tiếp tục chuyển động'} aria-pressed="false" hidden>{en ? 'Pause motion' : 'Dừng chuyển động'}</button></div>
 </div>
 <script>
   import '../scripts/ecosystem-orbit';

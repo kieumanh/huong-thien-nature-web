@@ -44,9 +44,9 @@ export const copy = {
         "Trở về điểm tựa mà không trách mình. Lặp lại bao nhiêu lần cũng được."
       ]
     ],
-    "natureEye": "04 — Ba trọng tâm, một hành trình",
-    "natureTitle": "Ba trọng tâm. Cùng chăm sóc một đời sống.",
-    "natureCopy": "Ba kim tự tháp diễn tả cách dự án đi từ những điều rất gần: bữa ăn, khoảng nghỉ trong thiên nhiên và việc học đi cùng thực hành.",
+    "natureEye": "04 — Hệ sinh thái Hương Thiền Nature",
+    "natureTitle": "Một mái nhà. Ba hành trình chăm sóc.",
+    "natureCopy": "Từ đất lành, đến khoảng nghỉ giữa thiên nhiên, rồi mở rộng hiểu biết — ba hướng cùng chăm sóc Thân, Tâm và Trí.",
     "natureNote": "Catalogue Farm & Botanicals hiện dùng giá tham khảo; giá và tồn kho cần xác nhận. Eco-Retreat, Academy và Membership là định hướng tương lai, chưa mở đăng ký.",
     "natureCards": [
       [
@@ -151,9 +151,9 @@ export const copy = {
         "Return to the anchor without scolding yourself. Repeat as often as needed."
       ]
     ],
-    "natureEye": "04 — Three pillars, one journey",
-    "natureTitle": "Three directions, caring for one whole life.",
-    "natureCopy": "The three pyramids trace a path from familiar things: a meal, a pause in nature, and learning joined with practice.",
+    "natureEye": "04 — The Hương Thiền Nature ecosystem",
+    "natureTitle": "One home. Three ways to care.",
+    "natureCopy": "From healthy soil, to rest in nature, to a wider understanding — three paths caring for body, heart and mind.",
     "natureNote": "The Farm & Botanicals catalogue shows reference prices; prices and stock need confirmation. Eco-Retreat, Academy and Membership remain future directions and are not open for registration.",
     "natureCards": [
       [

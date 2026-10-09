@@ -68,3 +68,8 @@ test('data saver disables animated layers and reveal hiding', () => {
 test('missing IntersectionObserver never hides content', () => {
   assert.equal(setup({ observer: false }).classes.has('hybrid-motion'), false);
 });
+test('the redesigned discovery block and solar-system pillars remain reveal targets', () => {
+  assert(code.includes('.home-discovery-content'));
+  assert(code.includes('#nature .solar-pillar'));
+  assert(!code.includes('#nature .nature-card'));
+});

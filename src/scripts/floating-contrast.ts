@@ -73,18 +73,29 @@ function update() {
   for (const control of controls) {
     const rect = control.getBoundingClientRect();
     if (!rect.width || !rect.height) continue;
-    const x = rect.left + rect.width / 2;
-    const y = rect.top + rect.height / 2;
-    const underneath = document.elementsFromPoint(x, y).find(element => !element.closest('.music-dock, .back-to-top'));
-    if (!underneath) continue;
-    const color = underneath instanceof HTMLImageElement ? imageColor(underneath, x, y) || background(underneath) : background(underneath);
-    // Compare the actual contrast against the site's two opaque control surfaces.
+    const insetX = Math.min(6, rect.width / 4);
+    const insetY = Math.min(6, rect.height / 4);
+    const points: Array<[number, number]> = [
+      [rect.left + rect.width / 2, rect.top + rect.height / 2],
+      [rect.left + insetX, rect.top + insetY],
+      [rect.right - insetX, rect.top + insetY],
+      [rect.left + insetX, rect.bottom - insetY],
+      [rect.right - insetX, rect.bottom - insetY],
+    ];
+    const samples = points.flatMap(([x, y]) => {
+      const underneath = document.elementsFromPoint(x, y).find(element => !element.closest('.music-dock, .back-to-top'));
+      if (!underneath) return [];
+      return [underneath instanceof HTMLImageElement ? imageColor(underneath, x, y) || background(underneath) : background(underneath)];
+    });
+    if (!samples.length) continue;
+    // Choose the branded surface with the best worst-case contrast across the control.
     const light = luminance([250, 248, 241]);
-    const dark = luminance([36, 63, 50]);
-    const surface = luminance(color);
-    const againstLight = (Math.max(light, surface) + .05) / (Math.min(light, surface) + .05);
-    const againstDark = (Math.max(dark, surface) + .05) / (Math.min(dark, surface) + .05);
-    control.dataset.floatingTone = againstLight > againstDark ? 'light' : 'dark';
+    const dark = luminance([16, 35, 26]);
+    const minimumContrast = (surfaceLum: number) => Math.min(...samples.map(color => {
+      const surface = luminance(color);
+      return (Math.max(surfaceLum, surface) + .05) / (Math.min(surfaceLum, surface) + .05);
+    }));
+    control.dataset.floatingTone = minimumContrast(light) > minimumContrast(dark) ? 'light' : 'dark';
   }
 }
 function schedule() {
