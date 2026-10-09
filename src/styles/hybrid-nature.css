@@ -152,3 +152,9 @@
  .hybrid-home > .section::before { width: 80px; height: 170px; opacity: .1; }
  .hybrid-breath { background-size: 55px auto; background-position: right center; }
 }
+
+/* Keep the emphasized half of the hero title readable against the forest image. */
+.hybrid-home .hybrid-hero h1 em {
+  color: #fff0c9;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, .42);
+}
