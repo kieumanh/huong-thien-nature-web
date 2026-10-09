@@ -11,6 +11,7 @@ for (const [language, path, values, titles, disclaimer] of [
     assert.equal((html.match(/class="nature-card eco-pyramid eco-pyramid--/g) || []).length, 3);
     for (const label of [...values, ...titles]) assert(html.includes(label), 'missing: ' + label);
     assert(html.includes(disclaimer));
-    assert(!html.includes('<div class="three-pillars">'));
+    const story = html.split('<section id="story"')[1]?.split('</section>')[0] || '';
+    assert(!story.includes('class="pillar'));
   });
 }
