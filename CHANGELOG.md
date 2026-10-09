@@ -1,3 +1,9 @@
+## 2.0.5 — Nút nhạc nền xanh sage dịu nhẹ
+
+- Tinh chỉnh nút nhạc nền thành dáng viên thuốc bo mềm, gọn hơn và thêm trạng thái hover/focus nhẹ.
+- Chuyển sang cặp màu xanh sage dịu hơn, vẫn tự chọn biến thể sáng/tối theo vùng nền để giữ độ đọc rõ.
+- Giữ nguyên nút phát/dừng, trạng thái phát, bảng chỉnh âm lượng và vị trí responsive.
+
 ## 2.0.4 — Hệ mặt trời Thân · Tâm · Trí
 
 - Thay ba kim tự tháp và các quỹ đạo riêng bằng một hệ mặt trời chung, với Hương Thiền Nature ở trung tâm và ba hành tinh đại diện cho Thân, Tâm, Trí.
