@@ -29,7 +29,7 @@ jobs:
       - run: npm run test:worker
       - run: npm run build
       - run: npm run audit:build
-      - run: node --test tests/ecosystem-content.test.mjs
+      - run: node --test tests/ecosystem-content.test.mjs tests/ecosystem-orbit.test.mjs
       - run: npm run build:pages-functions
         env:
           WRANGLER_SEND_METRICS: 'false'

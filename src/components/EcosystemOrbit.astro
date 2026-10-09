@@ -1,0 +1,24 @@
+---
+import type { Language } from '../data/site';
+const { lang, cards, images } = Astro.props as { lang: Language; cards: string[][]; images: string[] };
+const en = lang === 'en';
+const values = en ? ['BODY', 'HEART', 'MIND'] : ['THÂN', 'TÂM', 'TRÍ'];
+const satellites = en ? [['Living soil', 'Nourishment'], ['Rest', 'Connection'], ['Learning', 'Practice']] : [['Đất lành', 'Dưỡng nuôi'], ['Nghỉ ngơi', 'Kết nối'], ['Học hỏi', 'Thực hành']];
+---
+<div class="ecosystem-motion" data-ecosystem>
+  <div class="nature-grid ecosystem-pyramids">
+    {cards.map(([title, text], index) => <article class={`nature-card eco-pyramid eco-pyramid--${index + 1}`} data-hybrid-reveal>
+      <div class="ecosystem-orbit">
+        <div class="ecosystem-ring" aria-hidden="true"></div>
+        <div class="ecosystem-ring ecosystem-ring--inner" aria-hidden="true"></div>
+        <div class="nature-image eco-pyramid-visual"><img src={`/media/${images[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" /><span class="eco-pyramid-value" aria-hidden="true">{values[index]}</span></div>
+        {satellites[index].map((label, satellite) => <div class={`ecosystem-satellite ecosystem-satellite--${satellite + 1}`}><span class="ecosystem-label">{label}</span></div>)}
+      </div>
+      <div class="nature-card-copy eco-pyramid-copy"><span class="ecosystem-number" aria-hidden="true">0{index + 1} · {values[index]}</span><h3>{title}</h3><p>{text}</p></div>
+    </article>)}
+  </div>
+  <div class="ecosystem-controls"><p>{en ? 'Three centres, connected through daily care.' : 'Ba trọng tâm, kết nối qua sự chăm sóc mỗi ngày.'}</p><button type="button" data-orbit-toggle data-pause={en ? 'Pause motion' : 'Dừng chuyển động'} data-resume={en ? 'Resume motion' : 'Tiếp tục chuyển động'} aria-pressed="false" hidden>{en ? 'Pause motion' : 'Dừng chuyển động'}</button></div>
+</div>
+<script>
+  import '../scripts/ecosystem-orbit';
+</script>

@@ -1,3 +1,9 @@
+## 2.0.3 — Hệ sinh thái chuyển động quanh ba trọng tâm
+
+- Ba kim tự tháp là tâm điểm của ba quỹ đạo tròn, với các giá trị chuyển động quanh Thân – Tâm – Trí.
+- Nhãn chữ luôn giữ thẳng; có nút dừng/tiếp tục, tự dừng ngoài màn hình và khi tab bị ẩn.
+- Bố cục riêng cho desktop, tablet và mobile; giảm chuyển động và tiết kiệm dữ liệu dùng hình tĩnh.
+
 ## 2.0.2 — Ba kim tự tháp hệ sinh thái
 
 - Gộp nội dung Thân, Tâm, Trí vào một khu vực với ba kim tự tháp: Farm & Botanicals, Eco-Retreat và Academy.
