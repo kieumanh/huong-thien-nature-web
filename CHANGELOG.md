@@ -1,3 +1,11 @@
+## 2.0.2 — Ba kim tự tháp hệ sinh thái
+
+- Gộp nội dung Thân, Tâm, Trí vào một khu vực với ba kim tự tháp: Farm & Botanicals, Eco-Retreat và Academy.
+- Thêm reveal khi cuộn và chuyển động ảnh rất nhẹ khi hover; trên điện thoại xếp dọc, chế độ giảm chuyển động/tiết kiệm dữ liệu giữ nội dung tĩnh.
+- Tách rõ catalogue Farm & Botanicals (giá tham khảo, cần xác nhận) khỏi Eco-Retreat, Academy và Membership là các định hướng chưa mở đăng ký.
+- Chỉnh lời giới thiệu, tản văn và liên hệ để mỗi phần có nhiệm vụ riêng; giữ giọng giản dị, không hứa hẹn kết quả thiền hay công dụng sức khỏe.
+- Thêm kiểm thử nội dung song ngữ cho ba trung tâm và phạm vi catalogue/định hướng.
+
 ## 0.4.7 — Homepage discovery
 
 - Giữ phong cách Roots, cập nhật CTA đầu trang để mở bài nhập môn, thêm ô tìm kiếm và từ khóa gợi ý ngay trên homepage.

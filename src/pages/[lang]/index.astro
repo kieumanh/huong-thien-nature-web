@@ -62,10 +62,7 @@ const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-fi
       <div class="shell">
         <div class="intro-grid">
           <div class="intro-side"><span class="eyebrow">{t.introEyebrow}</span><RootMark class="intro-root" /><p class="intro-mark">{t.introMark}</p></div>
-          <div class="intro-copy"><h2 id="story-title">{t.introTitle}</h2><p class="lead">{t.introCopy}</p><p class="small-copy">{en ? 'No perfect state to reach. Just a little room to notice, to care and to begin again.' : 'Không cần đạt đến một trạng thái hoàn hảo. Chỉ cần một khoảng mở để nhận biết, chăm sóc và bắt đầu lại.'}</p></div>
-        </div>
-        <div class="three-pillars">
-          {t.pillars.map(([n, title, text], index) => <article class="pillar"><span class="index-number">{n}</span><h3>{title}</h3><p>{text}</p><a class="quiet-link" href={index === 2 ? '#nature' : '#practice'} aria-label={`${en ? 'Explore' : 'Khám phá'}: ${title}`}>{en ? 'Explore' : 'Khám phá'} <Arrow /></a></article>)}
+          <div class="intro-copy"><h2 id="story-title">{t.introTitle}</h2><p class="lead">{t.introCopy}</p><p class="small-copy">{en ? 'Each person has their own pace. Practice is an invitation, not a standard to meet.' : 'Mỗi người có một nhịp riêng. Thực tập là lời mời, không phải một tiêu chuẩn phải đạt.'}</p></div>
         </div>
       </div>
     </section>
@@ -86,7 +83,7 @@ const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-fi
     <section id="nature" class="section nature" aria-labelledby="nature-title">
       <div class="shell">
         <div class="section-head split-head"><div><span class="eyebrow">{t.natureEye}</span><h2 id="nature-title">{t.natureTitle}</h2></div><p>{t.natureCopy}</p></div>
-        <div class="nature-grid">{t.natureCards.map(([title, text], index) => <article class="nature-card"><div class="nature-image"><img src={`/media/${natureImages[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" /><span aria-hidden="true">0{index + 1}</span></div><div class="nature-card-copy"><h3>{title}</h3><p>{text}</p></div></article>)}</div>
+        <div class="nature-grid ecosystem-pyramids">{t.natureCards.map(([title, text], index) => <article class={`nature-card eco-pyramid eco-pyramid--${index + 1}`} data-hybrid-reveal><div class="nature-image eco-pyramid-visual"><img src={`/media/${natureImages[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" /><span class="eco-pyramid-value" aria-hidden="true">{(en ? ['BODY', 'HEART', 'MIND'] : ['THÂN', 'TÂM', 'TRÍ'])[index]}</span><span class="eco-pyramid-index" aria-hidden="true">0{index + 1}</span></div><div class="nature-card-copy eco-pyramid-copy"><h3>{title}</h3><p>{text}</p></div></article>)}</div>
         <div class="nature-bottom"><p class="note">{t.natureNote}</p><a class="quiet-link" href={articlePath(lang, 'listening-to-nature')}>{en ? 'Take a mindful walk' : 'Một cuộc gặp với thiên nhiên'} <Arrow /></a></div>
       </div>
     </section>
