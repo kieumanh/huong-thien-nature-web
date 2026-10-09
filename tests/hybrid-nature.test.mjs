@@ -10,7 +10,11 @@ function setup({ width = 1440, reduced = false, saveData = false, fine = true, o
   const classes = new Set();
   const properties = new Map();
   const media = new Map();
-  const targets = [{ classList: { add: key => classes.add(key) }, setAttribute() {} }];
+  const targets = [{
+    classList: { add: key => classes.add(key) },
+    style: { setProperty: (key, value) => properties.set(key, value), removeProperty: key => properties.delete(key) },
+    setAttribute() {},
+  }];
   const hero = { offsetHeight: 800, getBoundingClientRect: () => ({ top: -400, left: 0, width, height: 800 }), style: { setProperty: (k,v) => properties.set(k,v), removeProperty: k => properties.delete(k) }, addEventListener: (k,fn) => events.set(k,fn) };
   const window = { matchMedia(query) { const m = { matches: query.includes('min-width') ? width >= 761 : query.includes('pointer') ? fine : reduced, addEventListener: (_,fn) => { m.onchange = fn; } }; media.set(query,m); return m; }, addEventListener: (k,fn) => events.set(k,fn) };
   const observed = [];
