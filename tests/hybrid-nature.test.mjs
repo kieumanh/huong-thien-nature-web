@@ -12,7 +12,7 @@ function setup({ width = 1440, reduced = false, saveData = false, fine = true, o
   const media = new Map();
   const targets = [{
     classList: { add: key => classes.add(key) },
-    style: { setProperty: (key, value) => properties.set(key, value), removeProperty: key => properties.delete(key) },
+    style: { setProperty() {}, removeProperty() {} },
     setAttribute() {},
   }];
   const hero = { offsetHeight: 800, getBoundingClientRect: () => ({ top: -400, left: 0, width, height: 800 }), style: { setProperty: (k,v) => properties.set(k,v), removeProperty: k => properties.delete(k) }, addEventListener: (k,fn) => events.set(k,fn) };
