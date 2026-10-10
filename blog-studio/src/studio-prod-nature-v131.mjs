@@ -41,7 +41,7 @@ export default {async fetch(request,env,ctx){
  const response=await core.fetch(request,env,ctx);
  if(request.method!=="GET"||path.startsWith("/read/")||!(response.headers.get("content-type")||"").includes("text/html"))return response;
  let html=applyNatureBrand(await response.text());
- html=html.replace(OLD,NEW).replace("PHIÊN BẢN 1.1.0","PHIÊN BẢN 1.3.1").replace("</head>",'<style id="studio-editorial-131">'+analyticsCss+STUDIO_EDITORIAL_CSS+STUDIO_NATURE_CSS_V131+'</style></head>');
+ html=html.replace(OLD,NEW).replaceAll("Hương Thiền Studio","Hương Thiền Nature Studio").replaceAll("HƯƠNG THIỀN STUDIO","HƯƠNG THIỀN NATURE STUDIO").replace("<span>Hương Thiền<small>NATURE · STUDIO</small></span>","<span>Hương Thiền Nature<small>STUDIO</small></span>").replace("PHIÊN BẢN 1.1.0","PHIÊN BẢN 1.3.1").replace("</head>",'<style id="studio-editorial-131">'+analyticsCss+STUDIO_EDITORIAL_CSS+STUDIO_NATURE_CSS_V131+'</style></head>');
  const headers=new Headers(response.headers);headers.delete("content-length");headers.set("cache-control","private,no-store");
  return new Response(html,{status:response.status,headers});
 }};
