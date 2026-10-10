@@ -5,6 +5,7 @@ import {STUDIO_JS as NEW} from "./studio-client-nature-v131-release.mjs";
 import {STUDIO_EDITORIAL_CSS} from "./studio-editorial-css-v130.mjs";
 import {STUDIO_NATURE_CSS_V131} from "./studio-nature-css-v131.mjs";
 import {exportBundle} from "./studio-docx-export.mjs";
+import {DEMO_SHIM,DEMO_STYLE,DEMO_CTA,DEMO_BANNER} from "./studio-demo-v132.mjs";
 const json=(obj,status=200)=>Response.json(obj,{status,headers:{"Cache-Control":"private,no-store"}});
 const toHex=bytes=>Array.from(new Uint8Array(bytes),v=>v.toString(16).padStart(2,"0")).join("");
 async function account(req,env) {
@@ -27,6 +28,11 @@ async function readership(env) {
 const analyticsCss=".reader-report{padding:24px;margin:18px 0}.reader-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}.reader-head h2{font:400 29px Georgia,serif;color:#243f32}.reader-head p{font-size:12px;color:#647766}.reader-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.reader-summary span{display:block;font-size:11px;color:#6a7c6b}.reader-summary strong{display:block;font:400 32px Georgia,serif;color:#243f32}.reader-svg{width:100%;height:auto;max-height:280px}.reader-legend{display:flex;gap:15px;font-size:11px}.reader-rank-row{display:grid;grid-template-columns:20px minmax(0,1fr) 55px 110px;gap:10px;padding:10px 0;border-top:1px solid #e1e9dd;font-size:12px}.reader-rank-row a{color:#294d37}.reader-rank-row b,.reader-rank-row small{text-align:right}.export-toolbar{display:flex;justify-content:flex-end;margin:15px 0}@media(max-width:650px){.reader-rank-row{grid-template-columns:20px minmax(0,1fr) 45px}.reader-rank-row small{display:none}}";
 export default {async fetch(request,env,ctx){
  const path=new URL(request.url).pathname;
+ const isDemo=(path==="/demo"||path==="/demo/");
+ if(/^\/media\/d2000000-0000-4000-8000-00000000000[123]$/.test(path)){
+  const n=path.slice(-1),file=n==="1"?"hero-canopy-v2.webp":n==="2"?"practice-cushion-v2.webp":"hero-canopy-v2.webp";
+  return Response.redirect("https://huongthiennature.com/media/"+file,302);
+ }
  if(request.method==="GET"&&path==="/api/health")return json({ok:true,version:"1.3.1",product:"Hương Thiền Nature Studio",platform:"Cloudflare Workers + D1 + R2"});
  if(path==="/api/studio/export-word"){
   if(request.method!=="GET")return json({error:"Method not allowed"},405);
@@ -39,10 +45,13 @@ export default {async fetch(request,env,ctx){
   const days=data.readerDaily.slice(-30),studio=days.reduce((n,x)=>n+x.studio,0),nature=days.reduce((n,x)=>n+x.nature,0);
   return json({...baseline,version:"1.3.1",readerDaily:data.readerDaily,readerTop:data.readerTop,sourceNotes:data.sourceNotes,counts:{...baseline.counts,views30d:studio+nature,studio30d:studio,nature30d:nature}});
  }
- const response=await core.fetch(request,env,ctx);
+ const target=isDemo?new Request(new URL("/",request.url),request):request;
+ const response=await core.fetch(target,env,ctx);
  if(request.method!=="GET"||path.startsWith("/read/")||!(response.headers.get("content-type")||"").includes("text/html"))return response;
  let html=applyNatureBrand(await response.text());
+ if(isDemo)html=html.replace(OLD,NEW).replace("</head>",'<style id="studio-demo-theme">'+DEMO_STYLE+'</style><script>'+DEMO_SHIM+'</script></head>').replace('</body>',DEMO_BANNER+'</body>');
  html=html.replace(OLD,NEW).replaceAll("Hương Thiền Studio","Hương Thiền Nature Studio").replaceAll("HƯƠNG THIỀN STUDIO","HƯƠNG THIỀN NATURE STUDIO").replace("<span>Hương Thiền<small>NATURE · STUDIO</small></span>","<span>Hương Thiền Nature<small>STUDIO</small></span>").replace("PHIÊN BẢN 1.1.0","PHIÊN BẢN 1.3.1").replace("</head>",'<style id="studio-editorial-131">'+analyticsCss+STUDIO_EDITORIAL_CSS+STUDIO_NATURE_CSS_V131+'</style></head>');
- const headers=new Headers(response.headers);headers.delete("content-length");headers.set("cache-control","private,no-store");
+ if(!isDemo)html=html.replace('<div class="authlinks">',DEMO_CTA+'<div class="authlinks">');
+ const headers=new Headers(response.headers);headers.delete("content-length");headers.set("cache-control","private,no-store");if(isDemo)headers.set("X-Robots-Tag","noindex,nofollow,noarchive");
  return new Response(html,{status:response.status,headers});
 }};
