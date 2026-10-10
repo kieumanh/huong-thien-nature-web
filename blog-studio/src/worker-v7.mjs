@@ -66,7 +66,7 @@ if(m==="GET"&&p.startsWith("/read/")){
  const a=await e.DB.prepare("SELECT * FROM posts WHERE locale=? AND slug=? AND status='published' AND deleted_at IS NULL").bind(matches[1],matches[2]).first();
  if(!a)return html('<h1>Không tìm thấy bài viết.</h1>');
  const cover=a.cover_id?'<img width="100%" style="border-radius:14px" src="/media/'+a.cover_id+'" alt="">':"";
- return html('<!doctype html><html lang="'+a.locale+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+escape(a.seo_title||a.title)+'</title><meta name="description" content="'+escape(a.seo_description||a.excerpt)+'"><style>body{background:#f8f7f1;color:#294632;font:18px/1.9 Georgia,serif;margin:0}main{margin:70px auto;max-width:780px;padding:20px}h1{font-size:clamp(35px,5vw,62px);line-height:1.2}h2{margin-top:40px}a{color:#346f4e}p{overflow-wrap:anywhere}</style></head><body><main><a href="/">← Hương Thiền Blog Studio</a><p>'+escape(a.category)+'</p><h1>'+escape(a.title)+'</h1><p>'+escape(a.excerpt)+'</p>'+cover+'<article>'+format(a.body)+'</article></main></body></html>');
+ return html('<!doctype html><html lang="'+a.locale+'"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>'+escape(a.seo_title||a.title)+'</title><meta name="description" content="'+escape(a.seo_description||a.excerpt)+'"><style>body{background:#f8f7f1;color:#294632;font:18px/1.9 Georgia,serif;margin:0}main{margin:70px auto;max-width:780px;padding:20px}h1{font-size:clamp(35px,5vw,62px);line-height:1.2}h2{margin-top:40px}a{color:#346f4e}p{overflow-wrap:anywhere}</style></head><body><main><a href="/">← Zen Studio</a><p>'+escape(a.category)+'</p><h1>'+escape(a.title)+'</h1><p>'+escape(a.excerpt)+'</p>'+cover+'<article>'+format(a.body)+'</article></main></body></html>');
 }
 const user=await me(r,e);
 if(m==="GET"&&p.startsWith("/media/")){
@@ -126,5 +126,5 @@ if(m==="GET"&&p==="/api/export"&&user.role==="owner"){
  return new Response(JSON.stringify({version:"1.1.0",exported_at:new Date().toISOString(),posts:a.results,media:b.results}),{headers:{"Content-Type":"application/json","Content-Disposition":"attachment; filename=huong-thien-blog-studio-backup.json",...HEAD}});
 }
 return error("Không tìm thấy.",404);
-}catch(x){console.error("Blog Studio",x);return error("Có lỗi hệ thống. Vui lòng thử lại.",500)}
+}catch(x){console.error("Zen Studio",x);return error("Có lỗi hệ thống. Vui lòng thử lại.",500)}
 }};
