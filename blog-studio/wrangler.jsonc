@@ -1,0 +1,1 @@
+{"name":"huong-thien-blog-studio","main":"./src/worker.mjs","compatibility_date":"2026-10-10","d1_databases":[{"binding":"DB","database_name":"huong-thien-blog-studio-db","database_id":"db010b7a-4b89-483d-922e-4794f0a73618"}],"r2_buckets":[{"binding":"MEDIA","bucket_name":"huong-thien-blog-studio-media"}]}
