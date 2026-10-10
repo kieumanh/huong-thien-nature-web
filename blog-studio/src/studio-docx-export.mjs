@@ -32,7 +32,7 @@ export async function exportBundle(request,env,user){
  if(!user)return Response.json({error:"Đăng nhập để xuất file."},{status:401});
  let u=new URL(request.url),ids=(u.searchParams.get("ids")||"").split(",").filter(Boolean),format=u.searchParams.get("format");
  if(!ids.length||ids.length>20||ids.some(i=>!/^[0-9a-f-]{36}$/.test(i)))return Response.json({error:"Chọn từ 1 đến 20 bài viết."},{status:400});
- let entries=[["README.txt","Hương Thiền Studio: mỗi thư mục có bài DOCX (ảnh nhúng), Markdown và ảnh gốc."]],total=0;
+ let entries=[["README.txt","Zen Studio: mỗi thư mục có bài DOCX (ảnh nhúng), Markdown và ảnh gốc."]],total=0;
  for(const id of ids){let post=await env.DB.prepare("SELECT * FROM posts WHERE id=? AND deleted_at IS NULL").bind(id).first();if(!post)return Response.json({error:"Bài viết không tồn tại."},{status:404});
  let imgs=await imagesFor(post,env);total+=imgs.reduce((n,v)=>n+v.data.length,0);if(total>28000000)return Response.json({error:"Ảnh lớn hơn 28 MB; hãy xuất ít bài hơn."},{status:413});
  let bytes=docx(post,imgs);if(ids.length===1&&format==="docx")return new Response(bytes,{headers:{"Content-Type":"application/vnd.openxmlformats-officedocument.wordprocessingml.document","Content-Disposition":'attachment; filename="'+post.slug+'.docx"',"Cache-Control":"no-store"}});
