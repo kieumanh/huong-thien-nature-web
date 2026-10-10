@@ -1,7 +1,7 @@
 import core from "./studio-api-journal.mjs";
 import {applyNatureBrand} from "./studio-nature-theme.mjs";
 import {STUDIO_JS as OLD} from "./studio-client-v6.mjs";
-import {STUDIO_JS as NEW} from "./studio-client-nature-v131-release.mjs";
+import {STUDIO_JS as NEW} from "./studio-client-nature-v132.mjs";
 import {STUDIO_EDITORIAL_CSS} from "./studio-editorial-css-v130.mjs";
 import {STUDIO_NATURE_CSS_V131} from "./studio-nature-css-v131.mjs";
 import {exportBundle} from "./studio-docx-export.mjs";
@@ -33,7 +33,7 @@ export default {async fetch(request,env,ctx){
   const n=path.slice(-1),file=n==="1"?"hero-canopy-v2.webp":n==="2"?"practice-cushion-v2.webp":"hero-canopy-v2.webp";
   return Response.redirect("https://huongthiennature.com/media/"+file,302);
  }
- if(request.method==="GET"&&path==="/api/health")return json({ok:true,version:"1.3.1",product:"Hương Thiền Nature Studio",platform:"Cloudflare Workers + D1 + R2"});
+ if(request.method==="GET"&&path==="/api/health")return json({ok:true,version:"1.3.2",product:"Hương Thiền Nature Studio",platform:"Cloudflare Workers + D1 + R2"});
  if(path==="/api/studio/export-word"){
   if(request.method!=="GET")return json({error:"Method not allowed"},405);
   return exportBundle(request,env,await account(request,env));
@@ -43,14 +43,15 @@ export default {async fetch(request,env,ctx){
   const response=await core.fetch(request,env,ctx);if(!response.ok)return response;
   const baseline=await response.json();const data=await readership(env);
   const days=data.readerDaily.slice(-30),studio=days.reduce((n,x)=>n+x.studio,0),nature=days.reduce((n,x)=>n+x.nature,0);
-  return json({...baseline,version:"1.3.1",readerDaily:data.readerDaily,readerTop:data.readerTop,sourceNotes:data.sourceNotes,counts:{...baseline.counts,views30d:studio+nature,studio30d:studio,nature30d:nature}});
+  return json({...baseline,version:"1.3.2",readerDaily:data.readerDaily,readerTop:data.readerTop,sourceNotes:data.sourceNotes,counts:{...baseline.counts,views30d:studio+nature,studio30d:studio,nature30d:nature}});
  }
  const target=isDemo?new Request(new URL("/",request.url),request):request;
  const response=await core.fetch(target,env,ctx);
  if(request.method!=="GET"||path.startsWith("/read/")||!(response.headers.get("content-type")||"").includes("text/html"))return response;
  let html=applyNatureBrand(await response.text());
- if(isDemo)html=html.replace(OLD,NEW).replace("</head>",'<style id="studio-demo-theme">'+DEMO_STYLE+'</style><script>'+DEMO_SHIM+'</script></head>').replace('</body>',DEMO_BANNER+'</body>');
- html=html.replace(OLD,NEW).replaceAll("Hương Thiền Studio","Hương Thiền Nature Studio").replaceAll("HƯƠNG THIỀN STUDIO","HƯƠNG THIỀN NATURE STUDIO").replace("<span>Hương Thiền<small>NATURE · STUDIO</small></span>","<span>Hương Thiền Nature<small>STUDIO</small></span>").replace("PHIÊN BẢN 1.1.0","PHIÊN BẢN 1.3.1").replace("</head>",'<style id="studio-editorial-131">'+analyticsCss+STUDIO_EDITORIAL_CSS+STUDIO_NATURE_CSS_V131+'</style></head>');
+ html=html.replace("</head>",'<style id="studio-demo-theme">'+DEMO_STYLE+'</style></head>');
+ if(isDemo)html=html.replace(OLD,NEW).replace("</head>",'<script>'+DEMO_SHIM+'</script></head>').replace('</body>',DEMO_BANNER+'</body>');
+ html=html.replace(OLD,NEW).replaceAll("Hương Thiền Studio","Hương Thiền Nature Studio").replaceAll("HƯƠNG THIỀN STUDIO","HƯƠNG THIỀN NATURE STUDIO").replace("<span>Hương Thiền<small>NATURE · STUDIO</small></span>","<span>Hương Thiền Nature<small>STUDIO</small></span>").replace("PHIÊN BẢN 1.1.0","PHIÊN BẢN 1.3.2").replace("</head>",'<style id="studio-editorial-131">'+analyticsCss+STUDIO_EDITORIAL_CSS+STUDIO_NATURE_CSS_V131+'</style></head>');
  if(!isDemo)html=html.replace('<div class="authlinks">',DEMO_CTA+'<div class="authlinks">');
  const headers=new Headers(response.headers);headers.delete("content-length");headers.set("cache-control","private,no-store");if(isDemo)headers.set("X-Robots-Tag","noindex,nofollow,noarchive");
  return new Response(html,{status:response.status,headers});
