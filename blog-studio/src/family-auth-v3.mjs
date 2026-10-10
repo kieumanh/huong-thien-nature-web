@@ -11,7 +11,7 @@ async function jsonBody(request){const n=Number(request.headers.get("Content-Len
 async function passwordHash(pass,salt){const key=await crypto.subtle.importKey("raw",encode.encode(pass),"PBKDF2",false,["deriveBits"]);const b=await crypto.subtle.deriveBits({name:"PBKDF2",hash:"SHA-256",salt:encode.encode(salt),iterations:100000},key,256);return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 async function sendMail(env,to,subject,body){
  if(!env.RESEND_API_KEY)throw Error("MAIL_MISSING");
- const r=await fetch("https://api.resend.com/emails",{method:"POST",headers:{"Authorization":"Bearer "+env.RESEND_API_KEY,"Content-Type":"application/json"},body:JSON.stringify({from:"Hương Thiền Blog Studio <no-reply@huongthiennature.com>",to:[to],subject,text:body})});
+ const r=await fetch("https://api.resend.com/emails",{method:"POST",headers:{"Authorization":"Bearer "+env.RESEND_API_KEY,"Content-Type":"application/json"},body:JSON.stringify({from:"Zen Studio <no-reply@huongthiennature.com>",to:[to],subject,text:body})});
  if(!r.ok){console.error("Resend status",r.status);throw Error("MAIL_FAILED")}
 }
 async function signedOwner(request,env){
@@ -42,7 +42,7 @@ async function ownerSetup(request,env,data){
  const t=random(),h=await digest(t);
  await env.DB.prepare("DELETE FROM owner_bootstrap WHERE consumed_at IS NULL").run();
  await env.DB.prepare("INSERT INTO owner_bootstrap(token_hash,expires_at) VALUES(?,datetime('now','+30 minutes'))").bind(h).run();
- await sendMail(env,email,"Kích hoạt chủ sở hữu Hương Thiền Blog Studio","Bạn vừa yêu cầu tạo tài khoản chủ sở hữu Blog Studio.\n\nMở liên kết sau để thiết lập mật khẩu trong vòng 30 phút:\n"+BASE+"/owner-complete?token="+t+"\n\nNếu không phải bạn, hãy bỏ qua. Không chuyển tiếp liên kết này.");
+ await sendMail(env,email,"Kích hoạt chủ sở hữu Zen Studio","Bạn vừa yêu cầu tạo tài khoản chủ sở hữu Zen Studio.\n\nMở liên kết sau để thiết lập mật khẩu trong vòng 30 phút:\n"+BASE+"/owner-complete?token="+t+"\n\nNếu không phải bạn, hãy bỏ qua. Không chuyển tiếp liên kết này.");
  return ok({ok:true,message:"Nếu email hợp lệ, bạn sẽ nhận được liên kết kích hoạt."});
 }
 async function ownerComplete(request,env,data){
@@ -79,7 +79,7 @@ export async function familyAuth(request,env){
    if(!info)return error("Liên kết phê duyệt không hợp lệ hoặc hết hạn.",404);
    if(!env.RESEND_API_KEY)return error("Email chưa được cấu hình.",503);
    if(p.endsWith("reject")){
-    await sendMail(env,info.email,"Thông báo đăng ký Blog Studio","Xin chào "+info.display_name+",\n\nYêu cầu tham gia của bạn hiện chưa được phê duyệt. Bạn có thể trao đổi trực tiếp với chủ sở hữu.");
+    await sendMail(env,info.email,"Thông báo đăng ký Zen Studio","Xin chào "+info.display_name+",\n\nYêu cầu tham gia của bạn hiện chưa được phê duyệt. Bạn có thể trao đổi trực tiếp với chủ sở hữu.");
     await env.DB.batch([env.DB.prepare("UPDATE account_requests SET status='rejected',reviewed_at=CURRENT_TIMESTAMP WHERE id=?").bind(info.id),env.DB.prepare("UPDATE account_tokens SET consumed_at=CURRENT_TIMESTAMP WHERE token_hash=?").bind(info.token_hash),env.DB.prepare("INSERT INTO audit_log(user_id,action,target_id) VALUES(?,'account_rejected',?)").bind(owner.id,info.id)]);
     return ok({ok:true,message:"Đã từ chối và gửi email thông báo."});
    }
