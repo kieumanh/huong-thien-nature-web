@@ -58,5 +58,6 @@ h1,.brand{font-family:'Segoe UI',system-ui,sans-serif!important;letter-spacing:-
   .replace(/GIA ĐÌNH/gi,"ĐỐI TÁC")
   .replace(/Gia đình/gi,"Đối tác")
   .replace(/gia đình/gi,"đối tác");
- return brand.replace("</head>",css+"</head>").replace("</body>",script+"</body>");
+ const styled=brand.includes("</head>")?brand.replace("</head>",css+"</head>"):brand.replace("</style>","</style>"+css);
+ return styled.includes("</body>")?styled.replace("</body>",script+"</body>"):styled.replace("</html>",script+"</html>");
 }
