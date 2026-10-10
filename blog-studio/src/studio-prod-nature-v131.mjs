@@ -27,6 +27,7 @@ async function readership(env) {
 const analyticsCss=".reader-report{padding:24px;margin:18px 0}.reader-head{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}.reader-head h2{font:400 29px Georgia,serif;color:#243f32}.reader-head p{font-size:12px;color:#647766}.reader-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:20px 0}.reader-summary span{display:block;font-size:11px;color:#6a7c6b}.reader-summary strong{display:block;font:400 32px Georgia,serif;color:#243f32}.reader-svg{width:100%;height:auto;max-height:280px}.reader-legend{display:flex;gap:15px;font-size:11px}.reader-rank-row{display:grid;grid-template-columns:20px minmax(0,1fr) 55px 110px;gap:10px;padding:10px 0;border-top:1px solid #e1e9dd;font-size:12px}.reader-rank-row a{color:#294d37}.reader-rank-row b,.reader-rank-row small{text-align:right}.export-toolbar{display:flex;justify-content:flex-end;margin:15px 0}@media(max-width:650px){.reader-rank-row{grid-template-columns:20px minmax(0,1fr) 45px}.reader-rank-row small{display:none}}";
 export default {async fetch(request,env,ctx){
  const path=new URL(request.url).pathname;
+ if(request.method==="GET"&&path==="/api/health")return json({ok:true,version:"1.3.1",product:"Hương Thiền Nature Studio",platform:"Cloudflare Workers + D1 + R2"});
  if(path==="/api/studio/export-word"){
   if(request.method!=="GET")return json({error:"Method not allowed"},405);
   return exportBundle(request,env,await account(request,env));
