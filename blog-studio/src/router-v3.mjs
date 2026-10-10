@@ -1,0 +1,2 @@
+import app from './entry.mjs';
+export default {fetch(r,e,c){const url=new URL(r.url);if(r.method==='GET'&&['/register','/forgot-password','/verify-email','/approve','/activate','/reset-password'].includes(url.pathname)){return app.fetch(new Request(url.origin+'/',{headers:r.headers}),e,c).then(async response=>{const body=await response.text();return new Response(body.replace('</html>',`<script>history.replaceState(null,'',${JSON.stringify(url.pathname+url.search)});</script></html>`),{status:response.status,headers:response.headers})})}return app.fetch(r,e,c)}};
