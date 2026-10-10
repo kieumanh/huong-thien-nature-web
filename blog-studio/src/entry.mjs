@@ -1,4 +1,5 @@
 import core from "./worker.mjs";
+import {EXTRA_HTML} from "./email-ui.mjs";
 import {emailAuth} from "./email-auth.mjs";
 async function signedOwner(request,env){
  const m=(request.headers.get("Cookie")||"").match(/(?:^|;\s*)ht_blog_session=([a-f0-9]{64})/);
@@ -15,5 +16,10 @@ export default {async fetch(request,env,ctx){
   if(p==="/api/auth/approve"&&!(await signedOwner(request,env)))return Response.json({error:"Chủ sở hữu cần đăng nhập trước khi phê duyệt."},{status:403});
   return emailAuth(request,env);
  }
- return core.fetch(request,env,ctx);
+ const response=await core.fetch(request,env,ctx);
+ if(request.method==="GET"&&["/","/login","/register","/forgot-password","/verify-email","/approve","/activate","/reset-password"].includes(p)&&response.headers.get("content-type")?.includes("text/html")){
+  const h=(await response.text()).replace("</body>","<div class=\"auth-extra\"><a href=\"/register\">Đăng ký</a> · <a href=\"/forgot-password\">Quên mật khẩu?</a></div></body>").replace("</html>",EXTRA_HTML+"</html>");
+  return new Response(h,{status:response.status,headers:response.headers});
+ }
+ return response;
 }};
