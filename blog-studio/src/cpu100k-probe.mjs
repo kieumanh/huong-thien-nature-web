@@ -1,0 +1,2 @@
+import app from "./family-main-v3.mjs";
+export default {async fetch(req,env,ctx){if(new URL(req.url).pathname==="/_diagnostic_kdf_20261010"){const e=new TextEncoder();const k=await crypto.subtle.importKey("raw",e.encode("test-only"),"PBKDF2",false,["deriveBits"]);const t=Date.now();const a=await crypto.subtle.deriveBits({name:"PBKDF2",salt:e.encode("diagnostic"),iterations:100000,hash:"SHA-256"},k,256);return Response.json({ok:a.byteLength===32,ms:Date.now()-t})}return app.fetch(req,env,ctx)}};
