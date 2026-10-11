@@ -1,0 +1,13 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "huong-thien-journal-preview",
+  "main": "./src/worker-journal-staging.mjs",
+  "compatibility_date": "2026-10-10",
+  "services": [
+    { "binding": "SITE", "service": "huong-thien-nature" },
+    { "binding": "STUDIO", "service": "huong-thien-blog-studio" }
+  ],
+  "routes": [
+    { "pattern": "journal-preview.huongthiennature.com", "custom_domain": true }
+  ]
+}
