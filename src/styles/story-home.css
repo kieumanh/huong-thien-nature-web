@@ -64,3 +64,8 @@
   .journey-opening::after { display: none; }
   .journey-gallery img, .journey-gallery img:last-child { border-width: 3px; border-radius: 16px; }
 }
+
+.journey-jumps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.journey-jumps a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; background: var(--brand-fern); color: #284633; border-radius: 30px; font-size: .85rem; }
+.journey-jumps a:hover { text-decoration: underline; }
+.journey-chapters li[id] { scroll-margin-top: 110px; }

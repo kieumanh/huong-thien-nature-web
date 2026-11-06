@@ -32,12 +32,16 @@ const chapters = en ? [
 <section class="section founder-journey" id="journey" aria-labelledby="journey-title">
  <div class="shell">
   <div class="journey-opening">
-   <div><span class="eyebrow">{en ? '02 — The person behind the project' : '02 — Người gieo hạt'}</span><h2 id="journey-title">{en ? 'Before there was a project, there was a journey.' : 'Trước khi có một dự án, đã có một hành trình.'}</h2><p class="lead">{en ? 'I am Hương Thiền — Đỗ Thị Kim Hương. Here is how my search for understanding became a wish to share what I was learning.' : 'Mình là Hương Thiền — Đỗ Thị Kim Hương. Đây là câu chuyện về những điều mình đã đi qua và vì sao mình muốn chia sẻ những điều đã học.'}</p><a class="quiet-link" href="#nature">{en ? 'Discover the three pillars →' : 'Khám phá ba trọng tâm →'}</a></div>
+   <div><span class="eyebrow">{en ? '02 — The person behind the project' : '02 — Người gieo hạt'}</span><h2 id="journey-title">{en ? 'Before there was a project, there was a journey.' : 'Trước khi có một dự án, đã có một hành trình.'}</h2><p class="lead">{en ? 'I am Hương Thiền — Đỗ Thị Kim Hương. Here is how my search for understanding became a wish to share what I was learning.' : 'Mình là Hương Thiền — Đỗ Thị Kim Hương. Đây là câu chuyện về những điều mình đã đi qua và vì sao mình muốn chia sẻ những điều đã học.'}</p><nav class="journey-jumps" aria-label={en ? 'Journey chapters' : 'Các chặng hành trình'}>
+    <a href="#journey-early">{en ? 'Early years and turning points' : 'Tuổi thơ và bước ngoặt'}</a>
+    <a href="#journey-learning">{en ? 'Learning and practice' : 'Học hỏi và thực hành'}</a>
+    <a href="#journey-today">{en ? 'Hương Thiền Nature today' : 'Hương Thiền Nature hôm nay'}</a>
+   </nav></div>
    <img src="/media/huong-smile.jpg" alt={en ? 'Hương Thiền smiling among green grasses.' : 'Hương Thiền mỉm cười giữa cỏ cây xanh.'} width="960" height="1280" loading="lazy" />
   </div>
   <ol class="journey-chapters">
    {chapters.map(([label, title, body, href, link], i) => (
-    <li>
+    <li id={i === 0 ? "journey-early" : i === 4 ? "journey-learning" : i === chapters.length - 1 ? "journey-today" : undefined}>
      <span class="journey-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
      <div><span class="eyebrow">{label}</span><h3>{title}</h3><p>{body}</p>{href && <p><a href={href}>{link}</a></p>}</div>
     </li>

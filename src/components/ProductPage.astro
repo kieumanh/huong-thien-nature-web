@@ -42,6 +42,7 @@ const related = products.filter(item => item.slug !== product.slug).sort((a, b) 
       </div>
       <section class="product-related" aria-labelledby="related-title"><div class="shop-section-head"><h2 id="related-title">{vi ? 'Ghé xem thêm' : 'Keep exploring'}</h2><a class="quiet-link" href={shopPath(lang)}>{vi ? 'Toàn bộ catalogue' : 'Full catalogue'} <Arrow /></a></div><div class="shop-grid">{related.map(item => <ProductCard product={item} lang={lang} heading="h3" />)}</div></section>
     </div>
+    <p class="sr-only" role="status" data-stock-status></p>
   </main>
   <Footer lang={lang} />
   <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: copy.name, description: copy.description, image: `https://huongthiennature.com${product.image}`, url: `https://huongthiennature.com${productPath(lang, product.slug)}`, category: category[lang] })} />

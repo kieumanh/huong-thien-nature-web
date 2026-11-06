@@ -18,6 +18,7 @@ const category = productCategories.find(item => item.id === product.category)!;
     {!compact && <p class="product-subtitle">{copy.subtitle}</p>}
     {!compact && <p class="product-unit">{copy.unit}</p>}
     <p class="product-stock" data-stock-slug={product.slug} data-stock="unknown">{stockLabel('unknown', lang)}</p>
+    <a class="quiet-link stock-inquiry" data-stock-inquiry href={`/${lang}/?product=${product.slug}#connect`}>{lang === 'vi' ? 'Hỏi về sản phẩm này' : 'Ask about this product'}</a>
     <div class="product-card-bottom">
       <p class="product-price">{!compact && <span>{lang === 'vi' ? 'Giá tham khảo' : 'Demo price'}</span>}<strong>{formatPrice(product.price, lang)}</strong></p>
       <a class="product-link" href={productPath(lang, product.slug)} aria-label={`${lang === 'vi' ? 'Xem chi tiết' : 'View details'}: ${copy.name}`}>{lang === 'vi' ? 'Chi tiết' : 'Details'} <Arrow /></a>

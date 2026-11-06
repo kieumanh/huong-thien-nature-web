@@ -17,7 +17,7 @@ export type Product = {
   sources: string[]; priceBasis: string;
   translations: Record<Language, ProductCopy>;
 };
-export const stockLabel = (stock: Product['stock'], lang: Language): string => ({ in_stock: { vi: 'Còn hàng', en: 'In stock' }, out_of_stock: { vi: 'Hết hàng', en: 'Out of stock' }, unknown: { vi: 'Cần xác nhận tồn kho', en: 'Stock confirmation needed' } })[stock][lang];
+export const stockLabel = (stock: Product['stock'], lang: Language): string => ({ in_stock: { vi: 'Còn hàng', en: 'In stock' }, out_of_stock: { vi: 'Hết hàng', en: 'Out of stock' }, unknown: { vi: 'Chưa xác nhận tồn kho', en: 'Stock confirmation needed' } })[stock][lang];
 const photo = (slug: string) => `/media/shop/${slug}.webp`;
 export const products: Product[] = [
   {

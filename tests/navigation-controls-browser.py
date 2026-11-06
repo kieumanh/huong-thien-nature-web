@@ -58,6 +58,20 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':375,'height':850})
     page.locator('#connect').scroll_into_view_if_needed()
     page.wait_for_function('!document.querySelector(".back-to-top").hidden')
+    for width in [320, 375, 390]:
+        page.set_viewport_size({'width':width,'height':850})
+        menu = page.locator('.nav-toggle')
+        menu.focus()
+        page.keyboard.press('Enter')
+        assert menu.get_attribute('aria-expanded') == 'true'
+        page.keyboard.press('Escape')
+        assert menu.get_attribute('aria-expanded') == 'false'
+        assert menu.evaluate('el => el === document.activeElement')
+        message = page.locator('#message')
+        message.focus()
+        assert message.evaluate('el => el === document.activeElement')
+        box = message.bounding_box()
+        assert box and box['y'] + box['height'] < 850
     page.screenshot(path=str(out/f'v{version}-contact-controls-mobile.png'))
     assert errors == [], errors
     browser.close()

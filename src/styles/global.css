@@ -517,3 +517,14 @@ fieldset:disabled { opacity: .65; }
   .section { padding-block: clamp(44px, 11vw, 70px); }
   .section-head { margin-bottom: 26px; }
 }
+
+/* Secondary brand palette: fern, clay and rice paper. */
+:root { --brand-fern: #dce8d8; --brand-clay: #8b523d; --brand-rice: #f7f2e6; }
+.brand img { border-radius: 50%; background: var(--brand-rice); padding: 3px; box-shadow: 0 0 0 1px #657a5740; }
+.brand-name small { color: var(--brand-clay); letter-spacing: .23em; }
+.stock-inquiry { color: var(--brand-clay); display: inline-flex; align-items: center; min-height: 44px; }
+.stock-inquiry[hidden] { display: none; }
+@media (max-width: 480px) {
+  html { scroll-padding-bottom: 92px; }
+  .music-toggle > span:not(.music-state-dot) { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
+}

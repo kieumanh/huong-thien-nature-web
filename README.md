@@ -73,3 +73,11 @@ Node.js 24.19.0 and npm 11.9.0 were used for this edition. Set the Cloudflare bu
 - Meditation copy preserves the supplied practice insight: noticing attention wandered and returning without self-judgement is part of the exercise.
 
 See `CONTENT_GUIDE.md` for the supplied files and editorial choices.
+
+### Secondary brand palette
+
+| Color | Hex | Use |
+| --- | --- | --- |
+| Fern | `#DCE8D8` | Soft backgrounds for navigation and highlights |
+| Clay | `#8B523D` | Secondary text accents on light backgrounds |
+| Rice paper | `#F7F2E6` | Warm neutral surfaces and logo backing |

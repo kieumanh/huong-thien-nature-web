@@ -42,6 +42,7 @@ const featured = products[0];
       <noscript><p class="shop-demo-note">{vi ? 'Bạn có thể xem toàn bộ sản phẩm và mở trang chi tiết khi JavaScript tắt.' : 'All products and detail pages remain available with JavaScript disabled.'}</p></noscript>
     </section>
     <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'MAKE ROOM FOR A GOOD MEAL'}</span><h2>{vi ? 'Bạn đang tìm một nguyên liệu?' : 'Looking for an ingredient?'}</h2><p>{vi ? 'Gửi lời nhắn để hỏi thêm về sản phẩm, quy cách và giá chính thức.' : 'Send a message to ask about products, pack sizes and confirmed prices.'}</p></div><a class="button" href={`/${lang}/#connect`}>{vi ? 'Kết nối Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
+    <p class="sr-only" role="status" data-stock-status></p>
   </main>
   <Footer lang={lang} />
   <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'ItemList', name: title, itemListElement: products.map((product, index) => ({ '@type': 'ListItem', position: index + 1, name: product.translations[lang].name, url: `https://huongthiennature.com${productPath(lang, product.slug)}` })) })} />

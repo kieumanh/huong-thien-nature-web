@@ -1,3 +1,4 @@
+import { products } from './data/products.ts';
 import { onRequest as handleContact } from '../functions/api/contact.ts';
 import { onRequestGet as handleContactConfig } from '../functions/api/contact-config.ts';
 import { json, type ContactEnv } from '../functions/_lib/contact.ts';
@@ -24,10 +25,12 @@ const worker = {
 
     if (pathname === '/api/shop-stock') {
       if (request.method !== 'GET') return json({ ok: false }, 405, { Allow: 'GET' });
+      const unknown = Object.fromEntries(products.map(({ slug }) => [slug, 'unknown']));
+      const unavailable = () => json({ stock: unknown, status: 'unavailable' }, 503);
       if (env.INVENTORY_SITE_TOKEN) {
         try {
           const catalogue = await env.ASSETS.fetch(new Request(new URL('/catalogue/inventory.json', request.url)));
-          if (!catalogue.ok) return json({ stock: {} }, 503);
+          if (!catalogue.ok) return unavailable();
           const upstream = await fetch('https://huong-thien-inventory.kieumanh2211.chatgpt.site/shop-availability', {
             method: 'POST',
             headers: {
@@ -40,17 +43,20 @@ const worker = {
             signal: AbortSignal.timeout(4500),
           });
           if (upstream.ok) {
-            const { stock } = await upstream.json() as { stock: Record<string, unknown> };
-            const availability = Object.fromEntries(Object.entries(stock).filter(([slug, value]) =>
-              /^[a-z0-9-]{1,100}$/.test(slug) && (value === 'in_stock' || value === 'out_of_stock')));
-            return Response.json({ stock: availability }, { headers: { 'Cache-Control': 'public, max-age=30' } });
+            const { stock } = await upstream.json() as { stock?: Record<string, unknown> };
+            const availability = Object.fromEntries(products.map(({ slug }) => {
+              const value = stock?.[slug];
+              return [slug, value === 'in_stock' || value === 'out_of_stock' ? value : 'unknown'];
+            }));
+            const known = Object.values(availability).filter(value => value !== 'unknown').length;
+            return Response.json({ stock: availability, status: known === products.length ? 'complete' : known ? 'partial' : 'unconfirmed' }, { headers: { 'Cache-Control': 'public, max-age=30' } });
           }
           console.warn('shop-stock upstream response', upstream.status);
         } catch (error) {
           console.warn('shop-stock request failed', error instanceof Error ? error.message : 'unknown');
         }
       }
-      return json({ stock: {} }, 503);
+      return unavailable();
     }
 
     if (pathname.startsWith('/api/')) {

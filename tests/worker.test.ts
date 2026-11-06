@@ -45,3 +45,26 @@ test('Worker keeps the contact endpoint on the Worker when runtime bindings are 
   assert.equal(response.status, 503);
   assert.deepEqual(await response.json(), { ok: false, code: 'unavailable' });
 });
+
+test('stock maps known values and preserves unknown for unmatched catalogue entries', async (t) => {
+  const { products } = await import('../src/data/products.ts');
+  const [first, second, third] = products;
+  const request = new Request('https://example.test/api/shop-stock');
+  const env = { ASSETS: unusedAssets, INVENTORY_SITE_TOKEN: 'test-token' };
+  const upstream = t.mock.method(globalThis, 'fetch', async () => Response.json({
+    stock: { [first.slug]: 'in_stock', [second.slug]: 'out_of_stock', 'unknown-sku': 'in_stock' },
+  }));
+  const partial = await (await worker.fetch(request, env)).json();
+  assert.equal(partial.status, 'partial');
+  assert.equal(partial.stock[first.slug], 'in_stock');
+  assert.equal(partial.stock[second.slug], 'out_of_stock');
+  assert.equal(partial.stock[third.slug], 'unknown');
+  assert.equal(Object.keys(partial.stock).length, products.length);
+  upstream.mock.mockImplementation(async () => Response.json({ stock: {} }));
+  const empty = await (await worker.fetch(request, env)).json();
+  assert.equal(empty.status, 'unconfirmed');
+  assert(Object.values(empty.stock).every(value => value === 'unknown'));
+  const unavailable = await worker.fetch(request, { ASSETS: unusedAssets });
+  assert.equal(unavailable.status, 503);
+  assert.equal(Object.keys((await unavailable.json()).stock).length, products.length);
+});
