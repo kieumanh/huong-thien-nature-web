@@ -1,3 +1,9 @@
+## 2.0.6 — Hành trình Hương Thiền và tinh chỉnh giao diện
+
+- Viết lại hành trình của Hương thành sáu mốc rõ ràng, bổ sung bối cảnh và chuyển tiếp giữa các giai đoạn; đồng bộ nội dung tiếng Anh.
+- Tinh chỉnh nhịp dọc trang chủ và các điểm tương tác dùng chung: điều hướng, focus bàn phím, chân trang và khoảng cách trên màn hình nhỏ.
+- Giữ nguyên các trang chi tiết, nội dung cửa hàng và tính năng hiện có.
+
 ## 2.0.5 — Nút nhạc nền xanh sage dịu nhẹ
 
 - Tinh chỉnh nút nhạc nền thành dáng viên thuốc bo mềm, gọn hơn và thêm trạng thái hover/focus nhẹ.
