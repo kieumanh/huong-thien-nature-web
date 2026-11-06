@@ -36,7 +36,7 @@ const worker = {
               'x-ht-inventory': '1',
             },
             body: await catalogue.text(),
-            redirect: 'error',
+            redirect: 'manual',
             signal: AbortSignal.timeout(4500),
           });
           if (upstream.ok) {
@@ -47,7 +47,7 @@ const worker = {
           }
           console.warn('shop-stock upstream response', upstream.status);
         } catch (error) {
-          console.warn('shop-stock request failed', error instanceof Error ? error.name : 'unknown');
+          console.warn('shop-stock request failed', error instanceof Error ? error.message : 'unknown');
         }
       }
       return json({ stock: {} }, 503);
