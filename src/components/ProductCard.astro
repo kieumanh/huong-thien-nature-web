@@ -2,7 +2,7 @@
 import Arrow from './Arrow.astro';
 import { productPath, productCategories, formatPrice, stockLabel, type Product } from '../data/products';
 import type { Language } from '../data/site';
-const { product, lang, heading = 'h2' } = Astro.props as { product: Product; lang: Language; heading?: 'h2' | 'h3' };
+const { product, lang, heading = 'h2', compact = false } = Astro.props as { product: Product; lang: Language; heading?: 'h2' | 'h3'; compact?: boolean };
 const copy = product.translations[lang];
 const Heading = heading;
 const category = productCategories.find(item => item.id === product.category)!;
@@ -15,11 +15,11 @@ const category = productCategories.find(item => item.id === product.category)!;
   <div class="product-card-copy">
     <span class="product-category">{category[lang]}</span>
     <Heading><a href={productPath(lang, product.slug)}>{copy.name}</a></Heading>
-    <p class="product-subtitle">{copy.subtitle}</p>
-    <p class="product-unit">{copy.unit}</p>
-    <p class="product-stock" data-stock={product.stock}>{stockLabel(product.stock, lang)}</p>
+    {!compact && <p class="product-subtitle">{copy.subtitle}</p>}
+    {!compact && <p class="product-unit">{copy.unit}</p>}
+    {!compact && <p class="product-stock" data-stock={product.stock}>{stockLabel(product.stock, lang)}</p>}
     <div class="product-card-bottom">
-      <p class="product-price"><span>{lang === 'vi' ? 'Giá tham khảo' : 'Demo price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
+      <p class="product-price">{!compact && <span>{lang === 'vi' ? 'Giá tham khảo' : 'Demo price'}</span>}<strong>{formatPrice(product.price, lang)}</strong></p>
       <a class="product-link" href={productPath(lang, product.slug)} aria-label={`${lang === 'vi' ? 'Xem chi tiết' : 'View details'}: ${copy.name}`}>{lang === 'vi' ? 'Chi tiết' : 'Details'} <Arrow /></a>
     </div>
   </div>
