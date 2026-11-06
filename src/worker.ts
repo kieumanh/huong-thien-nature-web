@@ -26,10 +26,18 @@ const worker = {
       if (request.method !== 'GET') return json({ ok: false }, 405, { Allow: 'GET' });
       if (env.INVENTORY_SITE_TOKEN) {
         try {
+          const catalogue = await env.ASSETS.fetch(new Request(new URL('/catalogue/inventory.json', request.url)));
+          if (!catalogue.ok) return json({ stock: {} }, 503);
           const upstream = await fetch('https://huong-thien-inventory.kieumanh2211.chatgpt.site/shop-availability', {
-            headers: { 'OAI-Sites-Authorization': `Bearer ${env.INVENTORY_SITE_TOKEN}` },
+            method: 'POST',
+            headers: {
+              'OAI-Sites-Authorization': `Bearer ${env.INVENTORY_SITE_TOKEN}`,
+              'Content-Type': 'application/json',
+              'x-ht-inventory': '1',
+            },
+            body: await catalogue.text(),
             redirect: 'error',
-            signal: AbortSignal.timeout(4000),
+            signal: AbortSignal.timeout(4500),
           });
           if (upstream.ok) {
             const { stock } = await upstream.json() as { stock: Record<string, unknown> };
@@ -37,8 +45,9 @@ const worker = {
               /^[a-z0-9-]{1,100}$/.test(slug) && (value === 'in_stock' || value === 'out_of_stock')));
             return Response.json({ stock: availability }, { headers: { 'Cache-Control': 'public, max-age=30' } });
           }
-        } catch {
-          // The catalogue remains usable and shows unknown when the inventory is unavailable.
+          console.warn('shop-stock upstream response', upstream.status);
+        } catch (error) {
+          console.warn('shop-stock request failed', error instanceof Error ? error.name : 'unknown');
         }
       }
       return json({ stock: {} }, 503);
