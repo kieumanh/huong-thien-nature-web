@@ -17,7 +17,7 @@ const category = productCategories.find(item => item.id === product.category)!;
     <Heading><a href={productPath(lang, product.slug)}>{copy.name}</a></Heading>
     {!compact && <p class="product-subtitle">{copy.subtitle}</p>}
     {!compact && <p class="product-unit">{copy.unit}</p>}
-    {!compact && <p class="product-stock" data-stock={product.stock}>{stockLabel(product.stock, lang)}</p>}
+    <p class="product-stock" data-stock-slug={product.slug} data-stock="unknown">{stockLabel('unknown', lang)}</p>
     <div class="product-card-bottom">
       <p class="product-price">{!compact && <span>{lang === 'vi' ? 'Giá tham khảo' : 'Demo price'}</span>}<strong>{formatPrice(product.price, lang)}</strong></p>
       <a class="product-link" href={productPath(lang, product.slug)} aria-label={`${lang === 'vi' ? 'Xem chi tiết' : 'View details'}: ${copy.name}`}>{lang === 'vi' ? 'Chi tiết' : 'Details'} <Arrow /></a>

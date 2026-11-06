@@ -26,7 +26,7 @@ const related = products.filter(item => item.slug !== product.slug).sort((a, b) 
           <h1>{copy.name}</h1><p class="product-detail-subtitle">{copy.subtitle}</p>
           <p class="product-description">{copy.description}</p>
           <p class="product-unit">{copy.unit}</p>
-          <p class="product-stock" data-stock={product.stock}>{stockLabel(product.stock, lang)}</p>
+          <p class="product-stock" data-stock-slug={product.slug} data-stock="unknown">{stockLabel('unknown', lang)}</p>
           <ul class="product-keywords" aria-label={vi ? 'Từ khóa sản phẩm' : 'Product keywords'}>{product.keywords[lang].map(keyword => <li><a href={`${vi ? '/vi/timkiem/' : '/en/search/'}?q=${encodeURIComponent(keyword)}`}>{keyword}</a></li>)}</ul>
           <p class="product-price product-detail-price"><span>{vi ? 'Giá tham khảo cho demo' : 'Suggested demo price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
           <p class="shop-demo-note">{vi ? 'Giá và quy cách cần được Hương Thiền xác nhận trước khi đặt mua.' : 'Price and pack size must be confirmed by Hương Thiền before purchase.'}</p>
@@ -46,3 +46,7 @@ const related = products.filter(item => item.slug !== product.slug).sort((a, b) 
   <Footer lang={lang} />
   <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'Product', name: copy.name, description: copy.description, image: `https://huongthiennature.com${product.image}`, url: `https://huongthiennature.com${productPath(lang, product.slug)}`, category: category[lang] })} />
 </BaseLayout>
+
+<script>
+  import '../scripts/shop-stock';
+</script>
