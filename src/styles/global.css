@@ -506,3 +506,14 @@ fieldset:disabled { opacity: .65; }
 
 .contact-fields label { margin-top: 0; }
 @media(max-width:430px) { .contact-card { padding: 20px 16px; } }
+
+/* Shared navigation and interaction refinements. */
+:where(a, button, input, textarea, select, summary):focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
+.nav-toggle { border-radius: 12px; }
+.nav-search:hover, .nav-toggle:hover { background-color: var(--sage); }
+.footer-links { gap: 4px clamp(14px, 3vw, 28px); }
+.footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
+@media (max-width: 760px) {
+  .section { padding-block: clamp(44px, 11vw, 70px); }
+  .section-head { margin-bottom: 26px; }
+}
