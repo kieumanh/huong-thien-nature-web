@@ -20,3 +20,47 @@
 .hybrid-hero .hero-footnote { margin-top: clamp(20px, 4vw, 40px); }
 .journey-chapters p + p { margin-top: .75rem; }
 .journey-chapters p a { text-decoration: underline; text-underline-offset: 3px; }
+
+/* Soft botanical accents for the founder’s photographs and timeline. */
+.founder-journey {
+  background: radial-gradient(ellipse at 8% 5%, #e1e9d9 0, transparent 30rem),
+              linear-gradient(165deg, #f7f5eb, #edf1e6 55%, #f7f3e8);
+}
+.journey-opening { position: relative; isolation: isolate; }
+.journey-opening::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: auto auto 0 0;
+  width: min(30%, 180px);
+  aspect-ratio: 1;
+  background: url('/media/botanical-sprig.svg') left bottom / contain no-repeat;
+  opacity: .25;
+  pointer-events: none;
+}
+.journey-opening img {
+  aspect-ratio: 4 / 5;
+  object-position: center 38%;
+  border-radius: 46% 46% 28px 28px / 35% 35% 28px 28px;
+  border: 6px solid #fffdf5;
+  box-shadow: 0 14px 36px #30442d20;
+}
+.journey-chapters li > div {
+  background: linear-gradient(135deg, #fffdf6, #f7f8ee);
+  border-radius: 24px;
+  box-shadow: 0 5px 18px #30442d0c;
+}
+.journey-number { background: #dce8d8; box-shadow: inset 0 0 0 3px #f7faf1; }
+.journey-gallery img,
+.journey-gallery img:last-child {
+  height: auto;
+  aspect-ratio: 4 / 5;
+  border-radius: 24px;
+  border: 5px solid #fffdf5;
+  box-shadow: 0 10px 28px #30442d17;
+}
+.journey-gallery img:last-child { aspect-ratio: 5 / 6; }
+@media (max-width: 760px) {
+  .journey-opening::after { display: none; }
+  .journey-gallery img, .journey-gallery img:last-child { border-width: 3px; border-radius: 16px; }
+}
