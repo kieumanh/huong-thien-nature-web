@@ -1,3 +1,4 @@
+import { contactPath, contactEmail, hotline } from './contact-channels.ts';
 import { articles, articlePath } from './articles.ts';
 import { getCopy, type Language } from './site.ts';
 import { products, productPath, shopPath, productCategories, formatPrice, stockLabel } from './products.ts';
@@ -18,7 +19,7 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
     { title: t.natureTitle, description: t.natureCopy, url: `/${lang}/#nature`, text: plain([t.natureCopy,t.natureCards,t.natureNote]) },
     { title: lang === 'vi' ? 'Hương Thiền và Kiều Mạnh' : 'Hương Thiền and Kiều Mạnh', description: t.founderCopy, url: `/${lang}/#people`, text: plain([t.founderCopy,t.coCopy]) },
     { title: t.phasesTitle, description: lang === 'vi' ? 'Ba giai đoạn phát triển Hương Thiền Nature.' : 'The three stages of Hương Thiền Nature.', url: `/${lang}/#path`, text: plain(t.phases) },
-    { title: t.contactTitle, description: t.contactCopy, url: `/${lang}/#connect`, text: t.contactCopy },
+    { title: lang === 'vi' ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiền Nature', description: t.contactCopy, url: contactPath(lang), text: [t.contactCopy, 'Zalo', hotline, contactEmail].join(' ') },
   ].map(entry => ({ ...entry, category: lang === 'vi' ? 'Hương Thiền Nature' : 'About us' }));
   const shopCategory = lang === 'vi' ? 'Cửa hàng' : 'Shop';
   const catalogue = { title: shopCategory, description: lang === 'vi' ? 'Catalogue gia vị, ngũ cốc và thức uống với giá tham khảo.' : 'Seasonings, grains and drinks with suggested demo prices.', url: shopPath(lang), category: shopCategory, text: lang === 'vi' ? 'Farm Botanicals sản phẩm thực phẩm chay' : 'Farm Botanicals plant-based pantry products' };

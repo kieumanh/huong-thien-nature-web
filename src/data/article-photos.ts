@@ -1,5 +1,6 @@
 // Pixabay source pages and intrinsic dimensions for the locally hosted photographs.
-export const articlePhotos: Record<string, { source: string; width: number; height: number }> = {
+export const articlePhotos: Record<string, { source?: string; width: number; height: number }> = {
+  '/media/huong-ben-ho.webp': { width: 1120, height: 630 },
   '/media/pixabay-7363535.webp': { source: 'https://pixabay.com/photos/bamboo-forest-path-asia-japan-7363535/', width: 1200, height: 802 },
   '/media/pixabay-1869722.webp': { source: 'https://pixabay.com/photos/beverage-tea-pour-pouring-1869722/', width: 853, height: 1280 },
   '/media/pixabay-6166113.webp': { source: 'https://pixabay.com/photos/buffalo-farmer-lake-pond-animals-6166113/', width: 1200, height: 800 },

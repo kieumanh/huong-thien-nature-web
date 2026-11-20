@@ -42,7 +42,7 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
           return <article class="journal-card">
             <a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a>
             <div class="journal-card-copy">
-              <div class="article-meta"><span>{content.category}</span><span>{article.minutes} {t.readTime}</span></div>
+              <div class="article-meta"><span>{content.category}</span><span>{(lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes)} {t.readTime}</span></div>
               {article.phase === 'roots' && <span class="roots-tag">Roots · {en ? 'Beginner' : 'Nhập môn'}</span>}
               <h2><a href={articlePath(lang, article.slug)}>{content.title}</a></h2>
               <p>{content.description}</p>

@@ -1,4 +1,5 @@
 ---
+import { contactPath } from "../data/contact-channels";
 import { journalPath as journalUrl } from '../data/articles';
 import { version } from '../../package.json';
 import { getCopy, type Language } from '../data/site';
@@ -15,7 +16,7 @@ const t = getCopy(lang);
         <a href={`/${lang}/#practice`}>{t.nav[1]}</a>
         <a href={journalUrl(lang)}>{t.nav[4]}</a>
         <a href={shopPath(lang)}>{lang === 'vi' ? 'Cửa hàng' : 'Shop'}</a>
-        <a href={`/${lang}/#connect`}>{lang === 'vi' ? 'Kết nối' : 'Connect'}</a>
+        <a href={contactPath(lang)}>{lang === 'vi' ? 'Liên hệ' : 'Contact'}</a>
       </nav>
     </div>
     <p class="notice">{t.disclaimer}</p>

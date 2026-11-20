@@ -1,4 +1,5 @@
 ---
+import { contactPath } from "../data/contact-channels";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
@@ -28,8 +29,8 @@ const featured = products[0];
       <div class="shop-controls" hidden>
         <form class="shop-search" role="search" data-shop-search aria-label={vi ? 'Tìm sản phẩm' : 'Search products'}>
           <label class="sr-only" for="shop-search">{vi ? 'Tìm trong cửa hàng' : 'Search the shop'}</label>
-          <input id="shop-search" name="q" type="search" maxlength="120" placeholder={vi ? 'Tên, thành phần, từ khóa…' : 'Name, ingredient, keyword…'} autocomplete="off" aria-controls="shop-grid" />
-          <button class="button" type="submit"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7" /><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg><span>{vi ? 'Tìm kiếm' : 'Search'}</span></button>
+          <input id="shop-search" name="q" type="search" maxlength="120" placeholder={vi ? 'Tên hoặc thành phần…' : 'Name, ingredient, keyword…'} autocomplete="off" aria-controls="shop-grid" />
+          <button class="button" type="submit" aria-label={vi ? "Tìm sản phẩm" : "Search products"}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7" /><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg><span>{vi ? 'Tìm kiếm' : 'Search'}</span></button>
         </form>
         <div class="shop-filters" role="group" aria-label={vi ? 'Lọc nhóm sản phẩm' : 'Filter product categories'}>
           <button type="button" data-filter="all" aria-pressed="true">{vi ? 'Tất cả' : 'All'} <span>{products.length}</span></button>
@@ -41,7 +42,7 @@ const featured = products[0];
       <div class="shop-empty" hidden><h3>{vi ? 'Chưa tìm thấy sản phẩm' : 'No products found'}</h3><p>{vi ? 'Thử tên ngắn hơn hoặc chọn nhóm khác.' : 'Try a shorter name or another category.'}</p><button type="button" class="button" data-shop-reset>{vi ? 'Xem tất cả sản phẩm' : 'Show all products'}</button></div>
       <noscript><p class="shop-demo-note">{vi ? 'Bạn có thể xem toàn bộ sản phẩm và mở trang chi tiết khi JavaScript tắt.' : 'All products and detail pages remain available with JavaScript disabled.'}</p></noscript>
     </section>
-    <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'MAKE ROOM FOR A GOOD MEAL'}</span><h2>{vi ? 'Bạn đang tìm một nguyên liệu?' : 'Looking for an ingredient?'}</h2><p>{vi ? 'Gửi lời nhắn để hỏi thêm về sản phẩm, quy cách và giá chính thức.' : 'Send a message to ask about products, pack sizes and confirmed prices.'}</p></div><a class="button" href={`/${lang}/#connect`}>{vi ? 'Kết nối Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
+    <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'MAKE ROOM FOR A GOOD MEAL'}</span><h2>{vi ? 'Bạn đang tìm một nguyên liệu?' : 'Looking for an ingredient?'}</h2><p>{vi ? 'Gửi lời nhắn để hỏi thêm về sản phẩm, quy cách và giá chính thức.' : 'Send a message to ask about products, pack sizes and confirmed prices.'}</p></div><a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
     <p class="sr-only" role="status" data-stock-status></p>
   </main>
   <Footer lang={lang} />

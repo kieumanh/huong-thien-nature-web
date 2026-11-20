@@ -1,9 +1,10 @@
 ---
 import '../styles/global.css';
+import { contactEmail, internationalPhone } from '../data/contact-channels';
 import BackgroundMusic from '../components/BackgroundMusic.astro';
 import BackToTop from '../components/BackToTop.astro';
 import { version } from '../../package.json';
-const { lang = 'vi', title, description, alternatePath, image = '/media/hero-canopy-v2.webp', ogType = 'website' } = Astro.props;
+const { lang = 'vi', title, description, alternatePath, image = '/media/huong-ben-ho.webp', ogType = 'website', noindex = false } = Astro.props;
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
   ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const url = new URL(pathname, 'https://huongthiennature.com');
@@ -19,6 +20,7 @@ const siteName = 'Hương Thiền Nature';
     <meta name="theme-color" content="#243f32" />
     <meta name="color-scheme" content="light" />
     <meta name="application-version" content={version} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <meta name="description" content={description} />
     <link rel="canonical" href={url.href} />
     {alternatePath && <>
@@ -32,6 +34,7 @@ const siteName = 'Hương Thiền Nature';
     <meta property="og:description" content={description} />
     <meta property="og:url" content={url.href} />
     <meta property="og:image" content={new URL(image, 'https://huongthiennature.com').href} />
+    {alternatePath && <meta property="og:locale:alternate" content={lang === 'vi' ? 'en_US' : 'vi_VN'} />}
     <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
@@ -41,7 +44,10 @@ const siteName = 'Hương Thiền Nature';
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify({
       '@context': 'https://schema.org', '@type': 'Organization', name: siteName,
-      url: 'https://huongthiennature.com', description,
+      '@id': 'https://huongthiennature.com/#organization',
+      url: 'https://huongthiennature.com',
+      logo: 'https://huongthiennature.com/media/huong-thien-logo-forest.webp',
+      contactPoint: { '@type': 'ContactPoint', email: contactEmail, telephone: internationalPhone, contactType: 'customer support', availableLanguage: ['vi', 'en'] },
       founder: [{ '@type': 'Person', name: 'Hương Thiền', jobTitle: 'Founder & Teacher' }, { '@type': 'Person', name: 'Kiều Mạnh', jobTitle: 'Co-founder & Teacher' }],
     })} />
   </head>

@@ -3,11 +3,11 @@ import Arrow from './Arrow.astro';
 import { contactCopy, contactInterests } from '../data/contact';
 import type { Language } from '../data/site';
 import { products } from '../data/products';
-const { lang } = Astro.props as { lang: Language };
+const { lang, standalone = false } = Astro.props as { lang: Language; standalone?: boolean };
 const t = contactCopy[lang];
 ---
 <div class="contact-card">
-  <h3>{t.title}</h3>
+  {standalone ? <h2>{t.title}</h2> : <h3>{t.title}</h3>}
   <form id="interest-form" data-language={lang} data-products={JSON.stringify(products.map(product => ({ slug: product.slug, name: product.translations[lang].name })))} aria-busy="true">
     <fieldset disabled><legend class="sr-only">{t.title}</legend>
       <div class="contact-fields">

@@ -528,3 +528,58 @@ fieldset:disabled { opacity: .65; }
   html { scroll-padding-bottom: 92px; }
   .music-toggle > span:not(.music-state-dot) { position: absolute; clip-path: inset(50%); width: 1px; height: 1px; overflow: hidden; }
 }
+
+.nav-contact-mobile { display: none; }
+@media (max-width: 760px) { .nav-links .nav-contact-mobile { display: block; } }
+.contact-channels {
+  display: grid;
+  gap: .75rem;
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  font-style: normal;
+}
+.contact-channels a {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .4rem 1rem;
+  align-items: center;
+  padding: .85rem 1rem;
+  min-height: 44px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background-color: var(--paper);
+  overflow-wrap: anywhere;
+}
+.contact-channels a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.contact-grid > * { min-width: 0; }
+.contact h1 { font-size: clamp(2.35rem, 5vw, 4rem); line-height: 1.12; }
+.home-search-fields input, .search-form input { min-height: 50px; border-radius: 14px; }
+.home-search-fields .button, .search-form .button {
+  align-self: center;
+  min-height: 44px;
+  padding: .55rem .8rem;
+  font-size: .85rem;
+  border-radius: 12px;
+}
+@media (max-width: 520px) {
+  .home-search-fields, .search-form { flex-direction: row; gap: 8px; }
+}
+:is(.pillar, .phase, .journal-card, .related-card, .reflection-note, .article-toc, .article-practice, .interest-card) {
+  border-radius: 20px;
+}
+:where(.journal-card, .related-card, .product-card, .journey-album__grid, .nature-photos) img { border-radius: 14px; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  :is(.pillar, .phase, .journal-card, .related-card, .product-card, .contact-channels a) {
+    transition: translate .24s ease, box-shadow .24s ease;
+  }
+  :is(.pillar, .phase, .journal-card, .related-card, .product-card, .contact-channels a):hover {
+    translate: 0 -4px;
+    box-shadow: 0 12px 24px #243f321c;
+  }
+  :is(.journey-album__grid img, .nature-photos img, .practice-reminder img, .portrait-wrap img) {
+    transition: scale .3s ease;
+  }
+  :is(.journey-album__grid img, .nature-photos img, .practice-reminder img, .portrait-wrap img):hover { scale: 1.025; }
+}
+.contact .contact-card { border-radius: 20px; }
+.contact .contact-card h2 { font-size: 1.5rem; }

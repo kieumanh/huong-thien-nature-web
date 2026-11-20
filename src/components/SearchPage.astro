@@ -9,7 +9,7 @@ const title=en?'Search':'Tìm kiếm';
 const path=en?'/en/search/':'/vi/timkiem/';
 const alternatePath=en?'/vi/timkiem/':'/en/search/';
 ---
-<BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={en?'Search articles, products, prices and stock status at Hương Thiền Nature.':'Tìm bài viết, sản phẩm, giá tham khảo và trạng thái tồn kho tại Hương Thiền Nature.'} alternatePath={alternatePath}>
+<BaseLayout noindex lang={lang} title={`${title} | Hương Thiền Nature`} description={en?'Search articles, products, prices and stock status at Hương Thiền Nature.':'Tìm bài viết, sản phẩm, giá tham khảo và trạng thái tồn kho tại Hương Thiền Nature.'} alternatePath={alternatePath}>
   <Header lang={lang} alternatePath={alternatePath} isInnerPage />
   <main id="main-content" tabindex="-1" class="shell search-page" data-search-page data-language={lang}>
     <span class="eyebrow">{en?'Explore our library':'Khám phá thư viện'}</span>

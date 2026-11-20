@@ -4,6 +4,7 @@ import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articles as articleEntries, articlePath, journalPath } from '../src/data/articles.ts';
 import { products, productPath, shopPath } from '../src/data/products.ts';
+import { contactPath } from '../src/data/contact-channels.ts';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const base = 'https://huongthiennature.com';
@@ -16,7 +17,7 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, articleEntries.length * 2 + 8 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
+assert.equal(files.length, articleEntries.length * 2 + 10 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, (articleEntries.length + products.length + 4) * 2, 'Sitemap must list all localized pages and products');
@@ -35,19 +36,27 @@ for (const file of files) {
     assert.equal([...html.matchAll(/<h1\b/g)].length, 1, `Expected one page heading on ${route}`);
     assert.equal([...html.matchAll(/<main\b/g)].length, 1, `Expected one main landmark on ${route}`);
     assert(html.includes(`rel="canonical" href="${base}${route}"`), `Incorrect canonical on ${route}`);
-    assert(locations.includes(base + route), `Sitemap missing ${route}`);
+    if (route === '/vi/timkiem/' || route === '/en/search/') {
+      assert(!locations.includes(base + route) && html.includes('name="robots" content="noindex, follow"'), `Search results must be excluded from indexing on ${route}`);
+    } else {
+      assert(locations.includes(base + route), `Sitemap missing ${route}`);
+    }
     const other = lang === 'vi' ? 'en' : 'vi';
     const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
     const product = products.find(item => productPath(lang, item.slug) === route);
-    const alternate = product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
+    const alternate = route === contactPath(lang) ? contactPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
     assert(html.includes(`href="${shopPath(lang)}"`), `Shop navigation missing on ${route}`);
     if (route === shopPath(lang)) {
       assert.equal([...html.matchAll(/data-product-card/g)].length, products.length, `Catalogue must include every supplied product on ${route}`);
       for (const item of products) assert(html.includes(`href="${productPath(lang, item.slug)}"`), `Missing product link: ${item.slug}`);
     }
+    if (route === contactPath(lang)) {
+      assert(html.includes('id="interest-form"') && html.includes('mailto:huongthiennature@gmail.com')
+        && html.includes('tel:+84868499856') && html.includes('https://zalo.me/0868499856'), `Contact channels missing on ${route}`);
+    }
     if (product) {
-      assert(html.includes(`?product=${product.slug}#connect`), `Product enquiry must retain product identity on ${route}`);
+      assert(html.includes(`${contactPath(lang)}?product=${product.slug}#connect`), `Product enquiry must retain product identity on ${route}`);
       assert(html.includes('product-information') && html.includes('shop-demo-note'), `Missing product details or demo notice on ${route}`);
       assert(!html.includes('"@type":"Offer"'), `Demo prices must not be advertised as live offers on ${route}`);
     }
@@ -82,13 +91,13 @@ assert.equal(articles, articleEntries.length * 2, 'Both translations of every ar
 
 assert(!locations.some(url => url.includes('/vi/journal/')), 'Vietnamese sitemap must use localized URLs');
 const redirects = await readFile(join(dist, '_redirects'), 'utf8');
-for (const item of articleEntries.filter(item => item.phase !== 'roots')) {
+for (const item of articleEntries.filter(item => ['returning-attention', 'seven-layers', 'listening-to-nature'].includes(item.slug))) {
   assert(redirects.includes(`/vi/journal/${item.slug}/ ${articlePath('vi', item.slug)} 301`), 'Legacy article must redirect');
 }
 const roots = articleEntries.filter(item => item.phase === 'roots');
 assert.equal(roots.length, 12, 'The complete first Roots release must contain all twelve planned articles');
 assert.equal(new Set(roots.map(item => item.id)).size, 12, 'Roots editorial IDs must be unique');
-for (const item of articleEntries) assert.match(item.image, /^\/media\/pixabay-\d+\.webp$/);
+for (const item of articleEntries.filter(item => item.slug !== 'when-meditation-is-difficult')) assert.match(item.image, /^\/media\/pixabay-\d+\.webp$/);
 for (const item of roots) {
   const imageBytes = await readFile(join(dist, item.image));
   assert(imageBytes.length > 1000 && imageBytes.subarray(0, 4).toString() === 'RIFF' && imageBytes.subarray(8, 12).toString() === 'WEBP', `Invalid illustration: ${item.image}`);

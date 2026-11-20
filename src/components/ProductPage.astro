@@ -1,4 +1,5 @@
 ---
+import { contactPath } from "../data/contact-channels";
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
@@ -31,7 +32,7 @@ const related = products.filter(item => item.slug !== product.slug).sort((a, b) 
           <p class="product-price product-detail-price"><span>{vi ? 'Giá tham khảo cho demo' : 'Suggested demo price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
           <p class="shop-demo-note">{vi ? 'Giá và quy cách cần được Hương Thiền xác nhận trước khi đặt mua.' : 'Price and pack size must be confirmed by Hương Thiền before purchase.'}</p>
 
-          <a class="button" href={`/${lang}/?product=${product.slug}#connect`}>{vi ? 'Hỏi về sản phẩm này' : 'Ask about this product'} <Arrow /></a>
+          <a class="button" href={`${contactPath(lang)}?product=${product.slug}#connect`}>{vi ? 'Hỏi về sản phẩm này' : 'Ask about this product'} <Arrow /></a>
           <a class="product-back" href={shopPath(lang)}>{vi ? '← Trở lại cửa hàng' : '← Back to the shop'}</a>
         </div>
       </article>

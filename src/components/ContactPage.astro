@@ -1,0 +1,48 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import ContactForm from './ContactForm.astro';
+import { contactPath, contactEmail, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const vi = lang === 'vi';
+const title = vi ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiền Nature';
+const description = vi
+  ? 'Gọi hoặc nhắn Zalo 0868499856, gửi email hoặc để lại lời nhắn cho Hương Thiền Nature qua biểu mẫu.'
+  : 'Call Hương Thiền Nature, message us on Zalo, send an email or leave a message using the contact form.';
+const alternatePath = contactPath(vi ? 'en' : 'vi');
+const url = new URL(contactPath(lang), Astro.site).href;
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'ContactPage',
+  url,
+  name: title,
+  description,
+  inLanguage: lang,
+  mainEntity: { '@id': 'https://huongthiennature.com/#organization' },
+};
+---
+<BaseLayout {lang} {title} {description} {alternatePath}>
+  <Header {lang} {alternatePath} isInnerPage />
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+  <main id="main-content" class="section contact" tabindex="-1">
+    <div class="shell contact-grid">
+      <div>
+        <h1>{title}</h1>
+        <p class="lead">{vi
+          ? 'Bạn có thể hỏi về bài tập thiền, sản phẩm trong cửa hàng hoặc gửi góp ý cho nhóm Hương Thiền.'
+          : 'Ask us about meditation practices, products in the shop or share your feedback with the Hương Thiền team.'}</p>
+        <address class="contact-channels">
+          <a href={`tel:${internationalPhone}`}><strong>Hotline</strong><span>{hotline}</span></a>
+          <a href={zaloUrl}><strong>Zalo</strong><span>{hotline}</span></a>
+          <a href={`mailto:${contactEmail}`}><strong>Email</strong><span>{contactEmail}</span></a>
+        </address>
+      </div>
+      <div id="connect"><ContactForm {lang} standalone /></div>
+    </div>
+  </main>
+  <Footer {lang} />
+</BaseLayout>

@@ -1,4 +1,5 @@
 ---
+import { contactPath } from "../data/contact-channels";
 import { journalPath as journalUrl } from '../data/articles';
 import Arrow from './Arrow.astro';
 import { getCopy, type Language } from '../data/site';
@@ -21,6 +22,7 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
     <nav class="nav-links" id="main-nav" aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
       {sections.map((section, index) => <a href={sectionHref(section)} class:list={{ active: section === 'journal' && Astro.url.pathname.startsWith(journalPath) }} aria-current={section === 'journal' && Astro.url.pathname === journalPath ? 'page' : undefined}>{t.nav[index]}</a>)}
       <a href={shopPath(lang)} class:list={{ active: Astro.url.pathname.startsWith(shopPath(lang)) }} aria-current={Astro.url.pathname === shopPath(lang) ? 'page' : undefined}>{lang === 'vi' ? 'Cửa hàng' : 'Shop'}</a>
+      <a class="nav-contact-mobile" href={contactPath(lang)}>{lang === "vi" ? "Liên hệ" : "Contact"}</a>
     </nav>
     <div class="nav-actions">
       <a class="nav-search" href={lang === 'vi' ? '/vi/timkiem/' : '/en/search/'} aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'} title={lang === 'vi' ? 'Tìm kiếm' : 'Search'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
@@ -29,7 +31,7 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
         <span aria-hidden="true">/</span>
         <a class={lang === 'en' ? 'active' : ''} aria-current={lang === 'en' ? 'page' : undefined} href={lang === 'en' ? undefined : alternatePath} lang="en" aria-label="English">EN</a>
       </nav>
-      <a class="nav-connect" href={sectionHref('connect')}>{lang === 'vi' ? 'Kết nối' : 'Connect'} <Arrow /></a>
+      <a class="nav-connect" href={contactPath(lang)} aria-current={Astro.url.pathname === contactPath(lang) ? 'page' : undefined}>{lang === 'vi' ? 'Liên hệ' : 'Contact'} <Arrow /></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={lang === 'vi' ? 'Mở điều hướng' : 'Open navigation'} data-open-label={lang === 'vi' ? 'Mở điều hướng' : 'Open navigation'} data-close-label={lang === 'vi' ? 'Đóng điều hướng' : 'Close navigation'}>
         <span aria-hidden="true"></span><span aria-hidden="true"></span>
       </button>

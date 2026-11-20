@@ -1,4 +1,5 @@
 ---
+import { articleAnswers } from "../../../data/article-answers";
 import { articlePhotos } from "../../../data/article-photos";
 import Arrow from '../../../components/Arrow.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
@@ -44,12 +45,12 @@ const schema = {
     <article class="article-page">
       <header class="article-header shell">
         <nav class="breadcrumbs" aria-label={lang === 'vi' ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{t.home}</a><span aria-hidden="true">/</span><a href={journalPath(lang)}>{t.journalHome}</a></nav>
-        <div class="article-meta"><span>{content.category}</span><span>{article.minutes} {t.readTime}</span></div>
+        <div class="article-meta"><span>{content.category}</span><span>{(lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes)} {t.readTime}</span></div>
         <h1>{content.title}</h1>
-        <p class="lead">{content.description}</p>
+        <p class="lead">{articleAnswers[article.slug]?.[lang] ?? content.description}</p>
         {article.phase === 'roots' && <p class="article-byline">{lang === 'vi' ? 'Kiều Mạnh · Biên tập từ Thiền Tinh Hoa' : 'Kiều Mạnh · Adapted from Thiền Tinh Hoa'} · <time datetime={article.publishedAt}>{lang === 'vi' ? '07/10/2026' : '7 October 2026'}</time></p>}
       </header>
-      <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption><a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a></figcaption></figure>
+      <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
       <div class="article-body">
         <p class="article-introduction">{content.introduction}</p>
         <nav class="article-toc" aria-label={lang === 'vi' ? 'Mục lục bài viết' : 'Article contents'}><h2>{lang === 'vi' ? 'Trong bài này' : 'In this article'}</h2><ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol></nav>

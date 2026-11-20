@@ -1,4 +1,6 @@
 import type { Language } from './site';
+import { articleDepth } from './article-depth.ts';
+import { meditationChallenges } from './meditation-challenges.ts';
 import { rootsArticles } from './roots-articles.ts';
 
 export type ArticleTranslation = {
@@ -17,6 +19,7 @@ export type Article = {
   slug: string;
   image: string;
   minutes: number;
+  minutesVi?: number;
   translations: Record<Language, ArticleTranslation>;
   id?: string;
   viSlug?: string;
@@ -30,7 +33,8 @@ export type Article = {
   sources?: { title: string; url?: string }[];
 };
 
-export const articles: Article[] = [
+const baseArticles: Article[] = [
+  meditationChallenges,
   ...rootsArticles,
   {
     slug: 'returning-attention',
@@ -192,6 +196,20 @@ export const articles: Article[] = [
     },
   },
 ];
+
+export const articles: Article[] = baseArticles.map(article => {
+  const additions = articleDepth[article.slug];
+  if (!additions) return article;
+  const vi = article.translations.vi;
+  const sections = [...vi.sections, ...additions];
+  const words = [vi.introduction, ...sections.flatMap(section => section.paragraphs), ...vi.practice.steps].join(' ').trim().split(/\s+/).length;
+  return {
+    ...article,
+    updatedAt: '2026-11-20',
+    minutesVi: Math.ceil(words / 180),
+    translations: { ...article.translations, vi: { ...vi, sections } },
+  };
+});
 
 export function articlePath(lang: Language, slug: string) {
   const vietnamese: Record<string, string> = {
