@@ -15,7 +15,7 @@ const t = getCopy(lang);
 const title = en ? 'Journal' : 'Tản văn';
 const description = en
   ? 'Reflections on meditation, nature and everyday life. Find a story to read at your own pace.'
-  : 'Những bài chia sẻ về thực tập thiền, thiên nhiên và đời sống. Chọn một bài viết để đọc theo nhịp của bạn.';
+  : 'Ở đây mình viết về những gì có thể nhận ra khi ngồi yên, bước ra vườn hay trở về với bữa cơm nhà. Mời bạn chọn một bài hợp với ngày hôm nay.';
 const alternatePath = journalPath(en ? 'vi' : 'en');
 const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering-mind', 'everyday-mindfulness']
   .map(slug => articles.find(article => article.slug === slug)!);
@@ -31,7 +31,7 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
       <p class="journal-count">{articles.length} {en ? 'articles to explore' : 'bài viết để khám phá'}</p>
       <nav class="roots-reading-path" aria-label={en ? 'Suggested reading path' : 'Lộ trình đọc gợi ý'}>
         <h2>{en ? 'Roots — start here' : 'Roots — bắt đầu từ đây'}</h2>
-        <p>{en ? 'Twelve new guides from first steps to everyday practice. Read in this order, or choose what you need today.' : 'Mười hai bài hướng dẫn mới, từ bước đầu đến thực hành trong đời sống. Đọc theo lộ trình hoặc chọn điều bạn cần hôm nay.'}</p>
+        <p>{en ? 'Twelve new guides from first steps to everyday practice. Read in this order, or choose what you need today.' : 'Nếu mới tập, bạn có thể đi theo bốn bài dưới đây, từ lần đầu ngồi xuống đến lúc mang sự chú tâm vào việc thường ngày.'}</p>
         <ol>{readingPath.map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
       </nav>
     </header>

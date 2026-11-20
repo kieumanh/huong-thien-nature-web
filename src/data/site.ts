@@ -16,17 +16,17 @@ export const copy = {
     ],
     "eyebrow": "Thiền định · Thiên nhiên · Đời sống",
     "hero": "Từ những ngày chông chênh.<br/><em>Đến một đời sống có gốc rễ.</em>",
-    "lead": "Hương Thiền Nature bắt đầu từ hành trình của một người học cách hiểu mình — và lớn lên thành mong muốn cùng cộng đồng nuôi dưỡng Thân, chăm sóc Tâm, mở sáng Trí.",
+    "lead": "Mình đến với thiền từ những ngày còn nhiều chông chênh. Hương Thiền Nature lớn dần từ một câu hỏi rất đời thường. Sau khi đứng dậy khỏi chỗ ngồi thiền, mình sống với người bên cạnh thế nào?",
     "explore": "Khám phá thực hành",
     "storyCta": "Câu chuyện của chúng tôi",
     "note": "Không cần kinh nghiệm trước; hãy bắt đầu từ điều gần gũi nhất.",
     "introEyebrow": "01 — Vì sao chúng tôi bắt đầu",
     "introTitle": "Khi đời sống cần một khoảng lắng.",
-    "introCopy": "Có những lúc ta vẫn làm việc, vẫn chăm lo cho mọi người, nhưng lại xa lạ với chính mình. Từ trải nghiệm ấy, Hương Thiền chọn xây dựng một không gian để con người được chậm lại, học cách lắng nghe và tìm lại mối liên hệ với thiên nhiên. Điều học được ở đây cần có chỗ trong bữa ăn, công việc và những mối quan hệ mỗi ngày.",
+    "introCopy": "Có những ngày mình nhớ từng việc phải làm cho người khác, đến tối mới nhận ra hai vai đã mỏi từ lâu. Học lắng nghe bắt đầu từ những điều nhỏ như thế. Mình mong nơi đây có chỗ cho cả chuyện ngồi thiền lẫn chuyện bếp núc, làm vườn và học cách nghe nhau nói hết một câu.",
     "introMark": "Sống tử tế với thân mình, với nhau và với đất.",
     "practiceEye": "03 — Mang thực tập vào đời sống",
     "practiceTitle": "Tâm đi xa.<br/>Ta nhẹ nhàng trở lại.",
-    "practiceCopy": "Thiền không phải là ép tâm trí trống rỗng. Hãy nhận ra sự chú ý đã đi đâu, rồi nhẹ nhàng quay về điểm tựa. Chính sự quay về là thực tập.",
+    "practiceCopy": "Giữa một hơi thở, có khi mình đã đi rất xa trong ý nghĩ. Lúc chợt nhận ra, mình để ý bàn chân đang chạm đất và nghe hơi thở kế tiếp. Bạn cũng có thể thử ngay ở chỗ đang ngồi.",
     "steps": [
       [
         "01",
@@ -46,7 +46,7 @@ export const copy = {
     ],
     "natureEye": "04 — Hệ sinh thái Hương Thiền Nature",
     "natureTitle": "Một mái nhà. Ba hành trình chăm sóc.",
-    "natureCopy": "Từ đất lành, đến khoảng nghỉ giữa thiên nhiên, rồi mở rộng hiểu biết — ba hướng cùng chăm sóc Thân, Tâm và Trí.",
+    "natureCopy": "Một bữa cơm gợi chuyện về đất. Một buổi đi bộ trong vườn cho mình dịp nghỉ chân. Từ những việc gần gũi ấy, ba hướng của Hương Thiền Nature dần thành hình.",
     "natureNote": "Catalogue Farm & Botanicals hiện dùng giá tham khảo; giá và tồn kho cần xác nhận. Eco-Retreat, Academy và Membership là định hướng tương lai, chưa mở đăng ký.",
     "natureCards": [
       [
@@ -67,10 +67,10 @@ export const copy = {
     "founderRole": "Người sáng lập · Tác giả · Người hướng dẫn",
     "founderCopy": "Đỗ Thị Kim Hương, sinh ra và lớn lên tại Quảng Nam, là người khởi xướng Hương Thiền Nature. Từ trải nghiệm tự lập sớm và hành trình thiền tập, cô chọn kết nối đời sống tỉnh thức với thiên nhiên và sự phụng sự cộng đồng.",
     "coRole": "Đồng sáng lập · Người hướng dẫn",
-    "coCopy": "Kiều Mạnh là Teacher kiêm Co-founder, cùng định hình hành trình học tập và những nền tảng thực hành của dự án.",
+    "coCopy": "Kiều Mạnh cùng sáng lập Hương Thiền Nature, tham gia hướng dẫn và xây dựng các công cụ để mọi người có thể tự học, thực hành và ghi nhận hành trình của mình.",
     "journalEye": "Ghi chép từ đời sống",
     "journalTitle": "Ghi chép từ những điều bình thường.",
-    "phasesTitle": "Phát triển theo nhịp người thật",
+    "phasesTitle": "Những việc đang làm và dự định sắp tới",
     "phases": [
       [
         "01",
@@ -95,7 +95,7 @@ export const copy = {
     ],
     "contactEye": "Kết nối",
     "contactTitle": "Bạn đang ở đâu trên hành trình của mình?",
-    "contactCopy": "Nếu muốn tìm hiểu cách dự án được hình thành, hỏi về catalogue hoặc chia sẻ một suy nghĩ, hãy gửi lời nhắn. Chúng tôi sẽ phản hồi khi có thể.",
+    "contactCopy": "Có thể bạn muốn hỏi về một bài tập, một món trong gian bếp, hoặc kể lại điều vừa nhận ra khi đọc. Bạn có thể viết cho mình ở đây. Nhóm Hương Thiền sẽ hồi âm khi có thể.",
     "footer": "Thiền định · Chánh niệm · Chăm sóc tự nhiên",
     "disclaimer": "Website chia sẻ nội dung giáo dục và thực tập chiêm nghiệm, không thay thế chăm sóc y tế hay sức khỏe tâm thần. Mọi thực tập đều tùy chọn; hãy điều chỉnh theo nhu cầu của bạn.",
     "top": "Trở về đầu trang",

@@ -88,7 +88,7 @@ for (const item of articleEntries.filter(item => item.phase !== 'roots')) {
 const roots = articleEntries.filter(item => item.phase === 'roots');
 assert.equal(roots.length, 12, 'The complete first Roots release must contain all twelve planned articles');
 assert.equal(new Set(roots.map(item => item.id)).size, 12, 'Roots editorial IDs must be unique');
-assert.equal(new Set(roots.map(item => item.image)).size, 6, 'Roots must use all six illustrations');
+for (const item of articleEntries) assert.match(item.image, /^\/media\/pixabay-\d+\.webp$/);
 for (const item of roots) {
   const imageBytes = await readFile(join(dist, item.image));
   assert(imageBytes.length > 1000 && imageBytes.subarray(0, 4).toString() === 'RIFF' && imageBytes.subarray(8, 12).toString() === 'WEBP', `Invalid illustration: ${item.image}`);
@@ -112,4 +112,4 @@ for (const lang of ['vi','en']) {
   const home = await readFile(join(dist, lang, 'index.html'), 'utf8');
   assert(!home.includes('mailto:') && !home.includes('data-gmail'), 'Contact must use server delivery only');
 }
-console.log(`Build audit passed: ${files.length} HTML pages, ${articles} articles, ${locations.length} sitemap URLs, ${references} local links/assets, twelve Roots entries and six valid WebP illustrations.`);
+console.log(`Build audit passed: ${files.length} HTML pages, ${articles} articles, ${locations.length} sitemap URLs, ${references} local links/assets, twelve Roots entries with local Pixabay photographs.`);

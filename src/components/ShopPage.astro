@@ -10,7 +10,7 @@ import '../styles/shop.css';
 const { lang } = Astro.props as { lang: Language };
 const vi = lang === 'vi';
 const title = vi ? 'Cửa hàng' : 'Shop';
-const description = vi ? 'Khám phá catalogue gia vị, ngũ cốc và thức uống cho gian bếp chay. Xem ảnh thật, giá tham khảo và thông tin từng sản phẩm.' : 'Explore seasonings, grains and drinks for your plant-based pantry, with real photographs, demo prices and individual product pages.';
+const description = vi ? 'Tìm hiểu các loại gia vị, ngũ cốc và thức uống cho gian bếp chay. Xem ảnh thật, giá tham khảo và thông tin từng sản phẩm.' : 'Explore seasonings, grains and drinks for your plant-based pantry, with real photographs, demo prices and individual product pages.';
 const alternatePath = shopPath(vi ? 'en' : 'vi');
 const featured = products[0];
 ---
@@ -20,8 +20,8 @@ const featured = products[0];
     <section class="shop-intro shell" aria-labelledby="shop-title">
       <nav class="shop-breadcrumbs" aria-label={vi ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{vi ? 'Trang chủ' : 'Home'}</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
       <span class="eyebrow">FARM & BOTANICALS · {vi ? 'CỬA HÀNG' : 'SHOP'}</span>
-      <h1 id="shop-title">{vi ? 'Một góc bếp, nhiều điều lành.' : 'A little pantry, a gentler everyday.'}</h1>
-      <p class="lead">{vi ? 'Gia vị, ngũ cốc và thức uống cho bữa ăn chay mỗi ngày.' : 'Seasonings, grains and drinks for everyday plant-based meals.'}</p>
+      <h1 id="shop-title">{vi ? 'Gian bếp chay nhà mình' : 'A little pantry, a gentler everyday.'}</h1>
+      <p class="lead">{vi ? 'Một chút tương cho đĩa rau luộc, ít rong biển cho nồi canh. Mời bạn ghé xem những nguyên liệu quen thuộc trong bữa chay.' : 'Seasonings, grains and drinks for everyday plant-based meals.'}</p>
     </section>
     <section class="shop-catalogue shell" id="shop-products" aria-labelledby="catalogue-title" data-shop-catalogue data-lang={lang}>
       <h2 id="catalogue-title" class="sr-only">{vi ? 'Danh sách sản phẩm' : 'Product catalogue'}</h2>

@@ -34,15 +34,15 @@ export const articles: Article[] = [
   ...rootsArticles,
   {
     slug: 'returning-attention',
-    image: '/media/practice-cushion-v2.webp',
+    image: '/media/pixabay-1287964.webp',
     minutes: 4,
     translations: {
       vi: {
         category: 'Thực tập',
         title: 'Sự trở lại cũng là thực tập',
         description: 'Một thực tập ngắn để nhận ra tâm đi lang thang và nhẹ nhàng trở về với hơi thở.',
-        imageAlt: 'Đệm thiền và chiếc bình trong khoảng rừng yên tĩnh.',
-        introduction: 'Có những lúc vừa ngồi xuống, ta đã thấy mình ở trong một cuộc trò chuyện cũ, một danh sách việc cần làm, hay một điều chưa xảy ra. Đó không phải là dấu hiệu mình thực tập sai. Khoảnh khắc nhận ra chính là nơi có thể bắt đầu lại.',
+        imageAlt: 'Những chân nhang trong lớp tro ở một ngôi chùa tại Sài Gòn.',
+        introduction: 'Vừa ngồi xuống, mình đã nghĩ ra câu đáng lẽ nên nói trong cuộc trò chuyện hôm qua. Rồi chợt nghe tiếng xe ngoài ngõ và nhận ra mình vẫn ở đây. Giữa một buổi tập như thế, chính cái chợt nghe ấy là lúc mình quay về.',
         sections: [
           { title: 'Chọn một điểm tựa vừa đủ', paragraphs: [
             'Không cần thay đổi hơi thở. Bạn có thể chú ý đến cảm giác không khí đi qua mũi, chuyển động của bụng, hoặc sự tiếp xúc giữa bàn chân và mặt đất. Chọn điều dễ nhận biết nhất trong lúc này.',
@@ -64,7 +64,7 @@ export const articles: Article[] = [
         category: 'Practice',
         title: 'Returning is part of the practice',
         description: 'A short practice for noticing a wandering mind and gently returning to the breath.',
-        imageAlt: 'A meditation cushion and a small vessel in a quiet forest clearing.',
+        imageAlt: 'Incense sticks in ash at a temple in Saigon.',
         introduction: 'Sometimes, just after sitting down, we find ourselves in an old conversation, a list of tasks or something that has not happened yet. This does not mean we are practising incorrectly. The moment of noticing is a place to begin again.',
         sections: [
           { title: 'Choose a simple anchor', paragraphs: [
@@ -87,15 +87,15 @@ export const articles: Article[] = [
   },
   {
     slug: 'seven-layers',
-    image: '/media/fern-study-v2.webp',
+    image: '/media/pixabay-7374190.webp',
     minutes: 5,
     translations: {
       vi: {
         category: 'Chiêm nghiệm',
         title: 'Bảy tầng — một bản đồ để tự hỏi',
         description: 'Tìm hiểu khung bảy tầng trải nghiệm của Hương Thiền Nature như một lời mời chiêm nghiệm cá nhân.',
-        imageAlt: 'Những chiếc lá dương xỉ và rêu trên nền đất rừng.',
-        introduction: 'Một bản đồ có thể giúp ta đặt câu hỏi, nhưng không thay thế trải nghiệm đang diễn ra. Khung bảy tầng của Hương Thiền Nature được chia sẻ theo tinh thần ấy: một cách nhìn do tác giả chiêm nghiệm, để mỗi người quan sát và tự tìm ngôn ngữ cho mình.',
+        imageAlt: 'Lá dương xỉ nổi rõ từng nhánh nhỏ trên nền sáng.',
+        introduction: 'Khi lòng còn rối, câu hỏi dễ trả lời nhất đôi khi là hai bàn tay mình đang nắm hay đang mở. Từ những quan sát gần như thế, mình dùng hình ảnh bảy tầng để lần theo một trải nghiệm. Bạn có thể gọi tên điều mình thấy bằng lời của riêng bạn.',
         sections: [
           { title: 'Từ thân thể đến cách mình hiện diện', paragraphs: [
             'Một cách diễn giải đi qua thân thể; năng lượng và cảm xúc; tâm trí; giá trị và ý chí; tập khí và nghiệp lực; tánh biết; tánh không và duyên khởi. Một diễn giải khác trong tư liệu của tác giả gọi tên thân thể, cảm xúc, tâm trí, tinh thần, nhân quả, tánh biết và tánh không.',
@@ -117,7 +117,7 @@ export const articles: Article[] = [
         category: 'Reflection',
         title: 'Seven layers — a map for asking questions',
         description: 'Explore the seven-layer framework of Hương Thiền Nature as an invitation to personal reflection.',
-        imageAlt: 'Fern leaves and moss on the woodland floor.',
+        imageAlt: 'A fern frond stands out against a bright background.',
         introduction: 'A map can help us ask questions, but it cannot replace experience as it happens. The seven-layer framework of Hương Thiền Nature is offered in that spirit: a personal lens developed by its author, leaving room for each person to observe and find their own language.',
         sections: [
           { title: 'From the body to how we are present', paragraphs: [
@@ -140,15 +140,15 @@ export const articles: Article[] = [
   },
   {
     slug: 'listening-to-nature',
-    image: '/media/woodland-stream-v2.webp',
+    image: '/media/pixabay-6540843.webp',
     minutes: 4,
     translations: {
       vi: {
         category: 'Thiên nhiên',
         title: 'Lắng nghe nơi mình đang đứng',
         description: 'Một cách quan sát thiên nhiên bằng giác quan, sự tò mò và những ghi chép không vội diễn giải.',
-        imageAlt: 'Dòng suối nhỏ đi qua đá và cây xanh trong rừng.',
-        introduction: 'Không phải lúc nào ta cũng có thể đi vào rừng. Một chiếc lá bên cửa sổ, bóng nắng trên tường hay âm thanh của gió cũng có thể là điểm bắt đầu để gặp thế giới sống quanh mình.',
+        imageAlt: 'Thác nước đổ qua vách đá giữa rừng cây ở Việt Nam.',
+        introduction: 'Ngay cả khi chưa thể đi xa, mình vẫn có thể mở cửa sổ và đứng yên một lát. Có tiếng lá, tiếng người, có cả tiếng động cơ vừa nổ máy. Thử nghe cho hết một âm thanh, nơi rất quen ấy bỗng có điều để khám phá.',
         sections: [
           { title: 'Quan sát trước khi diễn giải', paragraphs: [
             'Chọn một điều ở gần: thân cây, đám mây, một chậu cây. Nhận biết màu sắc, đường nét, độ sáng và chuyển động. Thử mô tả những gì đang thấy trước khi tìm ý nghĩa.',
@@ -170,7 +170,7 @@ export const articles: Article[] = [
         category: 'Nature',
         title: 'Listen to the place where you stand',
         description: 'A sensory practice for observing nature with curiosity and notes that leave room for interpretation.',
-        imageAlt: 'A small stream flowing between rocks and green plants in a woodland.',
+        imageAlt: 'A waterfall cascades over rock among trees in Vietnam.',
         introduction: 'We cannot always go into a forest. A leaf by a window, sunlight on a wall or the sound of wind can also be a beginning for meeting the living world around us.',
         sections: [
           { title: 'Observe before interpreting', paragraphs: [
