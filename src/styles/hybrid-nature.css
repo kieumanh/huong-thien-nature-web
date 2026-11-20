@@ -197,6 +197,9 @@
 .ecosystem-active .solar-orbit, .ecosystem-active .solar-planet-counter { animation-play-state: running; }
 @media (max-width:760px) {
   .ecosystem-solar-system { margin-block: 28px 38px; }
+  .ecosystem-controls button { display: none; }
+  .ecosystem-motion .solar-orbit,
+  .ecosystem-motion .solar-planet-counter { animation-play-state: paused; }
   .solar-system-pillars { grid-template-columns: 1fr; gap: 24px; }
   .solar-pillar { padding-top: 16px; }
   .solar-pillar h3 { min-height: 0; }

@@ -5,7 +5,7 @@ export const meditationChallenges: Article = {
   "viSlug": "nhung-kho-khan-khi-thuc-hanh-thien",
   "publishedAt": "2026-11-20",
   "updatedAt": "2026-11-20",
-  "image": "/media/huong-ben-ho.webp",
+  "image": "/media/pixabay-7363535.webp",
   "minutes": 2,
   "minutesVi": 10,
   "relatedSlugs": [
@@ -18,8 +18,8 @@ export const meditationChallenges: Article = {
       "category": "Thực tập",
       "title": "Những ngày ngồi thiền thấy khó",
       "description": "Khi tâm chạy mãi, chân mỏi hoặc căn nhà quá ồn, mình có thể thay đổi điều gì để tiếp tục thực tập?",
-      "imageAlt": "Hương mỉm cười, hai bàn tay tạo hình trái tim bên hồ dưới chân núi.",
-      "introduction": "Lạ thật, cả buổi sáng mình quên mất phải mua gì ở chợ. Vừa ngồi xuống khép mắt, mình nhớ ra cả gừng, muối lẫn cái bóng đèn ngoài hiên. Mình mở mắt, ghi mấy chữ vào mảnh giấy, rồi quay lại ngồi. Một buổi thiền tưởng như hỏng đã bắt đầu như thế. Về sau mình mới quý buổi ngồi ấy. Nó cho mình thấy hai điều cùng đúng. Mình muốn dành một khoảng lặng cho bản thân, và ngoài hiên thực sự có một cái bóng đèn phải thay. Học thiền, với mình, cũng là học cách dành chỗ cho cả hai.",
+      "imageAlt": "Lối đi yên tĩnh xuyên qua rừng tre xanh ở châu Á.",
+      "introduction": "Thiền thường khó ở những chỗ rất cụ thể: tâm liên tục chạy theo suy nghĩ, thân thể đau mỏi, hơi thở bị mình điều khiển, không gian ồn ào, cảm xúc trồi lên, hoặc nếp thực tập dần đứt quãng. Mỗi trở ngại cần một cách ứng xử khác nhau. Mình kể lại những gì đã thử, để bạn có thể chọn điều phù hợp với hoàn cảnh của mình.",
       "sections": [
         {
           "title": "Trong đầu vẫn còn một cuộc trò chuyện",
@@ -74,7 +74,7 @@ export const meditationChallenges: Article = {
           "title": "Trở lại ngay trong chiều nay",
           "paragraphs": [
             "Bạn có thể chọn một chỗ ngồi quen và để mắt mở. Nhìn xem ánh sáng đang rơi xuống đâu. Đặt bàn chân cho vững rồi chọn một cảm giác dễ nhận biết. Ngồi vừa đủ để nhận ra một lần tâm đi chỗ khác và đưa nó về. Nếu chuông reo trước lúc ấy, bạn vẫn có thể đứng dậy. Trước khi bước đi, thử hỏi mình cần gì cho phần còn lại của ngày. Có khi câu trả lời là một bữa ăn. Có khi là một cuộc gọi mình đã hoãn mấy hôm. Hãy mang chút chú tâm vừa có vào việc ấy.",
-            "Đến chiều, ra chợ mua gừng, mình có thể vẫn quên cái bóng đèn. Nhưng trên đường về, khi người bán hàng gọi với theo rằng mình quên tiền thừa, mình có dịp dừng lại, nhìn vào mắt cô và nói cảm ơn cho đàng hoàng. Có lẽ đó là phần mình yêu nhất của việc tập thiền. Mỗi lần trở về, mình tìm thấy một đời sống cụ thể đang đợi, với người để thương, việc để làm và cả những chuyện rất nhỏ còn có thể làm tử tế hơn hôm qua."
+            "Sau buổi ngồi, mình ghi lại điều khó nhất và một thay đổi có thể thử lần tới. Nếu chân đau, kê lại ghế. Nếu cứ mong chuông reo, rút ngắn buổi tập. Nếu đang trải qua một ngày quá sức, mình ưu tiên nghỉ ngơi. Những ghi chép ấy giúp mình hiểu điều kiện thực tập của chính mình và dễ bắt đầu lại vào ngày mai."
           ]
         }
       ],
@@ -91,8 +91,8 @@ export const meditationChallenges: Article = {
       "category": "Practice",
       "title": "When sitting quietly feels difficult",
       "description": "A practical reflection on wandering thoughts, tiredness, interruptions and beginning again.",
-      "imageAlt": "Hương smiles and shapes a heart with her hands beside a mountain lake.",
-      "introduction": "I can forget the shopping list all morning, yet the moment I sit down I remember ginger, salt and the bulb that needs replacing. Sometimes I jot them down. Both my wish for quiet and the broken bulb deserve a little room.",
+      "imageAlt": "A quiet path winds through a green bamboo forest in Asia.",
+      "introduction": "Meditation can be difficult in specific ways: thoughts pull attention away, the body aches, breathing becomes controlled, the room is noisy, emotions surface, or the habit fades. Each challenge calls for a different response. Here are approaches I have tried, offered for you to adapt.",
       "sections": [
         {
           "title": "An argument still going on",

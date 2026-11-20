@@ -86,7 +86,7 @@ const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-fi
         <div class="section-head split-head"><div><span class="eyebrow">{t.natureEye}</span><h2 id="nature-title">{t.natureTitle}</h2></div><p>{t.natureCopy}</p></div>
         <EcosystemOrbit lang={lang} cards={t.natureCards} images={natureImages} />
         <div class="nature-photos">
-          <figure><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{en ? 'Preparing a meal outdoors' : 'Sửa soạn bữa ăn bên bếp củi'}</figcaption></figure>
+          <figure class="nature-photos__outdoor-kitchen"><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{en ? 'Preparing a meal outdoors' : 'Sửa soạn bữa ăn bên bếp củi'}</figcaption></figure>
           <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{en ? 'A moment together by the sea' : 'Một khoảnh khắc bên nhau ngoài biển'}</figcaption></figure>
         </div>
         <div class="nature-bottom"><p class="note">{t.natureNote}</p><a class="quiet-link" href={articlePath(lang, 'listening-to-nature')}>{en ? 'Take a mindful walk' : 'Một cuộc gặp với thiên nhiên'} <Arrow /></a></div>

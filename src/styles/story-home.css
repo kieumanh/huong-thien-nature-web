@@ -103,6 +103,7 @@
 .hybrid-home .practice-image img { object-position: center 42%; }
 @media (max-width: 560px) {
   .nature-photos { grid-template-columns: 1fr; }
+  .nature-photos__outdoor-kitchen { display: none; }
   .practice-reminder.shell { grid-template-columns: minmax(0, 95px) 1fr; }
 }
 
