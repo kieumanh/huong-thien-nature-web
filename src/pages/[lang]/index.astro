@@ -1,4 +1,5 @@
 ---
+import HomePhoto from "../../components/HomePhoto.astro";
 import EcosystemOrbit from '../../components/EcosystemOrbit.astro';
 import HomeDiscovery from '../../components/HomeDiscovery.astro';
 import { homeCopy, beginnerArticles, featuredArticles } from '../../data/home';
@@ -51,19 +52,13 @@ const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-fi
         </div>
       </div>
       <span class="hybrid-hero__index" aria-hidden="true">HƯƠNG THIỀN · NATURE</span>
-      <div class="hybrid-hero__bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Explore at your own pace' : 'Khám phá theo nhịp của bạn'} <span aria-hidden="true">↓</span></a></div>
+      <div class="hybrid-hero__bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Read on' : 'Đọc tiếp'} <span aria-hidden="true">↓</span></a></div>
     </section>
-    <aside class="hybrid-breath" aria-label={en ? 'An invitation to pause' : 'Lời mời dừng lại'}>
-      <span class="hybrid-breath__mark" aria-hidden="true"></span>
-      <p>{en ? 'Pause for a breath. Nature is already here.' : 'Dừng lại một nhịp thở. Thiên nhiên vẫn đang ở đây.'}</p>
-      <small>{en ? 'Breathe · Feel · Return' : 'Thở · Cảm nhận · Trở về'}</small>
-    </aside>
-
     <section id="story" class="section roots" aria-labelledby="story-title">
       <div class="shell">
         <div class="intro-grid">
           <div class="intro-side"><span class="eyebrow">{t.introEyebrow}</span><RootMark class="intro-root" /><p class="intro-mark">{t.introMark}</p></div>
-          <div class="intro-copy"><h2 id="story-title">{t.introTitle}</h2><p class="lead">{t.introCopy}</p><p class="small-copy">{en ? 'Each person has their own pace. Practice is an invitation, not a standard to meet.' : 'Mỗi người có một nhịp riêng. Thực tập là lời mời, không phải một tiêu chuẩn phải đạt.'}</p></div>
+          <div class="intro-copy"><h2 id="story-title">{t.introTitle}</h2><p class="lead">{t.introCopy}</p><a class="quiet-link" href="#journey">{en ? "Read my story" : "Đọc câu chuyện của mình"} <Arrow /></a></div>
         </div>
       </div>
     </section>
@@ -76,22 +71,30 @@ const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-fi
 
     <section id="practice" class="section practice" aria-labelledby="practice-title">
       <div class="shell practice-grid">
-        <figure class="practice-image"><img src="/media/huong-sharing.jpg" alt={en ? 'Hương Thiền sitting quietly with a young companion outdoors.' : 'Hương Thiền ngồi tĩnh lặng cùng một người bạn nhỏ ngoài trời.'} width="720" height="540" loading="lazy" /></figure>
+        <figure class="practice-image"><HomePhoto photo="seated-in-grass" {lang} /></figure>
         <div><span class="eyebrow">{t.practiceEye}</span><h2 id="practice-title" set:html={t.practiceTitle} /><p class="lead">{t.practiceCopy}</p><ol class="steps">{t.steps.map(([n, title, text]) => <li><span class="step-number" aria-hidden="true">{n}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol><a class="quiet-link" href={articlePath(lang, 'returning-attention')}>{en ? 'Try a one-minute practice' : 'Thử một phút thực tập'} <Arrow /></a></div>
       </div>
+      <figure class="shell practice-reminder">
+        <HomePhoto photo="quiet-reminder" {lang} />
+        <figcaption>{en ? 'A small reminder from a picture on the wall. Give yourself a steady seat while things take their time.' : 'Một lời nhắc trên tường. Có những chuyện cần thời gian để lắng xuống. Trong lúc ấy, mình có thể cho mình một chỗ ngồi vững.'}</figcaption>
+      </figure>
     </section>
 
     <section id="nature" class="section nature" aria-labelledby="nature-title">
       <div class="shell">
         <div class="section-head split-head"><div><span class="eyebrow">{t.natureEye}</span><h2 id="nature-title">{t.natureTitle}</h2></div><p>{t.natureCopy}</p></div>
         <EcosystemOrbit lang={lang} cards={t.natureCards} images={natureImages} />
+        <div class="nature-photos">
+          <figure><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{en ? 'Preparing a meal outdoors' : 'Sửa soạn bữa ăn bên bếp củi'}</figcaption></figure>
+          <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{en ? 'A moment together by the sea' : 'Một khoảnh khắc bên nhau ngoài biển'}</figcaption></figure>
+        </div>
         <div class="nature-bottom"><p class="note">{t.natureNote}</p><a class="quiet-link" href={articlePath(lang, 'listening-to-nature')}>{en ? 'Take a mindful walk' : 'Một cuộc gặp với thiên nhiên'} <Arrow /></a></div>
       </div>
     </section>
 
     <section id="people" class="section people" aria-labelledby="people-title">
       <div class="shell people-grid">
-        <figure class="portrait-wrap"><img src="/media/huong-founder-2026.webp" alt={en ? 'Hương Thiền sitting in meditation among green terraced hills.' : 'Hương Thiền ngồi thiền giữa những sườn đồi ruộng bậc thang xanh.'} width="960" height="1280" loading="lazy" /></figure>
+        <figure class="portrait-wrap"><HomePhoto photo="mountain-lake" {lang} /></figure>
         <div><span class="eyebrow">{t.peopleEye}</span><h2 id="people-title">{t.peopleTitle}</h2><div class="people-copy"><article class="person"><span class="role">{t.founderRole}</span><h3>Hương Thiền</h3><p>{t.founderCopy}</p></article><article class="person"><span class="role">{t.coRole}</span><h3>Kiều Mạnh</h3><p>{t.coCopy}</p></article></div></div>
       </div>
     </section>
@@ -109,7 +112,7 @@ const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-fi
     </section>
 
     <section id="path" class="section roadmap" aria-labelledby="path-title">
-      <div class="shell"><div class="section-head"><span class="eyebrow">{en ? 'A thoughtful roadmap' : 'Lộ trình có chủ ý'}</span><h2 id="path-title">{t.phasesTitle}</h2></div><div class="pathway">{t.phases.map(([number, title, text], index) => <article class={`phase ${index === 0 ? 'current' : ''}`}><div class="phase-top"><span class="index-number">{number}</span><span class="phase-label">{t.phaseLabels[index]}</span></div><h3>{title}</h3><p>{text}</p></article>)}</div></div>
+      <div class="shell"><div class="section-head"><span class="eyebrow">{en ? 'A thoughtful roadmap' : 'Lộ trình dự án'}</span><h2 id="path-title">{t.phasesTitle}</h2></div><div class="pathway">{t.phases.map(([number, title, text], index) => <article class={`phase ${index === 0 ? 'current' : ''}`}><div class="phase-top"><span class="index-number">{number}</span><span class="phase-label">{t.phaseLabels[index]}</span></div><h3>{title}</h3><p>{text}</p></article>)}</div></div>
     </section>
 
     <BeginHere lang={lang} />

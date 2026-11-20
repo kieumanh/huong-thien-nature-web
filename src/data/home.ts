@@ -11,18 +11,18 @@ export const featuredArticles = ['wandering-mind', 'mindful-gardening', 'loving-
 
 export const homeCopy = {
   vi: {
-    start: 'Bắt đầu với Roots',
+    start: 'Thử bài thiền đầu tiên',
     searchEyebrow: 'Tìm trong tản văn', searchTitle: 'Hôm nay bạn muốn đọc gì?',
     searchDescription: 'Bạn có thể bắt đầu bằng chính điều đang vướng trong lòng, chẳng hạn “nhiều suy nghĩ”.',
     searchLabel: 'Bạn muốn tìm hiểu điều gì?', searchPlaceholder: 'Hơi thở, chánh niệm, làm vườn…', searchButton: 'Tìm bài viết',
     suggestionsLabel: 'Từ khóa gợi ý', suggestions: ['Hơi thở', 'Nhiều suy nghĩ', 'Làm vườn'],
     library: 'bài viết song ngữ', browse: 'Xem toàn bộ thư viện',
     readingEyebrow: 'Cho người mới bắt đầu',
-    featuredTitle: 'Từ thực tập đến đời sống.',
-    featuredDescription: 'Có hôm mình tập trong vườn, có hôm ngay giữa một ý nghĩ cứ trở đi trở lại. Ba bài dưới đây kể về những lúc như thế.',
+    featuredTitle: 'Tản văn về thiền và đời sống',
+    featuredDescription: 'Khi đầu óc cứ bận một chuyện, khi đứng bên luống rau, khi khó nói với mình một lời tử tế. Ba bài này bắt đầu ở những lúc như thế.',
   },
   en: {
-    start: 'Begin with Roots',
+    start: 'Try your first meditation',
     searchEyebrow: 'Something you are looking for', searchTitle: 'Find a reflection for today.',
     searchDescription: 'A question about breathing, something on your mind or a way to bring attention into daily life. Start with a keyword.',
     searchLabel: 'What would you like to explore?', searchPlaceholder: 'Breathing, mindfulness, gardening…', searchButton: 'Find articles',

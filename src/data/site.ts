@@ -4,8 +4,8 @@ export type Language = (typeof languages)[number];
 
 export const copy = {
   "vi": {
-    "title": "Bắt rễ trong hiện tại. Lớn lên cùng thiên nhiên.",
-    "desc": "Một không gian nhẹ nhàng cho thiền định, chánh niệm và chăm sóc sức khỏe tự nhiên, do Hương Thiền và Kiều Mạnh khởi xướng.",
+    "title": "Học cách ở lại với mình",
+    "desc": "Câu chuyện của Hương Thiền, những bài tập thiền cho người mới và cách đem sự chú tâm vào bữa cơm, khu vườn và những mối quan hệ hằng ngày.",
     "nav": [
       "Câu chuyện",
       "Thực hành",
@@ -15,18 +15,18 @@ export const copy = {
       "Lộ trình"
     ],
     "eyebrow": "Thiền định · Thiên nhiên · Đời sống",
-    "hero": "Từ những ngày chông chênh.<br/><em>Đến một đời sống có gốc rễ.</em>",
-    "lead": "Mình đến với thiền từ những ngày còn nhiều chông chênh. Hương Thiền Nature lớn dần từ một câu hỏi rất đời thường. Sau khi đứng dậy khỏi chỗ ngồi thiền, mình sống với người bên cạnh thế nào?",
+    "hero": "Qua những ngày chông chênh,<br/><em>mình học cách ở lại.</em>",
+    "lead": "Mình là Hương Thiền. Mình đã quen tự đứng vững từ nhỏ. Sau này, thiền dạy mình một điều tưởng như đơn giản mà phải tập rất lâu mới hiểu. Lúc lòng chao đảo, mình có thể ở lại với điều đang xảy ra, rồi mới chọn cách đáp lại.",
     "explore": "Khám phá thực hành",
-    "storyCta": "Câu chuyện của chúng tôi",
-    "note": "Không cần kinh nghiệm trước; hãy bắt đầu từ điều gần gũi nhất.",
-    "introEyebrow": "01 — Vì sao chúng tôi bắt đầu",
-    "introTitle": "Khi đời sống cần một khoảng lắng.",
-    "introCopy": "Có những ngày mình nhớ từng việc phải làm cho người khác, đến tối mới nhận ra hai vai đã mỏi từ lâu. Học lắng nghe bắt đầu từ những điều nhỏ như thế. Mình mong nơi đây có chỗ cho cả chuyện ngồi thiền lẫn chuyện bếp núc, làm vườn và học cách nghe nhau nói hết một câu.",
-    "introMark": "Sống tử tế với thân mình, với nhau và với đất.",
-    "practiceEye": "03 — Mang thực tập vào đời sống",
-    "practiceTitle": "Tâm đi xa.<br/>Ta nhẹ nhàng trở lại.",
-    "practiceCopy": "Giữa một hơi thở, có khi mình đã đi rất xa trong ý nghĩ. Lúc chợt nhận ra, mình để ý bàn chân đang chạm đất và nghe hơi thở kế tiếp. Bạn cũng có thể thử ngay ở chỗ đang ngồi.",
+    "storyCta": "Vì sao mình đến với thiền",
+    "note": "Bài tập đầu tiên bắt đầu bằng vài phút ngồi yên.",
+    "introEyebrow": "Vì sao mình bắt đầu",
+    "introTitle": "Khi mình thôi giục lòng phải yên",
+    "introCopy": "Mình từng nghĩ hiểu nỗi khổ rồi thì sẽ biết cách làm nó biến mất. Khi tập ngồi yên, mình mới thấy có lúc điều làm mình mệt thêm là cứ bắt lòng phải khác đi ngay. Một nỗi buồn có thể được nhận ra trước khi mình tìm lời giải thích cho nó. Từ khoảng dừng ấy, mình bắt đầu nghe rõ hơn cả mình lẫn người bên cạnh. Hương Thiền Nature ra đời từ mong muốn đem cách lắng nghe ấy về với những ngày bình thường.",
+    "introMark": "Cho mình đủ thời gian để nghe điều đang có mặt.",
+    "practiceEye": "Một phút thực hành",
+    "practiceTitle": "Nhận ra mình đang nghĩ,<br/>rồi trở về với hơi thở",
+    "practiceCopy": "Có khi mình ngồi xuống và trong đầu vẫn tiếp tục một cuộc trò chuyện đã qua. Khi nhận ra, mình cảm lại bàn chân đang chạm đất. Một nhịp thở như thế cho mình thời gian để thấy rõ điều mình đang mang theo. Bạn có thể thử ngay ở chỗ đang ngồi.",
     "steps": [
       [
         "01",
@@ -36,7 +36,7 @@ export const copy = {
       [
         "02",
         "Nhận ra tâm đã đi",
-        "Khi chợt nhớ, hãy gọi tên dịu dàng: đang nghĩ, đang tính, đang nhớ."
+        "Khi nhận ra mình đang mải nghĩ, chỉ cần ghi nhận điều đó một lần."
       ],
       [
         "03",
@@ -44,10 +44,10 @@ export const copy = {
         "Trở về điểm tựa mà không trách mình. Lặp lại bao nhiêu lần cũng được."
       ]
     ],
-    "natureEye": "04 — Hệ sinh thái Hương Thiền Nature",
-    "natureTitle": "Một mái nhà. Ba hành trình chăm sóc.",
-    "natureCopy": "Một bữa cơm gợi chuyện về đất. Một buổi đi bộ trong vườn cho mình dịp nghỉ chân. Từ những việc gần gũi ấy, ba hướng của Hương Thiền Nature dần thành hình.",
-    "natureNote": "Catalogue Farm & Botanicals hiện dùng giá tham khảo; giá và tồn kho cần xác nhận. Eco-Retreat, Academy và Membership là định hướng tương lai, chưa mở đăng ký.",
+    "natureEye": "Từ việc tập thiền đến cách mình sống",
+    "natureTitle": "Từ bữa cơm, khu vườn đến việc học",
+    "natureCopy": "Một bữa cơm khiến mình nghĩ đến người trồng rau. Một buổi đi bộ ngoài trời cho mình dịp để ý thân thể đã mỏi đến đâu. Từ những việc nhỏ ấy, mình muốn vun đắp ba hướng cho Hương Thiền Nature. Đó là chăm chút bữa ăn, tạo dịp nghỉ ngơi giữa thiên nhiên và chia sẻ những điều có thể đem ra thực tập.",
+    "natureNote": "Bạn có thể xem sản phẩm trong Cửa hàng. Giá và tồn kho cần được xác nhận trước khi đặt. Eco-Retreat, Academy và chương trình thành viên đang trong giai đoạn chuẩn bị và chưa mở đăng ký.",
     "natureCards": [
       [
         "Hương Thiền Farm & Botanicals",
@@ -55,37 +55,37 @@ export const copy = {
       ],
       [
         "Hương Thiền Eco-Retreat",
-        "Tâm • Định hướng một khoảng vườn rừng để nghỉ ngơi, đi bộ trong chánh niệm, dùng bữa giản dị và gặp gỡ nhau. Điều nghỉ ngơi gợi ra có thể theo ta về nhịp sống thường ngày."
+        "Tâm • Định hướng một khoảng vườn rừng để nghỉ ngơi, đi bộ trong chánh niệm, dùng bữa giản dị và gặp gỡ nhau. Nhóm mong tạo được một nơi để mọi người có thời gian nghỉ ngơi và lắng nghe nhau."
       ],
       [
         "Hương Thiền Academy",
-        "Trí • Học liệu và lộ trình về thiền, chánh niệm, sống thuận tự nhiên. Học đi cùng thực hành, câu hỏi và tự quan sát để mỗi người dần tự học được."
+        "Trí • Học liệu và lộ trình về thiền, chánh niệm, sống thuận tự nhiên. Mỗi chủ đề sẽ đi cùng một bài tập để người học tự quan sát và đặt câu hỏi."
       ]
     ],
-    "peopleEye": "Những người khởi xướng",
-    "peopleTitle": "Những người cùng vun gốc.",
+    "peopleEye": "Người sáng lập và đồng sáng lập",
+    "peopleTitle": "Ai đứng sau Hương Thiền Nature?",
     "founderRole": "Người sáng lập · Tác giả · Người hướng dẫn",
-    "founderCopy": "Đỗ Thị Kim Hương, sinh ra và lớn lên tại Quảng Nam, là người khởi xướng Hương Thiền Nature. Từ trải nghiệm tự lập sớm và hành trình thiền tập, cô chọn kết nối đời sống tỉnh thức với thiên nhiên và sự phụng sự cộng đồng.",
+    "founderCopy": "Đỗ Thị Kim Hương lớn lên ở Quảng Nam. Cô khởi xướng Hương Thiền Nature và viết về những điều đã học từ thiền tập, thiên nhiên và đời sống gia đình.",
     "coRole": "Đồng sáng lập · Người hướng dẫn",
-    "coCopy": "Kiều Mạnh cùng sáng lập Hương Thiền Nature, tham gia hướng dẫn và xây dựng các công cụ để mọi người có thể tự học, thực hành và ghi nhận hành trình của mình.",
+    "coCopy": "Kiều Mạnh đồng sáng lập Hương Thiền Nature. Anh tham gia hướng dẫn thực hành và xây dựng các công cụ học tập cho dự án.",
     "journalEye": "Ghi chép từ đời sống",
     "journalTitle": "Ghi chép từ những điều bình thường.",
-    "phasesTitle": "Những việc đang làm và dự định sắp tới",
+    "phasesTitle": "Hương Thiền Nature đang làm gì?",
     "phases": [
       [
         "01",
-        "Gieo nền tảng",
-        "Trang giới thiệu song ngữ, thư viện thực tập, câu chuyện người sáng lập và bài viết chọn lọc."
+        "Đọc và thực hành ngay",
+        "Tản văn và bài tập nhập môn đang có sẵn bằng tiếng Việt và tiếng Anh."
       ],
       [
         "02",
-        "Lắng nghe nhu cầu",
-        "Lắng nghe trải nghiệm cộng đồng trước khi chọn thêm hình thức đồng hành."
+        "Góp ý cho dự án",
+        "Những câu hỏi và chia sẻ của bạn giúp nhóm hiểu nội dung nào còn thiếu."
       ],
       [
         "03",
-        "Mở rộng có chọn lọc",
-        "Thử từng hướng phù hợp, chỉ mở rộng khi đã sẵn sàng chăm sóc đến nơi đến chốn."
+        "Chuẩn bị các hoạt động mới",
+        "Nhóm đang tìm hiểu cách tổ chức khóa học và các buổi thực tập giữa thiên nhiên."
       ]
     ],
     "phaseLabels": [
@@ -94,12 +94,12 @@ export const copy = {
       "Tương lai"
     ],
     "contactEye": "Kết nối",
-    "contactTitle": "Bạn đang ở đâu trên hành trình của mình?",
-    "contactCopy": "Có thể bạn muốn hỏi về một bài tập, một món trong gian bếp, hoặc kể lại điều vừa nhận ra khi đọc. Bạn có thể viết cho mình ở đây. Nhóm Hương Thiền sẽ hồi âm khi có thể.",
+    "contactTitle": "Viết cho mình",
+    "contactCopy": "Nếu bạn có câu hỏi về một bài tập, muốn hỏi về sản phẩm, hoặc muốn kể lại điều đã nhận ra khi đọc, hãy để lại lời nhắn. Nhóm Hương Thiền sẽ hồi âm khi có thể.",
     "footer": "Thiền định · Chánh niệm · Chăm sóc tự nhiên",
     "disclaimer": "Website chia sẻ nội dung giáo dục và thực tập chiêm nghiệm, không thay thế chăm sóc y tế hay sức khỏe tâm thần. Mọi thực tập đều tùy chọn; hãy điều chỉnh theo nhu cầu của bạn.",
     "top": "Trở về đầu trang",
-    "rootsNote": "Chậm lại. Chạm đất. Có mặt.",
+    "rootsNote": "Hương Thiền Nature",
     "journalLink": "Đọc tản văn",
     "journalIntro": "Những ghi chép có thể mang vào đời sống: một cách thực tập, một góc chiêm nghiệm, một cuộc gặp với thiên nhiên.",
     "practiceCaption": "Không cần một nơi hoàn hảo. Chỉ cần một khoảnh khắc có mặt.",
@@ -111,8 +111,8 @@ export const copy = {
     "readTime": "phút đọc"
   },
   "en": {
-    "title": "Rooted in the present. Growing with nature.",
-    "desc": "A gentle space for meditation, mindfulness and natural wellbeing, founded by Hương Thiền and Kiều Mạnh.",
+    "title": "Learning to stay with myself",
+    "desc": "Hương Thiền’s story, meditation for beginners, and ways to bring attention into meals, gardens and everyday relationships.",
     "nav": [
       "Our story",
       "Practice",
@@ -122,18 +122,18 @@ export const copy = {
       "Our path"
     ],
     "eyebrow": "Meditation · Nature · Everyday life",
-    "hero": "From uncertain beginnings.<br/><em>Towards a life with roots.</em>",
-    "lead": "Hương Thiền Nature began with one person learning to understand herself — and grew into an intention to nurture body, care for the heart and deepen understanding together.",
+    "hero": "Through uncertain years,<br/><em>I learned to stay.</em>",
+    "lead": "I am Hương Thiền. I learned to stand on my own early. Meditation taught me something that sounds simple and took years to understand. When I feel unsettled, I can stay with what is happening long enough to choose how to respond.",
     "explore": "Explore the practice",
-    "storyCta": "Our story",
-    "note": "No prior meditation experience is needed. Begin with what feels close at hand.",
-    "introEyebrow": "01 — Why we began",
-    "introTitle": "When life needs a little breathing room.",
-    "introCopy": "We can keep working and caring for others while losing touch with ourselves. From this experience, Hương Thiền began shaping a space to slow down, listen and reconnect with nature. What we learn here should belong in everyday meals, work and relationships.",
-    "introMark": "Care for ourselves, one another, and the ground beneath us.",
-    "practiceEye": "The practice",
-    "practiceTitle": "The mind travels.<br/>We gently return.",
-    "practiceCopy": "Meditation is not about forcing the mind to become empty. Notice where attention has gone, then gently return to the anchor. The returning is the practice.",
+    "storyCta": "Why I came to meditation",
+    "note": "The first practice begins with a few minutes of sitting.",
+    "introEyebrow": "Why I began",
+    "introTitle": "When I stopped rushing myself into calm",
+    "introCopy": "I used to think that if I understood suffering, I could make it go away. Sitting quietly, I began to see how much energy I spent insisting that I should already feel differently. I could acknowledge sadness before looking for an explanation. In that pause, I began to hear myself and the people around me more clearly. Hương Thiền Nature grew from wanting to bring that kind of listening into ordinary days.",
+    "introMark": "Give yourself enough time to hear what is already here.",
+    "practiceEye": "A minute of practice",
+    "practiceTitle": "Notice a thought,<br/>then return to your breath",
+    "practiceCopy": "Sometimes I sit down and find I am still carrying on an earlier conversation in my head. When I notice, I feel my feet against the ground again. That breath gives me a little time to see what I am carrying. You can try it where you are sitting.",
     "steps": [
       [
         "01",
@@ -151,10 +151,10 @@ export const copy = {
         "Return to the anchor without scolding yourself. Repeat as often as needed."
       ]
     ],
-    "natureEye": "04 — The Hương Thiền Nature ecosystem",
-    "natureTitle": "One home. Three ways to care.",
-    "natureCopy": "From healthy soil, to rest in nature, to a wider understanding — three paths caring for body, heart and mind.",
-    "natureNote": "The Farm & Botanicals catalogue shows reference prices; prices and stock need confirmation. Eco-Retreat, Academy and Membership remain future directions and are not open for registration.",
+    "natureEye": "From sitting practice to daily life",
+    "natureTitle": "The table, the garden and the place we learn",
+    "natureCopy": "A meal brings to mind the people who grew it. A walk outdoors gives me a chance to notice how tired my body has become. These small things shape three directions for Hương Thiền Nature: caring for what we eat, making room to rest in nature, and sharing what we can put into practice.",
+    "natureNote": "The shop lists products. Please confirm prices and availability before ordering. The Eco-Retreat, Academy and membership programme are still being planned and are not open for registration.",
     "natureCards": [
       [
         "Hương Thiền Farm & Botanicals",
@@ -169,15 +169,15 @@ export const copy = {
         "Mind • Learning materials and paths in meditation, mindfulness and nature-connected living. Join study with practice, questions and observation, so each person can keep learning for themselves."
       ]
     ],
-    "peopleEye": "The people behind the practice",
-    "peopleTitle": "The people tending these roots.",
+    "peopleEye": "The founders",
+    "peopleTitle": "Who is behind Hương Thiền Nature?",
     "founderRole": "Founder · Author · Teacher",
-    "founderCopy": "Born and raised in Quảng Nam, Đỗ Thị Kim Hương founded Hương Thiền Nature. Her early independence and meditation journey shaped her intention to bring conscious living, nature and service to the community together.",
+    "founderCopy": "Đỗ Thị Kim Hương grew up in Quảng Nam. She founded Hương Thiền Nature and writes about what she has learned through meditation, time in nature and family life.",
     "coRole": "Co-founder · Teacher",
-    "coCopy": "Kiều Mạnh is a teacher and co-founder, helping shape the learning journey and the practical foundations of the project.",
+    "coCopy": "Kiều Mạnh co-founded Hương Thiền Nature. He helps guide practice and builds learning tools for the project.",
     "journalEye": "Notes from daily life",
     "journalTitle": "Notes from ordinary days.",
-    "phasesTitle": "Growing at a human pace",
+    "phasesTitle": "What is Hương Thiền Nature working on?",
     "phases": [
       [
         "01",
@@ -201,12 +201,12 @@ export const copy = {
       "Later"
     ],
     "contactEye": "Get in touch",
-    "contactTitle": "Where are you on your journey?",
-    "contactCopy": "If you would like to ask about the project, the catalogue or share a thought, send a note. We will respond when we can.",
+    "contactTitle": "Write to me",
+    "contactCopy": "If you have a question about a practice or a product, or want to share something you noticed while reading, leave us a note. The Hương Thiền team will reply when we can.",
     "footer": "Meditation · Mindfulness · Natural wellbeing",
     "disclaimer": "This site shares educational and contemplative practices. It does not replace medical or mental-health care. Every practice is optional; adapt it to your own needs.",
     "top": "Back to top",
-    "rootsNote": "Slow down. Touch the earth. Be here.",
+    "rootsNote": "Hương Thiền Nature",
     "journalLink": "Read the reflection",
     "journalIntro": "Notes to bring into daily life: a practice, a reflection and an encounter with the living world.",
     "practiceCaption": "You do not need a perfect place. Just a moment of presence.",

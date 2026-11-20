@@ -68,4 +68,42 @@
 .journey-jumps { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
 .journey-jumps a { display: inline-flex; align-items: center; min-height: 44px; padding: 6px 14px; background: var(--brand-fern); color: #284633; border-radius: 30px; font-size: .85rem; }
 .journey-jumps a:hover { text-decoration: underline; }
-.journey-chapters li[id] { scroll-margin-top: 110px; }
+
+.journey-album { margin-top: clamp(3rem, 8vw, 6rem); }
+.journey-album > p { max-width: 58ch; }
+.journey-album__grid, .nature-photos {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin-top: 1.5rem;
+}
+.journey-album__grid img, .nature-photos img, .practice-reminder img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+}
+.journey-album__grid img {
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: center 46%;
+}
+.nature-photos { margin-block: 2rem; }
+.nature-photos figure, .practice-reminder { margin-inline: 0; }
+.nature-photos img { aspect-ratio: 4 / 3; object-fit: cover; object-position: center 40%; }
+.nature-photos figcaption, .practice-reminder figcaption { margin-top: 0.65rem; font-size: 0.92rem; }
+.practice-reminder.shell {
+  display: grid;
+  grid-template-columns: minmax(0, 140px) minmax(0, 42ch);
+  align-items: center;
+  gap: 1.25rem;
+  margin: 2.5rem auto 0;
+}
+.hybrid-home .practice-image img { object-position: center 42%; }
+@media (max-width: 560px) {
+  .nature-photos { grid-template-columns: 1fr; }
+  .practice-reminder.shell { grid-template-columns: minmax(0, 95px) 1fr; }
+}
+
+.journey-anchor { display: block; scroll-margin-top: 110px; }

@@ -5,7 +5,7 @@ const root = new URL('../', import.meta.url).pathname;
 const home = (await Promise.all([
   'src/pages/[lang]/index.astro', 'src/components/Header.astro',
   'src/components/Footer.astro', 'src/components/ContactForm.astro',
-  'src/components/HomeDiscovery.astro',
+  'src/components/HomeDiscovery.astro', 'src/components/FounderJourney.astro', 'src/data/home-photos.ts',
   'src/data/site.ts', 'src/data/articles.ts',
 ].map(file => readFile(join(root, file), 'utf8')))).join('\n');
 const problems = [];

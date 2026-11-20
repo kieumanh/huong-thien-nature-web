@@ -1,0 +1,13 @@
+---
+import { homePhotos } from '../data/home-photos';
+import type { Language } from '../data/site';
+
+interface Props {
+  photo: keyof typeof homePhotos;
+  lang: Language;
+}
+
+const { photo, lang } = Astro.props;
+const { src, width, height, alt } = homePhotos[photo];
+---
+<img {src} {width} {height} alt={alt[lang]} loading="lazy" decoding="async" />

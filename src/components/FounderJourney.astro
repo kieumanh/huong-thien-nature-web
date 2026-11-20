@@ -1,4 +1,5 @@
 ---
+import HomePhoto from "./HomePhoto.astro";
 const {lang} = Astro.props;
 const en = lang === 'en';
 const chapters = en ? [
@@ -6,7 +7,7 @@ const chapters = en ? [
  ['Age 13 · First responsibilities','Starting work early','I started working when I was thirteen. Taking on responsibility so early taught me persistence. It also gave me a respect for the work that goes into keeping an ordinary life going. That is part of why I want the practice I share today to fit into a real day, with all its demands.'],
  ['Age 22 · Family life','A new chapter and a question','I started a family at twenty-two. My marriage did not bring the happiness I had hoped for. Looking back, this chapter leaves me with a question that still matters: when life turns out differently from what I imagined, how can I meet it without losing my footing?'],
  ['Age 28 · Turning toward practice','Making time to understand suffering','At twenty-eight, I made more room for spiritual practice after years of organising my life around family and work. I wanted to understand where suffering begins and what happens inside me when I meet it. That question gave my search a direction: to look more closely at what I was experiencing and how I responded.'],
- ['Education · Date unrecorded','Graduating in Nha Trang','I graduated from Đại học Sư phạm Nha Trang. I include this milestone because my education is part of the story too. My later learning took a different form: alongside reading and listening, I began to pay attention to what I could understand through practice and experience.'],
+ ['Education','Graduating in Nha Trang','I graduated from Đại học Sư phạm Nha Trang. I include this milestone because my education is part of the story too. My later learning took a different form: alongside reading and listening, I began to pay attention to what I could understand through practice and experience.'],
  ['Spiritual practice','Beginning with Pure Land Buddhism','I began my spiritual practice with Pure Land Buddhism. It was the first doorway I walked through before exploring meditation more broadly. When I look back at that beginning, what matters is that the questions I had been carrying finally had a place in my everyday life.'],
  ['Learning about meditation','Carla Phương Cao','Carla Phương Cao was one of the people I learned from while exploring meditation. I include this part of the journey because my understanding grew through hearing different perspectives. It is also how I like to approach learning today: listen carefully, then give myself time to see what I can put into practice.'],
  ['Exploring meditation','Osho','I came across Osho’s teachings while exploring different approaches to meditation. His active methods opened up a question I find useful: what happens when movement or breathing comes before stillness? It is one way to think about the place of the body in a practice often pictured as sitting quietly.','https://www.osho.com/meditation/osho-active-meditations','Osho Active Meditations'],
@@ -15,11 +16,11 @@ const chapters = en ? [
  ['Học Thiền Đà Nẵng · Internship and practice','Hoàng Thị Phương Thảo','I learned with Hoàng Thị Phương Thảo at Học Thiền Đà Nẵng, where I interned and practised. I value that this chapter gave me room for hands-on learning. It is easy to understand an instruction when I hear it; returning to practice gives me a chance to notice what I actually do with it.','https://www.hocthiendanang.com/','Học Thiền Đà Nẵng'],
  ['Today · Hương Thiền Nature','Bringing practice into ordinary life','I started Hương Thiền Nature to bring what I had been learning closer to daily life. I want it to be a place where we can learn together, spend time with nature and try small ways of caring for ourselves. There is room to begin with a walk, a meal or a quiet moment, and to see what feels possible from there.']
 ] : [
- ['Tuổi thơ · Quảng Nam','Lớn lên giữa những đổi thay','Mình sinh ra và lớn lên ở Quảng Nam. Gia đình nhiều lần chuyển nhà. Có những năm thiếu thốn, người trong nhà cũng khó tìm được tiếng nói chung. Khi ít điều quanh mình đứng yên, mình sớm học cách tự lo những việc trong tầm tay.'],
+ ['Tuổi thơ · Quảng Nam','Lớn lên giữa những đổi thay','Mình sinh ra và lớn lên ở Quảng Nam. Gia đình nhiều lần chuyển nhà. Có những năm thiếu thốn, người trong nhà cũng khó tìm được tiếng nói chung. Khi nhà cửa và nếp sống còn hay đổi, biết tự lo là cách mình tìm chút ổn định. Mãi về sau mình mới hiểu rằng người đã quen tự lo cũng có lúc cần được đỡ đần.'],
  ['13 tuổi · Những trách nhiệm đầu tiên','Bắt đầu đi làm','Mười ba tuổi, mình bắt đầu đi làm. Từ đó, mình biết một bữa cơm dọn lên bàn chứa bao nhiêu công sức. Sau này, khi chia sẻ chuyện tu tập, mình vẫn nhớ người còn bận lo bữa tối cũng cần một cách tập vừa với ngày của họ.'],
- ['22 tuổi · Đời sống gia đình','Lập gia đình và nhìn lại mong đợi của mình','Mình lập gia đình năm hai mươi hai tuổi. Hôn nhân có những điều khác xa niềm vui mình từng hình dung. Đến giờ, câu hỏi từ quãng ấy vẫn còn gần gũi. Khi mọi việc đi khác ý mình, mình có thể lắng nghe nỗi buồn trước khi vội tìm người có lỗi không?'],
- ['28 tuổi · Bước ngoặt','Dành thời gian tìm hiểu về nỗi khổ','Ở tuổi hai mươi tám, sau những năm dành phần lớn thời gian cho gia đình và công việc, mình dành thêm chỗ cho việc tu tập. Mình muốn hiểu nỗi khổ từ đâu đến, và ngay khi chuyện khó xảy ra, trong lòng mình có những gì.'],
- ['Học tập · Chưa ghi năm','Tốt nghiệp tại Nha Trang','Mình tốt nghiệp Đại học Sư phạm Nha Trang. Việc học về sau vẫn cần đến sách vở và người chỉ dẫn. Có những điều mình phải tự ngồi xuống thực tập nhiều lần mới dần hiểu được.'],
+ ['22 tuổi · Đời sống gia đình','Lập gia đình và nhìn lại mong đợi của mình','Mình lập gia đình năm hai mươi hai tuổi. Hôn nhân có những điều khác xa niềm vui mình từng hình dung. Đến giờ, câu hỏi từ quãng ấy vẫn còn gần gũi. Khi điều mình mong và điều đang sống cách nhau quá xa, mình còn có thể thành thật với nỗi buồn của mình đến đâu? Câu hỏi ấy lớn dần theo năm tháng.'],
+ ['28 tuổi · Bước ngoặt','Dành thời gian tìm hiểu về nỗi khổ','Ở tuổi hai mươi tám, sau những năm dành phần lớn thời gian cho gia đình và công việc, mình dành thêm chỗ cho việc tu tập. Mình muốn thấy rõ một chuyện khó đi qua mình thế nào. Thân thể co lại ra sao? Ý nghĩ nào cứ lặp lại? Và mình đã nói với người bên cạnh bằng giọng nào?'],
+ ['Học tập','Tốt nghiệp tại Nha Trang','Mình tốt nghiệp Đại học Sư phạm Nha Trang. Việc học về sau vẫn cần đến sách vở và người chỉ dẫn. Có những điều mình phải tự ngồi xuống thực tập nhiều lần mới dần hiểu được.'],
  ['Khởi đầu tu tập','Đến với Tịnh độ Phật giáo','Mình bắt đầu tu tập với pháp môn Tịnh độ. Từ cánh cửa đầu tiên ấy, những câu hỏi mình mang trong lòng dần có chỗ trong đời sống thường ngày. Về sau mình mới tìm hiểu rộng hơn về thiền.'],
  ['Tìm hiểu thiền định','Carla Phương Cao','Khi tìm hiểu thiền định, mình có dịp học hỏi từ Carla Phương Cao. Gặp những góc nhìn khác nhau, mình tập nghe cho kỹ, rồi tự cho mình thời gian đem điều đã nghe vào thực hành.'],
  ['Khám phá các cách thiền','Osho','Qua những phương pháp thiền chủ động của Osho, mình bắt đầu chú ý đến chuyển động của thân thể. Một câu hỏi ở lại với mình là cảm giác ngồi yên sẽ ra sao sau khi mình đã thực sự nhận biết từng cử động.','https://www.osho.com/meditation/osho-active-meditations','Thiền chủ động Osho'],
@@ -32,21 +33,34 @@ const chapters = en ? [
 <section class="section founder-journey" id="journey" aria-labelledby="journey-title">
  <div class="shell">
   <div class="journey-opening">
-   <div><span class="eyebrow">{en ? '02 — The person behind the project' : '02 — Người gieo hạt'}</span><h2 id="journey-title">{en ? 'Before there was a project, there was a journey.' : 'Trước khi có một dự án, đã có một hành trình.'}</h2><p class="lead">{en ? 'I am Hương Thiền — Đỗ Thị Kim Hương. Here is how my search for understanding became a wish to share what I was learning.' : 'Mình là Hương Thiền — Đỗ Thị Kim Hương. Đây là câu chuyện về những điều mình đã đi qua và vì sao mình muốn chia sẻ những điều đã học.'}</p><nav class="journey-jumps" aria-label={en ? 'Journey chapters' : 'Các chặng hành trình'}>
+   <div><span class="eyebrow">{en ? 'Hương Thiền’s story' : 'Hành trình của Hương Thiền'}</span><h2 id="journey-title">{en ? 'From getting by to caring for myself' : 'Từ tự lo cho mình đến biết chăm sóc mình'}</h2><p class="lead">{en ? 'My full name is Đỗ Thị Kim Hương. Early life taught me to manage on my own. Later, I learned to notice when I was stretching myself too far, when to ask for help, and when to sit down for a while.' : 'Mình tên đầy đủ là Đỗ Thị Kim Hương. Quãng đời đầu dạy mình cách xoay xở. Quãng đời sau, mình học thêm cách nhận ra khi nào đã quá sức, khi nào cần nhờ người khác và khi nào chỉ cần ngồi xuống một lát.'}</p><nav class="journey-jumps" aria-label={en ? 'Journey chapters' : 'Các chặng hành trình'}>
     <a href="#journey-early">{en ? 'Early years and turning points' : 'Tuổi thơ và bước ngoặt'}</a>
     <a href="#journey-learning">{en ? 'Learning and practice' : 'Học hỏi và thực hành'}</a>
     <a href="#journey-today">{en ? 'Hương Thiền Nature today' : 'Hương Thiền Nature hôm nay'}</a>
    </nav></div>
-   <img src="/media/huong-smile.jpg" alt={en ? 'Hương Thiền smiling among green grasses.' : 'Hương Thiền mỉm cười giữa cỏ cây xanh.'} width="960" height="1280" loading="lazy" />
+   <HomePhoto photo="barefoot-by-sea" {lang} />
   </div>
   <ol class="journey-chapters">
    {chapters.map(([label, title, body, href, link], i) => (
-    <li id={i === 0 ? "journey-early" : i === 4 ? "journey-learning" : i === chapters.length - 1 ? "journey-today" : undefined}>
+    <li>
      <span class="journey-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-     <div><span class="eyebrow">{label}</span><h3>{title}</h3><p>{body}</p>{href && <p><a href={href}>{link}</a></p>}</div>
+     <div>
+      {i === 0 && <span class="journey-anchor" id="journey-early"></span>}
+      {i === 4 && <span class="journey-anchor" id="journey-learning"></span>}
+      {i === chapters.length - 1 && <span class="journey-anchor" id="journey-today"></span>}
+      <span class="eyebrow">{label}</span><h3>{title}</h3><p>{body}</p>{href && <p><a href={href}>{link}</a></p>}</div>
     </li>
    ))}
   </ol>
-  <div class="journey-gallery"><img src="/media/huong-meditation.jpg" alt={en ? 'Hương Thiền sitting quietly beside a simple mountain hut.' : 'Hương Thiền ngồi tĩnh lặng bên căn nhà mộc mạc giữa núi đồi.'} width="960" height="1280" loading="lazy"/><img src="/media/huong-flowers.jpg" alt={en ? 'Hương Thiền holding small flowers in a rural landscape.' : 'Hương Thiền nâng những bông hoa nhỏ trong khung cảnh vùng cao.'} width="720" height="960" loading="lazy"/></div>
+  <section class="journey-album" aria-labelledby="journey-album-title">
+    <h3 id="journey-album-title">{en ? 'Being present with one another' : 'Có mặt cho nhau'}</h3>
+    <p>{en ? 'I also practise in the time I share with others. Holding a child close or waiting for little feet to find their balance asks me to pay attention here, to the person in front of me.' : 'Mình cũng học thiền trong những lúc ở cạnh người khác. Khi bế một em bé hay đợi đôi chân nhỏ đứng vững trên cát, sự chú tâm có một hình hài rất cụ thể. Người trước mặt đang cần gì ở mình, ngay lúc này?'}</p>
+    <div class="journey-album__grid">
+      <HomePhoto photo="shore-with-children" {lang} />
+      <HomePhoto photo="holding-baby" {lang} />
+      <HomePhoto photo="rest-with-baby" {lang} />
+      <HomePhoto photo="under-leaves" {lang} />
+    </div>
+  </section>
  </div>
 </section>
