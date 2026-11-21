@@ -1,3 +1,11 @@
+## 2.2.0 — Zen Botanical
+
+- Làm mới trang chủ VI/EN, đặt Thân, Tâm và Trí ngay sau phần mở đầu. Giữ bản đồ quỹ đạo, câu chuyện đầy đủ, album và các liên kết sâu.
+- Đồng bộ nền, kiểu chữ, thẻ, form, điều hướng, chân trang và nút nổi. Nhạc nền bắt đầu theo lựa chọn của người nghe trên lượt truy cập mới.
+- Cải thiện trải nghiệm đọc, mục lục, ngày bài viết theo dữ liệu và phân công tác giả với người phụ trách giảng dạy.
+- Sửa liên kết hỏi sản phẩm để điền sẵn thông tin ở trang Liên hệ, bổ sung trạng thái nguồn tồn kho và làm rõ giá tham khảo.
+- Bổ sung tài liệu thiết kế, kiểm toán UX và kiểm thử trình duyệt cho bản phát hành.
+
 ## 2.1.0 — Chân trang và lịch sử phiên bản
 
 - Bổ sung timeline phát hành tiếng Việt và tiếng Anh, liên kết từ số phiên bản ở chân trang.

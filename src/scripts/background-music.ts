@@ -8,7 +8,7 @@ if (audio && toggle && slider && output && musicStatus) {
   const en = toggle.dataset.language === 'en';
   const preferenceKey = 'htn-background-music-v1';
   const positionKey = 'htn-lotus-position-v1';
-  let enabled = true;
+  let enabled = false;
   let volume = .25;
   let blocked = false;
   let lastSaved = 0;
@@ -48,7 +48,7 @@ if (audio && toggle && slider && output && musicStatus) {
       if (!enabled) return;
       blocked = error instanceof DOMException && error.name === 'NotAllowedError';
       musicStatus.textContent = blocked
-        ? (en ? 'Music will start after your first interaction, or press Play.' : 'Nhạc sẽ phát sau tương tác đầu tiên, hoặc nhấn nút phát nhạc.')
+        ? (en ? 'Playback is paused by the browser. Press Play or interact with the page to resume.' : 'Trình duyệt đang tạm dừng nhạc. Nhấn nút phát hoặc tương tác với trang để nghe tiếp.')
         : (en ? 'Music could not load. Press Play to try again.' : 'Chưa tải được nhạc. Nhấn nút phát để thử lại.');
       if (blocked) {
         document.addEventListener('pointerdown', onGesture);
@@ -97,11 +97,16 @@ if (audio && toggle && slider && output && musicStatus) {
   });
   window.addEventListener('pagehide', savePosition);
   document.addEventListener('keydown', event => {
-    if (event.key === 'Escape') document.querySelector<HTMLDetailsElement>('.music-options')?.removeAttribute('open');
+    const panel = document.querySelector<HTMLDetailsElement>('.music-options[open]');
+    if (event.key !== 'Escape' || !panel) return;
+    panel.open = false;
+    if (panel.contains(document.activeElement)) panel.querySelector('summary')?.focus();
   });
   document.addEventListener('click', event => {
     if (event.target instanceof Element && !event.target.closest('.music-dock')) document.querySelector<HTMLDetailsElement>('.music-options')?.removeAttribute('open');
   });
+  audio.controls = false;
+  toggle.closest('.music-dock')?.setAttribute('data-music-ready', '');
   toggle.disabled = false;
   update();
   if (enabled) void play();

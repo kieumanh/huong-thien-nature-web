@@ -2,7 +2,6 @@ import { matchesProduct } from './shop-filter';
 
 const catalogue = document.querySelector<HTMLElement>('[data-shop-catalogue]');
 if (catalogue) {
-  const controls = catalogue.querySelector<HTMLElement>('.shop-controls');
   const cards = [...catalogue.querySelectorAll<HTMLElement>('[data-product-card]')];
   const buttons = [...catalogue.querySelectorAll<HTMLButtonElement>('[data-filter]')];
   const input = catalogue.querySelector<HTMLInputElement>('#shop-search');
@@ -31,5 +30,4 @@ if (catalogue) {
     update();
     input?.focus();
   });
-  if (controls) controls.hidden = false;
 }

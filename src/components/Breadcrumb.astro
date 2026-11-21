@@ -1,0 +1,16 @@
+---
+import { getCopy, type Language } from '../data/site';
+
+interface Props {
+  lang: Language;
+  current: string;
+  parent?: { label: string; href: string };
+}
+const { lang, current, parent } = Astro.props;
+---
+<nav class="breadcrumbs" aria-label={lang === 'vi' ? 'Đường dẫn' : 'Breadcrumb'}>
+  <a href={`/${lang}/`}>{getCopy(lang).home}</a>
+  <span aria-hidden="true">/</span>
+  {parent && <><a href={parent.href}>{parent.label}</a><span aria-hidden="true">/</span></>}
+  <span aria-current="page">{current}</span>
+</nav>

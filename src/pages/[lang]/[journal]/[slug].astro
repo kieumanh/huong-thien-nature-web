@@ -1,6 +1,10 @@
 ---
 import { articleAnswers } from "../../../data/article-answers";
 import { articlePhotos } from "../../../data/article-photos";
+import AuthorProfile from '../../../components/AuthorProfile.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
+import { journalAuthor as author } from '../../../data/people';
+import '../../../styles/editorial.css';
 import Arrow from '../../../components/Arrow.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
@@ -21,14 +25,18 @@ const alternatePath = articlePath(lang === 'vi' ? 'en' : 'vi', article.slug);
 const related = article.relatedSlugs
   ? article.relatedSlugs.map(slug => articles.find(item => item.slug === slug)).filter((item): item is Article => Boolean(item) && item?.slug !== article.slug).slice(0, 3)
   : articles.filter(item => item.slug !== article.slug).slice(0, 3);
-const author = { name: 'Kiều Mạnh', image: '/media/author-kieu-manh.jpg' };
+const vi = lang === 'vi';
+const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', { dateStyle: 'long', timeZone: 'UTC' });
+const readableDate = (date: string) => dateFormat.format(new Date(date));
+const showModified = article.updatedAt && article.updatedAt !== article.publishedAt;
 const origin = 'https://huongthiennature.com';
 const schema = {
   '@context': 'https://schema.org', '@type': 'BlogPosting',
   headline: content.title, description: content.description, inLanguage: lang,
   image: new URL(article.image, origin).href,
   mainEntityOfPage: origin + articlePath(lang, article.slug),
-  ...(article.publishedAt ? { datePublished: article.publishedAt, dateModified: article.updatedAt } : {}),
+  ...(article.publishedAt ? { datePublished: article.publishedAt } : {}),
+  ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
   author: { '@type': 'Person', name: author.name, image: new URL(author.image, origin).href },
   publisher: { '@type': 'Organization', name: 'Hương Thiền Nature', url: origin },
   ...(article.keywords ? { keywords: article.keywords[lang] } : {}),
@@ -45,110 +53,36 @@ const schema = {
   <main id="main-content" tabindex="-1">
     <article class="article-page">
       <header class="article-header shell">
-        <nav class="breadcrumbs" aria-label={lang === 'vi' ? 'Đường dẫn' : 'Breadcrumb'}><a href={`/${lang}/`}>{t.home}</a><span aria-hidden="true">/</span><a href={journalPath(lang)}>{t.journalHome}</a></nav>
+        <Breadcrumb {lang} current={content.title} parent={{ label: t.journalHome, href: journalPath(lang) }} />
         <div class="article-meta"><span>{content.category}</span><span>{(lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes)} {t.readTime}</span></div>
         <h1>{content.title}</h1>
         <p class="lead">{articleAnswers[article.slug]?.[lang] ?? content.description}</p>
-        <p class="article-byline"><a href="#article-author">{author.name}</a>{article.phase === 'roots' && <> · {lang === 'vi' ? 'Biên tập từ Thiền Tinh Hoa' : 'Adapted from Thiền Tinh Hoa'} · <time datetime={article.publishedAt}>{lang === 'vi' ? '07/10/2026' : '7 October 2026'}</time></>}</p>
+        <p class="article-byline">
+          <a href="#article-author">{author.name}</a>
+          {article.publishedAt && <time datetime={article.publishedAt}>{readableDate(article.publishedAt)}</time>}
+          {showModified && <span>{vi ? 'Cập nhật' : 'Updated'} <time datetime={article.updatedAt}>{readableDate(article.updatedAt!)}</time></span>}
+          {article.phase === 'roots' && <span>{vi ? 'Biên tập từ Thiền Tinh Hoa' : 'Adapted from Thiền Tinh Hoa'}</span>}
+        </p>
       </header>
       <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
       <div class="article-body">
         <p class="article-introduction">{content.introduction}</p>
-        <nav class="article-toc" aria-label={lang === 'vi' ? 'Mục lục bài viết' : 'Article contents'}><h2>{lang === 'vi' ? 'Trong bài này' : 'In this article'}</h2><ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol></nav>
+        {content.sections.length >= 3 && <details class="article-toc material-details">
+          <summary>{vi ? 'Mục lục bài viết' : 'In this article'}</summary>
+          <nav class="disclosure-body" aria-label={vi ? 'Mục lục bài viết' : 'Article contents'}>
+            <ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol>
+          </nav>
+        </details>}
         {content.sections.map((section, index) => <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
         {content.cta && <p class="article-cta"><a class="button" href={articlePath(lang, content.cta.slug)}>{content.cta.label} <Arrow /></a></p>}
         {article.sources && <section class="article-sources" aria-labelledby="sources-title"><h2 id="sources-title">{lang === 'vi' ? 'Nguồn và đọc thêm' : 'Sources and further reading'}</h2><p>{lang === 'vi' ? 'Các bài Roots được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'Roots articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.'}</p><ul>{article.sources.map(source => <li>{source.url ? <a href={source.url}>{source.title}</a> : <span>{source.title}</span>}</li>)}</ul></section>}
-        <section class="author-card" id="article-author" aria-labelledby="author-name">
-          <div class="author-card__portrait"><img src={author.image} alt={lang === 'vi' ? 'Kiều Mạnh bên bờ biển' : 'Kiều Mạnh at the beach'} width="1152" height="1536" loading="lazy" decoding="async" /></div>
-          <div class="author-card__identity">
-            <span class="eyebrow">{lang === 'vi' ? 'Về tác giả' : 'About the author'}</span>
-            <h2 id="author-name">{author.name}</h2>
-          </div>
-          <div class="author-card__bio">
-            <p>{lang === 'vi' ? 'Người sáng lập dự án Hương Thiền Nature, dành cả đời để lan tỏa con đường thiền định, chánh niệm và sống tỉnh thức, thuận tự nhiên.' : 'A founder of Hương Thiền Nature, dedicated to sharing meditation, mindfulness and a way of living in tune with nature.'}</p>
-            <p>{lang === 'vi' ? 'Hương Thiền, người sáng lập, hiện chỉ phụ trách chuyên môn giảng dạy. Kiều Mạnh đảm nhiệm phần chia sẻ nội dung và truyền thông của dự án.' : 'Founder Hương Thiền currently focuses exclusively on teaching. Kiều Mạnh is responsible for sharing content and managing the project’s communications.'}</p>
-          </div>
-        </section>
+        <AuthorProfile {lang} />
         <a class="quiet-link" href={journalPath(lang)}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
       </div>
     </article>
-    <section class="section related-articles shell" aria-labelledby="related-title"><span class="eyebrow">{t.journalHome}</span><h2 id="related-title">{t.related}</h2><div class="related-grid">{related.map(item => <article class="related-card"><span class="article-meta">{item.translations[lang].category}</span><h3><a href={articlePath(lang, item.slug)}>{item.translations[lang].title}</a></h3><p>{item.translations[lang].description}</p><a class="quiet-link" href={articlePath(lang, item.slug)} aria-label={`${t.journalLink}: ${item.translations[lang].title}`}>{t.journalLink} <Arrow /></a></article>)}</div></section>
+    <section class="related-articles shell" aria-labelledby="related-title"><span class="eyebrow">{t.journalHome}</span><h2 id="related-title">{t.related}</h2><div class="related-grid">{related.map(item => <article class="related-card"><span class="article-meta">{item.translations[lang].category}</span><h3><a href={articlePath(lang, item.slug)}>{item.translations[lang].title}</a></h3><p>{item.translations[lang].description}</p></article>)}</div></section>
   </main>
   <Footer lang={lang} />
 </BaseLayout>
-
-
-<style>
-  .article-body .author-card {
-    display: grid;
-    grid-template-columns: 7.5rem minmax(0, 1fr);
-    grid-template-areas: "portrait identity" "portrait bio";
-    align-items: start;
-    column-gap: clamp(1rem, 4vw, 1.75rem);
-    row-gap: .7rem;
-    margin-block: 2.5rem 1.5rem;
-    padding: clamp(1rem, 4vw, 1.75rem);
-    border: 1px solid var(--line);
-    border-radius: 1.25rem;
-    background: linear-gradient(145deg, #edf2e9, #faf8f1 85%);
-  }
-
-  .author-card__portrait {
-    grid-area: portrait;
-    overflow: hidden;
-    aspect-ratio: 1;
-    border-radius: 50%;
-  }
-
-  .author-card__portrait img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 58%;
-    transform: scale(2.15);
-    transform-origin: 50% 40%;
-  }
-
-  .author-card__identity { grid-area: identity; }
-  .author-card__bio { grid-area: bio; }
-
-  .article-body .author-card h2 {
-    margin: .25rem 0 0;
-    font-size: clamp(1.45rem, 4vw, 1.9rem);
-  }
-
-  .article-body .author-card p {
-    margin: 0;
-    font-size: .92rem;
-    line-height: 1.65;
-  }
-
-  .article-body .author-card p + p {
-    margin-top: .75rem;
-    padding-top: .75rem;
-    border-top: 1px solid var(--line);
-  }
-
-  @media (max-width: 760px) {
-    .article-header, .article-cover, .article-body {
-      width: min(600px, calc(100% - 2 * clamp(1rem, 5vw, 1.5rem)));
-    }
-
-    .article-header { text-align: start; }
-    .article-header .breadcrumbs,
-    .article-header .article-meta { justify-content: flex-start; }
-    .article-body p { line-height: 1.75; }
-    .article-body .article-introduction { font-size: 1.15rem; }
-  }
-
-  @media (max-width: 540px) {
-    .article-body .author-card {
-      grid-template-columns: 4rem minmax(0, 1fr);
-      grid-template-areas: "portrait identity" "bio bio";
-      align-items: center;
-      gap: .9rem;
-    }
-  }
-</style>

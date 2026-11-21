@@ -40,6 +40,8 @@ async function setup(form: HTMLFormElement) {
     result.textContent = message;
     result.dataset.kind = kind;
   };
+  form.setAttribute('aria-busy', 'true');
+  status(t.loading);
   const refreshButton = () => { button.disabled = sending || !token; };
   const unavailable = () => {
     fieldset.disabled = false;

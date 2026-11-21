@@ -18,7 +18,7 @@ for (const scene of document.querySelectorAll<HTMLElement>('[data-ecosystem]')) 
   reduced.addEventListener('change', sync);
   document.addEventListener('visibilitychange', sync);
   if ('IntersectionObserver' in window) {
-    new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); sync(); }, { threshold: 0 }).observe(scene);
+    new IntersectionObserver(entries => { visible = entries.some(entry => entry.isIntersecting); sync(); }, { threshold: 0 }).observe(scene.querySelector('.solar-system-scene') ?? scene);
   }
   sync();
 }

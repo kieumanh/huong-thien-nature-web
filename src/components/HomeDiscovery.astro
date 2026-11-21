@@ -12,12 +12,12 @@ const searchPath = lang === 'vi' ? '/vi/timkiem/' : '/en/search/';
     <h2 id="discovery-title">{t.searchTitle}</h2>
     <form class="home-search-form" action={searchPath} method="get" role="search" aria-label={t.searchLabel}>
       <label class="sr-only" for="home-search-query">{t.searchLabel}</label>
-      <div class="home-search-fields"><input id="home-search-query" name="q" type="search" maxlength="120" required placeholder={t.searchPlaceholder} autocomplete="off" /><button class="button" type="submit">{t.searchButton} <Arrow /></button></div>
+      <div class="home-search-fields"><input id="home-search-query" name="q" type="search" maxlength="120" required placeholder={t.searchPlaceholder} autocomplete="off" /><button class="button" type="submit" aria-label={t.searchButton}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.75"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg><span class="search-button-caption">{lang === 'vi' ? 'Tìm' : 'Search'}</span></button></div>
     </form>
     <nav class="home-search-suggestions" aria-label={t.suggestionsLabel}>{t.suggestions.map(query => <a href={`${searchPath}?q=${encodeURIComponent(query)}`}>{query}</a>)}</nav>
-    <div class="home-beginner-links">
-      <span class="home-beginner-label">{t.readingEyebrow}</span>
-      <nav aria-label={t.readingEyebrow}>{beginnerArticles.map(article => <a class="home-beginner-link" href={articlePath(lang, article.slug)}>{article.translations[lang].title}<Arrow /></a>)}</nav>
-    </div>
+    <details class="home-beginner-links material-details">
+      <summary>{t.readingEyebrow}</summary>
+      <nav class="disclosure-body" aria-label={t.readingEyebrow}>{beginnerArticles.map(article => <a class="home-beginner-link" href={articlePath(lang, article.slug)}>{article.translations[lang].title}<Arrow /></a>)}</nav>
+    </details>
   </div>
 </section>

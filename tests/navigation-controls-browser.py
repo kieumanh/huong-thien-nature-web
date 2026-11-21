@@ -70,6 +70,7 @@ with sync_playwright() as p:
         assert menu.get_attribute('aria-expanded') == 'false'
         assert menu.evaluate('el => el === document.activeElement')
         message = page.locator('#message')
+        page.wait_for_function("!document.querySelector('#message').disabled")
         message.focus()
         assert message.evaluate('el => el === document.activeElement')
         box = message.bounding_box()

@@ -2,28 +2,38 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import { journalPath } from '../data/articles';
+import { shopPath } from '../data/products';
 import type { Language } from '../data/site';
-const { lang }=Astro.props as {lang:Language};
-const en=lang==='en';
-const title=en?'Search':'Tìm kiếm';
-const path=en?'/en/search/':'/vi/timkiem/';
-const alternatePath=en?'/vi/timkiem/':'/en/search/';
+
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const en = lang === 'en';
+const title = en ? 'Search' : 'Tìm kiếm';
+const path = en ? '/en/search/' : '/vi/timkiem/';
+const alternatePath = en ? '/vi/timkiem/' : '/en/search/';
+const description = en ? 'Find an article or a product by name, ingredient or keyword.' : 'Tìm bài viết hoặc sản phẩm theo tên, thành phần và từ khóa. Bạn có thể nhập tiếng Việt có dấu hoặc không dấu.';
 ---
-<BaseLayout noindex lang={lang} title={`${title} | Hương Thiền Nature`} description={en?'Search articles, products, prices and stock status at Hương Thiền Nature.':'Tìm bài viết, sản phẩm, giá tham khảo và trạng thái tồn kho tại Hương Thiền Nature.'} alternatePath={alternatePath}>
-  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+<BaseLayout noindex {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath}>
+  <Header {lang} {alternatePath} isInnerPage />
   <main id="main-content" tabindex="-1" class="shell search-page" data-search-page data-language={lang}>
-    <span class="eyebrow">{en?'Explore our library':'Khám phá thư viện'}</span>
+    <Breadcrumb {lang} current={title} />
     <h1>{title}</h1>
-    <p class="lead">{en?'Find an article or a product by name, ingredient or keyword.':'Tìm bài viết hoặc sản phẩm theo tên, thành phần và từ khóa.'}</p>
-    <form class="search-form" action={path} method="get" role="search">
-      <label for="search-query" class="sr-only">{en?'Keyword':'Từ khóa'}</label>
-      <input id="search-query" name="q" type="search" maxlength="120" required placeholder={en?'Try “cocoa”, “peanuts” or “breath”':'Thử “cacao”, “lạc” hoặc “hơi thở”'} autocomplete="off" />
-      <button type="submit" class="button">{title}</button>
+    <p class="lead">{description}</p>
+    <form class="search-form" action={path} method="get" role="search" aria-label={title}>
+      <label for="search-query" class="sr-only">{en ? 'Keyword' : 'Từ khóa'}</label>
+      <input id="search-query" name="q" type="search" maxlength="120" required placeholder={en ? 'Cocoa, peanuts or breath…' : 'Cacao, lạc hoặc hơi thở…'} autocomplete="off" />
+      <button type="submit" class="button" aria-label={title}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.75" /><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" /></svg><span class="search-button-caption">{en ? title : 'Tìm'}</span></button>
     </form>
-    <p id="search-status" class="search-status" role="status" aria-live="polite">{en?'Enter a keyword to search products, articles and site information.':'Nhập từ khóa để tìm sản phẩm, bài viết và thông tin trên website. Bạn có thể gõ tiếng Việt có dấu hoặc không dấu.'}</p>
+    <p id="search-status" class="search-status" role="status"></p>
     <div id="search-results" class="search-results"></div>
-    <noscript><p>{en?'Enable JavaScript to search. You can also browse the journal.':'Bật JavaScript để tìm kiếm. Bạn cũng có thể xem toàn bộ tản văn.'} <a href={en?'/en/journal/':'/vi/tan-van/'}>{en?'Browse articles':'Xem tản văn'}</a></p></noscript>
+    <p class="search-fallback" hidden><a class="quiet-link" href={journalPath(lang)}>{en ? 'Browse articles' : 'Xem Tản văn'}</a> · <a class="quiet-link" href={shopPath(lang)}>{en ? 'Browse the shop' : 'Ghé Cửa hàng'}</a></p>
+    <noscript>
+      <p class="search-fallback">{en ? 'Search needs JavaScript. You can browse the journal or shop directly.' : 'Tìm kiếm cần JavaScript. Bạn có thể mở thẳng Tản văn hoặc Cửa hàng.'}</p>
+      <a class="quiet-link" href={journalPath(lang)}>{en ? 'Browse articles' : 'Xem Tản văn'}</a> · <a class="quiet-link" href={shopPath(lang)}>{en ? 'Browse the shop' : 'Ghé Cửa hàng'}</a>
+    </noscript>
   </main>
-  <Footer lang={lang} />
+  <Footer {lang} />
 </BaseLayout>
 <script>import '../scripts/search-page';</script>

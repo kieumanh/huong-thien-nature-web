@@ -2,6 +2,7 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import Breadcrumb from './Breadcrumb.astro';
 import ContactForm from './ContactForm.astro';
 import { contactPath, contactEmail, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
@@ -29,6 +30,7 @@ const schema = {
   <Header {lang} {alternatePath} isInnerPage />
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <main id="main-content" class="section contact" tabindex="-1">
+    <div class="shell"><Breadcrumb {lang} current={vi ? 'Liên hệ' : 'Contact'} /></div>
     <div class="shell contact-grid">
       <div>
         <h1>{title}</h1>
@@ -36,9 +38,9 @@ const schema = {
           ? 'Bạn có thể hỏi về bài tập thiền, sản phẩm trong cửa hàng hoặc gửi góp ý cho nhóm Hương Thiền.'
           : 'Ask us about meditation practices, products in the shop or share your feedback with the Hương Thiền team.'}</p>
         <address class="contact-channels">
-          <a href={`tel:${internationalPhone}`}><strong>Hotline</strong><span>{hotline}</span></a>
-          <a href={zaloUrl}><strong>Zalo</strong><span>{hotline}</span></a>
-          <a href={`mailto:${contactEmail}`}><strong>Email</strong><span>{contactEmail}</span></a>
+          <a class="zen-card" href={`tel:${internationalPhone}`}><strong>Hotline</strong><span>{hotline}</span></a>
+          <a class="zen-card" href={zaloUrl}><strong>Zalo</strong><span>{hotline}</span></a>
+          <a class="zen-card" href={`mailto:${contactEmail}`}><strong>Email</strong><span>{contactEmail}</span></a>
         </address>
       </div>
       <div id="connect"><ContactForm {lang} standalone /></div>

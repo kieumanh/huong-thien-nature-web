@@ -68,8 +68,10 @@ function luminance(color: RGB) {
 }
 
 let scheduled = false;
+let lastSample = 0;
 function update() {
   scheduled = false;
+  lastSample = performance.now();
   for (const control of controls) {
     const rect = control.getBoundingClientRect();
     if (!rect.width || !rect.height) continue;
@@ -99,7 +101,10 @@ function update() {
   }
 }
 function schedule() {
-  if (!scheduled) { scheduled = true; requestAnimationFrame(update); }
+  if (scheduled) return;
+  scheduled = true;
+  const delay = Math.max(0, 120 - (performance.now() - lastSample));
+  window.setTimeout(() => requestAnimationFrame(update), delay);
 }
 if (controls.length) {
   window.addEventListener('scroll', schedule, { passive: true });

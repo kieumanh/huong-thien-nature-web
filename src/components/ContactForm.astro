@@ -6,9 +6,9 @@ import { products } from '../data/products';
 const { lang, standalone = false } = Astro.props as { lang: Language; standalone?: boolean };
 const t = contactCopy[lang];
 ---
-<div class="contact-card">
+<div class="contact-card zen-card">
   {standalone ? <h2>{t.title}</h2> : <h3>{t.title}</h3>}
-  <form id="interest-form" data-language={lang} data-products={JSON.stringify(products.map(product => ({ slug: product.slug, name: product.translations[lang].name })))} aria-busy="true">
+  <form id="interest-form" data-language={lang} data-products={JSON.stringify(products.map(product => ({ slug: product.slug, name: product.translations[lang].name })))} method="post">
     <fieldset disabled><legend class="sr-only">{t.title}</legend>
       <div class="contact-fields">
         <div class="contact-field"><label for="name">{t.name}</label><input id="name" name="name" autocomplete="name" maxlength="100" placeholder={lang === 'vi' ? 'Tên của bạn' : 'Your name'} required /></div>
@@ -21,8 +21,8 @@ const t = contactCopy[lang];
       <div id="contact-verification" class="contact-verification"></div>
       <button class="button" type="submit" disabled><span class="send-label">{t.send}</span><Arrow /></button>
     </fieldset>
-    <p class="form-result" id="form-result" role="status" aria-live="polite">{t.loading}</p>
-    <noscript><p class="form-note">{t.noScript}</p></noscript>
+    <p class="form-result" id="form-result" role="status" aria-live="polite"></p>
+    <noscript><style>#interest-form fieldset { display: none; }</style><p class="form-note">{t.noScript}</p></noscript>
   </form>
 </div>
 <script>

@@ -1,0 +1,21 @@
+---
+import { journalPath } from '../data/articles';
+import { journalAuthor, meditationFounder } from '../data/people';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const vi = lang === 'vi';
+---
+<section class="author-card" id="article-author" aria-labelledby="author-name">
+  <div class="author-card__portrait"><img src={journalAuthor.image} alt="" width="1152" height="1536" loading="lazy" decoding="async" /></div>
+  <div class="author-card__identity">
+    <h2 id="author-name">{journalAuthor.name}</h2>
+    <p class="author-card__role">{journalAuthor.role[lang]}</p>
+  </div>
+  <div class="author-card__bio">
+    <p>{journalAuthor.bio[lang]}</p>
+    <p>{meditationFounder.bio[lang]}</p>
+    <a class="quiet-link" href={`${journalPath(lang)}#journal-articles`}>{vi ? 'Các bài viết của Kiều Mạnh' : 'Articles by Kiều Mạnh'}</a>
+  </div>
+</section>

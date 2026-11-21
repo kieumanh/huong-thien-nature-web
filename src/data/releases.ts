@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.2.0',
+    date: '2026-11-21',
+    vi: ['Zen Botanical', 'Làm mới trang chủ quanh Thân, Tâm và Trí. Đồng bộ trải nghiệm đọc, Cửa hàng và Liên hệ, bổ sung ảnh đáp ứng cho đầu trang và chỉnh điều khiển nổi trên điện thoại.'],
+    en: ['Zen Botanical', 'Rebuilt the homepage around Body, Heart and Mind. Unified the reading, shop and contact layouts, added responsive hero photography and refined the floating controls on mobile.'],
+  },
+  {
     version: '2.1.0',
     date: '2026-11-21',
     vi: ['Chân trang và lịch sử phiên bản', 'Sắp xếp chân trang theo nhóm Khám phá, Hệ sinh thái và Kết nối. Bổ sung lịch sử phiên bản song ngữ, mở trực tiếp từ số phiên bản ở chân trang.'],
