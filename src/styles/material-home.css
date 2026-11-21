@@ -1,6 +1,6 @@
 .material-home {
   display: grid;
-  gap: var(--space-section);
+  gap: clamp(1.7rem, 4vw, 3.6rem);
   padding-block: clamp(1.25rem, 4vw, 3.75rem) var(--space-section);
 }
 .material-hero {
@@ -27,7 +27,7 @@
   .material-hero__art .contemplative-scene { aspect-ratio: 6 / 5; }
 }
 
-.home-ecosystem { padding-block: clamp(1.55rem, 4vw, 3.15rem); background: var(--surface-container); }
+.home-ecosystem { padding-block: clamp(1.5rem, 3vw, 2.55rem); background: var(--surface-container); }
 .home-ecosystem .section-heading > p { max-width: 32ch; }
 .solar-system-pillars { margin-top: 0; gap: .85rem; }
 .solar-pillar {

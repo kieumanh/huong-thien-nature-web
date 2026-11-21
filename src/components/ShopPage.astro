@@ -27,7 +27,7 @@ const featured = products[0];
     </section>
     <section class="shop-catalogue shell" id="shop-products" aria-labelledby="catalogue-title" data-shop-catalogue data-lang={lang}>
       <h2 id="catalogue-title" class="sr-only">{vi ? 'Danh sách sản phẩm' : 'Product catalogue'}</h2>
-      <div class="shop-controls" hidden>
+      <div class="shop-controls">
         <form class="shop-search" role="search" data-shop-search aria-label={vi ? 'Tìm sản phẩm' : 'Search products'}>
           <label class="sr-only" for="shop-search">{vi ? 'Tìm trong cửa hàng' : 'Search the shop'}</label>
           <input id="shop-search" name="q" type="search" maxlength="120" placeholder={vi ? 'Tên hoặc thành phần…' : 'Name, ingredient, keyword…'} autocomplete="off" aria-controls="shop-grid" />
@@ -42,7 +42,7 @@ const featured = products[0];
       <p class="stock-status" role="status" data-stock-status></p>
       <div class="shop-grid" id="shop-grid">{products.map(product => <ProductCard product={product} lang={lang} heading="h3" compact />)}</div>
       <div class="shop-empty" hidden><h3>{vi ? 'Chưa tìm thấy sản phẩm' : 'No products found'}</h3><p>{vi ? 'Thử tên ngắn hơn hoặc chọn nhóm khác.' : 'Try a shorter name or another category.'}</p><button type="button" class="button" data-shop-reset>{vi ? 'Xem tất cả sản phẩm' : 'Show all products'}</button></div>
-      <noscript><p class="shop-demo-note">{vi ? 'Bạn có thể xem toàn bộ sản phẩm và mở trang chi tiết khi JavaScript tắt.' : 'All products and detail pages remain available with JavaScript disabled.'}</p></noscript>
+      <noscript><style>.shop-controls { display: none; }</style><p class="shop-demo-note">{vi ? 'Bạn có thể xem toàn bộ sản phẩm và mở trang chi tiết khi JavaScript tắt.' : 'All products and detail pages remain available with JavaScript disabled.'}</p></noscript>
     </section>
     <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'MAKE ROOM FOR A GOOD MEAL'}</span><h2>{vi ? 'Bạn đang tìm một nguyên liệu?' : 'Looking for an ingredient?'}</h2><p>{vi ? 'Gửi lời nhắn để hỏi thêm về sản phẩm, quy cách và giá chính thức.' : 'Send a message to ask about products, pack sizes and confirmed prices.'}</p></div><a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
   </main>

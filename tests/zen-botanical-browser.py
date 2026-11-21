@@ -32,8 +32,11 @@ report = {'viewports': widths, 'snapshots': [], 'axe': [], 'passes': []}
 artifact.mkdir(parents=True, exist_ok=True)
 
 def wait_page(page, url):
+    target = urlsplit(url)
+    source = urlsplit(page.url)
+    same_document = source._replace(fragment='') == target._replace(fragment='') and source.fragment != target.fragment
     response = page.goto(url, wait_until='load')
-    assert response and response.ok, url
+    assert (response and response.ok) or (response is None and same_document), url
     expect(page.locator('h1')).to_be_visible()
 
 def dimensions(page):
@@ -46,7 +49,12 @@ def dimensions(page):
 def screenshot(page, label, lang, name, width):
     if name == 'search':
         page.wait_for_function("document.querySelector('#search-results h2')")
-    page.evaluate('window.scrollTo(0, 0)')
+    page.evaluate("""async () => {
+      const images = [...document.images].filter(image => image.checkVisibility({ contentVisibilityAuto: true }));
+      for (const image of images) image.loading = 'eager';
+      await Promise.all(images.map(image => image.decode().catch(() => undefined)));
+      window.scrollTo(0, 0);
+    }""")
     page.screenshot(path=str(artifact / f'{label}-{lang}-{name}-{width}.jpg'),
                     full_page=name == 'home', animations='disabled', type='jpeg', quality=82)
     report['snapshots'].append(dict(label=label, language=lang, page=name, viewport=width, **dimensions(page)))
@@ -59,13 +67,15 @@ def check_accessibility(page, lang, name, width):
     page.add_script_tag(path=str(axe_path))
     result = page.evaluate("""async () => {
       const result = await axe.run({ runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'wcag22aa'] } });
-      return { passes: result.passes.length, incomplete: result.incomplete.length,
+      return { passes: result.passes.length, incomplete: result.incomplete.map(({ id, nodes }) => ({ id, targets: nodes.map(node => node.target) })),
         violations: result.violations.map(({id, impact, nodes}) => ({ id, impact, nodes: nodes.map(node => node.target) })) };
     }""")
     report['axe'].append(dict(language=lang, page=name, viewport=width, **result))
 
 def check_flows(browser):
     page = browser.new_page(viewport={'width': 393, 'height': 850}, reduced_motion='reduce')
+    errors = []
+    page.on('pageerror', lambda error: errors.append(str(error)))
     arrange_api(page)
     wait_page(page, base + routes['vi']['home'])
     page.keyboard.press('Tab')
@@ -140,7 +150,7 @@ def check_flows(browser):
     page.emulate_media(reduced_motion='no-preference')
     wait_page(page, base + routes['vi']['home'])
     scene = page.locator('.ecosystem-visual')
-    expect(scene).not_to_have_class('ecosystem-active')
+    expect(page.locator('[data-ecosystem]')).to_have_class('ecosystem-motion')
     scene.locator('summary').click()
     page.locator('.solar-system-scene').scroll_into_view_if_needed()
     expect(page.locator('[data-ecosystem]')).to_have_class('ecosystem-motion ecosystem-active')
@@ -150,6 +160,7 @@ def check_flows(browser):
     page.emulate_media(reduced_motion='reduce')
     expect(page.locator('[data-orbit-toggle]')).to_be_hidden()
     report['passes'].append('Desktop orbit can be stopped, reduced motion hides the unnecessary control.')
+    assert not errors, errors
     page.close()
 
 def check_no_script(browser):

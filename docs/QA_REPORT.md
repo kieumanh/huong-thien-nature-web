@@ -9,6 +9,7 @@
 | Astro check | 0 lỗi, 0 cảnh báo, 11 gợi ý có sẵn trong Blog Studio |
 | Audit nguồn | 33 anchor duy nhất, 15 biến thể ảnh được tham chiếu, 63 tệp media |
 | Unit test | 65 ca cho liên hệ, tìm kiếm, cửa hàng, Worker, chuyển động và trang chủ |
+| Worker và Pages Functions | Wrangler Worker dry-run và biên dịch Pages Functions thành công |
 | Build và audit | 62 trang HTML, 32 trang bài viết VI/EN, 58 URL sitemap, 2.774 tham chiếu cục bộ được kiểm tra |
 
 ## Trình duyệt và so sánh trước/sau

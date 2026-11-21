@@ -93,6 +93,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 .nav-actions, .language { display: flex; align-items: center; flex: 0 0 auto; gap: .3rem; }
 .language { gap: .08rem; font-size: .74rem; }
 .language a, .language > span { display: grid; place-items: center; min-height: var(--control-size); min-width: 29px; color: var(--muted); border-radius: .35rem; }
+.language a { min-width: 44px; }
 .language .active { color: var(--primary); font-weight: 700; text-decoration: underline; text-underline-offset: .3em; }
 .nav-connect, .nav-toggle { display: none; }
 .nav-search, .js .nav-toggle {
@@ -109,6 +110,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   .brand img { width: 34px; height: 34px; }
   .brand-name { font-size: .94rem; }
   .brand-name small { font-size: .54rem; }
+  .language a { min-width: 36px; }
 }
 @media (min-width: 1100px) {
   .nav { flex-wrap: nowrap; min-height: 76px; gap: 1.05rem; }
