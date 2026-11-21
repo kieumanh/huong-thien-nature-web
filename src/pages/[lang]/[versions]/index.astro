@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { releaseTitle, releases, releasesPath } from '../../../data/releases';
+import { getCopy, languages, type Language } from '../../../data/site';
+
+export function getStaticPaths() {
+  return languages.map(lang => ({ params: { lang, versions: releasesPath(lang).split('/')[2] } }));
+}
+
+const lang = Astro.params.lang as Language;
+const vi = lang === 'vi';
+const title = releaseTitle[lang];
+const description = vi
+  ? 'Theo dõi những thay đổi của website Hương Thiền Nature theo từng phiên bản.'
+  : 'Follow the changes to the Hương Thiền Nature website, one release at a time.';
+const alternatePath = releasesPath(vi ? 'en' : 'vi');
+const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', {
+  dateStyle: 'long', timeZone: 'Asia/Ho_Chi_Minh',
+});
+---
+<BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath}>
+  <Header {lang} {alternatePath} isInnerPage />
+  <main id="main-content" class="shell versions-page" tabindex="-1">
+    <header class="versions-header">
+      <nav class="breadcrumbs" aria-label={vi ? 'Đường dẫn' : 'Breadcrumb'}>
+        <a href={`/${lang}/`}>{getCopy(lang).home}</a>
+        <span aria-hidden="true">/</span>
+        <span aria-current="page">{title}</span>
+      </nav>
+      <h1>{title}</h1>
+      <p class="lead">{description}</p>
+    </header>
+
+    <ol class="release-timeline">
+      {releases.map((entry, index) => {
+        const [heading, summary] = entry[lang];
+        return (
+          <li class:list={{ 'release-current': index === 0 }} id={`v${entry.version}`}>
+            <article class="release-entry">
+              <div class="release-meta">
+                <span class="release-version">V{entry.version}</span>
+                <time datetime={entry.date}>{dateFormat.format(new Date(entry.date + 'T12:00:00+07:00'))}</time>
+                {index === 0 && <span class="release-status">{vi ? 'Đang chạy' : 'Current release'}</span>}
+              </div>
+              <h2>{heading}</h2>
+              <p>{summary}</p>
+            </article>
+          </li>
+        );
+      })}
+    </ol>
+  </main>
+  <Footer {lang} />
+</BaseLayout>
+
+<style>
+  .versions-page { max-width: 800px; padding-block: clamp(1.75rem, 6vw, 4.5rem); }
+  .versions-header { margin-bottom: clamp(1.6rem, 5vw, 3rem); }
+  .versions-header .breadcrumbs { justify-content: flex-start; flex-wrap: wrap; margin-bottom: 1.25rem; }
+  .versions-header h1 { margin-bottom: .6rem; font-size: clamp(2.25rem, 6vw, 4rem); }
+
+  .release-timeline { list-style: none; margin: 0; padding: 0 0 0 1.4rem; }
+  .release-timeline > li { position: relative; padding: 0 0 .9rem .9rem; }
+  .release-timeline > li:not(:last-child)::before {
+    content: "";
+    position: absolute;
+    inset: 1.6rem auto -1.6rem 0;
+    border-left: 1px solid #a1b4a1;
+  }
+  .release-timeline > li::after {
+    content: "";
+    position: absolute;
+    top: 1.55rem;
+    left: 0;
+    width: .65rem;
+    height: .65rem;
+    border: 2px solid var(--paper);
+    border-radius: 50%;
+    transform: translateX(-45%);
+    background: var(--moss);
+  }
+  .release-timeline > .release-current::after { background: var(--forest); box-shadow: 0 0 0 2px #a1b4a1; }
+  .release-entry { border: 1px solid var(--line); border-radius: 1.2rem; padding: clamp(1rem, 3vw, 1.5rem); background: #fffef9; }
+  .release-current .release-entry { border-color: #9fb59e; background: #e7efe3; }
+  .release-meta { display: flex; flex-wrap: wrap; gap: .35rem .9rem; align-items: center; margin-bottom: .5rem; font-size: .85rem; color: var(--ink-soft); }
+  .release-version { color: var(--forest); font-weight: 700; font-variant-numeric: tabular-nums; }
+  .release-status { padding: .12rem .6rem; border-radius: 999px; background: var(--forest); color: var(--paper); font-weight: 600; }
+  .release-entry h2 { font-size: clamp(1.3rem, 3vw, 1.85rem); }
+  .release-entry p { margin-top: .42rem; color: var(--ink-soft); }
+
+  @media (max-width: 520px) {
+    .release-timeline { padding-inline-start: .22rem; }
+    .release-timeline > li { padding-inline-start: .7rem; }
+  }
+</style>

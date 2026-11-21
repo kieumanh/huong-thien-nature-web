@@ -4,6 +4,7 @@ import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articles as articleEntries, articlePath, journalPath } from '../src/data/articles.ts';
 import { products, productPath, shopPath } from '../src/data/products.ts';
+import { releases, releasesPath } from '../src/data/releases.ts';
 import { contactPath } from '../src/data/contact-channels.ts';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
@@ -17,10 +18,10 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, articleEntries.length * 2 + 10 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
+assert.equal(files.length, articleEntries.length * 2 + 12 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, (articleEntries.length + products.length + 4) * 2, 'Sitemap must list all localized pages and products');
+assert.equal(new Set(locations).size, (articleEntries.length + products.length + 5) * 2, 'Sitemap must list all localized pages and products');
 let references = 0;
 let articles = 0;
 for (const file of files) {
@@ -44,12 +45,21 @@ for (const file of files) {
     const other = lang === 'vi' ? 'en' : 'vi';
     const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
     const product = products.find(item => productPath(lang, item.slug) === route);
-    const alternate = route === contactPath(lang) ? contactPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
+    const alternate = route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
     assert(html.includes(`href="${shopPath(lang)}"`), `Shop navigation missing on ${route}`);
     if (route === shopPath(lang)) {
       assert.equal([...html.matchAll(/data-product-card/g)].length, products.length, `Catalogue must include every supplied product on ${route}`);
       for (const item of products) assert(html.includes(`href="${productPath(lang, item.slug)}"`), `Missing product link: ${item.slug}`);
+    }
+    assert(html.includes(`href="${releasesPath(lang)}"`), `Missing footer version link on ${route}`);
+    if (route === releasesPath(lang)) {
+      const version = html.match(/name="application-version" content="([^"]+)"/)?.[1];
+      assert.equal(releases[0].version, version, 'The current release must match the application version');
+      assert.equal(new Set(releases.map(entry => entry.version)).size, releases.length, 'Release versions must be unique');
+      for (const entry of releases) {
+        assert(html.includes(`id="v${entry.version}"`), `Missing version ${entry.version} on ${route}`);
+      }
     }
     if (route === contactPath(lang)) {
       assert(html.includes('id="interest-form"') && html.includes('mailto:huongthiennature@gmail.com')

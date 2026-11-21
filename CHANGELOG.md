@@ -1,3 +1,8 @@
+## 2.1.0 — Chân trang và lịch sử phiên bản
+
+- Bổ sung timeline phát hành tiếng Việt và tiếng Anh, liên kết từ số phiên bản ở chân trang.
+- Sắp xếp liên kết chân trang theo Khám phá, Hệ sinh thái và Kết nối.
+
 ## 2.0.6 — Hành trình Hương Thiền và tinh chỉnh giao diện
 
 - Viết lại hành trình của Hương thành sáu mốc rõ ràng, bổ sung bối cảnh và chuyển tiếp giữa các giai đoạn; đồng bộ nội dung tiếng Anh.

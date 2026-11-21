@@ -1,4 +1,5 @@
 import type { APIRoute } from 'astro';
+import { releasesPath } from '../data/releases';
 import { contactPath } from '../data/contact-channels';
 import { articles, articlePath, journalPath } from '../data/articles';
 import { products, productPath, shopPath } from '../data/products';
@@ -8,6 +9,7 @@ export const GET: APIRoute = () => {
   const paths = [
     { vi: '/vi/', en: '/en/' },
     { vi: contactPath('vi'), en: contactPath('en') },
+    { vi: releasesPath('vi'), en: releasesPath('en') },
     { vi: journalPath('vi'), en: journalPath('en') },
     { vi: shopPath('vi'), en: shopPath('en') },
     ...products.map(product => ({ vi: productPath('vi', product.slug), en: productPath('en', product.slug) })),

@@ -1,31 +1,117 @@
 ---
-import { contactPath } from "../data/contact-channels";
-import { journalPath as journalUrl } from '../data/articles';
+import { contactPath, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
+import { journalPath } from '../data/articles';
 import { version } from '../../package.json';
 import { getCopy, type Language } from '../data/site';
 import { shopPath } from '../data/products';
+import { releasesPath, releaseTitle } from '../data/releases';
+
 const { lang } = Astro.props as { lang: Language };
 const t = getCopy(lang);
+const vi = lang === 'vi';
+const home = `/${lang}/`;
+const versionPath = releasesPath(lang);
+const groups = [
+  {
+    title: vi ? 'Khám phá' : 'Explore',
+    links: [
+      { label: t.nav[1], url: `${home}#practice` },
+      { label: t.nav[4], url: journalPath(lang) },
+      { label: vi ? 'Tìm kiếm' : 'Search', url: vi ? '/vi/timkiem/' : '/en/search/' },
+    ],
+  },
+  {
+    title: vi ? 'Hệ sinh thái' : 'Ecosystem',
+    links: [
+      { label: vi ? 'Câu chuyện Hương Thiền' : 'Hương Thiền’s story', url: `${home}#story` },
+      { label: vi ? 'Ba hướng phát triển' : 'Our three areas', url: `${home}#nature` },
+      { label: vi ? 'Cửa hàng' : 'Shop', url: shopPath(lang) },
+    ],
+  },
+  {
+    title: vi ? 'Kết nối' : 'Connect',
+    links: [
+      { label: vi ? 'Liên hệ và gửi lời nhắn' : 'Contact and send a message', url: contactPath(lang) },
+      { label: `Hotline ${hotline}`, url: `tel:${internationalPhone}` },
+      { label: vi ? 'Nhắn qua Zalo' : 'Message on Zalo', url: zaloUrl },
+    ],
+  },
+];
 ---
 <footer class="footer">
   <div class="shell">
-    <div class="footer-top">
-      <div class="footer-identity"><a class="footer-logo" href={`/${lang}/`} aria-label={lang === 'vi' ? 'Trang chủ Hương Thiền Nature' : 'Hương Thiền Nature home'}><img src="/media/huong-thien-logo-footer.webp" alt="Hương Thiền Nature" width="480" height="480" loading="lazy" /></a><div><div class="footer-brand">Hương Thiền Nature</div><p>{t.footer}</p></div></div>
-      <nav class="footer-links" aria-label={lang === 'vi' ? 'Liên kết cuối trang' : 'Footer navigation'}>
-        <a href={`/${lang}/#story`}>{t.nav[0]}</a>
-        <a href={`/${lang}/#practice`}>{t.nav[1]}</a>
-        <a href={journalUrl(lang)}>{t.nav[4]}</a>
-        <a href={shopPath(lang)}>{lang === 'vi' ? 'Cửa hàng' : 'Shop'}</a>
-        <a href={contactPath(lang)}>{lang === 'vi' ? 'Liên hệ' : 'Contact'}</a>
+    <div class="footer-grid">
+      <div class="footer-identity">
+        <a class="footer-logo" href={home} aria-label={vi ? 'Trang chủ Hương Thiền Nature' : 'Hương Thiền Nature home'}>
+          <img src="/media/huong-thien-logo-footer.webp" alt="" width="480" height="480" loading="lazy" decoding="async" />
+        </a>
+        <div><p class="footer-brand">Hương Thiền Nature</p><p class="footer-description">{t.footer}</p></div>
+      </div>
+      <nav class="footer-navigation" aria-label={vi ? 'Liên kết cuối trang' : 'Footer navigation'}>
+        {groups.map(group => (
+          <div class="footer-group">
+            <h2>{group.title}</h2>
+            <ul>
+              {group.links.map(link => (
+                <li><a href={link.url} aria-current={Astro.url.pathname === link.url ? 'page' : undefined}>{link.label}</a></li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </nav>
     </div>
-    <p class="notice">{t.disclaimer}</p>
-    <div class="footer-bottom"><span>© {new Date().getFullYear()} Hương Thiền Nature · V{version}</span><span>{t.rootsNote}</span><a href="#top">{t.top} <span aria-hidden="true">↑</span></a></div>
+    <p class="footer-notice">{t.disclaimer}</p>
+    <div class="footer-bottom">
+      <span>© {new Date().getFullYear()} Hương Thiền Nature</span>
+      <a class="footer-version" href={versionPath} aria-current={Astro.url.pathname === versionPath ? 'page' : undefined}>
+        {releaseTitle[lang]} <span>V{version}</span>
+      </a>
+      <a class="footer-top-link" href="#top">{t.top} <span aria-hidden="true">↑</span></a>
+    </div>
   </div>
 </footer>
 
 <style>
-.footer-logo{display:block;flex:0 0 128px;border-radius:20px;overflow:hidden;background:#f7f7ef}
-.footer-logo img{display:block;width:128px;height:128px;object-fit:contain}
-@media(max-width:767px){.footer-logo{flex-basis:96px;border-radius:16px}.footer-logo img{width:96px;height:96px}}
+  .footer-grid {
+    display: grid;
+    grid-template-columns: minmax(0, .8fr) minmax(0, 1.6fr);
+    gap: clamp(1.5rem, 4vw, 3.25rem);
+  }
+
+  .footer-identity { display: flex; align-items: start; gap: 1rem; }
+  .footer-logo { flex: 0 0 3.75rem; overflow: hidden; border-radius: 1rem; background: #f7f7ef; }
+  .footer-logo img { width: 100%; height: auto; }
+  .footer-brand { margin: 0; font: 1.4rem/1.25 var(--serif); text-wrap: balance; }
+  .footer-description { max-width: 30ch; margin-top: .5rem; font-size: .9rem; color: #c8d2bf; }
+
+  .footer-navigation { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem 1.2rem; }
+  .footer-group h2 { margin: 0 0 .25rem; font: 650 .95rem/1.3 var(--sans); letter-spacing: 0; }
+  .footer-group ul { list-style: none; padding: 0; margin: 0; }
+  .footer-group a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; line-height: 1.45; color: #d9e2d2; }
+
+  .footer-notice { margin: 1.15rem 0; color: #c8d2bf; max-width: 78ch; font-size: .8rem; }
+  .footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: .35rem 1.1rem;
+    padding-top: .65rem;
+    border-top: 1px solid #eaeedf38;
+    color: #d9e2d2;
+    font-size: .85rem;
+  }
+  .footer-bottom a { min-height: 44px; display: inline-flex; align-items: center; gap: .55rem; }
+  .footer-version { margin-inline-start: auto; }
+  .footer-version span { padding: .12rem .55rem; border: 1px solid #cad8c17a; border-radius: 999px; color: #f5f6e8; font-weight: 650; }
+  .footer a[aria-current="page"] { text-decoration: underline; text-underline-offset: .2em; }
+
+  @media (max-width: 850px) { .footer-grid { grid-template-columns: 1fr; } }
+  @media (max-width: 560px) {
+    .footer-navigation { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-group:last-child { grid-column: 1 / -1; }
+    .footer-group:last-child ul { display: flex; flex-wrap: wrap; gap: 0 1rem; }
+    .footer-bottom > span { flex-basis: 100%; }
+    .footer-version { margin-inline-start: 0; }
+    .footer-top-link { margin-inline-start: auto; }
+  }
 </style>

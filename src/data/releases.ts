@@ -1,0 +1,150 @@
+import type { Language } from './site.ts';
+
+export const releasesPath = (lang: Language) => lang === 'vi' ? '/vi/phien-ban/' : '/en/versions/';
+
+export const releaseTitle = {
+  vi: 'Lịch sử phiên bản',
+  en: 'Version history',
+} satisfies Record<Language, string>;
+
+type Release = {
+  version: string;
+  date: string;
+  vi: [title: string, summary: string];
+  en: [title: string, summary: string];
+};
+
+export const releases: Release[] = [
+  {
+    version: '2.1.0',
+    date: '2026-11-21',
+    vi: ['Chân trang và lịch sử phiên bản', 'Sắp xếp chân trang theo nhóm Khám phá, Hệ sinh thái và Kết nối. Bổ sung lịch sử phiên bản song ngữ, mở trực tiếp từ số phiên bản ở chân trang.'],
+    en: ['Footer and version history', 'Grouped footer links into Explore, Ecosystem and Contact. Added a bilingual release timeline linked from the version number in the footer.'],
+  },
+  {
+    version: '2.0.6',
+    date: '2026-11-06',
+    vi: ['Hành trình Hương Thiền và giao diện mới', 'Mở rộng câu chuyện của Hương Thiền, hoàn thiện thông tin tồn kho và cải thiện giao diện trên điện thoại. Các cập nhật tiếp theo trong dòng 2.0.6 bổ sung trang Liên hệ, bài mới, khung tác giả, hiệu ứng thiền và bố cục trang chủ gọn hơn.'],
+    en: ['The founder’s story and a refreshed interface', 'Expanded Hương Thiền’s story, clarified stock availability and improved the mobile layout. Later updates in the 2.0.6 series added the contact page, a new article, author profiles, contemplative motion and a shorter homepage.'],
+  },
+  {
+    version: '2.0.5',
+    date: '2026-10-09',
+    vi: ['Nút nhạc nền dịu hơn', 'Tinh chỉnh màu xanh sage và hình dáng nút nhạc để dễ nhận ra trên cả vùng nền sáng lẫn tối.'],
+    en: ['Softer music controls', 'Refined the shape and sage palette of the music control so it stands out on light and dark backgrounds.'],
+  },
+  {
+    version: '2.0.4',
+    date: '2026-10-09',
+    vi: ['Ba quỹ đạo Thân, Tâm và Trí', 'Đưa ba hướng phát triển vào một mô hình quỹ đạo chung, với Hương Thiền Nature ở trung tâm.'],
+    en: ['Three orbits for Body, Heart and Mind', 'Brought the three areas of the project into one orbit model with Hương Thiền Nature at its centre.'],
+  },
+  {
+    version: '2.0.3',
+    date: '2026-10-09',
+    vi: ['Mô hình hệ sinh thái chuyển động', 'Thêm chuyển động quỹ đạo và điều khiển tạm dừng. Mô hình dừng khi rời vùng nhìn hoặc khi thiết bị yêu cầu giảm chuyển động.'],
+    en: ['An animated ecosystem model', 'Added orbital motion and pause controls. Motion stops outside the viewport or when the device asks for reduced motion.'],
+  },
+  {
+    version: '2.0.2',
+    date: '2026-10-09',
+    vi: ['Giới thiệu ba hướng phát triển', 'Trình bày Farm & Botanicals, Eco-Retreat và Academy trong cùng một khu vực. Làm rõ nội dung nào có thể khám phá và hoạt động nào đang chuẩn bị.'],
+    en: ['Three areas of development', 'Presented Farm & Botanicals, Eco-Retreat and Academy together, clarifying what was available and what was still being prepared.'],
+  },
+  {
+    version: '2.0.1',
+    date: '2026-10-08',
+    vi: ['Tìm sản phẩm thuận tiện hơn', 'Thu gọn ô tìm kiếm Cửa hàng và thêm ảnh sản phẩm luân phiên.'],
+    en: ['Easier product discovery', 'Made shop search more compact and introduced rotating product photography.'],
+  },
+  {
+    version: '2.0.0',
+    date: '2026-10-08',
+    vi: ['Giao diện lấy cảm hứng từ thiên nhiên', 'Làm mới nhận diện, thu gọn khu liên hệ và thêm thanh tiến trình đọc.'],
+    en: ['A nature-inspired redesign', 'Refreshed the visual identity, simplified the contact area and introduced reading progress.'],
+  },
+  {
+    version: '0.4.7',
+    date: '2026-10-08',
+    vi: ['Khám phá nội dung từ trang chủ', 'Thêm ô tìm kiếm, từ khóa gợi ý và lộ trình đọc cho người mới. Bổ sung danh mục và trang chi tiết sản phẩm song ngữ.'],
+    en: ['Explore from the homepage', 'Added search, suggested keywords, a beginner reading path, and bilingual catalogue and product pages.'],
+  },
+  {
+    version: '0.4.6',
+    date: '2026-10-08',
+    vi: ['Gói phát hành đồng bộ', 'Đồng bộ số phiên bản trong mã nguồn, giao diện và tài liệu triển khai.'],
+    en: ['Consistent release packaging', 'Aligned the version number across source, interface and deployment documentation.'],
+  },
+  {
+    version: '0.4.5',
+    date: '2026-10-08',
+    vi: ['Tìm kiếm tiếng Việt và tiếng Anh', 'Thêm trang kết quả theo từng ngôn ngữ và hỗ trợ tìm tiếng Việt có dấu hoặc không dấu.'],
+    en: ['Vietnamese and English search', 'Added separate results pages and Vietnamese search with or without diacritics.'],
+  },
+  {
+    version: '0.4.4',
+    date: '2026-10-07',
+    vi: ['Phản hồi liên hệ chính xác hơn', 'Sửa trạng thái xác minh để kết quả gửi biểu mẫu được hiển thị đúng.'],
+    en: ['Clearer contact feedback', 'Fixed verification states so that the form reports the submission outcome correctly.'],
+  },
+  {
+    version: '0.4.3',
+    date: '2026-10-07',
+    vi: ['Đóng gói thư viện Roots', 'Phát hành đồng bộ thư viện bài viết song ngữ và cấu hình chạy trên Cloudflare Worker.'],
+    en: ['Roots release package', 'Packaged the bilingual journal and Cloudflare Worker configuration together.'],
+  },
+  {
+    version: '0.4.1',
+    date: '2026-10-07',
+    vi: ['Triển khai Cloudflare Worker', 'Chuyển xử lý biểu mẫu sang Worker, dùng chung phần xác minh và gửi email.'],
+    en: ['Cloudflare Worker deployment', 'Moved contact form handling to the Worker with shared verification and email delivery.'],
+  },
+  {
+    version: '0.4.0',
+    date: '2026-10-07',
+    vi: ['Ra mắt thư viện Roots', 'Phát hành 12 bài song ngữ kèm minh họa, bài thực tập và gợi ý đọc tiếp.'],
+    en: ['The Roots library launches', 'Published twelve bilingual articles with illustrations, exercises and related reading.'],
+  },
+  {
+    version: '0.3.5',
+    date: '2026-10-07',
+    vi: ['Đọc và điều hướng trong bài', 'Thêm mục lục, bài liên quan và dữ liệu mô tả cho trang bài viết.'],
+    en: ['Article navigation and discovery', 'Added contents, related articles and descriptive metadata.'],
+  },
+  {
+    version: '0.3.4',
+    date: '2026-10-07',
+    vi: ['Đường dẫn riêng cho Tản văn tiếng Việt', 'Bản địa hóa đường dẫn và sitemap, đồng thời chuyển hướng các địa chỉ cũ.'],
+    en: ['Localized Vietnamese journal URLs', 'Localized journal addresses and sitemap entries, with redirects for older URLs.'],
+  },
+  {
+    version: '0.3.3',
+    date: '2026-10-07',
+    vi: ['Trang Tản văn riêng', 'Tạo danh sách bài song ngữ và để hai nút nổi đổi tông theo độ sáng của nền.'],
+    en: ['A dedicated journal page', 'Introduced bilingual article listings and adaptive contrast for the floating controls.'],
+  },
+  {
+    version: '0.3.2',
+    date: '2026-10-07',
+    vi: ['Nhạc, cuộn trang và số phiên bản', 'Đặt nút nhạc và nút về đầu trang ở hai góc, thêm số phiên bản ở chân trang.'],
+    en: ['Music, scrolling and version numbers', 'Placed music and back-to-top controls in opposite corners and displayed the version in the footer.'],
+  },
+  {
+    version: '0.3.1',
+    date: '2026-10-07',
+    vi: ['Gửi lời nhắn qua website', 'Bổ sung biểu mẫu liên hệ có xác minh và chức năng gửi email.'],
+    en: ['Contact through the website', 'Added a contact form with verification and email delivery.'],
+  },
+  {
+    version: '0.3.0',
+    date: '2026-10-07',
+    vi: ['Giao diện Roots song ngữ', 'Tạo bố cục Roots, Tản văn và điều hướng hỗ trợ bàn phím.'],
+    en: ['The bilingual Roots interface', 'Introduced the Roots layout, journal and keyboard-accessible navigation.'],
+  },
+  {
+    version: '0.1.0',
+    date: '2026-10-06',
+    vi: ['Bản giới thiệu đầu tiên', 'Đưa bản giới thiệu Hương Thiền Nature lên Cloudflare Pages.'],
+    en: ['The first public preview', 'Published the initial Hương Thiền Nature preview on Cloudflare Pages.'],
+  },
+];
