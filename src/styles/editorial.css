@@ -52,7 +52,7 @@
 .roots-reading-path ol { list-style: decimal; margin: .55rem 0 0; padding-inline-start: 1.3rem; }
 .roots-reading-path li + li { margin-top: .4rem; }
 
-.article-header, .article-body { width: min(var(--reading-width), calc(100% - 2 * var(--site-gutter))); margin-inline: auto; }
+.article-header.shell, .article-body { width: min(var(--reading-width), calc(100% - 2 * var(--site-gutter))); margin-inline: auto; }
 .article-header { padding-block: clamp(1.5rem, 5vw, 3.25rem) var(--space-6); }
 .article-header .breadcrumbs { margin-bottom: var(--space-5); }
 .article-header h1 { margin-block: .55rem .9rem; text-wrap: pretty; }
