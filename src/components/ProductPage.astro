@@ -17,7 +17,7 @@ const category = productCategories.find(item => item.id === product.category)!;
 const related = products.filter(item => item.slug !== product.slug).sort((a, b) => Number(b.category === product.category) - Number(a.category === product.category)).slice(0, 3);
 ---
 <BaseLayout lang={lang} title={`${copy.name} | ${vi ? 'Cửa hàng' : 'Shop'} Hương Thiền Nature`} description={copy.description} alternatePath={alternatePath} image={product.image}>
-  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <Header lang={lang} alternatePath={alternatePath} />
   <main id="main-content" tabindex="-1" class="shop-page product-page">
     <div class="shell">
       <Breadcrumb {lang} current={copy.name} parent={{ label: vi ? 'Cửa hàng' : 'Shop', href: shopPath(lang) }} />

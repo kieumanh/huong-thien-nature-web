@@ -17,7 +17,7 @@ const alternatePath = shopPath(vi ? 'en' : 'vi');
 const featured = products[0];
 ---
 <BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={description} alternatePath={alternatePath} image={featured.image}>
-  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <Header lang={lang} alternatePath={alternatePath} />
   <main id="main-content" tabindex="-1" class="shop-page">
     <section class="shop-intro shell" aria-labelledby="shop-title">
       <Breadcrumb {lang} current={title} />

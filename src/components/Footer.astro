@@ -1,5 +1,6 @@
 ---
 import { contactPath, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
+import { journeyPath, journeyPages } from '../data/journey-pages';
 import { journalPath } from '../data/articles';
 import { version } from '../../package.json';
 import { getCopy, type Language } from '../data/site';
@@ -15,7 +16,7 @@ const groups = [
   {
     title: vi ? 'Khám phá' : 'Explore',
     links: [
-      { label: t.nav[1], url: `${home}#practice` },
+      { label: t.nav[1], url: journeyPath(lang, 'practice') },
       { label: t.nav[4], url: journalPath(lang) },
       { label: vi ? 'Tìm kiếm' : 'Search', url: vi ? '/vi/timkiem/' : '/en/search/' },
     ],
@@ -23,8 +24,9 @@ const groups = [
   {
     title: vi ? 'Hệ sinh thái' : 'Ecosystem',
     links: [
-      { label: vi ? 'Câu chuyện Hương Thiền' : 'Hương Thiền’s story', url: `${home}#story` },
-      { label: vi ? 'Ba hướng phát triển' : 'Our three areas', url: `${home}#nature` },
+      { label: vi ? 'Câu chuyện Hương Thiền' : 'Hương Thiền’s story', url: journeyPath(lang, 'story') },
+      { label: vi ? 'Ba hướng phát triển' : 'Our three areas', url: journeyPath(lang, 'ecosystem') },
+      { label: journeyPages.team[lang].title, url: journeyPath(lang, 'team') },
       { label: vi ? 'Cửa hàng' : 'Shop', url: shopPath(lang) },
     ],
   },

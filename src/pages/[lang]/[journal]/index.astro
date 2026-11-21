@@ -23,7 +23,7 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
   .map(slug => articles.find(article => article.slug === slug)!);
 ---
 <BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath}>
-  <Header {lang} {alternatePath} isInnerPage />
+  <Header {lang} {alternatePath} />
   <main id="main-content" tabindex="-1" class="journal-listing">
     <header class="journal-listing-header shell">
       <ContemplativeScene motif="mandala" />

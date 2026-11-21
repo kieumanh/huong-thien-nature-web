@@ -1,3 +1,10 @@
+## 2.3.0 — Câu chuyện, thực hành và đội ngũ
+
+- Bổ sung trang song ngữ cho Thực hành, Hệ sinh thái, Câu chuyện và Đội ngũ. Chuyển nội dung chi tiết sang các trang này.
+- Viết lại trang chủ thành hành trình từ thiền tập đến bữa cơm, khu vườn và việc học. Dùng họa tiết mandala và ảnh từ dự án.
+- Giới thiệu Nguyễn Trần Quyết, Lê Lam Sơn và ZenWork. Gắn nguồn ảnh trên hồ sơ.
+- Đồng bộ sitemap, đường dẫn bản dịch, tìm kiếm nội bộ và dữ liệu có cấu trúc cho trang, dự án, tác giả và breadcrumb.
+
 ## 2.2.1 — Đọc liền mạch
 
 - Mở các mục nội dung VI/EN, giữ nguyên văn bản và liên kết.

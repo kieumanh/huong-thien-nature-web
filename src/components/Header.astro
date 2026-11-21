@@ -3,16 +3,18 @@ import { contactPath } from "../data/contact-channels";
 import { journalPath as journalUrl } from '../data/articles';
 import Arrow from './Arrow.astro';
 import { getCopy, type Language } from '../data/site';
+import { journeyPageKeys, journeyPages, journeyPath } from '../data/journey-pages';
 import { shopPath } from '../data/products';
-const { lang, alternatePath, isInnerPage = false } = Astro.props as {
-  lang: Language; alternatePath: string; isInnerPage?: boolean;
+const { lang, alternatePath } = Astro.props as {
+  lang: Language; alternatePath: string;
 };
 const t = getCopy(lang);
-const sections = [
-  ['practice', t.nav[1]], ['nature', lang === 'vi' ? 'Hệ sinh thái' : 'Ecosystem'], ['journal', t.nav[4]], ['story', t.nav[0]],
+const links = [
+  ...journeyPageKeys.map(page => ({ href: journeyPath(lang, page), label: journeyPages[page][lang].title })),
+  { href: journalUrl(lang), label: t.nav[4] },
+  { href: shopPath(lang), label: lang === 'vi' ? 'Cửa hàng' : 'Shop' },
 ];
-const journalPath = journalUrl(lang);
-const sectionHref = (section: string) => section === 'journal' ? journalPath : isInnerPage ? `/${lang}/#${section}` : `#${section}`;
+
 ---
 <a class="skip-link" href="#main-content">{t.skip}</a>
 <header class="topbar" id="top">
@@ -22,8 +24,7 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
       <span class="brand-name">Hương Thiền<small>NATURE</small></span>
     </a>
     <nav class="nav-links" id="main-nav" aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
-      {sections.map(([section, label]) => <a href={sectionHref(section)} class:list={{ active: section === 'journal' && Astro.url.pathname.startsWith(journalPath) }} aria-current={section === 'journal' && Astro.url.pathname === journalPath ? 'page' : undefined}>{label}</a>)}
-      <a href={shopPath(lang)} class:list={{ active: Astro.url.pathname.startsWith(shopPath(lang)) }} aria-current={Astro.url.pathname === shopPath(lang) ? 'page' : undefined}>{lang === 'vi' ? 'Cửa hàng' : 'Shop'}</a>
+      {links.map(({ href, label }) => <a {href} class:list={{ active: Astro.url.pathname.startsWith(href) }} aria-current={Astro.url.pathname === href ? 'page' : undefined}>{label}</a>)}
       <a class="nav-contact-mobile" href={contactPath(lang)} aria-current={Astro.url.pathname === contactPath(lang) ? 'page' : undefined}>{lang === "vi" ? "Liên hệ" : "Contact"}</a>
     </nav>
     <div class="nav-actions">
@@ -53,15 +54,6 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
       setOpen(open);
       if (open) menu.querySelector('a')?.focus();
     });
-    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
-      if (button.getAttribute('aria-expanded') !== 'true') return;
-      setOpen(false);
-      const section = link.pathname === location.pathname && document.getElementById(link.hash.slice(1));
-      if (section) {
-        section.tabIndex = -1;
-        section.focus({ preventScroll: true });
-      }
-    }));
     document.addEventListener('focusin', event => {
       if (event.target instanceof Node && !menu.closest('header')?.contains(event.target)) setOpen(false);
     });

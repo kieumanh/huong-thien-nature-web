@@ -14,14 +14,16 @@ widths = (320, 375, 393, 768, 1024, 1440)
 snapshot_widths = (393, 1440)
 routes = {
     'vi': {
-        'home': '/vi/', 'journal': '/vi/tan-van/',
+        'home': '/vi/', 'practice': '/vi/thuc-hanh/', 'ecosystem': '/vi/he-sinh-thai/',
+        'story': '/vi/cau-chuyen/', 'team': '/vi/doi-ngu/', 'journal': '/vi/tan-van/',
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
         'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
         'search': '/vi/timkiem/?q=bot+cacao', 'contact': '/vi/lien-he/',
         'versions': '/vi/phien-ban/',
     },
     'en': {
-        'home': '/en/', 'journal': '/en/journal/',
+        'home': '/en/', 'practice': '/en/practice/', 'ecosystem': '/en/ecosystem/',
+        'story': '/en/story/', 'team': '/en/team/', 'journal': '/en/journal/',
         'article': '/en/journal/when-meditation-is-difficult/',
         'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',
         'search': '/en/search/?q=cocoa', 'contact': '/en/contact/',
@@ -91,16 +93,23 @@ def check_flows(browser):
     expect(menu).to_be_focused()
     expect(page.locator('#main-nav')).to_be_hidden()
     page.locator('.material-hero .button').click()
-    assert urlsplit(page.url).fragment == 'practice'
+    page.wait_for_url(base + routes['vi']['practice'])
     expect(page.locator('#practice h2')).to_be_visible()
-    expect(page.locator('[data-orbit-toggle]')).to_be_hidden()
     wait_page(page, base + '/vi/#journey-learning')
-    expect(page.locator('#journey-learning')).to_be_attached()
-    expect(page.locator('.journey-chapters li').last).to_be_visible()
-    expect(page.locator('main details')).to_have_count(0)
-    report['passes'].append('Keyboard opens/closes navigation, skip link transfers focus, practice CTA and legacy journey fragment work.')
+    expect(page.locator('#journey a')).to_have_attribute('href', '/vi/cau-chuyen/#journey')
+    report['passes'].append('Keyboard navigation, practice CTA and legacy homepage journey links work.')
 
     for lang, entries in routes.items():
+        wait_page(page, base + entries['home'])
+        menu.click()
+        page.locator(f'#main-nav a[href="{entries["team"]}"]').click()
+        page.wait_for_url(base + entries['team'])
+        expect(page.locator('#doi-tac .partner-card')).to_have_count(3)
+        expect(page.locator('#huong-thien h3')).to_be_visible()
+        expect(page.locator('#kieu-manh h3')).to_be_visible()
+        wait_page(page, base + entries['story'])
+        expect(page.locator('.journey-chapters li')).to_have_count(12)
+        expect(page.locator('main details')).to_have_count(0)
         wait_page(page, base + entries['article'])
         page.locator('.article-toc a').first.click()
         assert urlsplit(page.url).fragment == 'section-1'
@@ -149,7 +158,7 @@ def check_flows(browser):
 
     page.set_viewport_size({'width': 1440, 'height': 900})
     page.emulate_media(reduced_motion='no-preference')
-    wait_page(page, base + routes['vi']['home'])
+    wait_page(page, base + routes['vi']['ecosystem'])
     for width in widths:
         page.set_viewport_size({'width': width, 'height': 900})
         scene = page.locator('.solar-system-scene')
@@ -181,7 +190,8 @@ def check_no_script(browser):
         wait_page(page, base + entries['home'])
         expect(page.locator('#main-nav')).to_be_visible()
         expect(page.locator('audio[controls]')).to_be_visible()
-        page.locator('#main-nav a[href="#practice"]').click()
+        page.locator(f'#main-nav a[href="{entries["practice"]}"]').click()
+        page.wait_for_url(base + entries['practice'])
         expect(page.locator('#practice h2')).to_be_visible()
         wait_page(page, base + entries['article'])
         expect(page.locator('.article-toc a').first).to_be_visible()
@@ -227,6 +237,8 @@ with sync_playwright() as playwright:
         for width in snapshot_widths:
             page.set_viewport_size({'width': width, 'height': 900})
             for name, path in routes['vi'].items():
+                if name in {'practice', 'ecosystem', 'story', 'team'}:
+                    continue
                 wait_page(page, baseline + path)
                 screenshot(page, 'baseline', 'vi', name, width)
     page.close()

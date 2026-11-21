@@ -27,7 +27,7 @@ const schema = {
 };
 ---
 <BaseLayout {lang} {title} {description} {alternatePath}>
-  <Header {lang} {alternatePath} isInnerPage />
+  <Header {lang} {alternatePath} />
   <script type="application/ld+json" set:html={JSON.stringify(schema)} />
   <main id="main-content" class="section contact" tabindex="-1">
     <div class="shell"><Breadcrumb {lang} current={vi ? 'Liên hệ' : 'Contact'} /></div>

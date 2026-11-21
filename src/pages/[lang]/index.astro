@@ -1,139 +1,122 @@
 ---
 import { contactPath } from '../../data/contact-channels';
 import HomePhoto from '../../components/HomePhoto.astro';
-import EcosystemOrbit from '../../components/EcosystemOrbit.astro';
 import HomeDiscovery from '../../components/HomeDiscovery.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
 import Arrow from '../../components/Arrow.astro';
-import { homeCopy, featuredArticles } from '../../data/home';
-import RiceLandscapes from '../../components/RiceLandscapes.astro';
-import FounderJourney from '../../components/FounderJourney.astro';
 import ContemplativeScene from '../../components/ContemplativeScene.astro';
-import '../../styles/story-home.css';
-import '../../styles/hybrid-nature.css';
-import '../../styles/material-home.css';
-import '../../styles/editorial.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
 import { languages, getCopy, type Language } from '../../data/site';
 import { articlePath, journalPath } from '../../data/articles';
-import { shopPath } from '../../data/products';
-import { journalAuthor, meditationFounder } from '../../data/people';
+import { homeCopy, featuredArticles } from '../../data/home';
+import { journeyPages, journeyPath } from '../../data/journey-pages';
+import '../../styles/material-home.css';
+import '../../styles/editorial.css';
+import '../../styles/journey-pages.css';
 
 export function getStaticPaths() {
   return languages.map(lang => ({ params: { lang } }));
 }
 const lang = Astro.params.lang as Language;
-const en = lang === 'en';
+const vi = lang === 'vi';
 const t = getCopy(lang);
-const home = homeCopy[lang];
-const alternatePath = `/${en ? 'vi' : 'en'}/`;
-const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-field.jpg'];
-const ecosystemLinks = [
-  [shopPath(lang), en ? 'Browse the shop' : 'Ghé cửa hàng'],
-  [articlePath(lang, 'listening-to-nature'), en ? 'Try a mindful walk' : 'Thử đi bộ chánh niệm'],
-  [journalPath(lang), en ? 'Explore the journal' : 'Khám phá Tản văn'],
-];
-const founders = [meditationFounder, journalAuthor];
-const directions = en ? [
-  'Plant-based pantry ingredients, herbs and a closer look at where our food comes from.',
-  'A forest-garden retreat in development, with room for rest, mindful walks and simple meals.',
-  'A learning space in development, with practical guidance on meditation, mindfulness and living close to nature.',
-] : [
-  'Thực phẩm chay, thảo mộc và những câu chuyện giúp mình hiểu hơn về nơi nuôi lớn bữa cơm.',
-  'Một kỳ nghỉ thực tập giữa vườn rừng đang được chuẩn bị, với những bước chân chánh niệm và bữa ăn giản dị.',
-  'Không gian học tập đang được chuẩn bị, với học liệu về thiền định, chánh niệm và sống thuận tự nhiên.',
-];
-const directionsCards = t.natureCards.map(([name], index) => [name, directions[index]]);
+const alternatePath = `/${vi ? 'en' : 'vi'}/`;
+const description = vi
+  ? 'Hương Thiền Nature là dự án về thiền định, chánh niệm và sống thuận tự nhiên do Đỗ Thị Kim Hương sáng lập. Bắt đầu bằng một phút thực hành hoặc tìm hiểu hệ sinh thái Thân, Tâm và Trí.'
+  : 'Hương Thiền Nature is a project for meditation, mindfulness and living closer to nature, founded by Đỗ Thị Kim Hương. Begin with a minute of practice or explore its three areas: Body, Heart and Mind.';
+const practicePath = journeyPath(lang, 'practice');
+const storyPath = journeyPath(lang, 'story');
+const ecosystemPath = journeyPath(lang, 'ecosystem');
+const teamPath = journeyPath(lang, 'team');
+const directions = vi ? ['Thân', 'Tâm', 'Trí'] : ['Body', 'Heart', 'Mind'];
 ---
-<BaseLayout lang={lang} title={`${t.title} | Hương Thiền Nature`} description={t.desc} alternatePath={alternatePath}>
-  <Header lang={lang} alternatePath={alternatePath} />
+<BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} aboutOrganization>
+  <Header {lang} {alternatePath} />
   <main id="main-content" class="material-home" tabindex="-1">
     <section class="shell material-hero" aria-labelledby="hero-title">
       <div class="material-hero__copy">
-        <p class="eyebrow">{en ? 'Meditation · Nature · Everyday life' : 'Thiền định · Thiên nhiên · Đời sống'}</p>
-        <h1 id="hero-title">{en ? 'Be present for' : 'Có mặt trong'}<br /><em>{en ? 'your own life.' : 'đời mình.'}</em></h1>
-        <p class="lead">{en ? 'Hương Thiền Nature brings meditation and nature into everyday life. Start with a breath, a few quiet steps or a meal you have time to taste.' : 'Hương Thiền Nature đưa thiền định và thiên nhiên về gần đời sống. Mình có thể bắt đầu từ một hơi thở, vài bước chân thong thả hay một bữa cơm ăn cho trọn vẹn.'}</p>
+        <p class="eyebrow">{t.eyebrow}</p>
+        <h1 id="hero-title">{vi ? 'Có mặt trong' : 'Be present for'}<br /><em>{vi ? 'đời mình.' : 'your own life.'}</em></h1>
+        <p class="lead">{vi ? 'Có hôm, mình ngồi xuống mà trong đầu vẫn còn nguyên cuộc trò chuyện từ sáng. Khi nhận ra hai bàn chân đang đặt trên sàn, mình có một khoảnh khắc để nghe lòng mình trước khi tiếp tục ngày hôm đó.' : 'Some days I sit down and find that the morning’s conversation is still going on in my head. When I notice both feet on the floor, I have a moment to listen to myself before going on with my day.'}</p>
         <div class="material-actions">
-          <a class="button" href="#practice">{en ? 'Practise for one minute' : 'Thực tập một phút'} <Arrow /></a>
-          <a class="quiet-link" href={journalPath(lang)}>{en ? 'Read the journal' : 'Đọc Tản văn'}</a>
+          <a class="button" href={practicePath}>{vi ? 'Thực tập một phút' : 'Practise for one minute'} <Arrow /></a>
+          <a class="quiet-link" href={storyPath}>{vi ? 'Đọc câu chuyện' : 'Read our story'}</a>
         </div>
       </div>
       <div class="material-hero__art"><ContemplativeScene motif="meditation" /></div>
     </section>
 
-    <section id="nature" class="home-ecosystem" aria-labelledby="nature-title">
-      <div class="shell">
-        <div class="section-heading">
-          <div><p class="eyebrow">{en ? 'The Hương Thiền ecosystem' : 'Hệ sinh thái Hương Thiền'}</p><h2 id="nature-title">{en ? 'Body, heart and mind' : 'Nuôi dưỡng Thân, Tâm và Trí'}</h2></div>
-          <p class="lead">{en ? 'Three ways to care for how we eat, rest and learn.' : 'Ba hướng thực hành từ bữa ăn, những lúc nghỉ ngơi và điều mình học mỗi ngày.'}</p>
+    <section class="shell home-story" id="story" aria-labelledby="story-title">
+      <div class="home-story__photo"><HomePhoto photo="barefoot-by-sea" {lang} /></div>
+      <div class="home-story__copy">
+        <ContemplativeScene motif="mandala" />
+        <p class="eyebrow">Hương Thiền</p>
+        <h2 id="story-title">{vi ? 'Học cách ở lại với mình' : 'Learning to stay with myself'}</h2>
+        <p>{vi ? 'Mình là Hương Thiền, tên đầy đủ là Đỗ Thị Kim Hương. Lớn lên ở Quảng Nam, mình quen tự lo từ sớm. Mãi sau, khi có thời gian ngồi yên, mình mới nhận ra có những ngày điều mình cần nhất là thừa nhận mình đã mỏi và cho phép mình nghỉ một lát.' : 'I’m Hương Thiền, and my full name is Đỗ Thị Kim Hương. Growing up in Quảng Nam, I learned to look after myself early. It took years, and time sitting quietly, to see that some days the kindest thing I could do was admit I was tired and take a rest.'}</p>
+        <p>{vi ? 'Từ chỗ ngồi ấy, sự chú tâm theo mình ra khỏi phòng: đến bữa cơm, những bước chân ngoài vườn và cách mình lắng nghe một người. Hương Thiền Nature là nơi tụi mình chia sẻ cách đem thiền định và chánh niệm vào những việc bình thường như thế.' : 'From that seat, attention followed me out of the room. It came with me to the table, into the garden, and into the way I listened to another person. Hương Thiền Nature is where we share ways to bring meditation and mindfulness to ordinary moments like these.'}</p>
+        <div id="journey" class="home-story__links">
+          <a class="quiet-link" href={`${storyPath}#journey`}>{vi ? 'Đọc hành trình đầy đủ' : 'Read the full journey'} <Arrow /></a>
         </div>
-        <EcosystemOrbit lang={lang} cards={directionsCards} images={natureImages} links={ecosystemLinks} />
-        <p class="material-ecosystem__note">{en ? 'The shop is available to browse. Eco-Retreat, Academy and the membership programme are not open for registration.' : 'Bạn có thể xem sản phẩm trong Cửa hàng. Eco-Retreat, Academy và chương trình thành viên chưa mở đăng ký.'}</p>
-        <section class="reading-section ecosystem-photos">
-          <h3 class="reading-heading">{en ? 'Photographs from nature and everyday life' : 'Ảnh thiên nhiên và đời sống'}</h3>
-          <div class="nature-photos">
-            <figure class="nature-photos__outdoor-kitchen"><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{en ? 'Preparing a meal outdoors' : 'Sửa soạn bữa ăn bên bếp củi'}</figcaption></figure>
-            <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{en ? 'A moment together by the sea' : 'Một khoảnh khắc bên nhau ngoài biển'}</figcaption></figure>
-          </div>
-          <RiceLandscapes lang={lang} />
-        </section>
+        <span id="journey-early"></span><span id="journey-learning"></span><span id="journey-today"></span>
       </div>
     </section>
 
-    <section class="shell material-block" id="practice" aria-labelledby="practice-title">
-      <div class="material-practice">
-        <div class="material-practice__copy">
-          <p class="eyebrow">{t.practiceEye}</p>
-          <h2 id="practice-title">{en ? 'Return to your breath' : 'Trở về với hơi thở'}</h2>
-          <ol class="material-steps">{t.steps.map(([, title, description]) => <li><strong>{title}</strong><p>{description}</p></li>)}</ol>
-          <a class="quiet-link" href={articlePath(lang, 'returning-attention')}>{en ? 'Read the practice guide' : 'Đọc hướng dẫn thực tập'} <Arrow /></a>
+    <section class="home-ecosystem home-ecosystem-story" id="nature" aria-labelledby="nature-title">
+      <div class="shell">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">{journeyPages.ecosystem[lang].title}</p>
+            <h2 id="nature-title">{vi ? 'Từ bữa cơm đến một cách sống' : 'From a meal to a way of living'}</h2>
+          </div>
         </div>
-        <figure class="material-yoga">
-          <ContemplativeScene motif="yoga" />
-          <figcaption><a href="https://pixabay.com/photos/yoga-pose-exercise-woman-female-3426151/">{en ? 'Yoga photograph on Pixabay' : 'Ảnh yoga trên Pixabay'}</a></figcaption>
-        </figure>
+        <p class="lead">{journeyPages.ecosystem[lang].description}</p>
+        <div class="home-pillars">
+          {t.natureCards.map(([name], index) => <article class="zen-card home-pillar">
+            <span class="eyebrow">{directions[index]}</span>
+            <h3>{name}</h3>
+          </article>)}
+        </div>
+        <div class="material-actions" id="path">
+          <a class="button" href={ecosystemPath}>{vi ? 'Khám phá hệ sinh thái và ba quỹ đạo' : 'Explore the ecosystem and its three orbits'} <Arrow /></a>
+          <a class="quiet-link" href={`${ecosystemPath}#path`}>{vi ? 'Xem hoạt động hiện có' : 'See what’s available now'}</a>
+        </div>
+        <span id="rice-landscapes"></span>
       </div>
+    </section>
+
+    <section class="shell material-practice" id="practice" aria-labelledby="practice-title">
+      <div class="material-practice__copy">
+        <h2 id="practice-title">{vi ? 'Bắt đầu ở chỗ bạn đang ngồi' : 'Start where you are sitting'}</h2>
+        <p>{vi ? 'Thử đặt hai bàn chân xuống sàn và để ý một hơi thở đang diễn ra. Khi nhận ra mình đã mải nghĩ, hãy quay lại với bàn chân hoặc hơi thở, nhẹ như khi đặt một chiếc chén xuống bàn.' : 'Set both feet on the floor and notice one breath as it comes and goes. When you realise you’ve been thinking, return to your feet or the breath as gently as setting a cup on the table.'}</p>
+        <a class="quiet-link" href={practicePath}>{vi ? 'Xem hướng dẫn thực hành' : 'Open the practice guide'} <Arrow /></a>
+      </div>
+      <figure class="home-practice-photo"><img src="/media/practice-cushion-v2.webp" width="720" height="540" alt="" loading="lazy" decoding="async" /></figure>
     </section>
 
     <section id="journal" class="shell material-block" aria-labelledby="journal-title">
       <div class="section-heading">
-        <div><p class="eyebrow">{en ? 'Read and learn' : 'Đọc và học'}</p><h2 id="journal-title">{home.featuredTitle}</h2></div>
-        <a class="quiet-link" href={journalPath(lang)}>{en ? 'All articles' : 'Tất cả bài viết'} <Arrow /></a>
+        <div><p class="eyebrow">{vi ? 'Đọc và học' : 'Read and learn'}</p><h2 id="journal-title">{homeCopy[lang].featuredTitle}</h2></div>
+        <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Tất cả bài viết' : 'All articles'} <Arrow /></a>
       </div>
       <div class="journal-grid home-journal-grid">{featuredArticles.map(article => <ArticleCard {article} {lang} />)}</div>
-      <p id="layers" class="material-inline-link"><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{en ? 'Explore the seven-layer framework' : 'Tìm hiểu khung chiêm nghiệm bảy tầng'} <Arrow /></a></p>
+      <p id="layers" class="material-inline-link"><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{vi ? 'Tìm hiểu khung chiêm nghiệm bảy tầng' : 'Explore the seven-layer framework'} <Arrow /></a></p>
     </section>
-    <HomeDiscovery lang={lang} />
+    <HomeDiscovery {lang} />
 
-    <section id="story" class="shell material-block" aria-labelledby="people-title">
-      <div id="people" class="section-heading"><div><p class="eyebrow">{t.peopleEye}</p><h2 id="people-title">{t.peopleTitle}</h2></div></div>
-      <div class="material-founders">
-        {founders.map(person => (
-          <article class="material-founder zen-card">
-            <span class:list={['material-founder__portrait', { 'material-founder__portrait--closer': person === journalAuthor }]}><img src={person.image} alt="" width="128" height="128" loading="lazy" decoding="async" /></span>
-            <div><h3>{person.name}</h3><p class="material-founder__role">{person.role[lang]}</p><p>{person.bio[lang]}</p></div>
-          </article>
-        ))}
+    <section class="shell home-connection" id="people">
+      <ContemplativeScene motif="mandala" />
+      <div>
+        <h2>{vi ? 'Những người đi cùng nhau' : 'The people walking together'}</h2>
+        <p>{journeyPages.team[lang].description}</p>
+        <a class="quiet-link" href={teamPath}>{vi ? 'Gặp đội ngũ và đối tác' : 'Meet the team and our partners'} <Arrow /></a>
       </div>
-      <FounderJourney lang={lang} />
-    </section>
-
-    <section id="connect" class="shell material-block material-contact" aria-labelledby="connect-title">
-      <div class="material-contact__intro">
-        <div><h2 id="connect-title">{t.contactTitle}</h2><p>{en ? 'Write to us about practice, the shop or upcoming activities.' : 'Bạn có thể hỏi về việc thực tập, sản phẩm hoặc những hoạt động sắp tới.'}</p></div>
-        <a class="button" href={contactPath(lang)}>{en ? 'Contact us' : 'Liên hệ'} <Arrow /></a>
+      <div id="connect">
+        <p>{t.contactCopy}</p>
+        <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ' : 'Contact us'}</a>
       </div>
-      <section class="reading-section" id="path">
-        <h3 class="reading-heading">{t.phasesTitle}</h3>
-        <dl class="material-roadmap reading-links">{t.phases.map(([, title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
-      </section>
-      <section class="reading-section">
-        <h3 class="reading-heading">{en ? 'What can I join right now?' : 'Hiện tại mình có thể tham gia gì?'}</h3>
-        <p class="reading-links">{en ? 'You can read the bilingual journal, try the introductory practices and browse the shop. Course and retreat dates will be announced when available.' : 'Bạn có thể đọc Tản văn, thử các bài thiền nhập môn và ghé Cửa hàng. Khóa học và kỳ nghỉ thực tập sẽ được thông báo khi có lịch.'}</p>
-      </section>
     </section>
   </main>
-  <Footer lang={lang} />
+  <Footer {lang} />
 </BaseLayout>

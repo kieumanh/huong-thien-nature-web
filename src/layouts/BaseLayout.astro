@@ -3,9 +3,14 @@ import '../styles/global.css';
 import { contactEmail, internationalPhone } from '../data/contact-channels';
 import BackgroundMusic from '../components/BackgroundMusic.astro';
 import BackToTop from '../components/BackToTop.astro';
+import { meditationFounder, journalAuthor } from '../data/people';
+import { journeyPath } from '../data/journey-pages';
 import { version } from '../../package.json';
+const origin = 'https://huongthiennature.com';
+const organizationId = origin + '/#organization';
+const websiteId = origin + '/#website';
 const brandImage = '/media/huong-thien-ben-ho-social.jpg';
-const { lang = 'vi', title, description, alternatePath, image = brandImage, ogType = 'website', noindex = false } = Astro.props;
+const { lang = 'vi', title, description, alternatePath, image = brandImage, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false } = Astro.props;
 const imageUrl = new URL(image, 'https://huongthiennature.com').href;
 const brandAlt = lang === 'vi' ? 'Hương Thiền mỉm cười, hai tay tạo hình trái tim bên hồ dưới chân núi.' : 'Hương Thiền smiling by a mountain lake, making a heart with her hands.';
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
@@ -14,6 +19,34 @@ const url = new URL(pathname, 'https://huongthiennature.com');
 const enPath = lang === 'en' ? pathname : alternatePath;
 const viPath = lang === 'vi' ? pathname : alternatePath;
 const siteName = 'Hương Thiền Nature';
+const teamUrl = origin + journeyPath(lang, 'team');
+const people = [meditationFounder, journalAuthor].map((person, index) => ({
+  '@type': 'Person',
+  '@id': origin + (index === 0 ? '/#huong-thien' : '/#kieu-manh'),
+  name: person.name,
+  ...(index === 0 ? { alternateName: 'Đỗ Thị Kim Hương' } : {}),
+  url: teamUrl + (index === 0 ? '#huong-thien' : '#kieu-manh'),
+  image: new URL(person.image, origin).href,
+  jobTitle: person.role[lang === 'vi' ? 'vi' : 'en'],
+}));
+const schema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Organization', '@id': organizationId, name: siteName, url: origin,
+      logo: origin + '/media/huong-thien-logo-forest.webp',
+      contactPoint: { '@type': 'ContactPoint', email: contactEmail, telephone: internationalPhone, contactType: 'customer support', availableLanguage: ['vi', 'en'] },
+      founder: people.map(person => ({ '@id': person['@id'] })),
+    },
+    { '@type': 'WebSite', '@id': websiteId, name: siteName, url: origin, inLanguage: ['vi', 'en'], publisher: { '@id': organizationId } },
+    {
+      '@type': pageType, '@id': url.href + '#webpage', url: url.href, name: title, description, inLanguage: lang, isPartOf: { '@id': websiteId },
+      ...(aboutOrganization ? { about: { '@id': organizationId } } : {}),
+    },
+    ...people,
+  ],
+};
+
 ---
 <!doctype html>
 <html lang={lang}>
@@ -23,7 +56,7 @@ const siteName = 'Hương Thiền Nature';
     <meta name="theme-color" content="#243f32" />
     <meta name="color-scheme" content="light" />
     <meta name="application-version" content={version} />
-    {noindex && <meta name="robots" content="noindex, follow" />}
+    <meta name="robots" content={noindex ? "noindex, follow" : "max-image-preview:large"} />
     <meta name="description" content={description} />
     <link rel="canonical" href={url.href} />
     {alternatePath && <>
@@ -52,14 +85,8 @@ const siteName = 'Hương Thiền Nature';
     <meta name="twitter:image" content={imageUrl} />
     <link rel="icon" type="image/webp" href="/media/huong-thien-logo-forest.webp" />
     <title>{title}</title>
-    <script type="application/ld+json" set:html={JSON.stringify({
-      '@context': 'https://schema.org', '@type': 'Organization', name: siteName,
-      '@id': 'https://huongthiennature.com/#organization',
-      url: 'https://huongthiennature.com',
-      logo: 'https://huongthiennature.com/media/huong-thien-logo-forest.webp',
-      contactPoint: { '@type': 'ContactPoint', email: contactEmail, telephone: internationalPhone, contactType: 'customer support', availableLanguage: ['vi', 'en'] },
-      founder: [{ '@type': 'Person', name: 'Hương Thiền', jobTitle: 'Founder & Teacher' }, { '@type': 'Person', name: 'Kiều Mạnh', jobTitle: 'Co-founder, Content & Communications' }],
-    })} />
+    {(!noindex && alternatePath) && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
+
   </head>
   <body><div class="reading-progress" role="progressbar" aria-label={lang === 'vi' ? 'Tiến trình đọc trang' : 'Page reading progress'} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><slot /><BackgroundMusic lang={lang} /><BackToTop lang={lang} /></body>
   <script>

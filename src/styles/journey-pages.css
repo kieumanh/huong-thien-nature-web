@@ -1,0 +1,44 @@
+.journey-page { padding-block: clamp(1.25rem, 4vw, 3rem) var(--space-section); }
+.journey-page-header { position: relative; isolation: isolate; overflow: hidden; padding: clamp(1rem, 4vw, 3.5rem); border-radius: var(--radius-feature); background: var(--surface-container); margin-bottom: var(--space-6); }
+.journey-page-header .contemplative-scene--mandala { position: absolute; inset: auto 0 0 auto; z-index: -1; width: min(65%, 24rem); opacity: .22; }
+.journey-page-lead { max-width: 54rem; }
+.journey-page-lead h1 { margin-block: .85rem .65rem; }
+.journey-page-lead .lead { max-width: 65ch; }
+.journey-section, .team-group { margin-block: clamp(1.6rem, 5vw, 3.5rem); }
+.journey-section > p, .ecosystem-content > p { margin-block: .65rem 1rem; max-width: 68ch; }
+.journey-reading-list { list-style: decimal; padding-inline-start: 1.5rem; }
+.journey-page .ecosystem-visual { background: var(--surface-container); }
+.journey-page .founder-journey { margin-bottom: 1rem; }
+.journey-page .nature-photos { margin-block: 1rem; }
+.journey-page .nature-photos__outdoor-kitchen { display: block; }
+.founder-grid, .partner-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: clamp(.95rem, 2.8vw, 1.5rem); margin-top: 1.1rem; }
+.founder-profile, .partner-card { min-width: 0; overflow: hidden; }
+.founder-photo { background: var(--surface-container); overflow: hidden; }
+.founder-photo img { width: 100%; height: auto; aspect-ratio: 16 / 10; object-fit: cover; object-position: center 42%; }
+.founder-photo--author img { transform: scale(1.5); transform-origin: 50% 51%; }
+.profile-copy { padding: clamp(1rem, 3.2vw, 1.5rem); }
+.profile-copy p { margin-block: .4rem .85rem; }
+.profile-role { color: var(--secondary); font-weight: 650; font-size: var(--type-caption); }
+.partner-photo { display: grid; place-items: center; width: 100%; aspect-ratio: 5 / 3; object-fit: cover; object-position: center 40%; background: var(--surface-warm); }
+.partner-photo--zen { background: radial-gradient(ellipse, #f9f4fa, #e8dcee); }
+.partner-photo--logo img { width: clamp(5rem, 18vw, 7rem); height: auto; }
+.partner-identity, .profile-links { display: flex; align-items: center; gap: .6rem 1rem; flex-wrap: wrap; }
+.partner-identity img { width: 44px; height: 44px; object-fit: contain; }
+.photo-credit { font-size: var(--type-caption); text-decoration: underline; text-underline-offset: .15em; }
+
+.home-story { display: grid; gap: clamp(1.2rem, 4.5vw, 4rem); align-items: center; }
+.home-story__copy, .home-connection { position: relative; isolation: isolate; overflow: hidden; }
+.home-story__copy .contemplative-scene--mandala, .home-connection .contemplative-scene--mandala { position: absolute; z-index: -1; inset: 0 0 auto auto; width: min(62%, 19rem); opacity: .17; }
+.home-story__photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 49%; border-radius: 48% 48% var(--radius-feature) var(--radius-feature) / 24% 24% var(--radius-feature) var(--radius-feature); }
+.home-story__copy p + p, .home-story__copy h2 + p, .home-connection p { max-width: 64ch; margin-block: .65rem; }
+.home-ecosystem-story { position: relative; isolation: isolate; }
+.home-ecosystem-story::after { content: ''; position: absolute; inset: .7rem 0 auto auto; z-index: -1; width: min(34vw, 22rem); aspect-ratio: 1; background: url('/media/botanical-sprig.svg') right top / contain no-repeat; opacity: .23; pointer-events: none; }
+.home-pillars { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); gap: .9rem; margin-top: 1rem; }
+.home-pillar { padding: 1rem 1.15rem; }
+.home-pillar h3 { margin-top: .4rem; }
+.home-practice-photo img { width: 100%; height: auto; border-radius: var(--radius-card); }
+.home-connection { display: grid; align-items: center; gap: 1rem 2.3rem; padding: clamp(1rem, 4vw, 2rem); border-radius: var(--radius-feature); background: var(--surface-container); }
+@media (min-width: 760px) {
+  .home-story { grid-template-columns: minmax(0, .72fr) minmax(0, 1fr); }
+  .home-connection { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); }
+}

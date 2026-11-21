@@ -7,7 +7,18 @@ interface Props {
   parent?: { label: string; href: string };
 }
 const { lang, current, parent } = Astro.props;
+const origin = 'https://huongthiennature.com';
+const home = { label: getCopy(lang).home, href: `/${lang}/` };
+const trail = [home, ...(parent ? [parent] : []), { label: current, href: Astro.url.pathname }];
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'BreadcrumbList',
+  itemListElement: trail.map(({ label, href }, index) => ({
+    '@type': 'ListItem', position: index + 1, name: label, item: new URL(href, origin).href,
+  })),
+};
 ---
+<script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
 <nav class="breadcrumbs" aria-label={lang === 'vi' ? 'Đường dẫn' : 'Breadcrumb'}>
   <a href={`/${lang}/`}>{getCopy(lang).home}</a>
   <span aria-hidden="true">/</span>
