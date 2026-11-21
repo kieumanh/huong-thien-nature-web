@@ -53,7 +53,18 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
       setOpen(open);
       if (open) menu.querySelector('a')?.focus();
     });
-    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
+    menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => {
+      if (button.getAttribute('aria-expanded') !== 'true') return;
+      setOpen(false);
+      const section = link.pathname === location.pathname && document.getElementById(link.hash.slice(1));
+      if (section) {
+        section.tabIndex = -1;
+        section.focus({ preventScroll: true });
+      }
+    }));
+    document.addEventListener('focusin', event => {
+      if (event.target instanceof Node && !menu.closest('header')?.contains(event.target)) setOpen(false);
+    });
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
         setOpen(false);

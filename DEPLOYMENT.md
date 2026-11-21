@@ -1,6 +1,6 @@
 # Cloudflare Worker deployment — Hương Thiền Nature
 
-Production architecture: GitHub `main` → Cloudflare Workers Builds → Astro build in `dist` → Worker Static Assets. The Worker handles `/api/contact` and `/api/contact-config`; all other requests are served from the static asset binding. Cloudflare Pages remains a separate optional demo and is not the production Worker configuration.
+Production architecture: GitHub `main` → Cloudflare Workers Builds → Astro build in `dist` → Worker Static Assets. The Worker handles `/api/contact`, `/api/contact-config` and `/api/shop-stock`; all other requests are served from the static asset binding. Cloudflare Pages remains a separate optional demo and is not the production Worker configuration.
 
 ## Repository configuration
 

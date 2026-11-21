@@ -105,6 +105,8 @@ if (audio && toggle && slider && output && musicStatus) {
   document.addEventListener('click', event => {
     if (event.target instanceof Element && !event.target.closest('.music-dock')) document.querySelector<HTMLDetailsElement>('.music-options')?.removeAttribute('open');
   });
+  audio.controls = false;
+  toggle.closest('.music-dock')?.setAttribute('data-music-ready', '');
   toggle.disabled = false;
   update();
   if (enabled) void play();

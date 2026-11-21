@@ -71,10 +71,11 @@ jobs:
             done
             curl -fsS "$server/vi/" >/dev/null
           done
-          python tests/zen-botanical-browser.py
-          python tests/navigation-controls-browser.py
-          python tests/contact-browser.py
-          python tests/music-browser.py
+          browser_result=0
+          python tests/zen-botanical-browser.py || browser_result=1
+          python tests/navigation-controls-browser.py || browser_result=1
+          python tests/contact-browser.py || browser_result=1
+          python tests/music-browser.py || browser_result=1
           for label in candidate baseline; do
             if [ "$label" = "baseline" ] && [ -z "${BASELINE_URL:-}" ]; then continue; fi
             server="$APP_BASE_URL"
@@ -99,6 +100,7 @@ jobs:
                                   for key in ['largest-contentful-paint', 'total-blocking-time', 'cumulative-layout-shift'])
               print(f'{path.name}: {scores}, {timings}')
           PYTHON
+          exit "$browser_result"
       - uses: actions/upload-artifact@v4
         if: always()
         with:

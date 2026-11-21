@@ -141,7 +141,13 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 }
 [data-floating-tone="light"] { --floating-bg: #e9f1e6; --floating-fg: #1c382a; --floating-border: #788d79; --floating-state: #17352918; }
 .music-dock { inset-inline-start: max(var(--floating-inset), env(safe-area-inset-left)); display: flex; align-items: center; }
-.music-dock > audio { display: none; }
+.music-dock[data-music-ready] > audio { display: none; }
+.music-dock:not([data-music-ready]) {
+  position: static; display: block; padding: .65rem var(--site-gutter);
+  border: 0; border-radius: 0; background: var(--surface); color: var(--foreground); box-shadow: none;
+}
+.music-dock:not([data-music-ready]) > audio { display: block; width: min(100%, 260px); }
+.music-dock:not([data-music-ready]) > :is(.music-toggle, .music-options) { display: none; }
 .music-toggle, .music-options > summary {
   display: flex; align-items: center; justify-content: center; gap: .4rem; height: calc(var(--floating-size) - 2px); min-width: 48px;
   padding-inline: .65rem; background: transparent; font-size: .77rem; font-weight: 650;
