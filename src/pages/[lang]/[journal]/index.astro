@@ -2,6 +2,7 @@
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
 import Footer from '../../../components/Footer.astro';
+import ContemplativeScene from '../../../components/ContemplativeScene.astro';
 import Arrow from '../../../components/Arrow.astro';
 import { languages, getCopy, type Language } from '../../../data/site';
 import { articles, articlePath, journalPath } from '../../../data/articles';
@@ -23,7 +24,8 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
 <BaseLayout lang={lang} title={`${title} | Hương Thiền Nature`} description={description} alternatePath={alternatePath}>
   <Header lang={lang} alternatePath={alternatePath} isInnerPage />
   <main id="main-content" tabindex="-1" class="journal-listing">
-    <header class="journal-listing-header shell">
+    <header class="journal-listing-header shell journal-with-mandala">
+      <ContemplativeScene motif="mandala" />
       <nav class="breadcrumbs" aria-label={en ? 'Breadcrumb' : 'Đường dẫn'}><a href={`/${lang}/`}>{t.home}</a><span aria-hidden="true">/</span><span aria-current="page">{title}</span></nav>
       <span class="eyebrow">{en ? 'Meditation · Nature · Life' : 'Thiền · Thiên nhiên · Đời sống'}</span>
       <h1>{title}</h1>
@@ -55,3 +57,29 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
   </main>
   <Footer lang={lang} />
 </BaseLayout>
+
+
+<style>
+  .journal-with-mandala { position: relative; isolation: isolate; }
+  .journal-listing .journal-card {
+    border: 1px solid var(--line);
+    border-radius: 1.4rem;
+    overflow: hidden;
+    background: #fffef9;
+  }
+  .journal-listing .journal-image { border-radius: 0; }
+  .journal-listing .journal-card-copy { padding: 1.15rem; }
+
+  .journal-with-mandala :global(.contemplative-scene--mandala) {
+    position: absolute;
+    z-index: -1;
+    top: .5rem;
+    right: 0;
+    width: clamp(9rem, 29vw, 24rem);
+    opacity: .2;
+  }
+
+  @media (max-width: 760px) {
+    .journal-with-mandala :global(.contemplative-scene--mandala) { opacity: .13; }
+  }
+</style>

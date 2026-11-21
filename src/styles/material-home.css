@@ -1,0 +1,174 @@
+.material-home {
+  --home-surface: #f3f5ed;
+  --home-container: #e7eee3;
+  --home-card: #fffef9;
+  --home-gap: clamp(.95rem, 2.4vw, 1.5rem);
+  --home-pad: clamp(1.25rem, 4vw, 2.75rem);
+  display: grid;
+  gap: clamp(2.4rem, 6vw, 4.4rem);
+  padding-block: clamp(1.25rem, 4vw, 3rem) clamp(2.5rem, 6vw, 5rem);
+}
+
+.material-home .shell { width: min(1160px, calc(100% - clamp(2rem, 7vw, 5rem))); }
+.material-home h2 { font-size: clamp(1.65rem, 3vw, 2.6rem); }
+.material-home .eyebrow { letter-spacing: .085em; }
+.material-home .eyebrow::before { display: none; }
+
+.material-hero,
+.material-practice {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+  align-items: center;
+  gap: var(--home-gap);
+  overflow: hidden;
+  border-radius: clamp(1.4rem, 3vw, 2rem);
+}
+
+.material-hero { background: var(--home-container); }
+.material-hero__copy, .material-practice__copy { padding: var(--home-pad); }
+.material-hero h1 { margin: .65rem 0 1rem; font-size: clamp(2.55rem, 5.2vw, 4.85rem); }
+.material-hero h1 em { color: var(--moss); }
+.material-hero .lead { max-width: 42ch; }
+.material-actions { display: flex; flex-wrap: wrap; gap: .65rem; margin-top: 1.35rem; }
+.material-hero > .contemplative-scene { align-self: stretch; aspect-ratio: auto; min-height: 24rem; }
+
+.material-home .button--tonal { color: var(--forest); background: #dde8da; border-color: transparent; }
+.material-home .button--tonal:hover { background: #d0dfcf; }
+
+.material-practice { border: 1px solid var(--line); background: var(--home-surface); }
+.material-yoga { align-self: center; margin: .85rem .85rem .85rem 0; }
+.material-yoga .contemplative-scene { border-radius: 1.4rem; aspect-ratio: 16 / 11; }
+.material-yoga figcaption { margin-top: .25rem; text-align: end; font-size: .78rem; color: var(--ink-soft); }
+.material-yoga figcaption a { text-decoration: underline; text-underline-offset: .16em; }
+.material-steps { margin-block: .9rem 1rem; padding-inline-start: 1.4rem; list-style: decimal; }
+.material-steps li { padding-inline-start: .3rem; }
+.material-steps li + li { margin-top: .55rem; }
+.material-steps li::marker { font-weight: 650; color: var(--moss); }
+.material-steps p { color: var(--ink-soft); }
+
+.material-home .home-discovery {
+  padding: var(--home-pad);
+  border: 1px solid var(--line);
+  border-radius: 1.65rem;
+  background: var(--home-card);
+}
+.material-home .home-discovery-content { max-width: none; }
+.material-home .home-discovery h2 { margin: .2rem 0 .55rem; }
+.material-home .home-search-form { margin-top: 1rem; }
+.material-home .home-search-fields input { border-radius: .85rem; }
+.material-home .home-beginner-links { margin-top: 1rem; }
+.material-home .home-beginner-links nav a { grid-template-columns: 1fr 16px; font: 500 .95rem/1.5 var(--sans); }
+
+.material-section-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem 1.25rem;
+  margin-bottom: 1rem;
+}
+
+.material-home .journal-grid,
+.material-home .solar-system-pillars,
+.material-founders { gap: var(--home-gap); }
+
+.material-home .journal-card,
+.material-home .solar-pillar,
+.material-founder {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  background: var(--home-card);
+}
+
+.material-reading-card > img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.material-home .journal-card-copy { padding: 1.1rem; }
+.material-home .journal-card h3 { margin: .55rem 0; }
+.material-home .journal-card p { margin: 0; font-size: .95rem; }
+.material-inline-link { margin-top: 1rem; }
+
+.material-home .solar-system-pillars { margin-top: 0; }
+.material-home .solar-pillar { display: flex; flex-direction: column; padding: clamp(1rem, 3vw, 1.45rem); background: var(--home-surface); }
+.material-home .solar-pillar__index { color: var(--moss); font-size: .74rem; font-weight: 650; letter-spacing: .08em; }
+.material-home .solar-pillar h3 { min-height: 0; font-size: clamp(1.22rem, 2.15vw, 1.6rem); }
+.material-home .solar-pillar p { margin: 0 0 .85rem; max-width: none; color: var(--ink-soft); font-size: .95rem; line-height: 1.6; }
+.material-home .solar-pillar .quiet-link { margin-top: auto; align-self: start; }
+.material-ecosystem__note { margin-top: .85rem; max-width: 75ch; font-size: .9rem; color: var(--ink-soft); }
+
+.material-details { margin-top: .75rem; border: 1px solid var(--line); border-radius: 1.1rem; background: var(--home-surface); }
+.material-details > summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .9rem;
+  min-height: 48px;
+  padding: .7rem 1rem;
+  font-weight: 650;
+  list-style: none;
+  border-radius: inherit;
+}
+.material-details > summary::-webkit-details-marker { display: none; }
+.material-details > summary::after {
+  content: "";
+  width: .55rem;
+  height: .55rem;
+  flex: 0 0 .55rem;
+  border: solid currentColor;
+  border-width: 0 1.5px 1.5px 0;
+  transform: translateY(-.12rem) rotate(45deg);
+}
+.material-details[open] > summary::after { transform: translateY(.12rem) rotate(225deg); }
+.material-details > summary:hover { background: #dfe9dd; }
+.material-details__body, .material-roadmap { margin: 0; padding: 0 1rem 1rem; color: var(--ink-soft); }
+.material-roadmap > div + div { margin-top: .75rem; }
+.material-roadmap dt { color: var(--ink); font-weight: 650; }
+.material-roadmap dd { margin: 0; }
+.material-home .ecosystem-visual { background: #284536; color: #f8f7ed; margin-top: 1.15rem; }
+.material-home .ecosystem-visual > summary:hover { background: #365747; }
+.material-home .ecosystem-solar-system { padding: 0 1.5rem; margin: 1rem auto; }
+.material-home .ecosystem-controls { margin: 0; padding-bottom: 1rem; }
+.material-home .nature-photos { margin: .45rem 1rem 1rem; }
+.material-home .rice-landscapes { background: transparent; padding: 0 0 1rem; }
+.material-home .rice-landscapes .shell { width: calc(100% - 2rem); }
+.material-home .rice-landscapes .section-head { margin-bottom: .8rem; }
+.material-home .rice-landscapes h2 { font-size: 1.32rem; margin-top: .2rem; }
+
+.material-founders { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.material-founder { display: grid; grid-template-columns: 3.6rem minmax(0, 1fr); align-items: start; gap: .85rem; padding: 1.15rem; }
+.material-founder__portrait { aspect-ratio: 1; overflow: hidden; border-radius: 50%; background: var(--home-container); }
+.material-founder__portrait img { width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+.material-founder__portrait--closer img { transform: scale(2); transform-origin: 50% 42%; }
+.material-founder p { color: var(--ink-soft); }
+.material-founder .material-founder__role { color: var(--moss); font-size: .82rem; font-weight: 650; margin-bottom: .4rem; }
+.material-home .founder-journey { background: var(--home-surface); }
+.material-home .journey-content { padding: .5rem var(--home-pad) 1rem; }
+.material-home .journey-opening { gap: var(--home-gap); }
+.material-home .journey-opening img { max-height: 17rem; border: 0; border-radius: 1.1rem; }
+.material-home .journey-chapters { margin-block: 1.25rem; }
+.material-home .journey-chapters li { padding-bottom: .75rem; }
+.material-home .journey-chapters li > div { padding: .9rem 1rem; border-radius: 1.15rem; background: var(--home-card); box-shadow: none; }
+.material-home .journey-chapters h3 { font-size: clamp(1.2rem, 2.5vw, 1.55rem); }
+.material-home .journey-chapters p { line-height: 1.65; }
+.material-home .journey-album { margin-top: 1rem; }
+.material-home .journey-album > p, .material-home .journey-album__grid { margin: 0 1rem 1rem; }
+
+.material-contact {
+  padding: var(--home-pad);
+  background: var(--home-container);
+  border-radius: 1.65rem;
+}
+.material-contact__intro { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .8rem; margin-bottom: 1rem; }
+.material-contact__intro p { margin-top: .4rem; color: var(--ink-soft); }
+
+@media (max-width: 760px) {
+  .material-hero, .material-practice { grid-template-columns: 1fr; gap: 0; }
+  .material-hero > .contemplative-scene { min-height: 0; aspect-ratio: 2 / 1; }
+  .material-yoga { margin: 0 .75rem .65rem; }
+  .material-yoga .contemplative-scene { aspect-ratio: 2 / 1; }
+  .material-founders { grid-template-columns: 1fr; }
+}
+@media (max-width: 520px) {
+  .material-home .home-search-fields { flex-direction: row; flex-wrap: wrap; }
+  .material-home .home-search-fields input { flex-basis: 10rem; }
+  .material-home .home-search-fields .button { min-height: 46px; padding-inline: .8rem; }
+}

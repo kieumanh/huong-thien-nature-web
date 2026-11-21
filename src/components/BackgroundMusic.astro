@@ -5,7 +5,10 @@ const en = lang === 'en';
 <aside class="music-dock" data-floating-tone="dark" aria-label={en ? 'Background music' : 'Nhạc nền'}>
   <audio id="background-music" src="/audio/lotus-at-first-light.mp3" loop preload="metadata" aria-label="Lotus at First Light" />
   <button class="music-toggle" type="button" aria-controls="background-music" aria-pressed="false" data-language={lang} disabled>
-    <svg class="music-icon" viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><path d="M9 18V5l11-2v13M9 8l11-2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /><ellipse cx="6" cy="18" rx="3" ry="2" stroke="currentColor" stroke-width="1.5" /><ellipse cx="17" cy="16" rx="3" ry="2" stroke="currentColor" stroke-width="1.5" /></svg>
+    <svg class="music-icon" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true">
+      <path class="music-icon__play" d="M9 5.5 19 12 9 18.5z" fill="currentColor" />
+      <path class="music-icon__pause" d="M9 6.5v11m6-11v11" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+    </svg>
     <span>{en ? 'Background music' : 'Nhạc nền'}</span><span class="music-state-dot" aria-hidden="true"></span>
   </button>
   <details class="music-options">

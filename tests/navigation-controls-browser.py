@@ -58,6 +58,8 @@ with sync_playwright() as p:
     page.set_viewport_size({'width':375,'height':850})
     page.locator('#connect').scroll_into_view_if_needed()
     page.wait_for_function('!document.querySelector(".back-to-top").hidden')
+    page.locator('#connect a.button').click()
+    page.wait_for_url('**/vi/lien-he/')
     for width in [320, 375, 390]:
         page.set_viewport_size({'width':width,'height':850})
         menu = page.locator('.nav-toggle')

@@ -1,0 +1,123 @@
+---
+interface Props {
+  motif: 'meditation' | 'yoga' | 'mandala';
+}
+const { motif } = Astro.props;
+const petals = Array.from({ length: 12 }, (_, index) => index);
+---
+<div class:list={['contemplative-scene', `contemplative-scene--${motif}`]} data-contemplative-scene aria-hidden="true">
+  {motif === 'mandala' ? (
+    <div class="mandala-ring">
+      {petals.map(index => <span style={`--angle: ${index * 30}deg`}></span>)}
+    </div>
+  ) : (
+    <>
+      <img
+        src={motif === 'meditation' ? '/media/meditation-forest.webp' : '/media/yoga-tree-pose.webp'}
+        alt=""
+        width={motif === 'meditation' ? 1500 : 1080}
+        height={motif === 'meditation' ? 1000 : 678}
+        loading={motif === 'meditation' ? 'eager' : 'lazy'}
+        fetchpriority={motif === 'meditation' ? 'high' : 'auto'}
+        decoding="async"
+      />
+      <span class="scene-glow"></span>
+    </>
+  )}
+</div>
+
+<script>
+  const scenes = document.querySelectorAll('[data-contemplative-scene]');
+  const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      for (const { target, isIntersecting } of entries) {
+        target.classList.toggle('scene-visible', isIntersecting);
+      }
+    });
+    const update = () => {
+      observer.disconnect();
+      for (const scene of scenes) {
+        scene.classList.remove('scene-visible');
+        if (!motion.matches && !connection?.saveData && !document.hidden) observer.observe(scene);
+      }
+    };
+    motion.addEventListener('change', update);
+    document.addEventListener('visibilitychange', update);
+    update();
+  }
+</script>
+
+<style>
+  .contemplative-scene {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+    min-width: 0;
+    pointer-events: none;
+  }
+
+  .contemplative-scene img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .contemplative-scene--meditation { aspect-ratio: 5 / 4; background: #426451; }
+  .contemplative-scene--meditation img { animation: scene-breathe 4.8s ease-in-out both; }
+  .contemplative-scene--yoga { aspect-ratio: 5 / 4; background: #79533f; }
+  .contemplative-scene--yoga img { animation: yoga-drift 4.8s ease-in-out both; }
+  .scene-glow {
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(ellipse at 68% 35%, #fff2c866, transparent 48%);
+    animation: glow-drift 4.8s ease-in-out both;
+    mix-blend-mode: screen;
+  }
+
+  .contemplative-scene--mandala { aspect-ratio: 1; }
+  .mandala-ring {
+    position: relative;
+    display: grid;
+    place-items: center;
+    width: 80%;
+    aspect-ratio: 1;
+    color: #537453;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+    animation: mandala-turn 4.8s ease-out both;
+  }
+  .mandala-ring::before {
+    content: '';
+    position: absolute;
+    inset: 7%;
+    border: 1px solid currentColor;
+    border-radius: 50%;
+  }
+  .mandala-ring span {
+    position: absolute;
+    width: 28%;
+    height: 64%;
+    border: 1px solid currentColor;
+    border-radius: 72% 28% 72% 28%;
+    transform: rotate(var(--angle));
+  }
+
+  .contemplative-scene :is(img, .scene-glow, .mandala-ring) { animation-play-state: paused; }
+  .scene-visible :is(img, .scene-glow, .mandala-ring) { animation-play-state: running; }
+
+  @keyframes scene-breathe { from { transform: scale(1.015); } to { transform: scale(1.075); } }
+  @keyframes yoga-drift { from { transform: scale(1.04) translateX(-1%); } to { transform: scale(1.10) translateX(2%); } }
+  @keyframes glow-drift { from { transform: translate(-7%, 2%); opacity: .48; } to { transform: translate(6%, -5%); opacity: .85; } }
+  @keyframes mandala-turn { to { transform: rotate(30deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .contemplative-scene :is(img, .scene-glow, .mandala-ring) { animation: none; }
+  }
+</style>

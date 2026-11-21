@@ -1,22 +1,21 @@
 ---
-import { contactPath } from "../../data/contact-channels";
-import HomePhoto from "../../components/HomePhoto.astro";
+import { contactPath } from '../../data/contact-channels';
+import HomePhoto from '../../components/HomePhoto.astro';
 import EcosystemOrbit from '../../components/EcosystemOrbit.astro';
 import HomeDiscovery from '../../components/HomeDiscovery.astro';
-import { homeCopy, beginnerArticles, featuredArticles } from '../../data/home';
+import { homeCopy, featuredArticles } from '../../data/home';
 import RiceLandscapes from '../../components/RiceLandscapes.astro';
 import FounderJourney from '../../components/FounderJourney.astro';
-import ContactForm from '../../components/ContactForm.astro';
-import BeginHere from '../../components/BeginHere.astro';
+import ContemplativeScene from '../../components/ContemplativeScene.astro';
 import '../../styles/story-home.css';
-import Arrow from '../../components/Arrow.astro';
 import '../../styles/hybrid-nature.css';
+import '../../styles/material-home.css';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
-import RootMark from '../../components/RootMark.astro';
 import { languages, getCopy, type Language } from '../../data/site';
 import { articlePath, journalPath } from '../../data/articles';
+import { shopPath } from '../../data/products';
 
 export function getStaticPaths() {
   return languages.map(lang => ({ params: { lang } }));
@@ -27,104 +26,124 @@ const t = getCopy(lang);
 const home = homeCopy[lang];
 const alternatePath = `/${en ? 'vi' : 'en'}/`;
 const natureImages = ['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-field.jpg'];
+const ecosystemLinks = [
+  [shopPath(lang), en ? 'Browse the shop' : 'Xem cửa hàng'],
+  [articlePath(lang, 'listening-to-nature'), en ? 'Try a mindful walk' : 'Thử đi bộ chánh niệm'],
+  [journalPath(lang), en ? 'Explore the journal' : 'Khám phá Tản văn'],
+];
+const founders = [
+  ['Hương Thiền', '/media/home-mountain-lake.webp', t.founderRole, t.founderCopy],
+  ['Kiều Mạnh', '/media/author-kieu-manh.jpg', t.coRole, t.coCopy],
+];
 ---
 <BaseLayout lang={lang} title={`${t.title} | Hương Thiền Nature`} description={t.desc} alternatePath={alternatePath}>
   <Header lang={lang} alternatePath={alternatePath} />
-  <main id="main-content" class="hybrid-home" tabindex="-1">
-    <section class="hero hybrid-hero" aria-labelledby="hero-title">
-      <div class="hybrid-scene" aria-hidden="true">
-        <img class="hybrid-scene__canopy" src="/media/mountain-forest.jpg" alt={en ? 'Forested mountain slopes beneath clouds. Photo: Andrei Mike, Unsplash.' : 'Sườn núi phủ rừng xanh dưới mây trời. Ảnh: Andrei Mike, Unsplash.'} width="1920" height="1280" fetchpriority="high" decoding="async" />
-        <div class="hybrid-scene__veil"></div>
-        <div class="hybrid-scene__sun"></div>
-        <div class="hybrid-scene__mist hybrid-scene__mist--one"></div>
-        <div class="hybrid-scene__mist hybrid-scene__mist--two"></div>
-        <div class="hybrid-scene__foliage"></div>
-      </div>
-      <div class="hybrid-hero__layout">
-        <div class="hybrid-hero__copy">
-          <span class="hybrid-hero__eyebrow">{t.eyebrow}</span>
-          <h1 id="hero-title" set:html={t.hero} />
-          <p class="lead">{t.lead}</p>
-          <div class="hero-actions">
-            <a class="button" href={articlePath(lang, beginnerArticles[0].slug)}>{home.start} <Arrow /></a>
-            <a class="quiet-link" href="#story">{t.storyCta} <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="hero-footnote"><span class="small-dot" aria-hidden="true"></span><p>{t.note}</p></div>
+  <main id="main-content" class="material-home" tabindex="-1">
+    <section class="shell material-hero" aria-labelledby="hero-title">
+      <div class="material-hero__copy">
+        <span class="eyebrow">{t.eyebrow}</span>
+        <h1 id="hero-title" set:html={t.hero} />
+        <p class="lead">{en ? 'Explore meditation, mindfulness and simple ways to live closer to nature.' : 'Khám phá thiền định, chánh niệm và những cách giản dị để sống gần gũi hơn với thiên nhiên.'}</p>
+        <div class="material-actions">
+          <a class="button" href="#practice">{en ? 'Practise for one minute' : 'Thực tập một phút'}</a>
+          <a class="button button--tonal" href={journalPath(lang)}>{en ? 'Read the journal' : 'Đọc Tản văn'}</a>
         </div>
       </div>
-      <span class="hybrid-hero__index" aria-hidden="true">HƯƠNG THIỀN · NATURE</span>
-      <div class="hybrid-hero__bottom"><span>{t.rootsNote}</span><a href="#story">{en ? 'Read on' : 'Đọc tiếp'} <span aria-hidden="true">↓</span></a></div>
-    </section>
-    <section id="story" class="section roots" aria-labelledby="story-title">
-      <div class="shell">
-        <div class="intro-grid">
-          <div class="intro-side"><span class="eyebrow">{t.introEyebrow}</span><RootMark class="intro-root" /><p class="intro-mark">{t.introMark}</p></div>
-          <div class="intro-copy"><h2 id="story-title">{t.introTitle}</h2><p class="lead">{t.introCopy}</p><a class="quiet-link" href="#journey">{en ? "Read my story" : "Đọc câu chuyện của mình"} <Arrow /></a></div>
-        </div>
-      </div>
+      <ContemplativeScene motif="meditation" />
     </section>
 
-    <FounderJourney lang={lang} />
+    <section class="shell material-block" id="practice" aria-labelledby="practice-title">
+      <div class="material-practice">
+        <div class="material-practice__copy">
+          <span class="eyebrow">{t.practiceEye}</span>
+          <h2 id="practice-title">{en ? 'Return to your breath' : 'Trở về với hơi thở'}</h2>
+          <ol class="material-steps">{t.steps.map(([, title, description]) => <li><strong>{title}</strong><p>{description}</p></li>)}</ol>
+          <a class="quiet-link" href={articlePath(lang, 'returning-attention')}>{en ? 'Read the practice guide' : 'Đọc hướng dẫn thực tập'}</a>
+        </div>
+        <figure class="material-yoga">
+          <ContemplativeScene motif="yoga" />
+          <figcaption><a href="https://pixabay.com/photos/yoga-pose-exercise-woman-female-3426151/">{en ? 'Yoga photograph on Pixabay' : 'Ảnh yoga trên Pixabay'}</a></figcaption>
+        </figure>
+      </div>
+    </section>
 
     <HomeDiscovery lang={lang} />
 
-    <RiceLandscapes lang={lang} />
-
-    <section id="practice" class="section practice" aria-labelledby="practice-title">
-      <div class="shell practice-grid">
-        <figure class="practice-image"><HomePhoto photo="seated-in-grass" {lang} /></figure>
-        <div><span class="eyebrow">{t.practiceEye}</span><h2 id="practice-title" set:html={t.practiceTitle} /><p class="lead">{t.practiceCopy}</p><ol class="steps">{t.steps.map(([n, title, text]) => <li><span class="step-number" aria-hidden="true">{n}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol><a class="quiet-link" href={articlePath(lang, 'returning-attention')}>{en ? 'Try a one-minute practice' : 'Thử một phút thực tập'} <Arrow /></a></div>
+    <section id="journal" class="shell material-block" aria-labelledby="journal-title">
+      <div class="material-section-heading">
+        <h2 id="journal-title">{home.featuredTitle}</h2>
+        <a class="button button--tonal" href={journalPath(lang)}>{en ? 'All articles' : 'Tất cả bài viết'}</a>
       </div>
-      <figure class="shell practice-reminder">
-        <HomePhoto photo="quiet-reminder" {lang} />
-        <figcaption>{en ? 'A small reminder from a picture on the wall. Give yourself a steady seat while things take their time.' : 'Một lời nhắc trên tường. Có những chuyện cần thời gian để lắng xuống. Trong lúc ấy, mình có thể cho mình một chỗ ngồi vững.'}</figcaption>
-      </figure>
+      <div class="journal-grid">{featuredArticles.map(article => {
+        const translation = article.translations[lang];
+        const href = articlePath(lang, article.slug);
+        return (
+          <article class="journal-card material-reading-card">
+            <img src={article.image} alt="" width="720" height="540" loading="lazy" />
+            <div class="journal-card-copy">
+              <div class="article-meta"><span>{translation.category}</span><span>{(en ? article.minutes : article.minutesVi ?? article.minutes)} {t.readTime}</span></div>
+              <h3><a href={href}>{translation.title}</a></h3>
+              <p>{translation.description}</p>
+            </div>
+          </article>
+        );
+      })}</div>
+      <p id="layers" class="material-inline-link"><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{en ? 'Explore the seven-layer framework' : 'Tìm hiểu khung chiêm nghiệm bảy tầng'}</a></p>
     </section>
 
-    <section id="nature" class="section nature" aria-labelledby="nature-title">
-      <div class="shell">
-        <div class="section-head split-head"><div><span class="eyebrow">{t.natureEye}</span><h2 id="nature-title">{t.natureTitle}</h2></div><p>{t.natureCopy}</p></div>
-        <EcosystemOrbit lang={lang} cards={t.natureCards} images={natureImages} />
+    <section id="nature" class="shell material-block material-ecosystem" aria-labelledby="nature-title">
+      <div class="material-section-heading"><h2 id="nature-title">{en ? 'The Hương Thiền ecosystem' : 'Hệ sinh thái Hương Thiền'}</h2></div>
+      <EcosystemOrbit lang={lang} cards={t.natureCards} images={natureImages} links={ecosystemLinks} />
+      <p class="material-ecosystem__note">{t.natureNote}</p>
+      <details class="material-details">
+        <summary>{en ? 'Photographs from nature and everyday life' : 'Ảnh thiên nhiên và đời sống'}</summary>
         <div class="nature-photos">
           <figure class="nature-photos__outdoor-kitchen"><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{en ? 'Preparing a meal outdoors' : 'Sửa soạn bữa ăn bên bếp củi'}</figcaption></figure>
           <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{en ? 'A moment together by the sea' : 'Một khoảnh khắc bên nhau ngoài biển'}</figcaption></figure>
         </div>
-        <div class="nature-bottom"><p class="note">{t.natureNote}</p><a class="quiet-link" href={articlePath(lang, 'listening-to-nature')}>{en ? 'Take a mindful walk' : 'Một cuộc gặp với thiên nhiên'} <Arrow /></a></div>
-      </div>
+        <RiceLandscapes lang={lang} />
+      </details>
     </section>
 
-    <section id="people" class="section people" aria-labelledby="people-title">
-      <div class="shell people-grid">
-        <figure class="portrait-wrap"><HomePhoto photo="mountain-lake" {lang} /></figure>
-        <div><span class="eyebrow">{t.peopleEye}</span><h2 id="people-title">{t.peopleTitle}</h2><div class="people-copy"><article class="person"><span class="role">{t.founderRole}</span><h3>Hương Thiền</h3><p>{t.founderCopy}</p></article><article class="person"><span class="role">{t.coRole}</span><h3>Kiều Mạnh</h3><p>{t.coCopy}</p></article></div></div>
+    <section id="story" class="shell material-block" aria-labelledby="people-title">
+      <div id="people" class="material-section-heading"><h2 id="people-title">{t.peopleTitle}</h2></div>
+      <div class="material-founders">
+        {founders.map(([name, photo, role, copy]) => (
+          <article class="material-founder">
+            <span class:list={['material-founder__portrait', { 'material-founder__portrait--closer': name === 'Kiều Mạnh' }]}><img src={photo} alt="" width="128" height="128" loading="lazy" /></span>
+            <div><h3>{name}</h3><p class="material-founder__role">{role}</p><p>{copy}</p></div>
+          </article>
+        ))}
       </div>
+      <FounderJourney lang={lang} />
     </section>
 
-    <section id="journal" class="section journal" aria-labelledby="journal-title">
-      <div class="shell">
-        <div class="section-head split-head"><div><span class="eyebrow">{t.journalEye}</span><h2 id="journal-title">{home.featuredTitle}</h2></div><p>{home.featuredDescription}</p></div>
-        <div class="journal-grid">{featuredArticles.map(article => {
-          const translation = article.translations[lang];
-          return <article class="journal-card"><a class="journal-image" href={articlePath(lang, article.slug)} tabindex="-1" aria-hidden="true"><img src={article.image} alt="" width="720" height="540" loading="lazy" /></a><div class="journal-card-copy"><div class="article-meta"><span>{translation.category}</span><span>{(lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes)} {t.readTime}</span></div><h3><a href={articlePath(lang, article.slug)}>{translation.title}</a></h3><p>{translation.description}</p><a class="quiet-link" href={articlePath(lang, article.slug)} aria-label={`${t.journalLink}: ${translation.title}`}>{t.journalLink} <Arrow /></a></div></article>;
-        })}</div>
-        <div class="journal-all"><a class="button" href={journalPath(lang)}>{en ? 'View all articles' : 'Xem tất cả tản văn'} <Arrow /></a></div>
-        <aside id="layers" class="reflection-note"><span class="eyebrow">{en ? 'A personal lens' : 'Một góc nhìn cá nhân'}</span><p>{en ? 'The seven-layer framework is a prompt for reflection, not a clinical assessment or a universal scientific map. Each person has room for their own experience.' : 'Bảy tầng là khung chiêm nghiệm cá nhân, không phải công cụ đánh giá lâm sàng hay bản đồ khoa học phổ quát. Mỗi người có khoảng mở cho trải nghiệm riêng.'}</p><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{en ? 'Understand the framework' : 'Tìm hiểu khung chiêm nghiệm'} <span aria-hidden="true">→</span></a></aside>
+    <section id="connect" class="shell material-block material-contact" aria-labelledby="connect-title">
+      <div class="material-contact__intro">
+        <div><h2 id="connect-title">{t.contactTitle}</h2><p>{en ? 'Write to us about practice, the shop or upcoming activities.' : 'Bạn có thể hỏi về việc thực tập, sản phẩm hoặc những hoạt động sắp tới.'}</p></div>
+        <a class="button" href={contactPath(lang)}>{en ? 'Contact us' : 'Liên hệ'}</a>
       </div>
-    </section>
-
-    <section id="path" class="section roadmap" aria-labelledby="path-title">
-      <div class="shell"><div class="section-head"><span class="eyebrow">{en ? 'A thoughtful roadmap' : 'Lộ trình dự án'}</span><h2 id="path-title">{t.phasesTitle}</h2></div><div class="pathway">{t.phases.map(([number, title, text], index) => <article class={`phase ${index === 0 ? 'current' : ''}`}><div class="phase-top"><span class="index-number">{number}</span><span class="phase-label">{t.phaseLabels[index]}</span></div><h3>{title}</h3><p>{text}</p></article>)}</div></div>
-    </section>
-
-    <BeginHere lang={lang} />
-
-    <section id="connect" class="section contact" aria-labelledby="connect-title">
-      <div class="shell contact-grid">
-        <div><span class="eyebrow">{t.contactEye}</span><h2 id="connect-title">{t.contactTitle}</h2><p class="lead">{t.contactCopy}</p><a class="quiet-link" href={contactPath(lang)}>{en ? 'Phone, Zalo and email' : 'Điện thoại, Zalo và email'} <Arrow /></a></div>
-        <ContactForm lang={lang} />
-      </div>
+      <details class="material-details" id="path">
+        <summary>{t.phasesTitle}</summary>
+        <dl class="material-roadmap">{t.phases.map(([, title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
+      </details>
+      <details class="material-details">
+        <summary>{en ? 'What can I join right now?' : 'Hiện tại mình có thể tham gia gì?'}</summary>
+        <p class="material-details__body">{en ? 'You can read the bilingual journal, try the introductory practices and browse the shop. Course and retreat dates will be announced when available.' : 'Bạn có thể đọc Tản văn, thử các bài thiền nhập môn và ghé Cửa hàng. Khóa học và kỳ nghỉ thực tập sẽ được thông báo khi có lịch.'}</p>
+      </details>
     </section>
   </main>
   <Footer lang={lang} />
-  <script>import "../../scripts/hybrid-nature";</script>
+  <script>
+    const openSection = () => {
+      const target = document.getElementById(location.hash.slice(1));
+      if (!target) return;
+      for (let element: HTMLElement | null = target; element; element = element.parentElement) {
+        if (element instanceof HTMLDetailsElement) element.open = true;
+      }
+      target.scrollIntoView();
+    };
+    window.addEventListener('hashchange', openSection);
+    openSection();
+  </script>
 </BaseLayout>

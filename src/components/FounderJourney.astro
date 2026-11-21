@@ -30,8 +30,9 @@ const chapters = en ? [
  ['Hiện tại · Hương Thiền Nature','Đưa sự thực tập vào đời sống','Mình khởi xướng Hương Thiền Nature với mong muốn có một nơi cùng nhau học và gần gũi với thiên nhiên. Nếu một điều bạn đọc ở đây có thể đi cùng bạn ra vườn hay về tới bữa cơm chiều, mình thấy công việc này có ý nghĩa.']
 ];
 ---
-<section class="section founder-journey" id="journey" aria-labelledby="journey-title">
- <div class="shell">
+<details class="material-details founder-journey" id="journey">
+ <summary>{en ? 'Read Hương Thiền’s full story' : 'Đọc hành trình của Hương Thiền'}</summary>
+ <div class="journey-content">
   <div class="journey-opening">
    <div><span class="eyebrow">{en ? 'Hương Thiền’s story' : 'Hành trình của Hương Thiền'}</span><h2 id="journey-title">{en ? 'From getting by to caring for myself' : 'Từ tự lo cho mình đến biết chăm sóc mình'}</h2><p class="lead">{en ? 'My full name is Đỗ Thị Kim Hương. Early life taught me to manage on my own. Later, I learned to notice when I was stretching myself too far, when to ask for help, and when to sit down for a while.' : 'Mình tên đầy đủ là Đỗ Thị Kim Hương. Quãng đời đầu dạy mình cách xoay xở. Quãng đời sau, mình học thêm cách nhận ra khi nào đã quá sức, khi nào cần nhờ người khác và khi nào chỉ cần ngồi xuống một lát.'}</p></div>
    <HomePhoto photo="barefoot-by-sea" {lang} />
@@ -48,8 +49,8 @@ const chapters = en ? [
     </li>
    ))}
   </ol>
-  <section class="journey-album" aria-labelledby="journey-album-title">
-    <h3 id="journey-album-title">{en ? 'Being present with one another' : 'Có mặt cho nhau'}</h3>
+  <details class="material-details journey-album">
+    <summary>{en ? 'Family photo album' : 'Album ảnh gia đình'}</summary>
     <p>{en ? 'I also practise in the time I share with others. Holding a child close or waiting for little feet to find their balance asks me to pay attention here, to the person in front of me.' : 'Mình cũng học thiền trong những lúc ở cạnh người khác. Khi bế một em bé hay đợi đôi chân nhỏ đứng vững trên cát, sự chú tâm có một hình hài rất cụ thể. Người trước mặt đang cần gì ở mình, ngay lúc này?'}</p>
     <div class="journey-album__grid">
       <HomePhoto photo="shore-with-children" {lang} />
@@ -57,6 +58,6 @@ const chapters = en ? [
       <HomePhoto photo="rest-with-baby" {lang} />
       <HomePhoto photo="under-leaves" {lang} />
     </div>
-  </section>
+  </details>
  </div>
-</section>
+</details>

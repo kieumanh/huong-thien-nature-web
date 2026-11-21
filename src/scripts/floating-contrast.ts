@@ -89,8 +89,8 @@ function update() {
     });
     if (!samples.length) continue;
     // Choose the branded surface with the best worst-case contrast across the control.
-    const light = luminance([250, 248, 241]);
-    const dark = luminance([16, 35, 26]);
+    const light = luminance([233, 241, 230]);
+    const dark = luminance([23, 53, 41]);
     const minimumContrast = (surfaceLum: number) => Math.min(...samples.map(color => {
       const surface = luminance(color);
       return (Math.max(surfaceLum, surface) + .05) / (Math.min(surfaceLum, surface) + .05);
