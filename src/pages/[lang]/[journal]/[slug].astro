@@ -21,6 +21,7 @@ const alternatePath = articlePath(lang === 'vi' ? 'en' : 'vi', article.slug);
 const related = article.relatedSlugs
   ? article.relatedSlugs.map(slug => articles.find(item => item.slug === slug)).filter((item): item is Article => Boolean(item) && item?.slug !== article.slug).slice(0, 3)
   : articles.filter(item => item.slug !== article.slug).slice(0, 3);
+const author = { name: 'Kiều Mạnh', image: '/media/author-kieu-manh.jpg' };
 const origin = 'https://huongthiennature.com';
 const schema = {
   '@context': 'https://schema.org', '@type': 'BlogPosting',
@@ -28,7 +29,7 @@ const schema = {
   image: new URL(article.image, origin).href,
   mainEntityOfPage: origin + articlePath(lang, article.slug),
   ...(article.publishedAt ? { datePublished: article.publishedAt, dateModified: article.updatedAt } : {}),
-  ...(article.phase === 'roots' ? { author: { '@type': 'Person', name: 'Kiều Mạnh' } } : {}),
+  author: { '@type': 'Person', name: author.name, image: new URL(author.image, origin).href },
   publisher: { '@type': 'Organization', name: 'Hương Thiền Nature', url: origin },
   ...(article.keywords ? { keywords: article.keywords[lang] } : {}),
 };
@@ -48,7 +49,7 @@ const schema = {
         <div class="article-meta"><span>{content.category}</span><span>{(lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes)} {t.readTime}</span></div>
         <h1>{content.title}</h1>
         <p class="lead">{articleAnswers[article.slug]?.[lang] ?? content.description}</p>
-        {article.phase === 'roots' && <p class="article-byline">{lang === 'vi' ? 'Kiều Mạnh · Biên tập từ Thiền Tinh Hoa' : 'Kiều Mạnh · Adapted from Thiền Tinh Hoa'} · <time datetime={article.publishedAt}>{lang === 'vi' ? '07/10/2026' : '7 October 2026'}</time></p>}
+        <p class="article-byline"><a href="#article-author">{author.name}</a>{article.phase === 'roots' && <> · {lang === 'vi' ? 'Biên tập từ Thiền Tinh Hoa' : 'Adapted from Thiền Tinh Hoa'} · <time datetime={article.publishedAt}>{lang === 'vi' ? '07/10/2026' : '7 October 2026'}</time></>}</p>
       </header>
       <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
       <div class="article-body">
@@ -59,6 +60,15 @@ const schema = {
         <p class="article-note">{content.note}</p>
         {content.cta && <p class="article-cta"><a class="button" href={articlePath(lang, content.cta.slug)}>{content.cta.label} <Arrow /></a></p>}
         {article.sources && <section class="article-sources" aria-labelledby="sources-title"><h2 id="sources-title">{lang === 'vi' ? 'Nguồn và đọc thêm' : 'Sources and further reading'}</h2><p>{lang === 'vi' ? 'Các bài Roots được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'Roots articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.'}</p><ul>{article.sources.map(source => <li>{source.url ? <a href={source.url}>{source.title}</a> : <span>{source.title}</span>}</li>)}</ul></section>}
+        <section class="author-card" id="article-author" aria-labelledby="author-name">
+          <img src={author.image} alt={lang === 'vi' ? 'Kiều Mạnh bên bờ biển' : 'Kiều Mạnh at the beach'} width="1152" height="1536" loading="lazy" decoding="async" />
+          <div>
+            <span class="eyebrow">{lang === 'vi' ? 'Về tác giả' : 'About the author'}</span>
+            <h2 id="author-name">{author.name}</h2>
+            <p>{lang === 'vi' ? 'Người sáng lập dự án Hương Thiền Nature, dành cả đời để lan tỏa con đường thiền định, chánh niệm và sống tỉnh thức, thuận tự nhiên.' : 'A founder of Hương Thiền Nature, dedicated to sharing meditation, mindfulness and a way of living in tune with nature.'}</p>
+            <p>{lang === 'vi' ? 'Hương Thiền, người sáng lập, hiện chỉ phụ trách chuyên môn giảng dạy. Kiều Mạnh đảm nhiệm phần chia sẻ nội dung và truyền thông của dự án.' : 'Founder Hương Thiền currently focuses exclusively on teaching. Kiều Mạnh is responsible for sharing content and managing the project’s communications.'}</p>
+          </div>
+        </section>
         <a class="quiet-link" href={journalPath(lang)}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
       </div>
     </article>
@@ -66,3 +76,32 @@ const schema = {
   </main>
   <Footer lang={lang} />
 </BaseLayout>
+
+
+<style>
+  .author-card {
+    display: grid;
+    grid-template-columns: minmax(0, 8rem) minmax(0, 1fr);
+    align-items: start;
+    gap: 1.25rem;
+    margin-block: 2rem;
+    padding: clamp(1rem, 4vw, 1.75rem);
+    border: 1px solid #d6dfd3;
+    border-radius: 1.25rem;
+    background: #eef3ea;
+  }
+
+  .author-card img {
+    width: 100%;
+    height: auto;
+    border-radius: .75rem;
+  }
+
+  .author-card h2 { margin: .25rem 0 .65rem; }
+  .author-card p:last-child { margin-bottom: 0; }
+
+  @media (max-width: 480px) {
+    .author-card { grid-template-columns: 1fr; }
+    .author-card img { width: min(8rem, 100%); }
+  }
+</style>
