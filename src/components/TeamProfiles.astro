@@ -33,21 +33,15 @@ const vi = lang === 'vi';
 </section>
 
 <section class="team-group" id="doi-tac" aria-labelledby="partners-title">
-  <h2 id="partners-title">{vi ? 'Cố vấn, đối tác và dự án trực thuộc' : 'Adviser, farming partner and technology project'}</h2>
+  <h2 id="partners-title">{vi ? 'Cố vấn và đối tác' : 'Adviser and farming partner'}</h2>
   <div class="partner-grid">
     {partnerProfiles.map(partner => (
       <article class="partner-card zen-card">
-        {partner.image
-          ? <img class="partner-photo" src={partner.image.src} alt={partner.image[lang]} width={partner.image.width} height={partner.image.height} loading="lazy" decoding="async" />
-          : <div class:list={['partner-photo', 'partner-photo--logo', { 'partner-photo--zen': partner.name === 'ZenWork' }]}><img src={partner.logo} alt={partner.logoLabel} width="112" height="112" loading="lazy" decoding="async" /></div>}
-        <div class="profile-copy">
-          <div class="partner-identity">
-            {partner.image && <img src={partner.logo} alt="" width="48" height="48" loading="lazy" decoding="async" />}
-            <h3>{partner.name}</h3>
-          </div>
-          <p class="profile-role">{partner[lang].role}</p>
-          <p>{partner[lang].bio}</p>
-          <div class="profile-links"><a class="quiet-link" href={partner.site}>{partner.label}</a><a class="photo-credit" href={partner.source}>{vi ? 'Nguồn hình ảnh' : 'Image source'}</a></div>
+        <img class="partner-logo" src={partner.logo} alt="" width="52" height="52" loading="lazy" decoding="async" />
+        <div>
+          <h3>{partner.name}</h3>
+          <p>{partner[lang]}</p>
+          <a class="quiet-link" href={partner.site}>{partner.label}</a>
         </div>
       </article>
     ))}

@@ -125,3 +125,8 @@
   .journal-card--featured .journal-card-copy { align-self: center; }
 }
 @media (max-width: 600px) { .article-cover img { aspect-ratio: 5 / 4; } }
+
+.article-illustration { margin-block: clamp(1.5rem, 5vw, 2.6rem); }
+.article-illustration img { width: 100%; height: auto; border-radius: var(--radius-card); }
+.article-illustration figcaption { margin-top: .55rem; font-size: var(--type-caption); color: var(--muted); }
+.article-illustration a { white-space: nowrap; }

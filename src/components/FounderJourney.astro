@@ -29,6 +29,12 @@ const chapters = en ? [
  ['Học Thiền Đà Nẵng · Thực tập và thực hành','Hoàng Thị Phương Thảo','Mình học với cô Hoàng Thị Phương Thảo và có thời gian thực tập tại Học Thiền Đà Nẵng. Có lời hướng dẫn nghe xong tưởng đã hiểu. Đến khi ngồi xuống, mình mới thấy còn điều cần hỏi lại. Mình quý quãng học ấy vì thế.','https://www.hocthiendanang.com/','Học Thiền Đà Nẵng'],
  ['Hiện tại · Hương Thiền Nature','Đưa sự thực tập vào đời sống','Mình khởi xướng Hương Thiền Nature với mong muốn có một nơi cùng nhau học và gần gũi với thiên nhiên. Nếu một điều bạn đọc ở đây có thể đi cùng bạn ra vườn hay về tới bữa cơm chiều, mình thấy công việc này có ý nghĩa.']
 ];
+const stages = [
+  { id: 'journey-early', title: en ? 'Growing up and finding my footing' : 'Tuổi thơ và bước ngoặt', entries: chapters.slice(0, 4), start: 1 },
+  { id: 'journey-learning', title: en ? 'Learning to practise' : 'Học và chọn cách thực tập', entries: chapters.slice(4, 11), start: 5 },
+  { id: 'journey-today', title: en ? 'Where the practice led me' : 'Đưa việc tập vào đời sống', entries: chapters.slice(11), start: 12 },
+];
+
 ---
 <section class="reading-section founder-journey" id="journey">
  <div class="journey-content">
@@ -36,18 +42,26 @@ const chapters = en ? [
    <div><span class="eyebrow">{en ? 'Hương Thiền’s story' : 'Hành trình của Hương Thiền'}</span><h2 id="journey-title">{en ? 'From getting by to caring for myself' : 'Từ tự lo cho mình đến biết chăm sóc mình'}</h2><p class="lead">{en ? 'My full name is Đỗ Thị Kim Hương. Early life taught me to manage on my own. Later, I learned to notice when I was stretching myself too far, when to ask for help, and when to sit down for a while.' : 'Mình tên đầy đủ là Đỗ Thị Kim Hương. Quãng đời đầu dạy mình cách xoay xở. Quãng đời sau, mình học thêm cách nhận ra khi nào đã quá sức, khi nào cần nhờ người khác và khi nào chỉ cần ngồi xuống một lát.'}</p></div>
    <HomePhoto photo="barefoot-by-sea" {lang} />
   </div>
-  <ol class="journey-chapters">
-   {chapters.map(([label, title, body, href, link], i) => (
-    <li>
-     <span class="journey-number" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
-     <div>
-      {i === 0 && <span class="journey-anchor" id="journey-early"></span>}
-      {i === 4 && <span class="journey-anchor" id="journey-learning"></span>}
-      {i === chapters.length - 1 && <span class="journey-anchor" id="journey-today"></span>}
-      <span class="eyebrow">{label}</span><h3>{title}</h3><p>{body}</p>{href && <p><a href={href}>{link}</a></p>}</div>
-    </li>
-   ))}
-  </ol>
+  <nav class="journey-jumps" aria-label={en ? 'Jump to a chapter' : 'Đến từng chặng hành trình'}>
+    {stages.map(({ id, title }) => <a href={`#${id}`}>{title}</a>)}
+  </nav>
+  {stages.map(({ id, title, entries, start }) => (
+    <section class="journey-stage" id={id} aria-labelledby={`${id}-title`}>
+      <h3 id={`${id}-title`}>{title}</h3>
+      <ol class="journey-chapters" start={start} role="list">
+        {entries.map(([label, heading, body, href, link]) => (
+          <li>
+            <span class="journey-milestone">{label}</span>
+            <div class="journey-entry">
+              <h4>{heading}</h4>
+              <p>{body}</p>
+              {href && <p><a class="photo-credit" href={href}>{link}</a></p>}
+            </div>
+          </li>
+        ))}
+      </ol>
+    </section>
+  ))}
   <section class="reading-section journey-album">
     <h2 class="reading-heading">{en ? 'Family photo album' : 'Album ảnh gia đình'}</h2>
     <p>{en ? 'I also practise in the time I share with others. Holding a child close or waiting for little feet to find their balance asks me to pay attention here, to the person in front of me.' : 'Mình cũng học thiền trong những lúc ở cạnh người khác. Khi bế một em bé hay đợi đôi chân nhỏ đứng vững trên cát, sự chú tâm có một hình hài rất cụ thể. Người trước mặt đang cần gì ở mình, ngay lúc này?'}</p>

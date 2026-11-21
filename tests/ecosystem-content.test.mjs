@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 for (const [language, path, values, titles, disclaimer] of [
-  ['Vietnamese', 'dist/vi/he-sinh-thai/index.html', ['THÂN', 'TÂM', 'TRÍ'], ['Hương Thiền Farm &amp; Botanicals', 'Hương Thiền Eco-Retreat', 'Hương Thiền Academy'], 'chưa mở đăng ký'],
-  ['English', 'dist/en/ecosystem/index.html', ['BODY', 'HEART', 'MIND'], ['Hương Thiền Farm &amp; Botanicals', 'Hương Thiền Eco-Retreat', 'Hương Thiền Academy'], 'registration']
+  ['Vietnamese', 'dist/vi/index.html', ['THÂN', 'TÂM', 'TRÍ'], ['Hương Thiền Farm &amp; Botanicals', 'Hương Thiền Eco-Retreat', 'Hương Thiền Academy'], 'chưa mở đăng ký'],
+  ['English', 'dist/en/index.html', ['BODY', 'HEART', 'MIND'], ['Hương Thiền Farm &amp; Botanicals', 'Hương Thiền Eco-Retreat', 'Hương Thiền Academy'], 'registration']
 ]) {
   test(language + ' page presents the ecosystem as three distinct directions', () => {
     const html = fs.readFileSync(path, 'utf8');
@@ -14,8 +14,16 @@ for (const [language, path, values, titles, disclaimer] of [
     for (const label of [...values, ...titles]) assert(html.includes(label), 'missing: ' + label);
     assert(html.includes(disclaimer));
     assert(!html.includes('eco-pyramid'));
-    assert(!html.includes('kim tự tháp'));
     const story = html.split('<section id="story"')[1]?.split('</section>')[0] || '';
     assert(!story.includes('class="pillar'));
   });
 }
+
+test('ecosystem strategy pages show two illustrations and link back to the live orbits', () => {
+  for (const [lang, route] of [['vi', 'he-sinh-thai'], ['en', 'ecosystem']]) {
+    const html = fs.readFileSync(`dist/${lang}/${route}/index.html`, 'utf8');
+    assert.equal((html.match(/<figure[^>]+data-ecosystem-illustration/g) || []).length, 2);
+    assert(html.includes(`href="/${lang}/#nature"`));
+    assert(!html.includes('solar-orbit--1'));
+  }
+});

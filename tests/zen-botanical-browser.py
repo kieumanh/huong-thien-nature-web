@@ -1,4 +1,5 @@
 """Compare Zen Botanical with the source baseline and exercise its bilingual flows."""
+from datetime import datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -104,15 +105,23 @@ def check_flows(browser):
         menu.click()
         page.locator(f'#main-nav a[href="{entries["team"]}"]').click()
         page.wait_for_url(base + entries['team'])
-        expect(page.locator('#doi-tac .partner-card')).to_have_count(3)
+        expect(page.locator('#doi-tac .partner-card')).to_have_count(2)
+        expect(page.locator('#doi-tac img')).to_have_count(2)
+        expect(page.locator('#doi-tac a[href*="zenwork"]')).to_have_count(0)
+        expect(page.locator('.footer-credit a')).to_have_attribute('href', 'https://zenwork.io.vn/')
         expect(page.locator('#huong-thien h3')).to_be_visible()
         expect(page.locator('#kieu-manh h3')).to_be_visible()
         wait_page(page, base + entries['story'])
         expect(page.locator('.journey-chapters li')).to_have_count(12)
+        page.locator('.journey-jumps a').nth(1).click()
+        assert urlsplit(page.url).fragment == 'journey-learning'
+        wait_page(page, base + entries['ecosystem'])
+        expect(page.locator('[data-ecosystem-illustration]')).to_have_count(2)
         expect(page.locator('main details')).to_have_count(0)
         wait_page(page, base + entries['article'])
         page.locator('.article-toc a').first.click()
         assert urlsplit(page.url).fragment == 'section-1'
+        expect(page.locator('.article-illustration')).to_have_count(1 if lang == 'vi' else 0)
         expect(page.locator('#article-author h2')).to_have_text('Kiều Mạnh')
         wait_page(page, base + entries['search'])
         expect(page.locator('.search-result--product').first).to_be_visible()
@@ -158,7 +167,7 @@ def check_flows(browser):
 
     page.set_viewport_size({'width': 1440, 'height': 900})
     page.emulate_media(reduced_motion='no-preference')
-    wait_page(page, base + routes['vi']['ecosystem'])
+    wait_page(page, base + routes['vi']['home'])
     for width in widths:
         page.set_viewport_size({'width': width, 'height': 900})
         scene = page.locator('.solar-system-scene')
@@ -179,7 +188,17 @@ def check_flows(browser):
     expect(page.locator('[data-ecosystem]')).to_have_class('ecosystem-motion')
     page.emulate_media(reduced_motion='reduce')
     expect(page.locator('[data-orbit-toggle]')).to_be_hidden()
-    report['passes'].append('Desktop orbit can be stopped, reduced motion hides the unnecessary control.')
+    report['passes'].append('Homepage orbits fit every viewport, rotate in view and respect reduced motion.')
+    page.clock.install(time=datetime(2026, 11, 20, 16, 59, 59, tzinfo=timezone.utc))
+    wait_page(page, base + routes['vi']['story'])
+    expect(page.locator('html')).to_have_attribute('data-season', 'winter')
+    page.clock.fast_forward(2000)
+    expect(page.locator('html')).to_have_attribute('data-season', 'spring')
+    for season in ['summer', 'autumn', 'winter', 'spring']:
+        page.clock.fast_forward(3_600_000)
+        expect(page.locator('html')).to_have_attribute('data-season', season)
+    assert page.locator('.seasonal-accent span').first.evaluate("el => getComputedStyle(el).animationName") == 'none'
+    report['passes'].append('Seasonal cycle updates hourly across Vietnam midnight on an inner page and respects reduced motion.')
     assert not errors, errors
     page.close()
 

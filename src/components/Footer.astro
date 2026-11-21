@@ -65,6 +65,7 @@ const groups = [
     <p class="footer-notice">{t.disclaimer}</p>
     <div class="footer-bottom">
       <span>© {new Date().getFullYear()} Hương Thiền Nature</span>
+      <p class="footer-credit">{vi ? 'Thiết kế và phát triển bởi' : 'Designed and developed by'} <a href="https://zenwork.io.vn/">Zenwork.io.vn</a></p>
       <a class="footer-version" href={versionPath} aria-current={Astro.url.pathname === versionPath ? 'page' : undefined}>
         {releaseTitle[lang]} <span>V{version}</span>
       </a>

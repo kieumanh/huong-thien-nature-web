@@ -6,17 +6,14 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import ContemplativeScene from '../../components/ContemplativeScene.astro';
 import FounderJourney from '../../components/FounderJourney.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
-import EcosystemOrbit from '../../components/EcosystemOrbit.astro';
-import RiceLandscapes from '../../components/RiceLandscapes.astro';
-import HomePhoto from '../../components/HomePhoto.astro';
-import { articlePath, journalPath } from '../../data/articles';
+import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
+import { ecosystemVision } from '../../data/ecosystem-vision';
+import { articlePath } from '../../data/articles';
 import { beginnerArticles } from '../../data/home';
 import { contactPath } from '../../data/contact-channels';
 import { journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
-import { shopPath } from '../../data/products';
 import { getCopy, languages, type Language } from '../../data/site';
 import '../../styles/story-home.css';
-import '../../styles/hybrid-nature.css';
 import '../../styles/material-home.css';
 import '../../styles/journey-pages.css';
 
@@ -31,11 +28,7 @@ const vi = lang === 'vi';
 const t = getCopy(lang);
 const info = journeyPages[page][lang];
 const alternatePath = journeyPath(vi ? 'en' : 'vi', page);
-const ecosystemLinks = [
-  [shopPath(lang), vi ? 'Ghé cửa hàng' : 'Browse the shop'],
-  [articlePath(lang, 'listening-to-nature'), vi ? 'Thử đi bộ chánh niệm' : 'Try a mindful walk'],
-  [journalPath(lang), vi ? 'Khám phá Tản văn' : 'Explore the journal'],
-];
+const vision = ecosystemVision[lang];
 ---
 <BaseLayout {lang} title={`${info.heading} | Hương Thiền Nature`} description={info.description} {alternatePath}
   pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
@@ -74,24 +67,30 @@ const ecosystemLinks = [
     </>}
 
     {page === 'ecosystem' && <>
-      <section class="ecosystem-content" id="nature" aria-labelledby="pillars-title">
-        <h2 id="pillars-title">{vi ? 'Một ngày qua ba hướng thực hành' : 'Three ways to practise in an ordinary day'}</h2>
-        <p>{t.natureCopy}</p>
-        <EcosystemOrbit {lang} cards={t.natureCards} images={['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-field.jpg']} links={ecosystemLinks} />
-        <section class="journey-section" id="path">
-          <h2>{vi ? 'Hiện tại tôi có thể tham gia gì?' : 'What can I do right now?'}</h2>
-          <p>{t.natureNote}</p>
-          <dl class="material-roadmap">{t.phases.map(([, title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
-        </section>
+      <section class="journey-section" id="nature" aria-labelledby="vision-title">
+        <h2 id="vision-title">{vision.question}</h2>
+        <p>{vision.introduction}</p>
+        <EcosystemIllustration {...vision.loop} variant="loop" />
       </section>
-      <section class="reading-section ecosystem-photos">
-        <h2>{vi ? 'Ảnh thiên nhiên và đời sống' : 'Photographs from nature and everyday life'}</h2>
-        <div class="nature-photos">
-          <figure class="nature-photos__outdoor-kitchen"><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{vi ? 'Sửa soạn bữa ăn bên bếp củi' : 'Preparing a meal outdoors'}</figcaption></figure>
-          <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{vi ? 'Một khoảnh khắc bên nhau ngoài biển' : 'A moment together by the sea'}</figcaption></figure>
+      <section class="journey-section" aria-labelledby="directions-title">
+        <h2 id="directions-title">{vision.pathsTitle}</h2>
+        <div class="vision-grid">
+          {vision.paths.map((path, index) => <article class="zen-card vision-card">
+            <h3>{path.title}</h3>
+            <p><strong>{path.focus}</strong></p>
+            <p>{path.text}</p>
+            {index === 0 && <a class="quiet-link" href={journeyPath(lang, 'team') + '#doi-tac'}>{vi ? 'Gặp đối tác nông nghiệp' : 'Meet our farming partner'}</a>}
+          </article>)}
         </div>
-        <RiceLandscapes {lang} />
-        <a class="quiet-link" href={`${journeyPath(lang, 'team')}#doi-tac`}>{vi ? 'Gặp những người đồng hành' : 'Meet the people we work with'}</a>
+      </section>
+      <section class="journey-section" aria-labelledby="advantages-title">
+        <h2 id="advantages-title">{vision.advantagesTitle}</h2>
+        <dl class="vision-principles">{vision.advantages.map(([title, detail]) => <div><dt>{title}</dt><dd>{detail}</dd></div>)}</dl>
+      </section>
+      <section class="journey-section" id="path" aria-label={vision.roadmap.title}>
+        <EcosystemIllustration {...vision.roadmap} variant="roadmap" />
+        <p>{t.natureNote}</p>
+        <a class="quiet-link" href={`/${lang}/#nature`}>{vi ? 'Xem ba quỹ đạo trên trang chủ' : 'See the three orbits on the homepage'}</a>
       </section>
     </>}
 

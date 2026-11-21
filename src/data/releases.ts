@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.4.0',
+    date: '2026-11-21',
+    vi: ['Ba quỹ đạo trên trang chủ và bốn mùa', 'Đưa mô hình về trang chủ, viết riêng định hướng hệ sinh thái, chia lại timeline và bổ sung ảnh Pixabay trong bài dài. Website tự đổi hiệu ứng theo bốn mùa mỗi giờ.'],
+    en: ['Homepage orbits and four seasons', 'Moved the orbits home, expanded the ecosystem strategy, grouped the timeline and added Pixabay photos to long articles. Seasonal accents change each hour.'],
+  },
+  {
     version: '2.3.0',
     date: '2026-11-21',
     vi: ['Câu chuyện, thực hành và đội ngũ', 'Mở các trang riêng cho Thực hành, Hệ sinh thái, Câu chuyện và Đội ngũ. Thêm hồ sơ đối tác, viết lại trang chủ và đồng bộ dữ liệu có cấu trúc.'],
