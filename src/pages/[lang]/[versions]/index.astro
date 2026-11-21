@@ -22,7 +22,7 @@ const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', {
 });
 ---
 <BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath}>
-  <Header {lang} {alternatePath} isInnerPage />
+  <Header {lang} {alternatePath} />
   <main id="main-content" class="shell versions-page" tabindex="-1">
     <header class="versions-header">
       <Breadcrumb {lang} current={title} />

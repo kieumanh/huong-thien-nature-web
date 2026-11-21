@@ -4,6 +4,7 @@ import { resolve, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { articles as articleEntries, articlePath, journalPath } from '../src/data/articles.ts';
 import { products, productPath, shopPath } from '../src/data/products.ts';
+import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
 import { releases, releasesPath } from '../src/data/releases.ts';
 import { contactPath } from '../src/data/contact-channels.ts';
 
@@ -18,10 +19,10 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, articleEntries.length * 2 + 12 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
+assert.equal(files.length, (articleEntries.length + journeyPageKeys.length) * 2 + 12 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, (articleEntries.length + products.length + 5) * 2, 'Sitemap must list all localized pages and products');
+assert.equal(new Set(locations).size, (articleEntries.length + products.length + journeyPageKeys.length + 5) * 2, 'Sitemap must list all localized pages and products');
 let references = 0;
 let articles = 0;
 for (const file of files) {
@@ -45,8 +46,10 @@ for (const file of files) {
     const other = lang === 'vi' ? 'en' : 'vi';
     const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
     const product = products.find(item => productPath(lang, item.slug) === route);
-    const alternate = route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
+    const section = journeyPageKeys.find(page => journeyPath(lang, page) === route);
+    const alternate = section ? journeyPath(other, section) : route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
+    for (const page of journeyPageKeys) assert(html.includes(`href="${journeyPath(lang, page)}"`), `Section navigation missing on ${route}`);
     assert(html.includes(`href="${shopPath(lang)}"`), `Shop navigation missing on ${route}`);
     if (route === shopPath(lang)) {
       assert.equal([...html.matchAll(/data-product-card/g)].length, products.length, `Catalogue must include every supplied product on ${route}`);
@@ -77,7 +80,16 @@ for (const file of files) {
       assert.equal([...html.matchAll(/<article\b/g)].length, articleEntries.length, `Journal listing must include every article on ${route}`);
     }
   }
-  for (const [, json] of html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)) JSON.parse(json);
+  const schemas = [...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].map(match => JSON.parse(match[1]));
+  if (localized && locations.includes(base + route)) {
+    const graph = schemas.find(schema => schema['@graph'])?.['@graph'];
+    assert(graph?.some(entry => entry['@id'] === base + route + '#webpage' && entry.inLanguage === localized[1]), `Missing localized page graph on ${route}`);
+    if (route !== `/${localized[1]}/`) {
+      const trails = schemas.filter(schema => schema['@type'] === 'BreadcrumbList');
+      assert.equal(trails.length, 1, `Expected one breadcrumb trail on ${route}`);
+      assert.equal(trails[0].itemListElement.at(-1).item, base + route);
+    }
+  }
   for (const [, href] of html.matchAll(/\b(?:href|src)="([^"]+)"/g)) {
     if (!href.startsWith('/') && !href.startsWith('#')) continue;
     const parsed = new URL(href.replaceAll('&amp;', '&'), new URL(route, base));

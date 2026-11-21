@@ -1,5 +1,6 @@
 import { contactPath, contactEmail, hotline } from './contact-channels.ts';
 import { articles, articlePath } from './articles.ts';
+import { journeyPageKeys, journeyPages, journeyPath, partnerProfiles } from './journey-pages.ts';
 import { getCopy, type Language } from './site.ts';
 import { products, productPath, shopPath, productCategories, formatPrice, stockLabel } from './products.ts';
 import type { SearchRecord } from '../scripts/search-engine.ts';
@@ -13,12 +14,18 @@ const plain = (value: unknown): string => {
 export function buildSearchIndex(lang: Language): SearchEntry[] {
   const t = getCopy(lang);
   const sections = [
-    { title: lang === 'vi' ? 'Hành trình Đỗ Thị Kim Hương' : 'The journey of Đỗ Thị Kim Hương', description: t.founderCopy, url: `/${lang}/#journey`, text: plain([t.founderCopy, 'Quảng Nam 13 22 28 Tịnh độ Thích Nhất Hạnh Carla Phương Cao Patriji Hoàng Thị Phương Thảo PSSM Việt Nam Học Thiền Đà Nẵng Đại học Sư phạm Nha Trang Farm Botanicals Eco-Retreat Academy']) },
-    { title: t.introTitle, description: t.introCopy, url: `/${lang}/#story`, text: plain([t.introCopy,t.introMark]) },
-    { title: plain(t.practiceTitle), description: t.practiceCopy, url: `/${lang}/#practice`, text: plain([t.practiceCopy,t.steps]) },
-    { title: t.natureTitle, description: t.natureCopy, url: `/${lang}/#nature`, text: plain([t.natureCopy,t.natureCards,t.natureNote]) },
-    { title: lang === 'vi' ? 'Hương Thiền và Kiều Mạnh' : 'Hương Thiền and Kiều Mạnh', description: t.founderCopy, url: `/${lang}/#people`, text: plain([t.founderCopy,t.coCopy]) },
-    { title: t.phasesTitle, description: lang === 'vi' ? 'Ba giai đoạn phát triển Hương Thiền Nature.' : 'The three stages of Hương Thiền Nature.', url: `/${lang}/#path`, text: plain(t.phases) },
+    ...journeyPageKeys.map(page => ({
+      title: journeyPages[page][lang].heading,
+      description: journeyPages[page][lang].description,
+      url: journeyPath(lang, page),
+      text: plain([
+        journeyPages[page][lang].description,
+        page === 'story' ? [t.introCopy, t.founderCopy, 'Carla Phương Cao, Thích Nhất Hạnh, Patriji, Hoàng Thị Phương Thảo, PSSM Việt Nam, Tịnh độ, Quảng Nam'] : '',
+        page === 'practice' ? [t.practiceCopy, t.steps] : '',
+        page === 'ecosystem' ? [t.natureCards, t.natureNote, t.phases] : '',
+        page === 'team' ? partnerProfiles.map(partner => [partner.name, partner[lang], partner.label]) : '',
+      ]),
+    })),
     { title: lang === 'vi' ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiền Nature', description: t.contactCopy, url: contactPath(lang), text: [t.contactCopy, 'Zalo', hotline, contactEmail].join(' ') },
   ].map(entry => ({ ...entry, category: lang === 'vi' ? 'Hương Thiền Nature' : 'About us' }));
   const shopCategory = lang === 'vi' ? 'Cửa hàng' : 'Shop';

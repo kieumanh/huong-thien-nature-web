@@ -108,7 +108,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   .nav-actions { gap: .65rem; }
   .nav-links, .js .nav-links, .js .nav-links.open {
     position: static; display: flex; order: 0; justify-content: center; flex: 1 1 auto; flex-wrap: nowrap;
-    padding: 0; overflow: visible; border: 0; box-shadow: none; background: transparent; gap: .25rem;
+    padding: 0; overflow: visible; border: 0; box-shadow: none; background: transparent; gap: .1rem;
   }
   .nav-links a, .nav-connect { white-space: nowrap; }
   .js .nav-toggle, .nav-links .nav-contact-mobile { display: none; }

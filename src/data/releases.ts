@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.3.0',
+    date: '2026-11-21',
+    vi: ['Câu chuyện, thực hành và đội ngũ', 'Mở các trang riêng cho Thực hành, Hệ sinh thái, Câu chuyện và Đội ngũ. Thêm hồ sơ đối tác, viết lại trang chủ và đồng bộ dữ liệu có cấu trúc.'],
+    en: ['Story, practice and people', 'Added dedicated pages for Practice, Ecosystem, Story and Team. Introduced partner profiles, rewrote the homepage and aligned structured data.'],
+  },
+  {
     version: '2.2.1',
     date: '2026-11-21',
     vi: ['Đọc liền mạch', 'Mở toàn bộ hành trình, album và mục lục. Ba quỹ đạo tự xoay khi hiện trên màn hình. Trang chủ có ảnh chia sẻ Hương Thiền bên hồ.'],

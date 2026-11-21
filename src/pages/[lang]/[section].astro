@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import Breadcrumb from '../../components/Breadcrumb.astro';
+import ContemplativeScene from '../../components/ContemplativeScene.astro';
+import FounderJourney from '../../components/FounderJourney.astro';
+import TeamProfiles from '../../components/TeamProfiles.astro';
+import EcosystemOrbit from '../../components/EcosystemOrbit.astro';
+import RiceLandscapes from '../../components/RiceLandscapes.astro';
+import HomePhoto from '../../components/HomePhoto.astro';
+import { articlePath, journalPath } from '../../data/articles';
+import { beginnerArticles } from '../../data/home';
+import { contactPath } from '../../data/contact-channels';
+import { journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
+import { shopPath } from '../../data/products';
+import { getCopy, languages, type Language } from '../../data/site';
+import '../../styles/story-home.css';
+import '../../styles/hybrid-nature.css';
+import '../../styles/material-home.css';
+import '../../styles/journey-pages.css';
+
+export function getStaticPaths() {
+  return languages.flatMap(lang => journeyPageKeys.map(page => ({
+    params: { lang, section: journeyPages[page][lang].slug }, props: { page },
+  })));
+}
+const { page } = Astro.props as { page: JourneyPage };
+const lang = Astro.params.lang as Language;
+const vi = lang === 'vi';
+const t = getCopy(lang);
+const info = journeyPages[page][lang];
+const alternatePath = journeyPath(vi ? 'en' : 'vi', page);
+const ecosystemLinks = [
+  [shopPath(lang), vi ? 'Ghé cửa hàng' : 'Browse the shop'],
+  [articlePath(lang, 'listening-to-nature'), vi ? 'Thử đi bộ chánh niệm' : 'Try a mindful walk'],
+  [journalPath(lang), vi ? 'Khám phá Tản văn' : 'Explore the journal'],
+];
+---
+<BaseLayout {lang} title={`${info.heading} | Hương Thiền Nature`} description={info.description} {alternatePath}
+  pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
+  aboutOrganization={page !== 'practice'}>
+  <Header {lang} {alternatePath} />
+  <main id="main-content" class="shell journey-page" tabindex="-1">
+    <header class="journey-page-header">
+      <ContemplativeScene motif="mandala" />
+      <Breadcrumb {lang} current={info.title} />
+      <div class="journey-page-lead">
+        <h1>{info.heading}</h1>
+        <p class="lead">{info.description}</p>
+      </div>
+    </header>
+
+    {page === 'practice' && <>
+      <section class="material-practice" id="practice" aria-labelledby="practice-title">
+        <div class="material-practice__copy">
+          <p class="eyebrow">{t.practiceEye}</p>
+          <h2 id="practice-title">{vi ? 'Trở về với hơi thở' : 'Return to your breath'}</h2>
+          <p>{t.practiceCopy}</p>
+          <ol class="material-steps">{t.steps.map(([, title, description]) => <li><strong>{title}</strong><p>{description}</p></li>)}</ol>
+          <a class="quiet-link" href={articlePath(lang, 'returning-attention')}>{vi ? 'Đọc hướng dẫn thực tập' : 'Read the practice guide'}</a>
+        </div>
+        <figure class="material-yoga">
+          <ContemplativeScene motif="yoga" />
+          <figcaption><a href="https://pixabay.com/photos/yoga-pose-exercise-woman-female-3426151/">{vi ? 'Ảnh yoga trên Pixabay' : 'Yoga photograph on Pixabay'}</a></figcaption>
+        </figure>
+      </section>
+      <section class="journey-section">
+        <h2>{vi ? 'Nên đọc bài nào khi mới tập?' : 'What should I read first?'}</h2>
+        <p>{vi ? 'Bắt đầu với cách chọn tư thế và chuẩn bị buổi đầu tiên. Khi đã quen với chỗ ngồi, thử quan sát hơi thở theo từng bước.' : 'Begin with a posture you can settle into and prepare for a first sitting. Once you feel at ease, try observing the breath step by step.'}</p>
+        <ol class="journey-reading-list">{beginnerArticles.map(article => <li><a class="quiet-link" href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
+        <a class="quiet-link" href={articlePath(lang, 'when-meditation-is-difficult')}>{vi ? 'Làm gì khi thấy khó ngồi thiền?' : 'What can I do when meditation feels difficult?'}</a>
+      </section>
+    </>}
+
+    {page === 'ecosystem' && <>
+      <section class="ecosystem-content" id="nature" aria-labelledby="pillars-title">
+        <h2 id="pillars-title">{vi ? 'Một ngày qua ba hướng thực hành' : 'Three ways to practise in an ordinary day'}</h2>
+        <p>{t.natureCopy}</p>
+        <EcosystemOrbit {lang} cards={t.natureCards} images={['roots-garden.webp', 'vietnam-rice-fields.jpg', 'farmer-field.jpg']} links={ecosystemLinks} />
+        <section class="journey-section" id="path">
+          <h2>{vi ? 'Hiện tại tôi có thể tham gia gì?' : 'What can I do right now?'}</h2>
+          <p>{t.natureNote}</p>
+          <dl class="material-roadmap">{t.phases.map(([, title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
+        </section>
+      </section>
+      <section class="reading-section ecosystem-photos">
+        <h2>{vi ? 'Ảnh thiên nhiên và đời sống' : 'Photographs from nature and everyday life'}</h2>
+        <div class="nature-photos">
+          <figure class="nature-photos__outdoor-kitchen"><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{vi ? 'Sửa soạn bữa ăn bên bếp củi' : 'Preparing a meal outdoors'}</figcaption></figure>
+          <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{vi ? 'Một khoảnh khắc bên nhau ngoài biển' : 'A moment together by the sea'}</figcaption></figure>
+        </div>
+        <RiceLandscapes {lang} />
+        <a class="quiet-link" href={`${journeyPath(lang, 'team')}#doi-tac`}>{vi ? 'Gặp những người đồng hành' : 'Meet the people we work with'}</a>
+      </section>
+    </>}
+
+    {page === 'story' && <>
+      <section class="journey-section" id="story">
+        <h2>{t.introTitle}</h2>
+        <p>{t.introCopy}</p>
+      </section>
+      <FounderJourney {lang} />
+      <a class="quiet-link" href={journeyPath(lang, 'team')}>{vi ? 'Gặp đội ngũ Hương Thiền Nature' : 'Meet the Hương Thiền Nature team'}</a>
+    </>}
+
+    {page === 'team' && <>
+      <TeamProfiles {lang} />
+      <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ đội ngũ' : 'Contact the team'}</a>
+    </>}
+  </main>
+  <Footer {lang} />
+</BaseLayout>

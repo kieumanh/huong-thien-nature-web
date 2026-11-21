@@ -1,0 +1,55 @@
+---
+import { journalAuthor, meditationFounder } from '../data/people';
+import { journeyPath, partnerProfiles } from '../data/journey-pages';
+import { journalPath } from '../data/articles';
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+---
+<section class="team-group" id="people" aria-labelledby="people-title">
+  <h2 id="people-title">{vi ? 'Người sáng lập và đồng sáng lập' : 'Founders'}</h2>
+  <div class="founder-grid">
+    <article class="founder-profile zen-card" id="huong-thien">
+      <div class="founder-photo"><img src={meditationFounder.image} alt="" width="810" height="1080" loading="lazy" decoding="async" /></div>
+      <div class="profile-copy">
+        <h3>Hương Thiền</h3>
+        <p class="profile-role">{meditationFounder.role[lang]}</p>
+        <p>{vi ? 'Đỗ Thị Kim Hương lớn lên ở Quảng Nam và đi làm từ năm mười ba tuổi. Khi dành thời gian cho việc tu tập, cô bắt đầu quan sát nỗi buồn, sự mỏi mệt và những phản ứng của mình trong các tình huống thường ngày.' : 'Đỗ Thị Kim Hương grew up in Quảng Nam and began working at thirteen. As she made time to practise, she started noticing sadness, weariness and the ways she reacted to everyday situations.'}</p>
+        <p>{vi ? 'Ở Hương Thiền Nature, cô phụ trách chuyên môn, giảng dạy và hướng dẫn thực tập. Cô đưa bài tập về những việc người mới có thể tự thử, từ cảm nhận bàn chân chạm đất đến nhận ra mình đã mải nghĩ rồi nhẹ nhàng quay lại.' : 'At Hương Thiền Nature she leads teaching and meditation practice. She brings each exercise back to something a beginner can try, from feeling their feet on the ground to noticing a wandering thought and gently returning.'}</p>
+        <a class="quiet-link" href={`${journeyPath(lang, 'story')}#journey`}>{vi ? 'Đọc hành trình của Hương Thiền' : 'Read Hương Thiền’s journey'}</a>
+      </div>
+    </article>
+    <article class="founder-profile zen-card" id="kieu-manh">
+      <div class="founder-photo founder-photo--author"><img src={journalAuthor.image} alt="" width="1152" height="1536" loading="lazy" decoding="async" /></div>
+      <div class="profile-copy">
+        <h3>Kiều Mạnh</h3>
+        <p class="profile-role">{journalAuthor.role[lang]}</p>
+        <p>{journalAuthor.bio[lang]}</p>
+        <p>{vi ? 'Anh đang học làm vườn thuận tự nhiên cùng anh Lê Lam Sơn tại Cư M’gar. Công việc ở vườn giúp anh có thêm chất liệu để viết về việc chăm đất, làm ra thức ăn và sống gần hơn với những gì mình sử dụng mỗi ngày.' : 'He is learning natural farming with Lê Lam Sơn in Cư M’gar. Work in the garden gives him material for writing about soil care, growing food and living closer to what sustains us each day.'}</p>
+        <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Đọc bài viết của Kiều Mạnh' : 'Read Kiều Mạnh’s articles'}</a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="team-group" id="doi-tac" aria-labelledby="partners-title">
+  <h2 id="partners-title">{vi ? 'Cố vấn, đối tác và dự án trực thuộc' : 'Adviser, farming partner and technology project'}</h2>
+  <div class="partner-grid">
+    {partnerProfiles.map(partner => (
+      <article class="partner-card zen-card">
+        {partner.image
+          ? <img class="partner-photo" src={partner.image.src} alt={partner.image[lang]} width={partner.image.width} height={partner.image.height} loading="lazy" decoding="async" />
+          : <div class:list={['partner-photo', 'partner-photo--logo', { 'partner-photo--zen': partner.name === 'ZenWork' }]}><img src={partner.logo} alt={partner.logoLabel} width="112" height="112" loading="lazy" decoding="async" /></div>}
+        <div class="profile-copy">
+          <div class="partner-identity">
+            {partner.image && <img src={partner.logo} alt="" width="48" height="48" loading="lazy" decoding="async" />}
+            <h3>{partner.name}</h3>
+          </div>
+          <p class="profile-role">{partner[lang].role}</p>
+          <p>{partner[lang].bio}</p>
+          <div class="profile-links"><a class="quiet-link" href={partner.site}>{partner.label}</a><a class="photo-credit" href={partner.source}>{vi ? 'Nguồn hình ảnh' : 'Image source'}</a></div>
+        </div>
+      </article>
+    ))}
+  </div>
+</section>

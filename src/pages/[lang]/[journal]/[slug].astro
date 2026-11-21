@@ -2,6 +2,7 @@
 import { articleAnswers } from "../../../data/article-answers";
 import { articlePhotos } from "../../../data/article-photos";
 import AuthorProfile from '../../../components/AuthorProfile.astro';
+import { journeyPath } from '../../../data/journey-pages';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { journalAuthor as author } from '../../../data/people';
 import '../../../styles/editorial.css';
@@ -34,22 +35,17 @@ const schema = {
   '@context': 'https://schema.org', '@type': 'BlogPosting',
   headline: content.title, description: content.description, inLanguage: lang,
   image: new URL(article.image, origin).href,
-  mainEntityOfPage: origin + articlePath(lang, article.slug),
+  mainEntityOfPage: { '@id': origin + articlePath(lang, article.slug) + '#webpage' },
   ...(article.publishedAt ? { datePublished: article.publishedAt } : {}),
   ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
-  author: { '@type': 'Person', name: author.name, image: new URL(author.image, origin).href },
-  publisher: { '@type': 'Organization', name: 'Hương Thiền Nature', url: origin },
+  author: { '@type': 'Person', '@id': origin + '/#kieu-manh', name: author.name, url: origin + journeyPath(lang, 'team') + '#kieu-manh' },
+  publisher: { '@id': origin + '/#organization' },
   ...(article.keywords ? { keywords: article.keywords[lang] } : {}),
 };
 ---
 <BaseLayout lang={lang} title={`${content.title} | Hương Thiền Nature`} description={content.description} alternatePath={alternatePath} image={article.image} ogType="article">
   <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
-  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
-    { '@type': 'ListItem', position: 1, name: t.home, item: `${origin}/${lang}/` },
-    { '@type': 'ListItem', position: 2, name: t.journalHome, item: origin + journalPath(lang) },
-    { '@type': 'ListItem', position: 3, name: content.title, item: origin + articlePath(lang, article.slug) },
-  ] }).replace(/</g, '\\u003c')} />
-  <Header lang={lang} alternatePath={alternatePath} isInnerPage />
+  <Header lang={lang} alternatePath={alternatePath} />
   <main id="main-content" tabindex="-1">
     <article class="article-page">
       <header class="article-header shell">

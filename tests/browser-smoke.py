@@ -52,7 +52,7 @@ with sync_playwright() as p:
     assert toggle.get_attribute('aria-expanded')=='false'
     assert toggle.evaluate('el => el === document.activeElement')
     toggle.click()
-    page.locator('#main-nav a[href="#practice"]').click()
+    page.locator('#main-nav a[href="/vi/thuc-hanh/"]').click()
     assert toggle.get_attribute('aria-expanded')=='false'
     page.evaluate('window.scrollTo(0,0)')
     page.wait_for_timeout(400)
