@@ -1,27 +1,27 @@
 ---
 import Arrow from './Arrow.astro';
+import { contactPath } from '../data/contact-channels';
 import { productPath, productCategories, formatPrice, stockLabel, type Product } from '../data/products';
 import type { Language } from '../data/site';
-const { product, lang, heading = 'h2', compact = false } = Astro.props as { product: Product; lang: Language; heading?: 'h2' | 'h3'; compact?: boolean };
+
+interface Props { product: Product; lang: Language; heading?: 'h2' | 'h3'; compact?: boolean }
+const { product, lang, heading = 'h2', compact = false } = Astro.props;
 const copy = product.translations[lang];
 const Heading = heading;
 const category = productCategories.find(item => item.id === product.category)!;
+const vi = lang === 'vi';
 ---
-<article class="product-card" data-product-card data-category={product.category} data-search={`${copy.name} ${copy.subtitle} ${copy.ingredients} ${category[lang]} ${product.keywords[lang].join(' ')}`}>
-  <a class="product-image" href={productPath(lang, product.slug)} aria-label={copy.name}>
-    <img src={product.image} alt={copy.alt} width={product.width} height={product.height} loading="lazy" decoding="async" />
-
-  </a>
+<article class="product-card zen-card" data-product-card data-category={product.category} data-search={`${copy.name} ${copy.subtitle} ${copy.ingredients} ${category[lang]} ${product.keywords[lang].join(' ')}`}>
+  <div class="product-image"><img src={product.image} alt={copy.alt} width={product.width} height={product.height} loading="lazy" decoding="async" /></div>
   <div class="product-card-copy">
-    <span class="product-category">{category[lang]}</span>
-    <Heading><a href={productPath(lang, product.slug)}>{copy.name}</a></Heading>
-    {!compact && <p class="product-subtitle">{copy.subtitle}</p>}
+    <p class="product-category">{category[lang]}</p>
+    <Heading><a class="product-title" href={productPath(lang, product.slug)}>{copy.name} <Arrow /></a></Heading>
+    <p class="product-subtitle">{copy.subtitle}</p>
     {!compact && <p class="product-unit">{copy.unit}</p>}
-    <p class="product-stock" data-stock-slug={product.slug} data-stock="unknown">{stockLabel('unknown', lang)}</p>
-    <a class="quiet-link stock-inquiry" data-stock-inquiry href={`/${lang}/?product=${product.slug}#connect`}>{lang === 'vi' ? 'Hỏi về sản phẩm này' : 'Ask about this product'}</a>
     <div class="product-card-bottom">
-      <p class="product-price">{!compact && <span>{lang === 'vi' ? 'Giá tham khảo' : 'Demo price'}</span>}<strong>{formatPrice(product.price, lang)}</strong></p>
-      <a class="product-link" href={productPath(lang, product.slug)} aria-label={`${lang === 'vi' ? 'Xem chi tiết' : 'View details'}: ${copy.name}`}>{lang === 'vi' ? 'Chi tiết' : 'Details'} <Arrow /></a>
+      <p class="product-price"><span>{vi ? 'Giá tham khảo' : 'Indicative price'}</span><strong>{formatPrice(product.price, lang)}</strong></p>
+      <p class="product-stock" data-stock-slug={product.slug} data-stock="unknown">{stockLabel('unknown', lang)}</p>
+      <a class="quiet-link stock-inquiry" data-stock-inquiry href={`${contactPath(lang)}?product=${product.slug}#connect`} aria-label={vi ? `Hỏi về ${copy.name}` : `Ask about ${copy.name}`}>{vi ? 'Hỏi về sản phẩm' : 'Ask about this product'}</a>
     </div>
   </div>
 </article>

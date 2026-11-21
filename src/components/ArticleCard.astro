@@ -1,0 +1,27 @@
+---
+import { articlePath, type Article } from '../data/articles';
+import { articlePhotos } from '../data/article-photos';
+import { getCopy, type Language } from '../data/site';
+
+interface Props {
+  article: Article;
+  lang: Language;
+  heading?: 'h2' | 'h3';
+  featured?: boolean;
+}
+const { article, lang, heading = 'h3', featured = false } = Astro.props;
+const Heading = heading;
+const content = article.translations[lang];
+const photo = articlePhotos[article.image];
+const minutes = lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes;
+---
+<article class:list={['journal-card', 'zen-card', { 'journal-card--featured': featured }]}>
+  <div class="journal-image">
+    <img src={article.image} alt={content.imageAlt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+  </div>
+  <div class="journal-card-copy">
+    <p class="article-meta"><span>{article.phase === 'roots' ? 'Roots · ' : ''}{content.category}</span><span>{minutes} {getCopy(lang).readTime}</span></p>
+    <Heading><a href={articlePath(lang, article.slug)}>{content.title}</a></Heading>
+    <p class="journal-card-description">{content.description}</p>
+  </div>
+</article>

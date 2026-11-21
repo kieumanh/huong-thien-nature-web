@@ -1,0 +1,71 @@
+:root {
+  --forest: #243f32;
+  --moss: #526747;
+  --leaf: #536c4c;
+  --sage: #e8ebdf;
+  --paper: #faf8f1;
+  --cream: #f2eedf;
+  --clay: #8b523d;
+  --ink-soft: #586557;
+  --sun: #7a5a30;
+  --sand: #ddd5bf;
+
+  --primary: var(--forest);
+  --primary-hover: #365544;
+  --secondary: var(--moss);
+  --surface: var(--paper);
+  --surface-container: var(--sage);
+  --surface-raised: #fffdf7;
+  --surface-warm: var(--cream);
+  --foreground: var(--forest);
+  --muted: var(--ink-soft);
+  --border: #bdc5b5;
+  --border-control: #7e8a7b;
+  --focus: var(--sun);
+  --success: #2b5741;
+  --success-surface: #e1f0e5;
+  --warning: #6b4c22;
+  --warning-surface: #f3e8ce;
+  --error: #7c392c;
+  --error-surface: #f4e5df;
+
+  --ink: var(--foreground);
+  --line: var(--border);
+  --brand-fern: #dce8d8;
+  --brand-clay: var(--clay);
+  --brand-rice: var(--surface-warm);
+  --serif: Georgia, "Noto Serif", "Times New Roman", serif;
+  --sans: system-ui, "Segoe UI", "Noto Sans", Arial, sans-serif;
+  --type-display: clamp(2.65rem, 5.5vw, 5rem);
+  --type-page: clamp(2.05rem, 5vw, 4rem);
+  --type-section: clamp(1.65rem, 3.3vw, 3rem);
+  --type-card: clamp(1.17rem, 2.15vw, 1.55rem);
+  --type-body-large: clamp(1.055rem, 1.5vw, 1.18rem);
+  --type-body: 1rem;
+  --type-caption: .85rem;
+  --type-label: .875rem;
+
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-section: clamp(2.5rem, 6vw, 5.5rem);
+  --site-gutter: clamp(1rem, 3.4vw, 2.5rem);
+  --site-width: 75rem;
+  --reading-width: 43rem;
+
+  --radius-pill: 999px;
+  --radius-input: 14px;
+  --radius-card: 20px;
+  --radius-feature: 28px;
+  --radius-floating: 16px;
+  --shadow-card: 0 6px 24px #243f3210;
+  --shadow-floating: 0 2px 6px #243f3226, 0 6px 16px #243f321f;
+  --control-size: 48px;
+  --motion-fast: 160ms;
+  --motion-ease: cubic-bezier(.2, .65, .3, 1);
+  --header-offset: 90px;
+}

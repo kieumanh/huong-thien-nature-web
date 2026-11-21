@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
+import Breadcrumb from '../../../components/Breadcrumb.astro';
 import Footer from '../../../components/Footer.astro';
 import { releaseTitle, releases, releasesPath } from '../../../data/releases';
-import { getCopy, languages, type Language } from '../../../data/site';
+import { languages, type Language } from '../../../data/site';
 
 export function getStaticPaths() {
   return languages.map(lang => ({ params: { lang, versions: releasesPath(lang).split('/')[2] } }));
@@ -24,11 +25,7 @@ const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', {
   <Header {lang} {alternatePath} isInnerPage />
   <main id="main-content" class="shell versions-page" tabindex="-1">
     <header class="versions-header">
-      <nav class="breadcrumbs" aria-label={vi ? 'Đường dẫn' : 'Breadcrumb'}>
-        <a href={`/${lang}/`}>{getCopy(lang).home}</a>
-        <span aria-hidden="true">/</span>
-        <span aria-current="page">{title}</span>
-      </nav>
+      <Breadcrumb {lang} current={title} />
       <h1>{title}</h1>
       <p class="lead">{description}</p>
     </header>
@@ -82,8 +79,8 @@ const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', {
     background: var(--moss);
   }
   .release-timeline > .release-current::after { background: var(--forest); box-shadow: 0 0 0 2px #a1b4a1; }
-  .release-entry { border: 1px solid var(--line); border-radius: 1.2rem; padding: clamp(1rem, 3vw, 1.5rem); background: #fffef9; }
-  .release-current .release-entry { border-color: #9fb59e; background: #e7efe3; }
+  .release-entry { border: 1px solid var(--line); border-radius: var(--radius-card); padding: clamp(1rem, 3vw, 1.5rem); background: var(--surface-raised); }
+  .release-current .release-entry { border-color: #9fb59e; background: var(--surface-container); }
   .release-meta { display: flex; flex-wrap: wrap; gap: .35rem .9rem; align-items: center; margin-bottom: .5rem; font-size: .85rem; color: var(--ink-soft); }
   .release-version { color: var(--forest); font-weight: 700; font-variant-numeric: tabular-nums; }
   .release-status { padding: .12rem .6rem; border-radius: 999px; background: var(--forest); color: var(--paper); font-weight: 600; }

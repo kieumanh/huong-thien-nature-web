@@ -15,6 +15,8 @@ jobs:
       ASTRO_TELEMETRY_DISABLED: '1'
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '24'
@@ -38,11 +40,68 @@ jobs:
           WRANGLER_SEND_METRICS: 'false'
       - run: python -m pip install playwright
       - run: python -m playwright install --with-deps chromium
-      - name: Verify mobile navigation and keyboard controls
+      - name: Install browser audit tools
+        run: npm install --prefix "$RUNNER_TEMP/zen-qa" --no-audit --no-fund axe-core@4.10.3 lighthouse@12.8.2
+      - name: Prepare the baseline checkout
+        if: github.event_name == 'pull_request'
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
         run: |
+          git worktree add --detach "$RUNNER_TEMP/zen-baseline" "$BASE_SHA"
+          ln -s "$PWD/node_modules" "$RUNNER_TEMP/zen-baseline/node_modules"
+          npm --prefix "$RUNNER_TEMP/zen-baseline" run build
+      - name: Verify bilingual interaction, responsive layouts and accessibility
+        env:
+          APP_BASE_URL: http://127.0.0.1:4321
+          BASELINE_URL: http://127.0.0.1:4322
+        run: |
+          export ROOTS_ARTIFACT_DIR="$RUNNER_TEMP/zen-evidence"
+          export AXE_PATH="$RUNNER_TEMP/zen-qa/node_modules/axe-core/axe.min.js"
+          export CHROMIUM_EXECUTABLE="$(python -c 'from playwright.sync_api import sync_playwright; p = sync_playwright().start(); print(p.chromium.executable_path); p.stop()')"
           npm run preview -- --host 127.0.0.1 --port 4321 &
-          for attempt in {1..30}; do
-            if curl -fsS http://127.0.0.1:4321/vi/ >/dev/null; then break; fi
-            sleep 1
+          if [ -d "$RUNNER_TEMP/zen-baseline/dist" ]; then
+            npm --prefix "$RUNNER_TEMP/zen-baseline" run preview -- --host 127.0.0.1 --port 4322 &
+          else
+            unset BASELINE_URL
+          fi
+          for server in "$APP_BASE_URL" ${BASELINE_URL:-}; do
+            for attempt in {1..30}; do
+              if curl -fsS "$server/vi/" >/dev/null; then break; fi
+              sleep 1
+            done
+            curl -fsS "$server/vi/" >/dev/null
           done
-          APP_BASE_URL=http://127.0.0.1:4321 python tests/navigation-controls-browser.py
+          python tests/zen-botanical-browser.py
+          python tests/navigation-controls-browser.py
+          python tests/contact-browser.py
+          python tests/music-browser.py
+          for label in candidate baseline; do
+            if [ "$label" = "baseline" ] && [ -z "${BASELINE_URL:-}" ]; then continue; fi
+            server="$APP_BASE_URL"
+            if [ "$label" = "baseline" ]; then server="$BASELINE_URL"; fi
+            for page in home article; do
+              path=/vi/
+              if [ "$page" = "article" ]; then path=/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/; fi
+              CHROME_PATH="$CHROMIUM_EXECUTABLE" "$RUNNER_TEMP/zen-qa/node_modules/.bin/lighthouse" "$server$path" \
+                --quiet --only-categories=performance,accessibility,seo --output=json \
+                --output-path="$ROOTS_ARTIFACT_DIR/lighthouse-$label-$page.json" \
+                --chrome-flags="--headless --no-sandbox --disable-dev-shm-usage"
+            done
+          done
+          python - <<'PYTHON'
+          import json, os
+          from pathlib import Path
+          for path in sorted(Path(os.environ['ROOTS_ARTIFACT_DIR']).glob('lighthouse-*.json')):
+              result = json.loads(path.read_text())
+              scores = ', '.join(f"{category['id']}={round(category['score'] * 100)}"
+                                for category in result['categories'].values())
+              timings = ', '.join(f"{key}={result['audits'][key]['numericValue']:.2f}"
+                                  for key in ['largest-contentful-paint', 'total-blocking-time', 'cumulative-layout-shift'])
+              print(f'{path.name}: {scores}, {timings}')
+          PYTHON
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: zen-botanical-browser
+          path: ${{ runner.temp }}/zen-evidence
+          if-no-files-found: ignore

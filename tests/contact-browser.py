@@ -54,7 +54,7 @@ with sync_playwright() as p:
         payloads.append(route.request.post_data_json)
     page.route('**/api/contact',capture)
     for lang in ['vi','en']:
-        page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
+        page.goto(base+('/vi/lien-he/' if lang == 'vi' else '/en/contact/'), wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('#name').disabled")
         assert page.locator('#name').input_value()==''
         assert not page.locator('#interest-form button[type="submit"]').is_disabled()
@@ -93,7 +93,7 @@ with sync_playwright() as p:
             assert page.locator('#form-result').get_attribute('data-kind')=='success'
             assert page.locator('#form-result').inner_text()==accepted
         report.append(lang+': valid submission, consent, duplicate prevention and success reset; widget expiry/errors preserve pending and accepted states')
-    page.goto(base+'/vi/',wait_until='domcontentloaded')
+    page.goto(base+'/vi/lien-he/',wait_until='domcontentloaded')
     fill(page)
     page.locator('#interest-form button[type="submit"]').click()
     assert len(pending)==1
@@ -129,20 +129,20 @@ with sync_playwright() as p:
     unavailable=context.new_page()
     configure(unavailable,False)
     for lang in ['vi','en']:
-        unavailable.goto(base+'/'+lang+'/',wait_until='domcontentloaded')
+        unavailable.goto(base+('/vi/lien-he/' if lang == 'vi' else '/en/contact/'),wait_until='domcontentloaded')
         unavailable.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
         assert unavailable.locator('#name').is_enabled()
         assert unavailable.locator('#interest-form button[type="submit"]').is_disabled()
-        assert unavailable.locator('a[href^="mailto:"]').count()==0
+        assert unavailable.locator('a[href^="mailto:"]').count()==1
         assert unavailable.locator('[data-gmail]').count()==0
     configure(unavailable,True)
-    unavailable.goto(base+'/vi/',wait_until='domcontentloaded')
+    unavailable.goto(base+'/vi/lien-he/',wait_until='domcontentloaded')
     fill(unavailable)
     unavailable.route('**/api/contact', lambda route: route.fulfill(status=503,content_type='application/json',body='{"ok":false,"code":"unavailable"}'))
     unavailable.locator('#interest-form button[type="submit"]').click()
     unavailable.wait_for_function("document.querySelector('#form-result').dataset.kind === 'error'")
     assert unavailable.locator('#message').input_value().startswith('Tôi muốn')
-    report.append('Unavailable service keeps message text, displays an error and never offers email drafting')
+    report.append('Unavailable service preserves message text and shows an error. The direct email link remains separate from submission.')
     assert errors==[],errors
     report.append('No JavaScript page errors')
     browser.close()

@@ -14,6 +14,8 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
     <>
       <img
         src={motif === 'meditation' ? '/media/meditation-forest.webp' : '/media/yoga-tree-pose.webp'}
+        srcset={motif === 'meditation' ? '/media/meditation-forest-480.webp 480w, /media/meditation-forest-800.webp 800w, /media/meditation-forest.webp 1500w' : undefined}
+        sizes={motif === 'meditation' ? '(max-width: 759px) 94vw, (max-width: 1300px) 47vw, 610px' : undefined}
         alt=""
         width={motif === 'meditation' ? 1500 : 1080}
         height={motif === 'meditation' ? 1000 : 678}

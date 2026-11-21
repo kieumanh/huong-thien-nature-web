@@ -9,7 +9,7 @@ const { lang, alternatePath, isInnerPage = false } = Astro.props as {
 };
 const t = getCopy(lang);
 const sections = [
-  ['practice', t.nav[1]], ['journal', t.nav[4]], ['nature', lang === 'vi' ? 'Hệ sinh thái' : 'Ecosystem'], ['story', t.nav[0]],
+  ['practice', t.nav[1]], ['nature', lang === 'vi' ? 'Hệ sinh thái' : 'Ecosystem'], ['journal', t.nav[4]], ['story', t.nav[0]],
 ];
 const journalPath = journalUrl(lang);
 const sectionHref = (section: string) => section === 'journal' ? journalPath : isInnerPage ? `/${lang}/#${section}` : `#${section}`;
@@ -24,18 +24,17 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
     <nav class="nav-links" id="main-nav" aria-label={lang === 'vi' ? 'Điều hướng chính' : 'Main navigation'}>
       {sections.map(([section, label]) => <a href={sectionHref(section)} class:list={{ active: section === 'journal' && Astro.url.pathname.startsWith(journalPath) }} aria-current={section === 'journal' && Astro.url.pathname === journalPath ? 'page' : undefined}>{label}</a>)}
       <a href={shopPath(lang)} class:list={{ active: Astro.url.pathname.startsWith(shopPath(lang)) }} aria-current={Astro.url.pathname === shopPath(lang) ? 'page' : undefined}>{lang === 'vi' ? 'Cửa hàng' : 'Shop'}</a>
-      <a class="nav-contact-mobile" href={contactPath(lang)}>{lang === "vi" ? "Liên hệ" : "Contact"}</a>
+      <a class="nav-contact-mobile" href={contactPath(lang)} aria-current={Astro.url.pathname === contactPath(lang) ? 'page' : undefined}>{lang === "vi" ? "Liên hệ" : "Contact"}</a>
     </nav>
     <div class="nav-actions">
       <a class="nav-search" href={lang === 'vi' ? '/vi/timkiem/' : '/en/search/'} aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'} title={lang === 'vi' ? 'Tìm kiếm' : 'Search'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
       <nav class="language" aria-label={lang === 'vi' ? 'Ngôn ngữ' : 'Language'}>
-        <a class={lang === 'vi' ? 'active' : ''} aria-current={lang === 'vi' ? 'page' : undefined} href={lang === 'vi' ? undefined : alternatePath} lang="vi" aria-label="Tiếng Việt">VI</a>
-        <span aria-hidden="true">/</span>
-        <a class={lang === 'en' ? 'active' : ''} aria-current={lang === 'en' ? 'page' : undefined} href={lang === 'en' ? undefined : alternatePath} lang="en" aria-label="English">EN</a>
+        {lang === 'vi' ? <span class="active" aria-current="true" lang="vi"><span class="sr-only">Tiếng Việt</span><span aria-hidden="true">VI</span></span> : <a href={alternatePath} hreflang="vi" lang="vi" aria-label="Tiếng Việt">VI</a>}
+        {lang === 'en' ? <span class="active" aria-current="true" lang="en"><span class="sr-only">English</span><span aria-hidden="true">EN</span></span> : <a href={alternatePath} hreflang="en" lang="en" aria-label="English">EN</a>}
       </nav>
       <a class="nav-connect" href={contactPath(lang)} aria-current={Astro.url.pathname === contactPath(lang) ? 'page' : undefined}>{lang === 'vi' ? 'Liên hệ' : 'Contact'} <Arrow /></a>
       <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="main-nav" aria-label={lang === 'vi' ? 'Mở điều hướng' : 'Open navigation'} data-open-label={lang === 'vi' ? 'Mở điều hướng' : 'Open navigation'} data-close-label={lang === 'vi' ? 'Đóng điều hướng' : 'Close navigation'}>
-        <span aria-hidden="true"></span><span aria-hidden="true"></span>
+        <svg class="nav-icon-open" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 8h16M4 16h16" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" /></svg><svg class="nav-icon-close" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" /></svg>
       </button>
     </div>
   </div>
@@ -49,7 +48,11 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
       button.setAttribute('aria-expanded', String(open));
       button.setAttribute('aria-label', (open ? button.dataset.closeLabel : button.dataset.openLabel) || 'Menu');
     };
-    button.addEventListener('click', () => setOpen(button.getAttribute('aria-expanded') !== 'true'));
+    button.addEventListener('click', () => {
+      const open = button.getAttribute('aria-expanded') !== 'true';
+      setOpen(open);
+      if (open) menu.querySelector('a')?.focus();
+    });
     menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => setOpen(false)));
     document.addEventListener('keydown', event => {
       if (event.key === 'Escape' && button.getAttribute('aria-expanded') === 'true') {
@@ -60,7 +63,7 @@ const sectionHref = (section: string) => section === 'journal' ? journalPath : i
     document.addEventListener('click', event => {
       if (event.target instanceof Node && !menu.contains(event.target) && !button.contains(event.target)) setOpen(false);
     });
-    matchMedia('(min-width: 1241px)').addEventListener('change', event => {
+    matchMedia('(min-width: 1100px)').addEventListener('change', event => {
       if (event.matches) setOpen(false);
     });
     document.documentElement.classList.add('js');
