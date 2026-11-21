@@ -33,13 +33,13 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
         <h1>{title}</h1>
         <p class="lead">{description}</p>
       </div>
-      <details class="material-details roots-reading-path">
-        <summary>{en ? 'Roots · Where to start' : 'Roots · Lộ trình cho người mới'}</summary>
-        <div class="disclosure-body">
+      <section class="reading-section roots-reading-path">
+        <h2 class="reading-heading">{en ? 'Roots · Where to start' : 'Roots · Lộ trình cho người mới'}</h2>
+        <div class="reading-links">
           <p>{en ? 'Read these four guides in order, from your first sitting to bringing attention into everyday activities.' : 'Bốn bài theo thứ tự, từ lần đầu ngồi thiền đến khi mang sự chú tâm vào công việc hằng ngày.'}</p>
           <nav aria-label={en ? 'Suggested reading path' : 'Lộ trình đọc gợi ý'}><ol>{readingPath.map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol></nav>
         </div>
-      </details>
+      </section>
     </header>
     <section class="shell journal-listing-articles" id="journal-articles" aria-labelledby="journal-articles-title">
       <div class="section-heading">

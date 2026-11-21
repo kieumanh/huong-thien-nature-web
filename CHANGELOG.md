@@ -1,3 +1,9 @@
+## 2.2.1 — Đọc liền mạch
+
+- Mở các mục nội dung VI/EN, giữ nguyên văn bản và liên kết.
+- Dành đủ không gian cho hành tinh, ảnh và menu trên màn hình hẹp. Quỹ đạo tự xoay trong vùng nhìn và có điều khiển tạm dừng.
+- Dùng ảnh Hương Thiền bên hồ cho thẻ chia sẻ trang chủ, định dạng JPEG 1200 × 630.
+
 ## 2.2.0 — Zen Botanical
 
 - Làm mới trang chủ VI/EN, đặt Thân, Tâm và Trí ngay sau phần mở đầu. Giữ bản đồ quỹ đạo, câu chuyện đầy đủ, album và các liên kết sâu.

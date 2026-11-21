@@ -47,7 +47,7 @@
 }
 .article-meta > :first-child { font-weight: 680; }
 .article-meta > :not(:first-child) { color: var(--muted); }
-.roots-reading-path { max-width: 58rem; background: var(--surface-warm); }
+.roots-reading-path { max-width: 58rem; padding-block-start: 1rem; border-top: 1px solid var(--border); }
 .roots-reading-path p { max-width: 60ch; color: var(--muted); }
 .roots-reading-path ol { list-style: decimal; margin: .55rem 0 0; padding-inline-start: 1.3rem; }
 .roots-reading-path li + li { margin-top: .4rem; }

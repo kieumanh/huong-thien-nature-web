@@ -4,7 +4,10 @@ import { contactEmail, internationalPhone } from '../data/contact-channels';
 import BackgroundMusic from '../components/BackgroundMusic.astro';
 import BackToTop from '../components/BackToTop.astro';
 import { version } from '../../package.json';
-const { lang = 'vi', title, description, alternatePath, image = '/media/huong-ben-ho.webp', ogType = 'website', noindex = false } = Astro.props;
+const brandImage = '/media/huong-thien-ben-ho-social.jpg';
+const { lang = 'vi', title, description, alternatePath, image = brandImage, ogType = 'website', noindex = false } = Astro.props;
+const imageUrl = new URL(image, 'https://huongthiennature.com').href;
+const brandAlt = lang === 'vi' ? 'Hương Thiền mỉm cười, hai tay tạo hình trái tim bên hồ dưới chân núi.' : 'Hương Thiền smiling by a mountain lake, making a heart with her hands.';
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
   ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const url = new URL(pathname, 'https://huongthiennature.com');
@@ -33,13 +36,20 @@ const siteName = 'Hương Thiền Nature';
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={url.href} />
-    <meta property="og:image" content={new URL(image, 'https://huongthiennature.com').href} />
+    <meta property="og:image" content={imageUrl} />
+    {image === brandImage && <>
+      <meta property="og:image:type" content="image/jpeg" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
+      <meta property="og:image:alt" content={brandAlt} />
+      <meta name="twitter:image:alt" content={brandAlt} />
+    </>}
     {alternatePath && <meta property="og:locale:alternate" content={lang === 'vi' ? 'en_US' : 'vi_VN'} />}
     <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={new URL(image, 'https://huongthiennature.com').href} />
+    <meta name="twitter:image" content={imageUrl} />
     <link rel="icon" type="image/webp" href="/media/huong-thien-logo-forest.webp" />
     <title>{title}</title>
     <script type="application/ld+json" set:html={JSON.stringify({
