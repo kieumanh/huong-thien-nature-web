@@ -95,12 +95,13 @@ def check_flows(browser):
     expect(page.locator('#practice h2')).to_be_visible()
     expect(page.locator('[data-orbit-toggle]')).to_be_hidden()
     wait_page(page, base + '/vi/#journey-learning')
-    expect(page.locator('#journey')).to_have_attribute('open', '')
+    expect(page.locator('#journey-learning')).to_be_attached()
+    expect(page.locator('.journey-chapters li').last).to_be_visible()
+    expect(page.locator('main details')).to_have_count(0)
     report['passes'].append('Keyboard opens/closes navigation, skip link transfers focus, practice CTA and legacy journey fragment work.')
 
     for lang, entries in routes.items():
         wait_page(page, base + entries['article'])
-        page.locator('.article-toc summary').click()
         page.locator('.article-toc a').first.click()
         assert urlsplit(page.url).fragment == 'section-1'
         expect(page.locator('#article-author h2')).to_have_text('Kiều Mạnh')
@@ -149,9 +150,19 @@ def check_flows(browser):
     page.set_viewport_size({'width': 1440, 'height': 900})
     page.emulate_media(reduced_motion='no-preference')
     wait_page(page, base + routes['vi']['home'])
-    scene = page.locator('.ecosystem-visual')
-    expect(page.locator('[data-ecosystem]')).to_have_class('ecosystem-motion')
-    scene.locator('summary').click()
+    for width in widths:
+        page.set_viewport_size({'width': width, 'height': 900})
+        scene = page.locator('.solar-system-scene')
+        scene.scroll_into_view_if_needed()
+        page.wait_for_function("getComputedStyle(document.querySelector('.solar-orbit')).animationPlayState === 'running'")
+        assert scene.evaluate("""el => {
+          const bounds = el.getBoundingClientRect();
+          return [...el.querySelectorAll('.solar-orbit')].every(orbit => {
+            const planet = orbit.querySelector('.solar-planet');
+            return orbit.offsetWidth + planet.offsetWidth <= bounds.width + 1;
+          });
+        }"""), ('orbit exceeds its frame', width)
+    expect(page.locator('main details')).to_have_count(0)
     page.locator('.solar-system-scene').scroll_into_view_if_needed()
     expect(page.locator('[data-ecosystem]')).to_have_class('ecosystem-motion ecosystem-active')
     page.locator('[data-orbit-toggle]').click()
@@ -173,7 +184,6 @@ def check_no_script(browser):
         page.locator('#main-nav a[href="#practice"]').click()
         expect(page.locator('#practice h2')).to_be_visible()
         wait_page(page, base + entries['article'])
-        page.locator('.article-toc summary').click()
         expect(page.locator('.article-toc a').first).to_be_visible()
         wait_page(page, base + entries['shop'])
         expect(page.locator('[data-product-card]')).to_have_count(8)

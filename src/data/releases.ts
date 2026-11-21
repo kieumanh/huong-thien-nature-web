@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.2.1',
+    date: '2026-11-21',
+    vi: ['Đọc liền mạch', 'Mở toàn bộ hành trình, album và mục lục. Ba quỹ đạo tự xoay khi hiện trên màn hình. Trang chủ có ảnh chia sẻ Hương Thiền bên hồ.'],
+    en: ['An uninterrupted read', 'Opened the story, galleries and reading guides. The three orbits now turn when in view. Shared homepage links feature Hương Thiền by the lake.'],
+  },
+  {
     version: '2.2.0',
     date: '2026-11-21',
     vi: ['Zen Botanical', 'Làm mới trang chủ quanh Thân, Tâm và Trí. Đồng bộ trải nghiệm đọc, Cửa hàng và Liên hệ, bổ sung ảnh đáp ứng cho đầu trang và chỉnh điều khiển nổi trên điện thoại.'],

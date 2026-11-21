@@ -67,12 +67,12 @@ const schema = {
       <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
       <div class="article-body">
         <p class="article-introduction">{content.introduction}</p>
-        {content.sections.length >= 3 && <details class="article-toc material-details">
-          <summary>{vi ? 'Mục lục bài viết' : 'In this article'}</summary>
-          <nav class="disclosure-body" aria-label={vi ? 'Mục lục bài viết' : 'Article contents'}>
+        {content.sections.length >= 3 && <section class="article-toc reading-section">
+          <h2 class="reading-heading">{vi ? 'Mục lục bài viết' : 'In this article'}</h2>
+          <nav class="reading-links" aria-label={vi ? 'Mục lục bài viết' : 'Article contents'}>
             <ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol>
           </nav>
-        </details>}
+        </section>}
         {content.sections.map((section, index) => <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>

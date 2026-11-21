@@ -71,14 +71,14 @@ const directionsCards = t.natureCards.map(([name], index) => [name, directions[i
         </div>
         <EcosystemOrbit lang={lang} cards={directionsCards} images={natureImages} links={ecosystemLinks} />
         <p class="material-ecosystem__note">{en ? 'The shop is available to browse. Eco-Retreat, Academy and the membership programme are not open for registration.' : 'Bạn có thể xem sản phẩm trong Cửa hàng. Eco-Retreat, Academy và chương trình thành viên chưa mở đăng ký.'}</p>
-        <details class="material-details ecosystem-photos">
-          <summary>{en ? 'Photographs from nature and everyday life' : 'Ảnh thiên nhiên và đời sống'}</summary>
+        <section class="reading-section ecosystem-photos">
+          <h3 class="reading-heading">{en ? 'Photographs from nature and everyday life' : 'Ảnh thiên nhiên và đời sống'}</h3>
           <div class="nature-photos">
             <figure class="nature-photos__outdoor-kitchen"><HomePhoto photo="outdoor-kitchen" {lang} /><figcaption>{en ? 'Preparing a meal outdoors' : 'Sửa soạn bữa ăn bên bếp củi'}</figcaption></figure>
             <figure><HomePhoto photo="together-by-sea" {lang} /><figcaption>{en ? 'A moment together by the sea' : 'Một khoảnh khắc bên nhau ngoài biển'}</figcaption></figure>
           </div>
           <RiceLandscapes lang={lang} />
-        </details>
+        </section>
       </div>
     </section>
 
@@ -125,27 +125,15 @@ const directionsCards = t.natureCards.map(([name], index) => [name, directions[i
         <div><h2 id="connect-title">{t.contactTitle}</h2><p>{en ? 'Write to us about practice, the shop or upcoming activities.' : 'Bạn có thể hỏi về việc thực tập, sản phẩm hoặc những hoạt động sắp tới.'}</p></div>
         <a class="button" href={contactPath(lang)}>{en ? 'Contact us' : 'Liên hệ'} <Arrow /></a>
       </div>
-      <details class="material-details" id="path">
-        <summary>{t.phasesTitle}</summary>
-        <dl class="material-roadmap disclosure-body">{t.phases.map(([, title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
-      </details>
-      <details class="material-details">
-        <summary>{en ? 'What can I join right now?' : 'Hiện tại mình có thể tham gia gì?'}</summary>
-        <p class="disclosure-body">{en ? 'You can read the bilingual journal, try the introductory practices and browse the shop. Course and retreat dates will be announced when available.' : 'Bạn có thể đọc Tản văn, thử các bài thiền nhập môn và ghé Cửa hàng. Khóa học và kỳ nghỉ thực tập sẽ được thông báo khi có lịch.'}</p>
-      </details>
+      <section class="reading-section" id="path">
+        <h3 class="reading-heading">{t.phasesTitle}</h3>
+        <dl class="material-roadmap reading-links">{t.phases.map(([, title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
+      </section>
+      <section class="reading-section">
+        <h3 class="reading-heading">{en ? 'What can I join right now?' : 'Hiện tại mình có thể tham gia gì?'}</h3>
+        <p class="reading-links">{en ? 'You can read the bilingual journal, try the introductory practices and browse the shop. Course and retreat dates will be announced when available.' : 'Bạn có thể đọc Tản văn, thử các bài thiền nhập môn và ghé Cửa hàng. Khóa học và kỳ nghỉ thực tập sẽ được thông báo khi có lịch.'}</p>
+      </section>
     </section>
   </main>
   <Footer lang={lang} />
-  <script>
-    const openSection = () => {
-      const target = document.getElementById(location.hash.slice(1));
-      if (!target) return;
-      for (let element: HTMLElement | null = target; element; element = element.parentElement) {
-        if (element instanceof HTMLDetailsElement) element.open = true;
-      }
-      target.scrollIntoView();
-    };
-    window.addEventListener('hashchange', openSection);
-    openSection();
-  </script>
 </BaseLayout>

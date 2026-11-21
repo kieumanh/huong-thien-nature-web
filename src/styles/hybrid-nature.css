@@ -1,10 +1,10 @@
 .ecosystem-solar-system { max-width: 620px; margin: 42px auto 54px; text-align: center; }
-.solar-system-scene { position: relative; width: min(100%, 560px); aspect-ratio: 1; margin-inline: auto; isolation: isolate; }
+.solar-system-scene { position: relative; width: min(100%, 560px); container-type: inline-size; aspect-ratio: 1; margin-inline: auto; isolation: isolate; }
 .solar-system-starfield { position: absolute; inset: 0; border-radius: 50%; background: radial-gradient(circle, #e4dfc1, transparent 66%); }
 .solar-orbit { position: absolute; top: 50%; left: 50%; width: var(--orbit-size); aspect-ratio: 1; border-radius: 50%; transform: translate(-50%,-50%) rotate(var(--origin-angle)); animation: solar-revolve var(--orbit-duration) linear infinite; animation-delay: var(--orbit-delay); }
-.solar-orbit--1 { --orbit-size: 46%; --planet-size: 58px; }
-.solar-orbit--2 { --orbit-size: 72%; --planet-size: 70px; }
-.solar-orbit--3 { --orbit-size: 98%; --planet-size: 80px; }
+.solar-orbit--1 { --orbit-size: 41%; --planet-size: min(12cqi, 58px); }
+.solar-orbit--2 { --orbit-size: 62%; --planet-size: min(14cqi, 70px); }
+.solar-orbit--3 { --orbit-size: 81%; --planet-size: min(16cqi, 80px); }
 .solar-orbit-line { position: absolute; inset: 0; border: 1px solid #9ca88f; border-radius: 50%; }
 .solar-planet-counter { position: absolute; top: 0; left: 50%; width: var(--planet-size); height: var(--planet-size); transform: translate(-50%,-50%) rotate(calc(-1 * var(--origin-angle))); animation: solar-counter-revolve var(--orbit-duration) linear infinite; animation-delay: var(--orbit-delay); }
 .solar-planet { position: relative; display: grid; place-items: center; width: 100%; height: 100%; overflow: hidden; border: 1px solid rgba(255,250,235,.7); border-radius: 50%; box-shadow: 0 0 0 5px rgba(245,239,214,.08), 0 10px 30px rgba(9,25,17,.32); background: #304c39; }
@@ -13,7 +13,7 @@
 .solar-planet span { position: relative; z-index: 1; padding: 3px 6px; color: #fffdf2; background: rgba(26,49,37,.72); border-radius: 20px; font: 600 .55rem/1.2 var(--sans); letter-spacing: .09em; }
 .solar-planet--2 { background: #697a59; }
 .solar-planet--3 { background: #84745c; }
-.solar-sun { position: absolute; top: 50%; left: 50%; display: grid; place-content: center; gap: 3px; width: clamp(86px,18vw,132px); aspect-ratio: 1; transform: translate(-50%,-50%); border: 1px solid rgba(248,225,163,.86); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f6df9d, #d9ae62 54%, #ac7540); color: #3b3322; box-shadow: 0 0 24px rgba(238,207,132,.45),0 0 74px rgba(238,207,132,.2); font: 600 clamp(.68rem,1.8vw,.9rem)/1.3 var(--serif); }
+.solar-sun { position: absolute; top: 50%; left: 50%; display: grid; place-content: center; gap: 3px; width: min(24cqi, 122px); aspect-ratio: 1; transform: translate(-50%,-50%); border: 1px solid rgba(248,225,163,.86); border-radius: 50%; background: radial-gradient(circle at 35% 30%, #f6df9d, #d9ae62 54%, #ac7540); color: #3b3322; box-shadow: 0 0 24px rgba(238,207,132,.45),0 0 74px rgba(238,207,132,.2); font: 600 clamp(.68rem,1.8vw,.9rem)/1.3 var(--serif); }
 .solar-sun__symbol { color: #fff9e4; font-size: 1.1rem; line-height: 1; }
 .solar-system-caption { max-width: 50ch; margin: 16px auto 0; color: #d6ddcc; font: italic .95rem/1.7 var(--serif); }
 .solar-system-pillars { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(18px,3vw,40px); margin-top: 28px; }
@@ -28,17 +28,9 @@
 .ecosystem-active .solar-orbit, .ecosystem-active .solar-planet-counter { animation-play-state: running; }
 @media (max-width:760px) {
   .ecosystem-solar-system { margin-block: 28px 38px; }
-  .ecosystem-controls button { display: none; }
-  .ecosystem-motion .solar-orbit,
-  .ecosystem-motion .solar-planet-counter { animation-play-state: paused; }
   .solar-system-pillars { grid-template-columns: 1fr; gap: 24px; }
   .solar-pillar { padding-top: 16px; }
   .solar-pillar h3 { min-height: 0; }
-}
-@media (max-width:380px) {
-  .solar-orbit--1 { --planet-size: 50px; }
-  .solar-orbit--2 { --planet-size: 58px; }
-  .solar-orbit--3 { --planet-size: 64px; }
 }
 @media (prefers-reduced-motion: reduce) { .solar-orbit, .solar-planet-counter { animation: none !important; } }
 .ecosystem-status { width: fit-content; margin: .22rem 0; padding: .15rem .55rem; border-radius: var(--radius-pill); background: var(--warning-surface); color: var(--warning); font-size: .75rem; font-weight: 650; }
