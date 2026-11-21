@@ -1,6 +1,7 @@
 ---
 import { articleAnswers } from "../../../data/article-answers";
 import { articlePhotos } from "../../../data/article-photos";
+import { articleIllustrations } from '../../../data/editorial-illustrations';
 import AuthorProfile from '../../../components/AuthorProfile.astro';
 import { journeyPath } from '../../../data/journey-pages';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
@@ -27,6 +28,7 @@ const related = article.relatedSlugs
   ? article.relatedSlugs.map(slug => articles.find(item => item.slug === slug)).filter((item): item is Article => Boolean(item) && item?.slug !== article.slug).slice(0, 3)
   : articles.filter(item => item.slug !== article.slug).slice(0, 3);
 const vi = lang === 'vi';
+const illustration = vi ? articleIllustrations[article.slug] : undefined;
 const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', { dateStyle: 'long', timeZone: 'UTC' });
 const readableDate = (date: string) => dateFormat.format(new Date(date));
 const showModified = article.updatedAt && article.updatedAt !== article.publishedAt;
@@ -69,7 +71,15 @@ const schema = {
             <ol>{content.sections.map((section, index) => <li><a href={`#section-${index + 1}`}>{section.title}</a></li>)}</ol>
           </nav>
         </section>}
-        {content.sections.map((section, index) => <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>)}
+        {content.sections.map((section, index) => (
+          <>
+            <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>
+            {illustration && illustration.afterSection === index + 1 && <figure class="article-illustration">
+              <img src={illustration.src} width={illustration.width} height={illustration.height} alt={illustration.alt} loading="lazy" decoding="async" />
+              <figcaption>{illustration.caption} <a href={illustration.source}>Ảnh trên Pixabay</a></figcaption>
+            </figure>}
+          </>
+        ))}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
         {content.cta && <p class="article-cta"><a class="button" href={articlePath(lang, content.cta.slug)}>{content.cta.label} <Arrow /></a></p>}

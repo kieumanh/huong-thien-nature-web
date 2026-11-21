@@ -1,0 +1,52 @@
+---
+interface Props {
+  title: string;
+  steps: readonly (readonly [string, string])[];
+  variant: 'loop' | 'roadmap';
+}
+const { title, steps, variant } = Astro.props;
+---
+<figure class:list={['ecosystem-illustration', `ecosystem-illustration--${variant}`]} data-ecosystem-illustration>
+  <figcaption>{title}</figcaption>
+  <ol role="list">
+    {steps.map(([name, description], index) => (
+      <li style={`--step-delay: ${index * 350}ms`}>
+        <span class="illustration-marker" aria-hidden="true">{variant === 'loop' ? ['✦', '❋', '↺'][index] : index + 1}</span>
+        <div><strong>{name}</strong><p>{description}</p></div>
+      </li>
+    ))}
+  </ol>
+</figure>
+
+<script>
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('illustration-in-view');
+          observer.unobserve(entry.target);
+        }
+      }
+    }, { threshold: 0.15 });
+    document.querySelectorAll('[data-ecosystem-illustration]').forEach(element => observer.observe(element));
+  }
+</script>
+<style>
+  .ecosystem-illustration { margin-block: 1.5rem; padding: clamp(1rem, 4vw, 2rem); border-radius: var(--radius-feature); background: var(--surface-container); }
+  .ecosystem-illustration--roadmap { background: var(--surface-warm); }
+  figcaption { margin: 0 0 .9rem; font: 500 var(--type-card)/1.3 var(--serif); color: var(--primary); }
+  ol { list-style: none; display: grid; gap: .8rem; }
+  li { display: flex; gap: .7rem; min-width: 0; padding: .85rem; border-radius: var(--radius-input); background: var(--surface-raised); }
+  .illustration-marker { display: grid; flex: 0 0 2rem; place-items: center; align-self: start; height: 2rem; border-radius: 50%; background: var(--brand-fern); color: var(--primary); font-weight: 650; }
+  li strong { line-height: 1.3; }
+  li p { margin-top: .25rem; color: var(--muted); }
+  .illustration-in-view.ecosystem-illustration--loop .illustration-marker { animation: loop-pulse 1.3s var(--step-delay) ease-out; }
+  .illustration-in-view.ecosystem-illustration--roadmap li { animation: step-highlight 1.2s var(--step-delay) ease-out; }
+  @keyframes loop-pulse { 40% { transform: scale(1.16); box-shadow: 0 0 0 .32rem #9ab29155; } }
+  @keyframes step-highlight { 40% { transform: translateY(-3px); box-shadow: inset 0 -3px var(--clay); } }
+  @media (min-width: 720px) {
+    ol { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    li { flex-direction: column; }
+    .illustration-marker { width: 2rem; }
+  }
+</style>

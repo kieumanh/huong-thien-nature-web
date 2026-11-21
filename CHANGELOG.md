@@ -1,3 +1,9 @@
+## 2.4.0 — Ba quỹ đạo trên trang chủ và bốn mùa
+
+- Đưa ba hướng, mô hình quỹ đạo, tình trạng hoạt động và thư viện ảnh về trang chủ. Viết riêng định hướng hệ sinh thái và thêm hai minh họa chuyển động.
+- Chia 12 mốc hành trình thành ba chặng có liên kết nhảy nhanh. Thêm ảnh Pixabay cho khối thực hành và năm bài dài tiếng Việt.
+- Tự đổi hiệu ứng theo bốn mùa mỗi giờ, theo giờ Việt Nam. Rút gọn hồ sơ đối tác và ghi công Zenwork.io.vn ở chân trang.
+
 ## 2.3.0 — Câu chuyện, thực hành và đội ngũ
 
 - Bổ sung trang song ngữ cho Thực hành, Hệ sinh thái, Câu chuyện và Đội ngũ. Chuyển nội dung chi tiết sang các trang này.

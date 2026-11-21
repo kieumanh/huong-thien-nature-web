@@ -1,0 +1,30 @@
+:root[data-season="spring"] {
+  --season-glow: #e6b5ba32;
+  --season-particle: #c98191;
+  --season-shape: 65% 45% 72% 35%;
+  --season-border: #c981913b;
+}
+:root[data-season="summer"] {
+  --season-glow: #eccd743b;
+  --season-particle: #d5aa4f;
+  --season-size: .35rem;
+  --season-shape: 50%;
+  --season-border: #c9a03d45;
+}
+:root[data-season="autumn"] {
+  --season-glow: #d79e6738;
+  --season-particle: #b57845;
+  --season-shape: 75% 10% 75% 15%;
+  --season-border: #ad734748;
+}
+:root[data-season="winter"] {
+  --season-glow: #a9c7de42;
+  --season-particle: #6e98b2;
+  --season-size: .31rem;
+  --season-shape: 50%;
+  --season-border: #769ebd50;
+}
+:root[data-season] .topbar {
+  box-shadow: inset 0 -2px var(--season-border);
+  transition: box-shadow .45s ease;
+}

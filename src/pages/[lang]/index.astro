@@ -1,5 +1,9 @@
 ---
 import { contactPath } from '../../data/contact-channels';
+import EcosystemOverview from '../../components/EcosystemOverview.astro';
+import '../../styles/story-home.css';
+import '../../styles/hybrid-nature.css';
+import { practicePhoto } from '../../data/editorial-illustrations';
 import HomePhoto from '../../components/HomePhoto.astro';
 import HomeDiscovery from '../../components/HomeDiscovery.astro';
 import ArticleCard from '../../components/ArticleCard.astro';
@@ -28,9 +32,7 @@ const description = vi
   : 'Hương Thiền Nature is a project for meditation, mindfulness and living closer to nature, founded by Đỗ Thị Kim Hương. Begin with a minute of practice or explore its three areas: Body, Heart and Mind.';
 const practicePath = journeyPath(lang, 'practice');
 const storyPath = journeyPath(lang, 'story');
-const ecosystemPath = journeyPath(lang, 'ecosystem');
 const teamPath = journeyPath(lang, 'team');
-const directions = vi ? ['Thân', 'Tâm', 'Trí'] : ['Body', 'Heart', 'Mind'];
 ---
 <BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} aboutOrganization>
   <Header {lang} {alternatePath} />
@@ -63,28 +65,7 @@ const directions = vi ? ['Thân', 'Tâm', 'Trí'] : ['Body', 'Heart', 'Mind'];
       </div>
     </section>
 
-    <section class="home-ecosystem home-ecosystem-story" id="nature" aria-labelledby="nature-title">
-      <div class="shell">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">{journeyPages.ecosystem[lang].title}</p>
-            <h2 id="nature-title">{vi ? 'Từ bữa cơm đến một cách sống' : 'From a meal to a way of living'}</h2>
-          </div>
-        </div>
-        <p class="lead">{journeyPages.ecosystem[lang].description}</p>
-        <div class="home-pillars">
-          {t.natureCards.map(([name], index) => <article class="zen-card home-pillar">
-            <span class="eyebrow">{directions[index]}</span>
-            <h3>{name}</h3>
-          </article>)}
-        </div>
-        <div class="material-actions" id="path">
-          <a class="button" href={ecosystemPath}>{vi ? 'Khám phá hệ sinh thái và ba quỹ đạo' : 'Explore the ecosystem and its three orbits'} <Arrow /></a>
-          <a class="quiet-link" href={`${ecosystemPath}#path`}>{vi ? 'Xem hoạt động hiện có' : 'See what’s available now'}</a>
-        </div>
-        <span id="rice-landscapes"></span>
-      </div>
-    </section>
+    <EcosystemOverview {lang} />
 
     <section class="shell material-practice" id="practice" aria-labelledby="practice-title">
       <div class="material-practice__copy">
@@ -92,7 +73,10 @@ const directions = vi ? ['Thân', 'Tâm', 'Trí'] : ['Body', 'Heart', 'Mind'];
         <p>{vi ? 'Thử đặt hai bàn chân xuống sàn và để ý một hơi thở đang diễn ra. Khi nhận ra mình đã mải nghĩ, hãy quay lại với bàn chân hoặc hơi thở, nhẹ như khi đặt một chiếc chén xuống bàn.' : 'Set both feet on the floor and notice one breath as it comes and goes. When you realise you’ve been thinking, return to your feet or the breath as gently as setting a cup on the table.'}</p>
         <a class="quiet-link" href={practicePath}>{vi ? 'Xem hướng dẫn thực hành' : 'Open the practice guide'} <Arrow /></a>
       </div>
-      <figure class="home-practice-photo"><img src="/media/practice-cushion-v2.webp" width="720" height="540" alt="" loading="lazy" decoding="async" /></figure>
+      <figure class="home-practice-photo">
+        <img src={practicePhoto.src} width={practicePhoto.width} height={practicePhoto.height} alt={practicePhoto.alt[lang]} loading="lazy" decoding="async" />
+        <figcaption><a href={practicePhoto.source}>{vi ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a></figcaption>
+      </figure>
     </section>
 
     <section id="journal" class="shell material-block" aria-labelledby="journal-title">

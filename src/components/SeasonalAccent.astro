@@ -1,0 +1,54 @@
+<div class="seasonal-accent" aria-hidden="true">
+  {[
+    [-12, 10, -2], [7, 17, -5], [26, 5, -4], [39, 26, -7], [58, 12, -1], [71, 35, -9], [88, 17, -6],
+  ].map(([left, top, delay]) => <span style={`--x:${left}%;--y:${top}%;--delay:${delay}s`}></span>)}
+</div>
+
+<script>
+  import { seasonAt, timeUntilNextHour } from '../scripts/seasons';
+
+  let timer: ReturnType<typeof setTimeout>;
+  function syncSeason() {
+    clearTimeout(timer);
+    if (document.hidden) return;
+    const now = Date.now();
+    document.documentElement.dataset.season = seasonAt(now);
+    timer = setTimeout(syncSeason, timeUntilNextHour(now));
+  }
+
+  document.addEventListener('visibilitychange', syncSeason);
+  window.addEventListener('pageshow', syncSeason);
+  syncSeason();
+</script>
+<style>
+  .seasonal-accent {
+    position: fixed;
+    z-index: 2;
+    inset: 4.6rem 0 auto auto;
+    width: min(30vw, 21rem);
+    height: min(32vh, 16rem);
+    pointer-events: none;
+    overflow: hidden;
+    background: radial-gradient(ellipse at top right, var(--season-glow, transparent), transparent 68%);
+    transition: background-color .5s ease;
+  }
+  span {
+    position: absolute;
+    left: var(--x);
+    top: var(--y);
+    width: var(--season-size, .55rem);
+    height: var(--season-size, .55rem);
+    border-radius: var(--season-shape, 55% 45% 58% 42%);
+    background: var(--season-particle, transparent);
+    opacity: .55;
+    animation: drift 12s var(--delay) ease-in-out infinite;
+  }
+  @keyframes drift {
+    0% { transform: translate(1rem, -1rem) rotate(0deg); opacity: 0; }
+    30%, 65% { opacity: .55; }
+    100% { transform: translate(-2.8rem, 8rem) rotate(115deg); opacity: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seasonal-accent span { animation: none; }
+  }
+</style>
