@@ -1,3 +1,8 @@
+## 2.5.0 — Khóa hướng dẫn tarot cùng Hương Thiền
+
+- Thêm trang Khóa hướng dẫn Việt–Anh với buổi tự phản tỉnh 1:1, lịch trình 90 phút và nguồn đọc mở rộng.
+- Bổ sung màu tím mận, kiểu chữ viết tay hỗ trợ tiếng Việt và phản hồi khi tương tác với nút, menu.
+
 ## 2.4.2 — Hành trình kết nối đối tác
 
 - Bổ sung mốc hợp tác với farm Gửi Yêu Thương Vào Đất và vai trò đối tác chiến lược của anh Nguyễn Trần Quyết.

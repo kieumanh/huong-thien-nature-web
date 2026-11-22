@@ -1,0 +1,137 @@
+---
+import Breadcrumb from './Breadcrumb.astro';
+import { tarotCopy, tarotPortraits } from '../data/tarot-guidance';
+import { journeyPages } from '../data/journey-pages';
+import { contactPath, zaloUrl } from '../data/contact-channels';
+import type { Language } from '../data/site';
+import '../styles/tarot-guidance.css';
+
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const copy = tarotCopy[lang];
+const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magician.jpg';
+---
+<main class="shell guidance" id="main-content" tabindex="-1">
+  <Breadcrumb {lang} current={journeyPages.guidance[lang].title} />
+  <article aria-labelledby="guidance-title">
+    <header class="guidance-hero">
+      <div class="guidance-hero-copy">
+        <p class="eyebrow">{copy.eyebrow}</p>
+        <h1 id="guidance-title"><span class="handwritten">{vi ? 'Lắng nghe mình' : 'Listening to yourself'}</span>{' '}{vi ? 'qua tarot' : 'through tarot'}</h1>
+        <p class="lead">{copy.lead}</p>
+        <p class="guidance-meta">{copy.duration}<span aria-hidden="true"> / </span>{copy.price}</p>
+        <div class="guidance-actions">
+          <a class="button guidance-button" href={zaloUrl}>{copy.booking}</a>
+          <a class="button button--tonal" href="#session">{copy.outline}</a>
+        </div>
+      </div>
+      <figure class="guidance-art">
+        <div class="guidance-card-stage">
+          <img src="/media/guidance/magician.webp" alt={vi ? 'Lá The Magician với một nhân vật đứng trước bàn, tay giơ đũa, xung quanh có hoa đỏ.' : 'The Magician stands at a table, raising a wand among red flowers.'} width="369" height="640" decoding="async" />
+        </div>
+        <figcaption><a href={cardSource}>{copy.art}</a></figcaption>
+      </figure>
+    </header>
+
+    <section class="guidance-reading guidance-opening">
+      <h2 class="handwritten">{copy.openingTitle}</h2>
+      <div class="guidance-opening-grid">
+        <blockquote>
+          <p>{copy.poem.map((line, index) => <>{line}{index < copy.poem.length - 1 && <br />}</>)}</p>
+          <p class="guidance-byline">{copy.by}</p>
+        </blockquote>
+        <figure>
+          <img src="/media/pixabay-2608830.webp" width="880" height="586" loading="lazy" decoding="async" alt={vi ? 'Nước chảy quanh các tảng đá giữa rừng.' : 'Water flowing around rocks in a forest.'} />
+          <figcaption><a href="https://pixabay.com/photos/nature-water-river-stream-rocks-2608830/">Pixabay</a></figcaption>
+        </figure>
+      </div>
+      <p>{copy.opening}</p>
+    </section>
+
+    <section class="guidance-reading">
+      <h2>{copy.whyTitle}</h2>
+      {copy.why.map(paragraph => <p>{paragraph}</p>)}
+    </section>
+
+    <section class="guidance-section" aria-labelledby="connection-title">
+      <h2 id="connection-title">{copy.connectionTitle}</h2>
+      <ul class="guidance-connections" data-guidance-connections>
+        {copy.connection.map(([title, description]) => <li class="zen-card"><h3>{title}</h3><p>{description}</p></li>)}
+      </ul>
+      <p>{copy.connectionNote}</p>
+      <div class="guidance-exercise">
+        <h3>{copy.exerciseTitle}</h3>
+        <details>
+          <summary>{copy.exerciseLabel}</summary>
+          <p>{copy.exercise}</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="guidance-section" aria-labelledby="guidance-sources">
+      <h2 id="guidance-sources">{copy.sourcesTitle}</h2>
+      <p>{copy.sourcesIntro}</p>
+      <div class="guidance-portraits">
+        {tarotPortraits.map(person => <article class="zen-card guidance-person">
+          <figure>
+            <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.name} />
+            <figcaption><a href={person.photo}>{person.credit}<span class="sr-only"> · {copy.picture}: {person.name}</span></a></figcaption>
+          </figure>
+          <div>
+            <h3>{person.name}</h3>
+            <p>{person[lang]}</p>
+            <a class="quiet-link" href={person.source}>{copy.original}<span class="sr-only"> · {person.name}</span></a>
+          </div>
+        </article>)}
+      </div>
+      <div class="guidance-reading guidance-books">
+        <h3>{copy.booksTitle}</h3>
+        {copy.books.map(paragraph => <p>{paragraph}</p>)}
+        <ul class="guidance-references">
+          <li><a href="https://wellcomecollection.org/works/wkfv6fww">William James · The Varieties of Religious Experience</a></li>
+          <li><a href="https://guides.library.unt.edu/tarot/books">University of North Texas Libraries · Tarot Books &amp; Resources</a></li>
+          <li><a href="https://redwheelweiser.com/book/tarot-for-your-self-9781578636792/">Mary K. Greer · Tarot for Your Self</a></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="guidance-section guidance-session" id="session" aria-labelledby="session-title">
+      <h2 id="session-title">{copy.sessionTitle}</h2>
+      <p>{copy.sessionIntro}</p>
+      <ol>
+        {copy.steps.map(([minutes, title, detail]) => <li>
+          <div><h3>{title}</h3><p>{detail}</p></div>
+          <span>{minutes} {vi ? 'phút' : 'min'}</span>
+        </li>)}
+      </ol>
+    </section>
+
+    <section class="guidance-reading guidance-scope" aria-labelledby="scope-title">
+      <h2 id="scope-title">{copy.noteTitle}</h2>
+      <p>{copy.finish}</p>
+      {copy.note.map(paragraph => <p>{paragraph}</p>)}
+      <ul class="guidance-references">
+        <li><a href="https://www.apa.org/practice/guidelines/evidence-based-statement.html">American Psychological Association · Evidence-based practice</a></li>
+        <li><a href="https://www.nccih.nih.gov/health/tips/8-things-to-know-about-meditation-and-mindfulness">NCCIH · Meditation and mindfulness</a></li>
+      </ul>
+      <div class="guidance-actions">
+        <a class="button guidance-button" href={zaloUrl}>{copy.booking}</a>
+        <a class="quiet-link" href={contactPath(lang)}>{copy.contact}</a>
+      </div>
+    </section>
+  </article>
+</main>
+<script>
+  const connections = document.querySelector('[data-guidance-connections]');
+  if (connections && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(entries => {
+      for (const entry of entries) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('guidance-connections--visible');
+          observer.disconnect();
+        }
+      }
+    }, { threshold: .2 });
+    observer.observe(connections);
+  }
+</script>

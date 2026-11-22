@@ -21,7 +21,7 @@ routes = {
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
         'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
         'search': '/vi/timkiem/?q=bot+cacao', 'contact': '/vi/lien-he/',
-        'versions': '/vi/phien-ban/',
+        'versions': '/vi/phien-ban/', 'guidance': '/vi/khoa-huong-dan/',
     },
     'en': {
         'home': '/en/', 'practice': '/en/practice/', 'ecosystem': '/en/ecosystem/',
@@ -29,7 +29,7 @@ routes = {
         'article': '/en/journal/when-meditation-is-difficult/',
         'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',
         'search': '/en/search/?q=cocoa', 'contact': '/en/contact/',
-        'versions': '/en/versions/',
+        'versions': '/en/versions/', 'guidance': '/en/guided-sessions/',
     },
 }
 report = {'viewports': widths, 'snapshots': [], 'axe': [], 'passes': []}
@@ -112,6 +112,19 @@ def check_flows(browser):
         expect(page.locator('.footer-credit a')).to_have_attribute('href', 'https://zenwork.io.vn/')
         expect(page.locator('#huong-thien h3')).to_be_visible()
         expect(page.locator('#kieu-manh h3')).to_be_visible()
+        menu.click()
+        page.locator(f'#main-nav a[href="{entries["guidance"]}"]').click()
+        page.wait_for_url(base + entries['guidance'])
+        expect(page.locator('#guidance-title')).to_be_visible()
+        expect(page.locator('.guidance-person img')).to_have_count(4)
+        expect(page.locator('.guidance-scope a[href*="zalo.me"]')).to_be_visible()
+        expect(page.locator('.language a')).to_have_attribute('href', routes['en' if lang == 'vi' else 'vi']['guidance'])
+        minutes = page.locator('.guidance-session li span').all_text_contents()
+        assert sum(int(step.split()[0]) for step in minutes) == 90
+        exercise = page.locator('.guidance-exercise details')
+        exercise.locator('summary').click()
+        expect(exercise.locator('p')).to_be_visible()
+        expect(exercise.locator('p')).to_have_css('animation-name', 'none')
         wait_page(page, base + entries['story'])
         expect(page.locator('.journey-chapters li')).to_have_count(12)
         page.locator('.journey-jumps a').nth(1).click()
@@ -281,7 +294,7 @@ with sync_playwright() as playwright:
         for width in snapshot_widths:
             page.set_viewport_size({'width': width, 'height': 900})
             for name, path in routes['vi'].items():
-                if name in {'practice', 'ecosystem', 'story', 'team'}:
+                if name in {'practice', 'ecosystem', 'story', 'team', 'guidance'}:
                     continue
                 wait_page(page, baseline + path)
                 screenshot(page, 'baseline', 'vi', name, width)

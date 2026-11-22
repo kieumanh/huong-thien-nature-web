@@ -5,6 +5,7 @@ import Footer from '../../components/Footer.astro';
 import Breadcrumb from '../../components/Breadcrumb.astro';
 import ContemplativeScene from '../../components/ContemplativeScene.astro';
 import FounderJourney from '../../components/FounderJourney.astro';
+import TarotGuidance from '../../components/TarotGuidance.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
 import { ecosystemVision } from '../../data/ecosystem-vision';
@@ -34,7 +35,7 @@ const vision = ecosystemVision[lang];
   pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
   aboutOrganization={page !== 'practice'}>
   <Header {lang} {alternatePath} />
-  <main id="main-content" class="shell journey-page" tabindex="-1">
+  {page === 'guidance' ? <TarotGuidance {lang} /> : <main id="main-content" class="shell journey-page" tabindex="-1">
     <header class="journey-page-header">
       <ContemplativeScene motif="mandala" />
       <Breadcrumb {lang} current={info.title} />
@@ -120,6 +121,6 @@ const vision = ecosystemVision[lang];
       <TeamProfiles {lang} />
       <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ đội ngũ' : 'Contact the team'}</a>
     </>}
-  </main>
+  </main>}
   <Footer {lang} />
 </BaseLayout>

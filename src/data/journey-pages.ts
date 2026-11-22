@@ -5,6 +5,10 @@ export const journeyPages = {
     vi: { slug: 'thuc-hanh', title: 'Thực hành', heading: 'Bắt đầu thực hành thiền và chánh niệm', description: 'Bạn có thể bắt đầu bằng một phút cảm nhận hơi thở tự nhiên hoặc bàn chân chạm đất. Hương Thiền Nature có hướng dẫn thiền tại nhà và đi bộ chánh niệm cho người mới.' },
     en: { slug: 'practice', title: 'Practice', heading: 'A first step in meditation and mindfulness', description: 'Begin with a minute of feeling your natural breath or your feet on the ground. Hương Thiền Nature offers guides to meditating at home and walking mindfully.' },
   },
+  guidance: {
+    vi: { slug: 'khoa-huong-dan', title: 'Khóa hướng dẫn', heading: 'Lắng nghe mình qua tarot', description: 'Khóa hướng dẫn tự phản tỉnh qua tarot cùng Hương Thiền. Buổi 1:1 kéo dài 90 phút, kết hợp biểu tượng, trực giác và chánh niệm. Liên hệ để hỏi lịch và chi phí.' },
+    en: { slug: 'guided-sessions', title: 'Guided sessions', heading: 'Listening to yourself through tarot', description: 'A 90-minute one-to-one guided reflection session with Hương Thiền, drawing on tarot imagery, intuition and mindfulness. Contact us for availability and pricing.' },
+  },
   ecosystem: {
     vi: { slug: 'he-sinh-thai', title: 'Hệ sinh thái', heading: 'Hệ sinh thái Thân, Tâm và Trí', description: 'Định hướng của Hương Thiền Nature là nối việc chăm đất, thực tập thiền và học từ trải nghiệm. Tìm hiểu ba hướng Thân, Tâm và Trí, điểm mạnh và các bước dự kiến trước khi mở rộng.' },
     en: { slug: 'ecosystem', title: 'Ecosystem', heading: 'The ecosystem of Body, Heart and Mind', description: 'Hương Thiền Nature connects soil care, meditation and learning through experience. Explore the direction and strengths of Body, Heart and Mind, and what the team plans to test before growing.' },
