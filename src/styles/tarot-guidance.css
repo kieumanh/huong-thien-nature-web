@@ -92,6 +92,7 @@
   padding: clamp(.8rem, 2.5vw, 1.15rem);
 }
 .guidance-person img { width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; object-position: center 30%; border-radius: var(--radius-input); }
+.guidance-person img.guidance-source-illustration { object-fit: contain; background: var(--orchid-mist); }
 .guidance-person p { margin-top: .35rem; }
 .guidance-person figcaption { overflow-wrap: anywhere; }
 .guidance-books { margin-top: 1.7rem; }

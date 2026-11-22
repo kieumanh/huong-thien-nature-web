@@ -1,6 +1,6 @@
 ---
 import Breadcrumb from './Breadcrumb.astro';
-import { tarotCopy, tarotPortraits } from '../data/tarot-guidance';
+import { tarotCopy, tarotSources } from '../data/tarot-guidance';
 import { journeyPages } from '../data/journey-pages';
 import { contactPath, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
@@ -72,10 +72,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       <h2 id="guidance-sources">{copy.sourcesTitle}</h2>
       <p>{copy.sourcesIntro}</p>
       <div class="guidance-portraits">
-        {tarotPortraits.map(person => <article class="zen-card guidance-person">
+        {tarotSources.map(person => <article class="zen-card guidance-person">
           <figure>
-            <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.name} />
-            <figcaption><a href={person.photo}>{person.credit}<span class="sr-only"> · {copy.picture}: {person.name}</span></a></figcaption>
+            <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.illustration?.[lang] ?? person.name} class:list={{ 'guidance-source-illustration': person.illustration }} />
+            <figcaption><a href={person.photo}>{person.illustration ? person.illustration[lang] : person.credit}<span class="sr-only"> · {copy.picture}{person.illustration ? "" : `: ${person.name}`}</span></a></figcaption>
           </figure>
           <div>
             <h3>{person.name}</h3>

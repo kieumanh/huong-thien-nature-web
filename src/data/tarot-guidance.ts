@@ -1,6 +1,6 @@
 const commons = 'https://commons.wikimedia.org/wiki/File:';
 
-export const tarotPortraits = [
+export const tarotSources = [
   {
     name: 'Carl Gustav Jung',
     image: 'jung',
@@ -29,13 +29,14 @@ export const tarotPortraits = [
     en: 'The author of The Pictorial Key to the Tarot and Smith’s collaborator. The book documents a tradition of interpretation. In the session, traditional meanings are one possible reading alongside your own associations.',
   },
   {
-    name: 'Wolfgang Pauli',
-    image: 'pauli',
-    credit: 'Nobel Foundation · Wikimedia Commons',
-    photo: commons + 'Pauli.jpg',
-    source: 'https://press.princeton.edu/books/paperback/9780691161471/atom-and-archetype',
-    vi: 'Nhà vật lý nhận Nobel năm 1945 cho nguyên lý loại trừ. Thư từ với Jung ghi lại cuộc trao đổi về giấc mơ, biểu tượng và đồng hiện. Đó là tư liệu về sự tò mò liên ngành, không cho thấy Pauli thực hành tarot hay vật lý lượng tử xác nhận tarot.',
-    en: 'The 1945 physics Nobel laureate for the exclusion principle. His letters with Jung document a conversation about dreams, symbols and synchronicity. They show interdisciplinary curiosity, with no basis for claiming Pauli practised tarot or that quantum physics validates it.',
+    name: 'Sallie Nichols',
+    image: 'marseille-fool',
+    credit: 'Jean Dodal · Tarot de Marseille',
+    photo: commons + 'Jean_Dodal_Tarot_trump_Fool.jpg',
+    illustration: { vi: 'Lá Le Mat trong bộ Tarot de Marseille của Jean Dodal', en: 'Le Mat from Jean Dodal’s Tarot de Marseille' },
+    source: 'https://redwheelweiser.com/book/tarot-and-the-archetypal-journey-9781578636594/',
+    vi: 'Tác giả Jung and Tarot: An Archetypal Journey (1980), từng giảng dạy về biểu tượng tarot cho học viên tại Viện C. G. Jung ở Los Angeles. Bà đọc 22 lá Ẩn chính qua khái niệm nguyên mẫu và tiến trình cá thể hóa của Jung. Cách đọc này giúp đặt câu hỏi về những mô thức lặp lại trong đời mình và ý nghĩa mình gán cho chúng.',
+    en: 'The author of Jung and Tarot: An Archetypal Journey (1980), Nichols taught tarot symbolism to trainees at the C. G. Jung Institute of Los Angeles. She read the 22 Major Arcana through Jung’s ideas of archetypes and individuation, inviting readers to reflect on recurring patterns and the meanings they give them.',
   },
 ];
 
