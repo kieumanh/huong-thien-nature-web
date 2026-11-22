@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.6.2',
+    date: '2026-11-22',
+    vi: ['Nguồn ảnh Sallie Nichols', 'Thêm liên kết xem ảnh trên hồ sơ tác giả của Editorial Kairós.'],
+    en: ['Sallie Nichols photo source', 'Linked to the photo on the Editorial Kairós author profile.'],
+  },
+  {
     version: '2.6.1',
     date: '2026-11-22',
     vi: ['Mạch đọc và lộ trình tarot', 'Thêm minh họa động theo ba bước, nối liền các mốc và làm rõ lời mời liên hệ cuối khóa.'],

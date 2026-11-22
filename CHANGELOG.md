@@ -1,3 +1,7 @@
+## 2.6.2 — Nguồn ảnh Sallie Nichols
+
+- Thêm liên kết xem ảnh trên hồ sơ tác giả của Editorial Kairós ở cả hai bản Việt và Anh.
+
 ## 2.6.1 — Mạch đọc và lộ trình tarot
 
 - Thay minh họa quỹ đạo ở trang tarot bằng ba bước lắng lại, nhìn hình ảnh và đặt câu hỏi.

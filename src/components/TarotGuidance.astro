@@ -93,6 +93,11 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
             <h3>{person.name}</h3>
             <p>{person[lang]}</p>
             <a class="quiet-link" href={person.source}>{copy.original}<span class="sr-only"> · {person.name}</span></a>
+            {person.portraitProfile && <div>
+              <a class="quiet-link" href={person.portraitProfile}>
+                {lang === 'vi' ? 'Xem ảnh trên trang Editorial Kairós' : 'View the photo at Editorial Kairós'}
+              </a>
+            </div>}
           </div>
         </article>)}
       </div>

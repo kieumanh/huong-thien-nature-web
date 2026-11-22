@@ -32,6 +32,7 @@ export const tarotSources = [
     name: 'Sallie Nichols',
     work: 'Jung and Tarot: An Archetypal Journey',
     publication: 'Weiser Books · 1980',
+    portraitProfile: 'https://www.editorialkairos.com/autores/sallie-nichols',
     source: 'https://www.junginla.org/bookstore/tarot-and-the-archetypal-journey/',
     vi: 'Tác giả Jung and Tarot: An Archetypal Journey (1980), từng giảng dạy về biểu tượng tarot cho học viên tại Viện C. G. Jung ở Los Angeles. Bà đọc 22 lá Ẩn chính qua khái niệm nguyên mẫu và tiến trình cá thể hóa của Jung. Cách đọc này giúp đặt câu hỏi về những mô thức lặp lại trong đời mình và ý nghĩa mình gán cho chúng.',
     en: 'The author of Jung and Tarot: An Archetypal Journey (1980), Nichols taught tarot symbolism to trainees at the C. G. Jung Institute of Los Angeles. She read the 22 Major Arcana through Jung’s ideas of archetypes and individuation, inviting readers to reflect on recurring patterns and the meanings they give them.',
