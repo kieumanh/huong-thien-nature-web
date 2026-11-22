@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.6.3',
+    date: '2026-11-22',
+    vi: ['Chân trang trên điện thoại', 'Sửa chữ bị cắt và điều chỉnh màu nền chân trang ở chạng vạng.'],
+    en: ['Mobile footer', 'Fixed clipped text and refined the footer colours at twilight.'],
+  },
+  {
     version: '2.6.2',
     date: '2026-11-22',
     vi: ['Nguồn ảnh Sallie Nichols', 'Thêm liên kết xem ảnh trên hồ sơ tác giả của Editorial Kairós.'],

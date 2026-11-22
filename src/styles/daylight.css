@@ -10,6 +10,10 @@
   --on-primary: #faf8f1;
   --on-orchid: #faf8f1;
   --footer-surface: #243f32;
+  --footer-muted: #d4decf;
+  --footer-link: #e0e8dc;
+  --footer-divider: #eaeedf38;
+  --footer-chip: #ffffff17;
   --surface: color-mix(in srgb, var(--paper), #f3e3dc var(--twilight));
   --surface-container: color-mix(in srgb, var(--sage), #e8d8d4 var(--twilight));
   --surface-raised: color-mix(in srgb, #fffdf7, #f8ebe4 var(--twilight));
@@ -31,7 +35,9 @@
   --border: #665f6e;
   --border-control: #a99bad;
   --brand-fern: #33453e;
-  --footer-surface: #17231f;
+  --footer-surface: color-mix(in srgb, #17231f, #302630 var(--twilight));
+  --footer-muted: #d7d9cf;
+  --footer-link: #e5eadf;
   --orchid: #edb9dd;
   --orchid-deep: #ffe1f6;
   --orchid-mist: #3d2a3c;

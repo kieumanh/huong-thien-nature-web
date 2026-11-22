@@ -1,3 +1,7 @@
+## 2.6.3 — Chân trang trên điện thoại
+
+- Sửa chữ bị cắt, tách số phiên bản xuống dòng và phối nền chân trang theo sắc độ chạng vạng.
+
 ## 2.6.2 — Nguồn ảnh Sallie Nichols
 
 - Thêm liên kết xem ảnh trên hồ sơ tác giả của Editorial Kairós ở cả hai bản Việt và Anh.
