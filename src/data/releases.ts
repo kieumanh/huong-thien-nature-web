@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.4.2',
+    date: '2026-11-22',
+    vi: ['Hành trình kết nối đối tác', 'Bổ sung hai mối hợp tác trong Hệ sinh thái, rút gọn chân trang và canh giữa nội dung trên điện thoại.'],
+    en: ['Our partnership journey', 'Added two partnerships to the Ecosystem page, simplified the footer and centered its content on mobile.'],
+  },
+  {
     version: '2.4.1',
     date: '2026-11-22',
     vi: ['Trang chủ và chân trang dễ đọc hơn', 'Tăng độ tương phản của thẻ hệ sinh thái, canh giữa họa tiết trên điện thoại, đưa lịch sử phiên bản vào nhóm Khám phá và thêm hồ sơ ZenWork.'],

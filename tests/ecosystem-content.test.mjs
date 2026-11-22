@@ -25,5 +25,10 @@ test('ecosystem strategy pages show two illustrations and link back to the live 
     assert.equal((html.match(/<figure[^>]+data-ecosystem-illustration/g) || []).length, 2);
     assert(html.includes(`href="/${lang}/#nature"`));
     assert(!html.includes('solar-orbit--1'));
+    const partnerships = html.match(/<section[^>]+id="partnerships"[^>]*>(.*?)<\/section>/s)?.[1];
+    assert(partnerships, 'missing partnership journey for ' + lang);
+    for (const marker of ['Lê Lam Sơn', 'Nguyễn Trần Quyết', 'datetime="2026-09"', 'https://guiyeuthuongvaodat.com/', 'https://kimtuthap.org/']) {
+      assert(partnerships.includes(marker), 'missing: ' + marker);
+    }
   }
 });

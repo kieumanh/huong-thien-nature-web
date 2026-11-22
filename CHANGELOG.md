@@ -1,3 +1,8 @@
+## 2.4.2 — Hành trình kết nối đối tác
+
+- Bổ sung mốc hợp tác với farm Gửi Yêu Thương Vào Đất và vai trò đối tác chiến lược của anh Nguyễn Trần Quyết.
+- Bỏ nhóm Kết nối ở chân trang và canh giữa nội dung trên điện thoại.
+
 ## 2.4.1 — Trang chủ và chân trang dễ đọc hơn
 
 - Đồng nhất kiểu hiển thị các thẻ Thân, Tâm và Trí. Canh giữa họa tiết trên điện thoại và thêm chuyển động nhẹ.

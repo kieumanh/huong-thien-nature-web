@@ -22,6 +22,8 @@ with sync_playwright() as p:
         assert 'V'+version in history.inner_text()
         assert history.get_attribute('href') == ('/vi/phien-ban/' if lang == 'vi' else '/en/versions/')
         assert page.locator('footer a[href="#top"]').count() == 0
+        assert page.locator('.footer-group').count() == 2
+        assert page.locator('footer a[href^="tel:"], footer a[href*="zalo.me"]').count() == 0
         button = page.locator('.back-to-top')
         assert button.is_hidden()
         for progress, visible in [(0.29, False), (0.31, True), (0.1, False), (0.7, True)]:
@@ -44,6 +46,8 @@ with sync_playwright() as p:
             assert panel and abs(panel['x']-dock['x']) <= 2 and panel['x']+panel['width'] <= width
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             page.locator('.music-options').evaluate('el => el.open=false')
+            if width < 640:
+                assert page.locator('footer').evaluate('el => getComputedStyle(el).textAlign') == 'center'
             page.evaluate('window.scrollTo(0, document.documentElement.scrollHeight)')
             page.wait_for_function('window.scrollY + innerHeight >= document.documentElement.scrollHeight - 1')
             footer = page.locator('.footer-bottom').bounding_box()

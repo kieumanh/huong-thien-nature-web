@@ -23,23 +23,27 @@ export type JourneyPage = keyof typeof journeyPages;
 export const journeyPageKeys = Object.keys(journeyPages) as JourneyPage[];
 export const journeyPath = (lang: Language, page: JourneyPage) => `/${lang}/${journeyPages[page][lang].slug}/`;
 
+const quartzPartner = {
+  name: 'Nguyễn Trần Quyết',
+  site: 'https://kimtuthap.org/',
+  label: 'kimtuthap.org',
+  logo: '/media/partners/kim-tu-thap-logo.webp',
+  vi: 'Đối tác chiến lược về đá thạch anh và phong thủy, đồng thời là cố vấn tại Nha Trang, Khánh Hòa.',
+  en: 'Strategic partner in quartz and feng shui, and an adviser based in Nha Trang, Khánh Hòa.',
+};
+
+const farmPartner = {
+  name: 'Lê Lam Sơn',
+  site: 'https://guiyeuthuongvaodat.com/',
+  label: 'guiyeuthuongvaodat.com',
+  logo: '/media/partners/farm-logo.svg',
+  vi: 'Đối tác nông nghiệp thuận tự nhiên tại Cư M’gar, Đắk Lắk.',
+  en: 'Natural farming partner in Cư M’gar, Đắk Lắk.',
+};
+
 export const partnerProfiles = [
-  {
-    name: 'Nguyễn Trần Quyết',
-    site: 'https://kimtuthap.org/',
-    label: 'kimtuthap.org',
-    logo: '/media/partners/kim-tu-thap-logo.webp',
-    vi: 'Cố vấn Hương Thiền Nature tại Nha Trang, Khánh Hòa.',
-    en: 'Hương Thiền Nature adviser in Nha Trang, Khánh Hòa.',
-  },
-  {
-    name: 'Lê Lam Sơn',
-    site: 'https://guiyeuthuongvaodat.com/',
-    label: 'guiyeuthuongvaodat.com',
-    logo: '/media/partners/farm-logo.svg',
-    vi: 'Đối tác nông nghiệp thuận tự nhiên tại Cư M’gar, Đắk Lắk.',
-    en: 'Natural farming partner in Cư M’gar, Đắk Lắk.',
-  },
+  quartzPartner,
+  farmPartner,
   {
     name: 'ZenWork',
     site: 'https://zenwork.io.vn/',
@@ -47,5 +51,35 @@ export const partnerProfiles = [
     logo: '/media/partners/zenwork-logo.webp',
     vi: 'Dự án con của Hương Thiền Nature do Kiều Mạnh vận hành. ZenWork phụ trách truyền thông và tiếp thị, thiết kế giải pháp, xây dựng và ứng dụng phần mềm vào quản lý, vận hành doanh nghiệp.',
     en: 'A Hương Thiền Nature project run by Kiều Mạnh. ZenWork handles communications and marketing, designs solutions, and builds and applies software for business management and operations.',
+  },
+];
+
+export const ecosystemPartnerJourney = [
+  {
+    partner: farmPartner,
+    date: '2026-09',
+    vi: {
+      milestone: 'Tháng 9/2026',
+      affiliation: 'Farm Gửi Yêu Thương Vào Đất',
+      description: 'Hương Thiền Nature kết nối với anh Lê Lam Sơn và farm Gửi Yêu Thương Vào Đất để đưa nông nghiệp sạch, thuận tự nhiên và trải nghiệm sống xanh vào hệ sinh thái. Anh Sơn phụ trách toàn bộ nguồn cung thực phẩm sạch cho hệ sinh thái. Từ khu vườn đến bữa ăn, sự hợp tác này giúp người tham gia hiểu thêm thực phẩm mình dùng được trồng và chăm sóc như thế nào.',
+    },
+    en: {
+      milestone: 'September 2026',
+      affiliation: 'Gửi Yêu Thương Vào Đất Farm',
+      description: 'Hương Thiền Nature joined forces with Lê Lam Sơn and Gửi Yêu Thương Vào Đất Farm to bring natural farming and hands-on experiences of greener living into the ecosystem. Sơn oversees the ecosystem’s entire supply of naturally grown food. The partnership connects the farm to the table and helps people see how their food is grown and cared for.',
+    },
+  },
+  {
+    partner: quartzPartner,
+    vi: {
+      milestone: 'Đối tác chiến lược',
+      affiliation: 'Nha Trang, Khánh Hòa',
+      description: 'Anh Nguyễn Trần Quyết đồng hành với Hương Thiền Nature trong lĩnh vực đá thạch anh và phong thủy. Với kinh nghiệm tại Nha Trang, Khánh Hòa, anh đồng thời là cố vấn, chia sẻ góc nhìn và góp ý cho các định hướng phát triển của dự án.',
+    },
+    en: {
+      milestone: 'Strategic partnership',
+      affiliation: 'Nha Trang, Khánh Hòa',
+      description: 'Nguyễn Trần Quyết is Hương Thiền Nature’s strategic partner in quartz and feng shui. Drawing on his experience in Nha Trang, Khánh Hòa, he also advises the team on the project’s direction.',
+    },
   },
 ];
