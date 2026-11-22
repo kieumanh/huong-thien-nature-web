@@ -1,4 +1,5 @@
 ---
+import ContemplativeScene from "./ContemplativeScene.astro";
 import HomePhoto from "./HomePhoto.astro";
 const {lang} = Astro.props;
 const en = lang === 'en';
@@ -39,6 +40,7 @@ const stages = [
 <section class="reading-section founder-journey" id="journey">
  <div class="journey-content">
   <div class="journey-opening">
+   <ContemplativeScene motif="sprig" />
    <div><span class="eyebrow">{en ? 'Hương Thiền’s story' : 'Hành trình của Hương Thiền'}</span><h2 id="journey-title">{en ? 'From getting by to caring for myself' : 'Từ tự lo cho mình đến biết chăm sóc mình'}</h2><p class="lead">{en ? 'My full name is Đỗ Thị Kim Hương. Early life taught me to manage on my own. Later, I learned to notice when I was stretching myself too far, when to ask for help, and when to sit down for a while.' : 'Mình tên đầy đủ là Đỗ Thị Kim Hương. Quãng đời đầu dạy mình cách xoay xở. Quãng đời sau, mình học thêm cách nhận ra khi nào đã quá sức, khi nào cần nhờ người khác và khi nào chỉ cần ngồi xuống một lát.'}</p></div>
    <HomePhoto photo="barefoot-by-sea" {lang} />
   </div>

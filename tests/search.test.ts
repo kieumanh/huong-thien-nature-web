@@ -33,7 +33,7 @@ test('founder journey and all ecosystem pillars are searchable',()=>{for(const l
 
 test('partner names find the localized team page', () => {
   for (const lang of ['vi', 'en'] as const) {
-    for (const query of ['Nguyen Tran Quyet', 'Le Lam Son']) {
+    for (const query of ['Nguyen Tran Quyet', 'Le Lam Son', 'ZenWork']) {
       assert(searchRecords(buildSearchIndex(lang), query).some(row => row.url === journeyPath(lang, 'team')));
     }
   }

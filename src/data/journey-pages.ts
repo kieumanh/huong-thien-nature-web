@@ -40,4 +40,12 @@ export const partnerProfiles = [
     vi: 'Đối tác nông nghiệp thuận tự nhiên tại Cư M’gar, Đắk Lắk.',
     en: 'Natural farming partner in Cư M’gar, Đắk Lắk.',
   },
+  {
+    name: 'ZenWork',
+    site: 'https://zenwork.io.vn/',
+    label: 'zenwork.io.vn',
+    logo: '/media/partners/zenwork-logo.webp',
+    vi: 'Dự án con của Hương Thiền Nature do Kiều Mạnh vận hành. ZenWork phụ trách truyền thông và tiếp thị, thiết kế giải pháp, xây dựng và ứng dụng phần mềm vào quản lý, vận hành doanh nghiệp.',
+    en: 'A Hương Thiền Nature project run by Kiều Mạnh. ZenWork handles communications and marketing, designs solutions, and builds and applies software for business management and operations.',
+  },
 ];

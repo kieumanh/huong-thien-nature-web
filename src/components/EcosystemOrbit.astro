@@ -10,7 +10,7 @@ const orbitDurations = ['26s', '42s', '58s'];
 <div class="ecosystem-motion" data-ecosystem>
 
   <div class="solar-system-pillars">
-    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`} data-hybrid-reveal>
+    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`}>
       <span class="solar-pillar__index">{values[index]}</span>
       <h3>{title}</h3>
       <p>{text}</p>

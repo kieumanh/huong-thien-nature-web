@@ -130,3 +130,8 @@
 .article-illustration img { width: 100%; height: auto; border-radius: var(--radius-card); }
 .article-illustration figcaption { margin-top: .55rem; font-size: var(--type-caption); color: var(--muted); }
 .article-illustration a { white-space: nowrap; }
+
+
+@media (max-width: 759px) {
+  .journal-listing-header .contemplative-scene--mandala { inset-inline: 0; margin-inline: auto; opacity: .13; }
+}

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.4.1',
+    date: '2026-11-22',
+    vi: ['Trang chủ và chân trang dễ đọc hơn', 'Tăng độ tương phản của thẻ hệ sinh thái, canh giữa họa tiết trên điện thoại, đưa lịch sử phiên bản vào nhóm Khám phá và thêm hồ sơ ZenWork.'],
+    en: ['A clearer homepage and footer', 'Improved ecosystem card contrast, centered decorations on mobile, moved version history to Explore and added the ZenWork profile.'],
+  },
+  {
     version: '2.4.0',
     date: '2026-11-21',
     vi: ['Ba quỹ đạo trên trang chủ và bốn mùa', 'Đưa mô hình về trang chủ, viết riêng định hướng hệ sinh thái, chia lại timeline và bổ sung ảnh Pixabay trong bài dài. Website tự đổi hiệu ứng theo bốn mùa mỗi giờ.'],

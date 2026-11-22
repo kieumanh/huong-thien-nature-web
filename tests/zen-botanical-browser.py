@@ -2,6 +2,7 @@
 from datetime import datetime, timezone
 import json
 import os
+import re
 from pathlib import Path
 from urllib.parse import urlsplit
 
@@ -105,9 +106,9 @@ def check_flows(browser):
         menu.click()
         page.locator(f'#main-nav a[href="{entries["team"]}"]').click()
         page.wait_for_url(base + entries['team'])
-        expect(page.locator('#doi-tac .partner-card')).to_have_count(2)
-        expect(page.locator('#doi-tac img')).to_have_count(2)
-        expect(page.locator('#doi-tac a[href*="zenwork"]')).to_have_count(0)
+        expect(page.locator('#doi-tac .partner-card')).to_have_count(3)
+        expect(page.locator('#doi-tac img')).to_have_count(3)
+        expect(page.locator('#doi-tac a[href="https://zenwork.io.vn/"]')).to_have_count(1)
         expect(page.locator('.footer-credit a')).to_have_attribute('href', 'https://zenwork.io.vn/')
         expect(page.locator('#huong-thien h3')).to_be_visible()
         expect(page.locator('#kieu-manh h3')).to_be_visible()
@@ -168,8 +169,32 @@ def check_flows(browser):
     page.set_viewport_size({'width': 1440, 'height': 900})
     page.emulate_media(reduced_motion='no-preference')
     wait_page(page, base + routes['vi']['home'])
+    page.set_viewport_size({'width': 393, 'height': 850})
+    mandala = page.locator('.home-story__copy .contemplative-scene--mandala')
+    mandala.scroll_into_view_if_needed()
+    expect(mandala).to_have_class(re.compile('scene-visible'))
+    assert mandala.evaluate("""el => {
+      const center = node => node.getBoundingClientRect().left + node.getBoundingClientRect().width / 2;
+      return Math.abs(center(el) - center(el.parentElement)) <= 1;
+    }""")
     for width in widths:
         page.set_viewport_size({'width': width, 'height': 900})
+        assert page.locator('.solar-pillar').evaluate_all("""cards => {
+          function luminance(color) {
+            const [r, g, b] = color.match(/[0-9]+/g).map(channel => {
+              const value = Number(channel) / 255;
+              return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+            });
+            return .2126 * r + .7152 * g + .0722 * b;
+          }
+          return cards.length === 3 && cards.every(card => {
+            const bg = luminance(getComputedStyle(card).backgroundColor);
+            const fg = luminance(getComputedStyle(card.querySelector('p')).color);
+            const bounds = card.getBoundingClientRect();
+            return (Math.max(bg, fg) + .05) / (Math.min(bg, fg) + .05) >= 4.5 &&
+              bounds.left >= 0 && bounds.right <= innerWidth && card.scrollWidth <= card.clientWidth;
+          });
+        }"""), ('ecosystem cards must be legible and fit', width)
         scene = page.locator('.solar-system-scene')
         scene.scroll_into_view_if_needed()
         page.wait_for_function("getComputedStyle(document.querySelector('.solar-orbit')).animationPlayState === 'running'")

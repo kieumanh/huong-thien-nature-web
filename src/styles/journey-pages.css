@@ -28,7 +28,7 @@
 .home-story__photo img { width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover; object-position: center 49%; border-radius: 48% 48% var(--radius-feature) var(--radius-feature) / 24% 24% var(--radius-feature) var(--radius-feature); }
 .home-story__copy p + p, .home-story__copy h2 + p, .home-connection p { max-width: 64ch; margin-block: .65rem; }
 .home-ecosystem-story { position: relative; isolation: isolate; }
-.home-ecosystem-story::after { content: ''; position: absolute; inset: .7rem 0 auto auto; z-index: -1; width: min(34vw, 22rem); aspect-ratio: 1; background: url('/media/botanical-sprig.svg') right top / contain no-repeat; opacity: .23; pointer-events: none; }
+.home-ecosystem-story .contemplative-scene--sprig { position: absolute; inset: .7rem 0 auto auto; z-index: -1; width: min(30vw, 18rem); opacity: .19; }
 .home-practice-photo img { width: 100%; height: auto; border-radius: var(--radius-card); }
 .home-connection { display: grid; align-items: center; gap: 1rem 2.3rem; padding: clamp(1rem, 4vw, 2rem); border-radius: var(--radius-feature); background: var(--surface-container); }
 @media (min-width: 760px) {
@@ -63,4 +63,17 @@
 .journey-entry p { max-width: 64ch; margin-top: .4rem; line-height: 1.68; }
 @media (max-width: 560px) {
   .founder-journey .journey-chapters li { grid-template-columns: minmax(0, 1fr); }
+}
+
+
+@media (max-width: 759px) {
+  .home-story__copy .contemplative-scene--mandala {
+    position: relative; inset: auto; z-index: auto;
+    width: clamp(5.5rem, 25vw, 7.5rem); margin: .1rem auto .7rem;
+  }
+  .journey-page-header .contemplative-scene--mandala,
+  .home-connection .contemplative-scene--mandala,
+  .home-ecosystem-story .contemplative-scene--sprig {
+    inset-inline: 0; margin-inline: auto; opacity: .13;
+  }
 }
