@@ -20,6 +20,7 @@ const groups = [
     title: vi ? 'Khám phá' : 'Explore',
     links: [
       { label: t.nav[1], url: journeyPath(lang, 'practice') },
+      { label: journeyPages.guidance[lang].title, url: journeyPath(lang, 'guidance') },
       { label: t.nav[4], url: journalPath(lang) },
       { label: vi ? 'Tìm kiếm' : 'Search', url: vi ? '/vi/timkiem/' : '/en/search/' },
       { label: releaseTitle[lang], url: versionPath },

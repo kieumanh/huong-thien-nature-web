@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.5.0',
+    date: '2026-11-22',
+    vi: ['Khóa hướng dẫn tarot cùng Hương Thiền', 'Bổ sung buổi hướng dẫn 1:1 trong 90 phút, màu tím mận, chữ viết tay và trạng thái tương tác rõ hơn cho nút và menu.'],
+    en: ['Tarot guidance with Hương Thiền', 'Added a 90-minute one-to-one guided session, a plum accent, handwritten display type and clearer button and menu states.'],
+  },
+  {
     version: '2.4.2',
     date: '2026-11-22',
     vi: ['Hành trình kết nối đối tác', 'Bổ sung hai mối hợp tác trong Hệ sinh thái, rút gọn chân trang và canh giữa nội dung trên điện thoại.'],
