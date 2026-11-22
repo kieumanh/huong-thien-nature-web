@@ -77,3 +77,10 @@
     inset-inline: 0; margin-inline: auto; opacity: .13;
   }
 }
+
+.partner-journey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}

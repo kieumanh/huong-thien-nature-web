@@ -1,5 +1,4 @@
 ---
-import { contactPath, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
 import { journeyPath, journeyPages } from '../data/journey-pages';
 import { journalPath } from '../data/articles';
 import { version } from '../../package.json';
@@ -33,14 +32,6 @@ const groups = [
       { label: vi ? 'Định hướng' : 'Our direction', url: journeyPath(lang, 'ecosystem') },
       { label: journeyPages.team[lang].title, url: journeyPath(lang, 'team') },
       { label: vi ? 'Cửa hàng' : 'Shop', url: shopPath(lang) },
-    ],
-  },
-  {
-    title: vi ? 'Kết nối' : 'Connect',
-    links: [
-      { label: vi ? 'Liên hệ' : 'Contact', url: contactPath(lang) },
-      { label: hotline, url: `tel:${internationalPhone}` },
-      { label: vi ? 'Nhắn Zalo' : 'Message on Zalo', url: zaloUrl },
     ],
   },
 ];
@@ -113,13 +104,14 @@ const groups = [
   .footer a[aria-current="page"] { text-decoration: underline; text-underline-offset: .2em; }
 
   @media (max-width: 639px) {
-    .footer-group:last-child { grid-column: 1 / -1; padding-top: .75rem; border-top: 1px solid #eaeedf38; }
-    .footer-group:last-child ul { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
-  }
-  @media (min-width: 640px) {
-    .footer-navigation { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .footer { text-align: center; }
+    .footer-identity { flex-direction: column; align-items: center; }
+    .footer-logo { flex: none; width: 3rem; }
+    .footer-group a, .footer-bottom { justify-content: center; }
+    .footer-notice { margin-inline: auto; }
+    .footer-bottom { flex-direction: column; }
   }
   @media (min-width: 960px) {
-    .footer-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.9fr); }
+    .footer-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.5fr); }
   }
 </style>

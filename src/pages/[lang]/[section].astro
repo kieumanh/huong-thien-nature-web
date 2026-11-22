@@ -11,7 +11,7 @@ import { ecosystemVision } from '../../data/ecosystem-vision';
 import { articlePath } from '../../data/articles';
 import { beginnerArticles } from '../../data/home';
 import { contactPath } from '../../data/contact-channels';
-import { journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
+import { ecosystemPartnerJourney, journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
 import { getCopy, languages, type Language } from '../../data/site';
 import '../../styles/story-home.css';
 import '../../styles/material-home.css';
@@ -79,7 +79,20 @@ const vision = ecosystemVision[lang];
             <h3>{path.title}</h3>
             <p><strong>{path.focus}</strong></p>
             <p>{path.text}</p>
-            {index === 0 && <a class="quiet-link" href={journeyPath(lang, 'team') + '#doi-tac'}>{vi ? 'Gặp đối tác nông nghiệp' : 'Meet our farming partner'}</a>}
+            {index === 0 && <a class="quiet-link" href="#partnerships">{vi ? 'Gặp đối tác nông nghiệp' : 'Meet our farming partner'}</a>}
+          </article>)}
+        </div>
+      </section>
+      <section class="journey-section" id="partnerships" aria-labelledby="partnerships-title">
+        <h2 id="partnerships-title">{vi ? 'Hành trình kết nối đối tác' : 'How our partnerships took shape'}</h2>
+        <p>{vi ? 'Hai mối hợp tác giúp Hương Thiền Nature đưa việc chăm đất, sống xanh và kinh nghiệm của những người đồng hành vào thực tế.' : 'Two partnerships bring natural farming, greener living and the experience of trusted advisers into Hương Thiền Nature.'}</p>
+        <div class="partner-journey-grid">
+          {ecosystemPartnerJourney.map(({ partner, date, [lang]: entry }) => <article class="zen-card vision-card">
+            <p class="eyebrow">{date ? <time datetime={date}>{entry.milestone}</time> : entry.milestone}</p>
+            <h3>{partner.name}</h3>
+            <p><strong>{entry.affiliation}</strong></p>
+            <p>{entry.description}</p>
+            <a class="quiet-link" href={partner.site}>{partner.label}</a>
           </article>)}
         </div>
       </section>
