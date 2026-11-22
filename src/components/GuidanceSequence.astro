@@ -1,0 +1,84 @@
+---
+import type { Language } from '../data/site';
+
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const stages = vi ? [
+  ['Thiền định', 'Lắng lại', 'Cảm nhận hơi thở hoặc điểm tựa của cơ thể.'],
+  ['Tarot', 'Nhìn một hình ảnh', 'Để ý chi tiết mình chú ý đầu tiên và điều nó gợi ra.'],
+  ['Tâm lý học', 'Đặt câu hỏi', 'Kiểm tra liên tưởng bằng sự việc mình biết rồi chọn một bước nhỏ.'],
+] : [
+  ['Meditation', 'Settle', 'Notice a breath or where your body is supported.'],
+  ['Tarot', 'Look at an image', 'Notice the first detail that draws you in and what it brings to mind.'],
+  ['Psychology', 'Ask a question', 'Check the association against what you know and choose a small step.'],
+];
+---
+<figure class="guidance-sequence" data-guidance-sequence>
+  <ol role="list">
+    {stages.map(([method, title, detail], index) => <li>
+      <div class:list={['sequence-glyph', `sequence-glyph--${index + 1}`]} aria-hidden="true">
+        <i></i><i></i><i></i>
+      </div>
+      <p class="eyebrow">{method}</p>
+      <h3>{title}</h3>
+      <p>{detail}</p>
+    </li>)}
+  </ol>
+  <figcaption>{vi ? 'Cùng một câu hỏi, ba cách để nhìn kỹ hơn.' : 'Three ways to look more closely at the same question.'}</figcaption>
+</figure>
+<script>
+  const sequence = document.querySelector('[data-guidance-sequence]');
+  if (sequence && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      sequence.classList.add('sequence-started');
+      observer.disconnect();
+    }, { threshold: .2 });
+    observer.observe(sequence);
+  }
+</script>
+<style>
+  .guidance-sequence {
+    padding: clamp(1rem, 4vw, 2.2rem); margin-top: 1.2rem;
+    border: 1px solid var(--orchid-line); border-radius: var(--radius-feature);
+    background: linear-gradient(135deg, var(--orchid-mist), var(--surface-raised) 76%);
+  }
+  .guidance-sequence ol { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
+  .guidance-sequence li {
+    min-width: 0; padding: .85rem .85rem 1.1rem; background: var(--surface-raised);
+    border: 1px solid var(--orchid-line); border-radius: var(--radius-input);
+  }
+  .guidance-sequence .eyebrow { color: var(--orchid); margin-bottom: .25rem; }
+  .guidance-sequence h3 + p { margin-top: .35rem; }
+  .guidance-sequence figcaption { margin-top: .8rem; text-align: center; }
+  .sequence-glyph {
+    display: grid; place-items: center; overflow: hidden; position: relative; isolation: isolate;
+    block-size: 6rem; margin-bottom: .75rem; border-radius: .65rem;
+    color: var(--orchid); background: var(--orchid-mist);
+  }
+  .sequence-glyph i { display: block; grid-area: 1 / 1; border: 1px solid currentColor; }
+  .sequence-glyph--1 i { block-size: .75rem; inline-size: 3.2rem; border-width: 0 0 2px; border-radius: 0 0 50% 50%; transform: translateY(var(--y)); }
+  .sequence-glyph--1 i:first-child { --y: -.64rem; }
+  .sequence-glyph--1 i:nth-child(2) { --y: 0rem; }
+  .sequence-glyph--1 i:last-child { --y: .64rem; }
+  .sequence-glyph--2 i { inline-size: 2rem; block-size: 3.1rem; border-radius: .28rem; background: var(--surface-raised); transform: translateX(var(--x)) rotate(var(--angle)); }
+  .sequence-glyph--2 i:first-child { --x: -.76rem; --angle: -16deg; }
+  .sequence-glyph--2 i:nth-child(2) { --x: .76rem; --angle: 16deg; }
+  .sequence-glyph--2 i:last-child { --x: 0rem; --angle: 0deg; background: radial-gradient(circle, var(--orchid) 12%, var(--surface-raised) 13%); }
+  .sequence-glyph--3 i {
+    inline-size: 2.6rem; block-size: 1.3rem; border-radius: .65rem .65rem .65rem .12rem;
+    transform: translate(var(--x), var(--y));
+  }
+  .sequence-glyph--3 i:first-child { --x: -.85rem; --y: -.66rem; }
+  .sequence-glyph--3 i:nth-child(2) { --x: .85rem; --y: .25rem; border-radius: .65rem .65rem .12rem .65rem; }
+  .sequence-glyph--3 i:last-child { --x: -.3rem; --y: 1.35rem; inline-size: 1.5rem; block-size: 0; border-width: 0 0 2px; }
+  @media (min-width: 700px) { .guidance-sequence ol { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (prefers-reduced-motion: no-preference) {
+    .sequence-started .sequence-glyph--1 i { animation: breathe-lines 1.35s ease-in-out; }
+    .sequence-started .sequence-glyph--2 i { animation: fan-cards 1.05s 1.4s ease-out backwards; }
+    .sequence-started .sequence-glyph--3 i { animation: dialogue 1s 2.5s ease-out backwards; }
+    @keyframes breathe-lines { 48% { transform: translateY(calc(var(--y) * 1.5)) scaleX(1.24); } }
+    @keyframes fan-cards { from { transform: translateX(0) rotate(0); } }
+    @keyframes dialogue { from { opacity: .25; transform: translate(var(--x), calc(var(--y) + .45rem)); } }
+  }
+</style>

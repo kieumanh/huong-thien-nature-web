@@ -48,7 +48,9 @@
 .vision-principles { max-width: 68ch; }
 .vision-principles > div { padding: .85rem 0; border-bottom: 1px solid var(--border); }
 
-.journey-stage { max-width: 57rem; margin: 2.25rem auto 0; }
+.journey-timeline { max-width: 57rem; margin: 2rem auto 0; }
+.journey-stage + .journey-stage { margin-top: 1.65rem; }
+.journey-timeline .journey-chapters li::after { inset-block-start: 1.52rem; }
 .journey-stage > h3 { padding-bottom: .65rem; border-bottom: 2px solid var(--brand-fern); }
 .founder-journey .journey-jumps { max-width: 57rem; margin: 1.5rem auto; }
 .founder-journey .journey-chapters { max-width: none; margin: 0; }

@@ -1,6 +1,6 @@
 ---
 import Breadcrumb from './Breadcrumb.astro';
-import GuidanceOrbit from './GuidanceOrbit.astro';
+import GuidanceSequence from './GuidanceSequence.astro';
 import { tarotCopy, tarotSources } from '../data/tarot-guidance';
 import { journeyPages, journeyPath } from '../data/journey-pages';
 import { contactPath, zaloUrl } from '../data/contact-channels';
@@ -61,8 +61,8 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
 
     <section class="guidance-section" aria-labelledby="connection-title">
       <h2 id="connection-title">{copy.connectionTitle}</h2>
-      <GuidanceOrbit {lang} />
-      <ul class="guidance-connections" data-guidance-connections>
+      <GuidanceSequence {lang} />
+      <ul class="guidance-connections">
         {copy.connection.map(([title, description]) => <li class="zen-card"><h3>{title}</h3><p>{description}</p></li>)}
       </ul>
       <p>{copy.connectionNote}</p>
@@ -85,10 +85,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       <p>{copy.sourcesIntro}</p>
       <div class="guidance-portraits">
         {tarotSources.map(person => <article class="zen-card guidance-person">
-          <figure>
-            <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.illustration?.[lang] ?? person.name} class:list={{ 'guidance-source-illustration': person.illustration }} />
-            <figcaption><a href={person.photo}>{person.illustration ? person.illustration[lang] : person.credit}<span class="sr-only"> · {copy.picture}{person.illustration ? "" : `: ${person.name}`}</span></a></figcaption>
-          </figure>
+          {person.image ? <figure>
+            <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.name} />
+            <figcaption><a href={person.photo}>{person.credit}<span class="sr-only"> · {copy.picture}: {person.name}</span></a></figcaption>
+          </figure> : <div class="guidance-work"><cite>{person.work}</cite><small>{person.publication}</small></div>}
           <div>
             <h3>{person.name}</h3>
             <p>{person[lang]}</p>
@@ -110,10 +110,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
     <section class="guidance-section guidance-session" id="session" aria-labelledby="session-title">
       <h2 id="session-title">{copy.sessionTitle}</h2>
       <p>{copy.sessionIntro}</p>
-      <ol>
+      <ol class="progress-line" role="list">
         {copy.steps.map(([minutes, title, detail]) => <li>
           <div><h3>{title}</h3><p>{detail}</p></div>
-          <span>{minutes} {vi ? 'phút' : 'min'}</span>
+          <span class="session-duration">{minutes} {vi ? 'phút' : 'min'}</span>
         </li>)}
       </ol>
     </section>
@@ -126,24 +126,15 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
         <li><a href="https://www.apa.org/practice/guidelines/evidence-based-statement.html">American Psychological Association · Evidence-based practice</a></li>
         <li><a href="https://www.nccih.nih.gov/health/tips/8-things-to-know-about-meditation-and-mindfulness">NCCIH · Meditation and mindfulness</a></li>
       </ul>
+    </section>
+
+    <section class="guidance-reading guidance-invitation" aria-labelledby="invitation-title">
+      <h2 id="invitation-title">{copy.invitation}</h2>
+      <p>{copy.invitationNote}</p>
       <div class="guidance-actions">
-        <a class="button guidance-button" href={zaloUrl}>{copy.booking}</a>
+        <a class="button guidance-button" href={zaloUrl}>{copy.invitationAction}</a>
         <a class="quiet-link" href={contactPath(lang)}>{copy.contact}</a>
       </div>
     </section>
   </article>
 </main>
-<script>
-  const connections = document.querySelector('[data-guidance-connections]');
-  if (connections && 'IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    const observer = new IntersectionObserver(entries => {
-      for (const entry of entries) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('guidance-connections--visible');
-          observer.disconnect();
-        }
-      }
-    }, { threshold: .2 });
-    observer.observe(connections);
-  }
-</script>

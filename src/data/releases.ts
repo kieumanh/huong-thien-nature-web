@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.6.1',
+    date: '2026-11-22',
+    vi: ['Mạch đọc và lộ trình tarot', 'Thêm minh họa động theo ba bước, nối liền các mốc và làm rõ lời mời liên hệ cuối khóa.'],
+    en: ['Tarot sequence and timelines', 'Added a three-step animated illustration, continuous timeline connectors and a clearer invitation to get in touch.'],
+  },
+  {
     version: '2.6.0',
     date: '2026-11-22',
     vi: ['Khóa học và nhịp ngày đêm', 'Thêm mục Khóa học, mở rộng bài tarot và minh họa ba quỹ đạo. Phối chữ viết tay và tím mận trên toàn site, đổi sắc độ theo giờ Việt Nam.'],

@@ -92,7 +92,14 @@
   padding: clamp(.8rem, 2.5vw, 1.15rem);
 }
 .guidance-person img { width: 100%; aspect-ratio: 4 / 5; height: auto; object-fit: cover; object-position: center 30%; border-radius: var(--radius-input); }
-.guidance-person img.guidance-source-illustration { object-fit: contain; background: var(--orchid-mist); }
+.guidance-work {
+  display: grid; align-content: center; gap: .6rem;
+  min-height: 8rem; padding: clamp(.65rem, 2vw, 1rem);
+  border-radius: var(--radius-input); background: var(--orchid-mist);
+  color: var(--orchid-deep); overflow-wrap: break-word;
+}
+.guidance-work cite { font: italic 1rem/1.4 var(--serif); }
+.guidance-work small { font-size: .78rem; }
 .guidance-person p { margin-top: .35rem; }
 .guidance-person figcaption { overflow-wrap: anywhere; }
 .guidance-books { margin-top: 1.7rem; }
@@ -106,11 +113,23 @@
   border-radius: var(--radius-feature);
   background: var(--surface-container);
 }
-.guidance-session ol { list-style: decimal; padding-inline-start: 1.4rem; margin-top: .6rem; }
+.guidance-session ol { list-style: none; margin-top: .85rem; }
 .guidance-session li { padding: .75rem 0; border-bottom: 1px solid var(--border); }
 .guidance-session li:last-child { border-bottom: 0; }
-.guidance-session li span { color: var(--orchid); font-size: .9rem; font-weight: 650; }
+.guidance-session .session-duration { color: var(--orchid); font-size: .9rem; font-weight: 650; }
 .guidance-scope { border-top: 1px solid var(--orchid-line); padding-top: 1.7rem; }
+.guidance-invitation {
+  padding: clamp(1.15rem, 4vw, 2rem);
+  margin-top: clamp(1.75rem, 5vw, 3rem);
+  border: 1px solid var(--orchid-line); border-radius: var(--radius-feature);
+  background: linear-gradient(135deg, var(--orchid-mist), var(--surface-raised));
+}
+.guidance-invitation h2 { color: var(--orchid-deep); }
+.guidance-invitation .guidance-button { min-height: 3.35rem; padding-inline: clamp(.9rem, 3vw, 1.5rem); font-size: 1rem; text-align: center; }
+@media (max-width: 560px) {
+  .guidance-invitation .guidance-actions { flex-direction: column; align-items: stretch; }
+  .guidance-invitation .quiet-link { justify-content: center; text-align: center; }
+}
 @media (max-width: 430px) {
   .guidance-person { grid-template-columns: 1fr; }
   .guidance-person figure img { max-width: 10rem; }
@@ -119,12 +138,9 @@
   .guidance-opening-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
   .guidance-hero { grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); }
   .guidance-session li { position: relative; padding-inline-end: 5rem; }
-  .guidance-session li span { position: absolute; inset: .85rem 0 auto auto; }
+  .guidance-session .session-duration { position: absolute; inset: .85rem 0 auto auto; }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .guidance-connections--visible li { animation: guidance-settle .65s var(--motion-ease) both; }
-  .guidance-connections--visible li:nth-child(2) { animation-delay: .12s; }
-  .guidance-connections--visible li:nth-child(3) { animation-delay: .24s; }
   .guidance-exercise details[open] p { animation: guidance-settle .33s var(--motion-ease) both; }
   @keyframes guidance-settle {
     from { opacity: .5; transform: translateY(.55rem); }
@@ -141,7 +157,6 @@
   .guidance-hero .guidance-actions > a { flex: 1 1 100%; text-align: center; }
   .guidance-person { grid-template-columns: 1fr; }
   .guidance-person figure { width: min(100%, 11rem); }
-  .guidance-session ol { padding-inline-start: 1.2rem; }
 }
 @media (min-width: 580px) and (max-width: 959px) {
   .guidance-section { max-width: 48rem; margin-inline: auto; }
