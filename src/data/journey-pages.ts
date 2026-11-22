@@ -71,13 +71,14 @@ export const ecosystemPartnerJourney = [
   },
   {
     partner: quartzPartner,
+    date: '2026-11-22',
     vi: {
-      milestone: 'Đối tác chiến lược',
+      milestone: '22/11/2026',
       affiliation: 'Nha Trang, Khánh Hòa',
       description: 'Anh Nguyễn Trần Quyết đồng hành với Hương Thiền Nature trong lĩnh vực đá thạch anh và phong thủy. Với kinh nghiệm tại Nha Trang, Khánh Hòa, anh đồng thời là cố vấn, chia sẻ góc nhìn và góp ý cho các định hướng phát triển của dự án.',
     },
     en: {
-      milestone: 'Strategic partnership',
+      milestone: '22 November 2026',
       affiliation: 'Nha Trang, Khánh Hòa',
       description: 'Nguyễn Trần Quyết is Hương Thiền Nature’s strategic partner in quartz and feng shui. Drawing on his experience in Nha Trang, Khánh Hòa, he also advises the team on the project’s direction.',
     },
