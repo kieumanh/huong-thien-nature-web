@@ -1,7 +1,8 @@
 ---
 import Breadcrumb from './Breadcrumb.astro';
+import GuidanceOrbit from './GuidanceOrbit.astro';
 import { tarotCopy, tarotSources } from '../data/tarot-guidance';
-import { journeyPages } from '../data/journey-pages';
+import { journeyPages, journeyPath } from '../data/journey-pages';
 import { contactPath, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
 import '../styles/tarot-guidance.css';
@@ -12,7 +13,7 @@ const copy = tarotCopy[lang];
 const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magician.jpg';
 ---
 <main class="shell guidance" id="main-content" tabindex="-1">
-  <Breadcrumb {lang} current={journeyPages.guidance[lang].title} />
+  <Breadcrumb {lang} current={vi ? "Lắng nghe mình qua tarot" : "Listening to yourself through tarot"} parent={{ label: journeyPages.guidance[lang].title, href: journeyPath(lang, "guidance") }} />
   <article aria-labelledby="guidance-title">
     <header class="guidance-hero">
       <div class="guidance-hero-copy">
@@ -53,8 +54,14 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       {copy.why.map(paragraph => <p>{paragraph}</p>)}
     </section>
 
+    <section class="guidance-reading" aria-labelledby="meditation-first">
+      <h2 id="meditation-first">{copy.meditationTitle}</h2>
+      {copy.meditation.map(paragraph => <p>{paragraph}</p>)}
+    </section>
+
     <section class="guidance-section" aria-labelledby="connection-title">
       <h2 id="connection-title">{copy.connectionTitle}</h2>
+      <GuidanceOrbit {lang} />
       <ul class="guidance-connections" data-guidance-connections>
         {copy.connection.map(([title, description]) => <li class="zen-card"><h3>{title}</h3><p>{description}</p></li>)}
       </ul>
@@ -66,6 +73,11 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
           <p>{copy.exercise}</p>
         </details>
       </div>
+    </section>
+
+    <section class="guidance-reading" aria-labelledby="after-the-card">
+      <h2 id="after-the-card">{copy.integrationTitle}</h2>
+      {copy.integration.map(paragraph => <p>{paragraph}</p>)}
     </section>
 
     <section class="guidance-section" aria-labelledby="guidance-sources">

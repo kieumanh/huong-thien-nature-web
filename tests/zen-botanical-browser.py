@@ -21,7 +21,7 @@ routes = {
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
         'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
         'search': '/vi/timkiem/?q=bot+cacao', 'contact': '/vi/lien-he/',
-        'versions': '/vi/phien-ban/', 'guidance': '/vi/khoa-huong-dan/',
+        'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-hoc/', 'guidance': '/vi/khoa-hoc/tam-ly-tarot/',
     },
     'en': {
         'home': '/en/', 'practice': '/en/practice/', 'ecosystem': '/en/ecosystem/',
@@ -29,7 +29,7 @@ routes = {
         'article': '/en/journal/when-meditation-is-difficult/',
         'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',
         'search': '/en/search/?q=cocoa', 'contact': '/en/contact/',
-        'versions': '/en/versions/', 'guidance': '/en/guided-sessions/',
+        'versions': '/en/versions/', 'courses': '/en/courses/', 'guidance': '/en/courses/tarot-reflection/',
     },
 }
 report = {'viewports': widths, 'snapshots': [], 'axe': [], 'passes': []}
@@ -113,14 +113,18 @@ def check_flows(browser):
         expect(page.locator('#huong-thien h3')).to_be_visible()
         expect(page.locator('#kieu-manh h3')).to_be_visible()
         menu.click()
-        page.locator(f'#main-nav a[href="{entries["guidance"]}"]').click()
+        page.locator(f'#main-nav a[href="{entries["courses"]}"]').click()
+        page.wait_for_url(base + entries['courses'])
+        page.locator(f'.course-card a[href="{entries["guidance"]}"]').click()
         page.wait_for_url(base + entries['guidance'])
         expect(page.locator('#guidance-title')).to_be_visible()
         expect(page.locator('.guidance-person img')).to_have_count(4)
         expect(page.locator('.guidance-scope a[href*="zalo.me"]')).to_be_visible()
         expect(page.locator('.language a')).to_have_attribute('href', routes['en' if lang == 'vi' else 'vi']['guidance'])
         minutes = page.locator('.guidance-session li span').all_text_contents()
-        assert sum(int(step.split()[0]) for step in minutes) == 90
+        assert sum(int(step.split()[0]) for step in minutes) == 90 and minutes[0].startswith('15 ')
+        expect(page.locator('.orbit-track')).to_have_count(3)
+        expect(page.locator('[data-orbit-pause]')).to_be_hidden()
         exercise = page.locator('.guidance-exercise details')
         exercise.locator('summary').click()
         expect(exercise.locator('p')).to_be_visible()
@@ -194,8 +198,9 @@ def check_flows(browser):
         page.set_viewport_size({'width': width, 'height': 900})
         assert page.locator('.solar-pillar').evaluate_all("""cards => {
           function luminance(color) {
-            const [r, g, b] = color.match(/[0-9]+/g).map(channel => {
-              const value = Number(channel) / 255;
+            const scale = color.startsWith('color(srgb ') ? 1 : 255;
+            const [r, g, b] = color.match(/[0-9.]+/g).map(channel => {
+              const value = Number(channel) / scale;
               return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
             });
             return .2126 * r + .7152 * g + .0722 * b;
@@ -263,9 +268,36 @@ def check_no_script(browser):
     context.close()
     report['passes'].append('VI/EN no-JS navigation, native audio, reading, catalogue, search alternatives and direct contact channels.')
 
+def check_daylight(browser):
+    page = browser.new_page(viewport={'width': 393, 'height': 850}, reduced_motion='reduce')
+    arrange_api(page)
+    html = page.locator('html')
+    for utc_hour, utc_minute, tone, twilight in [(3, 0, 'day', '0%'), (11, 0, 'day', '75%'), (11, 50, 'night', '70%'), (14, 0, 'night', '0%')]:
+        page.clock.set_fixed_time(datetime(2026, 11, 22, utc_hour, utc_minute, tzinfo=timezone.utc))
+        wait_page(page, base + routes['vi']['guidance'])
+        expect(html).to_have_attribute('data-sky', tone)
+        assert html.evaluate("el => el.style.getPropertyValue('--twilight')") == twilight
+    for lang, entries in routes.items():
+        for name, path in entries.items():
+            wait_page(page, base + path)
+            expect(html).to_have_attribute('data-sky', 'night')
+            check_accessibility(page, lang, name + '-night', 393)
+    page.emulate_media(reduced_motion='no-preference')
+    wait_page(page, base + routes['vi']['guidance'])
+    figure = page.locator('[data-guidance-orbit]')
+    figure.scroll_into_view_if_needed()
+    expect(figure).to_have_class(re.compile('orbit-in-motion'))
+    pause = page.locator('[data-orbit-pause]')
+    pause.click()
+    expect(pause).to_have_attribute('aria-pressed', 'true')
+    expect(figure).not_to_have_class(re.compile('orbit-in-motion'))
+    page.close()
+    report['passes'].append('Vietnam clock sets day, twilight and night correctly. Night contrast and pausing the guide orbit tested.')
+
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True, args=['--no-sandbox'])
     page = browser.new_page(reduced_motion='reduce')
+    page.clock.set_fixed_time(datetime(2026, 11, 22, 3, tzinfo=timezone.utc))
     errors = []
     page.on('pageerror', lambda error: errors.append(str(error)))
     arrange_api(page)
@@ -294,7 +326,7 @@ with sync_playwright() as playwright:
         for width in snapshot_widths:
             page.set_viewport_size({'width': width, 'height': 900})
             for name, path in routes['vi'].items():
-                if name in {'practice', 'ecosystem', 'story', 'team', 'guidance'}:
+                if name in {'practice', 'ecosystem', 'story', 'team', 'courses', 'guidance'}:
                     continue
                 wait_page(page, baseline + path)
                 screenshot(page, 'baseline', 'vi', name, width)
@@ -303,6 +335,7 @@ with sync_playwright() as playwright:
     try:
         check_flows(browser)
         check_no_script(browser)
+        check_daylight(browser)
     finally:
         artifact.joinpath('zen-botanical-browser.json').write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding='utf-8')
     findings = [result for result in report['axe'] if result['violations']]

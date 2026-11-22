@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.6.0',
+    date: '2026-11-22',
+    vi: ['Khóa học và nhịp ngày đêm', 'Thêm mục Khóa học, mở rộng bài tarot và minh họa ba quỹ đạo. Phối chữ viết tay và tím mận trên toàn site, đổi sắc độ theo giờ Việt Nam.'],
+    en: ['Courses and the daylight cycle', 'Added a course catalogue, expanded the tarot course and illustrated three orbits. Applied handwritten type and plum accents across the site, with colours following Vietnam time.'],
+  },
+  {
     version: '2.5.0',
     date: '2026-11-22',
     vi: ['Khóa hướng dẫn tarot cùng Hương Thiền', 'Bổ sung buổi hướng dẫn 1:1 trong 90 phút, màu tím mận, chữ viết tay và trạng thái tương tác rõ hơn cho nút và menu.'],

@@ -1,5 +1,6 @@
 import type { APIRoute } from 'astro';
 import { journeyPageKeys, journeyPath } from '../data/journey-pages';
+import { coursePath, courses } from '../data/courses';
 import { releasesPath } from '../data/releases';
 import { contactPath } from '../data/contact-channels';
 import { articles, articlePath, journalPath } from '../data/articles';
@@ -11,6 +12,7 @@ export const GET: APIRoute = () => {
     { vi: '/vi/', en: '/en/' },
     ...journeyPageKeys.map(page => ({ vi: journeyPath('vi', page), en: journeyPath('en', page) })),
     { vi: contactPath('vi'), en: contactPath('en') },
+    ...courses.map(course => ({ vi: coursePath('vi', course), en: coursePath('en', course) })),
     { vi: releasesPath('vi'), en: releasesPath('en') },
     { vi: journalPath('vi'), en: journalPath('en') },
     { vi: shopPath('vi'), en: shopPath('en') },

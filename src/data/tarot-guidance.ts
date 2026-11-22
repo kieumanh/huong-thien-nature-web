@@ -64,6 +64,12 @@ export const tarotCopy = {
       'Ví dụ, thay cho câu hỏi “Người ấy sẽ quay lại chứ?”, bạn có thể hỏi “Mình cần điều gì để đối diện sự chưa rõ ràng này?” Nếu lá bài gợi cảm giác cô độc, hai người có thể tìm hiểu sự khác nhau giữa muốn được ở một mình và cảm thấy bị bỏ rơi. Khi nhận ra nhu cầu thực sự là được lắng nghe, một bước hữu ích có thể là trò chuyện với một người đáng tin. Bước ấy đến từ hoàn cảnh của bạn, không từ một lời tiên đoán.',
       'Những chữ như “chữa lành” có thể diễn tả cảm nhận nhẹ nhõm sau khi được nghe và hiểu. Trong chăm sóc sức khỏe tâm thần, việc đánh giá triệu chứng, chọn phương pháp và theo dõi kết quả đòi hỏi chuyên môn. Vì thế, khi một lá gợi chuyện đau buồn, Hương Thiền có thể mời bạn trở về điều bạn thấy an toàn để nói ở hiện tại. Lá bài không dùng để xác định chấn thương, giải thích bệnh lý hay khuyên bỏ điều trị.',
     ],
+    meditationTitle: 'Vì sao mình ngồi yên trước khi rút bài?',
+    meditation: [
+      'Buổi gặp mở đầu bằng 15 phút thiền cùng Hương Thiền. Khi vừa đến, ta thường còn mang theo nhịp của việc đang làm dở, câu trả lời muốn nghe hoặc nỗi lo về điều sắp được nói. Khoảng lặng chung cho mình thời gian đặt những điều ấy xuống một chút. Bạn có thể ngồi trên ghế, mở hoặc khép mắt tùy ý, để hơi thở tự nhiên và nhận ra những nơi cơ thể đang được nâng đỡ.',
+      'Trong những phút đầu, Hương Thiền mời bạn nhận biết âm thanh và điểm tựa của cơ thể. Sau đó, bạn có thể để ý một hơi thở hoặc đơn giản lắng nghe căn phòng. Khi dòng suy nghĩ trở lại, việc nhận ra nó đã đủ. Cuối khoảng lặng, bạn chọn một từ hoặc một câu ghi nhận điều mình đang mang vào buổi gặp. Bạn có thể đổi tư thế, dừng hoặc dùng khoảng thời gian đầu để trò chuyện nếu ngồi yên khiến bạn khó chịu.',
+      'Nếu tâm linh là ngôn ngữ quen thuộc với bạn, đây có thể là dịp trở về với một lời nguyện, một cảm giác gắn kết hoặc điều mình thấy thiêng liêng. Sự kết nối ấy thuộc trải nghiệm của mỗi người. Có hôm ta cảm thấy sâu lắng, có hôm chỉ nhận ra mình đang mệt. Cả hai trải nghiệm đều có thể cho thấy câu hỏi nào đang cần được chăm sóc.',
+    ],
     connectionTitle: 'Trực giác, biểu tượng và sự có mặt',
     connection: [
       ['Tâm linh và trực giác', 'Một hình ảnh có thể khiến ta cảm thấy được chạm đến, hoặc gợi một giá trị mình đã quên. Có thể giữ trải nghiệm ấy như ý nghĩa riêng, rồi đặt nó bên cạnh bối cảnh và sự kiện có thể kiểm chứng.'],
@@ -74,6 +80,12 @@ export const tarotCopy = {
     exerciseTitle: 'Thử một câu hỏi với lá The Magician',
     exerciseLabel: 'Mở bài thực hành ngắn',
     exercise: 'Nhìn chiếc bàn và những vật đang ở trước mặt nhân vật. Ghi một điều bạn thấy, một cảm xúc nảy sinh và một chi tiết trong đời sống có thể giải thích cảm xúc đó. Sau đó hỏi: “Tuần này mình có thể dùng nguồn lực nào đang sẵn có?” Chọn một việc nhỏ để thử, rồi xem lại điều đã xảy ra.',
+    integrationTitle: 'Từ điều lá bài gợi ra đến một việc có thể làm',
+    integration: [
+      'Giả sử bạn đang cân nhắc nghỉ việc và một hình ảnh người đi đường khiến bạn thấy nhẹ nhõm. Cảm giác nhẹ nhõm có thể gợi rằng bạn đang cần nghỉ, cần tự chủ hơn hoặc đã mong thay đổi từ lâu. Hãy thử đặt từng khả năng cạnh điều đang thật sự diễn ra. Cụ thể, nếu được nghỉ một tuần mà vẫn muốn rời đi, điều gì ở công việc khiến bạn nghĩ như vậy? Nếu muốn ở lại trong điều kiện khác, bạn có thể cùng ai bàn về điều kiện ấy?',
+      'Sau buổi gặp, có thể viết ba dòng: hình ảnh mình nhớ, cách mình đang hiểu nó, và việc mình muốn thử. Giữ lại cả một dấu hỏi để quay về sau vài ngày. Một cách hiểu có ích thường làm tình huống cụ thể hơn hoặc mở ra một hành động vừa sức, như xin thêm thời gian, hỏi một người đáng tin hay kiểm tra lại thông tin còn thiếu. Bạn có thể đổi cách hiểu khi biết thêm điều mới.',
+      'Với khó khăn kéo dài hoặc lựa chọn có hậu quả lớn, chọn thêm một nguồn hỗ trợ phù hợp với tình huống. Hình ảnh giúp đặt lời cho trải nghiệm, còn quyết định cần dựa vào điều bạn biết, nguồn lực thực tế và quyền tự chọn của chính mình.',
+    ],
     sourcesTitle: 'Người đi trước và tư liệu gốc',
     sourcesIntro: 'Tarot có lịch sử từ những bộ bài ở châu Âu thời Phục hưng rồi phát triển qua nhiều cách diễn giải. Các hạt giống của buổi hướng dẫn đến từ nhiều truyền thống: nghệ thuật kể chuyện bằng hình, sự quan tâm đến ý nghĩa chủ quan và cách thực tập chú ý. Danh tiếng của một học giả không biến một phương pháp thành trị liệu đã được kiểm chứng.',
     original: 'Đọc tư liệu',
@@ -86,8 +98,8 @@ export const tarotCopy = {
     sessionTitle: 'Lộ trình 90 phút cùng Hương Thiền',
     sessionIntro: 'Bạn có thể đến với một câu hỏi về mối quan hệ, một ngã rẽ hoặc một cảm xúc hay lặp lại. Một chủ đề vừa đủ là được. Bạn chọn điều muốn chia sẻ, có thể bỏ bài tập hoặc xin dừng bất cứ lúc nào.',
     steps: [
+      [15, 'Thiền cùng nhau', 'Mở đầu bằng khoảng lặng có hướng dẫn để tâm trí có thời gian lắng xuống và lắng nghe đời sống nội tâm. Có thể giữ mắt mở, đổi tư thế hoặc chọn trò chuyện.'],
       [10, 'Đặt câu hỏi', 'Chọn một tình huống cụ thể, thống nhất điều bạn mong muốn và giới hạn chia sẻ.'],
-      [15, 'Chậm lại', 'Trò chuyện hoặc thử cảm nhận điểm tựa của cơ thể, nếu bạn thấy thoải mái. Nhận diện điều mình đang mang vào buổi gặp.'],
       [25, 'Đọc hình ảnh', 'Chọn một đến ba lá làm gợi ý. Nói điều bạn thấy và thử nhiều cách hiểu, kể cả cách hiểu trái với ấn tượng đầu tiên.'],
       [20, 'Trở về tình huống thật', 'Tách sự kiện khỏi suy diễn. Gọi tên nhu cầu hoặc giá trị đang bị bỏ qua và xem bạn còn những lựa chọn nào.'],
       [15, 'Chọn bước tiếp theo', 'Viết một hành động nhỏ có thể thử trong tuần, cùng điều bạn muốn quan sát sau khi thử.'],
@@ -126,6 +138,12 @@ export const tarotCopy = {
       'Instead of asking whether someone will come back, you might ask what you need while you sit with uncertainty. If the card evokes loneliness, you could explore the difference between wanting solitude and feeling abandoned. If what you need is to be heard, speaking to someone you trust might be a useful next step. That choice comes from your circumstances.',
       'Words such as “healing” can express the relief of being heard. In mental health care, assessing symptoms, selecting treatment and monitoring progress require professional expertise. If a card brings up a painful memory, Hương Thiền can invite you back to what feels safe to discuss now. Cards are not used to identify trauma, explain a condition or advise anyone to stop treatment.',
     ],
+    meditationTitle: 'Why sit together before drawing a card?',
+    meditation: [
+      'The session opens with 15 minutes of meditation with Hương Thiền. We often arrive carrying the pace of unfinished work, a reply we hope to hear or a worry about what might come up. Sitting quietly together makes room for those things to settle. You can sit on a chair, keep your eyes open or closed, breathe naturally and notice where the body is supported.',
+      'In the first few minutes, Hương Thiền invites you to notice sound and contact with your seat or the floor. You can rest your attention on a breath or simply listen to the room. When thoughts return, noticing them is enough. At the end, choose a word or sentence for what you are bringing into the meeting. You can change position, stop or use this time to talk if sitting still feels uncomfortable.',
+      'If spirituality is a familiar language for you, the pause may be a way to return to a prayer, a sense of connection or something you hold sacred. The meaning is personal. Some days the experience feels deep, and on others you simply notice how tired you are. Either can help you decide what deserves attention today.',
+    ],
     connectionTitle: 'Intuition, symbolism and attention',
     connection: [
       ['Spirituality and intuition', 'An image may feel personally significant or recall a value you have set aside. You can honour that meaning and still check it against context and observable facts.'],
@@ -136,6 +154,12 @@ export const tarotCopy = {
     exerciseTitle: 'Try one question with The Magician',
     exerciseLabel: 'Open the short exercise',
     exercise: 'Look at the table and the objects in front of the figure. Write one thing you notice, one feeling that comes up, and one detail from your life that might account for it. Ask: “What could I work with this week that I already have?” Choose a small action and look back at what happens.',
+    integrationTitle: 'From an association to something you can do',
+    integration: [
+      'Suppose you are thinking about leaving a job and the image of a traveller brings relief. That relief might point to a need for rest, more autonomy, or a change you have wanted for a while. Put each possibility beside what is actually happening. If a week off would still leave you wanting to go, what about the work feels difficult? If you would stay under different conditions, who could you talk to about changing them?',
+      'After the session, try writing three lines: the image you remember, what you currently make of it, and something you might try. Keep a question open and revisit it after a few days. A useful reading often makes a situation more specific or suggests a manageable action, like asking for time, speaking to someone you trust or checking a missing fact. You can revise your understanding as you learn more.',
+      'When distress persists or a decision has serious consequences, add support suited to the situation. An image can give you words for an experience. Your decisions draw on what you know, what resources you have and the choices that belong to you.',
+    ],
     sourcesTitle: 'People and primary sources',
     sourcesIntro: 'Tarot traces its history to playing cards in Renaissance Europe and evolved through many traditions of interpretation. This session draws on visual storytelling, the study of personal meaning and practices of attention. A scholar’s reputation is no substitute for clinical evidence.',
     original: 'Read the source',
@@ -148,8 +172,8 @@ export const tarotCopy = {
     sessionTitle: 'A 90-minute session with Hương Thiền',
     sessionIntro: 'Bring one question about a relationship, a transition or a recurring emotion. One manageable topic is enough. You decide what to share, and you can skip an exercise or stop at any point.',
     steps: [
+      [15, 'Meditate together', 'Begin with a guided pause so the mind can settle and you can listen inwardly. You can keep your eyes open, change posture or choose to talk.'],
       [10, 'Frame the question', 'Choose a specific situation and agree on what you want to explore and what you would rather keep private.'],
-      [15, 'Slow down', 'Talk or notice where your body is supported, if that feels comfortable. Take stock of what you are bringing into the meeting.'],
       [25, 'Read the imagery', 'Use one to three cards as prompts. Say what you see and try more than one reading, including an alternative to your first impression.'],
       [20, 'Return to the situation', 'Separate observations from assumptions. Name a need or value that may have been overlooked and consider the options you have.'],
       [15, 'Choose a next step', 'Write down one small action for the week and what you will pay attention to when trying it.'],

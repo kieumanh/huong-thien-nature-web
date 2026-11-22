@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import { articles as articleEntries, articlePath, journalPath } from '../src/data/articles.ts';
 import { products, productPath, shopPath } from '../src/data/products.ts';
 import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
+import { courses, coursePath } from '../src/data/courses.ts';
 import { releases, releasesPath } from '../src/data/releases.ts';
 import { contactPath } from '../src/data/contact-channels.ts';
 
@@ -19,10 +20,17 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, (articleEntries.length + journeyPageKeys.length) * 2 + 12 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
+assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 12 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, (articleEntries.length + products.length + journeyPageKeys.length + 5) * 2, 'Sitemap must list all localized pages and products');
+assert.equal(new Set(locations).size, (articleEntries.length + products.length + journeyPageKeys.length + courses.length + 5) * 2, 'Sitemap must list all localized pages and products');
+for (const course of courses) {
+  for (const lang of ['vi', 'en']) {
+    const path = coursePath(lang, course);
+    assert(locations.includes(base + path), `Course missing from sitemap: ${path}`);
+    await access(join(dist, path, 'index.html'));
+  }
+}
 let references = 0;
 let articles = 0;
 for (const file of files) {
@@ -47,7 +55,8 @@ for (const file of files) {
     const article = articleEntries.find(item => articlePath(lang, item.slug) === route);
     const product = products.find(item => productPath(lang, item.slug) === route);
     const section = journeyPageKeys.find(page => journeyPath(lang, page) === route);
-    const alternate = section ? journeyPath(other, section) : route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
+    const course = courses.find(item => coursePath(lang, item) === route);
+    const alternate = course ? coursePath(other, course) : section ? journeyPath(other, section) : route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
     for (const page of journeyPageKeys) assert(html.includes(`href="${journeyPath(lang, page)}"`), `Section navigation missing on ${route}`);
     assert(html.includes(`href="${shopPath(lang)}"`), `Shop navigation missing on ${route}`);

@@ -1,0 +1,22 @@
+import type { Language } from './site.ts';
+
+export const tarotCourse = {
+  vi: {
+    slug: 'tam-ly-tarot',
+    title: 'Lắng nghe mình qua tarot',
+    description: 'Buổi 1:1 trong 90 phút cùng Hương Thiền. Mở đầu bằng 15 phút thiền chung, sau đó dùng lá bài và đối thoại để hiểu rõ hơn một câu hỏi trong đời sống.',
+  },
+  en: {
+    slug: 'tarot-reflection',
+    title: 'Listening to yourself through tarot',
+    description: 'A 90-minute one-to-one session with Hương Thiền. Begin with 15 minutes of meditation together, then use imagery and conversation to explore a question from your life.',
+  },
+} as const;
+
+export const courses = [tarotCourse] as const;
+
+export function coursePath(lang: Language, course: (typeof courses)[number] = tarotCourse) {
+  return lang === 'vi'
+    ? `/vi/khoa-hoc/${course.vi.slug}/`
+    : `/en/courses/${course.en.slug}/`;
+}

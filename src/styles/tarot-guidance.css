@@ -16,7 +16,7 @@
 .guidance-meta { color: var(--orchid); margin-block: 1.05rem .85rem; font-weight: 650; }
 .guidance-meta span { padding-inline: .3rem; }
 .guidance-actions { display: flex; align-items: center; flex-wrap: wrap; gap: .65rem 1rem; margin-top: 1rem; }
-.guidance .guidance-button { background: var(--orchid); border-color: var(--orchid); }
+.guidance .guidance-button { background: var(--orchid); border-color: var(--orchid); color: var(--on-orchid); }
 .guidance .guidance-button:hover { background: var(--orchid-deep); }
 .guidance-art { margin: 0; min-width: 0; }
 .guidance-card-stage {
@@ -27,7 +27,7 @@
   overflow: hidden;
   padding: clamp(1.4rem, 4vw, 2.8rem);
   border-radius: var(--radius-card);
-  background: radial-gradient(ellipse at 50% 38%, #8c5276, var(--orchid-deep) 64%, #292a30);
+  background: radial-gradient(ellipse at 50% 38%, #8c5276, #492742 64%, #292a30);
 }
 .guidance-card-stage::before {
   content: '';
@@ -130,4 +130,24 @@
     from { opacity: .5; transform: translateY(.55rem); }
     to { opacity: 1; transform: translateY(0); }
   }
+}
+
+.guidance article > :where(.guidance-section, .guidance-reading) { scroll-margin-block-start: .8rem; }
+.guidance-reading:not(.guidance-opening) { line-height: 1.8; }
+.guidance-person > div { min-width: 0; }
+@media (max-width: 579px) {
+  .guidance-hero h1 { font-size: clamp(2.35rem, 11vw, 3.4rem); }
+  .guidance-hero h1 .handwritten { font-size: 1em; }
+  .guidance-hero .guidance-actions > a { flex: 1 1 100%; text-align: center; }
+  .guidance-person { grid-template-columns: 1fr; }
+  .guidance-person figure { width: min(100%, 11rem); }
+  .guidance-session ol { padding-inline-start: 1.2rem; }
+}
+@media (min-width: 580px) and (max-width: 959px) {
+  .guidance-section { max-width: 48rem; margin-inline: auto; }
+  .guidance-portraits { grid-template-columns: 1fr; }
+}
+@media (min-width: 960px) {
+  .guidance-section { max-width: 67rem; margin-inline: auto; }
+  .guidance-session { max-width: 52rem; }
 }

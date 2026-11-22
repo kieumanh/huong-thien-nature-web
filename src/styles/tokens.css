@@ -38,6 +38,7 @@
   --brand-fern: #dce8d8;
   --brand-clay: var(--clay);
   --brand-rice: var(--surface-warm);
+  --display-face: "Dancing Script", Georgia, "Times New Roman", serif;
   --serif: Georgia, "Noto Serif", "Times New Roman", serif;
   --sans: system-ui, "Segoe UI", "Noto Sans", Arial, sans-serif;
   --type-display: clamp(2.65rem, 5.5vw, 5rem);
