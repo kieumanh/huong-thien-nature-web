@@ -47,6 +47,7 @@ const stages = [
   <nav class="journey-jumps" aria-label={en ? 'Jump to a chapter' : 'Đến từng chặng hành trình'}>
     {stages.map(({ id, title }) => <a href={`#${id}`}>{title}</a>)}
   </nav>
+  <div class="journey-timeline progress-line">
   {stages.map(({ id, title, entries, start }) => (
     <section class="journey-stage" id={id} aria-labelledby={`${id}-title`}>
       <h3 id={`${id}-title`}>{title}</h3>
@@ -64,6 +65,7 @@ const stages = [
       </ol>
     </section>
   ))}
+  </div>
   <section class="reading-section journey-album">
     <h2 class="reading-heading">{en ? 'Family photo album' : 'Album ảnh gia đình'}</h2>
     <p>{en ? 'I also practise in the time I share with others. Holding a child close or waiting for little feet to find their balance asks me to pay attention here, to the person in front of me.' : 'Mình cũng học thiền trong những lúc ở cạnh người khác. Khi bế một em bé hay đợi đôi chân nhỏ đứng vững trên cát, sự chú tâm có một hình hài rất cụ thể. Người trước mặt đang cần gì ở mình, ngay lúc này?'}</p>

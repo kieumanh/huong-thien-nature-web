@@ -1,3 +1,9 @@
+## 2.6.1 — Mạch đọc và lộ trình tarot
+
+- Thay minh họa quỹ đạo ở trang tarot bằng ba bước lắng lại, nhìn hình ảnh và đặt câu hỏi.
+- Nối các mốc trong lộ trình 90 phút và hành trình Hương Thiền. Làm rõ lời mời liên hệ cuối trang.
+- Trình bày Sallie Nichols bằng thông tin tác phẩm.
+
 ## 2.6.0 — Khóa học và nhịp ngày đêm
 
 - Tổ chức Khóa học Việt–Anh, mở rộng bài tarot với 15 phút thiền đầu buổi và minh họa ba quỹ đạo.

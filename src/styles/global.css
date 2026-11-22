@@ -48,6 +48,19 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 .quiet-link { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; color: var(--primary); font-size: var(--type-label); font-weight: 650; }
 .quiet-link:hover, .quiet-link:focus-visible { text-decoration: underline; text-underline-offset: .18em; }
 
+.progress-line {
+  --timeline-gutter: clamp(.95rem, 3vw, 1.5rem);
+  padding-inline-start: var(--timeline-gutter);
+  border-inline-start: 2px solid var(--orchid-line);
+}
+.progress-line li { position: relative; }
+.progress-line li::after {
+  content: ""; position: absolute; inset-block-start: 1.25rem;
+  inset-inline-start: calc(-1 * var(--timeline-gutter) - .38rem);
+  width: .65rem; aspect-ratio: 1; border-radius: 50%;
+  background: var(--orchid); box-shadow: 0 0 0 2px var(--surface-raised);
+}
+
 .zen-card, .related-card, .search-result {
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
