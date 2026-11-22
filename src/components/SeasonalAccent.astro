@@ -48,6 +48,12 @@
     30%, 65% { opacity: .55; }
     100% { transform: translate(-2.8rem, 8rem) rotate(115deg); opacity: 0; }
   }
+  @media (max-width: 759px) {
+    .seasonal-accent {
+      inset-inline: 0; margin-inline: auto; width: min(42vw, 12rem);
+      opacity: .65; background: radial-gradient(ellipse at top, var(--season-glow, transparent), transparent 65%);
+    }
+  }
   @media (prefers-reduced-motion: reduce) {
     .seasonal-accent span { animation: none; }
   }

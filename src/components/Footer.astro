@@ -12,6 +12,10 @@ const t = getCopy(lang);
 const vi = lang === 'vi';
 const home = `/${lang}/`;
 const versionPath = releasesPath(lang);
+const summary = vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên.' : 'Meditation, mindfulness and living in tune with nature.';
+const notice = vi
+  ? 'Nội dung để học và tự thực tập theo sức mình. Việc chăm sóc sức khỏe thể chất và tinh thần cần hướng dẫn chuyên môn.'
+  : 'Explore and practise at your own pace. Seek professional guidance for physical and mental health care.';
 const groups = [
   {
     title: vi ? 'Khám phá' : 'Explore',
@@ -19,13 +23,14 @@ const groups = [
       { label: t.nav[1], url: journeyPath(lang, 'practice') },
       { label: t.nav[4], url: journalPath(lang) },
       { label: vi ? 'Tìm kiếm' : 'Search', url: vi ? '/vi/timkiem/' : '/en/search/' },
+      { label: releaseTitle[lang], url: versionPath },
     ],
   },
   {
     title: vi ? 'Hệ sinh thái' : 'Ecosystem',
     links: [
-      { label: vi ? 'Câu chuyện Hương Thiền' : 'Hương Thiền’s story', url: journeyPath(lang, 'story') },
-      { label: vi ? 'Ba hướng phát triển' : 'Our three areas', url: journeyPath(lang, 'ecosystem') },
+      { label: vi ? 'Câu chuyện' : 'Our story', url: journeyPath(lang, 'story') },
+      { label: vi ? 'Định hướng' : 'Our direction', url: journeyPath(lang, 'ecosystem') },
       { label: journeyPages.team[lang].title, url: journeyPath(lang, 'team') },
       { label: vi ? 'Cửa hàng' : 'Shop', url: shopPath(lang) },
     ],
@@ -33,9 +38,9 @@ const groups = [
   {
     title: vi ? 'Kết nối' : 'Connect',
     links: [
-      { label: vi ? 'Liên hệ và gửi lời nhắn' : 'Contact and send a message', url: contactPath(lang) },
-      { label: `Hotline ${hotline}`, url: `tel:${internationalPhone}` },
-      { label: vi ? 'Nhắn qua Zalo' : 'Message on Zalo', url: zaloUrl },
+      { label: vi ? 'Liên hệ' : 'Contact', url: contactPath(lang) },
+      { label: hotline, url: `tel:${internationalPhone}` },
+      { label: vi ? 'Nhắn Zalo' : 'Message on Zalo', url: zaloUrl },
     ],
   },
 ];
@@ -47,7 +52,7 @@ const groups = [
         <a class="footer-logo" href={home} aria-label={vi ? 'Trang chủ Hương Thiền Nature' : 'Hương Thiền Nature home'}>
           <img src="/media/huong-thien-logo-footer.webp" alt="" width="480" height="480" loading="lazy" decoding="async" />
         </a>
-        <div><p class="footer-brand">Hương Thiền Nature</p><p class="footer-description">{t.footer}</p></div>
+        <div><p class="footer-brand">Hương Thiền Nature</p><p class="footer-description">{summary}</p></div>
       </div>
       <nav class="footer-navigation" aria-label={vi ? 'Liên kết cuối trang' : 'Footer navigation'}>
         {groups.map(group => (
@@ -55,21 +60,22 @@ const groups = [
             <h2>{group.title}</h2>
             <ul>
               {group.links.map(link => (
-                <li><a href={link.url} aria-current={Astro.url.pathname === link.url ? 'page' : undefined}>{link.label}</a></li>
+                <li>
+                  <a href={link.url} aria-current={Astro.url.pathname === link.url ? 'page' : undefined}>
+                    {link.label}
+                    {link.url === versionPath && <span class="footer-version">V{version}</span>}
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
         ))}
       </nav>
     </div>
-    <p class="footer-notice">{t.disclaimer}</p>
+    <p class="footer-notice">{notice}</p>
     <div class="footer-bottom">
       <span>© {new Date().getFullYear()} Hương Thiền Nature</span>
       <p class="footer-credit">{vi ? 'Thiết kế và phát triển bởi' : 'Designed and developed by'} <a href="https://zenwork.io.vn/">Zenwork.io.vn</a></p>
-      <a class="footer-version" href={versionPath} aria-current={Astro.url.pathname === versionPath ? 'page' : undefined}>
-        {releaseTitle[lang]} <span>V{version}</span>
-      </a>
-      <a class="footer-top-link" href="#top">{t.top} <span aria-hidden="true">↑</span></a>
     </div>
   </div>
 </footer>
@@ -77,44 +83,43 @@ const groups = [
 <style>
   .footer-grid {
     display: grid;
-    grid-template-columns: minmax(0, .8fr) minmax(0, 1.6fr);
-    gap: clamp(1.5rem, 4vw, 3.25rem);
+    gap: clamp(1.4rem, 3vw, 2.5rem);
   }
 
-  .footer-identity { display: flex; align-items: start; gap: 1rem; }
-  .footer-logo { flex: 0 0 3.75rem; overflow: hidden; border-radius: var(--radius-input); background: var(--surface); }
+  .footer-identity { display: flex; align-items: start; gap: .85rem; }
+  .footer-logo { flex: 0 0 3rem; overflow: hidden; border-radius: var(--radius-input); background: var(--surface); }
   .footer-logo img { width: 100%; height: auto; }
-  .footer-brand { margin: 0; font: 1.4rem/1.25 var(--serif); text-wrap: balance; }
-  .footer-description { max-width: 30ch; margin-top: .5rem; font-size: .9rem; color: #c8d2bf; }
+  .footer-brand { margin: 0; font: 1.35rem/1.24 var(--serif); }
+  .footer-description { max-width: 32ch; margin-top: .35rem; font-size: .875rem; line-height: 1.55; color: #d4decf; }
 
-  .footer-navigation { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: .9rem 1.2rem; }
-  .footer-group h2 { margin: 0 0 .25rem; font: 650 .95rem/1.3 var(--sans); letter-spacing: 0; }
+  .footer-navigation { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem clamp(.75rem, 3vw, 1.75rem); }
+  .footer-group h2 { margin: 0 0 .35rem; font: 650 .95rem/1.3 var(--sans); letter-spacing: 0; }
   .footer-group ul { list-style: none; padding: 0; margin: 0; }
-  .footer-group a { display: inline-flex; align-items: center; min-height: 44px; font-size: .875rem; line-height: 1.45; color: #d9e2d2; }
-
-  .footer-notice { margin: 1.15rem 0; color: #c8d2bf; max-width: 78ch; font-size: .8rem; }
-  .footer-bottom {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: .35rem 1.1rem;
-    padding-top: .65rem;
-    border-top: 1px solid #eaeedf38;
-    color: #d9e2d2;
-    font-size: .85rem;
+  .footer-group a {
+    display: inline-flex; flex-wrap: wrap; align-content: center; align-items: center; gap: .15rem .4rem;
+    min-height: 44px; padding-block: .3rem; font-size: .875rem; line-height: 1.45; color: #e0e8dc;
   }
-  .footer-bottom a { min-height: 44px; display: inline-flex; align-items: center; gap: .55rem; }
-  .footer-version { margin-inline-start: auto; }
-  .footer-version span { padding: .12rem .55rem; border: 1px solid #cad8c17a; border-radius: 999px; color: #f5f6e8; font-weight: 650; }
+  .footer-version {
+    display: inline-block; width: max-content; padding: .1rem .42rem;
+    border-radius: 999px; background: #ffffff17; color: #faf8f1; font-size: .72rem; font-weight: 650;
+  }
+  .footer-notice { margin: 1.25rem 0 .85rem; color: #d4decf; max-width: 68ch; font-size: .8rem; line-height: 1.55; }
+  .footer-bottom {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between;
+    gap: .1rem 1rem; padding-top: .75rem; border-top: 1px solid #eaeedf38;
+    color: #d4decf; font-size: .8rem; line-height: 1.55;
+  }
+  .footer-credit a { display: inline-block; padding-block: .4rem; text-decoration: underline; text-underline-offset: .18em; }
   .footer a[aria-current="page"] { text-decoration: underline; text-underline-offset: .2em; }
 
-  @media (max-width: 850px) { .footer-grid { grid-template-columns: 1fr; } }
-  @media (max-width: 560px) {
-    .footer-navigation { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .footer-group:last-child { grid-column: 1 / -1; }
-    .footer-group:last-child ul { display: flex; flex-wrap: wrap; gap: 0 1rem; }
-    .footer-bottom > span { flex-basis: 100%; }
-    .footer-version { margin-inline-start: 0; }
-    .footer-top-link { margin-inline-start: auto; }
+  @media (max-width: 639px) {
+    .footer-group:last-child { grid-column: 1 / -1; padding-top: .75rem; border-top: 1px solid #eaeedf38; }
+    .footer-group:last-child ul { display: flex; flex-wrap: wrap; gap: 0 1.1rem; }
+  }
+  @media (min-width: 640px) {
+    .footer-navigation { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  }
+  @media (min-width: 960px) {
+    .footer-grid { grid-template-columns: minmax(0, .8fr) minmax(0, 1.9fr); }
   }
 </style>

@@ -1,6 +1,6 @@
 ---
 interface Props {
-  motif: 'meditation' | 'yoga' | 'mandala';
+  motif: 'meditation' | 'yoga' | 'mandala' | 'sprig';
 }
 const { motif } = Astro.props;
 const petals = Array.from({ length: 12 }, (_, index) => index);
@@ -10,6 +10,8 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
     <div class="mandala-ring">
       {petals.map(index => <span style={`--angle: ${index * 30}deg`}></span>)}
     </div>
+  ) : motif === 'sprig' ? (
+    <img src="/media/botanical-sprig.svg" alt="" width="240" height="360" loading="lazy" decoding="async" />
   ) : (
     <>
       <img
@@ -54,7 +56,6 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
 
 <style>
   .contemplative-scene {
-    position: relative;
     isolation: isolate;
     display: grid;
     place-items: center;
@@ -62,6 +63,8 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
     min-width: 0;
     pointer-events: none;
   }
+
+  :where(.contemplative-scene) { position: relative; }
 
   .contemplative-scene img {
     position: absolute;
@@ -83,7 +86,12 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
     mix-blend-mode: screen;
   }
 
-  .contemplative-scene--mandala { aspect-ratio: 1; }
+  .contemplative-scene--mandala, .contemplative-scene--sprig { aspect-ratio: 1; }
+  .contemplative-scene--sprig img {
+    object-fit: contain;
+    transform-origin: center bottom;
+    animation: sprig-sway 4.5s ease-in-out both;
+  }
   .mandala-ring {
     position: relative;
     display: grid;
@@ -93,7 +101,7 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
     color: #537453;
     border: 1px solid currentColor;
     border-radius: 50%;
-    animation: mandala-turn 4.8s ease-out both;
+    animation: mandala-turn 4.5s ease-in-out both;
   }
   .mandala-ring::before {
     content: '';
@@ -117,7 +125,8 @@ const petals = Array.from({ length: 12 }, (_, index) => index);
   @keyframes scene-breathe { from { transform: scale(1.015); } to { transform: scale(1.075); } }
   @keyframes yoga-drift { from { transform: scale(1.04) translateX(-1%); } to { transform: scale(1.10) translateX(2%); } }
   @keyframes glow-drift { from { transform: translate(-7%, 2%); opacity: .48; } to { transform: translate(6%, -5%); opacity: .85; } }
-  @keyframes mandala-turn { to { transform: rotate(30deg); } }
+  @keyframes mandala-turn { 55% { transform: rotate(18deg) scale(1.035); } to { transform: rotate(30deg); } }
+  @keyframes sprig-sway { 50% { transform: rotate(7deg); } }
 
   @media (prefers-reduced-motion: reduce) {
     .contemplative-scene :is(img, .scene-glow, .mandala-ring) { animation: none; }

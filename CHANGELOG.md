@@ -1,3 +1,9 @@
+## 2.4.1 — Trang chủ và chân trang dễ đọc hơn
+
+- Đồng nhất kiểu hiển thị các thẻ Thân, Tâm và Trí. Canh giữa họa tiết trên điện thoại và thêm chuyển động nhẹ.
+- Tổ chức lại chân trang, đưa lịch sử phiên bản vào Khám phá và giữ nút mũi tên về đầu trang.
+- Bổ sung hồ sơ ZenWork trong mục Đối tác.
+
 ## 2.4.0 — Ba quỹ đạo trên trang chủ và bốn mùa
 
 - Đưa ba hướng, mô hình quỹ đạo, tình trạng hoạt động và thư viện ảnh về trang chủ. Viết riêng định hướng hệ sinh thái và thêm hai minh họa chuyển động.

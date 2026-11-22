@@ -18,7 +18,10 @@ with sync_playwright() as p:
         page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('.music-toggle').disabled")
         assert page.locator('meta[name="application-version"]').get_attribute('content') == version
-        assert 'V'+version in page.locator('.footer-bottom').inner_text()
+        history = page.locator('.footer-group').first.locator('a', has=page.locator('.footer-version'))
+        assert 'V'+version in history.inner_text()
+        assert history.get_attribute('href') == ('/vi/phien-ban/' if lang == 'vi' else '/en/versions/')
+        assert page.locator('footer a[href="#top"]').count() == 0
         button = page.locator('.back-to-top')
         assert button.is_hidden()
         for progress, visible in [(0.29, False), (0.31, True), (0.1, False), (0.7, True)]:
@@ -41,6 +44,12 @@ with sync_playwright() as p:
             assert panel and abs(panel['x']-dock['x']) <= 2 and panel['x']+panel['width'] <= width
             assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
             page.locator('.music-options').evaluate('el => el.open=false')
+            page.evaluate('window.scrollTo(0, document.documentElement.scrollHeight)')
+            page.wait_for_function('window.scrollY + innerHeight >= document.documentElement.scrollHeight - 1')
+            footer = page.locator('.footer-bottom').bounding_box()
+            dock = page.locator('.music-dock').bounding_box()
+            assert footer and dock and footer['y'] + footer['height'] <= dock['y']
+
         report.append(lang+': left music/right back-to-top controls fit and do not overlap at 320/375/768/1440 px')
     page.set_viewport_size({'width':375,'height':850})
     page.goto(base+'/vi/tan-van/bay-tang-trai-nghiem/',wait_until='domcontentloaded')
