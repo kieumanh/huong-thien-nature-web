@@ -9,8 +9,9 @@ function background(element: Element): RGB {
     const color = getComputedStyle(node).backgroundColor;
     const numbers = color.match(/[\d.]+/g)?.map(Number);
     if (!numbers || numbers.length < 3) continue;
+    const scale = color.startsWith('color(srgb ') ? 255 : 1;
     const alpha = numbers[3] ?? 1;
-    if (alpha > 0) layers.push([...numbers.slice(0, 3), alpha]);
+    if (alpha > 0) layers.push([...numbers.slice(0, 3).map(value => value * scale), alpha]);
     if (alpha === 1) break;
   }
   let color: RGB = [250, 248, 241];
@@ -114,6 +115,7 @@ if (controls.length) {
   document.addEventListener('load', schedule, true);
   new ResizeObserver(schedule).observe(document.body);
   const observer = new MutationObserver(schedule);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ['data-sky', 'style'] });
   controls.forEach(control => observer.observe(control, { attributes: true, attributeFilter: ['hidden'] }));
   schedule();
 }

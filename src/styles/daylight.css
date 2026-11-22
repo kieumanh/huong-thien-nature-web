@@ -1,0 +1,61 @@
+@property --twilight {
+  syntax: '<percentage>';
+  inherits: true;
+  initial-value: 0%;
+}
+
+:root {
+  color-scheme: light;
+  transition: --twilight 22s linear;
+  --on-primary: #faf8f1;
+  --on-orchid: #faf8f1;
+  --footer-surface: #243f32;
+  --surface: color-mix(in srgb, var(--paper), #f3e3dc var(--twilight));
+  --surface-container: color-mix(in srgb, var(--sage), #e8d8d4 var(--twilight));
+  --surface-raised: color-mix(in srgb, #fffdf7, #f8ebe4 var(--twilight));
+  --surface-warm: color-mix(in srgb, var(--cream), #efe0dc var(--twilight));
+}
+:root[data-sky="night"] {
+  color-scheme: dark;
+  --forest: #c5dfc9;
+  --moss: #c3d2bd;
+  --ink-soft: #d0c8ce;
+  --clay: #efbcaa;
+  --sun: #f3cd90;
+  --surface: color-mix(in srgb, #15141b, #362833 var(--twilight));
+  --surface-container: color-mix(in srgb, #22212b, #402f3b var(--twilight));
+  --surface-raised: color-mix(in srgb, #1c1b25, #392d37 var(--twilight));
+  --surface-warm: color-mix(in srgb, #29232d, #45323e var(--twilight));
+  --primary-hover: #d8ead9;
+  --on-primary: #173021;
+  --border: #665f6e;
+  --border-control: #a99bad;
+  --brand-fern: #33453e;
+  --footer-surface: #17231f;
+  --orchid: #edb9dd;
+  --orchid-deep: #ffe1f6;
+  --orchid-mist: #3d2a3c;
+  --orchid-line: #8a6485;
+  --on-orchid: #32182f;
+  --success: #c6efcc;
+  --success-surface: #233b30;
+  --warning: #f7d49f;
+  --warning-surface: #423522;
+  --error: #ffb9b3;
+  --error-surface: #472b32;
+}
+[data-sky="night"] .button:not(.button--tonal):not(.guidance-button):not(:disabled):active { background: var(--primary-hover); }
+[data-sky="night"] .button--tonal:not(:disabled):active { background: var(--brand-fern); }
+[data-sky="night"] .brand img, [data-sky="night"] .footer-logo { background: #eee9e2; }
+[data-sky="night"] .solar-system-starfield { background: radial-gradient(circle, #6d5a43, transparent 68%); }
+[data-sky="night"] .reading-progress span { background: var(--orchid); }
+[data-sky="night"] .seasonal-accent { opacity: .38; }
+[data-sky="night"] .founder-journey .journey-jumps a { color: var(--foreground); }
+[data-sky="night"] .nav-links a[aria-current] { color: var(--orchid-deep); }
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: 1.8s; }
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root), ::view-transition-new(root) { animation-duration: .001s; }
+}

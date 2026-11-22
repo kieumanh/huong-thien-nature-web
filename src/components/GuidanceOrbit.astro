@@ -1,0 +1,83 @@
+---
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const captions = vi
+  ? ['Thiền định', 'Tarot', 'Tâm lý học']
+  : ['Meditation', 'Tarot', 'Psychology'];
+---
+<figure class="guidance-orbit" data-guidance-orbit>
+  <div class="orbit-map" aria-hidden="true">
+    <div class="orbit-center"></div>
+    {captions.map((_, index) => <div class={`orbit-track orbit-track--${index + 1}`}><span></span></div>)}
+  </div>
+  <figcaption>
+    <ul aria-label={vi ? 'Ba quỹ đạo' : 'The three orbits'}>
+      {captions.map(label => <li>{label}</li>)}
+    </ul>
+    <p>{vi ? 'Sự tự nhận biết nằm ở tâm vòng xoay. Thiền cho mình khoảng lặng, tarot gợi hình ảnh, tâm lý học giúp đặt câu hỏi về điều đang diễn ra.' : 'Self-awareness sits at the centre. Meditation makes space, tarot offers an image, and psychology helps ask what is happening in your life.'}</p>
+  </figcaption>
+  <button class="orbit-control button button--tonal" type="button" aria-pressed="false" hidden data-orbit-pause>{vi ? 'Tạm dừng vòng xoay' : 'Pause the orbit'}</button>
+</figure>
+
+<script>
+  const figure = document.querySelector<HTMLElement>('[data-guidance-orbit]');
+  const pause = figure?.querySelector<HTMLButtonElement>('[data-orbit-pause]');
+  if (figure && pause && 'IntersectionObserver' in window) {
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    let visible = false;
+    let paused = false;
+    const sync = () => {
+      pause.hidden = reduced.matches;
+      figure.classList.toggle('orbit-in-motion', visible && !paused && !document.hidden && !reduced.matches);
+    };
+    new IntersectionObserver(([entry]) => { visible = entry.isIntersecting; sync(); }).observe(figure);
+    pause.addEventListener('click', () => {
+      paused = !paused;
+      pause.setAttribute('aria-pressed', String(paused));
+      sync();
+    });
+    reduced.addEventListener('change', sync);
+    document.addEventListener('visibilitychange', sync);
+    sync();
+  }
+</script>
+
+<style>
+  .guidance-orbit {
+    display: grid; justify-items: center; gap: .9rem;
+    padding: clamp(1rem, 4vw, 2.4rem); margin-top: 1.2rem;
+    border: 1px solid var(--orchid-line); border-radius: var(--radius-feature);
+    background: radial-gradient(circle at 50% 40%, #493150, #211c2b 70%);
+    color: #faedf9; text-align: center;
+  }
+  .orbit-map {
+    display: grid; place-items: center; position: relative;
+    aspect-ratio: 1; width: min(100%, 19rem); margin: auto;
+    background: radial-gradient(circle, #ed99ce1f, transparent 68%);
+  }
+  .orbit-center, .orbit-track { grid-area: 1 / 1; aspect-ratio: 1; border-radius: 50%; }
+  .orbit-center { width: 19%; background: radial-gradient(circle at 35% 30%, #fff1c7, #d49cbc 68%, #9f5483); box-shadow: 0 0 2rem #ffbdeb65; }
+  .orbit-track {
+    position: relative; border: 1px solid #eccde858; transform: rotate(var(--angle));
+    animation: guidance-orbit-spin var(--speed) linear infinite paused;
+  }
+  .orbit-in-motion .orbit-track { animation-play-state: running; }
+  .orbit-track span {
+    position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%);
+    width: .82rem; aspect-ratio: 1; border-radius: 50%; background: var(--planet); box-shadow: 0 0 .9rem var(--planet);
+  }
+  .orbit-track--1 { width: 43%; --angle: 48deg; --speed: 34s; --planet: #c9e8aa; }
+  .orbit-track--2 { width: 66%; --angle: 166deg; --speed: 48s; --planet: #f5bde6; }
+  .orbit-track--3 { width: 89%; --angle: 274deg; --speed: 62s; --planet: #f4d391; }
+  .guidance-orbit figcaption { color: #faedf9; font-size: 1rem; max-width: 56ch; }
+  .guidance-orbit ul { display: flex; gap: .3rem 1rem; flex-wrap: wrap; justify-content: center; margin-bottom: .55rem; }
+  .guidance-orbit li { display: flex; align-items: center; gap: .4rem; font-weight: 650; }
+  .guidance-orbit li::before { content: ''; width: .55rem; aspect-ratio: 1; border-radius: 50%; background: #c9e8aa; }
+  .guidance-orbit li:nth-child(2)::before { background: #f5bde6; }
+  .guidance-orbit li:nth-child(3)::before { background: #f4d391; }
+  .orbit-control { border-color: #f5bde6; color: #faedf9; background: #44334d; }
+  .orbit-control:not(:disabled):hover, .orbit-control[aria-pressed="true"] { background: #644763; }
+  .orbit-control:focus-visible { outline-color: #f5bde6; }
+  @keyframes guidance-orbit-spin { from { transform: rotate(var(--angle)); } to { transform: rotate(calc(var(--angle) + 360deg)); } }
+</style>

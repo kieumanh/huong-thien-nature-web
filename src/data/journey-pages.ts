@@ -6,8 +6,8 @@ export const journeyPages = {
     en: { slug: 'practice', title: 'Practice', heading: 'A first step in meditation and mindfulness', description: 'Begin with a minute of feeling your natural breath or your feet on the ground. Hương Thiền Nature offers guides to meditating at home and walking mindfully.' },
   },
   guidance: {
-    vi: { slug: 'khoa-huong-dan', title: 'Khóa hướng dẫn', heading: 'Lắng nghe mình qua tarot', description: 'Khóa hướng dẫn tự phản tỉnh qua tarot cùng Hương Thiền. Buổi 1:1 kéo dài 90 phút, kết hợp biểu tượng, trực giác và chánh niệm. Liên hệ để hỏi lịch và chi phí.' },
-    en: { slug: 'guided-sessions', title: 'Guided sessions', heading: 'Listening to yourself through tarot', description: 'A 90-minute one-to-one guided reflection session with Hương Thiền, drawing on tarot imagery, intuition and mindfulness. Contact us for availability and pricing.' },
+    vi: { slug: 'khoa-hoc', title: 'Khóa học', heading: 'Khóa học cùng Hương Thiền', description: 'Tìm khóa thực hành và hướng dẫn cá nhân cùng Hương Thiền, bắt đầu với Lắng nghe mình qua tarot.' },
+    en: { slug: 'courses', title: 'Courses', heading: 'Courses with Hương Thiền', description: 'Explore guided practice and individual sessions with Hương Thiền, beginning with Listening to yourself through tarot.' },
   },
   ecosystem: {
     vi: { slug: 'he-sinh-thai', title: 'Hệ sinh thái', heading: 'Hệ sinh thái Thân, Tâm và Trí', description: 'Định hướng của Hương Thiền Nature là nối việc chăm đất, thực tập thiền và học từ trải nghiệm. Tìm hiểu ba hướng Thân, Tâm và Trí, điểm mạnh và các bước dự kiến trước khi mở rộng.' },

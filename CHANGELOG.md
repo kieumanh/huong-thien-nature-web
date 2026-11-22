@@ -1,3 +1,8 @@
+## 2.6.0 — Khóa học và nhịp ngày đêm
+
+- Tổ chức Khóa học Việt–Anh, mở rộng bài tarot với 15 phút thiền đầu buổi và minh họa ba quỹ đạo.
+- Đồng bộ kiểu chữ và sắc tím mận. Thêm chuyển màu ngày đêm theo giờ Việt Nam.
+
 ## 2.5.0 — Khóa hướng dẫn tarot cùng Hương Thiền
 
 - Thêm trang Khóa hướng dẫn Việt–Anh với buổi tự phản tỉnh 1:1, lịch trình 90 phút và nguồn đọc mở rộng.

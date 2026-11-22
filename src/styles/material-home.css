@@ -9,7 +9,7 @@
   align-items: center;
 }
 .material-hero__copy { padding-block: clamp(.4rem, 2vw, 1.6rem); }
-.material-hero h1 { margin: .42rem 0 1rem; font-size: var(--type-display); line-height: 1.06; letter-spacing: -.033em; text-wrap: initial; }
+.material-hero h1 { margin: .42rem 0 1rem; font-size: var(--type-display); line-height: 1.06; letter-spacing: 0; text-wrap: initial; }
 .material-hero .lead { max-width: 42ch; }
 .material-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem 1.25rem; margin-top: 1.25rem; }
 .material-hero__art { position: relative; isolation: isolate; }

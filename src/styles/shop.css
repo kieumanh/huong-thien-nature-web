@@ -13,7 +13,7 @@
 }
 .shop-filters button span { margin-left: .25rem; }
 .shop-filters button:hover, .product-keywords a:hover { background: var(--surface-container); }
-.shop-filters button[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--paper); font-weight: 650; }
+.shop-filters button[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: var(--on-primary); font-weight: 650; }
 .shop-results { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: .25rem 1rem; margin-block: .85rem; color: var(--muted); font-size: var(--type-caption); }
 [data-shop-count] { font-weight: 650; }
 .stock-status { margin: .3rem 0 .85rem; color: var(--muted); font-size: var(--type-caption); }
