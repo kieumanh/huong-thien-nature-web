@@ -159,12 +159,25 @@ const petals = [6, 5, 7, 4, 3, 8];
       <h2 id="gf-frequencies-title">{copy.frequencies.title}</h2>
       <p class="gf-intro">{copy.frequencies.intro}</p>
     </div>
-    <figure class="gf-spectrum" data-gf-reveal>
-      <div class="gf-spectrum-bar" aria-hidden="true"><span></span></div>
+    <figure class="gf-spectrum" data-gf-reveal data-gf-scale data-gf-scale-level="3">
+      <div class="gf-scale-control" data-gf-scale-control hidden>
+        <label class="sr-only" for="gf-scale-input">{copy.frequencies.scaleLabel}</label>
+        <input class="gf-scale-input" id="gf-scale-input" type="range" min="0" max={copy.frequencies.scale.length - 1} step="1" value="3" aria-describedby="gf-scale-hint" />
+        <ol class="gf-scale-ticks" aria-hidden="true">{copy.frequencies.scale.map((stop, index) => <li data-gf-scale-tick={index}></li>)}</ol>
+      </div>
+      <p class="gf-scale-hint" id="gf-scale-hint" data-gf-scale-hint hidden>{copy.frequencies.scaleHint}</p>
       <figcaption class="gf-spectrum-labels">
         <p><strong>{copy.frequencies.low}</strong><span>{copy.frequencies.lowWords}</span></p>
         <p><strong>{copy.frequencies.high}</strong><span>{copy.frequencies.highWords}</span></p>
       </figcaption>
+      <div class="gf-scale-panels" role="status" aria-live="polite" aria-atomic="true">
+        {copy.frequencies.scale.map((stop, index) => <article class="gf-scale-panel" data-gf-scale-panel={index}>
+          <h3>{stop.name}</h3>
+          <p class="gf-scale-words">{stop.words}</p>
+          <dl>{stop.rows.map((row, rowIndex) => <div><dt>{copy.frequencies.scaleRows[rowIndex]}</dt><dd>{row}</dd></div>)}</dl>
+          <p class="gf-scale-step"><strong>{copy.frequencies.scaleStep}:</strong> {stop.step}</p>
+        </article>)}
+      </div>
     </figure>
     <p class="gf-spectrum-note" data-gf-reveal>{copy.frequencies.note}</p>
     <h3 class="gf-subhead" data-gf-reveal>{copy.frequencies.fiveTitle}</h3>

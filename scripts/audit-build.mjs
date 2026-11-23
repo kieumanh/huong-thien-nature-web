@@ -152,7 +152,8 @@ for (const item of roots) {
     assert.equal(schema.image, base + item.image, 'Social/structured images must point at the article illustration');
     assert(html.includes('og:type" content="article"'), 'Article social metadata must use article type');
     assert(html.includes('article-toc') && html.includes('article-sources'), 'Article must include navigation and attribution');
-    assert.equal([...html.matchAll(/class="related-card"/g)].length, 3, 'Related reading must stay bounded');
+    const relatedSection = html.match(/<section class="related-articles[\s\S]*?<\/section>/)?.[0] ?? '';
+    assert.equal([...relatedSection.matchAll(/data-journal-card/g)].length, 3, 'Related reading must stay bounded');
     assert(content.sections.length >= 3 && content.practice.steps.length >= 4, 'Full article and practice must be present');
     assert(content.cta && articleEntries.some(entry => entry.slug === content.cta.slug), 'CTA target must be published');
     assert(item.relatedSlugs.every(slug => articleEntries.some(entry => entry.slug === slug)), 'Related articles must be published');

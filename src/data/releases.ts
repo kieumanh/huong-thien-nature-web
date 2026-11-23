@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.11.0',
+    date: '2026-11-24',
+    vi: ['Tinh chỉnh giao diện và tìm kiếm Tản văn', 'Tản văn có ô tìm bài theo từ khóa và bỏ chữ Roots. Tiêu đề trong timeline nổi bật hơn, biểu tượng Farm Gửi yêu thương vào đất rõ hơn, biểu tượng cuối trang bo tròn, thứ tự menu và chân trang đưa Hệ sinh thái và Đội ngũ lên trước. Cửa hàng có thanh điều khiển gọn hơn, trang Liên hệ có thêm hotline và Zalo hỗ trợ.'],
+    en: ['Interface polish and journal search', 'The journal gains keyword search and drops the Roots label. Timeline titles stand out, the Farm partner mark is clearer, the footer mark is round, and the menu and footer put Ecosystem and Team first. The shop has tidier controls and the contact page adds a support hotline and Zalo.'],
+  },
+  {
     version: '2.10.0',
     date: '2026-11-24',
     vi: ['Khóa thực hành Tần Số Vàng', 'Trang giới thiệu khóa 6 chặng làm chủ năng lượng tần số cao: năm dạng tần số, bài tự định vị sáu lĩnh vực đời sống có bản đồ trực quan, bài tập tuần, sáu nhà khoa học minh họa, phúc lợi sau khóa và nút nhận báo giá qua Zalo, điện thoại hoặc biểu mẫu. Có ảnh chia sẻ mạng xã hội riêng cho tiếng Việt và tiếng Anh.'],

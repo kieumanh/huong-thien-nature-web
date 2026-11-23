@@ -1,3 +1,15 @@
+## 2.11.0 — Tinh chỉnh giao diện và tìm kiếm Tản văn
+
+- Tản văn: ô tìm bài theo từ khóa (không phân biệt dấu, lọc ngay trên trang, hỗ trợ `?q=`); bỏ chữ "Roots" ở tiêu đề lộ trình, nhãn thẻ bài và ghi chú nguồn.
+- Timeline Câu chuyện: tiêu đề mỗi mốc đậm, lớn hơn, có vạch nhấn; nhãn mốc thời gian dạng viên thuốc.
+- Đội ngũ: biểu tượng Farm Gửi yêu thương vào đất đặt trên nền sáng có viền; nút "Liên hệ đội ngũ" canh giữa.
+- Chân trang: biểu tượng tròn; nhóm Hệ sinh thái (Đội ngũ đầu tiên) lên trước, "Gợi ý" xuống cuối. Menu chính cũng xếp Hệ sinh thái, Đội ngũ lên đầu và Gợi ý xuống cuối.
+- Cửa hàng (trang không gian): thẻ không gian có màu riêng và vuốt ngang; một bảng điều khiển gồm tìm kiếm rộng, nhóm sản phẩm vuốt ngang kèm số lượng.
+- Liên hệ: thêm Hotline và Zalo hỗ trợ 0388000680.
+- Tần Số Vàng: không công bố học phí trên trang, thanh báo giá hay dữ liệu có cấu trúc; khách nhận học phí qua tin nhắn (công tắc `showFrequencyFee` trong `src/data/courses.ts`, mức 5,6tr năm 2026 và 6,6tr từ 2027 giữ sẵn để bật lại). Thang tần số ở chặng 1 kéo được qua 5 trạng thái (Co lại → Mở rộng), mỗi trạng thái hiện thân, cảm xúc, suy nghĩ, hành động và một bước nhỏ; dùng được bằng phím mũi tên, không có JavaScript thì hiện đủ 5 trạng thái. Khối giảng viên canh giữa trên điện thoại.
+- Bài tản văn: khối "Nguồn và đọc thêm" thành thẻ có ghi chú biên tập và từng nguồn là một thẻ bấm được; "Bài liên quan" dùng thẻ bài có ảnh, nhóm và thời gian đọc.
+- Chưa làm: ảnh chân dung nhà khoa học trên trang Tần Số Vàng (không tự lấy ảnh từ internet; chờ ảnh có bản quyền hợp lệ do chủ dự án cung cấp).
+
 ## 2.10.0 — Khóa thực hành Tần Số Vàng
 
 - Trang mới `/vi/khoa-thuc-hanh/tan-so-vang/` và `/en/practice-courses/golden-frequency/`: khóa 6 chặng làm chủ năng lượng tần số cao, phong cách trời đêm và ánh vàng theo nhịp ngày/đêm của site.

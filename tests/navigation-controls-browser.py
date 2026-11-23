@@ -18,7 +18,7 @@ with sync_playwright() as p:
         page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('.music-toggle').disabled")
         assert page.locator('meta[name="application-version"]').get_attribute('content') == version
-        history = page.locator('.footer-group').first.locator('a', has=page.locator('.footer-version'))
+        history = page.locator('.footer-group').last.locator('a', has=page.locator('.footer-version'))
         assert 'V'+version in history.inner_text()
         assert history.get_attribute('href') == ('/vi/phien-ban/' if lang == 'vi' else '/en/versions/')
         assert page.locator('footer a[href="#top"]').count() == 0

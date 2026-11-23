@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
-import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
+import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, showFrequencyFee, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
 import { frequencySchema } from '../src/data/golden-frequency-schema.ts';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, selfCheckDomains, weeklyPlan } from '../src/data/golden-frequency.ts';
 
@@ -28,11 +28,14 @@ test('confirmed fee: 5.600.000 ₫ in 2026, 6.600.000 ₫ from 2027', () => {
   assert.equal(frequencyPriceLabel('vi', frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00'))), '5.600.000 ₫');
   assert.equal(frequencyPriceLabel('en', frequencyOfferFor(new Date('2027-02-01T00:00:00+07:00'))), '6,600,000 VND');
   assert.match(frequencyFeeNote('vi', frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00'))), /6\.600\.000/);
-  assert.equal(frequencyPriceLabel('vi', { price: null }), 'Nhận báo giá');
-  assert.equal(frequencyPriceLabel('en', { price: null }), 'Ask for a quote');
-  for (const bad of [0, -1, Number.NaN]) assert.equal(frequencyPriceLabel('en', { price: bad }), 'Ask for a quote');
-  assert.ok(frequencyOffer.price === 5600000 || frequencyOffer.price === 6600000);
+  for (const bad of [0, -1, Number.NaN]) assert.equal(frequencyPriceLabel('en', { price: bad }), 'Quote by message');
+  assert.equal(showFrequencyFee, false, 'the fee is quoted by message and is not published');
+  assert.equal(frequencyOffer.price, null);
+  assert.equal(frequencyPriceLabel('vi'), 'Báo giá qua tin nhắn');
+  assert.equal(frequencyPriceLabel('en'), 'Quote by message');
   for (const lang of languages) {
+    const published = frequencySchema(lang).find(node => node['@type'] === 'Service');
+    assert.ok(published && !('offers' in published), 'no fee in the published structured data');
     const service = frequencySchema(lang, { price: null, currency: 'VND' }).find(node => node['@type'] === 'Service');
     assert.ok(service && !('offers' in service));
   }

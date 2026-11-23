@@ -3,6 +3,7 @@ import { articleAnswers } from "../../../data/article-answers";
 import { articlePhotos } from "../../../data/article-photos";
 import { articleIllustrations } from '../../../data/editorial-illustrations';
 import AuthorProfile from '../../../components/AuthorProfile.astro';
+import ArticleCard from '../../../components/ArticleCard.astro';
 import { journeyPath } from '../../../data/journey-pages';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { journalAuthor as author } from '../../../data/people';
@@ -83,12 +84,30 @@ const schema = {
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
         {content.cta && <p class="article-cta"><a class="button" href={articlePath(lang, content.cta.slug)}>{content.cta.label} <Arrow /></a></p>}
-        {article.sources && <section class="article-sources" aria-labelledby="sources-title"><h2 id="sources-title">{lang === 'vi' ? 'Nguồn và đọc thêm' : 'Sources and further reading'}</h2><p>{lang === 'vi' ? 'Các bài Roots được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'Roots articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.'}</p><ul>{article.sources.map(source => <li>{source.url ? <a href={source.url}>{source.title}</a> : <span>{source.title}</span>}</li>)}</ul></section>}
+        {article.sources && <section class="article-sources" aria-labelledby="sources-title">
+          <div class="article-sources__head">
+            <span class="article-sources__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M5 4.5h10a3 3 0 0 1 3 3V19.5H8a3 3 0 0 1-3-3V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9h5M9 12.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
+            <div>
+              <span class="eyebrow">{vi ? 'Tài liệu tham khảo' : 'References'}</span>
+              <h2 id="sources-title">{vi ? 'Nguồn và đọc thêm' : 'Sources and further reading'}</h2>
+            </div>
+          </div>
+          <p class="article-sources__note">{vi ? 'Các bài viết này được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'These articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.'}</p>
+          <ul class="article-sources__list" role="list">{article.sources.map(source => <li>{source.url
+            ? <a href={source.url} rel="noopener"><span>{source.title}</span><small>{new URL(source.url).hostname.replace(/^www\./, '')} <Arrow /></small></a>
+            : <span class="article-sources__plain"><span>{source.title}</span></span>}</li>)}</ul>
+        </section>}
         <AuthorProfile {lang} />
         <a class="quiet-link" href={journalPath(lang)}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
       </div>
     </article>
-    <section class="related-articles shell" aria-labelledby="related-title"><span class="eyebrow">{t.journalHome}</span><h2 id="related-title">{t.related}</h2><div class="related-grid">{related.map(item => <article class="related-card"><span class="article-meta">{item.translations[lang].category}</span><h3><a href={articlePath(lang, item.slug)}>{item.translations[lang].title}</a></h3><p>{item.translations[lang].description}</p></article>)}</div></section>
+    <section class="related-articles shell" aria-labelledby="related-title">
+      <div class="related-articles__head">
+        <div><span class="eyebrow">{t.journalHome}</span><h2 id="related-title">{t.related}</h2></div>
+        <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Xem tất cả bài viết' : 'See all articles'} <Arrow /></a>
+      </div>
+      <div class="related-grid journal-grid">{related.map(item => <ArticleCard article={item} {lang} heading="h3" />)}</div>
+    </section>
   </main>
   <Footer lang={lang} />
 </BaseLayout>

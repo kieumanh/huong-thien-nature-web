@@ -17,24 +17,25 @@ const notice = vi
   : 'Explore and practise at your own pace. Seek professional guidance for physical and mental health care.';
 const groups = [
   {
-    title: vi ? 'Khám phá' : 'Explore',
-    links: [
-      { label: journeyPages.practice[lang].title, url: journeyPath(lang, 'practice') },
-      { label: journeyPages.guidance[lang].title, url: journeyPath(lang, 'guidance') },
-      { label: t.nav[4], url: journalPath(lang) },
-      { label: releaseTitle[lang], url: versionPath },
-    ],
-  },
-  {
     title: vi ? 'Hệ sinh thái' : 'Ecosystem',
     links: [
+      { label: journeyPages.team[lang].title, url: journeyPath(lang, 'team') },
       { label: vi ? 'Câu chuyện' : 'Our story', url: journeyPath(lang, 'story') },
       { label: vi ? 'Định hướng' : 'Our direction', url: journeyPath(lang, 'ecosystem') },
-      { label: journeyPages.team[lang].title, url: journeyPath(lang, 'team') },
       { label: vi ? 'Cửa hàng' : 'Shop', url: shopPath(lang) },
     ],
   },
+  {
+    title: vi ? 'Khám phá' : 'Explore',
+    links: [
+      { label: journeyPages.guidance[lang].title, url: journeyPath(lang, 'guidance') },
+      { label: t.nav[4], url: journalPath(lang) },
+      { label: releaseTitle[lang], url: versionPath },
+      { label: journeyPages.practice[lang].title, url: journeyPath(lang, 'practice') },
+    ],
+  },
 ];
+
 ---
 <footer class="footer">
   <div class="shell">
@@ -78,8 +79,8 @@ const groups = [
   }
 
   .footer-identity { display: flex; align-items: start; gap: .85rem; }
-  .footer-logo { flex: 0 0 3rem; overflow: hidden; border-radius: var(--radius-input); background: var(--surface); }
-  .footer-logo img { width: 100%; height: auto; }
+  .footer-logo { flex: 0 0 3.25rem; width: 3.25rem; height: 3.25rem; overflow: hidden; border-radius: 50%; background: var(--surface); box-shadow: 0 0 0 2px var(--footer-divider); }
+  .footer-logo img { width: 100%; height: 100%; object-fit: cover; }
   .footer-brand { margin: 0; font: 1.35rem/1.24 var(--serif); }
   .footer-description { max-width: 32ch; margin-top: .35rem; font-size: .875rem; line-height: 1.55; color: var(--footer-muted); }
 
@@ -109,7 +110,7 @@ const groups = [
   @media (max-width: 639px) {
     .footer { text-align: center; }
     .footer-identity { flex-direction: column; align-items: center; }
-    .footer-logo { flex: none; width: 3rem; }
+    .footer-logo { flex: none; width: 3.25rem; }
     .footer-navigation {
       padding-block: .85rem;
       border-block: 1px solid var(--footer-divider);

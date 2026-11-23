@@ -106,7 +106,7 @@ export function tarotEnquiryPath(lang: Language) {
 }
 
 /**
- * Golden Frequency course fee, confirmed by the owner. The fee depends on the calendar year in
+ * Golden Frequency course fee, confirmed by the owner (kept for reference; see `showFrequencyFee`). The fee depends on the calendar year in
  * Vietnam when the site is built (2026: 5.600.000 ₫, 2027 onward: 6.600.000 ₫). Set `price: null`
  * only to fall back to "ask for a quote"; no Offer is then published.
  */
@@ -123,7 +123,10 @@ export function frequencyOfferFor(date: Date = new Date()): FrequencyOffer {
   return { price: tier.price, currency: 'VND', year: tier.year };
 }
 
-export const frequencyOffer: FrequencyOffer = frequencyOfferFor();
+/** The fee is quoted by message, not published. Set to true to show `frequencyFees` on the page, in the sticky bar and in structured data. */
+export const showFrequencyFee = false;
+
+export const frequencyOffer: FrequencyOffer = showFrequencyFee ? frequencyOfferFor() : { price: null, currency: 'VND' };
 
 function money(lang: Language, price: number) {
   const amount = new Intl.NumberFormat(lang === 'vi' ? 'vi-VN' : 'en-US').format(Math.round(price));
@@ -131,7 +134,7 @@ function money(lang: Language, price: number) {
 }
 
 export function frequencyPriceLabel(lang: Language, offer: { price: number | null } = frequencyOffer) {
-  if (offer.price === null || !Number.isFinite(offer.price) || offer.price <= 0) return lang === 'vi' ? 'Nhận báo giá' : 'Ask for a quote';
+  if (offer.price === null || !Number.isFinite(offer.price) || offer.price <= 0) return lang === 'vi' ? 'Báo giá qua tin nhắn' : 'Quote by message';
   return money(lang, offer.price);
 }
 

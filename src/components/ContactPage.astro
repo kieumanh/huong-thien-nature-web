@@ -4,7 +4,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import ContactForm from './ContactForm.astro';
-import { contactPath, contactEmail, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
+import { contactPath, contactEmail, hotline, internationalPhone, supportHotline, supportPhone, supportZaloUrl, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
 
 interface Props { lang: Language }
@@ -40,6 +40,8 @@ const schema = {
         <address class="contact-channels">
           <a class="zen-card" href={`tel:${internationalPhone}`}><strong>Hotline</strong><span>{hotline}</span></a>
           <a class="zen-card" href={zaloUrl}><strong>Zalo</strong><span>{hotline}</span></a>
+          <a class="zen-card contact-support" href={`tel:${supportPhone}`}><strong>{vi ? 'Hotline hỗ trợ' : 'Support hotline'}</strong><span>{supportHotline}</span></a>
+          <a class="zen-card contact-support" href={supportZaloUrl}><strong>{vi ? 'Zalo hỗ trợ' : 'Support Zalo'}</strong><span>{supportHotline}</span></a>
           <a class="zen-card" href={`mailto:${contactEmail}`}><strong>Email</strong><span>{contactEmail}</span></a>
         </address>
       </div>

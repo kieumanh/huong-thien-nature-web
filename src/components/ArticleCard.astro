@@ -13,14 +13,16 @@ const { article, lang, heading = 'h3', featured = false } = Astro.props;
 const Heading = heading;
 const content = article.translations[lang];
 const photo = articlePhotos[article.image];
+const searchText = [content.title, content.category, content.description, article.keywords?.[lang] ?? '']
+  .join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const minutes = lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes;
 ---
-<article class:list={['journal-card', 'zen-card', { 'journal-card--featured': featured }]}>
+<article class:list={['journal-card', 'zen-card', { 'journal-card--featured': featured }]} data-journal-card data-search={searchText}>
   <div class="journal-image">
     <img src={article.image} alt={content.imageAlt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
   </div>
   <div class="journal-card-copy">
-    <p class="article-meta"><span>{article.phase === 'roots' ? 'Roots · ' : ''}{content.category}</span><span>{minutes} {getCopy(lang).readTime}</span></p>
+    <p class="article-meta"><span>{content.category}</span><span>{minutes} {getCopy(lang).readTime}</span></p>
     <Heading><a href={articlePath(lang, article.slug)}>{content.title}</a></Heading>
     <p class="journal-card-description">{content.description}</p>
   </div>

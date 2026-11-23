@@ -121,7 +121,7 @@ const vision = ecosystemVision[lang];
 
     {page === 'team' && <>
       <TeamProfiles {lang} />
-      <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ đội ngũ' : 'Contact the team'}</a>
+      <p class="team-contact"><a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ đội ngũ' : 'Contact the team'}</a></p>
     </>}
   </main>
   <Footer {lang} />

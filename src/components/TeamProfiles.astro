@@ -37,7 +37,7 @@ const vi = lang === 'vi';
   <div class="partner-grid">
     {partnerProfiles.map(partner => (
       <article class="partner-card zen-card">
-        <img class="partner-logo" src={partner.logo} alt="" width="52" height="52" loading="lazy" decoding="async" />
+        <img class:list={['partner-logo', { 'partner-logo--tile': partner.logo.endsWith('.svg') }]} src={partner.logo} alt="" width="52" height="52" loading="lazy" decoding="async" />
         <div>
           <h3>{partner.name}</h3>
           <p>{partner[lang]}</p>
