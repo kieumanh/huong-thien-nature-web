@@ -296,3 +296,76 @@
     55% { transform: scale(1.07) rotate(-6deg); }
   }
 }
+
+.guidance-ai-details { margin-top: 1rem; }
+
+.guidance-hero, .guidance-invitation {
+  position: relative;
+  isolation: isolate;
+}
+.guidance-hero::before, .guidance-invitation::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 12% 22%, #f6d3a6a0 0 1px, transparent 2px),
+    radial-gradient(circle at 29% 83%, #f6d3a677 0 1px, transparent 2px),
+    radial-gradient(circle at 63% 12%, #f6d3a6a0 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 86% 77%, #f6d3a677 0 1.5px, transparent 2.5px),
+    radial-gradient(circle at 94% 28%, #fff4e9aa 0 1px, transparent 2px),
+    radial-gradient(ellipse at 82% 28%, #b364873b, transparent 60%);
+}
+
+.guidance-card-stage::before {
+  content: '';
+  position: absolute;
+  inset: 19% 12%;
+  z-index: -1;
+  border: 1px dashed #f6d3a675;
+  border-radius: 50%;
+  transform: rotate(-30deg) scaleY(.62);
+  pointer-events: none;
+}
+.guidance-card-stage::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(115deg, transparent 35%, #f6d3a62f 49%, transparent 64%);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.guidance-jumps::after {
+  content: '';
+  flex: 0 0 100%;
+  grid-column: 1 / -1;
+  height: 8px;
+  background: radial-gradient(circle, var(--orchid-deep) 0 1.5px, transparent 2.5px) center / 18px 8px repeat-x;
+  width: min(100%, 90px);
+  max-width: 90px;
+  justify-self: center;
+  opacity: .5;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .guidance-hero:has(.guidance-art.guidance-revealed)::before,
+  .guidance-invitation.guidance-revealed::before { animation: guidance-starlight 4s ease-in-out; }
+  .guidance-art.guidance-revealed .guidance-card-stage::before { animation: guidance-orbit 3.6s ease-out both; }
+  .guidance-art.guidance-revealed .guidance-card-stage::after { animation: guidance-shimmer 2.8s ease-in-out both; }
+  @keyframes guidance-starlight {
+    0%, 100% { opacity: 1; }
+    50% { opacity: .55; }
+  }
+  @keyframes guidance-orbit {
+    from { transform: rotate(-62deg) scaleY(.46); opacity: .35; }
+    to { transform: rotate(-30deg) scaleY(.62); opacity: 1; }
+  }
+  @keyframes guidance-shimmer {
+    0% { transform: translateX(-75%); opacity: 0; }
+    48% { opacity: 1; }
+    100% { transform: translateX(75%); opacity: 0; }
+  }
+}

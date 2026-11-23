@@ -89,6 +89,12 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       <h3 id="human-guidance-example">{copy.humanGuidance.exampleTitle}</h3>
       <p>{copy.humanGuidance.example}</p>
     </aside>
+    <div class="guidance-ai-details" data-guidance-reveal>
+      {copy.humanGuidance.details.map(([question, answer]) => <details class="guidance-disclosure">
+        <summary>{question}</summary>
+        <p>{answer}</p>
+      </details>)}
+    </div>
   </section>
 
   <section class="guidance-section guidance-host" aria-labelledby="host-title" data-guidance-reveal>
