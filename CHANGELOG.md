@@ -1,3 +1,7 @@
+## 2.7.1 — Ảnh đại diện khóa tarot
+
+- Thêm ảnh Tarot của AlbanyColley trên Pixabay vào danh mục khóa học và bản xem trước khi chia sẻ trang khóa Tarot tiếng Việt và tiếng Anh.
+
 ## 2.7.0 — Bốn mùa trong ngày
 
 - Chia bốn mùa thành các khung 6 giờ theo giờ Việt Nam. Thêm nắng xuân, én, lá xanh và mưa phùn, nắng hạ và mưa rào, gió thu và lá vàng, tuyết rơi và đọng tuyết vào mùa đông.

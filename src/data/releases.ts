@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.7.1',
+    date: '2026-11-23',
+    vi: ['Ảnh đại diện khóa tarot', 'Thêm ảnh Tarot từ Pixabay cho danh mục khóa học và khi chia sẻ liên kết.'],
+    en: ['Tarot course thumbnail', 'Added a Pixabay tarot photo to the course catalogue and link previews.'],
+  },
+  {
     version: '2.7.0',
     date: '2026-11-23',
     vi: ['Bốn mùa trong ngày', 'Mỗi mùa kéo dài 6 giờ theo giờ Việt Nam, với én và mưa phùn mùa xuân, mưa rào mùa hạ, lá vàng mùa thu và tuyết mùa đông.'],

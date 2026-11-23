@@ -8,9 +8,10 @@ import type { Language } from '../data/site';
 
 const { lang } = Astro.props as { lang: Language };
 const { title, description } = tarotCourse[lang];
+const { thumbnail } = tarotCourse;
 const alternatePath = coursePath(lang === 'vi' ? 'en' : 'vi');
 ---
-<BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath} aboutOrganization>
+<BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath} image={thumbnail.src} imageDetails={{ width: thumbnail.width, height: thumbnail.height, alt: thumbnail.alt[lang], type: 'image/jpeg' }} aboutOrganization>
   <Header {lang} {alternatePath} />
   <TarotGuidance {lang} />
   <Footer {lang} />

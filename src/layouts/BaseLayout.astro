@@ -12,9 +12,10 @@ const origin = 'https://huongthiennature.com';
 const organizationId = origin + '/#organization';
 const websiteId = origin + '/#website';
 const brandImage = '/media/huong-thien-ben-ho-social.jpg';
-const { lang = 'vi', title, description, alternatePath, image = brandImage, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false } = Astro.props;
+const { lang = 'vi', title, description, alternatePath, image = brandImage, imageDetails, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false } = Astro.props;
 const imageUrl = new URL(image, 'https://huongthiennature.com').href;
 const brandAlt = lang === 'vi' ? 'Hương Thiền mỉm cười, hai tay tạo hình trái tim bên hồ dưới chân núi.' : 'Hương Thiền smiling by a mountain lake, making a heart with her hands.';
+const socialImage = imageDetails ?? (image === brandImage ? { type: 'image/jpeg', width: 1200, height: 630, alt: brandAlt } : undefined);
 const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
   ? Astro.url.pathname : `${Astro.url.pathname}/`;
 const url = new URL(pathname, 'https://huongthiennature.com');
@@ -73,12 +74,12 @@ const schema = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={url.href} />
     <meta property="og:image" content={imageUrl} />
-    {image === brandImage && <>
-      <meta property="og:image:type" content="image/jpeg" />
-      <meta property="og:image:width" content="1200" />
-      <meta property="og:image:height" content="630" />
-      <meta property="og:image:alt" content={brandAlt} />
-      <meta name="twitter:image:alt" content={brandAlt} />
+    {socialImage && <>
+      <meta property="og:image:type" content={socialImage.type} />
+      <meta property="og:image:width" content={socialImage.width} />
+      <meta property="og:image:height" content={socialImage.height} />
+      <meta property="og:image:alt" content={socialImage.alt} />
+      <meta name="twitter:image:alt" content={socialImage.alt} />
     </>}
     {alternatePath && <meta property="og:locale:alternate" content={lang === 'vi' ? 'en_US' : 'vi_VN'} />}
     <meta property="og:locale" content={lang === 'vi' ? 'vi_VN' : 'en_US'} />

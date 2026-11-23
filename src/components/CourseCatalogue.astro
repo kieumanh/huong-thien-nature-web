@@ -7,23 +7,26 @@ const vi = lang === 'vi';
 <section class="journey-section" aria-labelledby="course-list-title">
   <h2 id="course-list-title">{vi ? 'Khóa đang nhận đăng ký' : 'Available courses'}</h2>
   {courses.map(course => <div class="course-card zen-card">
-    <div class="course-preview" aria-hidden="true">
-      <img src="/media/guidance/magician.webp" alt="" width="369" height="640" loading="lazy" />
+    <div class="course-preview">
+      <img src={course.thumbnail.src} alt={course.thumbnail.alt[lang]} width={course.thumbnail.width} height={course.thumbnail.height} loading="lazy" decoding="async" />
     </div>
     <div class="course-card-copy">
       <p class="eyebrow">{vi ? '1:1 cùng Hương Thiền · 90 phút' : 'One-to-one with Hương Thiền · 90 minutes'}</p>
       <h3>{course[lang].title}</h3>
       <p>{course[lang].description}</p>
+      <p class="course-credit"><a href={course.thumbnail.source}>{course.thumbnail.credit}</a></p>
       <a class="button" href={coursePath(lang, course)}>{vi ? 'Xem khóa tarot' : 'Explore the tarot course'}</a>
     </div>
   </div>)}
 </section>
 <style>
   .course-card { display: grid; max-width: 53rem; overflow: hidden; margin-top: 1rem; }
-  .course-preview { display: grid; place-items: center; background: var(--orchid-mist); padding-block: 1rem; }
-  .course-preview img { width: 5.4rem; border-radius: .35rem; }
+  .course-preview { position: relative; min-height: 0; aspect-ratio: 1200 / 630; background: var(--orchid-mist); }
+  .course-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .course-credit { font-size: .8rem; }
+  .course-credit a { text-decoration: underline; text-underline-offset: .18em; }
   .course-card-copy { padding: clamp(1rem, 3.5vw, 2rem); }
   .course-card-copy :is(h3, p, a) { margin-top: .55rem; }
   .course-card-copy .eyebrow { margin-top: 0; color: var(--orchid); }
-  @media (min-width: 580px) { .course-card { grid-template-columns: minmax(8rem, .65fr) minmax(0, 2fr); } }
+  @media (min-width: 580px) { .course-card { grid-template-columns: minmax(8rem, 1.15fr) minmax(0, 2fr); } .course-preview { aspect-ratio: auto; } }
 </style>
