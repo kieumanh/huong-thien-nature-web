@@ -119,6 +119,12 @@ def check_flows(browser):
         page.wait_for_url(base + entries['guidance'])
         expect(page.locator('#guidance-title')).to_be_visible()
         expect(page.locator('.guidance-person img')).to_have_count(3)
+        expect(page.locator('#benefits li.zen-card')).to_have_count(3)
+        page.locator('.guidance-hero .guidance-button').click()
+        assert urlsplit(page.url).fragment == 'booking'
+        faq = page.locator('#faq details').first
+        faq.locator('summary').press('Enter')
+        expect(faq.locator('p')).to_be_visible()
         expect(page.locator('.guidance-work cite')).to_have_text('Jung and Tarot: An Archetypal Journey')
         expect(page.locator('.guidance-invitation a[href="https://zalo.me/0868499856"]')).to_be_visible()
         expect(page.locator('.language a')).to_have_attribute('href', routes['en' if lang == 'vi' else 'vi']['guidance'])
@@ -177,7 +183,7 @@ def check_flows(browser):
         page.locator('[data-stock-inquiry][href*="muoi-hong-himalaya"]').click()
         assert urlsplit(page.url).path == entries['contact']
         assert 'product=muoi-hong-himalaya' in page.url
-        assert page.locator('#message').input_value() != ''
+        expect(page.locator('#message')).to_have_value(re.compile(r'\S'))
         expect(page.locator('#interest-form button')).to_be_disabled()
         expect(page.locator('#message')).to_be_enabled()
         page.locator('#message').focus()
@@ -227,6 +233,7 @@ def check_flows(browser):
         for image, name in zip(scene.locator('.solar-planet img').all(), ('than', 'tam', 'tri')):
             expect(image).to_have_attribute('src', f'/media/planet-{name}.webp')
         page.wait_for_function("getComputedStyle(document.querySelector('.solar-orbit')).animationPlayState === 'running'")
+        expect(scene.locator('.solar-orbit').first).to_have_css('animation-iteration-count', 'infinite')
         assert scene.evaluate("""el => {
           const bounds = el.getBoundingClientRect();
           return [...el.querySelectorAll('.solar-orbit')].every(orbit => {
@@ -298,6 +305,7 @@ def check_daylight(browser):
     figure = page.locator('[data-guidance-sequence]')
     figure.scroll_into_view_if_needed()
     expect(figure).to_have_class(re.compile('sequence-started'))
+    expect(page.locator('#reflection > div[data-guidance-reveal]').first).to_have_class('guidance-revealed')
     expect(figure.locator('.sequence-glyph--2 i').first).to_have_css('animation-iteration-count', '1')
     page.close()
     report['passes'].append('Vietnam clock sets day, twilight and night correctly. Night contrast and finite tarot sequence motion tested.')

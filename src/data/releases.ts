@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.8.0',
+    date: '2026-11-23',
+    vi: ['Trải nghiệm Tarot và ba quỹ đạo', 'Trang riêng cho buổi Tarot 1:1 với lợi ích, lộ trình, bài thực hành và cách hỏi lịch. Ba hành tinh chuyển động liên tục khi hiển thị và ảnh rừng đầu trang được ẩn trên điện thoại.'],
+    en: ['Tarot session and three orbits', 'A dedicated Tarot session page with takeaways, a session outline, a short exercise and booking details. The three planets move continuously in view, and the homepage forest photo is hidden on phones.'],
+  },
+  {
     version: '2.7.2',
     date: '2026-11-23',
     vi: ['Vào thẳng trang chủ', 'Địa chỉ gốc mở trang chủ tiếng Việt. Mandala xuất hiện khi tải chậm và mục Phiên bản có nhãn ngắn hơn.'],
