@@ -1,3 +1,8 @@
+## 2.8.4 — Đồng bộ lịch sử phiên bản
+
+- Khôi phục mục 2.8.0–2.8.3 bị mất khi gộp nhánh. Các bản 2.7.3–2.7.6 hoàn thành sau 2.8.3 nên được giữ theo thứ tự thời gian.
+- Thêm AGENTS.md, cập nhật HANDOFF.md và docs/BRANCHES.md để người hoặc công cụ AI khác (ví dụ ChatGPT/Codex) tiếp tục phát triển.
+
 ## 2.7.6 — Liên kết Khóa thực hành
 
 - Khôi phục mục Khóa thực hành và sửa liên kết tới trang Tarot trong danh mục.
@@ -15,6 +20,27 @@
 - Ẩn ảnh núi ở phần mở đầu trên màn hình nhỏ, giữ ảnh đời thực ở phần câu chuyện bên dưới.
 - Thay ảnh ba quỹ đạo bằng minh họa riêng cho cây mầm, hoa sen và sách mở; bỏ nút dừng chuyển động trên mọi kích thước màn hình.
 - Cấp favicon và biểu tượng cài đặt ứng dụng từ logo Hương Thiền Nature.
+
+## 2.8.3 — Trang Tarot gọn hơn và có mục về AI
+
+- Rút gọn nội dung giới thiệu, lộ trình và tài liệu đọc. Chuyển bài thơ của Hương Thiền vào mục mở rộng cạnh phần giới thiệu người đồng hành.
+- Gỡ khối nghiên cứu về tâm linh và cảm nhận cơ thể. Thêm so sánh giữa AI và trao đổi 1:1, với ví dụ về câu hỏi công việc.
+
+## 2.8.2 — Tarot dưới góc nhìn tâm lý học
+
+- Giới thiệu Hương Thiền là người sáng lập và giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh.
+- Gỡ khối thử câu hỏi với The Magician. Đưa tư liệu gốc ra thành mục riêng, bổ sung công trình của David Bryce Yaden và Lisa Feldman Barrett cùng các đồng tác giả.
+
+## 2.8.1 — Khóa thực hành và điều hướng gọn hơn
+
+- Đổi tên và địa chỉ mục Khóa thực hành ở cả hai ngôn ngữ, chuyển hướng từ địa chỉ cũ.
+- Nhóm các nút tìm kiếm, ngôn ngữ và menu thành một cụm trên màn hình nhỏ.
+- Thay minh họa Tarot bằng sen và gợn nước, lá bài và đối thoại. Canh giữa trên điện thoại và thêm chuyển động nhẹ theo từng mục.
+
+## 2.8.0 — Trải nghiệm Tarot và ba quỹ đạo
+
+- Thiết kế trang giới thiệu buổi Tarot 1:1 với lộ trình 90 phút, bài thực hành, người hướng dẫn, câu hỏi thường gặp và cách liên hệ. Thêm chuyển động theo từng mục.
+- Đổi minh họa Thân, Tâm, Trí và cho ba hành tinh quay liên tục trong vùng nhìn. Ẩn khung ảnh rừng đầu trang khi màn hình dưới 760 px.
 
 ## 2.7.2 — Vào thẳng trang chủ
 

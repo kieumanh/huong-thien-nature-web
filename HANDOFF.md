@@ -1,58 +1,48 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-## Nguồn kế thừa
+Cập nhật: 2026-11-23, phiên bản 2.8.4. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
-Mã nguồn và tài liệu trong repository `kieumanh/huong-thien-nature-web` là cơ sở tiếp tục phát triển. Phiên bản V3 Roots tiếp tục từ commit `9cc35139162f750635f98d24fdc72e3267b79af3`. Liên kết hội thoại ChatGPT Work không truy cập được từ môi trường này; không khẳng định đã kế thừa các yêu cầu chưa đọc. Xem `V3_ROOTS.md` để biết phạm vi phiên bản.
+## Nguồn sự thật
 
-## Thành phần đã có
+Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (ChatGPT Work, Codex, Claude) không phải nguồn sự thật; chỉ tin mã, `CHANGELOG.md` và tài liệu trong repo. Nhiều nhánh `codex/*` là sản phẩm của các phiên Codex trước.
 
-- Website Astro tĩnh, giao diện tiếng Việt `/vi` và tiếng Anh `/en`.
-- Giao diện V3 Roots: tông đất/xanh rừng, dấu rễ cây dạng vector, chữ hệ thống dễ đọc, menu có hỗ trợ bàn phím.
-- Ba bài tản văn đầy đủ ở mỗi ngôn ngữ, tổng cộng sáu trang bài viết; chuyển ngôn ngữ giữ nguyên bài.
-- Nội dung dùng chung trong `src/data`, bố cục dùng chung trong `src/components`; sitemap tự tạo từ danh sách bài viết.
-- Nội dung thương hiệu, thực tập thiền, thiên nhiên, người sáng lập, nhật ký và lộ trình.
-- Tailwind CSS, 14 ảnh WebP trong `public/media`, metadata SEO, robots và sitemap.
-- `CONTENT_GUIDE.md`: nguồn nội dung và định hướng biên tập.
-- `DEPLOYMENT.md`: quy trình Cloudflare Worker production và các việc cần hoàn thành trước khi ra mắt; Pages vẫn dùng cho demo.
-- `package-lock.json`: phiên bản dependencies để cài đặt lặp lại.
+## Lịch sử xây dựng (tóm tắt)
 
-## Cài đặt và kiểm tra
+| Giai đoạn | Nội dung chính |
+|---|---|
+| 6–7/10/2026 | Demo Cloudflare Pages; giao diện V3 Roots song ngữ; form liên hệ (Turnstile + Resend); nhạc nền; thư viện bài Roots; chuyển production sang Cloudflare Worker (0.4.x) |
+| 7–9/10 | Tìm kiếm song ngữ; cửa hàng danh mục; giao diện Botanical 2.0.x; ba kim tự tháp rồi hệ mặt trời Thân·Tâm·Trí |
+| 10/10 | Zen Studio CMS 1.3.x trong `blog-studio/` (nhánh thử nghiệm `experiment/*`) |
+| 6/11 | Tồn kho nối vào cửa hàng; dòng thời gian người sáng lập (2.0.6) |
+| 20–21/11 | Bài tản văn mới, hồ sơ tác giả, Zen Botanical 2.2–2.4 (ba quỹ đạo, bốn mùa) |
+| 22–23/11 | Khóa Tarot 1:1, nhịp ngày đêm/bốn mùa theo giờ Việt Nam, favicon, lá rơi, đổi tên mục Khóa thực hành (2.5–2.8) |
 
-Đã kiểm tra với Node.js 24.19.0 và npm 11.9.0. Chạy từ thư mục repository:
+Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 
-```bash
-export XDG_CONFIG_HOME=/workspace/.config
-export XDG_CACHE_HOME=/workspace/.cache
-export ASTRO_TELEMETRY_DISABLED=1
-export WRANGLER_SEND_METRICS=false
-mkdir -p "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME"
-npm ci --cache /workspace/.npm --no-fund --no-audit
-npm run check
-npm run audit
-npm run build
-npm run audit:build
-npm run test:contact
-npm run build:pages-functions
-npx wrangler deploy --dry-run --config wrangler.worker.jsonc
-npm run dev -- --host 0.0.0.0 --port 4321
-```
+## Trạng thái hiện tại
 
-Hai biến XDG giúp các công cụ ghi cấu hình/cache vào vùng được phép của môi trường cloud. Trên máy cá nhân có thể dùng vị trí mặc định. Cloud task đã được cô lập; sử dụng checkout hiện có, không tạo Git worktree trừ khi được yêu cầu.
+- Website: tiếng Việt `/vi`, tiếng Anh `/en`, gốc `/` mở thẳng trang chủ tiếng Việt. 74 trang HTML, 32 bài tản văn, 70 URL trong sitemap.
+- Trang chính: trang chủ (ba quỹ đạo, khám phá, tìm kiếm), Tản văn, Cửa hàng/danh mục, Khóa thực hành (Tarot 1:1), Câu chuyện, Đội ngũ, Hệ sinh thái, Liên hệ, Lịch sử phiên bản.
+- Kiểm tra ngày 23/11/2026 trên bản clone: `check`, `audit`, `build`, `audit:build`, 4 bộ test Node và `wrangler deploy --dry-run` đều đạt.
 
-Kiểm tra `/vi`, `/en`, `/robots.txt`, `/sitemap.xml` và ảnh trong `/media/`. Xem bản build bằng `npm run preview`. Dùng `npm run dev:worker` để chạy Worker cùng API liên hệ. `npm run deploy:worker-dry-run` build và đóng gói cấu hình Worker mà không xuất bản.
+## Việc chưa làm / rủi ro đã biết
+
+1. **Form liên hệ chưa xác minh gửi thật.** Test dùng mock. Cần gửi thử một thư thật sau khi đủ 4 biến cấu hình trong Cloudflare (`CONTACT_SETUP.md`).
+2. **Tồn kho phụ thuộc site ngoài** (`huong-thien-inventory…chatgpt.site`) và secret `INVENTORY_SITE_TOKEN`. Nếu không còn site đó, `/api/shop-stock` trả "unavailable" (website vẫn chạy). Nên quyết định chuyển nguồn tồn kho về Zen Flow Inventory.
+3. **Nội dung Tarot/tâm linh** phải giữ giọng phản tỉnh, không hứa hẹn kết quả; quyền dùng ảnh (Pixabay, Sallie Nichols) cần giữ ghi nguồn.
+4. **Repository công khai** gồm cả mã CMS và xác thực (`blog-studio/`). Quét mẫu không thấy khóa/bí mật, nhưng chưa audit bảo mật chuyên sâu. Cân nhắc tách CMS sang repo riêng.
+5. **Nhiều nhánh phụ** — xem `docs/BRANCHES.md`.
+6. Kiểm thử trình duyệt (Playwright, Lighthouse) chỉ chạy trong CI GitHub; chưa chạy trong phiên bàn giao này.
+7. Tài liệu REVIEW_*.md, RELEASE_2.0.0.md, V3_ROOTS.md là lịch sử, có thể lỗi thời.
 
 ## Triển khai
 
-Production: Cloudflare Workers Builds, nhánh `main`, root `/`, build `npm run build`, deploy `npx wrangler deploy --config wrangler.worker.jsonc`; worker name `huong-thien-nature`. Worker serve static assets từ `dist` và giữ API liên hệ tại `/api/*`. Cloudflare Pages còn là môi trường demo riêng.
+Xem `DEPLOYMENT.md`. Tóm tắt: push `main` → Workers Builds → Worker `huong-thien-nature` → `huongthiennature.com`. Sau mỗi lần deploy phải mở domain thật kiểm tra (`/vi/`, `/en/`, `/vi/phien-ban/`, `/sitemap.xml`, `/api/contact-config`).
 
-Triển khai trực tiếp bằng `npm run deploy:worker` cần thông tin xác thực Cloudflare. Không lưu token vào repository. Push GitHub và build cục bộ không chứng minh deployment Cloudflare đã thành công.
+## Cài đặt và kiểm tra
 
-## Phạm vi hiện tại và công việc tiếp theo
-
-Form liên hệ đã có endpoint gửi email qua Resend, xác minh Turnstile ở máy chủ và ô đồng ý. Cần năm binding trong `CONTACT_SETUP.md` trước khi gửi thật; thiếu cấu hình hoặc JavaScript thì form khóa. Email nhận do chủ dự án cấu hình; địa chỉ không nằm trong frontend. Chưa có tài khoản thành viên, thanh toán, lịch đặt chỗ hoặc cơ sở dữ liệu. Kiểm thử dùng mock không chứng minh thư đã vào hộp nhận.
-
-Tiếp tục rà soát giao diện trên thiết bị thực, khả năng truy cập, nội dung song ngữ và quyền sử dụng hình ảnh; xác minh deployment Worker, DNS/TLS và tên miền theo `DEPLOYMENT.md`.
+Chạy các lệnh trong `AGENTS.md`. Trong môi trường cloud hạn chế, đặt `XDG_CONFIG_HOME`, `XDG_CACHE_HOME` vào vùng ghi được và `ASTRO_TELEMETRY_DISABLED=1`, `WRANGLER_SEND_METRICS=false`.
 
 ## Gói mã nguồn
 
-Dùng `git archive` tại commit đã push để đóng gói các tệp được Git quản lý. Gói bao gồm mã nguồn, ảnh, lockfile và tài liệu; không bao gồm `.git`, dependencies đã cài, cache, bản build hoặc thông tin xác thực. Dùng lockfile để cài lại dependencies và build lại `dist`.
+`git archive` tại commit đã push; không gồm `.git`, `node_modules`, `dist`, bí mật.

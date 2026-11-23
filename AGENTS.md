@@ -1,0 +1,71 @@
+# AGENTS.md — Hương Thiền Nature (dành cho ChatGPT/Codex, Claude và mọi trợ lý AI)
+
+Đọc tệp này trước. Sau đó đọc `HANDOFF.md` (trạng thái hiện tại), `DEPLOYMENT.md` (triển khai), `CHANGELOG.md` (lịch sử).
+
+## Làm việc với chủ dự án
+
+- Chủ dự án (Kiều Mạnh) là nhà thiết kế giải pháp, **không viết code**. Anh định hướng; trợ lý viết code, sửa lỗi, kiểm thử và triển khai.
+- Giao tiếp bằng **tiếng Việt**, ngắn gọn, nói kết quả trước. Giải thích kỹ thuật bằng ngôn ngữ đời thường.
+- Không bắt chủ dự án chạy lệnh. Tự chạy kiểm tra, rồi báo kết quả thật (đạt/không đạt), không khẳng định điều chưa xác minh.
+- Mọi thay đổi hiển thị công khai (nội dung, ảnh, tên người) cần đúng sự thật và có nguồn ảnh hợp lệ.
+
+## Dự án là gì
+
+Website song ngữ Việt/Anh của hệ sinh thái Hương Thiền Nature: thiền, chánh niệm, nông sản/thảo dược, khóa thực hành (có buổi Tarot 1:1), tản văn, cửa hàng danh mục. Ba trục nội dung: **Thân · Tâm · Trí** (Farm & Botanicals · Eco-Retreat/Meditation · Academy/Library).
+
+- Repository: `kieumanh/huong-thien-nature-web` (công khai). Nhánh production: `main`.
+- Domain: `https://huongthiennature.com`. Cloudflare Worker tên `huong-thien-nature`.
+- Phiên bản hiện tại: xem `package.json` (khớp `src/data/releases.ts` và `CHANGELOG.md`).
+
+## Kiến trúc
+
+- Astro 6 (static output → `dist/`), TypeScript, Tailwind CSS 4, không có cơ sở dữ liệu, không đăng nhập, không thanh toán.
+- Cloudflare **Worker + Static Assets** (`wrangler.worker.jsonc`, entry `src/worker.ts`). Worker chỉ xử lý `/api/*`:
+  - `/api/contact`, `/api/contact-config`: form liên hệ (Resend + Turnstile, logic ở `functions/`).
+  - `/api/shop-stock`: đọc tồn kho từ một site ChatGPT bên ngoài (`huong-thien-inventory…chatgpt.site`), cần secret `INVENTORY_SITE_TOKEN`; thiếu thì trả trạng thái "unavailable" và site vẫn chạy.
+- `wrangler.jsonc` là cấu hình **Pages demo**, KHÔNG dùng để deploy production.
+- `blog-studio/` là Zen Studio CMS (Worker riêng, nhiều file phiên bản). Không thuộc build của website; chỉ sửa khi được yêu cầu.
+
+## Bản đồ mã nguồn
+
+- `src/pages/` — route (`vi/`, `en/`, `[lang]/`); `src/components/` — giao diện; `src/data/` — nội dung song ngữ gõ kiểu (articles, courses, products, people, releases, search, tarot-guidance…); `src/styles/`, `src/scripts/`.
+- `public/media/` ảnh WebP; `public/_redirects` chuyển hướng URL cũ (không bỏ khi đổi URL).
+- `scripts/` audit nguồn và build; `tests/` kiểm thử Node + Playwright; `.github/workflows/validate.yml` là CI.
+
+## Lệnh chuẩn (Node 24 ở CI; 22 vẫn chạy được)
+
+```bash
+npm ci
+npm run check && npm run audit
+npm run build && npm run audit:build
+npm run test:contact && npm run test:worker && npm run test:search && npm run test:shop
+node --test tests/hybrid-nature.test.mjs tests/ecosystem-content.test.mjs tests/ecosystem-orbit.test.mjs tests/home-discovery.test.mjs
+npx wrangler deploy --dry-run --config wrangler.worker.jsonc
+```
+
+Kiểm thử trình duyệt (Playwright) chạy trong CI; chạy cục bộ cần Python Playwright và `APP_BASE_URL`.
+
+## Quy tắc khi sửa
+
+1. Mọi nội dung có **cả `vi` và `en`**; giữ sitemap, hreflang, tìm kiếm (`src/data/search.ts`) đồng bộ.
+2. Mỗi bản phát hành: tăng `version` trong `package.json` **và** `package-lock.json`, thêm mục vào `CHANGELOG.md` **và** `src/data/releases.ts` (cùng số). Đã từng bị lệch khi gộp nhánh song song (xem 2.8.4) — kiểm tra lại sau mỗi lần merge.
+3. Đổi/xóa URL → thêm dòng trong `public/_redirects`.
+4. Giọng văn: giản dị; không hứa hẹn kết quả thiền/sức khỏe; ngôn ngữ về năng lượng, Tarot, tâm linh được trình bày là phản tỉnh/chiêm nghiệm cá nhân, không phải y khoa hay khoa học đã kiểm chứng.
+5. Trước khi push `main`: toàn bộ lệnh chuẩn ở trên phải đạt.
+6. Không commit bí mật. `.dev.vars*`, `.env*` đã bị git bỏ qua. Không dán khóa vào chat.
+
+## Bí mật và cấu hình (đặt trong Cloudflare, không trong repo)
+
+`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY` (secret); `CONTACT_FROM_EMAIL`, `TURNSTILE_SITE_KEY` (text); `INVENTORY_SITE_TOKEN` (secret, tùy chọn). `CONTACT_TO_EMAIL` có trong `wrangler.worker.jsonc`. Chi tiết: `CONTACT_SETUP.md`. Chưa từng xác minh gửi email thật từ production.
+
+## Triển khai
+
+Push lên `main` → Cloudflare Workers Builds (build `npm run build`, deploy `npx wrangler deploy --config wrangler.worker.jsonc`). Push thành công **không** chứng minh deploy thành công: luôn mở `/vi/`, `/en/`, `/sitemap.xml`, `/api/contact-config` trên domain thật để xác minh.
+
+## Nhánh
+
+Quy ước và tình trạng nhánh: `docs/BRANCHES.md`. Đừng xóa nhánh nếu chủ dự án chưa đồng ý.
+
+## Dự án liên quan (repository khác, cùng hệ sinh thái)
+
+`kieumanh/farm-gui-yeu-thuong-vao-dat` (Farm Yêu Thương, Lê Lam Sơn). Các dự án khác (Zen Flow Inventory, Sổ nợ An Tâm, Kanban Zen Studio, Portfolio, Satori…) nằm ở nơi khác; hỏi chủ dự án khi cần.
