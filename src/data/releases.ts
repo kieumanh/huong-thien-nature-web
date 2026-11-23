@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.7.4',
+    date: '2026-11-23',
+    vi: ['Lá rơi khắp màn hình', 'Lá xuân và lá thu rơi rải rác trên toàn chiều ngang của mọi trang, kể cả khi cuộn.'],
+    en: ['Leaves across the screen', 'Spring and autumn leaves drift across the full width of every page as you scroll.'],
+  },
+  {
     version: '2.7.3',
     date: '2026-11-23',
     vi: ['Logo và mô hình ba quỹ đạo', 'Dùng đúng logo làm biểu tượng trình duyệt và cài đặt ứng dụng. Ẩn ảnh mở đầu trên mobile, thay hình Thân, Tâm, Trí bằng minh họa sát chủ đề và tinh gọn chuyển động.'],

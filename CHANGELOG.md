@@ -1,3 +1,7 @@
+## 2.7.4 — Lá rơi khắp màn hình
+
+- Rải lá xuân và lá thu trên toàn chiều ngang của mọi trang, kể cả khi cuộn.
+
 ## 2.7.3 — Nhận diện thương hiệu rõ hơn
 
 - Ẩn ảnh núi ở phần mở đầu trên màn hình nhỏ, giữ ảnh đời thực ở phần câu chuyện bên dưới.
@@ -180,4 +184,24 @@ Phiên bản dùng `major.minor.patch`, hiển thị từ `package.json` tại f
 
 ## V3 Roots 0.3.3
 
-- Hai nút nổi (nhạc và về đầu trang) tự chọn nền t
+- Hai nút nổi (nhạc và về đầu trang) tự chọn nền tối trên vùng sáng, nền sáng trên vùng tối, theo vị trí riêng khi cuộn/đổi kích thước. Ảnh cùng nguồn được lấy mẫu màu tại vị trí nút. Chữ, biểu tượng, viền, dấu trạng thái và bảng âm lượng cùng đổi màu để giữ độ tương phản.
+- Navigation Tản văn dẫn đến trang danh sách riêng, song ngữ tại `/vi/journal/` và `/en/journal/`. Liệt kê ba bài hiện có với ảnh, chủ đề, thời gian đọc và tóm tắt; đọc bài, quay lại danh sách và đổi ngôn ngữ.
+- Breadcrumb, liên kết chân trang, nút Xem tất cả và sitemap cập nhật cho hai trang mới. Giữ URL của các bài đã xuất bản.
+
+## V3 Roots 0.3.2
+
+- Contact có phương án Soạn email đến địa chỉ chủ dự án đã cung cấp khi API hoặc khởi tạo xác minh chưa hoạt động. Có liên kết ứng dụng email và Gmail; người dùng kiểm tra rồi tự gửi, không nhầm bản nháp với gửi thành công.
+- Điều khiển nhạc chuyển xuống góc trái, bảng âm lượng mở cùng phía.
+- Nút Về đầu trang ở góc phải xuất hiện khi cuộn đạt 30% phần trang có thể cuộn; hỗ trợ bàn phím và giảm chuyển động.
+- Hiển thị số phiên bản tại footer và metadata để nhận diện bản đang chạy.
+
+## V3 Roots 0.3.1
+
+- API liên hệ Cloudflare Pages Functions, Resend và Turnstile; gửi trực tiếp cần cấu hình runtime.
+- Nhạc nền Lotus at First Light, bật/tắt, âm lượng và ghi nhớ lựa chọn. Tính năng nhạc đã phát hành trước khi quy ước tăng số cho từng bản cập nhật được áp dụng.
+
+### Homepage storytelling integration — v0.4.7
+- Integrated bilingual founder story, learning milestone timeline and Farm & Botanicals → Eco-Retreat → Academy direction.
+- Added responsive Hybrid Nature motion with reduced-motion and data-saver support.
+- Replaced selected couple imagery and hero with nature scenes; source credits retained in code and alt text.
+- Preserved v0.4.7 Roots search, beginner reading path, featured articles and contact form.

@@ -101,18 +101,23 @@
   top: -1.2rem;
   background-color: var(--season-particle);
 }
-:is([data-season="spring"], [data-season="autumn"]) .season-particle {
-  display: block;
+.season-leaves { display: none; position: absolute; inset: 0; }
+:is([data-season="spring"], [data-season="autumn"]) .season-leaves { display: block; }
+.season-leaf {
+  position: absolute;
+  left: var(--x);
+  top: -1.2rem;
   width: .47rem;
   height: .76rem;
   border-radius: 80% 5% 75% 15%;
+  background-color: var(--season-particle);
   animation: season-leaf var(--fall-time) var(--delay) ease-in-out infinite;
 }
-[data-season="autumn"] .season-particle {
+[data-season="autumn"] .season-leaf {
   --leaf-sweep: -1.75rem;
   animation-timing-function: linear;
 }
-[data-season="autumn"] .season-particle:nth-child(odd) { background-color: #ba7543; }
+[data-season="autumn"] .season-leaf:nth-child(odd) { background-color: #ba7543; }
 @keyframes season-leaf {
   0% { transform: translate(0, 0) rotate(0); opacity: 0; }
   13%, 73% { opacity: .54; }
@@ -238,13 +243,14 @@
 }
 @media (max-width: 639px) {
   .seasonal-accent .season-bank .season-particle--extra { display: none; }
-  [data-season="autumn"] .season-particle { --leaf-sweep: -13px; }
+  .season-leaf--extra { display: none; }
+  [data-season="autumn"] .season-leaf { --leaf-sweep: -13px; }
   [data-season="winter"] .season-particle { --snow-sweep: -12px; }
   .season-sun { width: 64vw; }
   .season-swallows { width: 36vw; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .seasonal-accent :is(.season-bank, .season-swallows) { display: none; }
+  .seasonal-accent :is(.season-bank, .season-swallows, .season-leaves) { display: none; }
   .seasonal-accent .season-sun, :root[data-season] .topbar { transition: none; }
   [data-season="winter"] :is(.topbar, .footer, .material-hero)::before { animation: none; }
   [data-weather="downpour"] .material-hero::after { display: none; }

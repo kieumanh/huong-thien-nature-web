@@ -16,6 +16,12 @@ const particles = [
       </div>
     ))}
   </div>
+  <div class="season-leaves">
+    {particles.map(([x, delay, duration], index) => (
+      <span class:list={['season-leaf', { 'season-leaf--extra': index >= 6 }]}
+        style={`--x:${x}%;--delay:${delay}s;--fall-time:${duration}s`}></span>
+    ))}
+  </div>
   {['left', 'right'].map(side => (
     <div class={`season-bank season-bank--${side}`}>
       {particles.map(([x, delay, duration], index) => (
