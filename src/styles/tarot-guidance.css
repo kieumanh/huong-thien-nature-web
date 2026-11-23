@@ -117,6 +117,15 @@
   border-color: var(--orchid-line);
   background: linear-gradient(145deg, var(--orchid-mist), var(--surface-raised) 75%);
 }
+.benefit-illustration {
+  display: grid; place-items: center; width: 3rem; height: 3rem; margin-bottom: .75rem;
+  border-radius: 50%; color: var(--orchid-deep); background: var(--orchid-mist);
+}
+.benefit-illustration svg { width: 2rem; height: 2rem; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+@media (prefers-reduced-motion: no-preference) {
+  .guidance-revealed .benefit-illustration svg { animation: benefit-bloom 1.8s ease-out both; }
+  @keyframes benefit-bloom { 0% { opacity: .55; transform: translateY(5px) scale(.86); } 55% { opacity: 1; transform: translateY(-2px) scale(1.06); } 100% { transform: none; } }
+}
 .guidance-benefits p, .guidance-audience p { margin-top: .55rem; color: var(--muted); }
 .guidance-audience {
   display: grid;
