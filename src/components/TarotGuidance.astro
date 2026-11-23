@@ -2,7 +2,8 @@
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import GuidanceSequence from './GuidanceSequence.astro';
-import { tarotCopy, tarotLanding, tarotSources } from '../data/tarot-guidance';
+import TarotResearch from './TarotResearch.astro';
+import { tarotCopy, tarotLanding } from '../data/tarot-guidance';
 import { tarotCourse } from '../data/courses';
 import { journeyPages, journeyPath } from '../data/journey-pages';
 import { contactPath, zaloUrl } from '../data/contact-channels';
@@ -86,16 +87,6 @@ const practiceNotes = [
   <section class="guidance-section" id="reflection" aria-labelledby="connection-title">
     <h2 id="connection-title" data-guidance-reveal>{copy.connectionTitle}</h2>
     <div data-guidance-reveal><GuidanceSequence {lang} /></div>
-    <div class="guidance-exercise" data-guidance-reveal>
-      <img src="/media/guidance/magician.webp" width="369" height="640" alt="" loading="lazy" decoding="async" />
-      <div>
-        <h3>{copy.exerciseTitle}</h3>
-        <details class="guidance-disclosure">
-          <summary>{copy.exerciseLabel}</summary>
-          <p>{copy.exercise}</p>
-        </details>
-      </div>
-    </div>
   </section>
 
   <section class="guidance-section guidance-host" aria-labelledby="host-title" data-guidance-reveal>
@@ -103,7 +94,7 @@ const practiceNotes = [
     <div>
       <h2 id="host-title">{landing.hostTitle}</h2>
       <h3>{meditationFounder.name}</h3>
-      <p>{meditationFounder.bio[lang]}</p>
+      <p>{landing.hostBio}</p>
       <a class="quiet-link" href={journeyPath(lang, 'story')}>{landing.hostLink} <Arrow /></a>
     </div>
   </section>
@@ -136,34 +127,9 @@ const practiceNotes = [
       </dl>
       <p>{copy.connectionNote}</p>
     </details>
-    <details class="guidance-disclosure" id="guidance-sources">
-      <summary>{copy.sourcesTitle}</summary>
-      <p>{copy.sourcesIntro}</p>
-      <div class="guidance-portraits">
-        {tarotSources.map(person => <article class="zen-card guidance-person">
-          {person.image ? <figure>
-            <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.name} />
-            <figcaption><a href={person.photo}>{person.credit}<span class="sr-only"> · {copy.picture} {person.name}</span></a></figcaption>
-          </figure> : <div class="guidance-work"><cite>{person.work}</cite><small>{person.publication}</small></div>}
-          <div>
-            <h3>{person.name}</h3>
-            <p>{person[lang]}</p>
-            <a class="quiet-link" href={person.source}>{copy.original}<span class="sr-only"> · {person.name}</span></a>
-            {person.portraitProfile && <div><a class="quiet-link" href={person.portraitProfile}>
-              {vi ? 'Xem ảnh trên trang Editorial Kairós' : 'View the photo at Editorial Kairós'}
-            </a></div>}
-          </div>
-        </article>)}
-      </div>
-      <h3>{copy.booksTitle}</h3>
-      {copy.books.map(paragraph => <p>{paragraph}</p>)}
-      <ul class="guidance-references">
-        <li><a href="https://wellcomecollection.org/works/wkfv6fww">William James · The Varieties of Religious Experience</a></li>
-        <li><a href="https://guides.library.unt.edu/tarot/books">University of North Texas Libraries · Tarot Books &amp; Resources</a></li>
-        <li><a href="https://redwheelweiser.com/book/tarot-for-your-self-9781578636792/">Mary K. Greer · Tarot for Your Self</a></li>
-      </ul>
-    </details>
   </section>
+
+  <TarotResearch {lang} />
 
   <section class="guidance-section guidance-accordion" id="faq" aria-labelledby="faq-title" data-guidance-reveal>
     <h2 id="faq-title">{landing.faqTitle}</h2>

@@ -76,9 +76,6 @@ export const tarotCopy = {
       ['Thiền định và trị liệu tâm lý', 'Chánh niệm tự nguyện giúp chậm nhịp để quan sát phản ứng. Trong trị liệu, người có chuyên môn đánh giá và làm việc theo phương pháp phù hợp. Ba hướng có thể cùng gợi một câu hỏi, với vai trò riêng.'],
     ],
     connectionNote: 'Cảm giác “điều này đúng với mình” đáng để tìm hiểu. Nó có thể đến từ kinh nghiệm, mong ước hoặc lo lắng. Khi chưa đủ thông tin, bạn có thể giữ đôi ba cách hiểu cùng lúc. Bạn cũng có thể dừng, bỏ qua lá bài hoặc chuyển thẳng sang trò chuyện.',
-    exerciseTitle: 'Thử một câu hỏi với lá The Magician',
-    exerciseLabel: 'Mở bài thực hành ngắn',
-    exercise: 'Nhìn chiếc bàn và những vật đang ở trước mặt nhân vật. Ghi một điều bạn thấy, một cảm xúc nảy sinh và một chi tiết trong đời sống có thể giải thích cảm xúc đó. Sau đó hỏi: “Tuần này mình có thể dùng nguồn lực nào đang sẵn có?” Chọn một việc nhỏ để thử, rồi xem lại điều đã xảy ra.',
     integrationTitle: 'Từ điều lá bài gợi ra đến một việc có thể làm',
     integration: [
       'Giả sử bạn đang cân nhắc nghỉ việc và một hình ảnh người đi đường khiến bạn thấy nhẹ nhõm. Cảm giác nhẹ nhõm có thể gợi rằng bạn đang cần nghỉ, cần tự chủ hơn hoặc đã mong thay đổi từ lâu. Hãy thử đặt từng khả năng cạnh điều đang thật sự diễn ra. Cụ thể, nếu được nghỉ một tuần mà vẫn muốn rời đi, điều gì ở công việc khiến bạn nghĩ như vậy? Nếu muốn ở lại trong điều kiện khác, bạn có thể cùng ai bàn về điều kiện ấy?',
@@ -86,7 +83,7 @@ export const tarotCopy = {
       'Với khó khăn kéo dài hoặc lựa chọn có hậu quả lớn, chọn thêm một nguồn hỗ trợ phù hợp với tình huống. Hình ảnh giúp đặt lời cho trải nghiệm, còn quyết định cần dựa vào điều bạn biết, nguồn lực thực tế và quyền tự chọn của chính mình.',
     ],
     sourcesTitle: 'Người đi trước và tư liệu gốc',
-    sourcesIntro: 'Tarot có lịch sử từ những bộ bài ở châu Âu thời Phục hưng rồi phát triển qua nhiều cách diễn giải. Các hạt giống của buổi hướng dẫn đến từ nhiều truyền thống: nghệ thuật kể chuyện bằng hình, sự quan tâm đến ý nghĩa chủ quan và cách thực tập chú ý. Danh tiếng của một học giả không biến một phương pháp thành trị liệu đã được kiểm chứng.',
+    sourcesIntro: 'Tarot có lịch sử từ những bộ bài ở châu Âu thời Phục hưng rồi phát triển qua nhiều cách diễn giải. Những tư liệu dưới đây giúp hiểu cách hình ảnh được tạo ra và được đọc qua các thời kỳ, từ minh họa của Pamela Colman Smith đến cách đọc nguyên mẫu của Sallie Nichols.',
     original: 'Đọc tư liệu',
     picture: 'Nguồn ảnh',
     booksTitle: 'Đọc tiếp',
@@ -153,9 +150,6 @@ export const tarotCopy = {
       ['Meditation and psychotherapy', 'Optional mindfulness gives you time to observe a response. Psychotherapy involves professional assessment and methods suited to the person. These practices can each inform a question while serving different roles.'],
     ],
     connectionNote: 'Feeling that something resonates is worth exploring. It might reflect experience, hope or worry. When information is limited, you can hold several interpretations at once. You can also pause, skip a card or talk without cards.',
-    exerciseTitle: 'Try one question with The Magician',
-    exerciseLabel: 'Open the short exercise',
-    exercise: 'Look at the table and the objects in front of the figure. Write one thing you notice, one feeling that comes up, and one detail from your life that might account for it. Ask: “What could I work with this week that I already have?” Choose a small action and look back at what happens.',
     integrationTitle: 'From an association to something you can do',
     integration: [
       'Suppose you are thinking about leaving a job and the image of a traveller brings relief. That relief might point to a need for rest, more autonomy, or a change you have wanted for a while. Put each possibility beside what is actually happening. If a week off would still leave you wanting to go, what about the work feels difficult? If you would stay under different conditions, who could you talk to about changing them?',
@@ -163,7 +157,7 @@ export const tarotCopy = {
       'When distress persists or a decision has serious consequences, add support suited to the situation. An image can give you words for an experience. Your decisions draw on what you know, what resources you have and the choices that belong to you.',
     ],
     sourcesTitle: 'People and primary sources',
-    sourcesIntro: 'Tarot traces its history to playing cards in Renaissance Europe and evolved through many traditions of interpretation. This session draws on visual storytelling, the study of personal meaning and practices of attention. A scholar’s reputation is no substitute for clinical evidence.',
+    sourcesIntro: 'Tarot traces its history to playing cards in Renaissance Europe and evolved through many traditions of interpretation. These sources help trace how tarot imagery was created and interpreted over time, from Pamela Colman Smith’s illustrations to Sallie Nichols’s use of archetypes.',
     original: 'Read the source',
     picture: 'Photo source',
     booksTitle: 'Further reading',
@@ -201,7 +195,7 @@ export const tarotLanding = {
     topic: 'Tarot tâm lý học',
     facts: [['90 phút', 'Thời lượng'], ['1:1', 'Cùng Hương Thiền'], ['Liên hệ', 'Lịch và chi phí']],
     navigation: 'Các mục của khóa trải nghiệm',
-    links: [['benefits', 'Bạn có thể nhận được gì'], ['session', 'Lộ trình 90 phút'], ['reflection', 'Thử một lá bài'], ['faq', 'Câu hỏi thường gặp']],
+    links: [['benefits', 'Bạn có thể nhận được gì'], ['session', 'Lộ trình 90 phút'], ['research', 'Tarot và tâm lý học'], ['faq', 'Câu hỏi thường gặp']],
     introTitle: 'Dành một khoảng lặng cho câu hỏi của bạn',
     intro: 'Khi đứng trước một ngã rẽ, hoặc khi một cảm xúc cứ trở lại, đôi lúc điều khó nhất là tìm lời để nói về nó. Trong buổi trải nghiệm, bạn có thời gian dừng lại, quan sát một hình ảnh và cùng Hương Thiền tìm câu hỏi sát hơn với điều mình đang sống.',
     benefitsTitle: 'Bạn có thể mang gì về sau buổi gặp?',
@@ -218,6 +212,7 @@ export const tarotLanding = {
     ],
     preparation: 'Bạn có thể mang theo một câu hỏi hoặc vài dòng ghi chép. Bạn tự chọn điều muốn chia sẻ và có thể bỏ qua bất kỳ bài tập nào.',
     hostTitle: 'Người đồng hành cùng bạn',
+    hostBio: 'Đỗ Thị Kim Hương là người sáng lập Hương Thiền Nature và là giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh.',
     hostLink: 'Đọc câu chuyện của Hương Thiền',
     moreTitle: 'Đọc sâu hơn về cách thực hành',
     faqTitle: 'Câu hỏi thường gặp',
@@ -232,7 +227,7 @@ export const tarotLanding = {
     topic: 'Tarot for self-reflection',
     facts: [['90 min', 'Duration'], ['1:1', 'With Hương Thiền'], ['Ask us', 'Availability and cost']],
     navigation: 'Explore the session',
-    links: [['benefits', 'What you can take away'], ['session', '90-minute outline'], ['reflection', 'Try a card'], ['faq', 'Common questions']],
+    links: [['benefits', 'What you can take away'], ['session', '90-minute outline'], ['research', 'Tarot and psychology'], ['faq', 'Common questions']],
     introTitle: 'Make room for the question you’re carrying',
     intro: 'When you are facing a change or an emotion keeps returning, finding words for it can be the hardest part. In this session you have time to pause, look closely at an image and work with Hương Thiền to find a question that fits what you are actually experiencing.',
     benefitsTitle: 'What might you take away?',
@@ -249,6 +244,7 @@ export const tarotLanding = {
     ],
     preparation: 'Bring a question or a few notes if you like. You choose what to share and can skip any exercise.',
     hostTitle: 'Who will guide you',
+    hostBio: 'Đỗ Thị Kim Hương is the founder of Hương Thiền Nature and teaches meditation, mindfulness and spiritual awakening practices.',
     hostLink: 'Read Hương Thiền’s story',
     moreTitle: 'Read more about the approach',
     faqTitle: 'Common questions',
@@ -258,5 +254,57 @@ export const tarotLanding = {
       ['Can I ask what will happen in the future?', 'The session focuses on what you are experiencing and what you can do now. Instead of trying to know what someone else will decide, you might explore what you need while things are uncertain.'],
       ['How can I find out the cost, format and availability?', 'Message us on Zalo or use the contact page. You can ask about times, how to meet and how much it costs before confirming.'],
     ],
+  },
+} as const;
+
+export const tarotResearchAuthors = [
+  {
+    name: 'David Bryce Yaden',
+    work: 'The Varieties of Self-Transcendent Experience',
+    publication: 'Review of General Psychology · 2017',
+    source: 'https://doi.org/10.1037/gpr0000102',
+    vi: {
+      topic: 'Nghiên cứu trải nghiệm tâm linh',
+      description: 'Yaden và cộng sự tổng quan những trải nghiệm trong đó cảm nhận về cái tôi tạm lắng và cảm giác kết nối tăng lên. Nhóm xem xét chánh niệm, cảm giác choáng ngợp trước điều rộng lớn và các trải nghiệm mang tính huyền nhiệm trong cùng một khung tâm lý học.',
+    },
+    en: {
+      topic: 'Research on spiritual experience',
+      description: 'Yaden and colleagues review experiences in which attention to the self recedes and a sense of connectedness grows. Their psychological framework considers mindfulness, awe and mystical-type experiences.',
+    },
+  },
+  {
+    name: 'Lisa Feldman Barrett',
+    work: 'Interoceptive Predictions in the Brain',
+    publication: 'Nature Reviews Neuroscience · 2015',
+    source: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4731102/',
+    vi: {
+      topic: 'Cảm nhận tín hiệu bên trong cơ thể',
+      description: 'Barrett và W. Kyle Simmons đề xuất một mô hình về cách não diễn giải tín hiệu như nhịp tim và nhịp thở. Trong đời thường, từ “năng lượng” có thể diễn tả sự mệt mỏi, tỉnh táo hoặc bồn chồn. Việc gọi tên cảm giác cụ thể giúp mình phân biệt trải nghiệm chủ quan với chỉ số sinh lý có thể đo.',
+    },
+    en: {
+      topic: 'How we sense the body from within',
+      description: 'Barrett and W. Kyle Simmons propose a model of how the brain interprets signals such as heartbeat and breathing. In everyday speech, “energy” may refer to feeling tired, alert or restless. Naming the sensation helps distinguish the felt experience from a measurable physiological signal.',
+    },
+  },
+] as const;
+
+export const tarotResearchCopy = {
+  vi: {
+    heading: 'Tarot dưới góc nhìn tâm lý học',
+    intro: 'Cùng nhìn một lá bài, mỗi người có thể chú ý đến một chi tiết khác nhau. Trong buổi thực hành, hình ảnh mở đầu cuộc trò chuyện. Người tham gia có thể mô tả điều mình thấy, nhận ra liên tưởng của mình và đối chiếu nó với những gì đang xảy ra trong đời sống.',
+    checkTitle: 'Khi một lời diễn giải có vẻ rất đúng',
+    check: 'Hiệu ứng Barnum là khuynh hướng thấy một nhận xét chung như thể nó được viết riêng cho mình. Cảm giác một hình ảnh hay một câu nói chạm đến mình có thể mở đầu cho việc suy ngẫm. Khi diễn giải, hãy đặt cảm nhận ấy cạnh các sự kiện cụ thể và chừa chỗ cho một cách hiểu khác.',
+    reference: 'Hiệp hội Tâm lý học Hoa Kỳ · Hiệu ứng Barnum',
+    studiesTitle: 'Tâm linh và cảm nhận cơ thể trong nghiên cứu',
+    boundary: 'Hai công trình này nghiên cứu trải nghiệm tâm linh và cảm nhận cơ thể. Để đánh giá khả năng dự đoán, chẩn đoán hoặc trị liệu bằng Tarot, cần bằng chứng từ các nghiên cứu trực tiếp về từng khả năng đó.',
+  },
+  en: {
+    heading: 'Tarot from a psychological perspective',
+    intro: 'Two people may notice different details on the same card. In a guided practice session, the image opens a conversation. Participants can describe what they see, notice their own associations and check them against what is happening in their lives.',
+    checkTitle: 'When a reading feels remarkably accurate',
+    check: 'The Barnum effect is the tendency to take a general statement as if it were written specifically for you. The way a picture or statement resonates can be worth reflecting on. When interpreting it, consider how it fits the known facts and leave room for another reading.',
+    reference: 'American Psychological Association · Barnum effect',
+    studiesTitle: 'Research on spirituality and bodily experience',
+    boundary: 'These papers examine spiritual experience and bodily perception. Evaluating tarot as a way to predict events, diagnose conditions or provide treatment would require studies testing those specific claims.',
   },
 } as const;
