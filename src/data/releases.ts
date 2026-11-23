@@ -16,28 +16,10 @@ type Release = {
 
 export const releases: Release[] = [
   {
-    version: '2.8.3',
+    version: '2.7.3',
     date: '2026-11-23',
-    vi: ['Trang Tarot gọn hơn và có mục về AI', 'Rút gọn phần giới thiệu và lộ trình, gỡ khối nghiên cứu về tâm linh và cảm nhận cơ thể, bổ sung so sánh AI với buổi hướng dẫn 1:1.'],
-    en: ['A shorter tarot page with an AI comparison', 'Shortened the introduction and outline, removed the section on spiritual and bodily experience, and compared AI prompts with one-to-one guidance.'],
-  },
-  {
-    version: '2.8.2',
-    date: '2026-11-23',
-    vi: ['Tarot dưới góc nhìn tâm lý học', 'Cập nhật giới thiệu Hương Thiền, gỡ bài thử với The Magician và đưa tư liệu gốc vào mục riêng cùng hai công trình về trải nghiệm tâm linh và cảm nhận cơ thể.'],
-    en: ['Tarot from a psychological perspective', 'Updated Hương Thiền’s bio, removed the Magician exercise and moved primary sources to a dedicated section with two papers on spiritual and bodily experience.'],
-  },
-  {
-    version: '2.8.1',
-    date: '2026-11-23',
-    vi: ['Khóa thực hành và điều hướng gọn hơn', 'Đổi tên và địa chỉ mục Khóa thực hành, thêm chuyển hướng từ liên kết cũ, làm gọn thanh đầu trang và thay minh họa Tarot.'],
-    en: ['Practice courses and simpler navigation', 'Renamed and moved Practice courses with redirects from old links, refined the header controls and refreshed the Tarot illustrations.'],
-  },
-  {
-    version: '2.8.0',
-    date: '2026-11-23',
-    vi: ['Trải nghiệm Tarot và ba quỹ đạo', 'Trang riêng cho buổi Tarot 1:1 với lợi ích, lộ trình, bài thực hành và cách hỏi lịch. Ba hành tinh chuyển động liên tục khi hiển thị và ảnh rừng đầu trang được ẩn trên điện thoại.'],
-    en: ['Tarot session and three orbits', 'A dedicated Tarot session page with takeaways, a session outline, a short exercise and booking details. The three planets move continuously in view, and the homepage forest photo is hidden on phones.'],
+    vi: ['Logo và mô hình ba quỹ đạo', 'Dùng đúng logo làm biểu tượng trình duyệt và cài đặt ứng dụng. Ẩn ảnh mở đầu trên mobile, thay hình Thân, Tâm, Trí bằng minh họa sát chủ đề và tinh gọn chuyển động.'],
+    en: ['Logo and three-orbit model', 'Used the brand logo for browser and app icons. Hid the opening image on mobile, replaced the Body, Heart and Mind planets with subject-specific illustrations and streamlined motion.'],
   },
   {
     version: '2.7.2',

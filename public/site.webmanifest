@@ -1,0 +1,15 @@
+{
+  "name": "Hương Thiền Nature",
+  "short_name": "Hương Thiền",
+  "description": "Thiền định, chánh niệm và sống thuận tự nhiên.",
+  "lang": "vi",
+  "start_url": "/vi/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#FAF8F1",
+  "theme_color": "#243F32",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any maskable" },
+    { "src": "/media/huong-thien-logo-forest.webp", "sizes": "720x720", "type": "image/webp", "purpose": "any maskable" }
+  ]
+}

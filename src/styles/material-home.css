@@ -12,7 +12,7 @@
 .material-hero h1 { margin: .42rem 0 1rem; font-size: var(--type-display); line-height: 1.06; letter-spacing: 0; text-wrap: initial; }
 .material-hero .lead { max-width: 42ch; }
 .material-actions { display: flex; flex-wrap: wrap; align-items: center; gap: .35rem 1.25rem; margin-top: 1.25rem; }
-.material-hero__art { position: relative; isolation: isolate; }
+.material-hero__art { display: none; position: relative; isolation: isolate; }
 .material-hero__art::before {
   content: ''; position: absolute; inset: 1.05rem -.55rem -.6rem 1rem; z-index: -1;
   border: 1px solid #9eac94; border-radius: 43% 43% var(--radius-card) var(--radius-card) / 29% 26% var(--radius-card) var(--radius-card);
@@ -21,10 +21,8 @@
   aspect-ratio: 5 / 3;
   border-radius: 43% 43% var(--radius-card) var(--radius-card) / 29% 26% var(--radius-card) var(--radius-card);
 }
-@media (width < 760px) {
-  .material-hero__art { display: none; }
-}
 @media (min-width: 760px) {
+  .material-hero__art { display: block; }
   .material-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr); }
   .material-hero__art .contemplative-scene { aspect-ratio: 6 / 5; }
 }

@@ -1,23 +1,8 @@
-## 2.8.3 — Trang Tarot gọn hơn và có mục về AI
+## 2.7.3 — Nhận diện thương hiệu rõ hơn
 
-- Rút gọn nội dung giới thiệu, lộ trình và tài liệu đọc. Chuyển bài thơ của Hương Thiền vào mục mở rộng cạnh phần giới thiệu người đồng hành.
-- Gỡ khối nghiên cứu về tâm linh và cảm nhận cơ thể. Thêm so sánh giữa AI và trao đổi 1:1, với ví dụ về câu hỏi công việc.
-
-## 2.8.2 — Tarot dưới góc nhìn tâm lý học
-
-- Giới thiệu Hương Thiền là người sáng lập và giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh.
-- Gỡ khối thử câu hỏi với The Magician. Đưa tư liệu gốc ra thành mục riêng, bổ sung công trình của David Bryce Yaden và Lisa Feldman Barrett cùng các đồng tác giả.
-
-## 2.8.1 — Khóa thực hành và điều hướng gọn hơn
-
-- Đổi tên và địa chỉ mục Khóa thực hành ở cả hai ngôn ngữ, chuyển hướng từ địa chỉ cũ.
-- Nhóm các nút tìm kiếm, ngôn ngữ và menu thành một cụm trên màn hình nhỏ.
-- Thay minh họa Tarot bằng sen và gợn nước, lá bài và đối thoại. Canh giữa trên điện thoại và thêm chuyển động nhẹ theo từng mục.
-
-## 2.8.0 — Trải nghiệm Tarot và ba quỹ đạo
-
-- Thiết kế trang giới thiệu buổi Tarot 1:1 với lộ trình 90 phút, bài thực hành, người hướng dẫn, câu hỏi thường gặp và cách liên hệ. Thêm chuyển động theo từng mục.
-- Đổi minh họa Thân, Tâm, Trí và cho ba hành tinh quay liên tục trong vùng nhìn. Ẩn khung ảnh rừng đầu trang khi màn hình dưới 760 px.
+- Ẩn ảnh núi ở phần mở đầu trên màn hình nhỏ, giữ ảnh đời thực ở phần câu chuyện bên dưới.
+- Thay ảnh ba quỹ đạo bằng minh họa riêng cho cây mầm, hoa sen và sách mở; bỏ nút dừng chuyển động trên mọi kích thước màn hình.
+- Cấp favicon và biểu tượng cài đặt ứng dụng từ logo Hương Thiền Nature.
 
 ## 2.7.2 — Vào thẳng trang chủ
 
@@ -195,24 +180,4 @@ Phiên bản dùng `major.minor.patch`, hiển thị từ `package.json` tại f
 
 ## V3 Roots 0.3.3
 
-- Hai nút nổi (nhạc và về đầu trang) tự chọn nền tối trên vùng sáng, nền sáng trên vùng tối, theo vị trí riêng khi cuộn/đổi kích thước. Ảnh cùng nguồn được lấy mẫu màu tại vị trí nút. Chữ, biểu tượng, viền, dấu trạng thái và bảng âm lượng cùng đổi màu để giữ độ tương phản.
-- Navigation Tản văn dẫn đến trang danh sách riêng, song ngữ tại `/vi/journal/` và `/en/journal/`. Liệt kê ba bài hiện có với ảnh, chủ đề, thời gian đọc và tóm tắt; đọc bài, quay lại danh sách và đổi ngôn ngữ.
-- Breadcrumb, liên kết chân trang, nút Xem tất cả và sitemap cập nhật cho hai trang mới. Giữ URL của các bài đã xuất bản.
-
-## V3 Roots 0.3.2
-
-- Contact có phương án Soạn email đến địa chỉ chủ dự án đã cung cấp khi API hoặc khởi tạo xác minh chưa hoạt động. Có liên kết ứng dụng email và Gmail; người dùng kiểm tra rồi tự gửi, không nhầm bản nháp với gửi thành công.
-- Điều khiển nhạc chuyển xuống góc trái, bảng âm lượng mở cùng phía.
-- Nút Về đầu trang ở góc phải xuất hiện khi cuộn đạt 30% phần trang có thể cuộn; hỗ trợ bàn phím và giảm chuyển động.
-- Hiển thị số phiên bản tại footer và metadata để nhận diện bản đang chạy.
-
-## V3 Roots 0.3.1
-
-- API liên hệ Cloudflare Pages Functions, Resend và Turnstile; gửi trực tiếp cần cấu hình runtime.
-- Nhạc nền Lotus at First Light, bật/tắt, âm lượng và ghi nhớ lựa chọn. Tính năng nhạc đã phát hành trước khi quy ước tăng số cho từng bản cập nhật được áp dụng.
-
-### Homepage storytelling integration — v0.4.7
-- Integrated bilingual founder story, learning milestone timeline and Farm & Botanicals → Eco-Retreat → Academy direction.
-- Added responsive Hybrid Nature motion with reduced-motion and data-saver support.
-- Replaced selected couple imagery and hero with nature scenes; source credits retained in code and alt text.
-- Preserved v0.4.7 Roots search, beginner reading path, featured articles and contact form.
+- Hai nút nổi (nhạc và về đầu trang) tự chọn nền t

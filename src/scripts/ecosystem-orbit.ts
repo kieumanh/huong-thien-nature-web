@@ -1,4 +1,4 @@
-/** CSS owns the orbit; only run while visible and allowed by device preferences. */
+/** CSS owns orbital motion; it runs only while visible and explicitly permitted. */
 for (const scene of document.querySelectorAll<HTMLElement>('[data-ecosystem]')) {
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
   const connection = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection;
