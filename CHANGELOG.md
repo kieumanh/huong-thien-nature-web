@@ -1,3 +1,8 @@
+## 2.7.0 — Bốn mùa trong ngày
+
+- Chia bốn mùa thành các khung 6 giờ theo giờ Việt Nam. Thêm nắng xuân, én, lá xanh và mưa phùn, nắng hạ và mưa rào, gió thu và lá vàng, tuyết rơi và đọng tuyết vào mùa đông.
+- Giữ hiệu ứng thời tiết nhất quán khi chuyển trang và tôn trọng tùy chọn giảm chuyển động.
+
 ## 2.6.3 — Chân trang trên điện thoại
 
 - Sửa chữ bị cắt, tách số phiên bản xuống dòng và phối nền chân trang theo sắc độ chạng vạng.

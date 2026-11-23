@@ -237,14 +237,15 @@ def check_flows(browser):
     report['passes'].append('Homepage orbits fit every viewport, rotate in view and respect reduced motion.')
     page.clock.install(time=datetime(2026, 11, 20, 16, 59, 59, tzinfo=timezone.utc))
     wait_page(page, base + routes['vi']['story'])
-    expect(page.locator('html')).to_have_attribute('data-season', 'winter')
+    expect(page.locator('html')).to_have_attribute('data-season', 'autumn')
     page.clock.fast_forward(2000)
-    expect(page.locator('html')).to_have_attribute('data-season', 'spring')
-    for season in ['summer', 'autumn', 'winter', 'spring']:
-        page.clock.fast_forward(3_600_000)
+    expect(page.locator('html')).to_have_attribute('data-season', 'winter')
+    for season in ['spring', 'summer', 'autumn', 'winter']:
+        page.clock.fast_forward(6 * 3_600_000)
         expect(page.locator('html')).to_have_attribute('data-season', season)
-    assert page.locator('.seasonal-accent span').first.evaluate("el => getComputedStyle(el).animationName") == 'none'
-    report['passes'].append('Seasonal cycle updates hourly across Vietnam midnight on an inner page and respects reduced motion.')
+    expect(page.locator('.seasonal-accent .season-bank').first).to_be_hidden()
+    assert page.locator('.topbar').evaluate("el => getComputedStyle(el, '::before').animationName") == 'none'
+    report['passes'].append('Four six-hour seasons follow Vietnam time on inner pages and respect reduced motion.')
     assert not errors, errors
     page.close()
 

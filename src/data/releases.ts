@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.7.0',
+    date: '2026-11-23',
+    vi: ['Bốn mùa trong ngày', 'Mỗi mùa kéo dài 6 giờ theo giờ Việt Nam, với én và mưa phùn mùa xuân, mưa rào mùa hạ, lá vàng mùa thu và tuyết mùa đông.'],
+    en: ['Four seasons in one day', 'Each season follows a six-hour slot in Vietnam time, with spring swallows and drizzle, summer showers, autumn leaves and winter snow.'],
+  },
+  {
     version: '2.6.3',
     date: '2026-11-22',
     vi: ['Chân trang trên điện thoại', 'Sửa chữ bị cắt và điều chỉnh màu nền chân trang ở chạng vạng.'],

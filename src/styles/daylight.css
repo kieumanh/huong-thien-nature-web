@@ -55,7 +55,6 @@
 [data-sky="night"] .brand img, [data-sky="night"] .footer-logo { background: #eee9e2; }
 [data-sky="night"] .solar-system-starfield { background: radial-gradient(circle, #6d5a43, transparent 68%); }
 [data-sky="night"] .reading-progress span { background: var(--orchid); }
-[data-sky="night"] .seasonal-accent { opacity: .38; }
 [data-sky="night"] .founder-journey .journey-jumps a { color: var(--foreground); }
 [data-sky="night"] .nav-links a[aria-current] { color: var(--orchid-deep); }
 

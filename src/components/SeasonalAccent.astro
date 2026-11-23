@@ -1,60 +1,51 @@
+---
+const particles = [
+  [11, -2, 9], [27, -7, 13], [53, -4, 10], [72, -9, 16],
+  [38, -12, 14], [88, -6, 11], [61, -1, 15], [18, -11, 12],
+  [82, -13, 17], [47, -6, 19],
+];
+---
 <div class="seasonal-accent" aria-hidden="true">
-  {[
-    [-12, 10, -2], [7, 17, -5], [26, 5, -4], [39, 26, -7], [58, 12, -1], [71, 35, -9], [88, 17, -6],
-  ].map(([left, top, delay]) => <span style={`--x:${left}%;--y:${top}%;--delay:${delay}s`}></span>)}
+  <div class="season-sun"></div>
+  <div class="season-swallows">
+    {[0, 1, 2].map(index => (
+      <div class="season-flight" style={`--bird:${index}`}>
+        <svg class="season-bird" viewBox="0 0 36 18" width="28" height="14" focusable="false">
+          <path d="M35 2c-6 0-12 2-17 6C13 4 8 2 1 1c6 3 9 9 15 10l-5 6 7-3 6 3-4-6C27 10 29 5 35 2Z" />
+        </svg>
+      </div>
+    ))}
+  </div>
+  {['left', 'right'].map(side => (
+    <div class={`season-bank season-bank--${side}`}>
+      {particles.map(([x, delay, duration], index) => (
+        <span class:list={['season-particle', { 'season-particle--extra': index >= 5 }]}
+          style={`--x:${x}%;--delay:${delay}s;--fall-time:${duration}s`}></span>
+      ))}
+      <span class="season-gust"></span>
+      <span class="season-runoff"></span>
+    </div>
+  ))}
 </div>
 
 <script>
-  import { seasonAt, timeUntilNextHour } from '../scripts/seasons';
+  import { seasonSceneAt } from '../scripts/seasons';
 
+  const root = document.documentElement;
   let timer: ReturnType<typeof setTimeout>;
+
   function syncSeason() {
     clearTimeout(timer);
+    root.toggleAttribute('data-season-paused', document.hidden);
     if (document.hidden) return;
     const now = Date.now();
-    document.documentElement.dataset.season = seasonAt(now);
-    timer = setTimeout(syncSeason, timeUntilNextHour(now));
+    const { season, weather, nextChangeAt } = seasonSceneAt(now);
+    root.dataset.season = season;
+    root.dataset.weather = weather;
+    timer = setTimeout(syncSeason, nextChangeAt - now);
   }
 
   document.addEventListener('visibilitychange', syncSeason);
   window.addEventListener('pageshow', syncSeason);
   syncSeason();
 </script>
-<style>
-  .seasonal-accent {
-    position: fixed;
-    z-index: 2;
-    inset: 4.6rem 0 auto auto;
-    width: min(30vw, 21rem);
-    height: min(32vh, 16rem);
-    pointer-events: none;
-    overflow: hidden;
-    background: radial-gradient(ellipse at top right, var(--season-glow, transparent), transparent 68%);
-    transition: background-color .5s ease;
-  }
-  span {
-    position: absolute;
-    left: var(--x);
-    top: var(--y);
-    width: var(--season-size, .55rem);
-    height: var(--season-size, .55rem);
-    border-radius: var(--season-shape, 55% 45% 58% 42%);
-    background: var(--season-particle, transparent);
-    opacity: .55;
-    animation: drift 12s var(--delay) ease-in-out infinite;
-  }
-  @keyframes drift {
-    0% { transform: translate(1rem, -1rem) rotate(0deg); opacity: 0; }
-    30%, 65% { opacity: .55; }
-    100% { transform: translate(-2.8rem, 8rem) rotate(115deg); opacity: 0; }
-  }
-  @media (max-width: 759px) {
-    .seasonal-accent {
-      inset-inline: 0; margin-inline: auto; width: min(42vw, 12rem);
-      opacity: .65; background: radial-gradient(ellipse at top, var(--season-glow, transparent), transparent 65%);
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .seasonal-accent span { animation: none; }
-  }
-</style>
