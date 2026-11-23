@@ -8,7 +8,8 @@ Rà soát hai trang Tarot tâm lý học và Tần Số Vàng từ góc nhìn ng
 - Tarot: ô chi phí đổi thành "Báo giá qua tin nhắn" (thay cho "Liên hệ"), ghi chú nhắn Zalo để nhận báo giá; thêm 3 câu hỏi đáp (chưa có câu hỏi rõ ràng, chi phí và thanh toán, chọn Tarot hay Tần Số Vàng).
 - Thanh đặt lịch/báo giá cố định trên điện thoại (Tarot, Tần Số Vàng): nút nhạc và nút lên đầu trang nâng theo chiều cao thật của thanh, không còn bị đè khi chữ xuống dòng ở màn hình hẹp hoặc ngôn ngữ dài hơn.
 - Kiểm thử: bổ sung test cho khối thông tin và bảng so sánh; cập nhật các kỳ vọng nhãn giá Tarot.
-- Chưa có (chờ chủ dự án): hình thức buổi Tarot (online hay trực tiếp), số buổi học trực tiếp và nền tảng lớp Tần Số Vàng, sĩ số, chính sách hoàn/dời lịch, cam kết bảo mật buổi 1:1, cảm nhận học viên đã đồng ý công khai, thông tin chuyên môn người hướng dẫn.
+- Theo xác nhận của chủ dự án: số 0388 000 680 là của Kiều Mạnh (ghi tên ở Liên hệ); thêm giới thiệu chuyên môn của Hương Thiền (bậc thầy về thiền, chánh niệm, duy trì tỉnh thức ở tần số cao) ở hai trang; thêm cam kết bảo mật cho buổi 1:1 và lớp học trong hỏi đáp.
+- Chưa có (chờ chủ dự án): hình thức buổi Tarot (online hay trực tiếp), số buổi học trực tiếp và nền tảng lớp Tần Số Vàng, sĩ số, chính sách hoàn/dời lịch, cảm nhận học viên đã đồng ý công khai.
 
 ## 2.11.0 — Tinh chỉnh giao diện và tìm kiếm Tản văn
 

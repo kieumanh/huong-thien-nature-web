@@ -104,7 +104,7 @@ export const tarotLanding = {
       exampleQuote: 'Điều gì ở nơi làm khiến bạn muốn rời đi nhất? Nếu có thể thử thay đổi một điều trước, bạn sẽ chọn gì?',
     },
     hostTitle: 'Người đồng hành cùng bạn',
-    hostBio: 'Đỗ Thị Kim Hương là người sáng lập Hương Thiền Nature và là giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh.',
+    hostBio: 'Đỗ Thị Kim Hương là người sáng lập Hương Thiền Nature và là giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh. Cô là bậc thầy về thiền, chánh niệm và duy trì sự tỉnh thức ở tần số cao.',
     hostLink: 'Đọc câu chuyện của Hương Thiền',
     poemTitle: 'Lắng nghe tiếng nước',
     poem: [
@@ -122,6 +122,7 @@ export const tarotLanding = {
       ['Mình có thể hỏi chuyện tương lai không?', 'Với câu hỏi về tương lai, Hương Thiền sẽ cùng bạn tìm phần thuộc về lựa chọn của mình ở hiện tại.'],
       ['Hỏi lịch, hình thức gặp và chi phí ở đâu?', 'Nhắn Zalo hoặc dùng trang Liên hệ để hỏi trước khi quyết định. Một câu nhắn ngắn là đủ.'],
       ['Mình chưa có câu hỏi rõ ràng thì sao?', 'Không sao. Bạn có thể bắt đầu từ một cảm xúc hay một tình huống đang bận tâm, ví dụ “mình thấy bế tắc”. Câu hỏi sẽ được làm rõ dần trong buổi gặp.'],
+      ['Nội dung buổi 1:1 có được bảo mật không?', 'Có. Những gì bạn chia sẻ trong buổi 1:1 được giữ bảo mật. Bạn chỉ nói trong phạm vi mình thấy thoải mái.'],
       ['Chi phí và thanh toán thế nào?', 'Chi phí được gửi qua tin nhắn khi bạn nhắn Zalo hoặc dùng trang Liên hệ. Hãy hỏi rõ lịch, hình thức gặp và chi phí qua kênh chính thức của Hương Thiền Nature trước khi xác nhận.'],
       ['Nên chọn buổi Tarot 1:1 hay khóa Tần Số Vàng?', 'Chọn buổi Tarot khi bạn có một câu hỏi hoặc tình huống cụ thể muốn làm rõ trong 90 phút. Chọn Tần Số Vàng khi bạn muốn một lộ trình online 1 tháng để luyện các thói quen hằng ngày.'],
     ],
@@ -197,7 +198,7 @@ export const tarotLanding = {
       exampleQuote: 'What at work makes you most want to leave? If you could try changing one thing first, what would it be?',
     },
     hostTitle: 'Who will guide you',
-    hostBio: 'Đỗ Thị Kim Hương is the founder of Hương Thiền Nature and teaches meditation, mindfulness and spiritual awakening practices.',
+    hostBio: 'Đỗ Thị Kim Hương is the founder of Hương Thiền Nature and teaches meditation, mindfulness and spiritual awakening practices. She is a master of meditation, mindfulness and sustaining awareness at a high frequency.',
     hostLink: 'Read Hương Thiền’s story',
     poemTitle: 'Listening to the water',
     poem: [
@@ -215,6 +216,7 @@ export const tarotLanding = {
       ['Can I ask about the future?', 'If you bring a question about the future, Hương Thiền will help you explore the choices available to you now.'],
       ['How can I find out the cost, format and availability?', 'Send a short message on Zalo or use the contact page to ask before making a decision.'],
       ['What if I do not have a clear question?', 'That is fine. You can begin with a feeling or a situation on your mind, such as “I feel stuck”. The question becomes clearer as we talk during the session.'],
+      ['Is what I share in the 1:1 session kept confidential?', 'Yes. What you share in the 1:1 session is kept confidential. You only share what you are comfortable sharing.'],
       ['How do cost and payment work?', 'The cost is sent by message when you contact us on Zalo or through the contact page. Please confirm the date, format and cost through Hương Thiền Nature’s official channels before you commit.'],
       ['Should I choose the 1:1 tarot session or The Golden Frequency?', 'Choose the tarot session when you have a specific question or situation to clarify in 90 minutes. Choose The Golden Frequency when you want a one-month online path to build daily habits.'],
     ],

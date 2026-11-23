@@ -565,7 +565,7 @@ export const frequencyLanding = {
       referencesTitle: 'Nghiên cứu được nhắc trên trang',
     },
     hostTitle: 'Người đồng hành',
-    hostBio: 'Đỗ Thị Kim Hương (Hương Thiền) là người sáng lập Hương Thiền Nature và là giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh. Trong khóa học, cô dẫn các buổi thiền, thở và đồng hành cùng bạn qua từng chặng.',
+    hostBio: 'Đỗ Thị Kim Hương (Hương Thiền) là người sáng lập Hương Thiền Nature và là giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh. Cô là bậc thầy về thiền, chánh niệm và duy trì sự tỉnh thức ở tần số cao. Trong khóa học, cô dẫn các buổi thiền, thở và đồng hành cùng bạn qua từng chặng.',
     hostLink: 'Đọc câu chuyện của Hương Thiền',
     support: {
       eyebrow: 'Sau khóa học',
@@ -596,6 +596,7 @@ export const frequencyLanding = {
       ['Mình đã thiền nhiều năm, khóa này có phù hợp không?', 'Bạn hoàn toàn có thể tham gia. Khóa không đòi hỏi kinh nghiệm thiền trước, và phần thực hành gắn với mối quan hệ, công việc, sự nghiệp, tiền bạc và thời gian trong đời sống hằng ngày. Nếu muốn biết khóa có hợp với quá trình của mình không, hãy nhắn cho chúng tôi trước khi đăng ký.'],
       ['Học phí và thanh toán thế nào?', 'Học phí được gửi qua tin nhắn khi bạn nhắn Zalo, gọi điện hoặc điền biểu mẫu. Hãy xác nhận ngày khai giảng và học phí qua kênh chính thức của Hương Thiền Nature trước khi thanh toán, và hỏi lại nếu có điều chưa rõ.'],
       ['Nên chọn khóa Tần Số Vàng hay buổi Tarot 1:1?', 'Chọn Tần Số Vàng khi bạn muốn một lộ trình online 1 tháng để luyện các thói quen hằng ngày. Chọn buổi Tarot 1:1 khi bạn có một câu hỏi hoặc tình huống cụ thể muốn làm rõ trong 90 phút.'],
+      ['Thông tin cá nhân của mình có được bảo mật không?', 'Có. Những gì bạn chia sẻ trong lớp học và khi trao đổi với Hương Thiền Nature được giữ bảo mật. Bạn chỉ chia sẻ trong phạm vi mình thấy thoải mái.'],
       ['Sau khóa học mình có được hỗ trợ không?', 'Có. Xem mục Phúc lợi hỗ trợ sau khóa học; phạm vi cụ thể được ghi trong báo giá.'],
     ],
     howtoTitle: 'Nhận báo giá trong 3 bước',
@@ -815,7 +816,7 @@ export const frequencyLanding = {
       referencesTitle: 'Research mentioned on this page',
     },
     hostTitle: 'Your guide',
-    hostBio: 'Đỗ Thị Kim Hương (Hương Thiền) founded Hương Thiền Nature and teaches meditation, mindfulness and spiritual awakening. Throughout the course she leads the meditation and breathing sessions and accompanies you through each stage.',
+    hostBio: 'Đỗ Thị Kim Hương (Hương Thiền) founded Hương Thiền Nature and teaches meditation, mindfulness and spiritual awakening. She is a master of meditation, mindfulness and sustaining awareness at a high frequency. Throughout the course she leads the meditation and breathing sessions and accompanies you through each stage.',
     hostLink: 'Read Hương Thiền’s story',
     support: {
       eyebrow: 'After the course',
@@ -846,6 +847,7 @@ export const frequencyLanding = {
       ['I have meditated for years. Is this course right for me?', 'You are welcome to join. The course does not require any prior meditation experience, and the practice is tied to relationships, work, career, money and time in everyday life. If you want to know whether it fits your own path, message us before you enrol.'],
       ['How do the fee and payment work?', 'The fee is sent by message when you contact us on Zalo, by phone or through the form. Please confirm the start date and fee through Hương Thiền Nature’s official channels before you pay, and ask again if anything is unclear.'],
       ['Should I choose The Golden Frequency or the 1:1 tarot session?', 'Choose The Golden Frequency when you want a one-month online path to build daily habits. Choose the 1:1 tarot session when you have a specific question or situation to clarify in 90 minutes.'],
+      ['Is my personal information kept confidential?', 'Yes. What you share in class and when you talk with Hương Thiền Nature is kept confidential. You only share what you are comfortable sharing.'],
       ['Is there support after the course?', 'Yes. See Support after the course; the exact scope is set out in your quote.'],
     ],
     howtoTitle: 'Get a quote in three steps',
