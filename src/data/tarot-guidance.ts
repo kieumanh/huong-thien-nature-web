@@ -72,12 +72,17 @@ export const tarotLanding = {
       options: [
         {
           title: 'Khi một gợi ý từ AI là đủ',
-          detail: 'AI có thể gợi vài cách hiểu một biểu tượng hoặc đề xuất câu hỏi để bạn tự viết nhật ký. Bạn có thể dùng những gợi ý đó để bắt đầu suy ngẫm theo nhịp riêng.',
+          detail: 'AI phù hợp khi bạn muốn tra cứu một biểu tượng, thử vài cách đọc hoặc tìm câu hỏi để viết nhật ký. Bạn có thể kể ngắn gọn tình huống, yêu cầu AI đưa ra hai cách hiểu, rồi ghi lại cách nào có căn cứ trong đời mình. Cuộc trò chuyện dựa vào những gì bạn cung cấp, nên một câu trả lời nghe rất khớp vẫn đáng được đối chiếu với sự việc cụ thể.',
         },
         {
           title: 'Khi bạn muốn đối thoại 1:1',
-          detail: 'Hương Thiền nghe câu chuyện bạn chọn chia sẻ và hỏi lại để chắc mình đã hiểu đúng. Khi bạn cần thêm thời gian, hai người có thể dừng lại cùng thở hoặc đổi hướng trò chuyện. Bạn tự chọn điều muốn làm sau buổi gặp.',
+          detail: 'Buổi 1:1 phù hợp khi câu hỏi còn mơ hồ, mỗi cách hiểu dẫn đến một lựa chọn khác nhau, hoặc bạn đã nghĩ về nó nhiều lần mà vẫn thấy vướng. Hương Thiền nghe câu chuyện bạn chọn chia sẻ, nhắc lại điều mình vừa hiểu và để bạn chỉnh nếu cần. Hai người có thể dừng lại cùng thở, nhìn lại chi tiết trên lá bài hoặc đổi hướng trò chuyện. Bạn tự chọn điều muốn làm sau buổi gặp.',
         },
+      ],
+      details: [
+        ['Điều gì thay đổi khi kể thành lời?', 'Bạn có thể bắt đầu từ câu “Mình thấy bế tắc”. Khi nghe lại câu chuyện và nhớ đến một việc cụ thể, bạn có thể nhận ra mình đang mệt, đang cần được lắng nghe hoặc đang muốn thay đổi một thói quen. Mỗi khả năng mở ra một câu hỏi khác.'],
+        ['Lá bài được dùng thế nào trong buổi gặp?', 'Hương Thiền có thể hỏi bạn chú ý đến hình ảnh nào trước và hình ảnh ấy gợi chuyện gì. Hai người xem lại điều bạn biết, điều bạn đang suy đoán và những cách hiểu khác. Khi đủ rõ, bạn chọn một việc nhỏ có thể thử hoặc một điều cần tìm hiểu thêm.'],
+        ['Có thể dùng cả AI và buổi 1:1 không?', 'Bạn có thể dùng AI trước để ghi ra vài câu hỏi. Khi gặp Hương Thiền, hãy mang theo một câu bạn còn muốn hiểu và một ví dụ trong đời sống. Sau buổi gặp, bạn có thể tự viết lại điều mình nhận ra bằng lời của mình.'],
       ],
       exampleTitle: 'Cùng một câu hỏi về công việc',
       example: 'Với câu hỏi “Mình có nên nghỉ việc?”, AI có thể giúp liệt kê những điều cần cân nhắc. Trong buổi 1:1, Hương Thiền có thể hỏi tiếp “Điều gì ở nơi làm khiến bạn muốn rời đi nhất? Nếu có thể thử thay đổi một điều trước, bạn sẽ chọn gì?”',
@@ -141,12 +146,17 @@ export const tarotLanding = {
       options: [
         {
           title: 'When an AI prompt is enough',
-          detail: 'AI can suggest several ways to interpret a symbol or offer questions for a journal. You can use those suggestions to start reflecting at your own pace.',
+          detail: 'AI can help you look up a symbol, try a few readings or find a journaling prompt. Briefly describe the situation, ask for two readings and write down which has a basis in your own experience. The conversation draws on what you provide, so even a response that feels accurate is worth checking against specific events.',
         },
         {
           title: 'When you want a one-to-one conversation',
-          detail: 'Hương Thiền listens to the story you choose to share and checks that she has understood you. If you need more time, you can pause to breathe together or take the conversation in another direction. You decide what to do after the session.',
+          detail: 'A one-to-one session can help when the question is still unclear, different readings point to different choices, or you keep turning it over and feel stuck. Hương Thiền listens, reflects back what she understood and invites you to correct it. You can pause to breathe together, look again at the card or change the subject. You decide what to do after the session.',
         },
+      ],
+      details: [
+        ['What can change when you say it aloud?', 'You might start with “I feel stuck.” Hearing your story back and recalling a specific event can help you notice fatigue, a need to be heard or a habit you want to change. Each possibility leads to a different question.'],
+        ['How do you use the card in the session?', 'Hương Thiền might ask what you noticed first and what it brought to mind. Together you revisit what you know, what you are assuming and what else the image could mean. You choose a small action to try or a question to explore further.'],
+        ['Can I use both AI and a one-to-one session?', 'You can use AI beforehand to write down some questions. Bring one question you still want to explore and a real-life example to the session. Afterwards, you can write down what you noticed in your own words.'],
       ],
       exampleTitle: 'The same question about work',
       example: 'If you ask “Should I leave my job?”, AI can help list things to consider. In a one-to-one session, Hương Thiền might ask, “What at work makes you most want to leave? If you could try changing one thing first, what would it be?”',
