@@ -638,6 +638,7 @@
 .gf-quote-form .contact-card :focus-visible { outline-color: var(--focus); }
 
 /* ---------- Sticky quote bar ---------- */
+.gf-sticky { --gf-cream: #f8f1e3; --gf-lilac: #d4c9ec; --gf-gold: #f4c76b; --gf-gold-hi: #ffe7a8; --gf-ink: #1a1233; } /* the bar sits outside .gf, so it carries its own palette */
 .gf-sticky[hidden] { display: none; }
 .gf-sticky:not([hidden]) {
   position: fixed;

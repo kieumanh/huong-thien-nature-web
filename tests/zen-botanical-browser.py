@@ -337,7 +337,7 @@ def check_tarot_conversion(browser):
             }""")
             assert not clash, ('floating controls overlap the booking bar', lang, width)
             # A wider font or a longer translation wraps the bar onto more lines; the controls must follow its real height.
-            page.add_style_tag(content='[data-guidance-sticky] span{font-size:1.05rem!important;letter-spacing:.06em!important}')
+            wrap_style = page.add_style_tag(content='[data-guidance-sticky] span{font-size:1.05rem!important;letter-spacing:.06em!important}')
             page.wait_for_timeout(250)
             wrapped = page.evaluate("""() => {
                 const bar = document.querySelector('[data-guidance-sticky]').getBoundingClientRect();
@@ -346,6 +346,8 @@ def check_tarot_conversion(browser):
                     .some(el => el.getBoundingClientRect().bottom > bar.top + 1);
             }""")
             assert not wrapped, ('floating controls overlap a wrapped booking bar', lang, width)
+            wrap_style.evaluate('el => el.remove()')
+            page.wait_for_timeout(250)
             if width == 393:
                 check_accessibility(page, lang, 'guidance-booking-bar', width)
             page.evaluate("document.querySelector('#booking').scrollIntoView()")

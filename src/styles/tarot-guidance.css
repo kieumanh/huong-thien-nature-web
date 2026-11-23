@@ -474,6 +474,7 @@
 .guidance-invitation .button--tonal:is(:hover, :active) { background: #6c4861; color: var(--tarot-paper); }
 .guidance-scope { margin-top: 1.1rem; font-size: .86rem; line-height: 1.5; }
 
+.guidance-sticky { --tarot-ink: #281a2a; --tarot-paper: #fff4e9; --tarot-gold: #f6d3a6; --tarot-soft: #f2dce8; } /* the bar sits outside .guidance, so it carries its own palette */
 .guidance-sticky[hidden] { display: none; }
 .guidance-sticky { display: none; }
 @media (max-width: 699px) {
