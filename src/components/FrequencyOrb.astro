@@ -1,0 +1,50 @@
+---
+import { frequencyTypes } from '../data/golden-frequency';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language; label: string }
+const { lang, label } = Astro.props;
+const rings = [78, 112, 146, 180, 214];
+const starts = [-24, 198, 136, 52, 288];
+const speeds = [38, 54, 70, 88, 110];
+const rays = Array.from({ length: 24 }, (_, index) => {
+  const angle = (index * 15 * Math.PI) / 180;
+  const inner = 50;
+  const outer = index % 2 ? 64 : 72;
+  return { x1: inner * Math.cos(angle), y1: inner * Math.sin(angle), x2: outer * Math.cos(angle), y2: outer * Math.sin(angle) };
+});
+const fixed = (value: number) => value.toFixed(1);
+---
+<figure class="gf-orb">
+  <svg viewBox="-250 -250 500 500" role="img" aria-label={label}>
+    <defs>
+      <radialGradient id="gf-core-gradient">
+        <stop offset="0" stop-color="#fffbe8" />
+        <stop offset=".45" stop-color="#ffe29a" />
+        <stop offset="1" stop-color="#e3a13d" />
+      </radialGradient>
+      <radialGradient id="gf-aura-gradient">
+        <stop offset="0" stop-color="#f4c76b" stop-opacity=".42" />
+        <stop offset=".55" stop-color="#f4c76b" stop-opacity=".08" />
+        <stop offset="1" stop-color="#f4c76b" stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <circle r="248" fill="url(#gf-aura-gradient)" />
+    <circle class="gf-orb-halo" r="236" fill="none" stroke="#f4c76b" stroke-opacity=".22" stroke-dasharray="2 9" />
+    {rings.map(radius => <circle r={radius} fill="none" stroke="#f4c76b" stroke-opacity=".34" stroke-width="1.2" />)}
+    <g class="gf-orb-rays">
+      {rays.map(ray => <line x1={fixed(ray.x1)} y1={fixed(ray.y1)} x2={fixed(ray.x2)} y2={fixed(ray.y2)} stroke="#ffe7a8" stroke-opacity=".85" stroke-width="2.2" stroke-linecap="round" />)}
+    </g>
+    <circle class="gf-orb-pulse" r="46" fill="#f4c76b" fill-opacity=".22" />
+    <circle r="44" fill="url(#gf-core-gradient)" />
+    {frequencyTypes.map((type, index) => <g class="gf-orbit" data-frequency={type.id} style={`--gf-orbit-start: ${starts[index]}deg; --gf-orbit-speed: ${speeds[index]}s; --gf-orbit-direction: ${index % 2 ? 'reverse' : 'normal'}`}>
+      <circle cx={rings[index]} cy="0" r="17" class="gf-orbit-glow" />
+      <circle cx={rings[index]} cy="0" r="9" class="gf-orbit-node" />
+    </g>)}
+  </svg>
+  <figcaption>
+    <ul class="gf-orb-legend" role="list">
+      {frequencyTypes.map(type => <li data-frequency={type.id}><span aria-hidden="true"></span>{type[lang].short}</li>)}
+    </ul>
+  </figcaption>
+</figure>

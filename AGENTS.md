@@ -39,7 +39,7 @@ Website song ngữ Việt/Anh của hệ sinh thái Hương Thiền Nature: thi�
 npm ci
 npm run check && npm run audit
 npm run build && npm run audit:build
-npm run test:contact && npm run test:worker && npm run test:search && npm run test:shop && npm run test:tarot && npm run test:headers
+npm run test:contact && npm run test:worker && npm run test:search && npm run test:shop && npm run test:tarot && npm run test:frequency && npm run test:headers
 node --test tests/hybrid-nature.test.mjs tests/ecosystem-content.test.mjs tests/ecosystem-orbit.test.mjs tests/home-discovery.test.mjs
 npx wrangler deploy --dry-run --config wrangler.worker.jsonc
 ```
@@ -64,6 +64,7 @@ Kiểm thử trình duyệt (Playwright) chạy trong CI; chạy cục bộ cầ
 - **Cửa hàng**: `/vi/cua-hang/` là trang tổng quan; ba không gian `thuc-pham-sach`, `da-nang-luong`, `sach` (EN: `clean-food`, `energy-stones`, `books`) định nghĩa ở `src/data/shop-themes.ts`, dựng bởi `ShopTheme.astro`. Mã chủ đề **dùng chung với Zen Flow Inventory** — không đổi một bên. Client (`src/scripts/shop-feed-client.ts`) chỉ dùng `textContent`; feed chỉ thay danh mục dự phòng của một chủ đề khi feed có ít nhất 1 sản phẩm của chủ đề đó.
 - **Tarot**: giá nằm ở `tarotOffer.price` (`src/data/courses.ts`), mặc định `null` → hiện "Liên hệ", không có Offer trong schema. Chỉ nhập giá khi chủ dự án xác nhận. Thanh đặt lịch cố định chỉ hiện trên điện thoại.
 - **CSP**: `scripts/secure-headers.mjs` chạy sau `astro build` (đã nằm trong `npm run build`), băm mọi script nội tuyến vào `dist/_headers`. Thêm script nội tuyến mới là tự động được băm; thêm máy chủ bên thứ ba phải sửa script này, `audit-build.mjs` sẽ báo lỗi nếu quên. Chỉ chạy `astro build` thì **thiếu CSP** và `audit:build` sẽ lỗi.
+- **Tần Số Vàng** (từ 2.10.0): trang khóa 6 chặng `/vi/khoa-thuc-hanh/tan-so-vang/` (EN `golden-frequency`). Nội dung ở `src/data/golden-frequency.ts`, giao diện `GoldenFrequency.astro` + `src/styles/golden-frequency.css`, tương tác `src/scripts/golden-frequency.ts`. Học phí ở `frequencyOffer.price` (`src/data/courses.ts`), mặc định `null` → "Nhận báo giá". "Tần số" luôn được trình bày là ẩn dụ chiêm nghiệm; nhà khoa học chỉ dùng hình sinh tự động, không dùng ảnh chân dung. Ảnh chia sẻ: `public/media/guidance/tan-so-vang.jpg` (VI) và `golden-frequency.jpg` (EN).
 - HSTS đang `max-age=31536000` không `includeSubDomains`/`preload` vì chưa xác minh mọi subdomain (kanban, farm, inventory…) chỉ dùng HTTPS. Chủ dự án quyết định có bật hay không.
 
 ## Triển khai

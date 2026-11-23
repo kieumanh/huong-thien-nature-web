@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.10.0',
+    date: '2026-11-24',
+    vi: ['Khóa thực hành Tần Số Vàng', 'Trang giới thiệu khóa 6 chặng làm chủ năng lượng tần số cao: năm dạng tần số, bài tự định vị sáu lĩnh vực đời sống có bản đồ trực quan, bài tập tuần, sáu nhà khoa học minh họa, phúc lợi sau khóa và nút nhận báo giá qua Zalo, điện thoại hoặc biểu mẫu. Có ảnh chia sẻ mạng xã hội riêng cho tiếng Việt và tiếng Anh.'],
+    en: ['The Golden Frequency course', 'A landing page for the six-stage course on mastering high-frequency energy: five kinds of frequency, a six-area self-check with a visual map, a weekly practice plan, six scientists as examples, support after the course and quote requests by Zalo, phone or form. Includes Vietnamese and English social sharing images.'],
+  },
+  {
     version: '2.9.0',
     date: '2026-11-24',
     vi: ['Cửa hàng ba không gian và Tarot dễ đặt lịch', 'Cửa hàng có ba không gian riêng: Thực phẩm sạch, Đá năng lượng và Sách, nối với kho Zen Flow. Trang Tarot có nút Zalo ngay đầu trang, thanh đặt lịch trên điện thoại và hướng dẫn đặt lịch 3 bước. Bổ sung chính sách bảo mật nội dung, HSTS và nâng cấp nền tảng.'],
