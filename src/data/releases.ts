@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.8.2',
+    date: '2026-11-23',
+    vi: ['Tarot dưới góc nhìn tâm lý học', 'Cập nhật giới thiệu Hương Thiền, gỡ bài thử với The Magician và đưa tư liệu gốc vào mục riêng cùng hai công trình về trải nghiệm tâm linh và cảm nhận cơ thể.'],
+    en: ['Tarot from a psychological perspective', 'Updated Hương Thiền’s bio, removed the Magician exercise and moved primary sources to a dedicated section with two papers on spiritual and bodily experience.'],
+  },
+  {
     version: '2.8.1',
     date: '2026-11-23',
     vi: ['Khóa thực hành và điều hướng gọn hơn', 'Đổi tên và địa chỉ mục Khóa thực hành, thêm chuyển hướng từ liên kết cũ, làm gọn thanh đầu trang và thay minh họa Tarot.'],

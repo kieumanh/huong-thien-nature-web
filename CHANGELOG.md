@@ -1,3 +1,8 @@
+## 2.8.2 — Tarot dưới góc nhìn tâm lý học
+
+- Giới thiệu Hương Thiền là người sáng lập và giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh.
+- Gỡ khối thử câu hỏi với The Magician. Đưa tư liệu gốc ra thành mục riêng, bổ sung công trình của David Bryce Yaden và Lisa Feldman Barrett cùng các đồng tác giả.
+
 ## 2.8.1 — Khóa thực hành và điều hướng gọn hơn
 
 - Đổi tên và địa chỉ mục Khóa thực hành ở cả hai ngôn ngữ, chuyển hướng từ địa chỉ cũ.
