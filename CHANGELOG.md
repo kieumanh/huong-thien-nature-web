@@ -1,3 +1,7 @@
+## 2.7.5 — Gợi ý và nhãn ba quỹ đạo
+
+- Đổi mục Thực hành thành Gợi ý và chuyển hướng đường dẫn cũ. Bỏ liên kết tìm kiếm ở chân trang và sửa nhãn Thân, Tâm, Trí bị cắt.
+
 ## 2.7.4 — Lá rơi khắp màn hình
 
 - Rải lá xuân và lá thu trên toàn chiều ngang của mọi trang, kể cả khi cuộn.

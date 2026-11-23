@@ -16,7 +16,7 @@ widths = (320, 375, 393, 768, 1024, 1440)
 snapshot_widths = (393, 1440)
 routes = {
     'vi': {
-        'home': '/vi/', 'practice': '/vi/thuc-hanh/', 'ecosystem': '/vi/he-sinh-thai/',
+        'home': '/vi/', 'practice': '/vi/goi-y/', 'ecosystem': '/vi/he-sinh-thai/',
         'story': '/vi/cau-chuyen/', 'team': '/vi/doi-ngu/', 'journal': '/vi/tan-van/',
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
         'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
@@ -24,7 +24,7 @@ routes = {
         'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-hoc/', 'guidance': '/vi/khoa-hoc/tam-ly-tarot/',
     },
     'en': {
-        'home': '/en/', 'practice': '/en/practice/', 'ecosystem': '/en/ecosystem/',
+        'home': '/en/', 'practice': '/en/suggestions/', 'ecosystem': '/en/ecosystem/',
         'story': '/en/story/', 'team': '/en/team/', 'journal': '/en/journal/',
         'article': '/en/journal/when-meditation-is-difficult/',
         'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.7.5',
+    date: '2026-11-23',
+    vi: ['Gợi ý và nhãn ba quỹ đạo', 'Đổi mục Thực hành thành Gợi ý, bỏ liên kết tìm kiếm ở chân trang và sửa nhãn Thân, Tâm, Trí bị cắt.'],
+    en: ['Suggestions and orbit labels', 'Renamed Practice to Suggestions, removed the footer search link, and fixed clipped planet labels.'],
+  },
+  {
     version: '2.7.4',
     date: '2026-11-23',
     vi: ['Lá rơi khắp màn hình', 'Lá xuân và lá thu rơi rải rác trên toàn chiều ngang của mọi trang, kể cả khi cuộn.'],

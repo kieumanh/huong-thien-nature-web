@@ -2,12 +2,12 @@ import type { Language } from './site.ts';
 
 export const journeyPages = {
   practice: {
-    vi: { slug: 'thuc-hanh', title: 'Thực hành', heading: 'Bắt đầu thực hành thiền và chánh niệm', description: 'Bạn có thể bắt đầu bằng một phút cảm nhận hơi thở tự nhiên hoặc bàn chân chạm đất. Hương Thiền Nature có hướng dẫn thiền tại nhà và đi bộ chánh niệm cho người mới.' },
-    en: { slug: 'practice', title: 'Practice', heading: 'A first step in meditation and mindfulness', description: 'Begin with a minute of feeling your natural breath or your feet on the ground. Hương Thiền Nature offers guides to meditating at home and walking mindfully.' },
+    vi: { slug: 'goi-y', title: 'Gợi ý', heading: 'Gợi ý thực hành thiền và chánh niệm', description: 'Bạn có thể bắt đầu bằng một phút cảm nhận hơi thở tự nhiên hoặc bàn chân chạm đất. Hương Thiền Nature có hướng dẫn thiền tại nhà và đi bộ chánh niệm cho người mới.' },
+    en: { slug: 'suggestions', title: 'Suggestions', heading: 'Suggestions for meditation and mindfulness', description: 'Begin with a minute of feeling your natural breath or your feet on the ground. Hương Thiền Nature offers guides to meditating at home and walking mindfully.' },
   },
   guidance: {
-    vi: { slug: 'khoa-thuc-hanh', title: 'Khóa thực hành', heading: 'Khóa thực hành cùng Hương Thiền', description: 'Tìm khóa thực hành và hướng dẫn cá nhân cùng Hương Thiền, bắt đầu với Lắng nghe mình qua tarot.' },
-    en: { slug: 'practice-courses', title: 'Practice courses', heading: 'Practice courses with Hương Thiền', description: 'Explore guided practice and individual sessions with Hương Thiền, beginning with Listening to yourself through tarot.' },
+    vi: { slug: 'khoa-hoc', title: 'Khóa học', heading: 'Khóa học cùng Hương Thiền', description: 'Tìm khóa thực hành và hướng dẫn cá nhân cùng Hương Thiền, bắt đầu với Lắng nghe mình qua tarot.' },
+    en: { slug: 'courses', title: 'Courses', heading: 'Courses with Hương Thiền', description: 'Explore guided practice and individual sessions with Hương Thiền, beginning with Listening to yourself through tarot.' },
   },
   ecosystem: {
     vi: { slug: 'he-sinh-thai', title: 'Hệ sinh thái', heading: 'Hệ sinh thái Thân, Tâm và Trí', description: 'Định hướng của Hương Thiền Nature là nối việc chăm đất, thực tập thiền và học từ trải nghiệm. Tìm hiểu ba hướng Thân, Tâm và Trí, điểm mạnh và các bước dự kiến trước khi mở rộng.' },
