@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
-import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyOffer, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
+import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
 import { frequencySchema } from '../src/data/golden-frequency-schema.ts';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, selfCheckDomains, weeklyPlan } from '../src/data/golden-frequency.ts';
 
@@ -20,18 +20,25 @@ test('the course is listed with bilingual routes and social images that exist', 
   assert.notEqual(courseImage(frequencyCourse, 'vi'), courseImage(frequencyCourse, 'en'));
 });
 
-test('no fee is published until the owner confirms one', () => {
-  assert.equal(frequencyOffer.price, null);
-  assert.equal(frequencyPriceLabel('vi'), 'Nhận báo giá');
-  assert.equal(frequencyPriceLabel('en'), 'Ask for a quote');
-  assert.equal(frequencyPriceLabel('vi', { price: 3500000 }), '3.500.000 ₫');
+test('confirmed fee: 5.600.000 ₫ in 2026, 6.600.000 ₫ from 2027', () => {
+  assert.equal(frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00')).price, 5600000);
+  assert.equal(frequencyOfferFor(new Date('2026-12-31T23:59:00+07:00')).price, 5600000);
+  assert.equal(frequencyOfferFor(new Date('2027-01-01T00:00:00+07:00')).price, 6600000);
+  assert.equal(frequencyOfferFor(new Date('2030-06-01T00:00:00+07:00')).price, 6600000);
+  assert.equal(frequencyPriceLabel('vi', frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00'))), '5.600.000 ₫');
+  assert.equal(frequencyPriceLabel('en', frequencyOfferFor(new Date('2027-02-01T00:00:00+07:00'))), '6,600,000 VND');
+  assert.match(frequencyFeeNote('vi', frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00'))), /6\.600\.000/);
+  assert.equal(frequencyPriceLabel('vi', { price: null }), 'Nhận báo giá');
+  assert.equal(frequencyPriceLabel('en', { price: null }), 'Ask for a quote');
   for (const bad of [0, -1, Number.NaN]) assert.equal(frequencyPriceLabel('en', { price: bad }), 'Ask for a quote');
+  assert.ok(frequencyOffer.price === 5600000 || frequencyOffer.price === 6600000);
   for (const lang of languages) {
-    const service = frequencySchema(lang).find(node => node['@type'] === 'Service');
+    const service = frequencySchema(lang, { price: null, currency: 'VND' }).find(node => node['@type'] === 'Service');
     assert.ok(service && !('offers' in service));
   }
-  const priced = frequencySchema('vi', { price: 3500000, currency: 'VND' }).find(node => node['@type'] === 'Service') as { offers: { price: string } };
-  assert.equal(priced.offers.price, '3500000');
+  const priced = frequencySchema('vi', { price: 5600000, currency: 'VND', year: 2026 }).find(node => node['@type'] === 'Service') as { offers: { price: string; priceValidUntil: string } };
+  assert.equal(priced.offers.price, '5600000');
+  assert.equal(priced.offers.priceValidUntil, '2026-12-31');
 });
 
 test('structured data mirrors the visible questions', () => {

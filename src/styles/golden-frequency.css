@@ -736,3 +736,6 @@ html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
 @media (forced-colors: active) {
   .gf-title-script, .gf-stage-number, .gf-quote h2 { background: none; color: CanvasText; }
 }
+
+.gf-supporter { margin-top: .9rem; text-align: center; font-size: .98rem; }
+.gf-supporter strong { color: var(--gf-gold-hi); font-weight: 600; }

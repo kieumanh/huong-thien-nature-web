@@ -106,16 +106,45 @@ export function tarotEnquiryPath(lang: Language) {
 }
 
 /**
- * Golden Frequency course fee. Keep `price: null` until the owner confirms a figure: the page then
- * invites visitors to ask for a quote and no Offer is published. A whole-number VND amount updates
- * the hero, sticky bar, quote section and structured data together.
+ * Golden Frequency course fee, confirmed by the owner. The fee depends on the calendar year in
+ * Vietnam when the site is built (2026: 5.600.000 ₫, 2027 onward: 6.600.000 ₫). Set `price: null`
+ * only to fall back to "ask for a quote"; no Offer is then published.
  */
-export const frequencyOffer: { price: number | null; currency: 'VND' } = { price: null, currency: 'VND' };
+export const frequencyFees = [
+  { year: 2026, price: 5_600_000 },
+  { year: 2027, price: 6_600_000 },
+] as const;
+
+export type FrequencyOffer = { price: number | null; currency: 'VND'; year?: number };
+
+export function frequencyOfferFor(date: Date = new Date()): FrequencyOffer {
+  const year = Number(new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric' }).format(date));
+  const tier = [...frequencyFees].reverse().find(fee => fee.year <= year) ?? frequencyFees[0];
+  return { price: tier.price, currency: 'VND', year: tier.year };
+}
+
+export const frequencyOffer: FrequencyOffer = frequencyOfferFor();
+
+function money(lang: Language, price: number) {
+  const amount = new Intl.NumberFormat(lang === 'vi' ? 'vi-VN' : 'en-US').format(Math.round(price));
+  return lang === 'vi' ? `${amount} ₫` : `${amount} VND`;
+}
 
 export function frequencyPriceLabel(lang: Language, offer: { price: number | null } = frequencyOffer) {
   if (offer.price === null || !Number.isFinite(offer.price) || offer.price <= 0) return lang === 'vi' ? 'Nhận báo giá' : 'Ask for a quote';
-  const amount = new Intl.NumberFormat(lang === 'vi' ? 'vi-VN' : 'en-US').format(Math.round(offer.price));
-  return lang === 'vi' ? `${amount} ₫` : `${amount} VND`;
+  return money(lang, offer.price);
+}
+
+/** One-line fee note: the current fee's year plus the next year's fee when one is set. */
+export function frequencyFeeNote(lang: Language, offer: FrequencyOffer = frequencyOffer) {
+  if (offer.price === null || offer.year === undefined) return '';
+  const next = frequencyFees.find(fee => fee.year > (offer.year as number));
+  if (offer.year === frequencyFees[frequencyFees.length - 1].year && !next) {
+    return lang === 'vi' ? `Học phí áp dụng từ năm ${offer.year}.` : `Fee applies from ${offer.year}.`;
+  }
+  return lang === 'vi'
+    ? `Học phí năm ${offer.year}. Từ 01/01/${next!.year}, học phí là ${money(lang, next!.price)}.`
+    : `${offer.year} fee. From 1 January ${next!.year} the fee is ${money(lang, next!.price)}.`;
 }
 
 /** Allow-listed contact topic for the Golden Frequency quote request. */

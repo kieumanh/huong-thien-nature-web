@@ -8,7 +8,7 @@ const origin = 'https://huongthiennature.com';
  * schema.org nodes for the Golden Frequency course page. A fee is published only when
  * `frequencyOffer.price` holds a confirmed figure, never a placeholder.
  */
-export function frequencySchema(lang: Language, offer: { price: number | null; currency: string } = frequencyOffer) {
+export function frequencySchema(lang: Language, offer: { price: number | null; currency: string; year?: number } = frequencyOffer) {
   const url = origin + coursePath(lang, frequencyCourse);
   const { title, description } = frequencyCourse[lang];
   const priced = offer.price !== null && Number.isFinite(offer.price) && offer.price > 0;
@@ -23,7 +23,7 @@ export function frequencySchema(lang: Language, offer: { price: number | null; c
       inLanguage: lang,
       provider: { '@id': origin + '/#organization' },
       image: new URL(courseImage(frequencyCourse, lang), origin).href,
-      ...(priced ? { offers: { '@type': 'Offer', price: String(Math.round(offer.price as number)), priceCurrency: offer.currency, url } } : {}),
+      ...(priced ? { offers: { '@type': 'Offer', price: String(Math.round(offer.price as number)), priceCurrency: offer.currency, url, availability: 'https://schema.org/InStock', ...(offer.year ? { priceValidUntil: `${offer.year}-12-31` } : {}) } } : {}),
     },
     {
       '@type': 'FAQPage',
