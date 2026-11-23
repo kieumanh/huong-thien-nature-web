@@ -21,7 +21,7 @@ routes = {
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
         'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
         'search': '/vi/timkiem/?q=bot+cacao', 'contact': '/vi/lien-he/',
-        'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-hoc/', 'guidance': '/vi/khoa-hoc/tam-ly-tarot/',
+        'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-thuc-hanh/', 'guidance': '/vi/khoa-thuc-hanh/tam-ly-tarot/',
     },
     'en': {
         'home': '/en/', 'practice': '/en/suggestions/', 'ecosystem': '/en/ecosystem/',
@@ -29,7 +29,7 @@ routes = {
         'article': '/en/journal/when-meditation-is-difficult/',
         'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',
         'search': '/en/search/?q=cocoa', 'contact': '/en/contact/',
-        'versions': '/en/versions/', 'courses': '/en/courses/', 'guidance': '/en/courses/tarot-reflection/',
+        'versions': '/en/versions/', 'courses': '/en/practice-courses/', 'guidance': '/en/practice-courses/tarot-reflection/',
     },
 }
 report = {'viewports': widths, 'snapshots': [], 'axe': [], 'passes': []}

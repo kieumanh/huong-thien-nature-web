@@ -1,3 +1,7 @@
+## 2.7.6 — Liên kết Khóa thực hành
+
+- Khôi phục mục Khóa thực hành và sửa liên kết tới trang Tarot trong danh mục.
+
 ## 2.7.5 — Gợi ý và nhãn ba quỹ đạo
 
 - Đổi mục Thực hành thành Gợi ý và chuyển hướng đường dẫn cũ. Bỏ liên kết tìm kiếm ở chân trang và sửa nhãn Thân, Tâm, Trí bị cắt.

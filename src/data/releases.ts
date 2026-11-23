@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.7.6',
+    date: '2026-11-23',
+    vi: ['Liên kết Khóa thực hành', 'Khôi phục mục Khóa thực hành và sửa liên kết tới trang Tarot trong danh mục.'],
+    en: ['Practice course links', 'Restored Practice courses and fixed the catalogue link to the Tarot session.'],
+  },
+  {
     version: '2.7.5',
     date: '2026-11-23',
     vi: ['Gợi ý và nhãn ba quỹ đạo', 'Đổi mục Thực hành thành Gợi ý, bỏ liên kết tìm kiếm ở chân trang và sửa nhãn Thân, Tâm, Trí bị cắt.'],
