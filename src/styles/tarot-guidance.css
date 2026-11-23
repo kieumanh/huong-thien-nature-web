@@ -247,6 +247,9 @@
 .guidance-invitation .guidance-actions { justify-content: center; }
 .guidance-invitation .quiet-link { color: var(--tarot-paper); }
 
+@media (max-width: 699px) {
+  #connection-title { text-align: center; }
+}
 @media (max-width: 560px) {
   .guidance-hero .guidance-actions > a { flex: 1 1 100%; text-align: center; }
   .guidance-jumps { display: grid; justify-content: stretch; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .2rem .8rem; }

@@ -118,18 +118,37 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 .button:not(:disabled):active, .nav-links a:active { box-shadow: inset 0 0 0 2px currentColor; }
 .js .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; padding: .65rem var(--site-gutter) .9rem; max-height: calc(100dvh - 68px); overflow-y: auto; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-card); }
 .js .nav-links.open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem; }
+@media (max-width: 1199px) {
+  .nav-actions {
+    gap: .1rem;
+    padding: 1px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-pill);
+    background: var(--surface-raised);
+  }
+  .nav-search, .js .nav-toggle { border: 0; border-radius: 50%; }
+  .nav-search[aria-current], .nav-toggle[aria-expanded="true"] {
+    background: var(--orchid-mist); color: var(--orchid-deep);
+  }
+  .language { gap: 0; border-radius: var(--radius-pill); background: var(--surface-container); }
+  .language a, .language > span { min-height: 44px; border-radius: var(--radius-pill); }
+  .language .active {
+    min-width: 34px;
+    background: var(--primary); color: var(--on-primary);
+    text-decoration: none;
+  }
+}
 @media (max-width: 759px) {
   .js .topbar { position: relative; }
   .js .nav-links.open { position: static; padding: .6rem 0; border: 0; border-top: 1px solid var(--border); box-shadow: none; }
-  .language { border-radius: var(--radius-pill); background: var(--surface-container); }
-  .language .active { border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary); text-decoration: none; }
-  .nav-actions { gap: .25rem; }
 }
-@media (max-width: 359px) {
-  .brand img { width: 34px; height: 34px; }
-  .brand-name { font-size: .94rem; }
+@media (max-width: 374px) {
+  .nav { width: calc(100% - 1.5rem); column-gap: .25rem; }
+  .brand { gap: .32rem; }
+  .brand img { width: 32px; height: 32px; }
+  .brand-name { font-size: .86rem; }
   .brand-name small { font-size: .54rem; }
-  .language a { min-width: 36px; }
+  .language .active { min-width: 28px; }
 }
 @media (min-width: 1200px) {
   .nav { flex-wrap: nowrap; min-height: 76px; gap: 1.05rem; }

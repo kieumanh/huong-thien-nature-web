@@ -130,7 +130,7 @@ const practiceNotes = [
       {paragraphs.map(paragraph => <p>{paragraph}</p>)}
     </details>)}
     <details class="guidance-disclosure">
-      <summary>{copy.connectionTitle}</summary>
+      <summary>{vi ? 'Hiểu thêm về trực giác và biểu tượng' : 'More about intuition and symbolism'}</summary>
       <dl class="guidance-connections">
         {copy.connection.map(([title, description]) => <div><dt>{title}</dt><dd>{description}</dd></div>)}
       </dl>

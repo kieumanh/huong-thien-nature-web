@@ -5,7 +5,7 @@ const { lang } = Astro.props as { lang: Language };
 const vi = lang === 'vi';
 ---
 <section class="journey-section" aria-labelledby="course-list-title">
-  <h2 id="course-list-title">{vi ? 'Khóa đang nhận đăng ký' : 'Available courses'}</h2>
+  <h2 id="course-list-title">{vi ? 'Khóa thực hành đang nhận đăng ký' : 'Available practice courses'}</h2>
   {courses.map(course => <div class="course-card zen-card">
     <div class="course-preview">
       <img src={course.thumbnail.src} alt={course.thumbnail.alt[lang]} width={course.thumbnail.width} height={course.thumbnail.height} loading="lazy" decoding="async" />

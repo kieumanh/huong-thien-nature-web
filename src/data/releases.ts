@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.8.1',
+    date: '2026-11-23',
+    vi: ['Khóa thực hành và điều hướng gọn hơn', 'Đổi tên và địa chỉ mục Khóa thực hành, thêm chuyển hướng từ liên kết cũ, làm gọn thanh đầu trang và thay minh họa Tarot.'],
+    en: ['Practice courses and simpler navigation', 'Renamed and moved Practice courses with redirects from old links, refined the header controls and refreshed the Tarot illustrations.'],
+  },
+  {
     version: '2.8.0',
     date: '2026-11-23',
     vi: ['Trải nghiệm Tarot và ba quỹ đạo', 'Trang riêng cho buổi Tarot 1:1 với lợi ích, lộ trình, bài thực hành và cách hỏi lịch. Ba hành tinh chuyển động liên tục khi hiển thị và ảnh rừng đầu trang được ẩn trên điện thoại.'],

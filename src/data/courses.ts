@@ -1,3 +1,4 @@
+import { journeyPath } from './journey-pages.ts';
 import type { Language } from './site.ts';
 
 export const tarotCourse = {
@@ -27,7 +28,5 @@ export const tarotCourse = {
 export const courses = [tarotCourse] as const;
 
 export function coursePath(lang: Language, course: (typeof courses)[number] = tarotCourse) {
-  return lang === 'vi'
-    ? `/vi/khoa-hoc/${course.vi.slug}/`
-    : `/en/courses/${course.en.slug}/`;
+  return `${journeyPath(lang, 'guidance')}${course[lang].slug}/`;
 }

@@ -21,7 +21,7 @@ routes = {
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
         'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
         'search': '/vi/timkiem/?q=bot+cacao', 'contact': '/vi/lien-he/',
-        'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-hoc/', 'guidance': '/vi/khoa-hoc/tam-ly-tarot/',
+        'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-thuc-hanh/', 'guidance': '/vi/khoa-thuc-hanh/tam-ly-tarot/',
     },
     'en': {
         'home': '/en/', 'practice': '/en/practice/', 'ecosystem': '/en/ecosystem/',
@@ -29,7 +29,7 @@ routes = {
         'article': '/en/journal/when-meditation-is-difficult/',
         'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',
         'search': '/en/search/?q=cocoa', 'contact': '/en/contact/',
-        'versions': '/en/versions/', 'courses': '/en/courses/', 'guidance': '/en/courses/tarot-reflection/',
+        'versions': '/en/versions/', 'courses': '/en/practice-courses/', 'guidance': '/en/practice-courses/tarot-reflection/',
     },
 }
 report = {'viewports': widths, 'snapshots': [], 'axe': [], 'passes': []}
@@ -131,7 +131,7 @@ def check_flows(browser):
         minutes = page.locator('.guidance-session .session-duration').all_text_contents()
         assert sum(int(step.split()[0]) for step in minutes) == 90 and minutes[0].startswith('15 ')
         expect(page.locator('[data-guidance-sequence] li')).to_have_count(3)
-        expect(page.locator('.sequence-glyph i').first).to_have_css('animation-name', 'none')
+        expect(page.locator('[data-sequence-motion]').first).to_have_css('animation-name', 'none')
         expect(page.locator('.guidance-session ol')).to_have_css('border-inline-start-width', '2px')
         exercise = page.locator('.guidance-exercise details')
         exercise.locator('summary').click()
@@ -304,9 +304,11 @@ def check_daylight(browser):
     wait_page(page, base + routes['vi']['guidance'])
     figure = page.locator('[data-guidance-sequence]')
     figure.scroll_into_view_if_needed()
-    expect(figure).to_have_class(re.compile('sequence-started'))
     expect(page.locator('#reflection > div[data-guidance-reveal]').first).to_have_class('guidance-revealed')
-    expect(figure.locator('.sequence-glyph--2 i').first).to_have_css('animation-iteration-count', '1')
+    for step in figure.locator('[data-sequence-step]').all():
+        step.scroll_into_view_if_needed()
+        expect(step).to_have_class('sequence-started')
+    expect(figure.locator('.sequence-glyph--2 [data-sequence-motion]')).to_have_css('animation-duration', '1.25s')
     page.close()
     report['passes'].append('Vietnam clock sets day, twilight and night correctly. Night contrast and finite tarot sequence motion tested.')
 

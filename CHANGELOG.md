@@ -1,3 +1,9 @@
+## 2.8.1 — Khóa thực hành và điều hướng gọn hơn
+
+- Đổi tên và địa chỉ mục Khóa thực hành ở cả hai ngôn ngữ, chuyển hướng từ địa chỉ cũ.
+- Nhóm các nút tìm kiếm, ngôn ngữ và menu thành một cụm trên màn hình nhỏ.
+- Thay minh họa Tarot bằng sen và gợn nước, lá bài và đối thoại. Canh giữa trên điện thoại và thêm chuyển động nhẹ theo từng mục.
+
 ## 2.8.0 — Trải nghiệm Tarot và ba quỹ đạo
 
 - Thiết kế trang giới thiệu buổi Tarot 1:1 với lộ trình 90 phút, bài thực hành, người hướng dẫn, câu hỏi thường gặp và cách liên hệ. Thêm chuyển động theo từng mục.

@@ -85,7 +85,7 @@ export const copy = {
       [
         "03",
         "Chuẩn bị các hoạt động mới",
-        "Nhóm đang tìm hiểu cách tổ chức khóa học và các buổi thực tập giữa thiên nhiên."
+        "Nhóm đang tìm hiểu cách tổ chức khóa thực hành và các buổi trải nghiệm giữa thiên nhiên."
       ]
     ],
     "phaseLabels": [
