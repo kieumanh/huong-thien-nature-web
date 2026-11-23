@@ -1,7 +1,7 @@
 export const contactCopy = {
   vi: {
     title: 'Gửi một lời nhắn', name: 'Tên của bạn', email: 'Địa chỉ email',
-    interest: 'Bạn muốn trao đổi về…', options: ['Chọn một mục', 'Thực tập thiền', 'Retreat', 'Khóa học', 'Cộng đồng', 'Nội dung khác'],
+    interest: 'Bạn muốn trao đổi về…', options: ['Chọn một mục', 'Thực tập thiền', 'Retreat', 'Khóa thực hành', 'Cộng đồng', 'Nội dung khác'],
     message: 'Lời nhắn của bạn', messageHint: 'Từ 10 đến 5.000 ký tự. Bạn có thể chia sẻ câu hỏi hoặc điều mình quan tâm.',
     consent: 'Tôi đồng ý để Hương Thiền Nature sử dụng thông tin trên để phản hồi lời nhắn này.',
     privacy: 'Tên, email và nội dung sẽ được chuyển qua dịch vụ email đến nhóm Hương Thiền Nature để phản hồi. Bạn không tự động đăng ký nhận bản tin. Vui lòng không gửi thông tin nhạy cảm.',
@@ -18,7 +18,7 @@ export const contactCopy = {
   },
   en: {
     title: 'Send a note', name: 'Your name', email: 'Email address',
-    interest: 'I would like to ask about…', options: ['Choose a topic', 'Meditation practice', 'Retreats', 'Courses', 'Community', 'Something else'],
+    interest: 'I would like to ask about…', options: ['Choose a topic', 'Meditation practice', 'Retreats', 'Practice courses', 'Community', 'Something else'],
     message: 'Your message', messageHint: '10 to 5,000 characters. Share a question or what you are interested in.',
     consent: 'I agree that Hương Thiền Nature may use these details to respond to this message.',
     privacy: 'Your name, email and message will be sent through an email service to the Hương Thiền Nature team to respond. This does not subscribe you to a newsletter. Please do not include sensitive information.',

@@ -9,6 +9,7 @@ const { lang, alternatePath } = Astro.props as {
   lang: Language; alternatePath: string;
 };
 const t = getCopy(lang);
+const searchPath = lang === 'vi' ? '/vi/timkiem/' : '/en/search/';
 const links = [
   ...journeyPageKeys.map(page => ({ href: journeyPath(lang, page), label: journeyPages[page][lang].title })),
   { href: journalUrl(lang), label: t.nav[4] },
@@ -28,7 +29,7 @@ const links = [
       <a class="nav-contact-mobile" href={contactPath(lang)} aria-current={Astro.url.pathname === contactPath(lang) ? 'page' : undefined}>{lang === "vi" ? "Liên hệ" : "Contact"}</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-search" href={lang === 'vi' ? '/vi/timkiem/' : '/en/search/'} aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'} title={lang === 'vi' ? 'Tìm kiếm' : 'Search'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+      <a class="nav-search" href={searchPath} aria-current={Astro.url.pathname === searchPath ? 'page' : undefined} aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'} title={lang === 'vi' ? 'Tìm kiếm' : 'Search'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
       <nav class="language" aria-label={lang === 'vi' ? 'Ngôn ngữ' : 'Language'}>
         {lang === 'vi' ? <span class="active" aria-current="true" lang="vi"><span class="sr-only">Tiếng Việt</span><span aria-hidden="true">VI</span></span> : <a href={alternatePath} hreflang="vi" lang="vi" aria-label="Tiếng Việt">VI</a>}
         {lang === 'en' ? <span class="active" aria-current="true" lang="en"><span class="sr-only">English</span><span aria-hidden="true">EN</span></span> : <a href={alternatePath} hreflang="en" lang="en" aria-label="English">EN</a>}

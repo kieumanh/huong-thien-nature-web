@@ -104,7 +104,7 @@ export async function readBody(request: Request, maxBytes = 32_768) {
 }
 
 const interestNames: Record<Interest, string> = {
-  meditation: 'Meditation / Thiền', retreat: 'Retreat', courses: 'Courses / Khóa học',
+  meditation: 'Meditation / Thiền', retreat: 'Retreat', courses: 'Practice courses / Khóa thực hành',
   membership: 'Membership / Cộng đồng', other: 'Other / Nội dung khác',
 };
 
