@@ -27,6 +27,7 @@ if ('IntersectionObserver' in window && !motion.matches && !saveData) {
 }
 
 setupSelfCheck();
+setupScale();
 setupWeek();
 setupSticky();
 setupRails();
@@ -142,6 +143,28 @@ function setupSelfCheck() {
   });
 
   show(0);
+}
+
+function setupScale() {
+  const root = document.querySelector<HTMLElement>('[data-gf-scale]');
+  const input = root?.querySelector<HTMLInputElement>('.gf-scale-input');
+  const panels = root ? [...root.querySelectorAll<HTMLElement>('[data-gf-scale-panel]')] : [];
+  if (!root || !input || panels.length === 0) return;
+  root.querySelector<HTMLElement>('[data-gf-scale-control]')?.removeAttribute('hidden');
+  root.querySelector<HTMLElement>('[data-gf-scale-hint]')?.removeAttribute('hidden');
+  const ticks = [...root.querySelectorAll<HTMLElement>('[data-gf-scale-tick]')];
+  const last = panels.length - 1;
+  const show = () => {
+    const level = Math.min(last, Math.max(0, Math.round(Number(input.value))));
+    root.dataset.gfScaleLevel = String(level);
+    root.style.setProperty('--gf-scale', String(level / last));
+    panels.forEach((panel, index) => { panel.hidden = index !== level; });
+    ticks.forEach((tick, index) => tick.toggleAttribute('data-active', index <= level));
+    const name = panels[level].querySelector('h3')?.textContent ?? '';
+    input.setAttribute('aria-valuetext', `${name} (${level + 1}/${panels.length})`);
+  };
+  input.addEventListener('input', show);
+  show();
 }
 
 function setupWeek() {

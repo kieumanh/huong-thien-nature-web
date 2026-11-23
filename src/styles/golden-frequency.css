@@ -740,3 +740,48 @@ html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
 .gf-supporter { margin-top: .9rem; text-align: center; font-size: .98rem; }
 .gf-supporter { color: var(--foreground); }
 .gf-supporter strong { color: var(--primary); font-weight: 700; }
+
+/* ---- Stage 1: draggable frequency scale ---- */
+.gf-spectrum { --gf-scale: .75; }
+.gf-scale-control { position: relative; padding-block: .7rem; }
+.gf-scale-input {
+  appearance: none; -webkit-appearance: none; display: block; width: 100%; height: 2.75rem; margin: 0; padding: 0; background: transparent; cursor: grab; touch-action: pan-y;
+}
+.gf-scale-input:active { cursor: grabbing; }
+.gf-scale-input::-webkit-slider-runnable-track { height: .95rem; border-radius: 999px; background: linear-gradient(90deg, #4b4470 0%, #6b5a8e 22%, #9f86b8 42%, #e1b46a 70%, #ffe7a8 100%); box-shadow: 0 0 24px #f4c76b40; }
+.gf-scale-input::-moz-range-track { height: .95rem; border-radius: 999px; background: linear-gradient(90deg, #4b4470 0%, #6b5a8e 22%, #9f86b8 42%, #e1b46a 70%, #ffe7a8 100%); box-shadow: 0 0 24px #f4c76b40; }
+.gf-scale-input::-webkit-slider-thumb { -webkit-appearance: none; width: 2.2rem; height: 2.2rem; margin-top: -.62rem; border: 3px solid #fff8e7; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6d5, #ffe7a8 55%, #e9b85b); box-shadow: 0 0 0 5px #ffe7a833, 0 0 24px #ffe7a8cc; transition: transform .15s var(--motion-ease, ease); }
+.gf-scale-input::-moz-range-thumb { width: 1.7rem; height: 1.7rem; border: 3px solid #fff8e7; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #fff6d5, #ffe7a8 55%, #e9b85b); box-shadow: 0 0 0 5px #ffe7a833, 0 0 24px #ffe7a8cc; }
+.gf-scale-input:active::-webkit-slider-thumb { transform: scale(1.12); }
+.gf-scale-input:focus-visible { outline: none; }
+.gf-scale-input:focus-visible::-webkit-slider-thumb { outline: 3px solid #fff; outline-offset: 3px; }
+.gf-scale-input:focus-visible::-moz-range-thumb { outline: 3px solid #fff; outline-offset: 3px; }
+.gf-scale-ticks { position: absolute; inset: 50% 1.1rem auto; display: flex; justify-content: space-between; margin: 0; padding: 0; list-style: none; pointer-events: none; transform: translateY(-50%); }
+.gf-scale-ticks li { width: .38rem; height: .38rem; border-radius: 50%; background: #0f0b1f66; }
+.gf-scale-ticks li[data-active] { background: #fff8e7aa; }
+.gf-scale-hint { margin: .1rem 0 0; font-size: .86rem; opacity: .85; }
+.gf-scale-panels { margin-top: 1rem; }
+.gf-scale-panel {
+  padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid color-mix(in srgb, #ffe7a8 calc(var(--gf-scale) * 100%), #9f86b8); border-radius: var(--radius-card);
+  background: linear-gradient(150deg, color-mix(in srgb, #ffe7a8 calc(var(--gf-scale) * 14%), #ffffff0a), #ffffff0a);
+  box-shadow: 0 0 calc(var(--gf-scale) * 34px) color-mix(in srgb, #ffe7a8 calc(var(--gf-scale) * 40%), transparent);
+  transition: border-color .25s, box-shadow .25s;
+}
+.gf-scale-panel + .gf-scale-panel { margin-top: .8rem; }
+.gf-scale-panel[hidden] { display: none; }
+.gf-scale-panel h3 { margin: 0; color: var(--gf-gold-hi); font: 400 clamp(1.5rem, 4vw, 2rem)/1.2 var(--serif); }
+.gf-panel .gf-scale-panel .gf-scale-words { margin-top: .25rem; color: var(--gf-cream); font-weight: 600; }
+.gf-scale-panel dl { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); gap: .6rem .9rem; margin: .9rem 0 0; }
+.gf-scale-panel dl > div { padding: .65rem .8rem; border-radius: var(--radius-input); background: #ffffff0f; }
+.gf-scale-panel dt { color: var(--gf-gold-hi); font-size: .74rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+.gf-scale-panel dd { margin: .2rem 0 0; }
+.gf-panel .gf-scale-panel .gf-scale-step { margin-top: .9rem; padding-top: .8rem; border-top: 1px dashed #f4c76b55; color: var(--gf-cream); }
+.gf-scale-panel .gf-scale-step strong { color: var(--gf-gold-hi); }
+@media (prefers-reduced-motion: reduce) { .gf-scale-panel, .gf-scale-input::-webkit-slider-thumb { transition: none; } }
+
+/* Host card: centred on phones. */
+@media (max-width: 699px) {
+  .gf-host { justify-items: center; text-align: center; }
+  .gf-host p:not(.gf-eyebrow) { margin-inline: auto; }
+  .gf-host .quiet-link { justify-content: center; }
+}
