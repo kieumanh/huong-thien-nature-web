@@ -8,6 +8,19 @@ declare global {
   interface Window { turnstile?: Turnstile; }
 }
 
+const enquiryTopics: Record<string, { vi: string; en: string; interest: 'courses' | 'other' }> = {
+  tarot: {
+    vi: 'Tôi muốn hỏi lịch, hình thức gặp và chi phí buổi Tarot tâm lý học 1:1 (90 phút).',
+    en: 'I would like to ask about availability, format and cost for the 1:1 tarot reflection session (90 minutes).',
+    interest: 'other',
+  },
+  'tan-so-vang': {
+    vi: 'Tôi muốn nhận báo giá khóa Tần Số Vàng: lịch khai giảng gần nhất, hình thức học và học phí.',
+    en: 'I would like a quote for The Golden Frequency course: the next start date, format and fee.',
+    interest: 'courses',
+  },
+};
+
 const form = document.querySelector<HTMLFormElement>('#interest-form');
 if (form) void setup(form);
 
@@ -24,15 +37,16 @@ async function setup(form: HTMLFormElement) {
   // "item" carries a product name from the live shop feed; it is plain text, trimmed and length-capped.
   const itemName = (params.get('item') || '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, 120);
   // "topic" is an allow-list of known enquiry topics (never free text) so a shared link cannot inject content.
-  const topic = params.get('topic');
-  if (topic === 'tarot') {
+  // An embedded form may carry its own topic (data-topic); a ?topic= link takes precedence.
+  const topic = params.get('topic') || form.dataset.topic || '';
+  const prefill = enquiryTopics[topic];
+  if (prefill) {
     const message = form.querySelector<HTMLTextAreaElement>('[name="message"]');
     const interest = form.querySelector<HTMLSelectElement>('[name="interest"]');
     if (message && !message.value) {
-      message.value = lang === 'vi'
-        ? 'Tôi muốn hỏi lịch, hình thức gặp và chi phí buổi Tarot tâm lý học 1:1 (90 phút).'
-        : 'I would like to ask about availability, format and cost for the 1:1 tarot reflection session (90 minutes).';
-      if (interest) interest.value = 'other';
+      message.value = prefill[lang];
+      message.dataset.autofill = message.value;
+      if (interest) interest.value = prefill.interest;
     }
   }
   if (productSlug || itemName) {

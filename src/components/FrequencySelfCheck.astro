@@ -1,0 +1,92 @@
+---
+import Arrow from './Arrow.astro';
+import { frequencyLanding, selfCheckDomains } from '../data/golden-frequency';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props;
+const copy = frequencyLanding[lang].selfCheck;
+// A wide canvas leaves room for the longest side labels ("Relationships", "Mối quan hệ") on narrow phones.
+const width = 440;
+const height = 330;
+const cx = width / 2;
+const cy = height / 2;
+const radius = 112;
+const axes = selfCheckDomains.map((domain, index) => {
+  const angle = ((-90 + index * 60) * Math.PI) / 180;
+  const label = radius + (index % 3 === 0 ? 20 : 16);
+  return {
+    name: domain[lang].name,
+    x: cx + radius * Math.cos(angle),
+    y: cy + radius * Math.sin(angle),
+    lx: cx + label * Math.cos(angle),
+    ly: cy + label * Math.sin(angle),
+    anchor: Math.abs(Math.cos(angle)) < 0.2 ? 'middle' : Math.cos(angle) > 0 ? 'start' : 'end',
+  };
+});
+const ring = (level: number) => selfCheckDomains.map((_, index) => {
+  const angle = ((-90 + index * 60) * Math.PI) / 180;
+  const r = (radius * level) / 4;
+  return `${(cx + r * Math.cos(angle)).toFixed(1)},${(cy + r * Math.sin(angle)).toFixed(1)}`;
+}).join(' ');
+const clientCopy = {
+  levels: copy.levels,
+  results: copy.results,
+  message: copy.message,
+  domainLabel: copy.domainLabel,
+  domains: selfCheckDomains.map(domain => ({ name: domain[lang].name, focus: domain[lang].focus })),
+  cx, cy, radius,
+};
+---
+<div class="gf-check" data-gf-check data-gf-copy={JSON.stringify(clientCopy)}>
+  <form class="gf-check-form" data-gf-check-form aria-label={copy.title}>
+    <div class="gf-check-meta" data-gf-meta hidden>
+      <p class="gf-check-progress" data-gf-progress aria-live="polite"></p>
+      <ol class="gf-check-dots" aria-hidden="true">
+        {selfCheckDomains.map(() => <li></li>)}
+      </ol>
+    </div>
+    {selfCheckDomains.map((domain, index) => <fieldset class="gf-step" data-gf-step={index} data-frequency={domain.frequency}>
+      <legend><span class="gf-step-number" aria-hidden="true">{index + 1}</span>{domain[lang].name}</legend>
+      <div class="gf-options">
+        {domain[lang].levels.map((text, level) => <label class="gf-option">
+          <input type="radio" name={`gf-${domain.id}`} value={level + 1} />
+          <span class="gf-option-level"><span class="gf-option-bars" aria-hidden="true">{[0, 1, 2, 3].map(bar => <i class:list={{ on: bar <= level }}></i>)}</span>{copy.levels[level]}</span>
+          <span class="gf-option-text">{text}</span>
+        </label>)}
+      </div>
+    </fieldset>)}
+    <div class="gf-check-nav" data-gf-nav hidden>
+      <button type="button" class="button button--tonal" data-gf-back>{copy.back}</button>
+      <button type="button" class="button gf-button" data-gf-next>{copy.next}</button>
+      <button type="button" class="gf-text-button" data-gf-restart>{copy.restart}</button>
+    </div>
+  </form>
+
+  <aside class="gf-check-result" aria-labelledby="gf-map-title">
+    <h3 id="gf-map-title">{copy.mapTitle}</h3>
+    <svg class="gf-radar" viewBox={`0 0 ${width} ${height}`} role="img" aria-labelledby="gf-map-title" data-gf-radar>
+      <defs>
+        <linearGradient id="gf-radar-fill" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0" stop-color="#ffe7a8" stop-opacity=".75" />
+          <stop offset="1" stop-color="#e3a13d" stop-opacity=".45" />
+        </linearGradient>
+      </defs>
+      {[1, 2, 3, 4].map(level => <polygon class="gf-radar-ring" points={ring(level)} />)}
+      {axes.map(axis => <line class="gf-radar-axis" x1={cx} y1={cy} x2={axis.x.toFixed(1)} y2={axis.y.toFixed(1)} />)}
+      <polygon class="gf-radar-shape" data-gf-shape points={Array(6).fill(`${cx},${cy}`).join(' ')} />
+      {axes.map((_, index) => <circle class="gf-radar-point" data-gf-point={index} cx={cx} cy={cy} r="5" />)}
+      {axes.map(axis => <text class="gf-radar-label" x={axis.lx.toFixed(1)} y={axis.ly.toFixed(1)} text-anchor={axis.anchor} dominant-baseline="middle">{axis.name}</text>)}
+    </svg>
+    <p class="gf-check-empty" data-gf-empty>{copy.mapEmpty}</p>
+    <div class="gf-outcome" data-gf-outcome hidden>
+      <p class="gf-outcome-title" data-gf-outcome-title></p>
+      <p data-gf-outcome-note></p>
+      <h4>{copy.focusTitle}</h4>
+      <p class="gf-outcome-focus" data-gf-focus></p>
+      <a class="button gf-button" href="#quote" data-gf-send>{copy.send} <Arrow /></a>
+    </div>
+  </aside>
+</div>
+<noscript><p class="gf-check-note">{copy.noScript}</p></noscript>
+<p class="gf-check-note">{copy.disclaimer}</p>

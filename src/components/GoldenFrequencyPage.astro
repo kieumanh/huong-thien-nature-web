@@ -1,0 +1,19 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import GoldenFrequency from './GoldenFrequency.astro';
+import { courseImage, coursePath, frequencyCourse } from '../data/courses';
+import { frequencySchema } from '../data/golden-frequency-schema';
+import type { Language } from '../data/site';
+
+const { lang } = Astro.props as { lang: Language };
+const { title, description } = frequencyCourse[lang];
+const { thumbnail } = frequencyCourse;
+const alternatePath = coursePath(lang === 'vi' ? 'en' : 'vi', frequencyCourse);
+---
+<BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath} image={courseImage(frequencyCourse, lang)} imageDetails={{ width: thumbnail.width, height: thumbnail.height, alt: thumbnail.alt[lang], type: 'image/jpeg' }} aboutOrganization extraGraph={frequencySchema(lang)}>
+  <Header {lang} {alternatePath} />
+  <GoldenFrequency {lang} />
+  <Footer {lang} />
+</BaseLayout>

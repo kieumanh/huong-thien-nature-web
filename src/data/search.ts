@@ -1,4 +1,5 @@
-import { tarotCourse, coursePath } from './courses.ts';
+import { tarotCourse, frequencyCourse, coursePath } from './courses.ts';
+import { frequencyLanding, frequencyScientists, frequencyTypes, selfCheckDomains, weeklyPlan } from './golden-frequency.ts';
 import { tarotLanding, tarotResearchCopy, tarotSources } from './tarot-guidance.ts';
 import { contactPath, contactEmail, hotline } from './contact-channels.ts';
 import { articles, articlePath } from './articles.ts';
@@ -33,6 +34,15 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
     {
       title: tarotCourse[lang].title, description: tarotCourse[lang].description,
       url: coursePath(lang), text: plain([tarotLanding[lang], tarotResearchCopy[lang], tarotSources.map(person => [person.name, person.work, person[lang]])]),
+    },
+    {
+      title: frequencyCourse[lang].title, description: frequencyCourse[lang].description,
+      url: coursePath(lang, frequencyCourse),
+      text: plain([
+        frequencyLanding[lang], frequencyTypes.map(type => type[lang]), selfCheckDomains.map(domain => domain[lang]),
+        weeklyPlan.map(entry => entry[lang]), frequencyScientists.map(person => [person.name, person[lang]]),
+        lang === 'vi' ? 'tần số cao năng lượng rung động báo giá học phí khai giảng' : 'high frequency vibration energy quote fee start date',
+      ]),
     },
     { title: lang === 'vi' ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiền Nature', description: t.contactCopy, url: contactPath(lang), text: [t.contactCopy, 'Zalo', hotline, contactEmail].join(' ') },
   ].map(entry => ({ ...entry, category: lang === 'vi' ? 'Hương Thiền Nature' : 'About us' }));

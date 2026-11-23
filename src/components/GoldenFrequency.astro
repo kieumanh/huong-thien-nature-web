@@ -1,0 +1,408 @@
+---
+import Arrow from './Arrow.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import ContactForm from './ContactForm.astro';
+import FrequencyOrb from './FrequencyOrb.astro';
+import FrequencySelfCheck from './FrequencySelfCheck.astro';
+import GfIcon, { type GfIconName } from './GfIcon.astro';
+import { frequencyCourse, frequencyFeeNote, frequencyPriceLabel, frequencyTopic } from '../data/courses';
+import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, weeklyPlan } from '../data/golden-frequency';
+import { journeyPages, journeyPath } from '../data/journey-pages';
+import { internationalPhone, zaloUrl } from '../data/contact-channels';
+import { meditationFounder } from '../data/people';
+import type { Language } from '../data/site';
+import '../styles/golden-frequency.css';
+
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const copy = frequencyLanding[lang];
+const priceLabel = frequencyPriceLabel(lang);
+const priced = priceLabel !== frequencyPriceLabel(lang, { price: null });
+const tel = `tel:${internationalPhone}`;
+
+const valueIcons: GfIconName[] = ['wave', 'compass', 'timer', 'heart', 'target', 'sun'];
+const domainIcons: GfIconName[] = ['heart', 'briefcase', 'rise', 'coin'];
+const methodIcons: GfIconName[] = ['rise', 'loop', 'spark'];
+const momentIcons: GfIconName[] = ['sunrise', 'briefcase', 'pulse', 'bubbles', 'coin', 'moon'];
+const supportIcons: GfIconName[] = ['group', 'calendar', 'book', 'headphones', 'chat', 'star'];
+const frequencyOf = Object.fromEntries(frequencyTypes.map(type => [type.id, type[lang].short]));
+const quickChannels: { copy: readonly [string, string, string]; href: string; icon: GfIconName }[] = [
+  { copy: copy.quick.zalo, href: zaloUrl, icon: 'chat' },
+  { copy: copy.quick.call, href: tel, icon: 'phone' },
+  { copy: copy.quick.form, href: '#quote', icon: 'form' },
+];
+
+// A wave that begins hurried and uneven and settles into a slow, wide rhythm.
+const wave = (() => {
+  const width = 1200;
+  const steps = 240;
+  const points: string[] = [];
+  for (let index = 0; index <= steps; index++) {
+    const x = (width * index) / steps;
+    const t = index / steps;
+    const ease = t * t * (3 - 2 * t);
+    const choppy = 9 * Math.sin(x * 0.19) + 6 * Math.sin(x * 0.47 + 1.3) + 3 * Math.sin(x * 0.83);
+    const smooth = 20 * Math.sin(x * 0.0165 - 1.1);
+    points.push(`${x.toFixed(1)},${(42 + (1 - ease) * choppy + ease * smooth).toFixed(1)}`);
+  }
+  return `M${points.join(' L')}`;
+})();
+
+// Each scientist gets a small generative "signature" glyph instead of a photograph.
+const glyph = (petals: number, phase: number) => {
+  const points: string[] = [];
+  for (let index = 0; index <= 180; index++) {
+    const theta = (index / 180) * Math.PI * 2;
+    const r = 34 + 8 * Math.sin(petals * theta + phase);
+    points.push(`${(50 + r * Math.cos(theta)).toFixed(1)},${(50 + r * Math.sin(theta)).toFixed(1)}`);
+  }
+  return `M${points.join(' L')}Z`;
+};
+const petals = [6, 5, 7, 4, 3, 8];
+---
+<main class="shell gf" id="main-content" tabindex="-1">
+  <Breadcrumb {lang} current={copy.titleScript} parent={{ label: journeyPages.guidance[lang].title, href: journeyPath(lang, 'guidance') }} />
+
+  <header class="gf-panel gf-hero">
+    <div class="gf-hero-copy" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.topic}</p>
+      <h1 id="gf-title"><span class="gf-title-script">{copy.titleScript}</span><span class="gf-title-line">{copy.titleLine}</span></h1>
+      <p class="gf-lead">{copy.lead}</p>
+      <div class="gf-actions">
+        <a class="button gf-button" href={zaloUrl}>{copy.quoteZalo} <Arrow /></a>
+        <a class="button gf-button--ghost" href="#quote">{copy.quoteForm}</a>
+      </div>
+      <ul class="gf-reassure" role="list">
+        {copy.reassure.map(item => <li><GfIcon name="check" size={18} />{item}</li>)}
+      </ul>
+      <dl class="gf-facts">
+        {[...copy.facts, [priceLabel, copy.priceLabel]].map(([value, label]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+      </dl>
+      <p class="gf-price-note">{priced ? frequencyFeeNote(lang) : copy.priceNote}</p>
+      <a class="gf-outline-link" href="#curriculum">{copy.outline} <span aria-hidden="true">↓</span></a>
+    </div>
+    <div class="gf-hero-art" data-gf-reveal><FrequencyOrb {lang} label={copy.artLabel} /></div>
+    <svg class="gf-hero-wave" viewBox="0 0 1200 84" preserveAspectRatio="none" aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="gf-wave-gradient" x1="0" x2="1">
+          <stop offset="0" stop-color="#8f86b8" stop-opacity=".3" />
+          <stop offset=".55" stop-color="#f4c76b" stop-opacity=".6" />
+          <stop offset="1" stop-color="#ffe7a8" stop-opacity=".95" />
+        </linearGradient>
+      </defs>
+      <path d={wave} fill="none" stroke="url(#gf-wave-gradient)" stroke-width="2.2" stroke-linecap="round" vector-effect="non-scaling-stroke" />
+      <path class="gf-hero-wave-spark" d={wave} fill="none" stroke="#fff4cf" stroke-width="3" stroke-linecap="round" vector-effect="non-scaling-stroke" pathLength="100" />
+    </svg>
+  </header>
+
+  <section class="gf-quick" aria-labelledby="gf-quick-title" data-gf-reveal>
+    <div class="gf-quick-head">
+      <h2 id="gf-quick-title">{copy.quick.title}</h2>
+      <p>{copy.quick.note}</p>
+    </div>
+    <ul class="gf-quick-list" role="list">
+      {quickChannels.map(({ copy: [label, detail, action], href, icon }) => <li>
+        <a class="gf-quick-card" href={href}>
+          <span class="gf-quick-icon"><GfIcon name={icon} /></span>
+          <span class="gf-quick-text"><strong>{label}</strong><span>{detail}</span></span>
+          <span class="gf-quick-action">{action} <Arrow /></span>
+        </a>
+      </li>)}
+    </ul>
+  </section>
+
+  <nav class="gf-jumps" aria-label={copy.navigation}>
+    {copy.links.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
+  </nav>
+
+  <section class="gf-section" id="value" aria-labelledby="gf-value-title">
+    <div class="gf-head" data-gf-reveal>
+      <h2 id="gf-value-title">{copy.valueTitle}</h2>
+      <p class="gf-intro">{copy.valueIntro}</p>
+    </div>
+    <ul class="gf-values gf-rail" role="list" data-gf-rail="gf-value-title">
+      {copy.values.map(([title, detail], index) => <li class="gf-card gf-value" data-gf-reveal>
+        <span class="gf-badge"><GfIcon name={valueIcons[index]} /></span>
+        <h3>{title}</h3>
+        <p>{detail}</p>
+      </li>)}
+    </ul>
+    <div class="gf-audience" data-gf-reveal>
+      <h3>{copy.audienceTitle}</h3>
+      <ul role="list">
+        {copy.audience.map(item => <li><GfIcon name="check" size={18} />{item}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <section class="gf-section" id="curriculum" aria-labelledby="gf-curriculum-title">
+    <div class="gf-head" data-gf-reveal>
+      <h2 id="gf-curriculum-title">{copy.curriculumTitle}</h2>
+      <p class="gf-intro">{copy.curriculumIntro}</p>
+    </div>
+    <ol class="gf-stages gf-rail" role="list" data-gf-rail="gf-curriculum-title">
+      {copy.stages.map(([title, learn, take, anchor], index) => <li class="gf-card gf-stage" data-gf-reveal>
+        <p class="gf-stage-number"><span class="sr-only">{copy.stageLabel} </span>{String(index + 1).padStart(2, '0')}</p>
+        <h3>{title}</h3>
+        <dl>
+          <div><dt>{copy.learnLabel}</dt><dd>{learn}</dd></div>
+          <div><dt>{copy.takeLabel}</dt><dd>{take}</dd></div>
+        </dl>
+        <a class="gf-stage-link" href={`#${anchor}`}>{vi ? `Xem chặng ${index + 1}` : `View stage ${index + 1}`} <span aria-hidden="true">↓</span></a>
+      </li>)}
+    </ol>
+  </section>
+
+  <section class="gf-panel gf-section gf-frequencies" id="frequencies" aria-labelledby="gf-frequencies-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.frequencies.eyebrow}</p>
+      <h2 id="gf-frequencies-title">{copy.frequencies.title}</h2>
+      <p class="gf-intro">{copy.frequencies.intro}</p>
+    </div>
+    <figure class="gf-spectrum" data-gf-reveal>
+      <div class="gf-spectrum-bar" aria-hidden="true"><span></span></div>
+      <figcaption class="gf-spectrum-labels">
+        <p><strong>{copy.frequencies.low}</strong><span>{copy.frequencies.lowWords}</span></p>
+        <p><strong>{copy.frequencies.high}</strong><span>{copy.frequencies.highWords}</span></p>
+      </figcaption>
+    </figure>
+    <p class="gf-spectrum-note" data-gf-reveal>{copy.frequencies.note}</p>
+    <h3 class="gf-subhead" data-gf-reveal>{copy.frequencies.fiveTitle}</h3>
+    <ol class="gf-types gf-rail" role="list" data-gf-rail="gf-frequencies-title">
+      {frequencyTypes.map((type, index) => <li class="gf-type" data-frequency={type.id} data-gf-reveal>
+        <span class="gf-type-bars" aria-hidden="true">{[0, 1, 2, 3, 4].map(bar => <i style={`--bar: ${bar}`}></i>)}</span>
+        <p class="gf-type-index">{String(index + 1).padStart(2, '0')}</p>
+        <h4>{type[lang].name}</h4>
+        <p class="gf-type-essence">{type[lang].essence}</p>
+        <dl>
+          <div class="gf-type-low"><dt>{copy.frequencies.lowLabel}</dt><dd>{type[lang].low}</dd></div>
+          <div class="gf-type-high"><dt>{copy.frequencies.highLabel}</dt><dd>{type[lang].high}</dd></div>
+        </dl>
+        <p class="gf-type-anchor"><span>{copy.frequencies.anchorLabel}</span>{type[lang].anchor}</p>
+      </li>)}
+    </ol>
+  </section>
+
+  <section class="gf-section" id="benefits" aria-labelledby="gf-benefits-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.benefits.eyebrow}</p>
+      <h2 id="gf-benefits-title">{copy.benefits.title}</h2>
+      <p class="gf-intro">{copy.benefits.intro}</p>
+    </div>
+    <ul class="gf-domains gf-rail" role="list" data-gf-rail="gf-benefits-title">
+      {copy.benefits.domains.map(([title, shift, low, high, practice], index) => <li class="gf-card gf-domain" data-gf-reveal>
+        <div class="gf-domain-head">
+          <span class="gf-badge"><GfIcon name={domainIcons[index]} /></span>
+          <div><h3>{title}</h3><p class="gf-domain-shift">{shift}</p></div>
+        </div>
+        <dl class="gf-domain-compare">
+          <div class="is-low"><dt>{copy.benefits.lowLabel}</dt><dd>{low}</dd></div>
+          <div class="is-high"><dt>{copy.benefits.highLabel}</dt><dd>{high}</dd></div>
+        </dl>
+        <p class="gf-domain-practice"><strong>{copy.benefits.practiceLabel}</strong>{practice}</p>
+      </li>)}
+    </ul>
+  </section>
+
+  <section class="gf-section" id="methods" aria-labelledby="gf-methods-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.methods.eyebrow}</p>
+      <h2 id="gf-methods-title">{copy.methods.title}</h2>
+      <p class="gf-intro">{copy.methods.intro}</p>
+    </div>
+    <ol class="gf-methods gf-rail" role="list" data-gf-rail="gf-methods-title">
+      {copy.methods.groups.map(([verb, when, items], index) => <li class="gf-card gf-method" data-gf-reveal>
+        <div class="gf-method-head">
+          <span class="gf-badge gf-badge--solid"><GfIcon name={methodIcons[index]} /></span>
+          <h3>{verb}</h3>
+          <p class="gf-chip">{when}</p>
+        </div>
+        <ul role="list">
+          {items.map(([title, detail]) => <li><strong>{title}</strong><span>{detail}</span></li>)}
+        </ul>
+      </li>)}
+    </ol>
+    <div class="gf-principles" data-gf-reveal>
+      <h3>{copy.methods.principlesTitle}</h3>
+      <ol role="list">
+        {copy.methods.principles.map(([title, detail], index) => <li><span class="gf-medal" aria-hidden="true">{index + 1}</span><div><strong>{title}</strong><p>{detail}</p></div></li>)}
+      </ol>
+    </div>
+  </section>
+
+  <section class="gf-panel gf-section gf-checkup" id="self-check" aria-labelledby="gf-check-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.selfCheck.eyebrow}</p>
+      <h2 id="gf-check-title">{copy.selfCheck.title}</h2>
+      <p class="gf-intro">{copy.selfCheck.intro}</p>
+    </div>
+    <FrequencySelfCheck {lang} />
+  </section>
+
+  <aside class="gf-band" aria-labelledby="gf-band-title" data-gf-reveal>
+    <div>
+      <h2 id="gf-band-title">{copy.midTitle}</h2>
+      <p>{copy.midNote}</p>
+    </div>
+    <div class="gf-band-actions">
+      <a class="button gf-button--dark" href={zaloUrl}>{copy.quoteZalo} <Arrow /></a>
+      <a class="gf-band-link" href="#quote">{copy.quoteForm}</a>
+    </div>
+  </aside>
+
+  <section class="gf-section" id="daily" aria-labelledby="gf-daily-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.daily.eyebrow}</p>
+      <h2 id="gf-daily-title">{copy.daily.title}</h2>
+      <p class="gf-intro">{copy.daily.intro}</p>
+    </div>
+    <ol class="gf-day-line" role="list">
+      {copy.daily.moments.map(([moment, detail], index) => <li data-gf-reveal>
+        <span class="gf-day-dot"><GfIcon name={momentIcons[index]} /></span>
+        <h3>{moment}</h3>
+        <p>{detail}</p>
+      </li>)}
+    </ol>
+  </section>
+
+  <section class="gf-section" id="weekly" aria-labelledby="gf-weekly-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.weekly.eyebrow}</p>
+      <h2 id="gf-weekly-title">{copy.weekly.title}</h2>
+      <p class="gf-intro">{copy.weekly.intro}</p>
+    </div>
+    <div class="gf-week-status" data-gf-reveal>
+      <p class="gf-week-meter" aria-live="polite"><strong data-gf-week-count>0</strong>/7 <span>{copy.weekly.progress}</span></p>
+      <div class="gf-week-track" aria-hidden="true"><span data-gf-week-bar></span></div>
+      <button type="button" class="gf-text-button" data-gf-week-reset>{copy.weekly.reset}</button>
+    </div>
+    <ol class="gf-week gf-rail" role="list" data-gf-week data-gf-rail="gf-weekly-title">
+      {weeklyPlan.map((entry, index) => {
+        const [day, title, detail] = entry[lang];
+        return <li class="gf-card gf-weekday" data-frequency={entry.frequency} data-gf-reveal>
+          <p class="gf-weekday-name">{day}<span>{frequencyOf[entry.frequency]}</span></p>
+          <h3>{title}</h3>
+          <p>{detail}</p>
+          <label class="gf-weekday-check"><input type="checkbox" data-gf-day={index} /><span>{copy.weekly.done}<span class="sr-only"> · {day}: {title}</span></span></label>
+        </li>;
+      })}
+    </ol>
+    <p class="gf-week-note">{copy.weekly.trackerNote}</p>
+    <div class="gf-journal" data-gf-reveal>
+      <h3>{copy.weekly.journalTitle}</h3>
+      <ol role="list">{copy.weekly.journal.map(question => <li>{question}</li>)}</ol>
+    </div>
+  </section>
+
+  <section class="gf-section" id="scientists" aria-labelledby="gf-scientists-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.scientists.eyebrow}</p>
+      <h2 id="gf-scientists-title">{copy.scientists.title}</h2>
+      <p class="gf-intro">{copy.scientists.intro}</p>
+    </div>
+    <ul class="gf-scientists gf-rail" role="list" data-gf-rail="gf-scientists-title">
+      {frequencyScientists.map((person, index) => <li class="gf-card gf-scientist" data-frequency={person.frequency} data-gf-reveal>
+        <div class="gf-scientist-head">
+          <svg class="gf-glyph" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <path d={glyph(petals[index], 0)} />
+            <path d={glyph(petals[index], Math.PI / petals[index])} />
+            <text x="50" y="51" text-anchor="middle" dominant-baseline="middle">{person.initials}</text>
+          </svg>
+          <div>
+            <h3>{person.name}</h3>
+            <p class="gf-scientist-role">{person[lang].role}</p>
+            <p class="gf-chip gf-chip--frequency">{frequencyOf[person.frequency]}</p>
+          </div>
+        </div>
+        <blockquote class="gf-scientist-idea"><p>{person[lang].idea}</p><footer>{copy.scientists.ideaLabel}</footer></blockquote>
+        <h4>{copy.scientists.lifeLabel}</h4>
+        <p>{person[lang].life}</p>
+        <p class="gf-scientist-lesson"><strong>{copy.scientists.lessonLabel}</strong>{person[lang].lesson}</p>
+        <a class="gf-source" href={person.source}>{copy.scientists.sourceLabel}: {person.sourceLabel}</a>
+      </li>)}
+    </ul>
+    <aside class="gf-honest" aria-labelledby="gf-honest-title" data-gf-reveal>
+      <h3 id="gf-honest-title">{copy.scientists.honestTitle}</h3>
+      {copy.scientists.honest.map(paragraph => <p>{paragraph}</p>)}
+      <details class="gf-disclosure">
+        <summary>{copy.scientists.referencesTitle}</summary>
+        <ul class="gf-references">
+          {frequencyReferences.map(([label, href]) => <li><a href={href}>{label}</a></li>)}
+        </ul>
+      </details>
+    </aside>
+  </section>
+
+  <section class="gf-section gf-host" aria-labelledby="gf-host-title" data-gf-reveal>
+    <img src={meditationFounder.image} alt="" width="810" height="1080" loading="lazy" decoding="async" />
+    <div>
+      <p class="gf-eyebrow">{copy.hostTitle}</p>
+      <h2 id="gf-host-title">{meditationFounder.name}</h2>
+      <p>{copy.hostBio}</p>
+      <a class="quiet-link" href={journeyPath(lang, 'story')}>{copy.hostLink} <Arrow /></a>
+    </div>
+  </section>
+
+  <section class="gf-section" id="support" aria-labelledby="gf-support-title">
+    <div class="gf-head" data-gf-reveal>
+      <p class="gf-eyebrow">{copy.support.eyebrow}</p>
+      <h2 id="gf-support-title">{copy.support.title}</h2>
+      <p class="gf-intro">{copy.support.intro}</p>
+    </div>
+    <ul class="gf-support gf-rail" role="list" data-gf-rail="gf-support-title">
+      {copy.support.items.map(([title, detail], index) => <li class="gf-card gf-perk" data-gf-reveal>
+        <span class="gf-badge gf-badge--solid"><GfIcon name={supportIcons[index]} /></span>
+        <h3>{title}</h3>
+        <p>{detail}</p>
+      </li>)}
+    </ul>
+    <p class="gf-support-note">{copy.support.note}</p>
+    <p class="gf-supporter"><span>{copy.supporter.label}</span> <strong>{copy.supporter.name}</strong> {copy.supporter.note}</p>
+  </section>
+
+  <section class="gf-section gf-faq" id="faq" aria-labelledby="gf-faq-title" data-gf-reveal>
+    <h2 id="gf-faq-title">{copy.faqTitle}</h2>
+    {copy.faq.map(([question, answer]) => <details class="gf-disclosure">
+      <summary>{question}</summary>
+      <p>{answer}</p>
+    </details>)}
+  </section>
+
+  <section class="gf-section" id="howto" aria-labelledby="gf-howto-title">
+    <h2 id="gf-howto-title" data-gf-reveal>{copy.howtoTitle}</h2>
+    <ol class="gf-howto" role="list">
+      {copy.howto.map(([title, detail], index) => <li class="gf-card" data-gf-reveal>
+        <span class="gf-medal" aria-hidden="true">{index + 1}</span>
+        <h3>{title}</h3>
+        <p>{detail}</p>
+      </li>)}
+    </ol>
+  </section>
+
+  <section class="gf-panel gf-section gf-quote" id="quote" aria-labelledby="gf-quote-title">
+    <div class="gf-quote-copy" data-gf-reveal>
+      <p class="gf-eyebrow">{frequencyCourse[lang].eyebrow}</p>
+      <h2 id="gf-quote-title">{copy.quoteTitle}</h2>
+      <p>{copy.quoteNote}</p>
+      <ul class="gf-quote-list" role="list">
+        {copy.quoteIncludes.map(item => <li><GfIcon name="check" size={18} />{item}</li>)}
+      </ul>
+      <p class="gf-quote-price"><span>{copy.priceLabel}</span> <strong>{priceLabel}</strong></p>
+      <div class="gf-actions">
+        <a class="button gf-button" href={zaloUrl}>{copy.quoteZaloAction} <Arrow /></a>
+        <a class="button gf-button--ghost" href={tel}>{copy.quoteCall}</a>
+      </div>
+      <p class="gf-scope">{copy.scope}</p>
+    </div>
+    <div class="gf-quote-form" data-gf-reveal><ContactForm {lang} topic={frequencyTopic} /></div>
+  </section>
+</main>
+
+<aside class="gf-sticky" data-gf-sticky hidden aria-label={copy.stickyLabel}>
+  <p><strong>{copy.stickyLabel}</strong><span>{copy.priceLabel}: {priceLabel}</span></p>
+  <a class="button gf-button" href={zaloUrl}>{copy.stickyAction}</a>
+</aside>
+
+<script>
+  import '../scripts/golden-frequency';
+</script>
