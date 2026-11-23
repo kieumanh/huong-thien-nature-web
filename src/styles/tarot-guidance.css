@@ -209,18 +209,62 @@
 .guidance-ai-options { display: grid; gap: .85rem; }
 .guidance-ai-option { padding: clamp(1rem, 3.1vw, 1.55rem); border-color: var(--orchid-line); }
 .guidance-ai-option h3 { color: var(--orchid-deep); text-wrap: balance; }
-.guidance-ai-option p, .guidance-note h3 + p { margin-top: .55rem; }
+.guidance-ai-option p { margin-top: .55rem; }
 .guidance-research h2 + p, .guidance-primary-sources h3 + p { margin-top: .7rem; }
 .guidance-research h4 { color: var(--orchid-deep); font: 400 var(--type-card)/1.3 var(--serif); text-wrap: balance; }
 .guidance-note {
-  margin-top: .95rem;
-  padding: clamp(.95rem, 3vw, 1.45rem);
-  border-inline-start: 3px solid var(--orchid);
-  border-radius: 0 var(--radius-input) var(--radius-input) 0;
-  background: var(--orchid-mist);
+  --note-tint: var(--orchid-mist);
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin-top: clamp(1rem, 2.4vw, 1.5rem);
+  padding: clamp(1.1rem, 4vw, 2.4rem);
+  border: 1px solid color-mix(in srgb, var(--orchid-line) 62%, var(--surface-raised));
+  border-radius: clamp(1.2rem, 3.4vw, 2rem);
+  background: linear-gradient(135deg, var(--note-tint), var(--surface-raised) 78%);
 }
-.guidance-note p, .guidance-primary-sources > p { max-width: 70ch; }
-.guidance-note a { margin-top: .2rem; }
+.guidance-note--reflection { --note-tint: color-mix(in srgb, var(--surface-container) 72%, var(--orchid-mist)); }
+.guidance-note::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(circle at 88% 12%, var(--note-tint), transparent 52%);
+}
+.guidance-note-heading {
+  display: flex;
+  align-items: center;
+  gap: clamp(.65rem, 2vw, 1rem);
+  margin-bottom: .75rem;
+}
+.guidance-note-heading h3 {
+  color: var(--orchid-deep);
+  text-wrap: pretty;
+}
+.guidance-note-mark {
+  display: grid;
+  flex: none;
+  place-items: center;
+  width: 2.65rem;
+  aspect-ratio: 1;
+  border: 1px solid var(--orchid-line);
+  border-radius: 50%;
+  background: var(--surface-raised);
+  color: var(--orchid-deep);
+  font-size: 1.25rem;
+}
+.guidance-note-mark--quote { font: 2.25rem/1 var(--serif); padding-top: .35rem; }
+.guidance-note > p, .guidance-primary-sources > p { max-width: 64ch; }
+.guidance-note blockquote {
+  max-width: 46ch;
+  margin: .9rem 0 0;
+  color: var(--orchid-deep);
+  font: italic clamp(1.05rem, 2.4vw, 1.32rem)/1.58 var(--serif);
+  text-wrap: pretty;
+}
+.guidance-note a { margin-top: .4rem; }
+
 .guidance-primary-sources {
   margin-top: clamp(1.4rem, 3.8vw, 2.35rem);
   padding-top: clamp(1rem, 2.8vw, 1.65rem);
@@ -282,6 +326,30 @@
   .guidance-art.guidance-revealed img { animation: guidance-card-float 3.2s ease-in-out both; }
   .guidance-art.guidance-revealed .guidance-card-halo { animation: guidance-halo 3.2s ease-in-out both; }
   .guidance-disclosure[open] > p:first-of-type { animation: guidance-enter .32s var(--motion-ease) both; }
+  .guidance-note.guidance-revealed::before { animation: guidance-note-glow 2.6s ease-out; }
+  .guidance-note.guidance-revealed .guidance-note-mark { animation: guidance-mark-settle 1.35s ease-out; }
+  .guidance-session li.guidance-revealed::after { animation: guidance-marker-pulse 1.15s ease-out; }
+  .guidance-person.guidance-revealed img { animation: guidance-portrait-focus 1.5s ease-out; }
+  .guidance-disclosure summary::after { transition: transform .28s ease-out; }
+  .guidance-disclosure[open] summary::after { transform: rotate(180deg); }
+  .guidance-poem[open] blockquote { animation: guidance-enter .48s var(--motion-ease) both; }
+  @keyframes guidance-note-glow {
+    from { opacity: .15; transform: translateX(-12%) scale(1.15); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes guidance-mark-settle {
+    from { opacity: .65; transform: translateY(4px) scale(.9); }
+    60% { opacity: 1; transform: scale(1.06); }
+    to { transform: none; }
+  }
+  @keyframes guidance-marker-pulse {
+    0%, 100% { transform: scale(1); }
+    45% { transform: scale(1.5); }
+  }
+  @keyframes guidance-portrait-focus {
+    from { opacity: .75; }
+    to { opacity: 1; }
+  }
   @keyframes guidance-enter {
     from { opacity: .65; transform: translateY(.75rem); }
     to { opacity: 1; transform: translateY(0); }

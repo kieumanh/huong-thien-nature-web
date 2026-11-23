@@ -85,9 +85,13 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
         <p>{detail}</p>
       </div>)}
     </div>
-    <aside class="guidance-note" aria-labelledby="human-guidance-example" data-guidance-reveal>
-      <h3 id="human-guidance-example">{copy.humanGuidance.exampleTitle}</h3>
+    <aside class="guidance-note guidance-note--example" aria-labelledby="human-guidance-example" data-guidance-reveal>
+      <div class="guidance-note-heading">
+        <span class="guidance-note-mark guidance-note-mark--quote" aria-hidden="true">“</span>
+        <h3 id="human-guidance-example">{copy.humanGuidance.exampleTitle}</h3>
+      </div>
       <p>{copy.humanGuidance.example}</p>
+      <blockquote><p>“{copy.humanGuidance.exampleQuote}”</p></blockquote>
     </aside>
     <div class="guidance-ai-details" data-guidance-reveal>
       {copy.humanGuidance.details.map(([question, answer]) => <details class="guidance-disclosure">
