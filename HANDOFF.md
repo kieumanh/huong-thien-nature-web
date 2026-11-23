@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-23, phiên bản 2.8.4. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.9.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -16,24 +16,28 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 6/11 | Tồn kho nối vào cửa hàng; dòng thời gian người sáng lập (2.0.6) |
 | 20–21/11 | Bài tản văn mới, hồ sơ tác giả, Zen Botanical 2.2–2.4 (ba quỹ đạo, bốn mùa) |
 | 22–23/11 | Khóa Tarot 1:1, nhịp ngày đêm/bốn mùa theo giờ Việt Nam, favicon, lá rơi, đổi tên mục Khóa thực hành (2.5–2.8) |
+| 24/11 | 2.9.0: cửa hàng ba không gian nối Zen Flow Inventory, Tarot dễ đặt lịch (ô giá chờ), CSP/HSTS, Astro 7 |
 
 Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 
 ## Trạng thái hiện tại
 
-- Website: tiếng Việt `/vi`, tiếng Anh `/en`, gốc `/` mở thẳng trang chủ tiếng Việt. 74 trang HTML, 32 bài tản văn, 70 URL trong sitemap.
-- Trang chính: trang chủ (ba quỹ đạo, khám phá, tìm kiếm), Tản văn, Cửa hàng/danh mục, Khóa thực hành (Tarot 1:1), Câu chuyện, Đội ngũ, Hệ sinh thái, Liên hệ, Lịch sử phiên bản.
-- Kiểm tra ngày 23/11/2026 trên bản clone: `check`, `audit`, `build`, `audit:build`, 4 bộ test Node và `wrangler deploy --dry-run` đều đạt.
+- Website: tiếng Việt `/vi`, tiếng Anh `/en`, gốc `/` mở thẳng trang chủ tiếng Việt. 80 trang HTML, 32 bài tản văn, 76 URL trong sitemap.
+- Trang chính: trang chủ (ba quỹ đạo, khám phá, tìm kiếm), Tản văn, Cửa hàng (tổng quan + ba không gian chủ đề), Khóa thực hành (Tarot 1:1), Câu chuyện, Đội ngũ, Hệ sinh thái, Liên hệ, Lịch sử phiên bản.
+- Kiểm tra ngày 24/11/2026 trên bản clone: `check`, `audit`, `build`, `audit:build`, các bộ test Node (contact, worker, search, shop, tarot, headers, hybrid-nature, ecosystem, home), `wrangler deploy --dry-run`, bảy bài kiểm tra trình duyệt Playwright (axe: 104 lượt quét, 0 lỗi) và quét CSP 81 trang trong trình duyệt thật đều đạt. `npm audit`: 0 lỗ hổng.
 
 ## Việc chưa làm / rủi ro đã biết
 
 1. **Form liên hệ chưa xác minh gửi thật.** Test dùng mock. Cần gửi thử một thư thật sau khi đủ 4 biến cấu hình trong Cloudflare (`CONTACT_SETUP.md`).
-2. **Tồn kho phụ thuộc site ngoài** (`huong-thien-inventory…chatgpt.site`) và secret `INVENTORY_SITE_TOKEN`. Nếu không còn site đó, `/api/shop-stock` trả "unavailable" (website vẫn chạy). Nên quyết định chuyển nguồn tồn kho về Zen Flow Inventory.
-3. **Nội dung Tarot/tâm linh** phải giữ giọng phản tỉnh, không hứa hẹn kết quả; quyền dùng ảnh (Pixabay, Sallie Nichols) cần giữ ghi nguồn.
-4. **Repository công khai** gồm cả mã CMS và xác thực (`blog-studio/`). Quét mẫu không thấy khóa/bí mật, nhưng chưa audit bảo mật chuyên sâu. Cân nhắc tách CMS sang repo riêng.
-5. **Nhiều nhánh phụ** — xem `docs/BRANCHES.md`.
-6. Kiểm thử trình duyệt (Playwright, Lighthouse) chỉ chạy trong CI GitHub; chưa chạy trong phiên bàn giao này.
-7. Tài liệu REVIEW_*.md, RELEASE_2.0.0.md, V3_ROOTS.md là lịch sử, có thể lỗi thời.
+2. **Feed cửa hàng phụ thuộc Zen Flow Inventory đã được triển khai** (`zen-flow-inventory.huongthiennature.com`). Nếu chưa deploy hoặc chưa xuất bản sản phẩm, cửa hàng dùng danh mục dự phòng (thực phẩm sạch 8 sản phẩm; Đá năng lượng và Sách hiện trạng thái trống/liên hệ). `src/pages/catalogue/inventory.json.ts` là di sản của site ChatGPT cũ, Worker không còn dùng; có thể xóa khi chủ dự án đồng ý.
+3. **Giá buổi Tarot chưa có** — ô giá hiện "Liên hệ". Chủ dự án sẽ cung cấp; đặt tại `tarotOffer.price`.
+4. **Phân tích số liệu (analytics)** chưa có, quyết định xây ở CMS sau.
+5. **Hiệu ứng chuyển động**: mọi chuyển động tôn trọng `prefers-reduced-motion`, nhưng quỹ đạo trang chủ không có nút dừng (quyết định thiết kế từ 2.7.3); cân nhắc lại nếu cần đạt WCAG 2.2.2 tuyệt đối.
+6. **Nội dung Tarot/tâm linh** phải giữ giọng phản tỉnh, không hứa hẹn kết quả; quyền dùng ảnh (Pixabay, Sallie Nichols) cần giữ ghi nguồn.
+7. **Repository công khai** gồm cả mã CMS và xác thực (`blog-studio/`). Quét mẫu không thấy khóa/bí mật, nhưng chưa audit bảo mật chuyên sâu. Cân nhắc tách CMS sang repo riêng.
+8. **Nhiều nhánh phụ** — xem `docs/BRANCHES.md`.
+9. Lighthouse chỉ chạy trong CI GitHub; Playwright đã chạy cục bộ trong phiên 2.9.0.
+10. Tài liệu REVIEW_*.md, RELEASE_2.0.0.md, V3_ROOTS.md là lịch sử, có thể lỗi thời.
 
 ## Triển khai
 

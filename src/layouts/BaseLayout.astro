@@ -13,7 +13,7 @@ const origin = 'https://huongthiennature.com';
 const organizationId = origin + '/#organization';
 const websiteId = origin + '/#website';
 const brandImage = '/media/huong-thien-ben-ho-social.jpg';
-const { lang = 'vi', title, description, alternatePath, canonicalPath, image = brandImage, imageDetails, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false } = Astro.props;
+const { lang = 'vi', title, description, alternatePath, canonicalPath, image = brandImage, imageDetails, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false, extraGraph = [] } = Astro.props;
 const imageUrl = new URL(image, 'https://huongthiennature.com').href;
 const brandAlt = lang === 'vi' ? 'Hương Thiền mỉm cười, hai tay tạo hình trái tim bên hồ dưới chân núi.' : 'Hương Thiền smiling by a mountain lake, making a heart with her hands.';
 const socialImage = imageDetails ?? (image === brandImage ? { type: 'image/jpeg', width: 1200, height: 630, alt: brandAlt } : undefined);
@@ -48,6 +48,7 @@ const schema = {
       ...(aboutOrganization ? { about: { '@id': organizationId } } : {}),
     },
     ...people,
+    ...extraGraph,
   ],
 };
 

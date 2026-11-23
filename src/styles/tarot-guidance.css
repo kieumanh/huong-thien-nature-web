@@ -437,3 +437,67 @@
     100% { transform: translateX(75%); opacity: 0; }
   }
 }
+
+/* Conversion layer: reassurance, price slot, mid-page CTA, booking steps, mobile booking bar. */
+.guidance-reassure { display: flex; flex-wrap: wrap; gap: .4rem 1.1rem; margin-top: 1.1rem; padding: 0; list-style: none; }
+.guidance-reassure li { display: inline-flex; align-items: center; gap: .4rem; color: var(--tarot-soft); font-size: .9rem; line-height: 1.4; }
+.guidance-reassure svg { flex: none; width: 1rem; height: 1rem; fill: none; stroke: var(--tarot-gold); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.guidance-price-note { margin-top: .75rem; color: var(--tarot-soft); font-size: .86rem; line-height: 1.5; }
+
+.guidance-cta-band {
+  display: grid;
+  align-items: center;
+  gap: .9rem 1.5rem;
+  margin-top: clamp(1.4rem, 3.4vw, 2.4rem);
+  padding: clamp(1rem, 3.4vw, 1.75rem);
+  border: 1px solid var(--orchid-line);
+  border-radius: var(--radius-card);
+  background: linear-gradient(135deg, var(--orchid-mist), var(--surface-raised) 85%);
+}
+.guidance-cta-band h2 { font-size: clamp(1.25rem, 3vw, 1.7rem); line-height: 1.25; }
+.guidance-cta-band p { margin-top: .3rem; color: var(--muted); }
+.guidance-cta-band .button { justify-self: start; text-align: center; }
+
+.guidance-howto-steps { display: grid; gap: .8rem; margin: 0; padding: 0; list-style: none; counter-reset: none; }
+.guidance-howto-steps li { min-width: 0; padding: clamp(1rem, 2.8vw, 1.5rem); border-color: var(--orchid-line); }
+.guidance-howto-steps h3 { margin-top: .6rem; }
+.guidance-howto-steps p { margin-top: .4rem; color: var(--muted); }
+.howto-number {
+  display: grid; place-items: center; width: 2.2rem; height: 2.2rem;
+  border-radius: 50%; background: var(--orchid); color: var(--on-orchid); font: 700 1rem/1 var(--sans);
+}
+
+.guidance-invitation-price { margin-top: .85rem; font-size: 1.05rem; }
+.guidance-invitation-price span { color: var(--tarot-soft); }
+.guidance-invitation-price strong { margin-inline-start: .35rem; color: var(--tarot-gold); font: 400 1.35rem/1.2 var(--serif); }
+.guidance-invitation .button--tonal { background: transparent; color: var(--tarot-paper); border-color: #c19ab5; text-align: center; }
+.guidance-invitation .button--tonal:is(:hover, :active) { background: #6c4861; color: var(--tarot-paper); }
+.guidance-scope { margin-top: 1.1rem; font-size: .86rem; line-height: 1.5; }
+
+.guidance-sticky[hidden] { display: none; }
+.guidance-sticky { display: none; }
+@media (max-width: 699px) {
+  .guidance-sticky:not([hidden]) {
+    position: fixed; z-index: 39; inset: auto 0 0;
+    display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+    padding: .6rem max(var(--site-gutter), env(safe-area-inset-right)) calc(.6rem + env(safe-area-inset-bottom)) max(var(--site-gutter), env(safe-area-inset-left));
+    background: #281a2a; color: var(--tarot-paper);
+    border-top: 1px solid #ad789275; box-shadow: 0 -8px 24px #1d122033;
+  }
+  .guidance-sticky p { display: grid; min-width: 0; line-height: 1.3; }
+  .guidance-sticky strong { font-size: .92rem; }
+  .guidance-sticky span { color: var(--tarot-soft); font-size: .8rem; }
+  .guidance-sticky .button { flex: none; min-height: 48px; background: var(--tarot-gold); border-color: var(--tarot-gold); color: var(--tarot-ink); }
+  .guidance-sticky .button:is(:hover, :active) { background: #ffe8c9; color: var(--tarot-ink); }
+  .guidance-sticky :focus-visible { outline-color: var(--tarot-gold); }
+  /* Keep the floating music and back-to-top controls above the bar, and keep focused content clear of it (WCAG 2.4.11). */
+  body[data-sticky-cta] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + env(safe-area-inset-bottom) + 4.6rem); }
+  html:has(body[data-sticky-cta]) { scroll-padding-bottom: 6rem; }
+}
+@media (min-width: 600px) {
+  .guidance-howto-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (min-width: 700px) {
+  .guidance-cta-band { grid-template-columns: minmax(0, 1fr) auto; }
+  .guidance-cta-band .button { justify-self: end; }
+}

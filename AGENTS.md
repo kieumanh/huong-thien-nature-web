@@ -19,10 +19,11 @@ Website song ngữ Việt/Anh của hệ sinh thái Hương Thiền Nature: thi�
 
 ## Kiến trúc
 
-- Astro 6 (static output → `dist/`), TypeScript, Tailwind CSS 4, không có cơ sở dữ liệu, không đăng nhập, không thanh toán.
+- Astro 7 (static output → `dist/`), TypeScript, Tailwind CSS 4, không có cơ sở dữ liệu, không đăng nhập, không thanh toán.
 - Cloudflare **Worker + Static Assets** (`wrangler.worker.jsonc`, entry `src/worker.ts`). Worker chỉ xử lý `/api/*`:
   - `/api/contact`, `/api/contact-config`: form liên hệ (Resend + Turnstile, logic ở `functions/`).
-  - `/api/shop-stock`: đọc tồn kho từ một site ChatGPT bên ngoài (`huong-thien-inventory…chatgpt.site`), cần secret `INVENTORY_SITE_TOKEN`; thiếu thì trả trạng thái "unavailable" và site vẫn chạy.
+  - `/api/shop-feed`: proxy chỉ-đọc tới feed công khai của **Zen Flow Inventory** (`https://zen-flow-inventory.huongthiennature.com/api/shop-feed`, đổi được bằng biến tùy chọn `INVENTORY_FEED_URL`, https). Worker lọc theo danh sách trường cho phép (`src/data/shop-feed.ts`); nguồn lỗi → 503 và trang dùng danh mục dự phòng.
+  - Mọi phản hồi `/api/*` đều có CSP `default-src 'none'`, nosniff, no-referrer (`hardenApi` trong `src/worker.ts`).
 - `wrangler.jsonc` là cấu hình **Pages demo**, KHÔNG dùng để deploy production.
 - `blog-studio/` là Zen Studio CMS (Worker riêng, nhiều file phiên bản). Không thuộc build của website; chỉ sửa khi được yêu cầu.
 
@@ -38,7 +39,7 @@ Website song ngữ Việt/Anh của hệ sinh thái Hương Thiền Nature: thi�
 npm ci
 npm run check && npm run audit
 npm run build && npm run audit:build
-npm run test:contact && npm run test:worker && npm run test:search && npm run test:shop
+npm run test:contact && npm run test:worker && npm run test:search && npm run test:shop && npm run test:tarot && npm run test:headers
 node --test tests/hybrid-nature.test.mjs tests/ecosystem-content.test.mjs tests/ecosystem-orbit.test.mjs tests/home-discovery.test.mjs
 npx wrangler deploy --dry-run --config wrangler.worker.jsonc
 ```
@@ -56,7 +57,14 @@ Kiểm thử trình duyệt (Playwright) chạy trong CI; chạy cục bộ cầ
 
 ## Bí mật và cấu hình (đặt trong Cloudflare, không trong repo)
 
-`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY` (secret); `CONTACT_FROM_EMAIL`, `TURNSTILE_SITE_KEY` (text); `INVENTORY_SITE_TOKEN` (secret, tùy chọn). `CONTACT_TO_EMAIL` có trong `wrangler.worker.jsonc`. Chi tiết: `CONTACT_SETUP.md`. Chưa từng xác minh gửi email thật từ production.
+`RESEND_API_KEY`, `TURNSTILE_SECRET_KEY` (secret); `CONTACT_FROM_EMAIL`, `TURNSTILE_SITE_KEY` (text); `INVENTORY_FEED_URL` (text, tùy chọn, https); binding `CONTACT_LIMITER` (Rate Limiting, tùy chọn — xem `DEPLOYMENT.md`). `CONTACT_TO_EMAIL` có trong `wrangler.worker.jsonc`. Chi tiết: `CONTACT_SETUP.md`. Chưa từng xác minh gửi email thật từ production.
+
+## Cửa hàng, Tarot và bảo mật (từ 2.9.0)
+
+- **Cửa hàng**: `/vi/cua-hang/` là trang tổng quan; ba không gian `thuc-pham-sach`, `da-nang-luong`, `sach` (EN: `clean-food`, `energy-stones`, `books`) định nghĩa ở `src/data/shop-themes.ts`, dựng bởi `ShopTheme.astro`. Mã chủ đề **dùng chung với Zen Flow Inventory** — không đổi một bên. Client (`src/scripts/shop-feed-client.ts`) chỉ dùng `textContent`; feed chỉ thay danh mục dự phòng của một chủ đề khi feed có ít nhất 1 sản phẩm của chủ đề đó.
+- **Tarot**: giá nằm ở `tarotOffer.price` (`src/data/courses.ts`), mặc định `null` → hiện "Liên hệ", không có Offer trong schema. Chỉ nhập giá khi chủ dự án xác nhận. Thanh đặt lịch cố định chỉ hiện trên điện thoại.
+- **CSP**: `scripts/secure-headers.mjs` chạy sau `astro build` (đã nằm trong `npm run build`), băm mọi script nội tuyến vào `dist/_headers`. Thêm script nội tuyến mới là tự động được băm; thêm máy chủ bên thứ ba phải sửa script này, `audit-build.mjs` sẽ báo lỗi nếu quên. Chỉ chạy `astro build` thì **thiếu CSP** và `audit:build` sẽ lỗi.
+- HSTS đang `max-age=31536000` không `includeSubDomains`/`preload` vì chưa xác minh mọi subdomain (kanban, farm, inventory…) chỉ dùng HTTPS. Chủ dự án quyết định có bật hay không.
 
 ## Triển khai
 
@@ -68,4 +76,4 @@ Quy ước và tình trạng nhánh: `docs/BRANCHES.md`. Đừng xóa nhánh n�
 
 ## Dự án liên quan (repository khác, cùng hệ sinh thái)
 
-`kieumanh/farm-gui-yeu-thuong-vao-dat` (Farm Yêu Thương, Lê Lam Sơn). Các dự án khác (Zen Flow Inventory, Sổ nợ An Tâm, Kanban Zen Studio, Portfolio, Satori…) nằm ở nơi khác; hỏi chủ dự án khi cần.
+`kieumanh/zen-flow-inventory` (Zen Flow Inventory: kho, bán hàng, thu chi, feed cửa hàng; đọc `AGENTS.md` và `HANDOFF.md` của repo đó trước khi sửa feed), `kieumanh/farm-gui-yeu-thuong-vao-dat` (Farm Yêu Thương, Lê Lam Sơn). Các dự án khác (Sổ nợ An Tâm, Kanban Zen Studio, Portfolio, Satori…) nằm ở nơi khác; hỏi chủ dự án khi cần.

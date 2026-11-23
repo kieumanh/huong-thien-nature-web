@@ -8,6 +8,14 @@ export async function onRequest({ request, env }: Context) {
   if (request.headers.get('origin') !== origin || request.headers.get('sec-fetch-site') === 'cross-site') {
     return json({ ok: false, code: 'invalid_origin' }, 403);
   }
+  if (env.CONTACT_LIMITER) {
+    try {
+      const key = request.headers.get('cf-connecting-ip') || 'unknown';
+      if (!(await env.CONTACT_LIMITER.limit({ key })).success) return json({ ok: false, code: 'busy' }, 429, { 'Retry-After': '60' });
+    } catch {
+      // Fail open: a limiter outage must not block genuine visitors; Turnstile still verifies each request.
+    }
+  }
   if (request.headers.get('content-type')?.split(';')[0].trim().toLowerCase() !== 'application/json') {
     return json({ ok: false, code: 'invalid_content_type' }, 415);
   }

@@ -4,6 +4,8 @@ export interface ContactEnv {
   CONTACT_FROM_EMAIL?: string;
   TURNSTILE_SITE_KEY?: string;
   TURNSTILE_SECRET_KEY?: string;
+  /** Optional Workers Rate Limiting binding; when absent the endpoint relies on Turnstile alone. */
+  CONTACT_LIMITER?: { limit(options: { key: string }): Promise<{ success: boolean }> };
 }
 
 export const interests = ['meditation', 'retreat', 'courses', 'membership', 'other'] as const;

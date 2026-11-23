@@ -1,6 +1,6 @@
 # Cloudflare Worker deployment — Hương Thiền Nature
 
-Production architecture: GitHub `main` → Cloudflare Workers Builds → Astro build in `dist` → Worker Static Assets. The Worker handles `/api/contact`, `/api/contact-config` and `/api/shop-stock`; all other requests are served from the static asset binding. Cloudflare Pages remains a separate optional demo and is not the production Worker configuration.
+Production architecture: GitHub `main` → Cloudflare Workers Builds → Astro build in `dist` → Worker Static Assets. The Worker handles `/api/contact`, `/api/contact-config` and `/api/shop-feed`; all other requests are served from the static asset binding. Cloudflare Pages remains a separate optional demo and is not the production Worker configuration.
 
 ## Repository configuration
 
@@ -76,3 +76,17 @@ npm run dev:worker
 - Keep privacy notice and service terms current before collecting personal information or accepting payments.
 - Check the Cloudflare build's commit SHA and deployment version after Git integration runs. A successful GitHub push alone does not verify a Cloudflare deploy.
 - Keep the Pages demo separate; it uses `wrangler.jsonc`, `npm run build`, output `dist`, and Pages Functions from `functions/`.
+
+## Shop feed (Zen Flow Inventory)
+
+`/api/shop-feed` proxies `https://zen-flow-inventory.huongthiennature.com/api/shop-feed` (read-only, published items only, cached 60 s). Override with the optional text variable `INVENTORY_FEED_URL` (https only). If the source is down the Worker answers 503 and the shop pages show their static fallback. `INVENTORY_SITE_TOKEN` and the old `/api/shop-stock` route no longer exist and can be deleted from Worker settings.
+
+## Security headers
+
+`npm run build` ends with `scripts/secure-headers.mjs`, which appends the Content-Security-Policy (SHA-256 hash for every inline script), HSTS, Permissions-Policy, COOP and immutable-cache rules to `dist/_headers`. Always deploy the output of `npm run build`, never of `astro build` alone; `npm run audit:build` fails if the CSP is missing or out of date. HSTS is `max-age=31536000` without `includeSubDomains`/`preload` until every `*.huongthiennature.com` host is confirmed HTTPS-only.
+
+Verify after each deploy: `curl -sI https://huongthiennature.com/vi/ | grep -i -E "content-security|strict-transport"` and open one page with DevTools → Console to confirm there are no "Content Security Policy" errors.
+
+## Optional contact rate limiting
+
+The contact endpoint already requires Turnstile, an exact Origin match, JSON and a size cap. For an extra per-IP limit, create a Workers Rate Limiting binding named `CONTACT_LIMITER` (Dashboard → Worker → Settings → Bindings, or `ratelimits` in `wrangler.worker.jsonc`, e.g. 5 requests per 60 s). When the binding is absent or errors, the endpoint keeps working on Turnstile alone; when it rejects, visitors see the existing "busy" message. It is deliberately not in `wrangler.worker.jsonc` yet because it could not be verified against the live account.

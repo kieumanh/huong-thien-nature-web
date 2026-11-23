@@ -1,3 +1,4 @@
+import { shopThemes, themePath } from '../src/data/shop-themes.ts';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { searchRecords, normalizeSearch } from '../src/scripts/search-engine.ts';
@@ -7,7 +8,7 @@ import { articles } from '../src/data/articles.ts';
 import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
 import { products, productPath } from '../src/data/products.ts';
 test('Vietnamese accents and đ are optional',()=>{assert.equal(normalizeSearch('THIỀN ĐỊNH'),'thien dinh');const index=buildSearchIndex('vi');assert.deepEqual(searchRecords(index,'hơi thở'),searchRecords(index,'hoi tho'));assert(searchRecords(index,'hoi tho').length>0);});
-test('index covers every article, product, catalogue and project section in each language',()=>{for(const lang of ['vi','en'] as const){const data=buildSearchIndex(lang);const count=articles.length+products.length+journeyPageKeys.length+courses.length+2;assert.equal(data.length,count);assert.equal(new Set(data.map(row=>row.url)).size,count);assert(courses.every(course => data.some(row => row.url === coursePath(lang, course))));assert(data.every(row=>row.url.startsWith(`/${lang}/`)));}});
+test('index covers every article, product, catalogue and project section in each language',()=>{for(const lang of ['vi','en'] as const){const data=buildSearchIndex(lang);const count=articles.length+products.length+journeyPageKeys.length+courses.length+2+shopThemes.length;assert.equal(data.length,count);assert.equal(new Set(data.map(row=>row.url)).size,count);assert(courses.every(course => data.some(row => row.url === coursePath(lang, course))));assert(shopThemes.every(theme => data.some(row => row.url === themePath(lang, theme))));assert(data.every(row=>row.url.startsWith(`/${lang}/`)));}});
 test('product names and ingredients are searchable in both languages',()=>{assert(searchRecords(buildSearchIndex('vi'),'bot nem sachi').some(row=>row.url===productPath('vi','bot-nem-sachi')));assert(searchRecords(buildSearchIndex('en'),'black sesame').some(row=>row.url===productPath('en','sua-kokkoh')));});
 test('product aliases find rich results with images, prices and explicit stock status',()=>{
   for(const [lang,query,slug] of [['vi','lac','dau-phong-song'],['vi','ca cao','bot-cacao'],['vi','xi dau','tuong-tamari'],['en','groundnuts','dau-phong-song']] as const){

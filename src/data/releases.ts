@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.9.0',
+    date: '2026-11-24',
+    vi: ['Cửa hàng ba không gian và Tarot dễ đặt lịch', 'Cửa hàng có ba không gian riêng: Thực phẩm sạch, Đá năng lượng và Sách, nối với kho Zen Flow. Trang Tarot có nút Zalo ngay đầu trang, thanh đặt lịch trên điện thoại và hướng dẫn đặt lịch 3 bước. Bổ sung chính sách bảo mật nội dung, HSTS và nâng cấp nền tảng.'],
+    en: ['Three-space shop and easier Tarot booking', 'The shop now has three spaces: Clean food, Energy stones and Books, connected to the Zen Flow inventory. The Tarot page has a Zalo button at the top, a mobile booking bar and a three-step guide. Added a content security policy, HSTS and a platform upgrade.'],
+  },
+  {
     version: '2.8.4',
     date: '2026-11-23',
     vi: ['Đồng bộ lịch sử phiên bản', 'Khôi phục các mục 2.8.0–2.8.3 bị mất khỏi lịch sử khi gộp nhánh. Các bản 2.7.3–2.7.6 được hoàn thành sau 2.8.3 nên nằm ngay bên dưới. Bổ sung tài liệu bàn giao cho người tiếp tục phát triển.'],

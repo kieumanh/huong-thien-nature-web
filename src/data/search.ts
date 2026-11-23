@@ -6,6 +6,7 @@ import { ecosystemVision } from './ecosystem-vision.ts';
 import { journeyPageKeys, journeyPages, journeyPath, partnerProfiles } from './journey-pages.ts';
 import { getCopy, type Language } from './site.ts';
 import { products, productPath, shopPath, productCategories, formatPrice, stockLabel } from './products.ts';
+import { shopThemes, themePath } from './shop-themes.ts';
 import type { SearchRecord } from '../scripts/search-engine.ts';
 export type SearchEntry = SearchRecord;
 const plain = (value: unknown): string => {
@@ -41,5 +42,6 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
     const copy = product.translations[lang];
     return { title: copy.name, description: copy.description, url: productPath(lang, product.slug), category: shopCategory, text: plain([copy, product.keywords[lang], productCategories.find(category => category.id === product.category)?.[lang]]), product: { image: product.image, imageAlt: copy.alt, price: product.price, priceLabel: formatPrice(product.price, lang), unit: copy.unit, stock: product.stock, stockLabel: stockLabel(product.stock, lang) } };
   });
-  return [...sections,...articles.map(article => ({title:article.translations[lang].title,description:article.translations[lang].description,url:articlePath(lang,article.slug),category:article.translations[lang].category,text:plain([article.translations[lang],article.keywords?.[lang]])})), catalogue, ...productEntries];
+  const themeEntries = shopThemes.map(theme => ({ title: theme.name[lang], description: `${theme.tagline[lang]}. ${theme.lead[lang]}`, url: themePath(lang, theme), category: shopCategory, text: [theme.name.vi, theme.name.en, theme.tagline[lang], theme.door[lang]].join(' ') }));
+  return [...sections,...articles.map(article => ({title:article.translations[lang].title,description:article.translations[lang].description,url:articlePath(lang,article.slug),category:article.translations[lang].category,text:plain([article.translations[lang],article.keywords?.[lang]])})), catalogue, ...themeEntries, ...productEntries];
 }

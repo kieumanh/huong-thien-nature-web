@@ -1,5 +1,7 @@
 # Cửa hàng — catalogue demo V0.4.7
 
+> **Cập nhật 2.9.0:** `/vi/cua-hang/` (EN `/en/shop/`) giờ là trang tổng quan dẫn vào ba không gian: Thực phẩm sạch (`thuc-pham-sach` / `clean-food`, tám sản phẩm dưới đây), Đá năng lượng (`da-nang-luong` / `energy-stones`) và Sách (`sach` / `books`). Sản phẩm thật, giá, ảnh và tồn kho do chủ dự án nhập trong Zen Flow Inventory (mục Cửa hàng & Mùa vụ) và hiển thị qua `/api/shop-feed`. Mô tả đá chỉ nói về hình thức, nguồn gốc và cách dùng để chiêm nghiệm, không có tuyên bố y khoa. Các mục "Routes" bên dưới mô tả bản V0.4.7 nên đọc cùng AGENTS.md.
+
 ## Routes and behavior
 
 - Vietnamese catalogue: `/vi/cua-hang/`; English catalogue: `/en/shop/`.

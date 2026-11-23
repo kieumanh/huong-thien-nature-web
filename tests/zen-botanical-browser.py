@@ -19,7 +19,7 @@ routes = {
         'home': '/vi/', 'practice': '/vi/goi-y/', 'ecosystem': '/vi/he-sinh-thai/',
         'story': '/vi/cau-chuyen/', 'team': '/vi/doi-ngu/', 'journal': '/vi/tan-van/',
         'article': '/vi/tan-van/nhung-kho-khan-khi-thuc-hanh-thien/',
-        'shop': '/vi/cua-hang/', 'product': '/vi/cua-hang/bot-cacao/',
+        'shop': '/vi/cua-hang/', 'food': '/vi/cua-hang/thuc-pham-sach/', 'stones': '/vi/cua-hang/da-nang-luong/', 'books': '/vi/cua-hang/sach/', 'product': '/vi/cua-hang/bot-cacao/',
         'search': '/vi/timkiem/?q=bot+cacao', 'contact': '/vi/lien-he/',
         'versions': '/vi/phien-ban/', 'courses': '/vi/khoa-thuc-hanh/', 'guidance': '/vi/khoa-thuc-hanh/tam-ly-tarot/',
     },
@@ -27,7 +27,7 @@ routes = {
         'home': '/en/', 'practice': '/en/suggestions/', 'ecosystem': '/en/ecosystem/',
         'story': '/en/story/', 'team': '/en/team/', 'journal': '/en/journal/',
         'article': '/en/journal/when-meditation-is-difficult/',
-        'shop': '/en/shop/', 'product': '/en/shop/bot-cacao/',
+        'shop': '/en/shop/', 'food': '/en/shop/clean-food/', 'stones': '/en/shop/energy-stones/', 'books': '/en/shop/books/', 'product': '/en/shop/bot-cacao/',
         'search': '/en/search/?q=cocoa', 'contact': '/en/contact/',
         'versions': '/en/versions/', 'courses': '/en/practice-courses/', 'guidance': '/en/practice-courses/tarot-reflection/',
     },
@@ -65,7 +65,7 @@ def screenshot(page, label, lang, name, width):
 
 def arrange_api(page):
     page.route('**/api/contact-config', lambda route: route.fulfill(json={'available': False, 'siteKey': None}))
-    page.route('**/api/shop-stock', lambda route: route.fulfill(status=503, json={'status': 'unavailable', 'stock': {}}))
+    page.route('**/api/shop-feed', lambda route: route.fulfill(status=503, json={'ok': False, 'code': 'unavailable'}))
 
 def check_accessibility(page, lang, name, width):
     page.add_script_tag(path=str(axe_path))
@@ -125,9 +125,9 @@ def check_flows(browser):
         minutes = page.locator('.guidance-session .session-duration').all_text_contents()
         assert sum(int(step.split()[0]) for step in minutes) == 90 and minutes[0].startswith('15 ')
         expect(page.locator('[data-guidance-sequence] li')).to_have_count(3)
-        expect(page.locator('.sequence-glyph i').first).to_have_css('animation-name', 'none')
+        expect(page.locator('.sequence-glyph svg [data-sequence-motion]').first).to_have_css('animation-name', 'none')
         expect(page.locator('.guidance-session ol')).to_have_css('border-inline-start-width', '2px')
-        exercise = page.locator('.guidance-exercise details')
+        exercise = page.locator('.guidance-ai-details .guidance-disclosure').first
         exercise.locator('summary').click()
         expect(exercise.locator('p')).to_be_visible()
         expect(exercise.locator('p')).to_have_css('animation-name', 'none')
@@ -157,17 +157,31 @@ def check_flows(browser):
         expect(page.locator('.search-fallback')).to_be_visible()
         page.unroute(f'**/{lang}/search-index.json')
 
+        # Hub: three doors, feed down -> built-in counts stay.
         wait_page(page, base + entries['shop'])
-        expect(page.locator('.stock-status')).to_have_attribute('data-state', 'unavailable')
+        expect(page.locator('.shop-door')).to_have_count(3)
+        # Clean-food space: built-in catalogue + honest "stockroom unreachable" notice while the feed is down.
+        wait_page(page, base + entries['food'])
+        expect(page.locator('[data-feed-status]')).to_have_attribute('data-state', 'unavailable')
         expect(page.locator('[data-stock="unknown"]')).to_have_count(8)
-        page.unroute('**/api/shop-stock')
-        page.route('**/api/shop-stock', lambda route: route.fulfill(json={
-            'status': 'partial', 'stock': {'bot-cacao': 'in_stock', 'bot-nem-sachi': 'out_of_stock'}
-        }))
-        wait_page(page, base + entries['shop'])
-        expect(page.locator('[data-stock-slug="bot-cacao"]')).to_have_attribute('data-stock', 'in_stock')
-        expect(page.locator('[data-stock-slug="bot-nem-sachi"]')).to_have_attribute('data-stock', 'out_of_stock')
-        expect(page.locator('[data-stock="unknown"]')).to_have_count(6)
+        # Stones/books have no built-in products: empty state, no fake catalogue.
+        for empty in ('stones', 'books'):
+            wait_page(page, base + entries[empty])
+            expect(page.locator('[data-theme-empty]')).to_be_visible()
+            expect(page.locator('[data-product-card]')).to_have_count(0)
+        # Feed available: announcement, season and per-space replacement; unpublished spaces keep their fallback.
+        page.unroute('**/api/shop-feed')
+        page.route('**/api/shop-feed', lambda route: route.fulfill(json={
+            'schema': 1, 'updated': None, 'announcement': {'text': 'Giao hàng thứ Bảy', 'tone': 'info'}, 'season': None,
+            'products': [{'id': 's1', 'name': 'Thạch anh tím', 'category': 'Đá thô', 'unit': 'viên', 'price': 450000, 'theme': 'da-nang-luong',
+                         'status': 'in', 'image': '', 'blurb': '', 'season': '', 'keywords': []}]}))
+        wait_page(page, base + entries['stones'])
+        expect(page.locator('.feed-card')).to_have_count(1)
+        expect(page.locator('.shop-announce')).to_be_visible()
+        expect(page.locator('[data-theme-empty]')).to_be_hidden()
+        wait_page(page, base + entries['food'])
+        expect(page.locator('[data-product-card]')).to_have_count(8)
+        expect(page.locator('[data-shop-count]')).to_be_visible()
         page.locator('[data-filter="drinks"]').click()
         expect(page.locator('[data-product-card]:visible')).to_have_count(2)
         page.locator('#shop-search').fill('kczzzz')
@@ -177,14 +191,14 @@ def check_flows(browser):
         page.locator('[data-stock-inquiry][href*="muoi-hong-himalaya"]').click()
         assert urlsplit(page.url).path == entries['contact']
         assert 'product=muoi-hong-himalaya' in page.url
-        assert page.locator('#message').input_value() != ''
+        expect(page.locator('#message')).not_to_have_value('')
         expect(page.locator('#interest-form button')).to_be_disabled()
         expect(page.locator('#message')).to_be_enabled()
         page.locator('#message').focus()
         expect(page.locator('.music-dock')).to_be_hidden()
-        page.unroute('**/api/shop-stock')
-        page.route('**/api/shop-stock', lambda route: route.fulfill(status=503, json={'status': 'unavailable', 'stock': {}}))
-    report['passes'].append('VI/EN article TOC and author, live-search result/error/empty, catalogue filter/reset, stock response mapping and product enquiry prefill.')
+        page.unroute('**/api/shop-feed')
+        page.route('**/api/shop-feed', lambda route: route.fulfill(status=503, json={'ok': False, 'code': 'unavailable'}))
+    report['passes'].append('VI/EN article TOC and author, live-search result/error/empty, shop hub, three spaces, feed fallback/replacement, catalogue filter/reset and product enquiry prefill.')
 
     page.set_viewport_size({'width': 1440, 'height': 900})
     page.emulate_media(reduced_motion='no-preference')
@@ -261,7 +275,7 @@ def check_no_script(browser):
         expect(page.locator('#practice h2')).to_be_visible()
         wait_page(page, base + entries['article'])
         expect(page.locator('.article-toc a').first).to_be_visible()
-        wait_page(page, base + entries['shop'])
+        wait_page(page, base + entries['food'])
         expect(page.locator('[data-product-card]')).to_have_count(8)
         expect(page.locator('[data-stock="unknown"]')).to_have_count(8)
         wait_page(page, base + entries['search'])
@@ -289,11 +303,56 @@ def check_daylight(browser):
     page.emulate_media(reduced_motion='no-preference')
     wait_page(page, base + routes['vi']['guidance'])
     figure = page.locator('[data-guidance-sequence]')
-    figure.scroll_into_view_if_needed()
-    expect(figure).to_have_class(re.compile('sequence-started'))
-    expect(figure.locator('.sequence-glyph--2 i').first).to_have_css('animation-iteration-count', '1')
+    card_step = figure.locator('[data-sequence-step]').nth(1)
+    card_step.scroll_into_view_if_needed()
+    expect(card_step).to_have_class(re.compile('sequence-started'))
+    expect(card_step.locator('.sequence-card-front')).to_have_css('animation-iteration-count', '1')
     page.close()
     report['passes'].append('Vietnam clock sets day, twilight and night correctly. Night contrast and finite tarot sequence motion tested.')
+
+def check_tarot_conversion(browser):
+    """Booking path of the tarot page: direct CTA, honest price slot, mobile booking bar, schema, prefilled enquiry."""
+    for lang, entries in routes.items():
+        for width in (320, 393):
+            page = browser.new_page(viewport={'width': width, 'height': 850}, reduced_motion='reduce')
+            arrange_api(page)
+            wait_page(page, base + entries['guidance'])
+            sticky = page.locator('[data-guidance-sticky]')
+            expect(sticky).to_be_hidden()
+            expect(page.locator('.guidance-hero a.guidance-button')).to_have_attribute('href', 'https://zalo.me/0868499856')
+            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('Liên hệ' if lang == 'vi' else 'Ask us')
+            expect(page.locator('.guidance-howto-steps li')).to_have_count(3)
+            expect(page.locator('.guidance-invitation a.button--tonal')).to_have_attribute('href', re.compile(r'topic=tarot'))
+            page.evaluate("document.querySelector('#session').scrollIntoView()")
+            expect(sticky).to_be_visible()
+            expect(sticky.locator('a')).to_have_attribute('href', 'https://zalo.me/0868499856')
+            box = sticky.bounding_box()
+            assert box and box['width'] <= width + 1 and box['x'] >= 0, ('sticky bar overflows', lang, width)
+            assert dimensions(page)['width'] <= width, ('horizontal overflow with booking bar', lang, width)
+            clash = page.evaluate("""() => {
+                const bar = document.querySelector('[data-guidance-sticky]').getBoundingClientRect();
+                return [...document.querySelectorAll('.back-to-top, .music-dock[data-music-ready]')]
+                    .filter(el => el.getBoundingClientRect().height && getComputedStyle(el).visibility !== 'hidden')
+                    .some(el => el.getBoundingClientRect().bottom > bar.top + 1);
+            }""")
+            assert not clash, ('floating controls overlap the booking bar', lang, width)
+            if width == 393:
+                check_accessibility(page, lang, 'guidance-booking-bar', width)
+            page.evaluate("document.querySelector('#booking').scrollIntoView()")
+            expect(sticky).to_be_hidden()
+            blocks = [json.loads(text) for text in page.locator('script[type="application/ld+json"]').all_inner_texts()]
+            graph = next(block['@graph'] for block in blocks if '@graph' in block)
+            assert {'Service', 'FAQPage'} <= {node['@type'] for node in graph}, ('tarot schema', lang)
+            assert 'offers' not in json.dumps(graph), 'no price may be published before the owner supplies it'
+            page.close()
+        page = browser.new_page(viewport={'width': 393, 'height': 850}, reduced_motion='reduce')
+        arrange_api(page)
+        page.goto(base + entries['contact'] + '?topic=tarot', wait_until='load')
+        expect(page.locator('[name="message"]')).to_have_value(re.compile(r'1:1'))
+        page.goto(base + entries['contact'] + '?topic=%3Cscript%3E', wait_until='load')
+        expect(page.locator('[name="message"]')).to_have_value('')
+        page.close()
+    report['passes'].append('Tarot page: direct Zalo CTA, honest price slot, mobile booking bar clear of floating controls, schema without invented price, prefilled enquiry.')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True, args=['--no-sandbox'])
@@ -335,6 +394,7 @@ with sync_playwright() as playwright:
 
     try:
         check_flows(browser)
+        check_tarot_conversion(browser)
         check_no_script(browser)
         check_daylight(browser)
     finally:

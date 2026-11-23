@@ -8,6 +8,8 @@ import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
 import { courses, coursePath } from '../src/data/courses.ts';
 import { releases, releasesPath } from '../src/data/releases.ts';
 import { contactPath } from '../src/data/contact-channels.ts';
+import { shopThemes, themePath } from '../src/data/shop-themes.ts';
+import { contentSecurityPolicy, inlineScriptHashes, turnstileHost } from './secure-headers.mjs';
 
 const dist = fileURLToPath(new URL('../dist/', import.meta.url));
 const base = 'https://huongthiennature.com';
@@ -20,10 +22,10 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 12 + (products.length + 1) * 2, 'Build must contain both shop catalogues, every product translation and all existing pages');
+assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 12 + (products.length + 1 + shopThemes.length) * 2, 'Build must contain both shop catalogues, every theme space, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
-assert.equal(new Set(locations).size, (articleEntries.length + products.length + journeyPageKeys.length + courses.length + 5) * 2, 'Sitemap must list all localized pages and products');
+assert.equal(new Set(locations).size, (articleEntries.length + products.length + shopThemes.length + journeyPageKeys.length + courses.length + 5) * 2, 'Sitemap must list all localized pages and products');
 for (const course of courses) {
   for (const lang of ['vi', 'en']) {
     const path = coursePath(lang, course);
@@ -56,13 +58,21 @@ for (const file of files) {
     const product = products.find(item => productPath(lang, item.slug) === route);
     const section = journeyPageKeys.find(page => journeyPath(lang, page) === route);
     const course = courses.find(item => coursePath(lang, item) === route);
-    const alternate = course ? coursePath(other, course) : section ? journeyPath(other, section) : route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
+    const theme = shopThemes.find(item => themePath(lang, item) === route);
+    const alternate = course ? coursePath(other, course) : theme ? themePath(other, theme) : section ? journeyPath(other, section) : route === contactPath(lang) ? contactPath(other) : route === releasesPath(lang) ? releasesPath(other) : product ? productPath(other, product.slug) : route === shopPath(lang) ? shopPath(other) : article ? articlePath(other, article.slug) : route === journalPath(lang) ? journalPath(other) : route === '/vi/timkiem/' ? '/en/search/' : route === '/en/search/' ? '/vi/timkiem/' : `/${other}/`;
     assert(html.includes(`hreflang="${lang === 'vi' ? 'en' : 'vi'}" href="${base}${alternate}"`), `Incorrect translation link on ${route}`);
     for (const page of journeyPageKeys) assert(html.includes(`href="${journeyPath(lang, page)}"`), `Section navigation missing on ${route}`);
     assert(html.includes(`href="${shopPath(lang)}"`), `Shop navigation missing on ${route}`);
     if (route === shopPath(lang)) {
-      assert.equal([...html.matchAll(/data-product-card/g)].length, products.length, `Catalogue must include every supplied product on ${route}`);
+      for (const item of shopThemes) assert(html.includes(`href="${themePath(lang, item)}"`), `Shop hub must link to the ${item.id} space on ${route}`);
+    }
+    if (theme?.id === 'thuc-pham-sach') {
+      assert.equal([...html.matchAll(/data-product-card/g)].length, products.length, `Clean-food space must include every supplied product on ${route}`);
       for (const item of products) assert(html.includes(`href="${productPath(lang, item.slug)}"`), `Missing product link: ${item.slug}`);
+    }
+    if (theme) {
+      assert(html.includes('data-shop-theme') && html.includes('data-theme-empty'), `Theme space must carry its feed hooks and empty state on ${route}`);
+      for (const other of shopThemes.filter(item => item.id !== theme.id)) assert(html.includes(`href="${themePath(lang, other)}"`), `Theme space must link to sibling spaces on ${route}`);
     }
     assert(html.includes(`href="${releasesPath(lang)}"`), `Missing footer version link on ${route}`);
     if (route === releasesPath(lang)) {
@@ -157,4 +167,21 @@ for (const lang of ['vi','en']) {
   const home = await readFile(join(dist, lang, 'index.html'), 'utf8');
   assert(!home.includes('mailto:') && !home.includes('data-gmail'), 'Contact must use server delivery only');
 }
+
+// --- Security headers: the generated CSP must cover every inline script and the page must not need any other host.
+const headers = await readFile(join(dist, '_headers'), 'utf8');
+const documents = await Promise.all(files.map(file => readFile(file, 'utf8')));
+const expectedCsp = contentSecurityPolicy(inlineScriptHashes(documents));
+assert(headers.includes(`Content-Security-Policy: ${expectedCsp}`), 'dist/_headers must contain the CSP generated from the built pages (run the full build, not astro build alone)');
+for (const required of ['Strict-Transport-Security:', 'Permissions-Policy:', 'Cross-Origin-Opener-Policy:', 'X-Frame-Options:', 'X-Content-Type-Options:', 'Referrer-Policy:']) assert(headers.includes(required), `Missing security header ${required}`);
+const allowedHosts = new Set([new URL(base).host, new URL(turnstileHost).host]);
+for (const [index, html] of documents.entries()) {
+  assert(!/\son[a-z]+\s*=\s*["']/i.test(html), `Inline event handler (blocked by CSP) in ${files[index]}`);
+  assert(!/href\s*=\s*["']\s*javascript:/i.test(html), `javascript: URL in ${files[index]}`);
+  for (const [, host] of html.matchAll(/<(?:script|iframe|link|audio|video|source|embed|object)\b[^>]*\b(?:src|href|data)="https?:\/\/([^/"]+)/g)) {
+    assert(allowedHosts.has(host) || /<link[^>]+(?:rel="(?:canonical|alternate)")/.test(html), `Unapproved external resource host ${host} in ${files[index]}`);
+  }
+}
+await access(join(dist, '.well-known', 'security.txt'));
+
 console.log(`Build audit passed: ${files.length} HTML pages, ${articles} articles, ${locations.length} sitemap URLs, ${references} local links/assets, twelve Roots entries with local Pixabay photographs.`);

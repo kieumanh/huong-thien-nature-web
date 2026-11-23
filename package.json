@@ -1,11 +1,11 @@
 {
   "name": "huong-thien-nature-web",
-  "version": "2.8.4",
+  "version": "2.9.0",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "astro dev",
-    "build": "node scripts/export-roots.mjs && astro build",
+    "build": "node scripts/export-roots.mjs && astro build && node scripts/secure-headers.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "audit": "node scripts/audit-source.mjs",
@@ -19,13 +19,15 @@
     "deploy:worker": "npm run build && wrangler deploy --config wrangler.worker.jsonc",
     "deploy:worker-dry-run": "npm run build && wrangler deploy --dry-run --config wrangler.worker.jsonc",
     "test:search": "node --test tests/search.test.ts",
-    "test:shop": "node --test tests/shop.test.ts"
+    "test:shop": "node --test tests/shop.test.ts",
+    "test:tarot": "node --test tests/tarot.test.ts",
+    "test:headers": "node --test tests/headers.test.mjs"
   },
   "dependencies": {
-    "astro": "^6.0.0"
+    "astro": "^7.4.13"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.4",
+    "@astrojs/check": "^0.9.12",
     "@tailwindcss/vite": "^4.0.0",
     "@types/node": "^22.0.0",
     "tailwindcss": "^4.0.0",

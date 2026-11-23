@@ -5,6 +5,7 @@ import { releasesPath } from '../data/releases';
 import { contactPath } from '../data/contact-channels';
 import { articles, articlePath, journalPath } from '../data/articles';
 import { products, productPath, shopPath } from '../data/products';
+import { shopThemes, themePath } from '../data/shop-themes';
 
 export const GET: APIRoute = () => {
   const base = 'https://huongthiennature.com';
@@ -16,6 +17,7 @@ export const GET: APIRoute = () => {
     { vi: releasesPath('vi'), en: releasesPath('en') },
     { vi: journalPath('vi'), en: journalPath('en') },
     { vi: shopPath('vi'), en: shopPath('en') },
+    ...shopThemes.map(theme => ({ vi: themePath('vi', theme), en: themePath('en', theme) })),
     ...products.map(product => ({ vi: productPath('vi', product.slug), en: productPath('en', product.slug) })),
     ...articles.map(article => ({
       vi: articlePath('vi', article.slug), en: articlePath('en', article.slug),

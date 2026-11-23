@@ -1,3 +1,10 @@
+## 2.9.0 — Cửa hàng ba không gian, Tarot dễ đặt lịch, bảo mật
+
+- Cửa hàng: trang tổng quan dẫn vào ba không gian riêng (Thực phẩm sạch, Đá năng lượng, Sách), mỗi không gian có giao diện, bộ lọc và tìm kiếm riêng. Sản phẩm và tồn kho lấy từ Zen Flow Inventory qua `/api/shop-feed` (chỉ hiển thị mục đã xuất bản; lỗi nguồn thì dùng danh mục dự phòng). `/api/shop-stock` và secret `INVENTORY_SITE_TOKEN` không còn dùng.
+- Khóa Tarot: nút Zalo ngay đầu trang, ba cam kết ngắn, thanh đặt lịch cố định trên điện thoại, mục "Đặt lịch trong 3 bước", biểu mẫu liên hệ tự điền chủ đề. Ô chi phí hiện "Liên hệ" cho đến khi chủ dự án cung cấp giá (đặt `tarotOffer.price` trong `src/data/courses.ts`). Thêm dữ liệu có cấu trúc Service và FAQ, không công bố giá khi chưa có.
+- Bảo mật: Content-Security-Policy sinh khi build (băm SHA-256 cho từng script nội tuyến, chỉ cho phép Turnstile là bên thứ ba), HSTS, Permissions-Policy, COOP, bộ nhớ đệm bất biến cho tệp băm, `security.txt`, tiêu đề chặn cho mọi phản hồi API, hỗ trợ giới hạn tần suất tùy chọn cho form liên hệ.
+- Hạ tầng: nâng Astro 6 → 7, vá phụ thuộc (`npm audit`: 0 lỗ hổng). Bộ kiểm tra build kiểm cả CSP và không gian cửa hàng. Sửa các bài kiểm tra trình duyệt Tarot đã lỗi thời.
+
 ## 2.8.4 — Đồng bộ lịch sử phiên bản
 
 - Khôi phục mục 2.8.0–2.8.3 bị mất khi gộp nhánh. Các bản 2.7.3–2.7.6 hoàn thành sau 2.8.3 nên được giữ theo thứ tự thời gian.

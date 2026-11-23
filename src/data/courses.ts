@@ -30,3 +30,21 @@ export const courses = [tarotCourse] as const;
 export function coursePath(lang: Language, course: (typeof courses)[number] = tarotCourse) {
   return `${journeyPath(lang, 'guidance')}${course[lang].slug}/`;
 }
+
+/**
+ * Tarot session price. Keep `price: null` until the owner confirms a figure; the page then shows
+ * "Liên hệ" / "Ask us" and publishes no price in structured data. Set a whole-number VND amount
+ * (e.g. `price: 600000`) and the hero facts, sticky bar and schema.org Offer all update together.
+ */
+export const tarotOffer: { price: number | null; currency: 'VND' } = { price: null, currency: 'VND' };
+
+export function tarotPriceLabel(lang: Language, offer: { price: number | null } = tarotOffer) {
+  if (offer.price === null || !Number.isFinite(offer.price) || offer.price <= 0) return lang === 'vi' ? 'Liên hệ' : 'Ask us';
+  const amount = new Intl.NumberFormat(lang === 'vi' ? 'vi-VN' : 'en-US').format(Math.round(offer.price));
+  return lang === 'vi' ? `${amount} ₫` : `${amount} VND`;
+}
+
+/** Contact form link that pre-fills the tarot enquiry (the form reads the allow-listed `topic=tarot`). */
+export function tarotEnquiryPath(lang: Language) {
+  return `${lang === 'vi' ? '/vi/lien-he/' : '/en/contact/'}?topic=tarot#interest-form`;
+}

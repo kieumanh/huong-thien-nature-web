@@ -19,14 +19,29 @@ async function setup(form: HTMLFormElement) {
   const button = form.querySelector<HTMLButtonElement>('button[type="submit"]')!;
   const label = button.querySelector<HTMLElement>('.send-label')!;
   const verification = form.querySelector<HTMLElement>('#contact-verification')!;
-  const productSlug = new URLSearchParams(window.location.search).get('product');
-  if (productSlug) {
-    const entries = JSON.parse(form.dataset.products || '[]') as { slug: string; name: string }[];
-    const product = entries.find(entry => entry.slug === productSlug);
+  const params = new URLSearchParams(window.location.search);
+  const productSlug = params.get('product');
+  // "item" carries a product name from the live shop feed; it is plain text, trimmed and length-capped.
+  const itemName = (params.get('item') || '').replace(/[\u0000-\u001f\u007f]/g, ' ').trim().slice(0, 120);
+  // "topic" is an allow-list of known enquiry topics (never free text) so a shared link cannot inject content.
+  const topic = params.get('topic');
+  if (topic === 'tarot') {
     const message = form.querySelector<HTMLTextAreaElement>('[name="message"]');
     const interest = form.querySelector<HTMLSelectElement>('[name="interest"]');
-    if (product && message && !message.value) {
-      message.value = lang === 'vi' ? `Tôi muốn hỏi thêm về sản phẩm ${product.name}.` : `I would like to ask about ${product.name}.`;
+    if (message && !message.value) {
+      message.value = lang === 'vi'
+        ? 'Tôi muốn hỏi lịch, hình thức gặp và chi phí buổi Tarot tâm lý học 1:1 (90 phút).'
+        : 'I would like to ask about availability, format and cost for the 1:1 tarot reflection session (90 minutes).';
+      if (interest) interest.value = 'other';
+    }
+  }
+  if (productSlug || itemName) {
+    const entries = JSON.parse(form.dataset.products || '[]') as { slug: string; name: string }[];
+    const name = entries.find(entry => entry.slug === productSlug)?.name ?? itemName;
+    const message = form.querySelector<HTMLTextAreaElement>('[name="message"]');
+    const interest = form.querySelector<HTMLSelectElement>('[name="interest"]');
+    if (name && message && !message.value) {
+      message.value = lang === 'vi' ? `Tôi muốn hỏi thêm về sản phẩm ${name}.` : `I would like to ask about ${name}.`;
       if (interest) interest.value = 'other';
     }
   }

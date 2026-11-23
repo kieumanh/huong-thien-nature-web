@@ -1,0 +1,74 @@
+---
+import { contactPath } from '../data/contact-channels';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import Arrow from './Arrow.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import ProductCard from './ProductCard.astro';
+import { products, productCategories, shopPath, productPath } from '../data/products';
+import { shopThemes, themeById, themePath, type ThemeId } from '../data/shop-themes';
+import type { Language } from '../data/site';
+import '../styles/shop.css';
+interface Props { lang: Language; themeId: ThemeId }
+const { lang, themeId } = Astro.props as Props;
+const vi = lang === 'vi';
+const theme = themeById(themeId)!;
+// Only the clean-food space has a built-in catalogue; other spaces fill from the Zen Flow feed once the owner publishes products.
+const fallback = themeId === 'thuc-pham-sach' ? products : [];
+const shopLabel = vi ? 'Cửa hàng' : 'Shop';
+const title = `${theme.name[lang]} | ${shopLabel} | Hương Thiền Nature`;
+const alternatePath = themePath(vi ? 'en' : 'vi', theme);
+const image = fallback[0]?.image;
+---
+<BaseLayout lang={lang} title={title} description={`${theme.tagline[lang]}. ${theme.lead[lang]}`} alternatePath={alternatePath} image={image}>
+  <Header lang={lang} alternatePath={alternatePath} />
+  <main id="main-content" tabindex="-1" class={`shop-page shop-theme shop-theme--${theme.accent}`}>
+    <section class="shop-intro shop-theme-hero shell" aria-labelledby="shop-title">
+      <Breadcrumb {lang} current={theme.name[lang]} parent={{ label: shopLabel, href: shopPath(lang) }} />
+      <span class="eyebrow">{shopLabel.toUpperCase()} · <span data-shop-season-label>{vi ? 'KHÔNG GIAN' : 'SPACE'}</span></span>
+      <h1 id="shop-title"><span class="shop-glyph" aria-hidden="true">{theme.glyph}</span> {theme.name[lang]}</h1>
+      <p class="lead">{theme.tagline[lang]}</p>
+      <p class="shop-theme-lead">{theme.lead[lang]}</p>
+      <p class="shop-season" data-shop-season hidden></p>
+    </section>
+    <div class="shell"><p class="shop-announce" data-shop-announce role="status" hidden></p></div>
+    <nav class="shop-spaces shell" aria-label={vi ? 'Các không gian của cửa hàng' : 'Shop spaces'}>
+      <a href={shopPath(lang)}>{vi ? 'Tất cả' : 'All spaces'}</a>
+      {shopThemes.map(item => <a href={themePath(lang, item)} aria-current={item.id === themeId ? 'page' : undefined} class={`shop-space shop-space--${item.accent}`}><span aria-hidden="true">{item.glyph}</span> {item.name[lang]}</a>)}
+    </nav>
+    <section class="shop-catalogue shell" id="shop-products" aria-labelledby="catalogue-title" data-shop-catalogue data-shop-theme={themeId} data-lang={lang} data-contact={contactPath(lang)}>
+      <h2 id="catalogue-title" class="sr-only">{vi ? 'Danh sách sản phẩm' : 'Product catalogue'}</h2>
+      <div data-shop-controls hidden={fallback.length === 0}>
+        <div class="shop-controls">
+          <form class="shop-search" role="search" data-shop-search aria-label={vi ? 'Tìm sản phẩm' : 'Search products'}>
+            <label class="sr-only" for="shop-search">{vi ? 'Tìm trong không gian này' : 'Search this space'}</label>
+            <input id="shop-search" name="q" type="search" maxlength="120" placeholder={vi ? 'Tên hoặc từ khóa…' : 'Name or keyword…'} autocomplete="off" aria-controls="shop-grid" />
+            <button class="button" type="submit" aria-label={vi ? 'Tìm sản phẩm' : 'Search products'}><svg viewBox="0 0 24 24" width="18" height="18" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7" /><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg><span class="search-button-caption">{vi ? 'Tìm' : 'Search'}</span></button>
+          </form>
+          <div class="shop-filters" role="group" aria-label={vi ? 'Lọc nhóm sản phẩm' : 'Filter product categories'}>
+            <button type="button" data-filter="all" aria-pressed="true">{vi ? 'Tất cả' : 'All'} <span>{fallback.length}</span></button>
+            {fallback.length > 0 && productCategories.map(category => <button type="button" data-filter={category.id} aria-pressed="false">{category[lang]} <span>{fallback.filter(product => product.category === category.id).length}</span></button>)}
+          </div>
+        </div>
+        <div class="shop-results"><p data-shop-count role="status" aria-live="polite" aria-atomic="true">{fallback.length} {vi ? 'sản phẩm' : 'products'}</p><p data-shop-price-note>{vi ? 'Giá tham khảo. Vui lòng hỏi giá và tình trạng hàng trước khi đặt.' : 'Prices are estimates. Please confirm price and availability before ordering.'}</p></div>
+      </div>
+      <p class="stock-status" role="status" data-feed-status></p>
+      <div class="shop-grid" id="shop-grid" data-source="catalogue">{fallback.map(product => <ProductCard product={product} lang={lang} heading="h3" compact />)}</div>
+      <div class="shop-empty" hidden><h3>{vi ? 'Chưa tìm thấy sản phẩm' : 'No products found'}</h3><p>{vi ? 'Thử tên ngắn hơn hoặc chọn nhóm khác.' : 'Try a shorter name or another category.'}</p><button type="button" class="button" data-shop-reset>{vi ? 'Xem tất cả sản phẩm' : 'Show all products'}</button></div>
+      <div class="shop-theme-empty zen-card" data-theme-empty hidden={fallback.length > 0}>
+        <span class="shop-glyph" aria-hidden="true">{theme.glyph}</span>
+        <h3>{theme.emptyTitle[lang]}</h3><p>{theme.emptyBody[lang]}</p>
+        <a class="button" href={`${contactPath(lang)}?item=${encodeURIComponent(theme.name[lang])}#connect`}>{vi ? 'Gửi lời nhắn' : 'Send a message'} <Arrow /></a>
+      </div>
+    </section>
+    {theme.note && <aside class="shop-note shell" aria-label={vi ? 'Lưu ý' : 'Note'}><p>{theme.note[lang]}</p></aside>}
+    <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'ORDERING'}</span><h2>{vi ? 'Bạn muốn đặt hoặc hỏi thêm?' : 'Want to order or ask more?'}</h2><p>{vi ? 'Gửi lời nhắn, chúng tôi xác nhận giá, tình trạng hàng và cách thanh toán trước khi bạn chuyển khoản.' : 'Send a message. We confirm price, availability and payment details before you transfer anything.'}</p></div><a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
+  </main>
+  <Footer lang={lang} />
+  <script type="application/ld+json" set:html={JSON.stringify({ '@context': 'https://schema.org', '@type': 'CollectionPage', name: theme.name[lang], description: theme.lead[lang], url: `https://huongthiennature.com${themePath(lang, theme)}`, ...(fallback.length ? { mainEntity: { '@type': 'ItemList', itemListElement: fallback.map((product, index) => ({ '@type': 'ListItem', position: index + 1, name: product.translations[lang].name, url: `https://huongthiennature.com${productPath(lang, product.slug)}` })) } } : {}) }).replace(/</g, '\\u003c')} />
+</BaseLayout>
+<script>
+  import '../scripts/shop-catalogue';
+  import '../scripts/shop-feed-client';
+</script>

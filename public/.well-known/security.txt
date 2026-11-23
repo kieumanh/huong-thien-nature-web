@@ -1,0 +1,4 @@
+Contact: mailto:huongthiennature@gmail.com
+Expires: 2027-10-31T00:00:00.000Z
+Preferred-Languages: vi, en
+Canonical: https://huongthiennature.com/.well-known/security.txt

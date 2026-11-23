@@ -46,25 +46,77 @@ test('Worker keeps the contact endpoint on the Worker when runtime bindings are 
   assert.deepEqual(await response.json(), { ok: false, code: 'unavailable' });
 });
 
-test('stock maps known values and preserves unknown for unmatched catalogue entries', async (t) => {
-  const { products } = await import('../src/data/products.ts');
-  const [first, second, third] = products;
-  const request = new Request('https://example.test/api/shop-stock');
-  const env = { ASSETS: unusedAssets, INVENTORY_SITE_TOKEN: 'test-token' };
-  const upstream = t.mock.method(globalThis, 'fetch', async () => Response.json({
-    stock: { [first.slug]: 'in_stock', [second.slug]: 'out_of_stock', 'unknown-sku': 'in_stock' },
-  }));
-  const partial = await (await worker.fetch(request, env)).json();
-  assert.equal(partial.status, 'partial');
-  assert.equal(partial.stock[first.slug], 'in_stock');
-  assert.equal(partial.stock[second.slug], 'out_of_stock');
-  assert.equal(partial.stock[third.slug], 'unknown');
-  assert.equal(Object.keys(partial.stock).length, products.length);
-  upstream.mock.mockImplementation(async () => Response.json({ stock: {} }));
-  const empty = await (await worker.fetch(request, env)).json();
-  assert.equal(empty.status, 'unconfirmed');
-  assert(Object.values(empty.stock).every(value => value === 'unknown'));
-  const unavailable = await worker.fetch(request, { ASSETS: unusedAssets });
-  assert.equal(unavailable.status, 503);
-  assert.equal(Object.keys((await unavailable.json()).stock).length, products.length);
+const feedPayload = {
+  schema: 1, updated: '2026-11-23T01:00:00.000Z', announcement: { text: 'Giao hàng thứ Bảy', tone: 'info' }, season: { name: 'Mùa thu hoạch', note: '' },
+  products: [
+    { id: 'p1', name: 'Gạo lứt đỏ', category: 'Ngũ cốc', unit: 'kg', price: 68000, theme: 'thuc-pham-sach', status: 'in', image: 'https://cdn.example.com/a.jpg', blurb: 'Gạo mới', season: '', keywords: ['gạo'], cost: 42000, sku: 'SECRET', lots: [{ code: 'X' }] },
+    { id: 'p2', name: 'Thạch anh', category: 'Đá', unit: 'viên', price: 450000, theme: 'da-nang-luong', status: 'contact', image: 'http://insecure.example.com/a.jpg', blurb: '', season: '', keywords: [] },
+    { id: 'p3', name: 'Chủ đề lạ', theme: 'khong-co', status: 'in' },
+    { id: 'p4', name: 'Trạng thái lạ', theme: 'sach', status: 'weird' },
+  ],
+};
+
+test('shop feed is proxied server-side, whitelisted, cached briefly and never leaks internal fields', async (t) => {
+  const request = new Request('https://example.test/api/shop-feed');
+  let target = '';
+  t.mock.method(globalThis, 'fetch', async (url: string) => { target = String(url); return Response.json(feedPayload); });
+  const response = await worker.fetch(request, { ASSETS: unusedAssets });
+  assert.equal(response.status, 200);
+  assert.equal(target, 'https://zen-flow-inventory.huongthiennature.com/api/shop-feed');
+  assert.match(response.headers.get('cache-control') ?? '', /max-age=60/);
+  const wire = await response.text();
+  const feed = JSON.parse(wire);
+  assert.deepEqual(feed.products.map((product: { id: string }) => product.id), ['p1', 'p2']);
+  assert.equal(feed.products[1].price, null, 'contact-only items expose no price');
+  assert.equal(feed.products[1].image, '', 'non-https images are dropped');
+  for (const secret of ['42000', 'SECRET', 'lots', 'cost', 'sku']) assert(!wire.includes(secret), `leaked ${secret}`);
+  assert.equal(feed.announcement.text, 'Giao hàng thứ Bảy');
+});
+
+test('shop feed honours an https override, rejects http overrides, and fails soft', async (t) => {
+  const request = new Request('https://example.test/api/shop-feed');
+  const calls: string[] = [];
+  const upstream = t.mock.method(globalThis, 'fetch', async (url: string) => { calls.push(String(url)); return Response.json(feedPayload); });
+  await worker.fetch(request, { ASSETS: unusedAssets, INVENTORY_FEED_URL: 'https://staging.example.com/api/shop-feed' });
+  await worker.fetch(request, { ASSETS: unusedAssets, INVENTORY_FEED_URL: 'http://evil.example.com/feed' });
+  assert.deepEqual(calls, ['https://staging.example.com/api/shop-feed', 'https://zen-flow-inventory.huongthiennature.com/api/shop-feed']);
+  upstream.mock.mockImplementation(async () => new Response('nope', { status: 500 }));
+  assert.equal((await worker.fetch(request, { ASSETS: unusedAssets })).status, 503);
+  upstream.mock.mockImplementation(async () => Response.json({ schema: 2, products: [] }));
+  assert.equal((await worker.fetch(request, { ASSETS: unusedAssets })).status, 503);
+  upstream.mock.mockImplementation(async () => new Response('x'.repeat(600 * 1024)));
+  assert.equal((await worker.fetch(request, { ASSETS: unusedAssets })).status, 503);
+  upstream.mock.mockImplementation(async () => { throw new Error('network'); });
+  const failed = await worker.fetch(request, { ASSETS: unusedAssets });
+  assert.equal(failed.status, 503);
+  assert.equal(failed.headers.get('cache-control'), 'no-store');
+  assert.equal((await worker.fetch(new Request('https://example.test/api/shop-feed', { method: 'POST' }), { ASSETS: unusedAssets })).status, 405);
+  assert.equal((await worker.fetch(new Request('https://example.test/api/shop-stock'), { ASSETS: unusedAssets })).status, 404, 'the retired stock endpoint is gone');
+});
+
+test('every API response is hardened as a non-page', async () => {
+  for (const path of ['/api/contact-config', '/api/missing', '/api/shop-feed']) {
+    const response = await worker.fetch(new Request('https://example.test' + path), { ASSETS: unusedAssets, INVENTORY_FEED_URL: 'http://insecure.test/feed' });
+    assert.equal(response.headers.get('content-security-policy'), "default-src 'none'; frame-ancestors 'none'", path);
+    assert.equal(response.headers.get('x-content-type-options'), 'nosniff', path);
+    assert.equal(response.headers.get('referrer-policy'), 'no-referrer', path);
+    assert.equal(response.headers.get('cross-origin-resource-policy'), 'same-origin', path);
+  }
+  const page = await worker.fetch(new Request('https://example.test/vi/'), { ASSETS: unusedAssets });
+  assert.equal(page.headers.get('content-security-policy'), null, 'pages get their CSP from the static _headers file');
+});
+
+test('contact endpoint honours an optional rate limiter and fails open when it errors', async () => {
+  const request = () => new Request('https://example.test/api/contact', {
+    method: 'POST', headers: { origin: 'https://example.test', 'content-type': 'application/json', 'cf-connecting-ip': '203.0.113.9' }, body: '{}',
+  });
+  const keys: string[] = [];
+  const blocked = await worker.fetch(request(), { ASSETS: unusedAssets, CONTACT_LIMITER: { async limit({ key }) { keys.push(key); return { success: false }; } } });
+  assert.equal(blocked.status, 429);
+  assert.equal(blocked.headers.get('retry-after'), '60');
+  assert.deepEqual(keys, ['203.0.113.9']);
+  const broken = await worker.fetch(request(), { ASSETS: unusedAssets, CONTACT_LIMITER: { async limit() { throw new Error('limiter down'); } } });
+  assert.equal(broken.status, 422, 'a limiter outage falls through to normal validation');
+  const allowed = await worker.fetch(request(), { ASSETS: unusedAssets, CONTACT_LIMITER: { async limit() { return { success: true }; } } });
+  assert.equal(allowed.status, 422);
 });
