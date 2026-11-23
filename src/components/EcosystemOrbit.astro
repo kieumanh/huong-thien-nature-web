@@ -1,11 +1,11 @@
 ---
 import type { Language } from '../data/site';
 import Arrow from './Arrow.astro';
-const { lang, cards, images, links } = Astro.props as { lang: Language; cards: string[][]; images: string[]; links: string[][] };
+const { lang, cards, links } = Astro.props as { lang: Language; cards: string[][]; links: string[][] };
 const en = lang === 'en';
 const values = en ? ['BODY', 'HEART', 'MIND'] : ['THÂN', 'TÂM', 'TRÍ'];
 const status = en ? ['Shop available', 'In preparation', 'In preparation'] : ['Có cửa hàng', 'Đang chuẩn bị', 'Đang chuẩn bị'];
-const orbitDurations = ['26s', '42s', '58s'];
+const planets = ['than', 'tam', 'tri'];
 ---
 <div class="ecosystem-motion" data-ecosystem>
 
@@ -23,11 +23,11 @@ const orbitDurations = ['26s', '42s', '58s'];
   <figure class="ecosystem-solar-system" aria-label={en ? 'Hương Thiền Nature at the centre, with three planets for Body, Heart and Mind.' : 'Hương Thiền Nature ở trung tâm, cùng ba hành tinh Thân, Tâm và Trí.'}>
     <div class="solar-system-scene" aria-hidden="true">
       <div class="solar-system-starfield"></div>
-      {[0, 1, 2].map((index) => <div class={`solar-orbit solar-orbit--${index + 1}`} style={`--orbit-duration:${orbitDurations[index]};--orbit-delay:${index * -8}s;--origin-angle:${index * 120}deg`}>
+      {planets.map((planet, index) => <div class={`solar-orbit solar-orbit--${index + 1}`} style={`--orbit-travel:${65 - index * 15}deg;--origin-angle:${50 + index * 120}deg`}>
         <div class="solar-orbit-line"></div>
         <div class="solar-planet-counter">
           <div class={`solar-planet solar-planet--${index + 1}`}>
-            <img src={`/media/${images[index]}`} alt="" width="720" height={index === 2 ? 480 : 540} loading="lazy" />
+            <img src={`/media/planet-${planet}.webp`} alt="" width="192" height="192" loading="lazy" decoding="async" />
             <span>{values[index]}</span>
           </div>
         </div>
@@ -37,7 +37,6 @@ const orbitDurations = ['26s', '42s', '58s'];
     <figcaption class="solar-system-caption">{en ? 'One shared home, held by care for body, heart and mind.' : 'Một mái nhà chung, được nuôi dưỡng từ Thân, chăm sóc Tâm và mở sáng Trí.'}</figcaption>
   </figure>
 
-  <div class="ecosystem-controls"><button class="button button--tonal" type="button" data-orbit-toggle data-pause={en ? 'Pause motion' : 'Dừng chuyển động'} data-resume={en ? 'Resume motion' : 'Tiếp tục chuyển động'} aria-pressed="false" hidden>{en ? 'Pause motion' : 'Dừng chuyển động'}</button></div>
   </section>
 </div>
 <script>

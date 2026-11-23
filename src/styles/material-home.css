@@ -21,6 +21,9 @@
   aspect-ratio: 5 / 3;
   border-radius: 43% 43% var(--radius-card) var(--radius-card) / 29% 26% var(--radius-card) var(--radius-card);
 }
+@media (width < 760px) {
+  .material-hero__art { display: none; }
+}
 @media (min-width: 760px) {
   .material-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1.04fr); }
   .material-hero__art .contemplative-scene { aspect-ratio: 6 / 5; }
@@ -35,7 +38,6 @@
 .ecosystem-visual .reading-heading { margin-bottom: .5rem; }
 .ecosystem-photos { padding-block-start: 1.25rem; border-top: 1px solid var(--border); }
 .ecosystem-visual .solar-system-caption { color: var(--muted); }
-.ecosystem-controls { margin: .75rem auto 0; }
 .ecosystem-photos .nature-photos { margin: 0 0 1rem; }
 .ecosystem-photos .rice-landscapes { padding: .75rem 0 0; background: transparent; }
 .ecosystem-photos .rice-landscapes .shell { width: 100%; }
