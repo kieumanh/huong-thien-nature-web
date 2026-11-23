@@ -1,3 +1,8 @@
+## 2.8.0 — Trải nghiệm Tarot và ba quỹ đạo
+
+- Thiết kế trang giới thiệu buổi Tarot 1:1 với lộ trình 90 phút, bài thực hành, người hướng dẫn, câu hỏi thường gặp và cách liên hệ. Thêm chuyển động theo từng mục.
+- Đổi minh họa Thân, Tâm, Trí và cho ba hành tinh quay liên tục trong vùng nhìn. Ẩn khung ảnh rừng đầu trang khi màn hình dưới 760 px.
+
 ## 2.7.2 — Vào thẳng trang chủ
 
 - Hiển thị trang chủ tiếng Việt tại địa chỉ gốc, bỏ trang chuyển hướng trung gian.

@@ -195,3 +195,68 @@ export const tarotCopy = {
     art: 'The Magician · Illustration by Pamela Colman Smith, 1909',
   },
 } as const;
+
+export const tarotLanding = {
+  vi: {
+    topic: 'Tarot tâm lý học',
+    facts: [['90 phút', 'Thời lượng'], ['1:1', 'Cùng Hương Thiền'], ['Liên hệ', 'Lịch và chi phí']],
+    navigation: 'Các mục của khóa trải nghiệm',
+    links: [['benefits', 'Bạn có thể nhận được gì'], ['session', 'Lộ trình 90 phút'], ['reflection', 'Thử một lá bài'], ['faq', 'Câu hỏi thường gặp']],
+    introTitle: 'Dành một khoảng lặng cho câu hỏi của bạn',
+    intro: 'Khi đứng trước một ngã rẽ, hoặc khi một cảm xúc cứ trở lại, đôi lúc điều khó nhất là tìm lời để nói về nó. Trong buổi trải nghiệm, bạn có thời gian dừng lại, quan sát một hình ảnh và cùng Hương Thiền tìm câu hỏi sát hơn với điều mình đang sống.',
+    benefitsTitle: 'Bạn có thể mang gì về sau buổi gặp?',
+    benefits: [
+      ['Gọi tên điều đang cảm thấy', 'Nhận ra cảm xúc nào xuất hiện trước và điều gì trong tình huống đang chạm vào bạn.'],
+      ['Thấy thêm một cách nhìn', 'Thử phân biệt điều đã xảy ra với cách mình diễn giải, rồi để ngỏ một cách hiểu khác.'],
+      ['Chọn một bước vừa sức', 'Viết ra một việc có thể thử trong tuần và một điều muốn quan sát sau khi thử.'],
+    ],
+    audienceTitle: 'Trải nghiệm này dành cho ai?',
+    audience: [
+      'Bạn đang cân nhắc một thay đổi về công việc hoặc đời sống và muốn nhìn rõ mình đang cần gì.',
+      'Bạn muốn suy ngẫm về một mối quan hệ hoặc một cảm xúc thường lặp lại.',
+      'Bạn tò mò về Tarot như một cách đặt câu hỏi và muốn thử từ đầu.',
+    ],
+    preparation: 'Bạn có thể mang theo một câu hỏi hoặc vài dòng ghi chép. Bạn tự chọn điều muốn chia sẻ và có thể bỏ qua bất kỳ bài tập nào.',
+    hostTitle: 'Người đồng hành cùng bạn',
+    hostLink: 'Đọc câu chuyện của Hương Thiền',
+    moreTitle: 'Đọc sâu hơn về cách thực hành',
+    faqTitle: 'Câu hỏi thường gặp',
+    faq: [
+      ['Mình chưa từng tiếp xúc với Tarot, có tham gia được không?', 'Có. Hương Thiền sẽ hướng dẫn bạn bắt đầu từ chi tiết nhìn thấy trên lá bài và điều nó gợi ra. Bạn có thể đến với một câu hỏi hoặc một tình huống muốn hiểu thêm.'],
+      ['Mình có cần chuẩn bị bộ bài hay phải ngồi thiền không?', 'Bạn không cần mang bộ bài. Phần thiền đầu buổi có thể thực hành trên ghế, với mắt mở. Nếu muốn, bạn có thể dùng khoảng thời gian ấy để trò chuyện.'],
+      ['Mình có thể hỏi chuyện tương lai không?', 'Buổi gặp tập trung vào điều bạn đang trải qua và những gì bạn có thể chủ động làm. Chẳng hạn, từ câu hỏi người kia sẽ quyết định gì, bạn có thể chuyển sang tìm hiểu mình cần gì trong lúc chờ sự rõ ràng.'],
+      ['Hỏi lịch, hình thức gặp và chi phí ở đâu?', 'Nhắn Zalo hoặc dùng trang Liên hệ. Bạn có thể hỏi khung giờ, cách gặp và chi phí để cân nhắc trước khi xác nhận.'],
+    ],
+  },
+  en: {
+    topic: 'Tarot for self-reflection',
+    facts: [['90 min', 'Duration'], ['1:1', 'With Hương Thiền'], ['Ask us', 'Availability and cost']],
+    navigation: 'Explore the session',
+    links: [['benefits', 'What you can take away'], ['session', '90-minute outline'], ['reflection', 'Try a card'], ['faq', 'Common questions']],
+    introTitle: 'Make room for the question you’re carrying',
+    intro: 'When you are facing a change or an emotion keeps returning, finding words for it can be the hardest part. In this session you have time to pause, look closely at an image and work with Hương Thiền to find a question that fits what you are actually experiencing.',
+    benefitsTitle: 'What might you take away?',
+    benefits: [
+      ['Put a feeling into words', 'Notice which feeling comes up first and what in the situation seems to bring it to the surface.'],
+      ['Explore another interpretation', 'Distinguish what happened from your reading of it, then consider another explanation.'],
+      ['Choose a manageable step', 'Write down one thing you can try this week and what you want to observe after trying it.'],
+    ],
+    audienceTitle: 'Who might enjoy this session?',
+    audience: [
+      'You are considering a change at work or in daily life and want to clarify what you need.',
+      'You want to think through a relationship or a feeling that keeps returning.',
+      'You are curious about tarot as a way to ask questions and want to start from scratch.',
+    ],
+    preparation: 'Bring a question or a few notes if you like. You choose what to share and can skip any exercise.',
+    hostTitle: 'Who will guide you',
+    hostLink: 'Read Hương Thiền’s story',
+    moreTitle: 'Read more about the approach',
+    faqTitle: 'Common questions',
+    faq: [
+      ['Can I join if I have never used tarot?', 'Yes. Hương Thiền will help you start with a detail you notice in the image and what it brings to mind. You can bring a question or a situation you would like to understand better.'],
+      ['Do I need to bring cards or sit in meditation?', 'You do not need to bring a deck. You can sit in a chair and keep your eyes open during the opening meditation. You can also use that time to talk.'],
+      ['Can I ask what will happen in the future?', 'The session focuses on what you are experiencing and what you can do now. Instead of trying to know what someone else will decide, you might explore what you need while things are uncertain.'],
+      ['How can I find out the cost, format and availability?', 'Message us on Zalo or use the contact page. You can ask about times, how to meet and how much it costs before confirming.'],
+    ],
+  },
+} as const;
