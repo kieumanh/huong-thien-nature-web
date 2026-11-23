@@ -15,8 +15,11 @@ const copy = tarotResearchCopy[lang];
     <p class="lead" id="why-tarot">{copy.intro}</p>
   </header>
 
-  <aside class="guidance-note" aria-labelledby="barnum-title" data-guidance-reveal>
-    <h3 id="barnum-title">{copy.checkTitle}</h3>
+  <aside class="guidance-note guidance-note--reflection" aria-labelledby="barnum-title" data-guidance-reveal>
+    <div class="guidance-note-heading">
+      <span class="guidance-note-mark" aria-hidden="true">✧</span>
+      <h3 id="barnum-title">{copy.checkTitle}</h3>
+    </div>
     <p>{copy.check}</p>
     <a class="quiet-link" href="https://dictionary.apa.org/barnum-effect">{copy.reference} <Arrow /></a>
   </aside>
@@ -25,7 +28,7 @@ const copy = tarotResearchCopy[lang];
     <h3 id="guidance-sources-title">{copy.sourcesTitle}</h3>
     <p>{copy.sourcesIntro}</p>
     <div class="guidance-portraits">
-      {tarotSources.map(person => <article class:list={['zen-card guidance-person', { 'guidance-person--portrait': person.image }]}>
+      {tarotSources.map(person => <article class:list={['zen-card guidance-person', { 'guidance-person--portrait': person.image }]} data-guidance-reveal>
         {person.image && <figure>
           <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.name} />
           <figcaption><a href={person.photo}>{person.credit}<span class="sr-only"> · {copy.picture} {person.name}</span></a></figcaption>
