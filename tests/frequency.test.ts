@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, showFrequencyFee, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
+import { courseCompare } from '../src/data/course-compare.ts';
 import { frequencySchema } from '../src/data/golden-frequency-schema.ts';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, selfCheckDomains, weeklyPlan } from '../src/data/golden-frequency.ts';
 
@@ -64,7 +65,7 @@ test('the six stages, five frequencies, six life areas and seven days are comple
     assert.ok(copy.faq.length >= 8);
     assert.equal(copy.selfCheck.levels.length, 4);
     assert.equal(copy.selfCheck.results.length, 4);
-    assert.deepEqual(copy.links.map(([id]) => id), ['value', 'curriculum', 'self-check', 'scientists', 'support', 'faq', 'quote']);
+    assert.deepEqual(copy.links.map(([id]) => id), ['info', 'value', 'curriculum', 'self-check', 'scientists', 'support', 'faq', 'quote']);
   }
   assert.equal(frequencyTypes.length, 5);
   assert.deepEqual(selfCheckDomains.map(domain => domain.vi.name), ['Tư duy', 'Cảm xúc', 'Hành vi', 'Lối sống', 'Mối quan hệ', 'Tài chính']);
@@ -96,4 +97,23 @@ test('quote links carry the allow-listed topic that the contact form understands
   const script = readFileSync(new URL('../src/scripts/contact-form.ts', import.meta.url), 'utf8');
   assert.ok(script.includes(`'${frequencyTopic}'`));
   for (const lang of languages) assert.ok(frequencyEnquiryPath(lang).includes(`topic=${frequencyTopic}`));
+});
+
+test('the course information sheet and the course comparison answer what a student asks before enrolling', () => {
+  for (const lang of languages) {
+    const { info, faq } = frequencyLanding[lang];
+    assert.equal(info.items.length, 8);
+    assert.equal(info.prepare.length, 3);
+    assert.ok(info.items.every(([label, value]) => label.length > 2 && value.length > 4));
+    assert.ok(info.items.some(([, value]) => /online/i.test(value)));
+    assert.ok(faq.length >= 12);
+    const compare = courseCompare[lang];
+    assert.equal(compare.rows.length, 5);
+    for (const key of ['golden-frequency', 'tarot'] as const) {
+      assert.equal(compare.courses[key].values.length, compare.rows.length);
+      assert.ok(compare.courses[key].values.every(value => value.length > 8));
+    }
+  }
+  assert.deepEqual(Object.keys(courseCompare.vi.courses), Object.keys(courseCompare.en.courses));
+  assert.ok(!courseCompare.vi.courses['golden-frequency'].values.join(' ').match(/\d[\d.,]*\s?(tr|đ|₫|vnd)/i), 'no fee figures in the comparison');
 });

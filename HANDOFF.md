@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.10.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.11.1. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -18,6 +18,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 22–23/11 | Khóa Tarot 1:1, nhịp ngày đêm/bốn mùa theo giờ Việt Nam, favicon, lá rơi, đổi tên mục Khóa thực hành (2.5–2.8) |
 | 24/11 | 2.9.0: cửa hàng ba không gian nối Zen Flow Inventory, Tarot dễ đặt lịch (ô giá chờ), CSP/HSTS, Astro 7 |
 | 24/11 | 2.10.0: trang khóa Tần Số Vàng (6 chặng, tự định vị tần số, bài tập tuần, nhà khoa học, báo giá) và ảnh chia sẻ VI/EN |
+| 24/11 | 2.11.0–2.11.1: tinh chỉnh giao diện, tìm kiếm Tản văn, ẩn học phí (báo giá qua tin nhắn), thang tần số kéo được, khối thông tin khóa học và bảng so sánh hai khóa |
 
 Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 
@@ -31,8 +32,9 @@ Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8
 
 1. **Form liên hệ chưa xác minh gửi thật.** Test dùng mock. Cần gửi thử một thư thật sau khi đủ 4 biến cấu hình trong Cloudflare (`CONTACT_SETUP.md`).
 2. **Feed cửa hàng phụ thuộc Zen Flow Inventory đã được triển khai** (`zen-flow-inventory.huongthiennature.com`). Nếu chưa deploy hoặc chưa xuất bản sản phẩm, cửa hàng dùng danh mục dự phòng (thực phẩm sạch 8 sản phẩm; Đá năng lượng và Sách hiện trạng thái trống/liên hệ). `src/pages/catalogue/inventory.json.ts` là di sản của site ChatGPT cũ, Worker không còn dùng; có thể xóa khi chủ dự án đồng ý.
-3. **Giá buổi Tarot chưa có** — ô giá hiện "Liên hệ". Chủ dự án sẽ cung cấp; đặt tại `tarotOffer.price`.
+3. **Giá buổi Tarot chưa công bố** — ô giá hiện "Báo giá qua tin nhắn". Nếu muốn hiện giá, chủ dự án cung cấp rồi đặt tại `tarotOffer.price`.
    **Khóa Tần Số Vàng**: học phí đã xác nhận (5,6tr năm 2026, 6,6tr từ 2027, `frequencyFees`); người hỗ trợ học viên là Kiều Mạnh. Hình thức: lớp online 1 tháng, khai giảng hằng tháng (ngày cụ thể gửi kèm báo giá). Phúc lợi sau khóa (nhóm 30 ngày, buổi gặp lại, sổ tay, bản ghi thiền, hỏi đáp 30 ngày, ưu tiên học viên) là đề xuất, cần chủ dự án xác nhận; trang ghi "phạm vi cụ thể theo báo giá".
+   **Còn thiếu để người tham khảo yên tâm đăng ký (chờ chủ dự án)**: hình thức buổi Tarot (online hay trực tiếp); số buổi học trực tiếp và nền tảng của lớp Tần Số Vàng; sĩ số; chính sách hoàn/dời lịch; cam kết bảo mật buổi 1:1; cảm nhận học viên đã đồng ý công khai (hiện chưa có, không tự tạo); thông tin chuyên môn người hướng dẫn; xác nhận số 0388000680 là của ai.
 4. **Phân tích số liệu (analytics)** chưa có, quyết định xây ở CMS sau.
 5. **Hiệu ứng chuyển động**: mọi chuyển động tôn trọng `prefers-reduced-motion`, nhưng quỹ đạo trang chủ không có nút dừng (quyết định thiết kế từ 2.7.3); cân nhắc lại nếu cần đạt WCAG 2.2.2 tuyệt đối.
 6. **Nội dung Tarot/tâm linh** phải giữ giọng phản tỉnh, không hứa hẹn kết quả; quyền dùng ảnh (Pixabay, Sallie Nichols) cần giữ ghi nguồn.

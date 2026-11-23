@@ -95,7 +95,7 @@ export function courseImage(course: Course, lang: Language) {
 export const tarotOffer: { price: number | null; currency: 'VND' } = { price: null, currency: 'VND' };
 
 export function tarotPriceLabel(lang: Language, offer: { price: number | null } = tarotOffer) {
-  if (offer.price === null || !Number.isFinite(offer.price) || offer.price <= 0) return lang === 'vi' ? 'Liên hệ' : 'Ask us';
+  if (offer.price === null || !Number.isFinite(offer.price) || offer.price <= 0) return lang === 'vi' ? 'Báo giá qua tin nhắn' : 'Quote by message';
   const amount = new Intl.NumberFormat(lang === 'vi' ? 'vi-VN' : 'en-US').format(Math.round(offer.price));
   return lang === 'vi' ? `${amount} ₫` : `${amount} VND`;
 }

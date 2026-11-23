@@ -1,3 +1,14 @@
+## 2.11.1 — Bổ sung thông tin cho người tham khảo đăng ký
+
+Rà soát hai trang Tarot tâm lý học và Tần Số Vàng từ góc nhìn người sắp đăng ký, bổ sung những gì còn thiếu mà không thêm thông tin chưa được xác nhận.
+
+- Tần Số Vàng: khối "Thông tin khóa học" ngay dưới phần báo giá nhanh (hình thức, thời gian, khai giảng, khối lượng, đầu vào, đồng hành, sau khóa, học phí) kèm danh sách "Bạn nên chuẩn bị"; thêm liên kết "Thông tin khóa học" vào thanh điều hướng nhanh.
+- Tần Số Vàng: thêm 4 câu hỏi đáp (chuẩn bị học online, đã thiền nhiều năm, học phí và thanh toán, chọn khóa nào); dữ liệu có cấu trúc FAQPage tự đồng bộ.
+- Bảng "Nên chọn khóa nào?" so sánh hai khóa (`src/components/CourseCompare.astro`, dữ liệu `src/data/course-compare.ts`) trên trang Tần Số Vàng, trang Tarot và trang Khóa thực hành.
+- Tarot: ô chi phí đổi thành "Báo giá qua tin nhắn" (thay cho "Liên hệ"), ghi chú nhắn Zalo để nhận báo giá; thêm 3 câu hỏi đáp (chưa có câu hỏi rõ ràng, chi phí và thanh toán, chọn Tarot hay Tần Số Vàng).
+- Kiểm thử: bổ sung test cho khối thông tin và bảng so sánh; cập nhật các kỳ vọng nhãn giá Tarot.
+- Chưa có (chờ chủ dự án): hình thức buổi Tarot (online hay trực tiếp), số buổi học trực tiếp và nền tảng lớp Tần Số Vàng, sĩ số, chính sách hoàn/dời lịch, cam kết bảo mật buổi 1:1, cảm nhận học viên đã đồng ý công khai, thông tin chuyên môn người hướng dẫn.
+
 ## 2.11.0 — Tinh chỉnh giao diện và tìm kiếm Tản văn
 
 - Tản văn: ô tìm bài theo từ khóa (không phân biệt dấu, lọc ngay trên trang, hỗ trợ `?q=`); bỏ chữ "Roots" ở tiêu đề lộ trình, nhãn thẻ bài và ghi chú nguồn.

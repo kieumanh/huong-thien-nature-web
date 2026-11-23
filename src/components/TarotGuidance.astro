@@ -1,6 +1,7 @@
 ---
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
+import CourseCompare from './CourseCompare.astro';
 import GuidanceSequence from './GuidanceSequence.astro';
 import TarotResearch from './TarotResearch.astro';
 import { tarotLanding } from '../data/tarot-guidance';
@@ -152,6 +153,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
         <li><a href="https://www.nccih.nih.gov/health/tips/8-things-to-know-about-meditation-and-mindfulness">NCCIH · Meditation and mindfulness</a></li>
       </ul>
     </details>
+  </section>
+
+  <section class="guidance-section" id="compare" aria-labelledby="course-compare-title" data-guidance-reveal>
+    <CourseCompare {lang} current="tarot" />
   </section>
 
   <section class="guidance-section guidance-howto" id="howto" aria-labelledby="howto-title">

@@ -320,7 +320,7 @@ def check_tarot_conversion(browser):
             sticky = page.locator('[data-guidance-sticky]')
             expect(sticky).to_be_hidden()
             expect(page.locator('.guidance-hero a.guidance-button')).to_have_attribute('href', 'https://zalo.me/0868499856')
-            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('Liên hệ' if lang == 'vi' else 'Ask us')
+            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('Báo giá qua tin nhắn' if lang == 'vi' else 'Quote by message')
             expect(page.locator('.guidance-howto-steps li')).to_have_count(3)
             expect(page.locator('.guidance-invitation a.button--tonal')).to_have_attribute('href', re.compile(r'topic=tarot'))
             page.evaluate("document.querySelector('#session').scrollIntoView()")
