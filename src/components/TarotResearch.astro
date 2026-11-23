@@ -1,54 +1,38 @@
 ---
 import Arrow from './Arrow.astro';
-import { tarotCopy, tarotResearchAuthors, tarotResearchCopy, tarotSources } from '../data/tarot-guidance';
+import { tarotResearchCopy, tarotSources } from '../data/tarot-guidance';
 import type { Language } from '../data/site';
 
 interface Props {
   lang: Language;
 }
 const { lang } = Astro.props;
-const copy = tarotCopy[lang];
-const research = tarotResearchCopy[lang];
+const copy = tarotResearchCopy[lang];
 ---
 <section class="guidance-section guidance-research" id="research" aria-labelledby="research-title">
   <header data-guidance-reveal>
-    <h2 id="research-title">{research.heading}</h2>
-    <p class="lead">{research.intro}</p>
+    <h2 id="research-title">{copy.heading}</h2>
+    <p class="lead" id="why-tarot">{copy.intro}</p>
   </header>
 
-  <aside class="guidance-research-note" aria-labelledby="barnum-title" data-guidance-reveal>
-    <h3 id="barnum-title">{research.checkTitle}</h3>
-    <p>{research.check}</p>
-    <a class="quiet-link" href="https://dictionary.apa.org/barnum-effect">{research.reference} <Arrow /></a>
+  <aside class="guidance-note" aria-labelledby="barnum-title" data-guidance-reveal>
+    <h3 id="barnum-title">{copy.checkTitle}</h3>
+    <p>{copy.check}</p>
+    <a class="quiet-link" href="https://dictionary.apa.org/barnum-effect">{copy.reference} <Arrow /></a>
   </aside>
-
-  <div class="guidance-research-studies">
-    <h3 data-guidance-reveal>{research.studiesTitle}</h3>
-    <div class="guidance-studies-grid">
-      {tarotResearchAuthors.map(author => <article class="zen-card guidance-study" data-guidance-reveal>
-        <p class="eyebrow">{author[lang].topic}</p>
-        <h4>{author.name}</h4>
-        <p>{author[lang].description}</p>
-        <div class="guidance-study-source">
-          <a href={author.source}><cite lang="en">{author.work}</cite> <Arrow /></a>
-          <p>{author.publication}</p>
-        </div>
-      </article>)}
-    </div>
-    <p class="guidance-evidence-note">{research.boundary}</p>
-  </div>
 
   <section class="guidance-primary-sources" id="guidance-sources" aria-labelledby="guidance-sources-title" data-guidance-reveal>
     <h3 id="guidance-sources-title">{copy.sourcesTitle}</h3>
     <p>{copy.sourcesIntro}</p>
     <div class="guidance-portraits">
-      {tarotSources.map(person => <article class="zen-card guidance-person">
-        {person.image ? <figure>
+      {tarotSources.map(person => <article class:list={['zen-card guidance-person', { 'guidance-person--portrait': person.image }]}>
+        {person.image && <figure>
           <img src={`/media/guidance/${person.image}.webp`} width="300" height="365" loading="lazy" decoding="async" alt={person.name} />
           <figcaption><a href={person.photo}>{person.credit}<span class="sr-only"> · {copy.picture} {person.name}</span></a></figcaption>
-        </figure> : <div class="guidance-work"><cite lang="en">{person.work}</cite><small>{person.publication}</small></div>}
+        </figure>}
         <div>
           <h4>{person.name}</h4>
+          {person.work && <p class="guidance-work"><cite lang="en">{person.work}</cite> · {person.publication}</p>}
           <p>{person[lang]}</p>
           <a class="quiet-link" href={person.source}>{copy.original}<span class="sr-only"> · {person.name}</span></a>
           {person.portraitProfile && <div><a class="quiet-link" href={person.portraitProfile}>
@@ -58,7 +42,6 @@ const research = tarotResearchCopy[lang];
       </article>)}
     </div>
     <h4>{copy.booksTitle}</h4>
-    {copy.books.map(paragraph => <p>{paragraph}</p>)}
     <ul class="guidance-references">
       <li><a href="https://wellcomecollection.org/works/wkfv6fww">William James · The Varieties of Religious Experience</a></li>
       <li><a href="https://guides.library.unt.edu/tarot/books">University of North Texas Libraries · Tarot Books &amp; Resources</a></li>
