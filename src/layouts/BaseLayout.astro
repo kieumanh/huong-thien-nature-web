@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/seasons.css';
+import PageLoader from '../components/PageLoader.astro';
 import SeasonalAccent from '../components/SeasonalAccent.astro';
 import { contactEmail, internationalPhone } from '../data/contact-channels';
 import BackgroundMusic from '../components/BackgroundMusic.astro';
@@ -12,12 +13,12 @@ const origin = 'https://huongthiennature.com';
 const organizationId = origin + '/#organization';
 const websiteId = origin + '/#website';
 const brandImage = '/media/huong-thien-ben-ho-social.jpg';
-const { lang = 'vi', title, description, alternatePath, image = brandImage, imageDetails, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false } = Astro.props;
+const { lang = 'vi', title, description, alternatePath, canonicalPath, image = brandImage, imageDetails, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false } = Astro.props;
 const imageUrl = new URL(image, 'https://huongthiennature.com').href;
 const brandAlt = lang === 'vi' ? 'Hương Thiền mỉm cười, hai tay tạo hình trái tim bên hồ dưới chân núi.' : 'Hương Thiền smiling by a mountain lake, making a heart with her hands.';
 const socialImage = imageDetails ?? (image === brandImage ? { type: 'image/jpeg', width: 1200, height: 630, alt: brandAlt } : undefined);
-const pathname = Astro.url.pathname.endsWith('/') || /\.[a-z]+$/i.test(Astro.url.pathname)
-  ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const routePath = Astro.url.pathname;
+const pathname = canonicalPath ?? (routePath.endsWith('/') || /\.[a-z]+$/i.test(routePath) ? routePath : `${routePath}/`);
 const url = new URL(pathname, 'https://huongthiennature.com');
 const enPath = lang === 'en' ? pathname : alternatePath;
 const viPath = lang === 'vi' ? pathname : alternatePath;
@@ -92,7 +93,7 @@ const schema = {
     {(!noindex && alternatePath) && <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />}
 
   </head>
-  <body><div class="reading-progress" role="progressbar" aria-label={lang === 'vi' ? 'Tiến trình đọc trang' : 'Page reading progress'} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><SeasonalAccent /><slot /><BackgroundMusic lang={lang} /><BackToTop lang={lang} /></body>
+  <body><PageLoader {lang} /><div class="reading-progress" role="progressbar" aria-label={lang === 'vi' ? 'Tiến trình đọc trang' : 'Page reading progress'} aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span></span></div><SeasonalAccent /><slot /><BackgroundMusic lang={lang} /><BackToTop lang={lang} /></body>
   <script>
     import '../scripts/floating-contrast';
     import '../scripts/reading-progress';

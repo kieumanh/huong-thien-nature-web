@@ -148,6 +148,11 @@ for (const item of roots) {
     assert(item.relatedSlugs.every(slug => articleEntries.some(entry => entry.slug === slug)), 'Related articles must be published');
   }
 }
+const rootHome = await readFile(join(dist, 'index.html'), 'utf8');
+assert(rootHome.includes('id="hero-title"') && rootHome.includes('id="main-content"'), 'The root URL must render the real Vietnamese homepage');
+assert(!rootHome.includes('http-equiv="refresh"'), 'The root homepage must not redirect in the browser');
+assert(rootHome.includes(`rel="canonical" href="${base}/vi/"`), 'The root homepage must retain the localized canonical URL');
+
 for (const lang of ['vi','en']) {
   const home = await readFile(join(dist, lang, 'index.html'), 'utf8');
   assert(!home.includes('mailto:') && !home.includes('data-gmail'), 'Contact must use server delivery only');

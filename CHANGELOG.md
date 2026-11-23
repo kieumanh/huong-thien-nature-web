@@ -1,3 +1,8 @@
+## 2.7.2 — Vào thẳng trang chủ
+
+- Hiển thị trang chủ tiếng Việt tại địa chỉ gốc, bỏ trang chuyển hướng trung gian.
+- Thêm mandala khi tải chậm và rút gọn nhãn thành Phiên bản.
+
 ## 2.7.1 — Ảnh đại diện khóa tarot
 
 - Thêm ảnh Tarot của AlbanyColley trên Pixabay vào danh mục khóa học và bản xem trước khi chia sẻ trang khóa Tarot tiếng Việt và tiếng Anh.

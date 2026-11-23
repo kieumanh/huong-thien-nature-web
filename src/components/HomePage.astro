@@ -1,0 +1,103 @@
+---
+import { contactPath } from '../data/contact-channels';
+import EcosystemOverview from './EcosystemOverview.astro';
+import '../styles/story-home.css';
+import '../styles/hybrid-nature.css';
+import { practicePhoto } from '../data/editorial-illustrations';
+import HomePhoto from './HomePhoto.astro';
+import HomeDiscovery from './HomeDiscovery.astro';
+import ArticleCard from './ArticleCard.astro';
+import Arrow from './Arrow.astro';
+import ContemplativeScene from './ContemplativeScene.astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from './Header.astro';
+import Footer from './Footer.astro';
+import { getCopy, type Language } from '../data/site';
+import { articlePath, journalPath } from '../data/articles';
+import { homeCopy, featuredArticles } from '../data/home';
+import { journeyPages, journeyPath } from '../data/journey-pages';
+import '../styles/material-home.css';
+import '../styles/editorial.css';
+import '../styles/journey-pages.css';
+
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const t = getCopy(lang);
+const alternatePath = `/${vi ? 'en' : 'vi'}/`;
+const description = vi
+  ? 'Hương Thiền Nature là dự án về thiền định, chánh niệm và sống thuận tự nhiên do Đỗ Thị Kim Hương sáng lập. Bắt đầu bằng một phút thực hành hoặc tìm hiểu hệ sinh thái Thân, Tâm và Trí.'
+  : 'Hương Thiền Nature is a project for meditation, mindfulness and living closer to nature, founded by Đỗ Thị Kim Hương. Begin with a minute of practice or explore its three areas: Body, Heart and Mind.';
+const practicePath = journeyPath(lang, 'practice');
+const storyPath = journeyPath(lang, 'story');
+const teamPath = journeyPath(lang, 'team');
+---
+<BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} canonicalPath={`/${lang}/`} aboutOrganization>
+  <Header {lang} {alternatePath} />
+  <main id="main-content" class="material-home" tabindex="-1">
+    <section class="shell material-hero" aria-labelledby="hero-title">
+      <div class="material-hero__copy">
+        <p class="eyebrow">{t.eyebrow}</p>
+        <h1 id="hero-title">{vi ? 'Có mặt trong' : 'Be present for'}<br /><span class="handwritten">{vi ? 'đời mình.' : 'your own life.'}</span></h1>
+        <p class="lead">{vi ? 'Có hôm, mình ngồi xuống mà trong đầu vẫn còn nguyên cuộc trò chuyện từ sáng. Khi nhận ra hai bàn chân đang đặt trên sàn, mình có một khoảnh khắc để nghe lòng mình trước khi tiếp tục ngày hôm đó.' : 'Some days I sit down and find that the morning’s conversation is still going on in my head. When I notice both feet on the floor, I have a moment to listen to myself before going on with my day.'}</p>
+        <div class="material-actions">
+          <a class="button" href={practicePath}>{vi ? 'Thực tập một phút' : 'Practise for one minute'} <Arrow /></a>
+          <a class="quiet-link" href={storyPath}>{vi ? 'Đọc câu chuyện' : 'Read our story'}</a>
+        </div>
+      </div>
+      <div class="material-hero__art"><ContemplativeScene motif="meditation" /></div>
+    </section>
+
+    <section class="shell home-story" id="story" aria-labelledby="story-title">
+      <div class="home-story__photo"><HomePhoto photo="barefoot-by-sea" {lang} /></div>
+      <div class="home-story__copy">
+        <ContemplativeScene motif="mandala" />
+        <p class="eyebrow">Hương Thiền</p>
+        <h2 id="story-title">{vi ? 'Học cách ở lại với mình' : 'Learning to stay with myself'}</h2>
+        <p>{vi ? 'Mình là Hương Thiền, tên đầy đủ là Đỗ Thị Kim Hương. Lớn lên ở Quảng Nam, mình quen tự lo từ sớm. Mãi sau, khi có thời gian ngồi yên, mình mới nhận ra có những ngày điều mình cần nhất là thừa nhận mình đã mỏi và cho phép mình nghỉ một lát.' : 'I’m Hương Thiền, and my full name is Đỗ Thị Kim Hương. Growing up in Quảng Nam, I learned to look after myself early. It took years, and time sitting quietly, to see that some days the kindest thing I could do was admit I was tired and take a rest.'}</p>
+        <p>{vi ? 'Từ chỗ ngồi ấy, sự chú tâm theo mình ra khỏi phòng: đến bữa cơm, những bước chân ngoài vườn và cách mình lắng nghe một người. Hương Thiền Nature là nơi tụi mình chia sẻ cách đem thiền định và chánh niệm vào những việc bình thường như thế.' : 'From that seat, attention followed me out of the room. It came with me to the table, into the garden, and into the way I listened to another person. Hương Thiền Nature is where we share ways to bring meditation and mindfulness to ordinary moments like these.'}</p>
+        <div id="journey" class="home-story__links">
+          <a class="quiet-link" href={`${storyPath}#journey`}>{vi ? 'Đọc hành trình đầy đủ' : 'Read the full journey'} <Arrow /></a>
+        </div>
+        <span id="journey-early"></span><span id="journey-learning"></span><span id="journey-today"></span>
+      </div>
+    </section>
+
+    <EcosystemOverview {lang} />
+
+    <section class="shell material-practice" id="practice" aria-labelledby="practice-title">
+      <div class="material-practice__copy">
+        <h2 id="practice-title">{vi ? 'Bắt đầu ở chỗ bạn đang ngồi' : 'Start where you are sitting'}</h2>
+        <p>{vi ? 'Thử đặt hai bàn chân xuống sàn và để ý một hơi thở đang diễn ra. Khi nhận ra mình đã mải nghĩ, hãy quay lại với bàn chân hoặc hơi thở, nhẹ như khi đặt một chiếc chén xuống bàn.' : 'Set both feet on the floor and notice one breath as it comes and goes. When you realise you’ve been thinking, return to your feet or the breath as gently as setting a cup on the table.'}</p>
+        <a class="quiet-link" href={practicePath}>{vi ? 'Xem hướng dẫn thực hành' : 'Open the practice guide'} <Arrow /></a>
+      </div>
+      <figure class="home-practice-photo">
+        <img src={practicePhoto.src} width={practicePhoto.width} height={practicePhoto.height} alt={practicePhoto.alt[lang]} loading="lazy" decoding="async" />
+        <figcaption><a href={practicePhoto.source}>{vi ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a></figcaption>
+      </figure>
+    </section>
+
+    <section id="journal" class="shell material-block" aria-labelledby="journal-title">
+      <div class="section-heading">
+        <div><p class="eyebrow">{vi ? 'Đọc và học' : 'Read and learn'}</p><h2 id="journal-title">{homeCopy[lang].featuredTitle}</h2></div>
+        <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Tất cả bài viết' : 'All articles'} <Arrow /></a>
+      </div>
+      <div class="journal-grid home-journal-grid">{featuredArticles.map(article => <ArticleCard {article} {lang} />)}</div>
+      <p id="layers" class="material-inline-link"><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{vi ? 'Tìm hiểu khung chiêm nghiệm bảy tầng' : 'Explore the seven-layer framework'} <Arrow /></a></p>
+    </section>
+    <HomeDiscovery {lang} />
+
+    <section class="shell home-connection" id="people">
+      <ContemplativeScene motif="mandala" />
+      <div>
+        <h2>{vi ? 'Những người đi cùng nhau' : 'The people walking together'}</h2>
+        <p>{journeyPages.team[lang].description}</p>
+        <a class="quiet-link" href={teamPath}>{vi ? 'Gặp đội ngũ và đối tác' : 'Meet the team and our partners'} <Arrow /></a>
+      </div>
+      <div id="connect">
+        <p>{t.contactCopy}</p>
+        <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ' : 'Contact us'}</a>
+      </div>
+    </section>
+  </main>
+  <Footer {lang} />
+</BaseLayout>

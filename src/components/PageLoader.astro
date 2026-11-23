@@ -1,0 +1,100 @@
+---
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const outerAngles = Array.from({ length: 12 }, (_, i) => i * 30);
+const innerAngles = Array.from({ length: 8 }, (_, i) => i * 45);
+---
+<div class="page-loader" data-page-loader hidden aria-hidden="true">
+  <div class="page-loader-panel">
+    <svg viewBox="0 0 128 128" width="108" height="108" fill="none" focusable="false">
+      <g class="page-loader-outer" stroke="currentColor">
+        <circle cx="64" cy="64" r="57" stroke-opacity=".48" />
+        <circle cx="64" cy="64" r="52" stroke-dasharray="1 5" stroke-opacity=".82" />
+        {outerAngles.map(angle => <path d="M64 88C44 76 46 51 64 18C82 51 84 76 64 88Z" transform={`rotate(${angle} 64 64)`} stroke-width=".8" stroke-opacity=".78" />)}
+      </g>
+      <g class="page-loader-inner" stroke="var(--page-loader-accent)">
+        <circle cx="64" cy="64" r="33" stroke-opacity=".5" />
+        {innerAngles.map(angle => <path d="M64 67C53 60 54 47 64 36C74 47 75 60 64 67Z" transform={`rotate(${angle} 64 64)`} stroke-width="1.1" />)}
+      </g>
+      <circle cx="64" cy="64" r="4" fill="var(--page-loader-accent)" />
+    </svg>
+    <span>{lang === 'vi' ? 'Đang mở trang…' : 'Opening the page…'}</span>
+  </div>
+</div>
+
+<script is:inline>
+  (() => {
+    const loader = document.querySelector('[data-page-loader]');
+    if (!loader) return;
+
+    const cleanup = new AbortController();
+    const { signal } = cleanup;
+    const show = setTimeout(() => { loader.hidden = false; }, 220);
+    const fallback = setTimeout(finish, 2600);
+
+    function finish() {
+      clearTimeout(show);
+      clearTimeout(fallback);
+      loader.hidden = true;
+      cleanup.abort();
+    }
+
+    function waitForMainImage() {
+      const image = document.querySelector('main img[fetchpriority="high"]');
+      if (!image || image.complete) {
+        finish();
+        return;
+      }
+      image.addEventListener('load', finish, { once: true, signal });
+      image.addEventListener('error', finish, { once: true, signal });
+    }
+
+    window.addEventListener('pagehide', finish, { once: true, signal });
+    window.addEventListener('pointerdown', finish, { once: true, signal });
+    window.addEventListener('keydown', finish, { once: true, signal });
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', waitForMainImage, { once: true, signal });
+    } else {
+      waitForMainImage();
+    }
+  })();
+</script>
+
+<style>
+  .page-loader:not([hidden]) {
+    --page-loader-accent: var(--sun);
+    position: fixed;
+    z-index: 90;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    pointer-events: none;
+    background: color-mix(in srgb, var(--surface) 65%, transparent);
+    color: var(--primary);
+  }
+
+  .page-loader-panel {
+    display: grid;
+    justify-items: center;
+    gap: .65rem;
+    padding: 1.05rem 1.35rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-feature);
+    background: var(--surface-raised);
+    box-shadow: var(--shadow-card);
+  }
+
+  .page-loader-panel span { font-size: .84rem; color: var(--foreground); }
+
+  .page-loader-outer, .page-loader-inner {
+    transform-box: view-box;
+    transform-origin: center;
+    animation: page-loader-turn 12s linear infinite;
+  }
+  .page-loader-inner { animation-duration: 16s; animation-direction: reverse; }
+  @keyframes page-loader-turn { to { transform: rotate(360deg); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .page-loader-outer, .page-loader-inner { animation: none; }
+  }
+</style>

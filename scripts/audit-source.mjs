@@ -3,7 +3,7 @@ import { join } from 'node:path';
 
 const root = new URL('../', import.meta.url).pathname;
 const home = (await Promise.all([
-  'src/pages/[lang]/index.astro', 'src/components/EcosystemOverview.astro', 'src/components/Header.astro',
+  'src/components/HomePage.astro', 'src/components/EcosystemOverview.astro', 'src/components/Header.astro',
   'src/components/Footer.astro', 'src/components/ContactForm.astro',
   'src/components/HomeDiscovery.astro', 'src/data/home-photos.ts',
   'src/data/site.ts', 'src/data/articles.ts', 'src/data/journey-pages.ts', 'src/data/editorial-illustrations.ts',

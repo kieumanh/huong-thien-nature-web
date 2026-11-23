@@ -3,8 +3,8 @@ import type { Language } from './site.ts';
 export const releasesPath = (lang: Language) => lang === 'vi' ? '/vi/phien-ban/' : '/en/versions/';
 
 export const releaseTitle = {
-  vi: 'Lịch sử phiên bản',
-  en: 'Version history',
+  vi: 'Phiên bản',
+  en: 'Versions',
 } satisfies Record<Language, string>;
 
 type Release = {
@@ -15,6 +15,12 @@ type Release = {
 };
 
 export const releases: Release[] = [
+  {
+    version: '2.7.2',
+    date: '2026-11-23',
+    vi: ['Vào thẳng trang chủ', 'Địa chỉ gốc mở trang chủ tiếng Việt. Mandala xuất hiện khi tải chậm và mục Phiên bản có nhãn ngắn hơn.'],
+    en: ['Direct homepage entry', 'The root URL opens the Vietnamese homepage. A mandala appears on slow loads and the Versions label is shorter.'],
+  },
   {
     version: '2.7.1',
     date: '2026-11-23',
