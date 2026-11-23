@@ -10,10 +10,15 @@ const { lang, alternatePath } = Astro.props as {
 };
 const t = getCopy(lang);
 const searchPath = lang === 'vi' ? '/vi/timkiem/' : '/en/search/';
+const pageLink = (page: typeof journeyPageKeys[number]) => ({ href: journeyPath(lang, page), label: journeyPages[page][lang].title });
 const links = [
-  ...journeyPageKeys.map(page => ({ href: journeyPath(lang, page), label: journeyPages[page][lang].title })),
+  pageLink('ecosystem'),
+  pageLink('team'),
+  pageLink('story'),
+  pageLink('guidance'),
   { href: journalUrl(lang), label: t.nav[4] },
   { href: shopPath(lang), label: lang === 'vi' ? 'Cửa hàng' : 'Shop' },
+  pageLink('practice'),
 ];
 
 ---

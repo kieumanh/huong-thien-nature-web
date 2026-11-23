@@ -738,4 +738,5 @@ html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
 }
 
 .gf-supporter { margin-top: .9rem; text-align: center; font-size: .98rem; }
-.gf-supporter strong { color: var(--gf-gold-hi); font-weight: 600; }
+.gf-supporter { color: var(--foreground); }
+.gf-supporter strong { color: var(--primary); font-weight: 700; }

@@ -34,7 +34,7 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
         <p class="lead">{description}</p>
       </div>
       <section class="reading-section roots-reading-path">
-        <h2 class="reading-heading">{en ? 'Roots · Where to start' : 'Roots · Lộ trình cho người mới'}</h2>
+        <h2 class="reading-heading">{en ? 'Where to start' : 'Lộ trình cho người mới'}</h2>
         <div class="reading-links">
           <p>{en ? 'Read these four guides in order, from your first sitting to bringing attention into everyday activities.' : 'Bốn bài theo thứ tự, từ lần đầu ngồi thiền đến khi mang sự chú tâm vào công việc hằng ngày.'}</p>
           <nav aria-label={en ? 'Suggested reading path' : 'Lộ trình đọc gợi ý'}><ol>{readingPath.map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol></nav>
@@ -44,10 +44,20 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
     <section class="shell journal-listing-articles" id="journal-articles" aria-labelledby="journal-articles-title">
       <div class="section-heading">
         <h2 id="journal-articles-title">{en ? 'All articles' : 'Tất cả bài viết'}</h2>
-        <p class="journal-count">{articles.length} {en ? 'articles' : 'bài viết'}</p>
+        <p class="journal-count" data-journal-count role="status" aria-live="polite" aria-atomic="true">{articles.length} {en ? 'articles' : 'bài viết'}</p>
       </div>
-      <div class="journal-grid">{articles.map((article, index) => <ArticleCard {article} {lang} featured={index === 0} />)}</div>
+      <form class="journal-search" role="search" data-journal-search aria-label={en ? 'Search articles by keyword' : 'Tìm bài viết theo từ khóa'}>
+        <label class="sr-only" for="journal-search">{en ? 'Search articles by keyword' : 'Tìm bài viết theo từ khóa'}</label>
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7" /><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
+        <input id="journal-search" name="q" type="search" maxlength="80" autocomplete="off" aria-controls="journal-grid" placeholder={en ? 'Search by keyword: breath, mindfulness, nature…' : 'Tìm theo từ khóa: hơi thở, chánh niệm, thiên nhiên…'} />
+        <button type="button" class="journal-search-clear" data-journal-clear hidden>{en ? 'Clear' : 'Xóa'}</button>
+      </form>
+      <p class="journal-empty" data-journal-empty hidden>{en ? 'No article matches that keyword. Try a shorter word.' : 'Chưa có bài nào khớp từ khóa này. Hãy thử một từ ngắn hơn.'}</p>
+      <div class="journal-grid" id="journal-grid">{articles.map((article, index) => <ArticleCard {article} {lang} featured={index === 0} />)}</div>
     </section>
   </main>
   <Footer {lang} />
 </BaseLayout>
+<script>
+  import '../../../scripts/journal-filter';
+</script>

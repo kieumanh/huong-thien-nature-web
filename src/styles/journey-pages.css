@@ -86,3 +86,16 @@
   gap: 1rem;
   margin-top: 1.25rem;
 }
+
+/* Partner marks that are dark line art sit on a light tile so they stay visible after dark. */
+.partner-logo--tile { padding: .35rem; border-radius: 1rem; background: #eef3e6; box-shadow: 0 0 0 2px var(--brand-fern), 0 4px 14px rgb(0 0 0 / .22); }
+.team-contact { display: flex; justify-content: center; margin-top: clamp(1.4rem, 4vw, 2.2rem); }
+
+/* Timeline entries: titles lead each milestone. */
+.journey-entry h4 {
+  position: relative; margin: 0 0 .15rem; padding-inline-start: .85rem;
+  color: var(--foreground); font: 650 clamp(1.3rem, 3.4vw, 1.65rem)/1.28 var(--serif); letter-spacing: 0;
+  overflow: visible; text-wrap: balance;
+}
+.journey-entry h4::before { content: ""; position: absolute; inset-block: .18em; inset-inline-start: 0; width: 4px; border-radius: 4px; background: linear-gradient(180deg, var(--orchid), var(--primary)); }
+.journey-milestone { display: inline-block; width: fit-content; padding: .18rem .65rem; border-radius: var(--radius-pill); background: var(--orchid-mist); color: var(--orchid-deep); font-weight: 700; letter-spacing: .01em; }
