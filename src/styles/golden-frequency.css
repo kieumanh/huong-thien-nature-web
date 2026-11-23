@@ -659,7 +659,7 @@
 .gf-sticky span { color: var(--gf-lilac); font-size: .8rem; }
 .gf-sticky .button { flex: none; min-height: 48px; border-color: #d59a3a; color: var(--gf-ink); background: linear-gradient(100deg, var(--gf-gold-hi), var(--gf-gold) 55%, #e8ab4a); }
 .gf-sticky :focus-visible { outline-color: var(--gf-gold); }
-body[data-gf-sticky-on] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + env(safe-area-inset-bottom) + 4.6rem); }
+body[data-gf-sticky-on] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + var(--sticky-bar-h, calc(4.2rem + env(safe-area-inset-bottom))) + .4rem); }
 html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
 
 /* ---------- Mobile rails: card groups scroll sideways so the page stays short on phones ---------- */

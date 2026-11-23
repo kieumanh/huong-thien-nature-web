@@ -491,7 +491,7 @@
   .guidance-sticky .button:is(:hover, :active) { background: #ffe8c9; color: var(--tarot-ink); }
   .guidance-sticky :focus-visible { outline-color: var(--tarot-gold); }
   /* Keep the floating music and back-to-top controls above the bar, and keep focused content clear of it (WCAG 2.4.11). */
-  body[data-sticky-cta] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + env(safe-area-inset-bottom) + 4.6rem); }
+  body[data-sticky-cta] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + var(--sticky-bar-h, calc(4.2rem + env(safe-area-inset-bottom))) + .4rem); }
   html:has(body[data-sticky-cta]) { scroll-padding-bottom: 6rem; }
 }
 @media (min-width: 600px) {

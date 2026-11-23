@@ -214,5 +214,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
     };
     new IntersectionObserver(([entry]) => { passedHero = !entry.isIntersecting && entry.boundingClientRect.top < 0; sync(); }).observe(hero);
     new IntersectionObserver(([entry]) => { reachedBooking = entry.isIntersecting || entry.boundingClientRect.top < 0; sync(); }).observe(booking);
+    // The bar can wrap onto more lines in another language or font; the floating controls follow its real height.
+    if ('ResizeObserver' in window) new ResizeObserver(() => {
+      const height = Math.ceil(bar.getBoundingClientRect().height);
+      if (height > 0) document.body.style.setProperty('--sticky-bar-h', `${height}px`);
+    }).observe(bar);
   }
 </script>
