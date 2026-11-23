@@ -138,8 +138,16 @@ def check_flows(browser):
         assert urlsplit(page.url).fragment == 'research'
         expect(page.locator('#research #guidance-sources h3')).to_be_visible()
         expect(page.locator('#faq #guidance-sources')).to_have_count(0)
-        expect(page.locator('#research .guidance-study h4')).to_have_text(['David Bryce Yaden', 'Lisa Feldman Barrett'])
-        expect(page.locator('#research .guidance-study-source a')).to_have_count(2)
+        expect(page.locator('#research .guidance-person')).to_have_count(4)
+        expect(page.locator('#research .guidance-study, #research .guidance-evidence-note')).to_have_count(0)
+        page.locator('.guidance-jumps a[href="#human-guidance"]').click()
+        assert urlsplit(page.url).fragment == 'human-guidance'
+        expect(page.locator('#human-guidance .guidance-ai-option')).to_have_count(2)
+        expect(page.locator('#human-guidance-example')).to_be_visible()
+        poem = page.locator('.guidance-poem')
+        expect(poem.locator('blockquote')).to_be_hidden()
+        poem.locator('summary').press('Enter')
+        expect(poem.locator('blockquote')).to_be_visible()
         wait_page(page, base + entries['story'])
         expect(page.locator('.journey-timeline .journey-chapters li')).to_have_count(12)
         expect(page.locator('.journey-timeline')).to_have_css('border-inline-start-width', '2px')

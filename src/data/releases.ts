@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.8.3',
+    date: '2026-11-23',
+    vi: ['Trang Tarot gọn hơn và có mục về AI', 'Rút gọn phần giới thiệu và lộ trình, gỡ khối nghiên cứu về tâm linh và cảm nhận cơ thể, bổ sung so sánh AI với buổi hướng dẫn 1:1.'],
+    en: ['A shorter tarot page with an AI comparison', 'Shortened the introduction and outline, removed the section on spiritual and bodily experience, and compared AI prompts with one-to-one guidance.'],
+  },
+  {
     version: '2.8.2',
     date: '2026-11-23',
     vi: ['Tarot dưới góc nhìn tâm lý học', 'Cập nhật giới thiệu Hương Thiền, gỡ bài thử với The Magician và đưa tư liệu gốc vào mục riêng cùng hai công trình về trải nghiệm tâm linh và cảm nhận cơ thể.'],

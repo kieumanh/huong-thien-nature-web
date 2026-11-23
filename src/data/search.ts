@@ -1,5 +1,5 @@
 import { tarotCourse, coursePath } from './courses.ts';
-import { tarotCopy, tarotLanding, tarotResearchAuthors, tarotResearchCopy } from './tarot-guidance.ts';
+import { tarotLanding, tarotResearchCopy, tarotSources } from './tarot-guidance.ts';
 import { contactPath, contactEmail, hotline } from './contact-channels.ts';
 import { articles, articlePath } from './articles.ts';
 import { ecosystemVision } from './ecosystem-vision.ts';
@@ -31,7 +31,7 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
     })),
     {
       title: tarotCourse[lang].title, description: tarotCourse[lang].description,
-      url: coursePath(lang), text: plain([tarotCopy[lang], tarotLanding[lang], tarotResearchCopy[lang], tarotResearchAuthors.map(author => [author.name, author.work, author[lang]])]),
+      url: coursePath(lang), text: plain([tarotLanding[lang], tarotResearchCopy[lang], tarotSources.map(person => [person.name, person.work, person[lang]])]),
     },
     { title: lang === 'vi' ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiền Nature', description: t.contactCopy, url: contactPath(lang), text: [t.contactCopy, 'Zalo', hotline, contactEmail].join(' ') },
   ].map(entry => ({ ...entry, category: lang === 'vi' ? 'Hương Thiền Nature' : 'About us' }));

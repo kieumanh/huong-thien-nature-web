@@ -1,3 +1,8 @@
+## 2.8.3 — Trang Tarot gọn hơn và có mục về AI
+
+- Rút gọn nội dung giới thiệu, lộ trình và tài liệu đọc. Chuyển bài thơ của Hương Thiền vào mục mở rộng cạnh phần giới thiệu người đồng hành.
+- Gỡ khối nghiên cứu về tâm linh và cảm nhận cơ thể. Thêm so sánh giữa AI và trao đổi 1:1, với ví dụ về câu hỏi công việc.
+
 ## 2.8.2 — Tarot dưới góc nhìn tâm lý học
 
 - Giới thiệu Hương Thiền là người sáng lập và giảng viên thực hành thiền, chánh niệm và thức tỉnh tâm linh.
