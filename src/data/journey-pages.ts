@@ -17,6 +17,10 @@ export const journeyPages = {
     vi: { slug: 'cau-chuyen', title: 'Câu chuyện', heading: 'Từ một chỗ ngồi yên đến Hương Thiền Nature', description: 'Đỗ Thị Kim Hương, thường gọi là Hương Thiền, sáng lập Hương Thiền Nature để đưa thiền định và chánh niệm vào đời sống. Câu chuyện bắt đầu từ những năm tháng cô tự lo cho mình ở Quảng Nam.' },
     en: { slug: 'story', title: 'Our story', heading: 'From a quiet seat to Hương Thiền Nature', description: 'Đỗ Thị Kim Hương, known as Hương Thiền, founded Hương Thiền Nature to bring meditation and mindfulness into everyday life. Her story begins in Quảng Nam, where she learned to look after herself early.' },
   },
+  feedback: {
+    vi: { slug: 'phan-hoi-hoc-vien', title: 'Phản hồi học viên', heading: 'Học viên nói gì về hành trình cùng Hương Thiền', description: 'Những chia sẻ do chính học viên gửi, được đăng khi có sự đồng ý của họ, để bạn tự xem trước khi chọn khóa thực hành.' },
+    en: { slug: 'student-feedback', title: 'Student feedback', heading: 'What students say about learning with Hương Thiền', description: 'Words shared by the students themselves and published with their consent, so you can read them for yourself before choosing a practice course.' },
+  },
   team: {
     vi: { slug: 'doi-ngu', title: 'Đội ngũ', heading: 'Những người làm nên Hương Thiền Nature', description: 'Hương Thiền sáng lập và phụ trách chuyên môn thiền. Kiều Mạnh đồng sáng lập, viết, biên tập và phụ trách truyền thông. Dự án còn có cố vấn, đối tác làm nông và nhóm phát triển công nghệ.' },
     en: { slug: 'team', title: 'Team', heading: 'The people behind Hương Thiền Nature', description: 'Hương Thiền founded the project and leads meditation practice. Co-founder Kiều Mạnh writes, edits and leads communications. An adviser, a farming partner and a technology team work alongside them.' },

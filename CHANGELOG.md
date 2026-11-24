@@ -1,3 +1,12 @@
+## 2.12.0 — Phong cách vàng ánh tím toàn trang, trang Phản hồi học viên, danh mục khóa học mới
+
+Áp dụng ngôn ngữ thiết kế của trang Tần Số Vàng (vàng kim, tím đêm, chữ Dancing Script) cho toàn website, đồng thời làm lại phần danh mục khóa và phần phản hồi học viên.
+
+- Giao diện: lớp `src/styles/gold.css` (nạp trong `BaseLayout.astro`) và các biến màu mới trong `tokens.css` (`--gold-*`, `--plum-*`). Nền sáng ấm hơn, nền đêm chuyển sang tím đêm (`daylight.css`). Nút chính dạng vàng chữ tối, đường kẻ vàng dưới tiêu đề và thanh đầu trang, đầu trang các mục hành trình thành khung tím đêm với tiêu đề chữ vàng, chân trang tím đêm, thanh điều khiển nổi tím/vàng. Mọi màu chữ được quét axe ở chế độ ngày và đêm.
+- Trang mới "Phản hồi học viên" (`/vi/phan-hoi-hoc-vien/`, EN `/en/student-feedback/`): chỉ gồm phản hồi của học viên đã đồng ý đăng. Thẻ phản hồi làm lại: ảnh chữ cái đầu, câu trích nổi bật, bấm "Đọc toàn bộ" để xem nguyên văn, ghi rõ người chia sẻ cũng là người hỗ trợ học viên. Mục này nằm trên menu, ngay trước nút Liên hệ.
+- Danh mục Khóa thực hành: thẻ khóa học đồng đều hai cột (ảnh, nhãn, mô tả, ba chip thông tin chính, nút xem chi tiết), bảng "Nên chọn khóa nào?" làm gọn, phần phản hồi dạng giới thiệu ngắn kèm liên kết "Xem tất cả phản hồi". Trang Tần Số Vàng và Tarot trỏ tới trang phản hồi mới.
+- Kiểm thử: thêm kiểm tra tuyến đường VI/EN của trang phản hồi, vị trí mục menu và việc nạp lớp vàng.
+
 ## 2.11.2 — Lời nhắn an toàn và thân thiện hơn; đổi thứ tự chân trang
 
 - Tần Số Vàng: viết lại câu hỏi đáp về giai đoạn khó khăn theo giọng ấm áp hơn. Giữ hướng dẫn an toàn (gọi 115 hoặc cơ sở y tế gần nhất, nhờ người thân ở cạnh, trò chuyện với chuyên gia sức khỏe tâm thần nơi mình sống), và thêm lời mời trao đổi trước với Kiều Mạnh qua số 0388 000 680, không áp lực quyết định ngay. Bản tiếng Anh tương ứng.

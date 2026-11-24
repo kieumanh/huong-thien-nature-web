@@ -6,6 +6,7 @@ import Breadcrumb from '../../components/Breadcrumb.astro';
 import ContemplativeScene from '../../components/ContemplativeScene.astro';
 import FounderJourney from '../../components/FounderJourney.astro';
 import CourseCatalogue from '../../components/CourseCatalogue.astro';
+import StudentFeedback from '../../components/StudentFeedback.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
 import { ecosystemVision } from '../../data/ecosystem-vision';
@@ -46,6 +47,8 @@ const vision = ecosystemVision[lang];
     </header>
 
     {page === 'guidance' && <CourseCatalogue {lang} />}
+
+    {page === 'feedback' && <div class="journey-section"><StudentFeedback {lang} hideHead /></div>}
 
     {page === 'practice' && <>
       <section class="material-practice" id="practice" aria-labelledby="practice-title">

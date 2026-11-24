@@ -1,6 +1,8 @@
 ---
 import CourseCompare from './CourseCompare.astro';
 import StudentFeedback from './StudentFeedback.astro';
+import Arrow from './Arrow.astro';
+import { courseCompare, type CourseKey } from '../data/course-compare';
 import { courses, coursePath, courseImage } from '../data/courses';
 import type { Language } from '../data/site';
 const { lang } = Astro.props as { lang: Language };
@@ -8,39 +10,49 @@ const vi = lang === 'vi';
 ---
 <section class="journey-section" aria-labelledby="course-list-title">
   <h2 id="course-list-title">{vi ? 'Khóa thực hành đang nhận đăng ký' : 'Available practice courses'}</h2>
-  {courses.map(course => <div class="course-card zen-card" data-course={course.id}>
-    <div class="course-preview">
-      <img src={courseImage(course, lang)} alt={course.thumbnail.alt[lang]} width={course.thumbnail.width} height={course.thumbnail.height} loading="lazy" decoding="async" />
-    </div>
-    <div class="course-card-copy">
-      <p class="eyebrow">{course[lang].eyebrow}</p>
-      <h3>{course[lang].title}</h3>
-      <p>{course[lang].description}</p>
-      {course.thumbnail.source && <p class="course-credit"><a href={course.thumbnail.source}>{course.thumbnail.credit}</a></p>}
-      <a class="button" href={coursePath(lang, course)}>{course[lang].action}</a>
-    </div>
-  </div>)}
+  <div class="course-grid">
+    {courses.map(course => <article class="course-card" data-course={course.id}>
+      <div class="course-preview">
+        <img src={courseImage(course, lang)} alt={course.thumbnail.alt[lang]} width={course.thumbnail.width} height={course.thumbnail.height} loading="lazy" decoding="async" />
+      </div>
+      <div class="course-card-copy">
+        <p class="eyebrow">{course[lang].eyebrow}</p>
+        <h3>{course[lang].title}</h3>
+        <p>{course[lang].description}</p>
+        <ul class="course-chips" role="list">{courseCompare[lang].courses[course.id as CourseKey].chips.map(chip => <li>{chip}</li>)}</ul>
+        {course.thumbnail.source && <p class="course-credit"><a href={course.thumbnail.source}>{course.thumbnail.credit}</a></p>}
+        <a class="button" href={coursePath(lang, course)}>{course[lang].action} <Arrow /></a>
+      </div>
+    </article>)}
+  </div>
 </section>
 <section class="journey-section" aria-labelledby="course-compare-title">
   <CourseCompare {lang} />
 </section>
-<StudentFeedback {lang} />
+<section class="journey-section">
+  <StudentFeedback {lang} compact />
+</section>
 <style>
-  .course-card { display: grid; max-width: 53rem; overflow: hidden; margin-top: 1rem; }
-  .course-preview { position: relative; min-height: 0; aspect-ratio: 1200 / 630; background: var(--orchid-mist); }
+  .course-grid { display: grid; gap: clamp(1rem, 3vw, 1.6rem); margin-top: 1.1rem; }
+  .course-card {
+    display: flex; flex-direction: column; overflow: hidden; min-width: 0;
+    border: 1px solid var(--gold-line); border-radius: var(--radius-feature);
+    background: linear-gradient(160deg, var(--gold-wash), var(--surface-raised) 62%); box-shadow: 0 10px 30px #3b2a0b12;
+  }
+  .course-preview { position: relative; aspect-ratio: 1200 / 630; overflow: hidden; background: var(--plum-deep); }
   .course-preview img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .course-card[data-course="golden-frequency"] .course-preview { background: #171236; }
   .course-card[data-course="golden-frequency"] .course-preview img { object-position: 30% 50%; }
+  .course-card-copy { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: .55rem; padding: clamp(1rem, 3.5vw, 1.7rem); }
+  .course-card-copy h3 { margin: 0; }
+  .course-card-copy p { margin: 0; }
+  .course-chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 0; padding: 0; list-style: none; }
+  .course-chips li { padding: .2rem .7rem; border: 1px solid var(--gold-line); border-radius: var(--radius-pill); background: var(--surface-raised); color: var(--foreground); font-size: .8rem; font-weight: 600; }
   .course-credit { font-size: .8rem; }
   .course-credit a { text-decoration: underline; text-underline-offset: .18em; }
-  .course-card-copy { padding: clamp(1rem, 3.5vw, 2rem); }
-  .course-card-copy :is(h3, p, a) { margin-top: .55rem; }
-  .course-card-copy .eyebrow { margin-top: 0; color: var(--orchid); }
-  @media (min-width: 580px) {
-    .course-card { grid-template-columns: minmax(8rem, 1.15fr) minmax(0, 2fr); }
-    .course-preview { aspect-ratio: auto; }
-    /* The Golden Frequency cover carries its title in the picture, so it is shown whole as a featured card. */
-    .course-card[data-course="golden-frequency"] { grid-template-columns: minmax(0, 1fr); }
-    .course-card[data-course="golden-frequency"] .course-preview { aspect-ratio: 1200 / 630; }
+  .course-card-copy .button { margin-top: auto; align-self: flex-start; }
+  .course-card-copy .eyebrow + h3 { margin-top: .1rem; }
+  @media (min-width: 860px) {
+    .course-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .course-card-copy .button { margin-top: 1rem; }
   }
 </style>

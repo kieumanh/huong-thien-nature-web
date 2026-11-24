@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.12.0',
+    date: '2026-11-24',
+    vi: ['Phong cách vàng ánh tím và trang Phản hồi học viên', 'Toàn website mang màu vàng kim, tím đêm và chữ viết tay của trang Tần Số Vàng. Có trang Phản hồi học viên riêng trên menu, thẻ phản hồi và danh mục khóa thực hành được làm lại cho dễ đọc hơn.'],
+    en: ['Gold and plum styling and a student feedback page', 'The whole site takes on the gold, night-plum and handwritten display type of the Golden Frequency page. A dedicated student feedback page joins the menu, and the feedback card and practice-course catalogue are redesigned to read more easily.'],
+  },
+  {
     version: '2.11.2',
     date: '2026-11-24',
     vi: ['Lời nhắn thân thiện hơn và chân trang', 'Tần Số Vàng viết lại phần khó khăn ấm áp hơn, giữ hướng dẫn an toàn và mời trao đổi trước với người hỗ trợ học viên. Mục Gợi ý đứng trước Phiên bản ở chân trang.'],

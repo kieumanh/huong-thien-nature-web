@@ -1,30 +1,102 @@
 ---
-import { feedbackAnchor, feedbackCopy, studentFeedback } from '../data/student-feedback';
+import { feedbackCopy, feedbackPath, studentFeedback } from '../data/student-feedback';
+import { contactPath } from '../data/contact-channels';
+import { journeyPath } from '../data/journey-pages';
 import type { Language } from '../data/site';
-const { lang } = Astro.props as { lang: Language };
+import Arrow from './Arrow.astro';
+interface Props { lang: Language; compact?: boolean; headingLevel?: 'h2' | 'h3'; hideHead?: boolean }
+const { lang, compact = false, headingLevel = 'h2', hideHead = false } = Astro.props as Props;
 const copy = feedbackCopy[lang];
+const Heading = headingLevel;
+const initials = (name: string) => name.split(/\s+/).map(part => part[0]).slice(-2).join('').toUpperCase();
 ---
-<section class="journey-section" id={feedbackAnchor} aria-labelledby="student-feedback-title">
-  <h2 id="student-feedback-title">{copy.title}</h2>
-  <p class="feedback-intro">{copy.intro}</p>
-  {studentFeedback.map(item => <figure class="feedback-card zen-card" lang={lang === 'vi' ? 'vi' : 'en'}>
-    <figcaption>
-      <strong>{item.name}</strong>
-      <span>{item.role[lang]}</span>
-    </figcaption>
-    <blockquote>
-      {(lang === 'vi' ? item.quote : item.quoteEn).map(paragraph => <p>{paragraph}</p>)}
-    </blockquote>
-    {lang === 'en' && <p class="feedback-note">{copy.translated}</p>}
-    {item.disclosure && <p class="feedback-note">{item.disclosure[lang]}</p>}
-  </figure>)}
+<section class="feedback" aria-label={hideHead ? copy.title : undefined} aria-labelledby={hideHead ? undefined : 'student-feedback-title'}>
+  {!hideHead && <div class="feedback-head">
+    <Heading id="student-feedback-title">{copy.title}</Heading>
+    <p>{copy.intro}</p>
+  </div>}
+  <div class="feedback-list">
+    {studentFeedback.map(item => {
+      const quote = lang === 'vi' ? item.quote : item.quoteEn;
+      const highlight = lang === 'vi' ? item.highlight : item.highlightEn;
+      return <figure class="feedback-card" lang={lang}>
+        <div class="feedback-person">
+          <span class="feedback-avatar" aria-hidden="true">{initials(item.name)}</span>
+          <figcaption><strong>{item.name}</strong><span>{item.role[lang]}</span></figcaption>
+        </div>
+        <div class="feedback-body">
+          <span class="feedback-mark" aria-hidden="true">“</span>
+          <blockquote class="feedback-highlight"><p>{highlight}</p></blockquote>
+          {!compact && <details class="feedback-more">
+            <summary><span class="feedback-more-open">{copy.readAll}</span><span class="feedback-more-close">{copy.close}</span></summary>
+            <div class="feedback-full">
+              {quote.map(paragraph => <p>{paragraph}</p>)}
+              {lang === 'en' && <p class="feedback-note">{copy.translated}</p>}
+            </div>
+          </details>}
+          {item.disclosure && <p class="feedback-note">{item.disclosure[lang]}</p>}
+        </div>
+      </figure>;
+    })}
+  </div>
+  {compact
+    ? <p class="feedback-actions"><a class="quiet-link" href={feedbackPath(lang)}>{copy.all} <Arrow /></a></p>
+    : <aside class="feedback-invite" aria-labelledby="feedback-invite-title">
+        <h2 id="feedback-invite-title">{copy.inviteTitle}</h2>
+        <p>{copy.inviteText}</p>
+        <div class="feedback-actions">
+          <a class="button" href={contactPath(lang)}>{copy.inviteAction} <Arrow /></a>
+          <a class="button button--tonal" href={journeyPath(lang, 'guidance')}>{copy.coursesAction}</a>
+        </div>
+      </aside>}
 </section>
 <style>
-  .feedback-intro { max-width: 60ch; margin-top: .5rem; color: var(--muted); }
-  .feedback-card { max-width: 53rem; margin: 1rem 0 0; padding: clamp(1.1rem, 4vw, 2rem); }
-  .feedback-card figcaption { display: grid; gap: .15rem; margin-bottom: .8rem; }
-  .feedback-card figcaption span { color: var(--secondary); font-size: .9rem; }
-  .feedback-card blockquote { display: grid; gap: .8rem; margin: 0; padding-left: 1rem; border-left: 3px solid var(--primary); line-height: 1.7; }
-  .feedback-card blockquote p { margin: 0; }
-  .feedback-note { margin-top: .8rem; color: var(--muted); font-size: .85rem; }
+  .feedback-head p { max-width: 58ch; margin-top: .5rem; color: var(--muted); text-wrap: balance; }
+  .feedback-list { display: grid; gap: clamp(.9rem, 2.5vw, 1.4rem); margin-top: 1.1rem; }
+  .feedback > .feedback-list:first-child { margin-top: 0; }
+  .feedback-card {
+    position: relative; isolation: isolate; display: grid; gap: 1.1rem 1.8rem; margin: 0; overflow: hidden;
+    padding: clamp(1.15rem, 4vw, 2.1rem); border: 1px solid #c88a2c99; border-radius: var(--radius-feature);
+    background: radial-gradient(ellipse at 90% 0, #4a3578 0, transparent 58%), linear-gradient(145deg, var(--plum-night), var(--plum-deep) 55%, var(--plum));
+    color: #f8f1e3; box-shadow: 0 16px 40px #100c242e;
+  }
+  .feedback-person { display: flex; align-items: center; gap: .85rem; }
+  .feedback-avatar {
+    display: grid; place-items: center; flex: none; width: 3.4rem; height: 3.4rem; border-radius: 50%;
+    border: 2px solid var(--gold); background: radial-gradient(circle at 35% 30%, #4a3578, var(--plum-deep));
+    color: var(--gold-hi); font: 400 1.25rem/1 var(--serif);
+  }
+  .feedback-card figcaption { display: grid; gap: .1rem; margin: 0; color: inherit; font-size: inherit; }
+  .feedback-card figcaption strong { color: var(--gold-hi); font: 400 1.3rem/1.25 var(--serif); }
+  .feedback-card figcaption span { color: #d4c9ec; font-size: .9rem; }
+  .feedback-body { position: relative; min-width: 0; }
+  .feedback-mark { position: absolute; inset: -1.15rem auto auto -.2rem; color: var(--gold); font: 400 5rem/1 var(--serif); opacity: .5; pointer-events: none; }
+  .feedback-highlight { margin: 0; padding-top: 1.3rem; }
+  .feedback-highlight p { margin: 0; color: var(--gold-hi); font: italic 400 clamp(1.2rem, 3.2vw, 1.65rem)/1.5 var(--serif); text-wrap: pretty; }
+  .feedback-more { margin-top: 1.1rem; }
+  .feedback-more summary {
+    display: inline-flex; align-items: center; min-height: 44px; padding: .4rem 1.1rem; border: 1px solid var(--gold-deep);
+    border-radius: var(--radius-pill); color: var(--gold-hi); font-size: var(--type-label); font-weight: 650; list-style: none;
+  }
+  .feedback-more summary::-webkit-details-marker { display: none; }
+  .feedback-more summary:hover { background: #f4c76b1f; }
+  .feedback-more summary:focus-visible { outline-color: var(--gold); }
+  .feedback-more .feedback-more-close, .feedback-more[open] .feedback-more-open { display: none; }
+  .feedback-more[open] .feedback-more-close { display: inline; }
+  .feedback-full { display: grid; gap: .85rem; margin-top: 1rem; padding-top: 1rem; border-top: 1px solid #f4c76b40; line-height: 1.75; }
+  .feedback-full p { margin: 0; color: #f1ebf8; }
+  .feedback-note { margin: .9rem 0 0; color: #d4c9ec; font-size: .85rem; }
+  .feedback-full .feedback-note { margin-top: 0; }
+  .feedback-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1rem; }
+  .feedback-invite {
+    margin-top: clamp(1.4rem, 4vw, 2.2rem); padding: clamp(1.1rem, 3.5vw, 1.8rem); border: 1px solid var(--gold-line);
+    border-radius: var(--radius-feature); background: linear-gradient(160deg, var(--gold-wash), var(--surface-raised) 70%);
+  }
+  .feedback-invite h2 { font-size: var(--type-card); }
+  .feedback-invite p { max-width: 58ch; margin-top: .4rem; color: var(--muted); }
+  @media (min-width: 760px) {
+    .feedback-card { grid-template-columns: minmax(10rem, 15rem) minmax(0, 1fr); align-items: start; }
+    .feedback-person { flex-direction: column; align-items: flex-start; }
+    .feedback-avatar { width: 4.2rem; height: 4.2rem; font-size: 1.5rem; }
+  }
 </style>

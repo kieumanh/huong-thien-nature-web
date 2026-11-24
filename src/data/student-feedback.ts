@@ -1,4 +1,7 @@
+import { journeyPath } from './journey-pages.ts';
 import type { Language } from './site.ts';
+
+export const feedbackPath = (lang: Language) => journeyPath(lang, 'feedback');
 
 /** Feedback shared by students with their consent. Add new entries to the top of `studentFeedback`; never write one on someone's behalf. */
 export type StudentFeedback = {
@@ -11,22 +14,39 @@ export type StudentFeedback = {
   quote: string[];
   /** English reading translation of the original. */
   quoteEn: string[];
+  /** One sentence taken word for word from `quote`, shown first as the pull-quote. */
+  highlight: string;
+  /** The matching sentence of `quoteEn`. */
+  highlightEn: string;
 };
 
-export const feedbackAnchor = 'student-feedback';
 
 export const feedbackCopy = {
   vi: {
     title: 'Phản hồi học viên',
     intro: 'Những chia sẻ do chính học viên gửi, được đăng khi có sự đồng ý của họ.',
     link: 'Xem phản hồi học viên',
+    all: 'Xem tất cả phản hồi',
+    readAll: 'Đọc toàn bộ chia sẻ',
+    close: 'Thu gọn',
     translated: 'Bản dịch tiếng Anh',
+    inviteTitle: 'Bạn là học viên của Hương Thiền?',
+    inviteText: 'Chúng tôi rất vui được lắng nghe trải nghiệm của bạn. Chỉ khi bạn đồng ý, lời chia sẻ mới được đăng ở đây.',
+    inviteAction: 'Gửi chia sẻ của bạn',
+    coursesAction: 'Xem các khóa thực hành',
   },
   en: {
     title: 'Student feedback',
     intro: 'Shared by the students themselves and published with their consent.',
     link: 'Read student feedback',
+    all: 'Read all feedback',
+    readAll: 'Read the full message',
+    close: 'Show less',
     translated: 'English translation',
+    inviteTitle: 'Are you one of Hương Thiền’s students?',
+    inviteText: 'We would be glad to hear about your experience. Your words are published here only with your consent.',
+    inviteAction: 'Share your experience',
+    coursesAction: 'See the practice courses',
   },
 } satisfies Record<Language, Record<string, string>>;
 
@@ -39,6 +59,8 @@ export const studentFeedback: StudentFeedback[] = [
       vi: 'Kiều Mạnh hiện cũng là người hỗ trợ học viên của Hương Thiền Nature.',
       en: 'Kiều Mạnh is also the student support person at Hương Thiền Nature.',
     },
+    highlight: 'Mặc dù chưa hoàn toàn vững chắc công phu, nhưng mình tin rằng mình đã có căn cơ đủ vững để tự thắp đuốc lên mà đi trên hành trình cuộc sống này.',
+    highlightEn: 'My practice is not yet fully solid, but I believe my foundation is strong enough to light my own torch and walk this path of life.',
     quote: [
       'Mình gặp bạn Hương 3 năm trước (đầu 2024), trong thời gian này đến hiện tại, mình đã chứng kiến nhiều điều kỳ diệu trong thời gian đồng hành cùng cô ấy. Có nhiều lúc, mình thấy tư duy của cô ấy rất ngược đời, nhưng trực giác mình biết rằng nó đúng, và kết quả mình đã thấy nhiều sự phát triển mà mình khó tưởng tượng.',
       'Cũng nhờ cô, mình đã có 3 năm được rèn luyện thiền định, sống chánh niệm, hiểu sâu về bát chánh đạo để tự tạo giới luật, giúp định tâm và trí tuệ tăng trưởng rõ rệt. Và nếu không có cô, hiện tại có lẽ mình vẫn chỉ là 1 nhân viên đang làm văn phòng ngày 8h cùng với 4 bức tường và những người bạn quen thuộc trong thành phố, khó có cơ hội mở rộng trái tim lẫn trí tuệ cũng như sự liều lĩnh để vươn xa như hiện tại.',

@@ -14,10 +14,10 @@
   --footer-link: #e0e8dc;
   --footer-divider: #eaeedf38;
   --footer-chip: #ffffff17;
-  --surface: color-mix(in srgb, var(--paper), #f3e3dc var(--twilight));
-  --surface-container: color-mix(in srgb, var(--sage), #e8d8d4 var(--twilight));
-  --surface-raised: color-mix(in srgb, #fffdf7, #f8ebe4 var(--twilight));
-  --surface-warm: color-mix(in srgb, var(--cream), #efe0dc var(--twilight));
+  --surface: color-mix(in srgb, var(--paper), #f6e6d6 var(--twilight));
+  --surface-container: color-mix(in srgb, var(--sage), #ecd9c8 var(--twilight));
+  --surface-raised: color-mix(in srgb, #fffdf7, #faeee2 var(--twilight));
+  --surface-warm: color-mix(in srgb, var(--cream), #f0dccb var(--twilight));
 }
 :root[data-sky="night"] {
   color-scheme: dark;
@@ -26,15 +26,18 @@
   --ink-soft: #d0c8ce;
   --clay: #efbcaa;
   --sun: #f3cd90;
-  --surface: color-mix(in srgb, #15141b, #362833 var(--twilight));
-  --surface-container: color-mix(in srgb, #22212b, #402f3b var(--twilight));
-  --surface-raised: color-mix(in srgb, #1c1b25, #392d37 var(--twilight));
-  --surface-warm: color-mix(in srgb, #29232d, #45323e var(--twilight));
+  --surface: color-mix(in srgb, #120e26, #3a2840 var(--twilight));
+  --surface-container: color-mix(in srgb, #1e1834, #46304a var(--twilight));
+  --surface-raised: color-mix(in srgb, #1a1530, #3b2c46 var(--twilight));
+  --surface-warm: color-mix(in srgb, #251d3c, #4a3345 var(--twilight));
+  --gold-accent: #f3cd90;
+  --gold-wash: #2b2236;
+  --gold-line: #6b5630;
   --primary-hover: #d8ead9;
   --on-primary: #173021;
-  --border: #665f6e;
+  --border: #6b5c4a;
   --border-control: #a99bad;
-  --brand-fern: #33453e;
+  --brand-fern: #3a2f4a;
   --footer-surface: color-mix(in srgb, #17231f, #302630 var(--twilight));
   --footer-muted: #d7d9cf;
   --footer-link: #e5eadf;
