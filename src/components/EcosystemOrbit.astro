@@ -3,8 +3,8 @@ import type { Language } from '../data/site';
 import Arrow from './Arrow.astro';
 const { lang, cards, links } = Astro.props as { lang: Language; cards: string[][]; links: string[][] };
 const en = lang === 'en';
-const values = en ? ['BODY', 'HEART', 'MIND'] : ['THÂN', 'TÂM', 'TRÍ'];
-const status = en ? ['Shop available', 'In preparation', 'In preparation'] : ['Có cửa hàng', 'Đang chuẩn bị', 'Đang chuẩn bị'];
+const values = en ? ['PRACTICE', 'NATURE', 'SUPPORT'] : ['PHÁP MÔN', 'THIÊN NHIÊN', 'HỖ TRỢ'];
+const status = en ? ['Courses available', 'With partner farms', 'Shop available'] : ['Có khóa thực hành', 'Cùng farm đối tác', 'Có Cửa hàng'];
 const orbitDurations = ['26s', '42s', '58s'];
 ---
 <div class="ecosystem-motion" data-ecosystem>
@@ -19,8 +19,8 @@ const orbitDurations = ['26s', '42s', '58s'];
     </article>)}
   </div>
   <section class="reading-section ecosystem-visual">
-    <h3 class="reading-heading">{en ? 'The three orbits' : 'Mô hình ba quỹ đạo'}</h3>
-  <figure class="ecosystem-solar-system" aria-label={en ? 'Hương Thiền Nature at the centre, with three planets for Body, Heart and Mind.' : 'Hương Thiền Nature ở trung tâm, cùng ba hành tinh Thân, Tâm và Trí.'}>
+    <h3 class="reading-heading">{en ? 'The three focal points' : 'Ba trọng tâm quanh Hương Thiền Nature'}</h3>
+  <figure class="ecosystem-solar-system" aria-label={en ? 'Hương Thiền Nature at the centre, with three planets for Practice, Nature and Support.' : 'Hương Thiền Nature ở trung tâm, cùng ba hành tinh Pháp môn, Thiên nhiên và Hỗ trợ.'}>
     <div class="solar-system-scene" aria-hidden="true">
       <div class="solar-system-starfield"></div>
       {[0, 1, 2].map((index) => <div class={`solar-orbit solar-orbit--${index + 1}`} style={`--orbit-duration:${orbitDurations[index]};--orbit-delay:${index * -8}s;--origin-angle:${index * 120}deg`}>
@@ -29,14 +29,14 @@ const orbitDurations = ['26s', '42s', '58s'];
           <div class={`solar-planet solar-planet--${index + 1}`}>
             {index === 0 ? (
               <svg class="solar-planet__art" viewBox="0 0 64 64" focusable="false">
-                <circle cx="47" cy="16" r="7" fill="currentColor" opacity=".24" />
-                <path d="M8 49h48M13 55h38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55" />
-                <path d="M32 49V25m0 13c-10-1-15-7-15-15 9 0 15 4 15 15Zm0-5c0-10 6-16 16-16 0 9-5 15-16 16Zm-8 7c-7 0-11-4-12-10 7 0 11 3 12 10Z" fill="#edf3ce" stroke="#f8f6e9" stroke-width="2" stroke-linejoin="round" />
+                <path d="M32 50s-22-12-22-27c0-10 13-15 22-3 9-12 22-7 22 3 0 15-22 27-22 27Z" fill="#f0d8d7" stroke="#fff7ee" stroke-width="2" stroke-linejoin="round" />
+                <path d="M32 46V32m0 9c-9 0-14-5-14-13 8 0 13 5 14 13Zm0-5c0-8 5-13 14-13 0 8-5 13-14 13Z" fill="#91aa7d" stroke="#eaf0d8" stroke-width="1.6" stroke-linejoin="round" />
               </svg>
             ) : index === 1 ? (
               <svg class="solar-planet__art" viewBox="0 0 64 64" focusable="false">
-                <path d="M32 50s-22-12-22-27c0-10 13-15 22-3 9-12 22-7 22 3 0 15-22 27-22 27Z" fill="#f0d8d7" stroke="#fff7ee" stroke-width="2" stroke-linejoin="round" />
-                <path d="M32 46V32m0 9c-9 0-14-5-14-13 8 0 13 5 14 13Zm0-5c0-8 5-13 14-13 0 8-5 13-14 13Z" fill="#91aa7d" stroke="#eaf0d8" stroke-width="1.6" stroke-linejoin="round" />
+                <circle cx="47" cy="16" r="7" fill="currentColor" opacity=".24" />
+                <path d="M8 49h48M13 55h38" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity=".55" />
+                <path d="M32 49V25m0 13c-10-1-15-7-15-15 9 0 15 4 15 15Zm0-5c0-10 6-16 16-16 0 9-5 15-16 16Zm-8 7c-7 0-11-4-12-10 7 0 11 3 12 10Z" fill="#edf3ce" stroke="#f8f6e9" stroke-width="2" stroke-linejoin="round" />
               </svg>
             ) : (
               <svg class="solar-planet__art" viewBox="0 0 64 64" focusable="false">

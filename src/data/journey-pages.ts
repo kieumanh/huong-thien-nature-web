@@ -10,8 +10,8 @@ export const journeyPages = {
     en: { slug: 'practice-courses', title: 'Practice courses', heading: 'Practice courses with Hương Thiền', description: 'Explore guided practice and individual sessions with Hương Thiền: the six-stage Golden Frequency course and the one-to-one session Listening to yourself through tarot.' },
   },
   ecosystem: {
-    vi: { slug: 'he-sinh-thai', title: 'Hệ sinh thái', heading: 'Hệ sinh thái Thân, Tâm và Trí', description: 'Định hướng của Hương Thiền Nature là nối việc chăm đất, thực tập thiền và học từ trải nghiệm. Tìm hiểu ba hướng Thân, Tâm và Trí, điểm mạnh và các bước dự kiến trước khi mở rộng.' },
-    en: { slug: 'ecosystem', title: 'Ecosystem', heading: 'The ecosystem of Body, Heart and Mind', description: 'Hương Thiền Nature connects soil care, meditation and learning through experience. Explore the direction and strengths of Body, Heart and Mind, and what the team plans to test before growing.' },
+    vi: { slug: 'he-sinh-thai', title: 'Hệ sinh thái', heading: 'Hệ sinh thái Hương Thiền Nature', description: 'Hệ sinh thái bao quanh ba trọng tâm: pháp môn tu tập, môi trường thiên nhiên từ các farm đối tác, và môi trường thực hành, sách vở, đá thanh lọc, cùng những người đồng hành bổ trợ để nuôi dưỡng, chữa lành và phát triển hài hòa, bền vững.' },
+    en: { slug: 'ecosystem', title: 'Ecosystem', heading: 'The Hương Thiền Nature ecosystem', description: 'An ecosystem built around three focal points: paths of practice, natural settings from our partner farms, and practice spaces, books and cleansing stones, with partners who help nurture, heal and grow them in harmony.' },
   },
   story: {
     vi: { slug: 'cau-chuyen', title: 'Câu chuyện', heading: 'Từ một chỗ ngồi yên đến Hương Thiền Nature', description: 'Đỗ Thị Kim Hương, thường gọi là Hương Thiền, sáng lập Hương Thiền Nature để đưa thiền định và chánh niệm vào đời sống. Câu chuyện bắt đầu từ những năm tháng cô tự lo cho mình ở Quảng Nam.' },

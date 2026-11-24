@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.14.4. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.15.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -27,6 +27,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.2: trang Gợi ý: thở một phút có hướng dẫn, lối đọc 3 bước, nút đi nhanh, lời mời cuối trang |
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
+| 24/11 | 2.15.0: Hệ sinh thái viết lại quanh 3 trọng tâm (Pháp môn / Thiên nhiên từ farm đối tác / Thực hành-sách-đá); Trang chủ thêm khối 2 khóa; đá năng lượng có bảng giá tham khảo từ kimtuthap.vn (chưa có ảnh, cần xác nhận quan hệ với kimtuthap.org); Hotline/Zalo gộp một số 0868499856; sửa nhãn timeline tablet |
 
 Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 

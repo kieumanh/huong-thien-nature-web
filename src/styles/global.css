@@ -303,3 +303,8 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+
+.contact-channels .contact-phone { display: grid; gap: .25rem; padding: .85rem 1rem; }
+.contact-channels .contact-phone__number { font-family: var(--serif); font-size: 1.5rem; letter-spacing: .02em; }
+.contact-channels .contact-phone__actions { display: flex; flex-wrap: wrap; gap: .2rem 1.4rem; }
+.contact-channels .contact-phone__actions a { display: inline-flex; min-height: 44px; padding: 0; justify-content: flex-start; }

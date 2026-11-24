@@ -1,3 +1,13 @@
+## 2.15.0 — Viết lại Hệ sinh thái quanh ba trọng tâm, giới thiệu hai khóa thực hành ở Trang chủ, bảng giá đá, một số Hotline/Zalo
+
+- **Hệ sinh thái viết lại hoàn toàn** theo nội dung của chủ dự án: hệ sinh thái bao quanh ba trọng tâm (Pháp môn tu tập; Môi trường thiên nhiên từ các farm đối tác; Môi trường thực hành, sách vở, đá thanh lọc), các đối tác xung quanh bổ trợ, và một cuộc sống tỉnh thức, lành mạnh, phụng sự. Mỗi trọng tâm có liên kết tới đúng trang (khóa thực hành, Gợi ý, farm đối tác, Cửa hàng, Tản văn). Thêm dòng lưu ý: đá và vật phẩm hỗ trợ là bạn đồng hành, không thay thế chăm sóc y tế. Mô hình cũ Thân/Tâm/Trí (Farm & Botanicals, Eco-Retreat, Academy) đã bỏ.
+- **Trang chủ:** khối hệ sinh thái cải biên theo ba trọng tâm mới (vòng quỹ đạo với ba hành tinh Pháp môn, Thiên nhiên, Hỗ trợ), ngay sau đó là khối **"Hai cách để đi cùng Hương Thiền"** giới thiệu Tần Số Vàng và buổi Tarot 1:1 (ảnh, mô tả, hình thức, nút xem khóa, liên kết so sánh). Mã ở `HomeCourses.astro`.
+- **Cửa hàng · Đá năng lượng:** bảng giá tham khảo 14 vật phẩm (vòng tay, vật phẩm góc thiền, đá vụn) lấy từ trang công khai Đá Quý Kim Tự Tháp (kimtuthap.vn), ghi nguồn và ngày lấy 24/11/2026, mỗi dòng có nút hỏi về món đó. Chưa có ảnh vì không tải được ảnh từ website nguồn; sẽ bổ sung ảnh thật khi có. Dữ liệu ở `src/data/partner-stones.ts`.
+- **Liên hệ:** gộp Hotline và Zalo thành một thẻ duy nhất với số 0868499856 (nút Gọi ngay, Nhắn Zalo); bỏ cặp số hỗ trợ riêng.
+- **Gợi ý:** câu cuối khối thở đổi theo lời chủ dự án ("Nếu thấy chóng mặt, khó chịu, hãy quay về với hơi thở tự nhiên…"), giữ thêm một dòng nhỏ về 115 khi quá tải hoặc khủng hoảng. Chữ ở lối đọc Tản văn và thẻ bài Gợi ý nhẹ hơn (không đậm).
+- **Sửa lỗi timeline Câu chuyện trên tablet:** nhãn mốc ("13 tuổi · …") bị kéo cao theo cả khối nên thành hình bầu dục lớn màu tím nhạt; nay chỉ ôm sát chữ. Đã kiểm tra điện thoại, tablet ngang/dọc và máy tính.
+- Kiểm thử: cập nhật các bài kiểm tra Hệ sinh thái, tìm kiếm; thêm kiểm tra trang Hệ sinh thái, Liên hệ một số điện thoại, bảng giá đá và lỗi nhãn timeline.
+
 ## 2.14.4 — Ba lối đọc Tản văn: bỏ gạch chân, giữ chấm đầu dòng
 
 - Tên bài trong 3 lối đọc không còn gạch chân; giữ chấm tròn vàng đầu dòng, đường kẻ ngăn và chữ đậm. Khi rê chuột hoặc dùng bàn phím, chữ đổi sang màu vàng và có viền focus.

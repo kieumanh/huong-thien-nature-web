@@ -87,3 +87,25 @@ test('built practice page: breathing guide, reading path and quick links', () =>
     for (const id of ['practice', 'start-reading', 'quiet-moments']) assert.ok(page.includes(`id="${id}"`), `${lang}: #${id}`);
   }
 });
+
+test('built ecosystem page follows the three focal points; contact shows one phone; stones list the partner prices', () => {
+  for (const [lang, eco, contact, stones] of [
+    ['vi', '/vi/he-sinh-thai/', '/vi/lien-he/', '/vi/cua-hang/da-nang-luong/'],
+    ['en', '/en/ecosystem/', '/en/contact/', '/en/shop/energy-stones/'],
+  ]) {
+    if (!existsSync(dist(`${eco}index.html`))) continue;
+    const page = readFileSync(dist(`${eco}index.html`), 'utf8');
+    assert.equal((page.match(/class="eco-focus zen-card/g) ?? []).length, 3, `${lang}: three focal points`);
+    assert.ok(!page.includes('Eco-Retreat') && !page.includes('Academy'), `${lang}: old model removed`);
+    assert.match(page, /id="partnerships"/);
+    const contactPage = readFileSync(dist(`${contact}index.html`), 'utf8');
+    assert.equal((contactPage.match(/contact-phone__number/g) ?? []).length, 1, `${lang}: one merged Hotline/Zalo card`);
+    assert.ok(contactPage.includes('0868499856') && !contactPage.includes('0388000680'), `${lang}: only Hương Thiền's number`);
+    const stonesPage = readFileSync(dist(`${stones}index.html`), 'utf8');
+    assert.ok(stonesPage.includes('id="partner-stones"') && stonesPage.includes('kimtuthap.vn'), `${lang}: partner price list with source`);
+    assert.ok((stonesPage.match(/partner-stones__price/g) ?? []).length >= 10, `${lang}: priced items`);
+  }
+  const css = readFileSync(new URL('../src/styles/journey-pages.css', import.meta.url), 'utf8');
+  assert.match(css, /\.journey-milestone \{[^}]*align-self: start/, 'timeline labels must not stretch into tall pills on tablet');
+});
+
