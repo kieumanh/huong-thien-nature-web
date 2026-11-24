@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.17.1',
+    date: '2026-11-24',
+    vi: ['Tác giả: liên kết rõ ràng, bio gọn hơn', 'Hai liên kết cuối bài không còn dính chữ, và phần giới thiệu tác giả được viết gọn lại.'],
+    en: ['Author card: clearer links, shorter bios', 'The two links at the end of an article no longer run together, and the author introduction is shorter.'],
+  },
+  {
     version: '2.17.0',
     date: '2026-11-24',
     vi: ['Quỹ ủng hộ', 'Thêm trang Quỹ ủng hộ: vì sao dự án cần được nâng đỡ, năm hạng mục sử dụng tài nguyên, thông tin chuyển khoản và mã QR của thủ quỹ, cùng các hình động nhẹ nhàng. Chân trang có mục Quỹ ủng hộ ở mọi trang.'],

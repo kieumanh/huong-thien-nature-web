@@ -133,7 +133,8 @@
 .article-body .author-card p { margin: 0; font-size: var(--type-body); line-height: 1.65; }
 .article-body .author-card p + p { margin-top: .55rem; }
 .article-body .author-card .author-card__role { color: var(--secondary); font-size: var(--type-caption); line-height: 1.4; }
-.author-card a { margin-top: .45rem; }
+.author-card__links { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin-top: .45rem !important; }
+.author-card__links a { margin: 0; }
 .related-articles { padding-bottom: var(--space-section); }
 .related-articles__head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .4rem 1rem; padding-top: clamp(1.4rem, 4vw, 2.4rem); border-top: 1px solid var(--border); }
 .related-articles__head h2 { margin-top: .3rem; }
