@@ -1,0 +1,30 @@
+---
+import { albumCopy, albumPath, albumPhoto } from '../data/album';
+import type { Language } from '../data/site';
+import AlbumRows from './AlbumRows.astro';
+import Arrow from './Arrow.astro';
+
+interface Props {
+  lang: Language;
+  // Ids of photos in src/data/album.ts, in display order.
+  photos: string[];
+  title: string;
+  intro?: string;
+  // Used for the section anchor and heading id; must be unique on the page.
+  id: string;
+  headingLevel?: 'h2' | 'h3';
+  // Extra class so a landing page can reuse its own section spacing.
+  extraClass?: string;
+}
+const { lang, photos, title, intro, id, headingLevel = 'h2', extraClass } = Astro.props as Props;
+const Heading = headingLevel;
+const copy = albumCopy[lang];
+---
+<section class:list={['album-strip', extraClass]} {id} aria-labelledby={`${id}-title`}>
+  <div class="album-strip-head">
+    <Heading id={`${id}-title`}>{title}</Heading>
+    {intro && <p>{intro}</p>}
+  </div>
+  <AlbumRows {lang} photos={photos.map(albumPhoto)} mode="strip" />
+  <p class="album-strip-more"><a class="quiet-link" href={albumPath(lang)}>{copy.stripAction} <Arrow /></a></p>
+</section>

@@ -1,6 +1,7 @@
 ---
 import ContemplativeScene from "./ContemplativeScene.astro";
 import HomePhoto from "./HomePhoto.astro";
+import { albumPath } from "../data/album";
 const {lang} = Astro.props;
 const en = lang === 'en';
 const chapters = en ? [
@@ -75,6 +76,7 @@ const stages = [
       <HomePhoto photo="rest-with-baby" {lang} />
       <HomePhoto photo="under-leaves" {lang} />
     </div>
+    <p><a class="quiet-link" href={albumPath(lang)}>{en ? 'See the album of our journey' : 'Xem album hành trình gặp gỡ và chia sẻ'}</a></p>
   </section>
  </div>
 </section>

@@ -6,6 +6,7 @@ import '../styles/hybrid-nature.css';
 import { practicePhoto } from '../data/editorial-illustrations';
 import HomePhoto from './HomePhoto.astro';
 import HomeDiscovery from './HomeDiscovery.astro';
+import AlbumStrip from './AlbumStrip.astro';
 import ArticleCard from './ArticleCard.astro';
 import Arrow from './Arrow.astro';
 import ContemplativeScene from './ContemplativeScene.astro';
@@ -85,6 +86,12 @@ const teamPath = journeyPath(lang, 'team');
       <p id="layers" class="material-inline-link"><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{vi ? 'Tìm hiểu khung chiêm nghiệm bảy tầng' : 'Explore the seven-layer framework'} <Arrow /></a></p>
     </section>
     <HomeDiscovery {lang} />
+
+    <div class="shell">
+      <AlbumStrip {lang} id="journey-photos" photos={['studio-hug-six', 'veggie-sunset', 'beach-meditate-smile', 'plaque-lotus-leaf']}
+        title={vi ? 'Khoảnh khắc trên hành trình' : 'Moments along the way'}
+        intro={vi ? 'Hình ảnh thật từ các buổi chia sẻ, khu vườn, bãi biển và những góc nhỏ trên hành trình.' : 'Real photographs from sharing sessions, the garden, the beach and small corners along the way.'} />
+    </div>
 
     <section class="shell home-connection" id="people">
       <ContemplativeScene motif="mandala" />

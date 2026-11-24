@@ -1,4 +1,5 @@
 ---
+import AlbumStrip from './AlbumStrip.astro';
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import CourseCompare from './CourseCompare.astro';
@@ -370,6 +371,10 @@ const petals = [6, 5, 7, 4, 3, 8];
       <a class="quiet-link" href={journeyPath(lang, 'story')}>{copy.hostLink} <Arrow /></a>
     </div>
   </section>
+
+  <AlbumStrip {lang} id="gf-moments" extraClass="gf-section" photos={['event-banner', 'lobby-group', 'hug-lobby']}
+    title={lang === 'vi' ? 'Từ những buổi chia sẻ và gặp gỡ' : 'From our sharing sessions and meetings'}
+    intro={lang === 'vi' ? 'Hình ảnh thật từ một chuyến chia sẻ ở Nha Trang. Lớp Tần Số Vàng học trực tuyến; đây là không khí những lần gặp gỡ của dự án.' : 'Real photographs from a sharing trip in Nha Trang. The Golden Frequency is taught online; these show the atmosphere of the project’s meetings.'} />
 
   <section class="gf-section" id="support" aria-labelledby="gf-support-title">
     <div class="gf-head" data-gf-reveal>

@@ -1,4 +1,5 @@
 ---
+import AlbumStrip from './AlbumStrip.astro';
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import CourseCompare from './CourseCompare.astro';
@@ -133,6 +134,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       </details>
     </div>
   </section>
+
+  <AlbumStrip {lang} id="tarot-moments" extraClass="guidance-section" photos={['tarot-cards-beach', 'tarot-decks', 'three-tree']}
+    title={lang === 'vi' ? 'Bộ bài và những lần gặp gỡ' : 'Decks and meetings'}
+    intro={lang === 'vi' ? 'Hình ảnh thật: những bộ bài trên bàn và một khoảnh khắc gặp nhau trực tiếp. Buổi Tarot cũng có thể diễn ra trực tiếp nếu hai bên ở cùng nơi.' : 'Real photographs: tarot decks on a table and a moment of meeting in person. A tarot session can also take place in person when you are in the same place.'} />
 
   <section class="guidance-section" id="reflection" aria-labelledby="connection-title">
     <h2 id="connection-title" data-guidance-reveal>{copy.connectionTitle}</h2>

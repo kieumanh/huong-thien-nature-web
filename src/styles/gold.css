@@ -29,7 +29,7 @@
 :is(.nav-links a, .nav-actions a, .nav-toggle):is(:hover, :focus-visible) {
   background: var(--gold-wash); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--gold-deep);
 }
-@media (max-width: 1199px) {
+@media (max-width: 1279px) {
   .nav-search[aria-current], .nav-toggle[aria-expanded="true"] { background: var(--gold-wash); color: var(--foreground); }
 }
 [data-sky="night"] .nav-links a[aria-current], [data-sky="night"] .nav-links a.active { color: var(--gold-hi); }

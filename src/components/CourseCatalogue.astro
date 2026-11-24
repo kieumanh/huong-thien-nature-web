@@ -1,6 +1,7 @@
 ---
 import CourseCompare from './CourseCompare.astro';
 import StudentFeedback from './StudentFeedback.astro';
+import AlbumStrip from './AlbumStrip.astro';
 import Arrow from './Arrow.astro';
 import { courseCompare, type CourseKey } from '../data/course-compare';
 import { courses, coursePath, courseImage } from '../data/courses';
@@ -32,6 +33,9 @@ const vi = lang === 'vi';
 <section class="journey-section">
   <StudentFeedback {lang} compact />
 </section>
+<AlbumStrip {lang} id="course-moments" photos={['studio-group', 'three-greeting', 'studio-hug-six']}
+  title={vi ? 'Từ những buổi chia sẻ và gặp gỡ' : 'From our sharing sessions and meetings'}
+  intro={vi ? 'Hình ảnh thật từ một chuyến chia sẻ ở Nha Trang, để bạn hình dung không khí của những buổi gặp.' : 'Real photographs from a sharing trip in Nha Trang, so you can picture the atmosphere of our meetings.'} />
 <style>
   .course-grid { display: grid; gap: clamp(1rem, 3vw, 1.6rem); margin-top: 1.1rem; }
   .course-card {

@@ -1,0 +1,73 @@
+/* Photo album: justified rows (every photo keeps its own proportions, no cropping), strips and lightbox. */
+.album-rows {
+  --row: 10rem;
+  display: flex; flex-wrap: wrap; gap: .7rem; margin: 1rem 0 0; padding: 0; list-style: none;
+}
+.album-rows::after { content: ""; flex: 999 1 0; } /* keeps the last row from stretching */
+.album-item {
+  /* flex-grow follows the aspect ratio, so every photo in a row ends up the same height */
+  flex: var(--ar) 1 calc(var(--ar) * var(--row)); min-width: 0; max-width: calc(var(--ar) * 26rem); margin: 0;
+  scroll-margin-top: 6rem;
+}
+.album-item figure { margin: 0; }
+.album-item a {
+  display: block; overflow: hidden; border-radius: var(--radius-card); background: var(--surface-container);
+  box-shadow: 0 6px 18px #1f1a1214;
+}
+.album-item img {
+  display: block; width: 100%; height: auto; aspect-ratio: var(--ar);
+  transition: transform .5s ease, filter .3s ease;
+}
+.album-item a:hover img { transform: scale(1.04); }
+.album-item:target a { outline: 3px solid var(--gold); outline-offset: 3px; }
+.album-item figcaption { margin-top: .45rem; padding-inline: .15rem; color: var(--muted); font-size: var(--type-caption); line-height: 1.5; text-wrap: pretty; }
+@media (prefers-reduced-motion: reduce) { .album-item img { transition: none; } .album-item a:hover img { transform: none; } }
+@media (min-width: 700px) { .album-rows { --row: 15rem; gap: .9rem; } }
+@media (min-width: 1100px) { .album-rows { --row: 17rem; } }
+
+/* Whole-album page */
+.album-jumps { display: flex; flex-wrap: wrap; gap: .5rem; margin: 1.1rem 0 0; padding: 0; list-style: none; }
+.album-jumps a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: .35rem 1rem; border: 1px solid var(--gold-line);
+  border-radius: var(--radius-pill); background: var(--gold-wash); color: var(--foreground); font-size: var(--type-label); font-weight: 650; text-decoration: none;
+}
+.album-jumps a:hover { border-color: var(--gold-deep); }
+.album-jumps span { margin-inline-start: .45rem; color: var(--muted); font-weight: 500; }
+.album-section > p { margin-block: .5rem 0; color: var(--muted); max-width: 62ch; }
+.album-note { max-width: 68ch; margin-top: clamp(1.4rem, 4vw, 2.2rem); color: var(--muted); font-size: var(--type-caption); line-height: 1.65; }
+
+/* Strips used on other pages */
+.album-strip { margin-block: clamp(1.8rem, 5vw, 3.2rem); }
+.album-strip-head p { max-width: 62ch; margin-top: .45rem; color: var(--muted); }
+.album-strip-more { margin-top: .9rem; }
+
+/* Lightbox */
+.album-dialog {
+  width: 100%; max-width: 100vw; height: 100%; max-height: 100dvh; margin: 0; padding: 0; border: 0; background: transparent; color: #f8f1e3;
+}
+.album-dialog::backdrop { background: #0d0a1ef2; }
+.album-dialog[open] { display: grid; place-items: center; }
+body:has(.album-dialog[open]) { overflow: hidden; }
+.album-stage {
+  position: relative; display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: .5rem;
+  width: min(100%, 78rem); height: 100%; padding: 3.4rem .75rem 1rem;
+}
+.album-stage figure { display: grid; justify-items: center; gap: .7rem; margin: 0; min-width: 0; }
+.album-stage img { max-width: 100%; max-height: calc(100dvh - 11rem); width: auto; height: auto; object-fit: contain; border-radius: 14px; background: #1a1338; }
+.album-stage figcaption { display: grid; gap: .2rem; max-width: 60ch; text-align: center; color: #f1ebf8; font-size: .95rem; line-height: 1.5; }
+.album-counter { color: #d4c9ec; font-size: var(--type-caption); }
+.album-close, .album-step {
+  display: grid; place-items: center; width: 48px; height: 48px; padding: 0; border: 1px solid #f4c76b99; border-radius: 50%;
+  background: #1a1338; color: var(--gold-hi); cursor: pointer;
+}
+.album-close:hover, .album-step:hover { background: #2c1f50; border-color: var(--gold); }
+.album-close:focus-visible, .album-step:focus-visible { outline: 3px solid var(--gold); outline-offset: 2px; }
+.album-close { position: absolute; top: .75rem; right: .75rem; z-index: 1; }
+.album-close svg, .album-step svg { width: 22px; height: 22px; }
+@media (max-width: 640px) {
+  .album-stage { grid-template-columns: 1fr 1fr; grid-template-rows: minmax(0, 1fr) auto; padding-inline: .6rem; }
+  .album-stage figure { grid-column: 1 / -1; grid-row: 1; }
+  .album-step--prev { grid-column: 1; grid-row: 2; justify-self: end; margin-inline-end: .5rem; }
+  .album-step--next { grid-column: 2; grid-row: 2; justify-self: start; margin-inline-start: .5rem; }
+  .album-stage img { max-height: calc(100dvh - 14rem); }
+}

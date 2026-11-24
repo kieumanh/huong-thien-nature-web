@@ -1,3 +1,16 @@
+## 2.13.0 — Album ảnh hành trình gặp gỡ và chia sẻ; ảnh thật trên các trang
+
+- Trang mới "Album" (`/vi/album/`, EN `/en/album/`) nằm trên menu giữa Khóa thực hành và Phản hồi học viên: 34 ảnh thật chia sáu nhóm (Gặp gỡ và chia sẻ; Giữa vườn và thiên nhiên, ghi rõ là khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn; Bên biển; Thiền, Tarot và góc thực hành; Tranh nhỏ trên tường; Những khoảnh khắc nhỏ). Ảnh có trẻ nhỏ và người trong cộng đồng được chủ dự án đồng ý đăng công khai. Ảnh xếp thành hàng, giữ nguyên tỷ lệ gốc, không cắt. Bấm vào ảnh để xem lớn (phóng to có số thứ tự, nút trước/sau, phím mũi tên, vuốt trên điện thoại, Esc để đóng); khi tắt JavaScript, ảnh mở thẳng bản đầy đủ. Có dòng ghi nguồn ảnh và lời mời gửi yêu cầu gỡ ảnh.
+- Dữ liệu ở `src/data/album.ts`: mỗi ảnh có nhóm, tỷ lệ, chú thích và mô tả thay thế (alt) song ngữ. Chú thích chỉ mô tả điều nhìn thấy trong ảnh; chỉ ảnh tấm biển sự kiện ghi địa điểm và ngày vì tấm biển có sẵn thông tin đó. Tệp ảnh ở `public/media/journey/` (`<id>.webp` bản đầy đủ và `<id>-640.webp` bản lưới, đã bỏ siêu dữ liệu).
+- Dải ảnh thật xuất hiện trên các trang phù hợp: Trang chủ, Câu chuyện (kèm liên kết từ phần album gia đình), Hệ sinh thái (khu vườn Gửi Yêu Thương Vào Đất), Khóa thực hành (cảnh buổi chia sẻ), Tần Số Vàng, Tarot tâm lý học (bộ bài và buổi gặp gỡ) và Gợi ý (những phút lắng lại: ngồi thiền bên biển, góc bàn nhỏ). Mỗi dải có liên kết "Xem toàn bộ album".
+- Menu: có 9 mục nên nút ☰ gập menu hiện đến chiều rộng 1279px (trước đây 1199px); từ 1280px menu hiện ngang đầy đủ và không tràn.
+- Kiểm thử: thêm `npm run test:album` (id duy nhất, đủ hai tệp ảnh WebP, không có ảnh thừa, chú thích và alt song ngữ, chỉ ảnh banner có ngày, vị trí menu, mọi dải ảnh chỉ dùng ảnh có trong album, trang dựng sẵn có lightbox và liên kết ảnh) và đưa vào CI.
+
+## 2.12.1 — Form lời nhắn dễ dùng hơn; icon cho phản hồi của Kiều Mạnh
+
+- Form "Gửi một lời nhắn": nhãn và tiêu đề theo màu vàng của phong cách mới; ô chọn chủ đề có mũi tên rõ ràng; ô nhập lời nhắn có gợi ý độ dài và bộ đếm ký tự (tối đa 5.000); hiển thị dòng quyền riêng tư đã có sẵn trong nội dung; ô đồng ý nằm trong khung riêng; nút gửi chiếm đủ chiều rộng trên điện thoại. Mã trường, tên và giá trị không đổi, nên kiểm thử form vẫn đạt.
+- Phản hồi học viên: thêm icon sen vàng trên ảnh chữ cái đầu của Kiều Mạnh.
+
 ## 2.12.0 — Phong cách vàng ánh tím toàn trang, trang Phản hồi học viên, danh mục khóa học mới
 
 Áp dụng ngôn ngữ thiết kế của trang Tần Số Vàng (vàng kim, tím đêm, chữ Dancing Script) cho toàn website, đồng thời làm lại phần danh mục khóa và phần phản hồi học viên.
