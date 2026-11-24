@@ -32,6 +32,7 @@ jobs:
       - run: npm run test:tarot
       - run: npm run test:frequency
       - run: npm run test:album
+      - run: npm run test:journal
       - run: npm run test:headers
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run build

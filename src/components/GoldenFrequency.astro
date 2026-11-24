@@ -1,5 +1,7 @@
 ---
 import AlbumStrip from './AlbumStrip.astro';
+import EmpathyPaths from './EmpathyPaths.astro';
+import { frequencyEmpathy } from '../data/empathy';
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import CourseCompare from './CourseCompare.astro';
@@ -130,6 +132,8 @@ const petals = [6, 5, 7, 4, 3, 8];
   <nav class="gf-jumps" aria-label={copy.navigation}>
     {copy.links.map(([id, label]) => <a href={`#${id}`}>{label}</a>)}
   </nav>
+
+  <EmpathyPaths block={frequencyEmpathy(lang)} id="gf-empathy" extraClass="gf-section" />
 
   <section class="gf-section" id="value" aria-labelledby="gf-value-title">
     <div class="gf-head" data-gf-reveal>

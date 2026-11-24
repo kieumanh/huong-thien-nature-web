@@ -1,6 +1,6 @@
 {
   "name": "huong-thien-nature-web",
-  "version": "2.13.0",
+  "version": "2.14.0",
   "private": true,
   "type": "module",
   "scripts": {
@@ -23,6 +23,7 @@
     "test:tarot": "node --test tests/tarot.test.ts",
     "test:frequency": "node --test tests/frequency.test.ts",
     "test:album": "node --test tests/album.test.ts",
+    "test:journal": "node --test tests/journal.test.ts",
     "test:headers": "node --test tests/headers.test.mjs"
   },
   "dependencies": {

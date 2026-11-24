@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.14.0',
+    date: '2026-11-24',
+    vi: ['Trang chủ đồng cảm, 5 bài Tản văn mới, lọc theo chủ đề', 'Trang chủ và hai khóa thực hành có thêm phần thấu hiểu những khó khăn người đọc đang mang, kèm một bước nhỏ để bắt đầu. Tản văn có 5 bài mới về chữa lành, cảm xúc, ranh giới, mất mát và lòng biết ơn; mỗi bài có ít nhất ba ảnh, và có thể lọc bài theo chủ đề.'],
+    en: ['A warmer home page, five new journal pieces, topic filters', 'The home page and both courses now acknowledge the difficulties readers carry, each with a small first step. The journal adds five pieces on healing, emotions, boundaries, loss and gratitude; every article has at least three images, and articles can be filtered by topic.'],
+  },
+  {
     version: '2.13.0',
     date: '2026-11-24',
     vi: ['Album ảnh hành trình gặp gỡ và chia sẻ', 'Trang Album mới trên menu gồm 34 ảnh thật từ những buổi chia sẻ, khu vườn Gửi Yêu Thương Vào Đất, bãi biển và góc thực hành, bấm vào để xem lớn. Ảnh thật cũng xuất hiện trên Trang chủ, Câu chuyện, Hệ sinh thái, Gợi ý, Khóa thực hành, Tần Số Vàng và Tarot.'],

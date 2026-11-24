@@ -138,7 +138,7 @@ for (const item of articleEntries.filter(item => ['returning-attention', 'seven-
 const roots = articleEntries.filter(item => item.phase === 'roots');
 assert.equal(roots.length, 12, 'The complete first Roots release must contain all twelve planned articles');
 assert.equal(new Set(roots.map(item => item.id)).size, 12, 'Roots editorial IDs must be unique');
-for (const item of articleEntries.filter(item => item.slug !== 'when-meditation-is-difficult')) assert.match(item.image, /^\/media\/pixabay-\d+\.webp$/);
+for (const item of articleEntries.filter(item => item.slug !== 'when-meditation-is-difficult')) assert.match(item.image, /^\/media\/(pixabay-\d+|journey\/[a-z0-9-]+)\.webp$/, 'Article covers are local Pixabay photos or our own album photos');
 for (const item of roots) {
   const imageBytes = await readFile(join(dist, item.image));
   assert(imageBytes.length > 1000 && imageBytes.subarray(0, 4).toString() === 'RIFF' && imageBytes.subarray(8, 12).toString() === 'WEBP', `Invalid illustration: ${item.image}`);

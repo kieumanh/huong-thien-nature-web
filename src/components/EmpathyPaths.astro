@@ -1,0 +1,31 @@
+---
+import type { EmpathyBlock } from '../data/empathy';
+import Arrow from './Arrow.astro';
+import '../styles/empathy.css';
+
+interface Props { block: EmpathyBlock & { promisesTitle?: string; promises?: { title: string; text: string }[] }; id: string; extraClass?: string }
+const { block, id, extraClass } = Astro.props;
+---
+<section class:list={['empathy', extraClass]} {id} aria-labelledby={`${id}-title`}>
+  <div class="empathy-head">
+    <p class="eyebrow">{block.eyebrow}</p>
+    <h2 id={`${id}-title`}>{block.title}</h2>
+    <p class="empathy-intro">{block.intro}</p>
+  </div>
+  <ul class="empathy-cards" role="list">
+    {block.cards.map(card => <li class="empathy-card">
+      <p class="empathy-feeling"><span aria-hidden="true">“</span>{card.feeling}</p>
+      <p class="empathy-understanding">{card.understanding}</p>
+      <a class="empathy-step" href={card.href}>{card.step} <Arrow /></a>
+    </li>)}
+  </ul>
+  {block.promises && <div class="empathy-promises">
+    <h3>{block.promisesTitle}</h3>
+    <ul role="list">{block.promises.map(item => <li><strong>{item.title}</strong><span>{item.text}</span></li>)}</ul>
+  </div>}
+  <div class="empathy-close">
+    <p>{block.closing}</p>
+    {block.action && <a class="button" href={block.action.href}>{block.action.label} <Arrow /></a>}
+  </div>
+  <p class="empathy-care" role="note">{block.care}</p>
+</section>
