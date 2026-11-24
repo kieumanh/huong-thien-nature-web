@@ -23,7 +23,7 @@ export const illustrations: Record<string, { alt: Text; caption: Text }> = {
 
 export const articleFigures: Record<string, { ref: string; after: number }[]> = {
   'healing-as-coming-home': [{ ref: 'ill:returning-path', after: 2 }, { ref: 'album:beach-sitting', after: 4 }, { ref: 'ill:held-light', after: 6 }],
-  'staying-with-strong-emotions': [{ ref: 'ill:moon-tide', after: 1 }, { ref: 'ill:breath-waves', after: 3 }, { ref: 'album:beach-meditate-smile', after: 6 }],
+  'staying-with-strong-emotions': [{ ref: 'ill:moon-tide', after: 1 }, { ref: 'ill:breath-waves', after: 3 }, { ref: 'album:beach-sitting', after: 6 }],
   'gentle-boundaries': [{ ref: 'ill:soft-boundary', after: 2 }, { ref: 'album:three-greeting', after: 5 }, { ref: 'album:hands-together-garden', after: 7 }],
   'walking-through-loss': [{ ref: 'ill:lanterns', after: 3 }, { ref: 'album:plaque-moon-boat', after: 5 }, { ref: 'ill:still-lake', after: 7 }],
   'small-joys-gratitude': [{ ref: 'album:altar-flowers', after: 2 }, { ref: 'ill:small-vase', after: 3 }, { ref: 'album:small-bowl', after: 6 }],
@@ -33,7 +33,7 @@ export const articleFigures: Record<string, { ref: string; after: number }[]> = 
   'start-meditating-at-home': [{ ref: 'album:altar-flowers', after: 2 }, { ref: 'ill:lotus-dawn', after: 5 }],
   'natural-breathing': [{ ref: 'ill:still-lake', after: 2 }, { ref: 'album:beach-sitting', after: 5 }],
   'wandering-mind': [{ ref: 'ill:moon-tide', after: 2 }, { ref: 'album:beach-sit-side', after: 5 }],
-  'meditation-posture': [{ ref: 'ill:sitting-still', after: 2 }, { ref: 'album:beach-meditate-calm', after: 5 }],
+  'meditation-posture': [{ ref: 'ill:sitting-still', after: 2 }, { ref: 'album:beach-sit-side', after: 5 }],
   'what-is-meditation': [{ ref: 'ill:still-lake', after: 2 }, { ref: 'album:beach-palms', after: 5 }],
   'body-mindfulness': [{ ref: 'ill:footsteps', after: 2 }, { ref: 'album:beach-carry', after: 5 }],
   'everyday-mindfulness': [{ ref: 'album:small-bowl', after: 2 }, { ref: 'ill:small-vase', after: 5 }],
@@ -42,7 +42,7 @@ export const articleFigures: Record<string, { ref: string; after: number }[]> = 
   'meditation-habit': [{ ref: 'ill:seedling', after: 2 }, { ref: 'album:hands-together-garden', after: 5 }],
   'returning-attention': [{ ref: 'ill:returning-path', after: 1 }, { ref: 'album:beach-sitting', after: 3 }],
   'seven-layers': [{ ref: 'ill:lotus-dawn', after: 1 }, { ref: 'album:wooden-house', after: 3 }],
-  'listening-to-nature': [{ ref: 'album:flowers-red-path', after: 1 }, { ref: 'album:veggie-sunset', after: 3 }],
+  'listening-to-nature': [{ ref: 'album:hands-together-garden', after: 1 }, { ref: 'album:veggie-sunset', after: 3 }],
 };
 
 export type ResolvedFigure = { src: string; width: number; height: number; alt: string; caption: string; credit: string; after: number };

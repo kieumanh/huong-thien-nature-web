@@ -1,5 +1,7 @@
 (() => {
   const root = document.documentElement;
+  // Hide the collapsed menu before first paint so the page does not jump when scripts load (layout shift).
+  root.classList.add('js');
   const clock = new Intl.DateTimeFormat('en-GB', {
     timeZone: 'Asia/Ho_Chi_Minh', hour: '2-digit', minute: '2-digit', hourCycle: 'h23',
   });

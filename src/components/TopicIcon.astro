@@ -1,0 +1,8 @@
+---
+import { topicIcons, type JournalTopic } from '../data/journal-topics';
+
+interface Props { topic: JournalTopic | 'all' }
+const { topic } = Astro.props;
+const path = topic === 'all' ? 'M5 6.5h14M5 12h14M5 17.5h14' : topicIcons[topic];
+---
+<svg class="topic-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.35" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d={path} /></svg>

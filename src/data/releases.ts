@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.16.0',
+    date: '2026-11-24',
+    vi: ['Tản văn: một khoảng lặng giữa dòng đời', 'Trang Tản văn có trang sách mở cho bài nổi bật, tìm kiếm và sắp xếp, "Một bài viết hữu duyên". Mỗi bài có chế độ Đọc trong tĩnh lặng, Lưu vào khu vườn, Chia sẻ và bài trước/sau. "Khu vườn của tôi" chỉ nằm trên thiết bị của bạn, không cần tài khoản.'],
+    en: ['Journal: a quiet pause in the flow of life', 'The Journal gains an open-page feature, search and sorting, and “An article that finds you”. Every article offers Read in stillness, Save to my garden, Share and previous/next. “My garden” lives only on your device, with no account.'],
+  },
+  {
     version: '2.15.2',
     date: '2026-11-24',
     vi: ['Menu điện thoại thoáng hơn', 'Khi mở menu trên điện thoại, danh sách liên kết không còn chạm sát nút đóng và khung tiêu đề; các dòng có thêm khoảng thở.'],

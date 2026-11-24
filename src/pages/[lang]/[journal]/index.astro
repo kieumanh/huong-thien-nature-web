@@ -5,12 +5,16 @@ import Footer from '../../../components/Footer.astro';
 import ContemplativeScene from '../../../components/ContemplativeScene.astro';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import TopicIcon from '../../../components/TopicIcon.astro';
 import Arrow from '../../../components/Arrow.astro';
 import { languages, type Language } from '../../../data/site';
 import { articles, articlePath, journalPath } from '../../../data/articles';
-import { journalTopics, laneArticles, readingLanes, topicOf } from '../../../data/journal-topics';
+import { articlePhotos } from '../../../data/article-photos';
+import { articleReflections } from '../../../data/article-reflections';
+import { curatedRank, featuredArticle, journalTopics, laneArticles, readingLanes, topicLabel, topicOf } from '../../../data/journal-topics';
 import { contactPath } from '../../../data/contact-channels';
 import '../../../styles/editorial.css';
+import '../../../styles/tan-van.css';
 
 export function getStaticPaths() {
   return languages.map(lang => ({ params: { lang, journal: lang === 'vi' ? 'tan-van' : 'journal' } }));
@@ -22,21 +26,142 @@ const description = en
   ? 'Reflections on meditation, healing, nature and everyday life, with small practices to try at your own pace.'
   : 'Những bài viết về thiền định, chữa lành, thiên nhiên và đời sống thường ngày, kèm những thực tập nhỏ để bạn thử theo nhịp của mình.';
 const alternatePath = journalPath(en ? 'vi' : 'en');
+const searchPath = en ? '/en/search/' : '/vi/timkiem/';
 const counts = Object.fromEntries(journalTopics.map(topic => [topic.id, articles.filter(article => topicOf(article) === topic.id).length]));
 const unit = en ? 'articles' : 'bài đọc';
+const readTime = en ? 'min read' : 'phút đọc';
+const ordered = [...articles].sort((a, b) => curatedRank(a.slug) - curatedRank(b.slug));
+const lead = featuredArticle();
+const leadText = lead.translations[lang];
+const leadPhoto = articlePhotos[lead.image];
+const leadQuote = articleReflections[lead.slug]?.quote?.[lang];
+const leadMinutes = lang === 'vi' ? lead.minutesVi ?? lead.minutes : lead.minutes;
+const origin = 'https://huongthiennature.com';
+const schema = {
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, description, inLanguage: lang,
+  url: origin + journalPath(lang),
+  mainEntity: { '@type': 'ItemList', numberOfItems: articles.length, itemListElement: ordered.map((article, index) => ({ '@type': 'ListItem', position: index + 1, url: origin + articlePath(lang, article.slug), name: article.translations[lang].title })) },
+};
+const copy = en ? {
+  eyebrow: 'Meditation · Nature · Healing',
+  slogan: 'A quiet pause in the flow of life.',
+  intro: [
+    'Some things do not need to be rushed to be understood. Some questions can only be answered once the heart is quiet enough to listen.',
+    'The Journal is where Hương Thiền Nature shares reflections on meditation, nature, loving-kindness and the journey back to oneself.',
+    'You can begin on any page, the way we begin again from a single breath.',
+  ],
+  open: 'An open page', read: 'Read this piece',
+  library: 'The library', search: 'Search the Journal', placeholder: 'Title, topic or keyword', go: 'Search',
+  sort: 'Sort by', sorts: { featured: 'Curated picks', newest: 'Newest', short: 'Shortest read' },
+  topics: 'Filter articles by topic', all: 'All', chance: 'An article that finds you', again: 'Another one', suggest: 'Perhaps this one today',
+  chanceNote: 'A quiet suggestion, never a push. It prefers pieces you have not opened yet.',
+  empty: 'No article matches that yet.', clear: 'Show every article', site: 'Search the whole website',
+  pages: 'Journal pages', garden: 'My garden', gardenNote: 'A place to keep the pieces you want to return to and the page where you stopped. Everything stays on this device: no account, nothing sent to a server.',
+  cont: 'Continue reading', saved: 'Saved pieces', noSaved: 'Nothing saved yet. While reading, choose “Save to my garden”.', noCont: 'No unfinished piece right now.',
+  history: 'Clear reading history', everything: 'Clear all data on this device', confirm: 'Press again to clear', cleared: 'Cleared. Nothing of yours remains on this device.', clearedHistory: 'Reading history cleared.',
+  noteStorage: 'Saved in this browser only. Clearing the browser’s data also clears the garden.',
+  inviteTitle: 'Carrying something you can’t find here?', invite: 'Send us a few lines about what you are going through or what you would like to read. We read every message and may write about it in a future piece, without your name.', send: 'Send a message',
+} : {
+  eyebrow: 'Thiền · Thiên nhiên · Chữa lành',
+  slogan: 'Một khoảng lặng giữa dòng đời.',
+  intro: [
+    'Có những điều không cần vội vã để hiểu. Có những câu hỏi chỉ khi lòng đủ tĩnh lặng, ta mới nghe được câu trả lời.',
+    'Tản văn là nơi Hương Thiền Nature chia sẻ những chiêm nghiệm về thiền định, thiên nhiên, tình yêu thương và hành trình trở về với chính mình.',
+    'Bạn có thể bắt đầu từ bất cứ trang nào, như cách ta bắt đầu lại từ một hơi thở.',
+  ],
+  open: 'Một trang đang mở', read: 'Đọc bài này',
+  library: 'Thư viện tản văn', search: 'Tìm trong Tản văn', placeholder: 'Tên bài, chủ đề hoặc từ khóa', go: 'Tìm',
+  sort: 'Sắp xếp', sorts: { featured: 'Bài viết được tuyển chọn', newest: 'Mới nhất', short: 'Thời gian đọc ngắn' },
+  topics: 'Lọc bài viết theo chủ đề', all: 'Tất cả', chance: 'Một bài viết hữu duyên', again: 'Bài khác', suggest: 'Có lẽ hôm nay bạn muốn đọc bài này',
+  chanceNote: 'Một gợi ý nhẹ, không thúc giục. Bài chưa mở sẽ được ưu tiên.',
+  empty: 'Chưa có bài nào khớp với điều bạn tìm.', clear: 'Xem tất cả bài viết', site: 'Tìm trên toàn website',
+  pages: 'Phân trang Tản văn', garden: 'Khu vườn của tôi', gardenNote: 'Nơi giữ lại những bài bạn muốn đọc lại và trang bạn đang đọc dở. Mọi thứ chỉ nằm trên thiết bị này: không cần tài khoản, không gửi gì về máy chủ.',
+  cont: 'Tiếp tục đọc', saved: 'Bài đã lưu', noSaved: 'Chưa có bài nào. Khi đọc, hãy chọn “Lưu vào khu vườn”.', noCont: 'Hiện chưa có bài nào đọc dở.',
+  history: 'Xóa lịch sử đọc', everything: 'Xóa toàn bộ dữ liệu trên thiết bị này', confirm: 'Bấm lần nữa để xóa', cleared: 'Đã xóa. Không còn gì của bạn trên thiết bị này.', clearedHistory: 'Đã xóa lịch sử đọc.',
+  noteStorage: 'Chỉ lưu trong trình duyệt này. Khi bạn xóa dữ liệu trình duyệt, khu vườn cũng sẽ trống.',
+  inviteTitle: 'Đang mang một điều chưa tìm thấy ở đây?', invite: 'Gửi cho tụi mình vài dòng về điều bạn đang trải qua hoặc chủ đề bạn muốn đọc. Tụi mình đọc từng lời nhắn, và có thể viết thành một bài sau này, không kèm tên bạn.', send: 'Gửi lời nhắn',
+};
 ---
 <BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath}>
+  <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <Header {lang} {alternatePath} />
   <main id="main-content" tabindex="-1" class="journal-listing">
     <header class="journal-listing-header shell">
       <ContemplativeScene motif="mandala" />
       <Breadcrumb {lang} current={title} />
       <div class="journal-intro">
-        <p class="eyebrow">{en ? 'Meditation · Healing · Life' : 'Thiền · Chữa lành · Đời sống'}</p>
+        <p class="eyebrow">{copy.eyebrow}</p>
         <h1>{title}</h1>
-        <p class="lead">{description}</p>
+        <p class="journal-slogan">{copy.slogan}</p>
+        <div class="journal-intro__text">{copy.intro.map(line => <p>{line}</p>)}</div>
       </div>
     </header>
+
+    <section class="shell journal-featured" aria-labelledby="journal-featured-title">
+      <div class="journal-book">
+        <figure class="journal-book__image">
+          <img src={lead.image} alt={leadText.imageAlt} width={leadPhoto.width} height={leadPhoto.height} loading="lazy" fetchpriority="low" decoding="async" />
+        </figure>
+        <div class="journal-book__text">
+          <p class="eyebrow">{copy.open}</p>
+          <p class="article-meta"><span>{topicLabel(topicOf(lead), lang)}</span><span>{leadMinutes} {readTime}</span></p>
+          <h2 id="journal-featured-title"><a href={articlePath(lang, lead.slug)}>{leadText.title}</a></h2>
+          {leadQuote
+            ? <blockquote class="journal-book__quote"><p>{leadQuote}</p></blockquote>
+            : <p class="journal-book__quote">{leadText.description}</p>}
+          <a class="button" href={articlePath(lang, lead.slug)}>{copy.read} <Arrow /></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell journal-listing-articles" id="journal-articles" aria-labelledby="journal-articles-title">
+      <div class="section-heading">
+        <h2 id="journal-articles-title">{copy.library}</h2>
+        <p class="journal-count" data-journal-count role="status" aria-live="polite" aria-atomic="true">{articles.length} {unit}</p>
+      </div>
+
+      <form class="journal-tools" role="search" method="get" action={searchPath} data-journal-form>
+        <div class="journal-search">
+          <label for="journal-search" class="sr-only">{copy.search}</label>
+          <input id="journal-search" type="search" name="q" maxlength="120" autocomplete="off" enterkeyhint="search" placeholder={copy.placeholder} data-journal-query />
+          <button class="button button--tonal" type="submit">{copy.go}</button>
+        </div>
+        <div class="journal-sort js-only">
+          <label for="journal-sort">{copy.sort}</label>
+          <select id="journal-sort" data-journal-sort>
+            <option value="featured">{copy.sorts.featured}</option>
+            <option value="newest">{copy.sorts.newest}</option>
+            <option value="short">{copy.sorts.short}</option>
+          </select>
+        </div>
+      </form>
+
+      <div class="journal-topics" role="group" aria-label={copy.topics} data-journal-topics>
+        <button type="button" class="journal-topic" data-topic="all" aria-pressed="true"><TopicIcon topic="all" /><span class="journal-topic__label">{copy.all}</span> <span class="journal-topic__count">{articles.length}</span></button>
+        {journalTopics.map(topic => <button type="button" class="journal-topic" data-topic={topic.id} aria-pressed="false"><TopicIcon topic={topic.id} /><span class="journal-topic__label">{topic.label[lang]}</span> <span class="journal-topic__count">{counts[topic.id]}</span></button>)}
+      </div>
+
+      <div class="journal-chance js-only">
+        <button type="button" class="journal-chance__button" data-chance-button>
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5c1.2 3.6 2.9 5.3 6.5 6.5-3.6 1.2-5.3 2.9-6.5 6.5-1.2-3.6-2.9-5.3-6.5-6.5C9.1 8.8 10.8 7.1 12 3.5Z"/><path d="M18 16.5v3m-1.5-1.5h3"/></svg>
+          {copy.chance}
+        </button>
+        <p class="journal-chance__note">{copy.chanceNote}</p>
+        <div class="journal-chance__result zen-card" data-chance-result hidden aria-live="polite">
+          <p class="eyebrow">{copy.suggest}</p>
+          <p class="journal-chance__title"><a href="#" data-chance-link></a></p>
+          <p class="article-meta" data-chance-meta></p>
+          <div class="journal-chance__actions"><a class="button" href="#" data-chance-open>{copy.read} <Arrow /></a><button class="button button--tonal" type="button" data-chance-again>{copy.again}</button></div>
+        </div>
+      </div>
+
+      <div class="journal-grid journal-grid--library" id="journal-grid">{ordered.map((article, index) => <ArticleCard {article} {lang} heading="h3" library order={index} />)}</div>
+      <div class="journal-empty zen-card" data-journal-empty hidden>
+        <p>{copy.empty}</p>
+        <p class="journal-empty__actions"><button class="button button--tonal" type="button" data-journal-reset>{copy.clear}</button> <a class="quiet-link" href={searchPath} data-journal-site>{copy.site} <Arrow /></a></p>
+      </div>
+      <nav class="journal-pages-wrap" aria-label={copy.pages}><ol class="journal-pages" data-journal-pages hidden></ol></nav>
+    </section>
 
     <section class="shell journal-lanes" aria-labelledby="journal-lanes-title">
       <h2 id="journal-lanes-title">{en ? 'Not sure where to begin?' : 'Không biết bắt đầu từ đâu?'}</h2>
@@ -51,23 +176,33 @@ const unit = en ? 'articles' : 'bài đọc';
       </ol>
     </section>
 
-    <section class="shell journal-listing-articles" id="journal-articles" aria-labelledby="journal-articles-title">
-      <div class="section-heading">
-        <h2 id="journal-articles-title">{en ? 'Browse the library' : 'Tìm trong thư viện'}</h2>
-        <p class="journal-count" data-journal-count role="status" aria-live="polite" aria-atomic="true">{articles.length} {unit}</p>
+    <section class="shell journal-garden js-only" id="khu-vuon" aria-labelledby="journal-garden-title" data-garden data-confirm={copy.confirm} data-msg-cleared={copy.cleared} data-msg-history={copy.clearedHistory} data-msg-none-saved={copy.noSaved} data-msg-none-continue={copy.noCont}>
+      <div class="journal-garden__head">
+        <h2 id="journal-garden-title">{copy.garden}</h2>
+        <p>{copy.gardenNote}</p>
       </div>
-      <div class="journal-topics" role="group" aria-label={en ? 'Filter articles by topic' : 'Lọc bài viết theo chủ đề'} data-journal-topics>
-        <button type="button" class="journal-topic" data-topic="all" aria-pressed="true">{en ? 'All' : 'Tất cả'} <span>{articles.length}</span></button>
-        {journalTopics.map(topic => <button type="button" class="journal-topic" data-topic={topic.id} aria-pressed="false">{topic.label[lang]} <span>{counts[topic.id]}</span></button>)}
+      <div class="journal-garden__grid">
+        <div class="journal-garden__card zen-card">
+          <h3>{copy.cont}</h3>
+          <div data-garden-continue></div>
+        </div>
+        <div class="journal-garden__card zen-card">
+          <h3>{copy.saved} <span class="journal-garden__count" data-garden-count></span></h3>
+          <ul class="journal-garden__list" data-garden-saved></ul>
+        </div>
       </div>
-      <div class="journal-grid journal-grid--library" id="journal-grid">{articles.map((article, index) => <ArticleCard {article} {lang} heading="h2" number={index + 1} />)}</div>
-      <nav class="journal-pages-wrap" aria-label={en ? 'Journal pages' : 'Phân trang Tản văn'}><ol class="journal-pages" data-journal-pages hidden></ol></nav>
+      <div class="journal-garden__controls">
+        <button type="button" class="button button--tonal" data-garden-clear-history>{copy.history}</button>
+        <button type="button" class="button button--tonal" data-garden-clear-all>{copy.everything}</button>
+        <p class="journal-garden__note">{copy.noteStorage}</p>
+        <p class="journal-garden__status" role="status" aria-live="polite" data-garden-status></p>
+      </div>
     </section>
 
     <section class="shell journal-invite zen-card" aria-labelledby="journal-invite-title">
-      <h2 id="journal-invite-title">{en ? 'Carrying something you can’t find here?' : 'Đang mang một điều chưa tìm thấy ở đây?'}</h2>
-      <p>{en ? 'Send us a few lines about what you are going through or what you would like to read. We read every message and may write about it in a future piece, without your name.' : 'Gửi cho tụi mình vài dòng về điều bạn đang trải qua hoặc chủ đề bạn muốn đọc. Tụi mình đọc từng lời nhắn, và có thể viết thành một bài sau này, không kèm tên bạn.'}</p>
-      <a class="button" href={contactPath(lang)}>{en ? 'Send a message' : 'Gửi lời nhắn'} <Arrow /></a>
+      <h2 id="journal-invite-title">{copy.inviteTitle}</h2>
+      <p>{copy.invite}</p>
+      <a class="button" href={contactPath(lang)}>{copy.send} <Arrow /></a>
     </section>
   </main>
   <Footer {lang} />

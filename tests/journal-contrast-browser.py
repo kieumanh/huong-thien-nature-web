@@ -25,9 +25,9 @@ with sync_playwright() as p:
         assert page.locator('h1').inner_text() == ('Tản văn' if lang=='vi' else 'Journal')
         assert page.locator('.journal-listing article').count() == len(site['articles'])
         assert page.locator('#main-nav a[aria-current="page"]').get_attribute('href') == journal(lang)
-        for link in page.locator('.journal-listing article h2 a').all():
+        for link in page.locator('.journal-listing article h3 a').all():
             assert link.get_attribute('href').startswith(journal(lang))
-        page.locator('.journal-listing article h2 a').first.click()
+        page.locator('.journal-listing article h3 a').first.click()
         page.wait_for_url(base+first_article(lang))
         assert page.locator('.article-body section').count() >= 3
         page.locator('.article-body > a.quiet-link').click()
@@ -54,7 +54,7 @@ with sync_playwright() as p:
     np.goto(base+'/vi/',wait_until='domcontentloaded')
     np.locator('#main-nav a[href="/vi/tan-van/"]').click()
     np.wait_for_url(base+'/vi/tan-van/')
-    np.locator('.journal-listing article h2 a').first.click()
+    np.locator('.journal-listing article h3 a').first.click()
     np.wait_for_url(base+first_article('vi'))
     report.append('Listing and article navigation also work without JavaScript')
     page.set_viewport_size({'width':1440,'height':900})
