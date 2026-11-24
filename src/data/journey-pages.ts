@@ -53,17 +53,19 @@ const farmPartner = {
   en: 'Natural farming partner in Cư M’gar, Đắk Lắk.',
 };
 
+const zenworkPartner = {
+  name: 'ZenWork',
+  site: 'https://zenwork.io.vn/',
+  label: 'zenwork.io.vn',
+  logo: '/media/partners/zenwork-logo.webp',
+  vi: 'Dự án con của Hương Thiền Nature do Kiều Mạnh vận hành. ZenWork phụ trách truyền thông và tiếp thị, thiết kế giải pháp, xây dựng và ứng dụng phần mềm vào quản lý, vận hành doanh nghiệp.',
+  en: 'A Hương Thiền Nature project run by Kiều Mạnh. ZenWork handles communications and marketing, designs solutions, and builds and applies software for business management and operations.',
+};
+
 export const partnerProfiles = [
   quartzPartner,
   farmPartner,
-  {
-    name: 'ZenWork',
-    site: 'https://zenwork.io.vn/',
-    label: 'zenwork.io.vn',
-    logo: '/media/partners/zenwork-logo.webp',
-    vi: 'Dự án con của Hương Thiền Nature do Kiều Mạnh vận hành. ZenWork phụ trách truyền thông và tiếp thị, thiết kế giải pháp, xây dựng và ứng dụng phần mềm vào quản lý, vận hành doanh nghiệp.',
-    en: 'A Hương Thiền Nature project run by Kiều Mạnh. ZenWork handles communications and marketing, designs solutions, and builds and applies software for business management and operations.',
-  },
+  zenworkPartner,
 ];
 
 export const ecosystemPartnerJourney = [
@@ -93,6 +95,20 @@ export const ecosystemPartnerJourney = [
       milestone: '22 November 2026',
       affiliation: 'Nha Trang, Khánh Hòa',
       description: 'Nguyễn Trần Quyết is Hương Thiền Nature’s strategic partner in quartz and feng shui. Drawing on his experience in Nha Trang, Khánh Hòa, he also advises the team on the project’s direction.',
+    },
+  },
+  {
+    partner: zenworkPartner,
+    date: '',
+    vi: {
+      milestone: 'Công nghệ và truyền thông',
+      affiliation: 'Dự án con của Hương Thiền Nature',
+      description: 'ZenWork.io.vn, do Kiều Mạnh vận hành, đảm nhận vai trò công nghệ và truyền thông của hệ sinh thái: thiết kế giải pháp, xây dựng và ứng dụng phần mềm vào quản lý, vận hành, cùng truyền thông và tiếp thị.',
+    },
+    en: {
+      milestone: 'Technology and communications',
+      affiliation: 'A Hương Thiền Nature project',
+      description: 'ZenWork.io.vn, run by Kiều Mạnh, takes on the technology and communications role of the ecosystem: designing solutions, building and applying software for management and operations, and handling communications and marketing.',
     },
   },
 ];

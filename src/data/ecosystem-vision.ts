@@ -30,7 +30,7 @@ export const ecosystemVision = {
     note: 'Đá và các vật phẩm hỗ trợ là người bạn đồng hành trong thực hành, không thay thế chăm sóc y tế. Giá và tồn kho trong Cửa hàng cần được xác nhận trước khi đặt.',
     partnersTitle: 'Những người đồng hành xung quanh',
     partnersIntro: 'Mỗi người đồng hành góp phần nuôi một trọng tâm. Họ ở đây bằng công việc thật của mình, để ba trọng tâm cùng lớn lên hài hòa và bền vững.',
-    supports: { 'Lê Lam Sơn': 'Bổ trợ trọng tâm Môi trường thiên nhiên', 'Nguyễn Trần Quyết': 'Bổ trợ trọng tâm Thực hành, sách vở, đá thanh lọc' },
+    supports: { 'Lê Lam Sơn': 'Bổ trợ trọng tâm Môi trường thiên nhiên', 'Nguyễn Trần Quyết': 'Bổ trợ trọng tâm Thực hành, sách vở, đá thanh lọc', ZenWork: 'Đảm nhận vai trò công nghệ và truyền thông cho cả hệ sinh thái' },
     closingTitle: 'Một cuộc sống tỉnh thức, lành mạnh và phụng sự',
     closing: 'Hệ sinh thái bao quanh các trọng tâm này sẽ bổ sung hoàn chỉnh cho một cuộc sống tỉnh thức với tần số ý thức cao, sâu sắc và khỏe mạnh. Đó là lối sống có chiều sâu, lành mạnh và phụng sự cho đời tốt đẹp hơn.',
     loop: {
@@ -72,7 +72,7 @@ export const ecosystemVision = {
     note: 'Stones and supportive objects are companions for practice, not a substitute for medical care. Prices and availability in the shop must be confirmed before ordering.',
     partnersTitle: 'The people around the three points',
     partnersIntro: 'Each partner helps nurture one focal point, through their own real work, so that all three can grow in harmony and last.',
-    supports: { 'Lê Lam Sơn': 'Supports the natural settings focus', 'Nguyễn Trần Quyết': 'Supports the practice spaces, books and stones focus' },
+    supports: { 'Lê Lam Sơn': 'Supports the natural settings focus', 'Nguyễn Trần Quyết': 'Supports the practice spaces, books and stones focus', ZenWork: 'Takes on technology and communications for the whole ecosystem' },
     closingTitle: 'An awakened, healthy life of service',
     closing: 'The ecosystem around these focal points completes a life of awakening, with a high, deep and healthy frequency of awareness. It is a life with depth, health, and service to make the world a better place.',
     loop: {

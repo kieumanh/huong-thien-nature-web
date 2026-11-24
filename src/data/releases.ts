@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.16.2',
+    date: '2026-11-24',
+    vi: ['ZenWork trong Hệ sinh thái, chế độ đọc gọn hơn', 'Thêm ZenWork vào Hệ sinh thái với vai trò công nghệ và truyền thông. Thanh chế độ đọc không còn đè lên đầu bài viết, trang Gợi ý có khoảng cách gọn hơn, và gỡ các dòng số khẩn cấp.'],
+    en: ['ZenWork in the Ecosystem, a tidier reading mode', 'ZenWork joins the Ecosystem page as the technology and communications partner. The reading-mode bar no longer covers the top of an article, the Suggestions page has better spacing, and the emergency-number lines are removed.'],
+  },
+  {
     version: '2.16.1',
     date: '2026-11-24',
     vi: ['Gọn lại Tản văn và nút Liên hệ', 'Gỡ mục "Khu vườn của tôi" cùng nút Lưu và nhắc đọc tiếp. Nút "Liên hệ" ở Trang chủ được canh giữa.'],
