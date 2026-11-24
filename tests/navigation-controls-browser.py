@@ -17,6 +17,10 @@ with sync_playwright() as p:
     for lang in ['vi', 'en']:
         page.goto(base+'/'+lang+'/', wait_until='domcontentloaded')
         page.wait_for_function("!document.querySelector('.music-toggle').disabled")
+        # Lazy images below the fold load while scrolling and change the page height, which moves the 30% threshold
+        # mid-test. Load them first so the scroll range is stable.
+        page.evaluate("document.querySelectorAll('img[loading=lazy]').forEach(i => { i.loading = 'eager'; })")
+        page.wait_for_function("[...document.images].every(i => i.complete)")
         assert page.locator('meta[name="application-version"]').get_attribute('content') == version
         history = page.locator('.footer-group').last.locator('a', has=page.locator('.footer-version'))
         assert 'V'+version in history.inner_text()
