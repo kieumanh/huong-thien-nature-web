@@ -1,3 +1,9 @@
+## 2.16.1 — Gỡ "Khu vườn của tôi", canh giữa nút Liên hệ ở Trang chủ
+
+- **Gỡ "Khu vườn của tôi" theo yêu cầu:** bỏ mục trên trang Tản văn, nút "Lưu vào khu vườn", thông báo "Tiếp tục từ chỗ cũ", nhãn "Đã lưu" trên thẻ bài và việc ghi nhớ tiến độ đọc. "Một bài viết hữu duyên" nay gợi ý từ tất cả bài. Chế độ "Đọc trong tĩnh lặng" (nền, cỡ chữ) và nút Chia sẻ giữ nguyên; cỡ chữ và nền vẫn nhớ trên thiết bị người đọc.
+- **Trang chủ:** nút "Liên hệ" ở khối "Những người đi cùng nhau" được canh giữa (đo trên 390 px và 1280 px).
+- Kiểm thử cập nhật (`tests/journal.test.ts`, `tests/tan-van-browser.py`). Không có migration.
+
 ## 2.16.0 — Tản văn "Một khoảng lặng giữa dòng đời": trang sách mở, tìm kiếm, Đọc trong tĩnh lặng, Khu vườn của tôi
 
 - **Trang Tản văn thiết kế lại theo hướng tạp chí tĩnh lặng:** phần đầu trang có tiêu đề, câu "Một khoảng lặng giữa dòng đời." và ba đoạn dẫn; bài nổi bật là **"một trang sách mở"** (ảnh, chủ đề, thời gian đọc, tiêu đề, một câu trích nguyên văn từ chính bài, nút đọc; không tự chạy); chip chủ đề có icon nét mảnh (giữ nguyên 6 chủ đề, địa chỉ `?chu-de=` và `?trang=`); thẻ bài viết kiểu tạp chí (3 cột máy tính, 2 cột máy tính bảng, 1 cột điện thoại, viền mảnh, cả thẻ bấm được, chuyển động nhẹ chỉ khi người dùng không tắt hiệu ứng). Số thứ tự trên thẻ được bỏ.

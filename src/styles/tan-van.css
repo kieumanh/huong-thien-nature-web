@@ -77,8 +77,6 @@ html:not(.js) .js-only { display: none !important; }
 .journal-card--library .journal-card-copy { display: grid; align-content: start; gap: .1rem; }
 .journal-card--library .journal-card-description { display: -webkit-box; margin: 0; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; font-size: .97rem; }
 .journal-card-more { display: flex; align-items: center; gap: .35rem; margin: .7rem 0 0; color: var(--gold-accent); font-size: var(--type-label); font-weight: 650; }
-.journal-saved { position: absolute; inset-block-start: .6rem; inset-inline-start: .6rem; padding: .2rem .65rem; border: 1px solid var(--gold-line); border-radius: 999px; background: var(--surface-raised); color: var(--gold-accent); font-size: .75rem; font-weight: 650; }
-.journal-saved[hidden] { display: none; }
 @media (prefers-reduced-motion: no-preference) {
   .journal-card--library { transition: transform .35s ease, border-color .35s ease; }
   .journal-card--library .journal-image img { transition: transform .8s ease; }
@@ -92,30 +90,7 @@ html:not(.js) .js-only { display: none !important; }
 .journal-empty p { margin: 0; }
 .journal-empty__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem 1rem; }
 
-/* ---------- Listing: Khu vườn của tôi ---------- */
-.journal-garden { margin-block: clamp(2rem, 5vw, 3.4rem); }
-.journal-garden__head p { max-width: 62ch; margin: .4rem 0 0; color: var(--muted); }
-.journal-garden__grid { display: grid; gap: 1rem; margin-top: 1.2rem; }
 @media (min-width: 48rem) { .journal-garden__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-.journal-garden__card { padding: clamp(1rem, 2.6vw, 1.4rem); }
-.journal-garden__card h3 { margin: 0 0 .6rem; font-size: var(--type-card); }
-.journal-garden__count { color: var(--muted); font-weight: 500; }
-.journal-garden__title { margin: 0; font: 600 1.1rem/1.4 var(--serif); }
-.journal-garden__meta, .journal-garden__empty { margin: 0; color: var(--muted); font-size: var(--type-caption); }
-.journal-garden__bar { height: 4px; margin-block: .65rem .5rem; overflow: hidden; border-radius: 99px; background: var(--surface-container); }
-.journal-garden__bar span { display: block; height: 100%; background: var(--gold-gradient); }
-.journal-garden__list { display: grid; margin: 0; padding: 0; list-style: none; }
-.journal-garden__list li { display: flex; align-items: center; justify-content: space-between; gap: .75rem; padding: .55rem 0; border-bottom: 1px solid var(--gold-line); }
-.journal-garden__list li:last-child { border-bottom: 0; }
-.journal-garden__list li.journal-garden__empty { border: 0; }
-.journal-garden__list small { display: block; color: var(--muted); }
-.journal-garden__list a { font-weight: 600; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: .15em; }
-.journal-garden__list a:is(:hover, :focus-visible) { text-decoration-color: currentColor; }
-.journal-garden__remove { flex: 0 0 auto; min-height: 44px; padding: .3rem .6rem; border: 0; background: none; color: var(--muted); font: inherit; font-size: var(--type-caption); text-decoration: underline; cursor: pointer; }
-.journal-garden__remove:is(:hover, :focus-visible) { color: var(--foreground); }
-.journal-garden__controls { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem; margin-top: 1rem; }
-.journal-garden__note { flex: 1 0 100%; margin: .2rem 0 0; color: var(--muted); font-size: var(--type-caption); }
-.journal-garden__status { flex: 1 0 100%; min-height: 1.5em; margin: 0; color: var(--success); font-size: var(--type-caption); }
 
 /* ---------- Article: tools row ---------- */
 .article-tools, .article-end__actions { display: flex; flex-wrap: wrap; gap: .5rem; }
@@ -154,10 +129,6 @@ html:not(.js) .js-only { display: none !important; }
 .article-body a.article-pager__link:not(.button) { text-decoration: none; }
 
 /* Resume reading: a small notice that never moves the page. */
-.article-resume { position: fixed; z-index: 95; inset-inline: 0; inset-block-start: calc(.75rem + 3px); display: grid; gap: .6rem; width: min(30rem, calc(100% - 2rem)); margin-inline: auto; padding: 1rem; border: 1px solid var(--gold-line); border-radius: var(--radius-card); background: var(--surface-raised); box-shadow: var(--shadow-floating); }
-.article-resume[hidden] { display: none; }
-.article-resume p { margin: 0; }
-.article-resume div { display: flex; flex-wrap: wrap; gap: .5rem; }
 
 /* ---------- Reading mode: "Đọc trong tĩnh lặng" ---------- */
 .reading-bar { position: fixed; z-index: 105; inset: 3px 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding: .45rem var(--site-gutter); border-bottom: 1px solid var(--gold-line); background: var(--surface-raised); }

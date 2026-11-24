@@ -54,12 +54,9 @@ const copy = en ? {
   library: 'The library', search: 'Search the Journal', placeholder: 'Title, topic or keyword', go: 'Search',
   sort: 'Sort by', sorts: { featured: 'Curated picks', newest: 'Newest', short: 'Shortest read' },
   topics: 'Filter articles by topic', all: 'All', chance: 'An article that finds you', again: 'Another one', suggest: 'Perhaps this one today',
-  chanceNote: 'A quiet suggestion, never a push. It prefers pieces you have not opened yet.',
+  chanceNote: 'A quiet suggestion, never a push.',
   empty: 'No article matches that yet.', clear: 'Show every article', site: 'Search the whole website',
-  pages: 'Journal pages', garden: 'My garden', gardenNote: 'A place to keep the pieces you want to return to and the page where you stopped. Everything stays on this device: no account, nothing sent to a server.',
-  cont: 'Continue reading', saved: 'Saved pieces', noSaved: 'Nothing saved yet. While reading, choose “Save to my garden”.', noCont: 'No unfinished piece right now.',
-  history: 'Clear reading history', everything: 'Clear all data on this device', confirm: 'Press again to clear', cleared: 'Cleared. Nothing of yours remains on this device.', clearedHistory: 'Reading history cleared.',
-  noteStorage: 'Saved in this browser only. Clearing the browser’s data also clears the garden.',
+  pages: 'Journal pages',
   inviteTitle: 'Carrying something you can’t find here?', invite: 'Send us a few lines about what you are going through or what you would like to read. We read every message and may write about it in a future piece, without your name.', send: 'Send a message',
 } : {
   eyebrow: 'Thiền · Thiên nhiên · Chữa lành',
@@ -73,12 +70,9 @@ const copy = en ? {
   library: 'Thư viện tản văn', search: 'Tìm trong Tản văn', placeholder: 'Tên bài, chủ đề hoặc từ khóa', go: 'Tìm',
   sort: 'Sắp xếp', sorts: { featured: 'Bài viết được tuyển chọn', newest: 'Mới nhất', short: 'Thời gian đọc ngắn' },
   topics: 'Lọc bài viết theo chủ đề', all: 'Tất cả', chance: 'Một bài viết hữu duyên', again: 'Bài khác', suggest: 'Có lẽ hôm nay bạn muốn đọc bài này',
-  chanceNote: 'Một gợi ý nhẹ, không thúc giục. Bài chưa mở sẽ được ưu tiên.',
+  chanceNote: 'Một gợi ý nhẹ, không thúc giục.',
   empty: 'Chưa có bài nào khớp với điều bạn tìm.', clear: 'Xem tất cả bài viết', site: 'Tìm trên toàn website',
-  pages: 'Phân trang Tản văn', garden: 'Khu vườn của tôi', gardenNote: 'Nơi giữ lại những bài bạn muốn đọc lại và trang bạn đang đọc dở. Mọi thứ chỉ nằm trên thiết bị này: không cần tài khoản, không gửi gì về máy chủ.',
-  cont: 'Tiếp tục đọc', saved: 'Bài đã lưu', noSaved: 'Chưa có bài nào. Khi đọc, hãy chọn “Lưu vào khu vườn”.', noCont: 'Hiện chưa có bài nào đọc dở.',
-  history: 'Xóa lịch sử đọc', everything: 'Xóa toàn bộ dữ liệu trên thiết bị này', confirm: 'Bấm lần nữa để xóa', cleared: 'Đã xóa. Không còn gì của bạn trên thiết bị này.', clearedHistory: 'Đã xóa lịch sử đọc.',
-  noteStorage: 'Chỉ lưu trong trình duyệt này. Khi bạn xóa dữ liệu trình duyệt, khu vườn cũng sẽ trống.',
+  pages: 'Phân trang Tản văn',
   inviteTitle: 'Đang mang một điều chưa tìm thấy ở đây?', invite: 'Gửi cho tụi mình vài dòng về điều bạn đang trải qua hoặc chủ đề bạn muốn đọc. Tụi mình đọc từng lời nhắn, và có thể viết thành một bài sau này, không kèm tên bạn.', send: 'Gửi lời nhắn',
 };
 ---
@@ -176,28 +170,6 @@ const copy = en ? {
       </ol>
     </section>
 
-    <section class="shell journal-garden js-only" id="khu-vuon" aria-labelledby="journal-garden-title" data-garden data-confirm={copy.confirm} data-msg-cleared={copy.cleared} data-msg-history={copy.clearedHistory} data-msg-none-saved={copy.noSaved} data-msg-none-continue={copy.noCont}>
-      <div class="journal-garden__head">
-        <h2 id="journal-garden-title">{copy.garden}</h2>
-        <p>{copy.gardenNote}</p>
-      </div>
-      <div class="journal-garden__grid">
-        <div class="journal-garden__card zen-card">
-          <h3>{copy.cont}</h3>
-          <div data-garden-continue></div>
-        </div>
-        <div class="journal-garden__card zen-card">
-          <h3>{copy.saved} <span class="journal-garden__count" data-garden-count></span></h3>
-          <ul class="journal-garden__list" data-garden-saved></ul>
-        </div>
-      </div>
-      <div class="journal-garden__controls">
-        <button type="button" class="button button--tonal" data-garden-clear-history>{copy.history}</button>
-        <button type="button" class="button button--tonal" data-garden-clear-all>{copy.everything}</button>
-        <p class="journal-garden__note">{copy.noteStorage}</p>
-        <p class="journal-garden__status" role="status" aria-live="polite" data-garden-status></p>
-      </div>
-    </section>
 
     <section class="shell journal-invite zen-card" aria-labelledby="journal-invite-title">
       <h2 id="journal-invite-title">{copy.inviteTitle}</h2>

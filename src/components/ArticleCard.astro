@@ -32,7 +32,6 @@ const unit = getCopy(lang).readTime;
 >
   <div class="journal-image">
     <img src={thumb.src} alt={content.imageAlt} width={thumb.isThumb ? thumb.width : photo.width} height={thumb.isThumb ? thumb.height : photo.height} loading="lazy" decoding="async" />
-    {library && <span class="journal-saved" data-journal-saved hidden>{lang === 'vi' ? 'Đã lưu' : 'Saved'}</span>}
   </div>
   <div class="journal-card-copy">
     <p class="article-meta"><span>{library ? topicLabel(topic, lang) : content.category}</span><span>{minutes} {unit}</span></p>

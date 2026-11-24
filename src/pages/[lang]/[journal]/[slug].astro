@@ -42,15 +42,13 @@ const origin = 'https://huongthiennature.com';
 const sectionCount = content.sections.length;
 const pauseAfter = (reflection?.pause ?? []).map((text, index, all) => ({ text: text[lang], after: Math.max(1, Math.min(sectionCount, Math.ceil(sectionCount * (index + 1) / (all.length + 1)))) }));
 const copy = vi ? {
-  tools: 'Công cụ đọc', reading: 'Đọc trong tĩnh lặng', save: 'Lưu vào khu vườn', saved: 'Đã lưu trong khu vườn', share: 'Chia sẻ', copied: 'Đã sao chép liên kết', shareFailed: 'Chưa sao chép được. Bạn có thể chọn và chép địa chỉ trên thanh trình duyệt.',
+  tools: 'Công cụ đọc', reading: 'Đọc trong tĩnh lặng', share: 'Chia sẻ', copied: 'Đã sao chép liên kết', shareFailed: 'Chưa sao chép được. Bạn có thể chọn và chép địa chỉ trên thanh trình duyệt.',
   exit: 'Thoát chế độ đọc', smaller: 'Chữ nhỏ hơn', larger: 'Chữ lớn hơn', theme: 'Màu nền khi đọc', light: 'Sáng', ivory: 'Ngà', dim: 'Dịu tối', bar: 'Chế độ đọc trong tĩnh lặng',
   pause: 'Một khoảng dừng', closing: 'Chúc bạn có một ngày đủ bình yên để lắng nghe chính mình.', previous: 'Bài trước', next: 'Bài sau', pager: 'Bài viết liền kề',
-  resume: 'Bạn đã đọc đến khoảng', resumeGo: 'Tiếp tục từ chỗ cũ', resumeTop: 'Đọc từ đầu', garden: 'Khu vườn của tôi',
 } : {
-  tools: 'Reading tools', reading: 'Read in stillness', save: 'Save to my garden', saved: 'Saved to my garden', share: 'Share', copied: 'Link copied', shareFailed: 'Could not copy. You can select the address in the browser bar instead.',
+  tools: 'Reading tools', reading: 'Read in stillness', share: 'Share', copied: 'Link copied', shareFailed: 'Could not copy. You can select the address in the browser bar instead.',
   exit: 'Leave reading mode', smaller: 'Smaller text', larger: 'Larger text', theme: 'Reading background', light: 'Light', ivory: 'Ivory', dim: 'Dim', bar: 'Reading in stillness',
   pause: 'A pause', closing: 'May your day be peaceful enough to hear yourself.', previous: 'Previous', next: 'Next', pager: 'Neighbouring articles',
-  resume: 'You read about', resumeGo: 'Continue where I stopped', resumeTop: 'Start from the top', garden: 'My garden',
 };
 const schema = {
   '@context': 'https://schema.org', '@type': 'BlogPosting',
@@ -84,10 +82,6 @@ const schema = {
         <button type="button" class="reading-bar__theme" data-reading-choice="dim" aria-pressed="false">{copy.dim}</button>
       </div>
     </div>
-    <div class="article-resume js-only" data-resume hidden role="status" data-prefix={copy.resume}>
-      <p data-resume-text></p>
-      <div><button type="button" class="button" data-resume-go>{copy.resumeGo}</button> <button type="button" class="button button--tonal" data-resume-top>{copy.resumeTop}</button></div>
-    </div>
     <article class="article-page" data-article data-slug={article.slug}>
       <header class="article-header shell">
         <Breadcrumb {lang} current={content.title} parent={{ label: t.journalHome, href: journalPath(lang) }} />
@@ -104,10 +98,6 @@ const schema = {
           <button type="button" class="article-tool" data-reading-toggle aria-pressed="false">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5c2.7-.9 5.3-.6 8 1v12.5c-2.7-1.6-5.3-1.9-8-1V5.5ZM20 5.5c-2.7-.9-5.3-.6-8 1v12.5c2.7-1.6 5.3-1.9 8-1V5.5Z"/></svg>
             <span>{copy.reading}</span>
-          </button>
-          <button type="button" class="article-tool" data-save aria-pressed="false" data-label-on={copy.saved} data-label-off={copy.save}>
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5h10v15l-5-3.4-5 3.4v-15Z"/></svg>
-            <span data-save-label>{copy.save}</span>
           </button>
           <button type="button" class="article-tool" data-share data-title={content.title} data-copied={copy.copied} data-failed={copy.shareFailed}>
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="12" r="2"/><circle cx="17" cy="6.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="m8.3 11 6.9-3.5M8.3 13l6.9 3.5"/></svg>
@@ -150,10 +140,6 @@ const schema = {
         <div class="article-end">
           <p class="article-closing">{copy.closing}</p>
           <div class="article-end__actions js-only">
-            <button type="button" class="article-tool" data-save aria-pressed="false" data-label-on={copy.saved} data-label-off={copy.save}>
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5h10v15l-5-3.4-5 3.4v-15Z"/></svg>
-              <span data-save-label>{copy.save}</span>
-            </button>
             <button type="button" class="article-tool" data-share data-title={content.title} data-copied={copy.copied} data-failed={copy.shareFailed}>
               <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="12" r="2"/><circle cx="17" cy="6.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="m8.3 11 6.9-3.5M8.3 13l6.9 3.5"/></svg>
               <span>{copy.share}</span>
