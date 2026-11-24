@@ -90,22 +90,17 @@ with sync_playwright() as p:
     page.locator('[data-journal-reset]').click()
     assert visible_cards(page).count() == 9 and page.locator('[data-journal-empty]').is_hidden()
     assert page.locator('#journal-search').input_value() == ''
-    # Sort: newest first is the default on a fresh visit
+    # Order: newest first on a fresh visit
     page.goto(base + listing('vi'), wait_until='domcontentloaded')
-    assert page.locator('#journal-sort').input_value() == 'newest'
     assert page.evaluate('document.querySelector("#journal-grid [data-journal-card]:not([hidden])").dataset.slug') == 'healing-as-coming-home'
-    page.select_option('#journal-sort', 'short')
-    minutes = page.evaluate('[...document.querySelectorAll("#journal-grid [data-journal-card]:not([hidden])")].map(card => Number(card.dataset.minutes))')
-    assert minutes == sorted(minutes), minutes
-    page.select_option('#journal-sort', 'newest')
     dates = page.evaluate('[...document.querySelectorAll("#journal-grid [data-journal-card]:not([hidden])")].map(card => card.dataset.date)')
     assert dates[0] == '2026-11-24' and dates == sorted(dates, reverse=True), dates
     # Pagination
     page.locator('.journal-page', has_text='2').first.click()
     assert visible_cards(page).count() == min(9, total - 9) and 'trang=2' in page.url
-    page.goto(base + listing('vi') + '?q=tho&sap-xep=short&chu-de=hoi-tho-co-the', wait_until='domcontentloaded')
+    page.goto(base + listing('vi') + '?q=tho&chu-de=hoi-tho-co-the', wait_until='domcontentloaded')
     page.wait_for_function('document.querySelector("[data-journal-count]").textContent.includes("khớp")')
-    assert page.locator('#journal-search').input_value() == 'tho' and page.locator('#journal-sort').input_value() == 'short'
+    assert page.locator('#journal-search').input_value() == 'tho'
     page.goto(base + listing('vi'), wait_until='domcontentloaded')
     page.wait_for_function('document.querySelector("[data-journal-pages]") && !document.querySelector("[data-journal-pages]").hidden')
     # A chance encounter: suggests, never navigates
@@ -121,7 +116,7 @@ with sync_playwright() as p:
         seen.add(page.locator('[data-chance-link]').inner_text())
         assert page.url == url_before
     assert len(seen) > 1, 'suggestions vary'
-    report.append('Listing: topic chips, diacritic-insensitive title and full-text search, empty state, newest-first default and shortest-read sort, pagination, shareable address, "a chance encounter" never navigates')
+    report.append('Listing: topic chips, diacritic-insensitive title and full-text search, empty state, newest-first order, pagination, shareable address, "a chance encounter" never navigates')
 
     # ---------- Article: tools, save, garden ----------
     page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
@@ -214,7 +209,7 @@ with sync_playwright() as p:
     page = context.new_page()
     page.goto(base + listing('vi'), wait_until='domcontentloaded')
     assert page.locator('#journal-grid [data-journal-card]:visible').count() == total, 'every article stays visible without JavaScript'
-    assert page.locator('.journal-sort').is_hidden() and page.locator('[data-chance-button]').is_hidden()
+    assert page.locator('[data-chance-button]').is_hidden()
     assert page.locator('form[role="search"]').get_attribute('action') == '/vi/timkiem/'
     page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
     assert page.locator('.article-tools').is_hidden() and page.locator('.article-body section').count() >= 3

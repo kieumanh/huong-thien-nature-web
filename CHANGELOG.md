@@ -1,3 +1,9 @@
+## 2.21.2 — Tản văn: bỏ ô sắp xếp, ghi ngày cho ba bài
+
+- **Danh sách luôn mới nhất trước:** đã bỏ ô "Sắp xếp" và tùy chọn "Thời gian đọc ngắn" trên trang Tản văn (`/vi/tan-van/`, `/en/journal/`). Bài mới nhất luôn ở đầu, bài cũ hơn xếp dần xuống dưới. Đường dẫn cũ có `?sap-xep=` vẫn mở được và bỏ qua tham số này.
+- **Ngày đăng cho ba bài:** `returning-attention`, `seven-layers`, `listening-to-nature` nay có ngày đăng 22/11/2026, nên không còn xếp cuối danh sách. Ngày này hiển thị trên trang bài viết và trong dữ liệu có cấu trúc.
+- Kiểm thử: `test:journal` không còn kiểm tra ô sắp xếp; `tests/tan-van-browser.py` bỏ các bước chọn sắp xếp và kiểm tra thứ tự mới nhất trước.
+
 ## 2.21.1 — Lối đọc Gợi ý có bước 4 về thấy khó ngồi yên
 
 - Trang Gợi ý (`/vi/goi-y/`, `/en/suggestions/`): khối "Thấy khó ngồi yên? Điều đó rất bình thường." đã thành **bước 4** của lối đọc, cùng kiểu thẻ với ba bước trước (số tròn, "Bước 4 · 10 phút đọc", tiêu đề có liên kết). Bước 4 dẫn tới bài "Những ngày ngồi thiền thấy khó". Lời nhắn giữ nguyên; liên kết "Làm gì khi thấy khó ngồi thiền?" được gộp vào tiêu đề.

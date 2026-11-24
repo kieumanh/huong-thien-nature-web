@@ -53,7 +53,6 @@ const copy = en ? {
   ],
   open: 'An open page', read: 'Read this piece',
   library: 'The library', search: 'Search the Journal', placeholder: 'Title, topic or keyword', go: 'Search',
-  sort: 'Sort by', sorts: { newest: 'Newest', short: 'Shortest read' },
   topics: 'Filter articles by topic', all: 'All', chance: 'An article that finds you', again: 'Another one', suggest: 'Perhaps this one today',
   chanceNote: 'A quiet suggestion, never a push.',
   empty: 'No article matches that yet.', clear: 'Show every article', site: 'Search the whole website',
@@ -69,7 +68,6 @@ const copy = en ? {
   ],
   open: 'Một trang đang mở', read: 'Đọc bài này',
   library: 'Thư viện tản văn', search: 'Tìm trong Tản văn', placeholder: 'Tên bài, chủ đề hoặc từ khóa', go: 'Tìm',
-  sort: 'Sắp xếp', sorts: { newest: 'Mới nhất', short: 'Thời gian đọc ngắn' },
   topics: 'Lọc bài viết theo chủ đề', all: 'Tất cả', chance: 'Một bài viết hữu duyên', again: 'Bài khác', suggest: 'Có lẽ hôm nay bạn muốn đọc bài này',
   chanceNote: 'Một gợi ý nhẹ, không thúc giục.',
   empty: 'Chưa có bài nào khớp với điều bạn tìm.', clear: 'Xem tất cả bài viết', site: 'Tìm trên toàn website',
@@ -120,13 +118,6 @@ const copy = en ? {
           <label for="journal-search" class="sr-only">{copy.search}</label>
           <input id="journal-search" type="search" name="q" maxlength="120" autocomplete="off" enterkeyhint="search" placeholder={copy.placeholder} data-journal-query />
           <button class="button button--tonal" type="submit">{copy.go}</button>
-        </div>
-        <div class="journal-sort js-only">
-          <label for="journal-sort">{copy.sort}</label>
-          <select id="journal-sort" data-journal-sort>
-            <option value="newest">{copy.sorts.newest}</option>
-            <option value="short">{copy.sorts.short}</option>
-          </select>
         </div>
       </form>
 

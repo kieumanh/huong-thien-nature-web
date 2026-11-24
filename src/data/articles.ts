@@ -47,6 +47,7 @@ const baseArticles: Article[] = [
     slug: 'returning-attention',
     image: '/media/pixabay-1287964.webp',
     minutes: 4,
+    publishedAt: '2026-11-22',
     translations: {
       vi: {
         category: 'Thực tập',
@@ -100,6 +101,7 @@ const baseArticles: Article[] = [
     slug: 'seven-layers',
     image: '/media/pixabay-7374190.webp',
     minutes: 5,
+    publishedAt: '2026-11-22',
     translations: {
       vi: {
         category: 'Chiêm nghiệm',
@@ -153,6 +155,7 @@ const baseArticles: Article[] = [
     slug: 'listening-to-nature',
     image: '/media/pixabay-6540843.webp',
     minutes: 4,
+    publishedAt: '2026-11-22',
     translations: {
       vi: {
         category: 'Thiên nhiên',

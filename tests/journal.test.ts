@@ -72,8 +72,8 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
     if (!existsSync(dist(`${journalPath(lang)}index.html`))) continue;
     const journal = readFileSync(dist(`${journalPath(lang)}index.html`), 'utf8');
     assert.equal((journal.match(/type="search"/g) ?? []).length, 1, `${lang}: one search box`);
-    assert.ok(journal.includes('data-journal-query') && journal.includes('data-journal-sort') && journal.includes('data-chance-button'), `${lang}: search, sort and "a chance encounter"`);
-    assert.equal((journal.match(/<option value="/g) ?? []).length, 2, `${lang}: two sort orders (newest first, shortest read)`);
+    assert.ok(journal.includes('data-journal-query') && journal.includes('data-chance-button'), `${lang}: search, sort and "a chance encounter"`);
+    assert.ok(!journal.includes('data-journal-sort'), `${lang}: no sort control, the list is always newest first`);
     assert.ok(!journal.includes('journal-lane__number'), `${lang}: reading lanes carry no numbers`);
     const dates = [...journal.matchAll(/data-date="([^"]*)"/g)].map(match => match[1]);
     const dated = dates.filter(Boolean);
@@ -97,7 +97,7 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
   }
   if (!existsSync(dist('/vi/tan-van/index.html'))) return;
   const vi = readFileSync(dist('/vi/tan-van/index.html'), 'utf8');
-  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên', 'Thời gian đọc ngắn', 'Mới nhất']) assert.ok(vi.includes(line), line);
+  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên']) assert.ok(vi.includes(line), line);
 });
 
 test('built article pages: reading mode, save, share, pull quote, pause, closing line, neighbours and at most three related pieces', () => {

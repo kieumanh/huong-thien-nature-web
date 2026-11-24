@@ -38,18 +38,14 @@ html:not(.js) .js-only { display: none !important; }
 .journal-tools > * { min-width: 0; }
 @media (min-width: 40rem) { .journal-tools { grid-template-columns: minmax(0, 1fr) auto; align-items: end; } }
 .journal-search { display: flex; gap: .5rem; }
-.journal-search input, .journal-sort select {
+.journal-search input {
   min-height: 44px; padding: .45rem 1rem; border: 1px solid var(--border-control); border-radius: var(--radius-pill, 999px);
   background: var(--surface-raised); color: var(--foreground); font: inherit; font-size: var(--type-body);
 }
 .journal-search input { flex: 1 1 auto; min-width: 0; }
 .journal-search input::placeholder { color: var(--muted); opacity: .85; }
 .journal-search .button { flex: 0 0 auto; }
-.journal-sort { display: grid; gap: .2rem; }
-.journal-sort label { color: var(--muted); font-size: var(--type-caption); }
-.journal-sort select { width: 100%; max-width: 100%; padding-inline-end: 2rem; }
-@media (min-width: 40rem) { .journal-sort select { width: auto; } }
-:is(.journal-search input, .journal-sort select, .journal-topic, .journal-chance__button, .article-tool, .reading-bar button):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+:is(.journal-search input, .journal-topic, .journal-chance__button, .article-tool, .reading-bar button):focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
 .journal-topic { display: inline-flex; align-items: center; gap: .45rem; min-height: 44px; }
 .journal-topics { gap: .45rem; }

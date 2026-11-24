@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.21.2',
+    date: '2026-11-24',
+    vi: ['Tản văn luôn mới nhất trước', 'Đã bỏ ô sắp xếp; bài mới nhất luôn ở đầu. Ba bài trước đây chưa có ngày nay đã ghi ngày đăng 22/11/2026.'],
+    en: ['The Journal always shows the newest first', 'The sort control has been removed, so the newest article always comes first. Three articles that had no date now show 22 November 2026.'],
+  },
+  {
     version: '2.21.1',
     date: '2026-11-24',
     vi: ['Lối đọc Gợi ý có bước 4 về thấy khó ngồi yên', 'Khối "Thấy khó ngồi yên?" trở thành bước 4 của lối đọc cho người mới, cùng kiểu với ba bước trước và dẫn tới bài "Những ngày ngồi thiền thấy khó".'],
