@@ -24,7 +24,7 @@ const vi = lang === 'vi';
       <div class="profile-copy">
         <h3>Kiều Mạnh</h3>
         <p class="profile-role">{journalAuthor.role[lang]}</p>
-        <p>{journalAuthor.bio[lang]}</p>
+        <p>{journalAuthor.longBio[lang]}</p>
         <p>{vi ? 'Anh đang học làm vườn thuận tự nhiên cùng anh Lê Lam Sơn tại Cư M’gar. Công việc ở vườn giúp anh có thêm chất liệu để viết về việc chăm đất, làm ra thức ăn và sống gần hơn với những gì mình sử dụng mỗi ngày.' : 'He is learning natural farming with Lê Lam Sơn in Cư M’gar. Work in the garden gives him material for writing about soil care, growing food and living closer to what sustains us each day.'}</p>
         <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Đọc bài viết của Kiều Mạnh' : 'Read Kiều Mạnh’s articles'}</a>
       </div>

@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { searchRecords, normalizeSearch } from '../src/scripts/search-engine.ts';
 import { buildSearchIndex } from '../src/data/search.ts';
 import { courses, coursePath } from '../src/data/courses.ts';
-import { articles } from '../src/data/articles.ts';
+import { articles, articlePath } from '../src/data/articles.ts';
 import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
 import { products, productPath } from '../src/data/products.ts';
 test('Vietnamese accents and đ are optional',()=>{assert.equal(normalizeSearch('THIỀN ĐỊNH'),'thien dinh');const index=buildSearchIndex('vi');assert.deepEqual(searchRecords(index,'hơi thở'),searchRecords(index,'hoi tho'));assert(searchRecords(index,'hoi tho').length>0);});
@@ -38,5 +38,33 @@ test('partner names find the localized team page', () => {
     for (const query of ['Nguyen Tran Quyet', 'Le Lam Son', 'ZenWork']) {
       assert(searchRecords(buildSearchIndex(lang), query).some(row => row.url === journeyPath(lang, 'team')));
     }
+  }
+});
+
+test('results carry a small thumbnail that exists on disk (articles, pages, courses)', async () => {
+  const { existsSync, statSync } = await import('node:fs');
+  for (const lang of ['vi', 'en'] as const) {
+    const data = buildSearchIndex(lang);
+    for (const article of articles) {
+      const row = data.find(entry => entry.url === articlePath(lang, article.slug));
+      assert(row?.image, `${lang}: article ${article.slug} has a result image`);
+    }
+    for (const page of journeyPageKeys) assert(data.find(entry => entry.url === journeyPath(lang, page))?.image, `${lang}: ${page} page has a result image`);
+    for (const course of courses) assert(data.find(entry => entry.url === coursePath(lang, course))?.image, `${lang}: course has a result image`);
+    for (const entry of data.filter(row => row.image)) {
+      const file = new URL(`../public${entry.image!.src}`, import.meta.url);
+      assert(entry.image!.src.startsWith('/media/thumbs/'), `${entry.url}: thumbnail path`);
+      assert(existsSync(file), `${entry.url}: ${entry.image!.src} exists`);
+      assert(statSync(file).size < 100 * 1024, `${entry.image!.src} is under 100 KB`);
+      assert.deepEqual([entry.image!.width, entry.image!.height], [640, 400]);
+    }
+  }
+});
+test('products keep their own image block and do not get a second thumbnail', () => {
+  for (const row of buildSearchIndex('vi').filter(entry => entry.product)) assert.equal(row.image, undefined);
+});
+test('the support page is searchable by its own wording', () => {
+  for (const [lang, query] of [['vi', 'tam long'], ['vi', 'quy ung ho'], ['en', 'support fund'], ['en', 'kind hearts']] as const) {
+    assert(searchRecords(buildSearchIndex(lang), query).some(row => row.url === journeyPath(lang, 'support')), `${lang}: ${query}`);
   }
 });

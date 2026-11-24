@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.18.0',
+    date: '2026-11-24',
+    vi: ['Tìm kiếm có ảnh, thumbnail chia sẻ mới, dải ảnh Hành trình cân đối', 'Kết quả tìm kiếm hiện ảnh; trang Quỹ ủng hộ và cả site có hình chia sẻ minh họa riêng; dải ảnh ở trang Câu chuyện không còn ô trống trên điện thoại; trang Đội ngũ giữ bản giới thiệu dài; nút Gặp đội ngũ rõ ràng hơn.'],
+    en: ['Search with pictures, new share thumbnails, balanced journey photos', 'Search results now show a picture; the support page and the whole site have illustrated link-share images; the story page photo strip no longer leaves an empty cell on phones; the team page keeps the longer introduction; the Meet the team button is clearer.'],
+  },
+  {
     version: '2.17.1',
     date: '2026-11-24',
     vi: ['Tác giả: liên kết rõ ràng, bio gọn hơn', 'Hai liên kết cuối bài không còn dính chữ, và phần giới thiệu tác giả được viết gọn lại.'],

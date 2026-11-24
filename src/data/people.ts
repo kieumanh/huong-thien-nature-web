@@ -16,4 +16,9 @@ export const journalAuthor = {
     vi: 'Kiều Mạnh viết và biên tập các bài về thiền, chánh niệm và sống thuận tự nhiên.',
     en: 'Kiều Mạnh writes and edits articles on meditation, mindfulness and living in tune with nature.',
   },
+  // Longer version for the team page; the article author card uses the short `bio` above.
+  longBio: {
+    vi: 'Kiều Mạnh viết và biên tập các bài về thiền định, chánh niệm và sống thuận tự nhiên. Anh phụ trách chia sẻ kiến thức và truyền thông của dự án.',
+    en: 'Kiều Mạnh writes and edits articles on meditation, mindfulness and living in tune with nature. He leads the project’s knowledge sharing and communications.',
+  },
 };

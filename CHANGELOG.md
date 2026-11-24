@@ -1,3 +1,13 @@
+## 2.18.0 — Ảnh trong tìm kiếm, thumbnail chia sẻ minh họa, dải ảnh Hành trình cân đối
+
+- **Bio trang Đội ngũ giữ đoạn dài:** phần giới thiệu Kiều Mạnh ở trang Đội ngũ trở lại bản đầy đủ (`journalAuthor.longBio`); thẻ tác giả cuối bài vẫn dùng bản gọn của 2.17.1.
+- **Tìm kiếm có ảnh:** mỗi kết quả bài viết, trang Hành trình, khóa học (Tần Số Vàng, Tarot) hiện ảnh thu nhỏ 640×400 (ảnh trên đầu thẻ ở điện thoại, bên trái từ 560 px). Sản phẩm giữ khối ảnh riêng như trước. Ảnh chỉ trang trí (không đọc lặp với tiêu đề) và bấm vào đi tới đúng kết quả. Thêm 8 ảnh thu nhỏ vào `public/media/thumbs/` (tất cả dưới 100 KB). Trang Quỹ ủng hộ giờ cũng tìm được bằng chính lời văn của trang.
+- **Dải ảnh "Trên những chặng gặp gỡ và chia sẻ":** thêm ảnh thứ 4 và dùng bố cục cân đối (`AlbumStrip balanced`): 2×2 trên điện thoại, một hàng 4 ảnh từ 700 px, không còn ô trống ở hàng cuối (đã đo ở 320–1280 px).
+- **Nút "Gặp đội ngũ Hương Thiền Nature":** thành nút thật (dạng tonal, mũi tên, cao 52 px, canh giữa; rộng hết cột trên điện thoại).
+- **Thumbnail chia sẻ minh họa 1200×630** (nền tím đêm, chữ vàng, canh giữa để Zalo/Facebook cắt vuông vẫn đủ chữ): ảnh mặc định toàn site (logo + "Thiền định, chánh niệm và sống thuận tự nhiên", vi/en) và ảnh riêng cho Quỹ ủng hộ (mầm cây, vi/en). Mỗi tệp khoảng 80 KB, có `og:image:width/height/type/alt` đúng ngôn ngữ. Ảnh chân dung cũ `huong-thien-ben-ho-social.jpg` vẫn còn trong kho, không còn là ảnh mặc định.
+- **Tương phản chú thích ảnh:** dòng ghi nguồn dưới ảnh minh họa trong bài (`.article-figure__credit`) bỏ độ mờ 0,9 vì chiều muộn màu nền làm tỉ lệ tương phản tụt xuống 4,49:1 (cần ≥ 4,5:1); phát hiện khi chạy axe lúc 17 giờ.
+- Công cụ dựng ảnh: `scripts/social-images/` (`template.html`, `render.py`, `logo-white.png`). Kiểm thử mới trong `tests/search.test.ts` và `tests/support.test.ts`.
+
 ## 2.17.1 — Tác giả: tách liên kết, bio gọn hơn
 
 - Hai liên kết "Về tác giả" và "Các bài viết" ở cuối bài không còn dính liền chữ; có khoảng cách và xuống dòng trên điện thoại.

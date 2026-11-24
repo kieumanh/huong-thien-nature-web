@@ -246,6 +246,13 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 .search-result-content .search-product-price { margin-top: .35rem; color: var(--foreground); font-weight: 650; }
 .search-result-content .search-product-unit { margin-top: .35rem; font-size: var(--type-caption); }
 .search-result-content .quiet-link { margin-top: .2rem; }
+/* Results with a thumbnail (articles, pages, courses): picture on top on a phone, beside the text from 560px. */
+.search-result--thumb { display: grid; grid-template-columns: minmax(0, 1fr); gap: .85rem; align-items: start; }
+.search-result-thumb { display: block; overflow: hidden; border-radius: var(--radius-input); background: var(--surface-container); aspect-ratio: 8 / 5; }
+.search-result-thumb img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+.search-result--thumb:hover .search-result-thumb img { transform: scale(1.03); }
+@media (min-width: 560px) { .search-result--thumb { grid-template-columns: minmax(0, 12rem) minmax(0, 1fr); gap: 1.1rem; } }
+@media (prefers-reduced-motion: reduce) { .search-result-thumb img { transition: none; } .search-result--thumb:hover .search-result-thumb img { transform: none; } }
 .search-fallback { margin-top: 1rem; }
 @media (max-width: 420px) {
   .search-result--product { grid-template-columns: 1fr; }

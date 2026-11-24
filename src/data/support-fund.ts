@@ -106,3 +106,10 @@ export const supportFund = {
     footerAction: 'Help sustain the project',
   },
 } as const;
+
+// Link-share picture for the support page (1200 x 630, text baked in, made by scripts/social-images/).
+export const supportShareImage = {
+  type: 'image/jpeg', width: 1200, height: 630,
+  vi: { src: '/media/social/quy-ung-ho-vi.jpg', alt: 'Một mầm cây nảy lên từ đất giữa những vòng sáng, cùng dòng chữ Quỹ ủng hộ: cùng nhau gieo mầm và lan tỏa.' },
+  en: { src: '/media/social/quy-ung-ho-en.jpg', alt: 'A seedling rising from the soil among rings of light, with the words Support fund: sowing seeds and spreading them together.' },
+} as const;
