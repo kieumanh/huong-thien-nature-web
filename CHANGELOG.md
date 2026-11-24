@@ -1,3 +1,7 @@
+## 2.19.1 — Sửa tuổi lập gia đình trong trang Câu chuyện
+
+- Trang Câu chuyện (`/vi/cau-chuyen/`, `/en/story/`): mốc "lập gia đình" sửa từ 22 tuổi thành 25 tuổi (cả hai ngôn ngữ). Các mốc 13 và 28 tuổi giữ nguyên.
+
 ## 2.19.0 — Bài mới "Mặt Trời, Mặt Trăng và nhịp sống của chúng ta" (Thiên nhiên), 5 hình minh họa chuyển động
 
 - **Bài Tản văn mới** (`sun-moon-rhythms`, `/vi/tan-van/mat-troi-mat-trang-nhip-song-cua-ta/`, `/en/journal/sun-moon-rhythms/`, chủ đề **Thiên nhiên**): Mặt Trời với đồng hồ sinh học và tâm trạng; Mặt Trăng, ngày rằm, ngày ba mươi, mồng một; vì sao trăng như "phóng đại" điều ẩn sâu trong ta; điều thuận lợi cho tu tập, chữa lành; cách kết hợp nhịp ngày và nhịp tháng. Bản Việt khoảng 2.750 chữ (9 mục có mục lục, hai khoảng dừng, phần thực hành, lưu ý tìm chuyên gia, không ghi số khẩn cấp); bản Anh rút gọn ~1.600 chữ cùng 9 mục.
