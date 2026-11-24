@@ -4,6 +4,7 @@ import test from 'node:test';
 import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, showFrequencyFee, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
 import { courseCompare } from '../src/data/course-compare.ts';
 import { studentFeedback } from '../src/data/student-feedback.ts';
+import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
 import { frequencySchema } from '../src/data/golden-frequency-schema.ts';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, selfCheckDomains, weeklyPlan } from '../src/data/golden-frequency.ts';
 
@@ -124,5 +125,30 @@ test('student feedback keeps the original text and an equal English translation'
   for (const item of studentFeedback) {
     assert.equal(item.quote.length, item.quoteEn.length);
     assert.ok(item.quote.every(paragraph => paragraph.length > 20) && item.name && item.role.vi && item.role.en);
+    assert.ok(item.quote.join(' ').includes(item.highlight), 'the pull-quote is a sentence of the original');
+    assert.ok(item.quoteEn.join(' ').includes(item.highlightEn));
   }
+});
+
+test('the student feedback page has bilingual routes, is built and sits in the menu just before Contact', () => {
+  assert.ok(journeyPageKeys.includes('feedback'));
+  assert.equal(journeyPath('vi', 'feedback'), '/vi/phan-hoi-hoc-vien/');
+  assert.equal(journeyPath('en', 'feedback'), '/en/student-feedback/');
+  const header = readFileSync(new URL('../src/components/Header.astro', import.meta.url), 'utf8');
+  const feedbackAt = header.indexOf("pageLink('feedback')");
+  assert.ok(feedbackAt > header.indexOf("pageLink('practice')"), 'feedback follows the practice courses');
+  assert.ok(feedbackAt < header.indexOf('nav-connect'), 'feedback comes before the Contact button');
+  for (const lang of languages) {
+    const built = new URL(`../dist${journeyPath(lang, 'feedback')}index.html`, import.meta.url);
+    if (!existsSync(built)) continue;
+    const html = readFileSync(built, 'utf8');
+    assert.ok(html.includes('feedback-card') || html.includes('class="feedback'), `${lang} page renders the feedback card`);
+    assert.ok(html.includes(`href="${journeyPath(lang, 'feedback')}"`), `${lang} menu links to the page`);
+  }
+});
+
+test('the gold layer is loaded site-wide after the base styles', () => {
+  const layout = readFileSync(new URL('../src/layouts/BaseLayout.astro', import.meta.url), 'utf8');
+  assert.ok(layout.includes('gold.css'));
+  assert.ok(existsSync(new URL('../src/styles/gold.css', import.meta.url)));
 });

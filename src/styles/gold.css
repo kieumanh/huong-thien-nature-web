@@ -1,0 +1,83 @@
+/* Gold and night-plum layer, taken from The Golden Frequency and applied site-wide.
+   Colour tokens live in tokens.css (day) and daylight.css (night). */
+
+/* Eyebrow labels read as small gold captions. */
+.eyebrow { color: var(--gold-accent); }
+
+/* Primary buttons carry the gold light; ink text keeps them readable day and night. */
+.button:not(.button--tonal) {
+  border-color: var(--gold-deep); background: var(--gold-gradient); color: var(--gold-ink);
+  box-shadow: 0 6px 18px #c88a2c2e;
+}
+.button:not(.button--tonal):not(:disabled):hover { background: linear-gradient(100deg, #fff3c9, #ffd986 55%, #f0b655); }
+.button:not(.button--tonal):not(:disabled):active { background: linear-gradient(100deg, var(--gold), #d99a38); }
+.button:disabled { box-shadow: none; }
+.button--tonal { border-color: var(--gold-line); background: var(--gold-wash); }
+.button--tonal:not(:disabled):hover { background: var(--brand-fern); }
+[data-sky="night"] .button--tonal:not(:disabled):active { background: #4a3a5a; }
+
+/* Header: a hairline of gold light under the bar and a gold mark for the active page. */
+.topbar { border-bottom-color: transparent; }
+.topbar::after {
+  content: ""; position: absolute; inset: auto 0 0; height: 1px; pointer-events: none;
+  background: linear-gradient(90deg, transparent, var(--gold-deep) 18%, var(--gold) 50%, var(--gold-deep) 82%, transparent); opacity: .75;
+}
+.brand-name small { color: var(--gold-accent); }
+.nav-links a.active, .nav-links a[aria-current], .nav-connect[aria-current] {
+  background: var(--gold-wash); color: var(--foreground); box-shadow: inset 0 -2px 0 var(--gold-deep);
+}
+:is(.nav-links a, .nav-actions a, .nav-toggle):is(:hover, :focus-visible) {
+  background: var(--gold-wash); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--gold-deep);
+}
+@media (max-width: 1199px) {
+  .nav-search[aria-current], .nav-toggle[aria-expanded="true"] { background: var(--gold-wash); color: var(--foreground); }
+}
+[data-sky="night"] .nav-links a[aria-current], [data-sky="night"] .nav-links a.active { color: var(--gold-hi); }
+
+/* Cards: warm gold wash with a fine gold border. */
+.zen-card, .related-card, .search-result {
+  background: linear-gradient(160deg, var(--gold-wash), var(--surface-raised) 62%);
+  box-shadow: 0 8px 26px #3b2a0b0d;
+}
+
+/* Section titles end in a short gold rule. */
+.journey-section > h2::after, .section-heading h2::after, .team-group > h2::after {
+  content: ""; display: block; width: 3.4rem; height: 2px; margin-top: .55rem;
+  background: var(--gold-gradient); border-radius: 2px;
+}
+
+/* Page headers on the journey pages: a night-plum panel with gold lettering and a gold mandala. */
+.journey-page .journey-page-header {
+  background: radial-gradient(ellipse at 85% 12%, #4a3578 0, transparent 58%), linear-gradient(145deg, var(--plum-night), var(--plum-deep) 55%, var(--plum));
+  color: #f8f1e3; box-shadow: 0 18px 44px #100c2433;
+}
+.journey-page .journey-page-header .contemplative-scene--mandala { color: var(--gold); opacity: .3; }
+.journey-page .journey-page-header .breadcrumbs, .journey-page .journey-page-header .breadcrumbs a { color: #d4c9ec; }
+.journey-page .journey-page-header h1 { color: var(--gold-hi); background: var(--gold-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+.journey-page .journey-page-header .lead { color: #e6def5; }
+.journey-page .journey-page-header :focus-visible { outline-color: var(--gold); }
+
+/* Other page titles: deep plum script on the warm page, with a gold rule. */
+.journal-intro h1::after, .contact h1::after, .search-page h1::after, .versions-header h1::after, .shop-intro h1::after {
+  content: ""; display: block; width: 4.2rem; height: 3px; margin-top: .55rem; background: var(--gold-gradient); border-radius: 3px;
+}
+
+/* Floating controls and the progress bar share the night-plum and gold. */
+.music-dock, .back-to-top { --floating-bg: #1a1338; --floating-fg: #ffe7a8; --floating-border: #8d733a; --floating-state: #ffe7a828; }
+[data-floating-tone="light"] { --floating-bg: #fbf2dd; --floating-fg: #1a1233; --floating-border: #c88a2c; --floating-state: #1a123318; }
+.reading-progress span { background: var(--gold-gradient); }
+[data-sky="night"] .reading-progress span { background: var(--gold-gradient); }
+::selection { background: var(--gold); color: var(--gold-ink); }
+
+/* Footer: night-plum with gold headings. */
+.footer {
+  --footer-surface: var(--plum-night); --footer-muted: #d7cfe6; --footer-link: #f1e6c6; --footer-divider: #f4c76b40; --footer-chip: #f4c76b26;
+  background: radial-gradient(ellipse at 15% 0, #2c1f50 0, transparent 55%), linear-gradient(180deg, var(--plum-deep), var(--plum-night));
+  border-top: 1px solid #c88a2c99;
+}
+.footer-group h2, .footer-brand { color: var(--gold-hi); }
+.footer a:hover { color: var(--gold-hi); }
+.footer a:focus-visible { outline-color: var(--gold); }
+
+/* At night the page titles take the gold of the lamp; panels with their own title colour keep it. */
+:where([data-sky="night"]) body h1 { color: var(--gold-hi); }

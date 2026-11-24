@@ -2,9 +2,9 @@
   --forest: #243f32;
   --moss: #526747;
   --leaf: #536c4c;
-  --sage: #e8ebdf;
-  --paper: #faf8f1;
-  --cream: #f2eedf;
+  --sage: #f3ebd4;
+  --paper: #fbf6ea;
+  --cream: #f6eed9;
   --clay: #8b523d;
   --ink-soft: #586557;
   --sun: #7a5a30;
@@ -23,7 +23,7 @@
   --surface-warm: var(--cream);
   --foreground: var(--forest);
   --muted: var(--ink-soft);
-  --border: #bdc5b5;
+  --border: #d9c9a0;
   --border-control: #7e8a7b;
   --focus: var(--sun);
   --success: #2b5741;
@@ -35,7 +35,21 @@
 
   --ink: var(--foreground);
   --line: var(--border);
-  --brand-fern: #dce8d8;
+  --brand-fern: #efe0b8;
+
+  /* Gold and night-plum accents shared with The Golden Frequency. */
+  --gold-hi: #ffe7a8;
+  --gold: #f4c76b;
+  --gold-deep: #c88a2c;
+  --gold-accent: #855510;
+  --gold-wash: #fbf2dd;
+  --gold-line: #e2cd9c;
+  --gold-ink: #1a1233;
+  --plum-night: #100c24;
+  --plum-deep: #1a1338;
+  --plum: #2c1f50;
+  --gold-gradient: linear-gradient(100deg, var(--gold-hi), var(--gold) 55%, #e8ab4a);
+  --gold-text: linear-gradient(100deg, #fff1c4 0%, #f4c76b 36%, #dc9b36 62%, #ffe7a8 100%);
   --brand-clay: var(--clay);
   --brand-rice: var(--surface-warm);
   --display-face: "Dancing Script", Georgia, "Times New Roman", serif;

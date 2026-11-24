@@ -19,6 +19,7 @@ export const courseCompare = {
           'Hương Thiền hướng dẫn; Kiều Mạnh hỗ trợ học viên.',
           'Báo giá qua tin nhắn.',
         ],
+        chips: ['Lớp online', '1 tháng · 6 chặng', 'Khai giảng hằng tháng'],
         action: 'Xem khóa Tần Số Vàng',
       },
       tarot: {
@@ -30,6 +31,7 @@ export const courseCompare = {
           'Đối thoại trực tiếp với Hương Thiền trong buổi gặp.',
           'Báo giá qua tin nhắn.',
         ],
+        chips: ['1:1 cùng Hương Thiền', '90 phút', 'Trực tiếp hoặc online'],
         action: 'Xem buổi Tarot 1:1',
       },
     },
@@ -49,6 +51,7 @@ export const courseCompare = {
           'Hương Thiền guides; Kiều Mạnh supports students.',
           'Quote by message.',
         ],
+        chips: ['Online class', 'One month · six stages', 'Starts every month'],
         action: 'View The Golden Frequency',
       },
       tarot: {
@@ -60,6 +63,7 @@ export const courseCompare = {
           'A direct conversation with Hương Thiền during the session.',
           'Quote by message.',
         ],
+        chips: ['1:1 with Hương Thiền', '90 minutes', 'In person or online'],
         action: 'View the 1:1 tarot session',
       },
     },

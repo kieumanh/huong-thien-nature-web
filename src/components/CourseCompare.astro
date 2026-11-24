@@ -29,12 +29,12 @@ const order: [CourseKey, (typeof courses)[number]][] = [['golden-frequency', fre
 <style>
   .course-compare__head p { max-width: 60ch; margin-top: .5rem; color: var(--muted); }
   .course-compare__grid { display: grid; gap: clamp(.8rem, 2.5vw, 1.25rem); margin-top: 1.1rem; }
-  .course-compare__card { display: flex; flex-direction: column; gap: .8rem; padding: clamp(1rem, 3.5vw, 1.5rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface-raised); color: var(--foreground); }
-  .course-compare__card.is-current { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+  .course-compare__card { display: flex; flex-direction: column; gap: .8rem; padding: clamp(1rem, 3.5vw, 1.5rem); border: 1px solid var(--gold-line); border-radius: var(--radius-card); background: linear-gradient(160deg, var(--gold-wash), var(--surface-raised) 62%); color: var(--foreground); }
+  .course-compare__card.is-current { border-color: var(--gold-deep); box-shadow: 0 0 0 1px var(--gold-deep), 0 10px 28px #c88a2c24; }
   .course-compare__card h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0; font-size: var(--type-card); }
-  .course-compare__badge { padding: .15rem .6rem; border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary, #fff); font: 650 .74rem/1.4 var(--sans); }
+  .course-compare__badge { padding: .15rem .6rem; border-radius: var(--radius-pill); background: var(--gold-gradient); color: var(--gold-ink); font: 700 .74rem/1.4 var(--sans); }
   .course-compare__card dl { display: grid; gap: .7rem; margin: 0; }
-  .course-compare__card dt { color: var(--secondary); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .course-compare__card dt { color: var(--gold-accent); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
   .course-compare__card dd { margin: .15rem 0 0; line-height: 1.55; }
   .course-compare__card .button { margin-top: auto; align-self: flex-start; }
   @media (min-width: 760px) { .course-compare__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
