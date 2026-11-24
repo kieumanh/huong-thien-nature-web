@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.19.1',
+    date: '2026-11-24',
+    vi: ['Sửa tuổi lập gia đình trong Câu chuyện', 'Trang Câu chuyện ghi đúng mốc lập gia đình ở tuổi 25 (vi và en).'],
+    en: ['Corrected the age of starting a family in the Story page', 'The Story page now gives the right age of starting a family, 25, in both languages.'],
+  },
+  {
     version: '2.19.0',
     date: '2026-11-24',
     vi: ['Bài mới về Mặt Trời, Mặt Trăng và nhịp sống, cùng năm hình minh họa chuyển động', 'Bài Tản văn mới trong mục Thiên nhiên về ánh sáng Mặt Trời, vòng trăng, ngày rằm, ngày ba mươi và mồng một, tách rõ điều nghiên cứu đã đo, điều chưa chắc và phần chiêm nghiệm; có năm hình minh họa chuyển động (tắt khi chọn giảm chuyển động) và danh sách nguồn. Sửa chế độ đọc nền sáng vào ban đêm.'],
