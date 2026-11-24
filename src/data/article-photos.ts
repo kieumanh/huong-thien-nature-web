@@ -1,5 +1,7 @@
+import { albumPhotos, albumPhotoSrc } from './album.ts';
+
 // Pixabay source pages and intrinsic dimensions for the locally hosted photographs.
-export const articlePhotos: Record<string, { source?: string; width: number; height: number }> = {
+const pixabayPhotos: Record<string, { source?: string; width: number; height: number }> = {
   '/media/huong-ben-ho.webp': { width: 1120, height: 630 },
   '/media/pixabay-7363535.webp': { source: 'https://pixabay.com/photos/bamboo-forest-path-asia-japan-7363535/', width: 1200, height: 802 },
   '/media/pixabay-1869722.webp': { source: 'https://pixabay.com/photos/beverage-tea-pour-pouring-1869722/', width: 853, height: 1280 },
@@ -13,4 +15,10 @@ export const articlePhotos: Record<string, { source?: string; width: number; hei
   '/media/pixabay-8259984.webp': { source: 'https://pixabay.com/photos/vietnam-tea-plantation-agriculture-8259984/', width: 1200, height: 800 },
   '/media/pixabay-2641446.webp': { source: 'https://pixabay.com/photos/water-buffalo-vietnam-nature-2641446/', width: 1200, height: 656 },
   '/media/pixabay-6540843.webp': { source: 'https://pixabay.com/photos/waterfall-vietnam-nature-landscape-6540843/', width: 1200, height: 800 },
+};
+
+// Album photographs (our own) may also be used as article covers.
+export const articlePhotos: Record<string, { source?: string; width: number; height: number }> = {
+  ...pixabayPhotos,
+  ...Object.fromEntries(albumPhotos.map(photo => [albumPhotoSrc(photo), { width: photo.width, height: photo.height }])),
 };

@@ -2,6 +2,7 @@
 import { articleAnswers } from "../../../data/article-answers";
 import { articlePhotos } from "../../../data/article-photos";
 import { articleIllustrations } from '../../../data/editorial-illustrations';
+import { figuresFor } from '../../../data/article-figures';
 import AuthorProfile from '../../../components/AuthorProfile.astro';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import { journeyPath } from '../../../data/journey-pages';
@@ -30,6 +31,7 @@ const related = article.relatedSlugs
   : articles.filter(item => item.slug !== article.slug).slice(0, 3);
 const vi = lang === 'vi';
 const illustration = vi ? articleIllustrations[article.slug] : undefined;
+const figures = figuresFor(article.slug, lang, article.translations.vi.sections.length, content.sections.length);
 const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', { dateStyle: 'long', timeZone: 'UTC' });
 const readableDate = (date: string) => dateFormat.format(new Date(date));
 const showModified = article.updatedAt && article.updatedAt !== article.publishedAt;
@@ -63,7 +65,7 @@ const schema = {
           {article.phase === 'roots' && <span>{vi ? 'Biên tập từ Thiền Tinh Hoa' : 'Adapted from Thiền Tinh Hoa'}</span>}
         </p>
       </header>
-      <figure class="shell article-cover"><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
+      <figure class:list={["shell article-cover", { "article-cover--portrait": articlePhotos[article.image].height > articlePhotos[article.image].width }]}><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
       <div class="article-body">
         <p class="article-introduction">{content.introduction}</p>
         {content.sections.length >= 3 && <section class="article-toc reading-section">
@@ -79,6 +81,10 @@ const schema = {
               <img src={illustration.src} width={illustration.width} height={illustration.height} alt={illustration.alt} loading="lazy" decoding="async" />
               <figcaption>{illustration.caption} <a href={illustration.source}>Ảnh trên Pixabay</a></figcaption>
             </figure>}
+            {figures.filter(figure => figure.after === index + 1).map(figure => <figure class="article-illustration article-figure">
+              <img src={figure.src} width={figure.width} height={figure.height} alt={figure.alt} loading="lazy" decoding="async" />
+              <figcaption>{figure.caption} <span class="article-figure__credit">{figure.credit}</span></figcaption>
+            </figure>)}
           </>
         ))}
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>

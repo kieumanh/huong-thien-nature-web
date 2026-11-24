@@ -1,6 +1,7 @@
 ---
 import { articlePath, type Article } from '../data/articles';
 import { articlePhotos } from '../data/article-photos';
+import { articleWords, audienceOf, topicLabel, topicOf } from '../data/journal-topics';
 import { getCopy, type Language } from '../data/site';
 
 interface Props {
@@ -8,22 +9,30 @@ interface Props {
   lang: Language;
   heading?: 'h2' | 'h3';
   featured?: boolean;
+  /** Library card on the journal page: number overlay, topic, word count and audience. */
+  number?: number;
 }
-const { article, lang, heading = 'h3', featured = false } = Astro.props;
+const { article, lang, heading = 'h3', featured = false, number } = Astro.props;
 const Heading = heading;
 const content = article.translations[lang];
 const photo = articlePhotos[article.image];
-const searchText = [content.title, content.category, content.description, article.keywords?.[lang] ?? '']
-  .join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 const minutes = lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes;
+const topic = topicOf(article);
+const library = number !== undefined;
+const words = Math.round(articleWords(article, lang) / 100) * 100;
+const wordLabel = lang === 'vi' ? `~${words.toLocaleString('vi-VN')} chữ` : `${minutes} ${getCopy(lang).readTime}`;
 ---
-<article class:list={['journal-card', 'zen-card', { 'journal-card--featured': featured }]} data-journal-card data-search={searchText}>
+<article class:list={['journal-card', 'zen-card', { 'journal-card--featured': featured, 'journal-card--library': library }]} data-journal-card data-topic={topic}>
   <div class="journal-image">
     <img src={article.image} alt={content.imageAlt} width={photo.width} height={photo.height} loading="lazy" decoding="async" />
+    {library && <span class="journal-number" aria-hidden="true">{String(number).padStart(2, '0')}</span>}
   </div>
   <div class="journal-card-copy">
-    <p class="article-meta"><span>{content.category}</span><span>{minutes} {getCopy(lang).readTime}</span></p>
+    {library
+      ? <p class="article-meta"><span>{topicLabel(topic, lang)}</span><span>{wordLabel}</span><span>{audienceOf(article, lang)}</span></p>
+      : <p class="article-meta"><span>{content.category}</span><span>{minutes} {getCopy(lang).readTime}</span></p>}
     <Heading><a href={articlePath(lang, article.slug)}>{content.title}</a></Heading>
     <p class="journal-card-description">{content.description}</p>
+    {library && <p class="journal-card-more" aria-hidden="true">{lang === 'vi' ? 'Đọc bài viết' : 'Read the article'} ↗</p>}
   </div>
 </article>

@@ -7,6 +7,9 @@ import { practicePhoto } from '../data/editorial-illustrations';
 import HomePhoto from './HomePhoto.astro';
 import HomeDiscovery from './HomeDiscovery.astro';
 import AlbumStrip from './AlbumStrip.astro';
+import EmpathyPaths from './EmpathyPaths.astro';
+import { homeEmpathy } from '../data/empathy';
+import { coursePath, frequencyCourse } from '../data/courses';
 import ArticleCard from './ArticleCard.astro';
 import Arrow from './Arrow.astro';
 import ContemplativeScene from './ContemplativeScene.astro';
@@ -31,6 +34,10 @@ const description = vi
 const practicePath = journeyPath(lang, 'practice');
 const storyPath = journeyPath(lang, 'story');
 const teamPath = journeyPath(lang, 'team');
+const welcome = homeEmpathy(lang, {
+  practice: practicePath, contact: contactPath(lang), frequency: coursePath(lang, frequencyCourse), tarot: coursePath(lang),
+  ecosystem: journeyPath(lang, 'ecosystem'), article: slug => articlePath(lang, slug),
+});
 ---
 <BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} canonicalPath={`/${lang}/`} aboutOrganization>
   <Header {lang} {alternatePath} />
@@ -39,7 +46,7 @@ const teamPath = journeyPath(lang, 'team');
       <div class="material-hero__copy">
         <p class="eyebrow">{t.eyebrow}</p>
         <h1 id="hero-title">{vi ? 'Có mặt trong' : 'Be present for'}<br /><span class="handwritten">{vi ? 'đời mình.' : 'your own life.'}</span></h1>
-        <p class="lead">{vi ? 'Có hôm, mình ngồi xuống mà trong đầu vẫn còn nguyên cuộc trò chuyện từ sáng. Khi nhận ra hai bàn chân đang đặt trên sàn, mình có một khoảnh khắc để nghe lòng mình trước khi tiếp tục ngày hôm đó.' : 'Some days I sit down and find that the morning’s conversation is still going on in my head. When I notice both feet on the floor, I have a moment to listen to myself before going on with my day.'}</p>
+        <p class="lead">{vi ? 'Dù hôm nay bạn đến với một nỗi mệt, một câu hỏi chưa có lời đáp, hay chỉ là mong được thở chậm lại, ở đây có chỗ để bạn ngồi xuống. Không cần phải ổn, không cần biết thiền. Chỉ cần bắt đầu từ chỗ bạn đang đứng.' : 'Whether you arrive today with tiredness, a question without an answer, or simply a wish to breathe more slowly, there is a place here to sit down. You don’t need to be okay or know how to meditate. Just begin where you are.'}</p>
         <div class="material-actions">
           <a class="button" href={practicePath}>{vi ? 'Thực tập một phút' : 'Practise for one minute'} <Arrow /></a>
           <a class="quiet-link" href={storyPath}>{vi ? 'Đọc câu chuyện' : 'Read our story'}</a>
@@ -47,6 +54,8 @@ const teamPath = journeyPath(lang, 'team');
       </div>
       <div class="material-hero__art"><ContemplativeScene motif="meditation" /></div>
     </section>
+
+    <EmpathyPaths block={welcome} id="welcome" extraClass="shell home-welcome" />
 
     <section class="shell home-story" id="story" aria-labelledby="story-title">
       <div class="home-story__photo"><HomePhoto photo="barefoot-by-sea" {lang} /></div>

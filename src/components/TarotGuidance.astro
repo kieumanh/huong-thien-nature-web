@@ -1,5 +1,7 @@
 ---
 import AlbumStrip from './AlbumStrip.astro';
+import EmpathyPaths from './EmpathyPaths.astro';
+import { tarotEmpathy } from '../data/empathy';
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import CourseCompare from './CourseCompare.astro';
@@ -53,6 +55,8 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
   <nav class="guidance-jumps" aria-label={copy.navigation} data-guidance-reveal>
     {copy.links.map(([id, label]) => <a href={`#${id}`}>{label} <span aria-hidden="true">↓</span></a>)}
   </nav>
+
+  <EmpathyPaths block={tarotEmpathy(lang)} id="tarot-empathy" extraClass="guidance-section" />
 
   <section class="guidance-section" id="benefits" aria-labelledby="benefits-title">
     <h2 id="benefits-title" data-guidance-reveal>{copy.benefitsTitle}</h2>

@@ -142,7 +142,8 @@ def check_flows(browser):
         wait_page(page, base + entries['article'])
         page.locator('.article-toc a').first.click()
         assert urlsplit(page.url).fragment == 'section-1'
-        expect(page.locator('.article-illustration')).to_have_count(1 if lang == 'vi' else 0)
+        expect(page.locator('.article-illustration:not(.article-figure)')).to_have_count(1 if lang == 'vi' else 0)
+        expect(page.locator('.article-figure')).to_have_count(2)
         expect(page.locator('#article-author h2')).to_have_text('Kiều Mạnh')
         wait_page(page, base + entries['search'])
         expect(page.locator('.search-result--product').first).to_be_visible()

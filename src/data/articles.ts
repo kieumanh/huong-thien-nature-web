@@ -2,6 +2,7 @@ import type { Language } from './site';
 import { articleDepth } from './article-depth.ts';
 import { meditationChallenges } from './meditation-challenges.ts';
 import { rootsArticles } from './roots-articles.ts';
+import { healingArticles } from './healing-articles.ts';
 
 export type ArticleTranslation = {
   category: string;
@@ -34,6 +35,7 @@ export type Article = {
 };
 
 const baseArticles: Article[] = [
+  ...healingArticles,
   meditationChallenges,
   ...rootsArticles,
   {

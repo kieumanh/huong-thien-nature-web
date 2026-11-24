@@ -5,8 +5,11 @@ import Footer from '../../../components/Footer.astro';
 import ContemplativeScene from '../../../components/ContemplativeScene.astro';
 import ArticleCard from '../../../components/ArticleCard.astro';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
+import Arrow from '../../../components/Arrow.astro';
 import { languages, type Language } from '../../../data/site';
 import { articles, articlePath, journalPath } from '../../../data/articles';
+import { journalTopics, laneArticles, readingLanes, topicOf } from '../../../data/journal-topics';
+import { contactPath } from '../../../data/contact-channels';
 import '../../../styles/editorial.css';
 
 export function getStaticPaths() {
@@ -16,11 +19,11 @@ const lang = Astro.params.lang as Language;
 const en = lang === 'en';
 const title = en ? 'Journal' : 'Tản văn';
 const description = en
-  ? 'Reflections on meditation, nature and the details of everyday life, with practices to try at your own pace.'
-  : 'Những bài viết về thiền định, thiên nhiên và đời sống thường ngày, với các bài thực tập bạn có thể thử theo nhịp của mình.';
+  ? 'Reflections on meditation, healing, nature and everyday life, with small practices to try at your own pace.'
+  : 'Những bài viết về thiền định, chữa lành, thiên nhiên và đời sống thường ngày, kèm những thực tập nhỏ để bạn thử theo nhịp của mình.';
 const alternatePath = journalPath(en ? 'vi' : 'en');
-const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering-mind', 'everyday-mindfulness']
-  .map(slug => articles.find(article => article.slug === slug)!);
+const counts = Object.fromEntries(journalTopics.map(topic => [topic.id, articles.filter(article => topicOf(article) === topic.id).length]));
+const unit = en ? 'articles' : 'bài đọc';
 ---
 <BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath}>
   <Header {lang} {alternatePath} />
@@ -29,31 +32,41 @@ const readingPath = ['meditation-for-beginners', 'breath-meditation', 'wandering
       <ContemplativeScene motif="mandala" />
       <Breadcrumb {lang} current={title} />
       <div class="journal-intro">
-        <p class="eyebrow">{en ? 'Meditation · Nature · Life' : 'Thiền · Thiên nhiên · Đời sống'}</p>
+        <p class="eyebrow">{en ? 'Meditation · Healing · Life' : 'Thiền · Chữa lành · Đời sống'}</p>
         <h1>{title}</h1>
         <p class="lead">{description}</p>
       </div>
-      <section class="reading-section roots-reading-path">
-        <h2 class="reading-heading">{en ? 'Where to start' : 'Lộ trình cho người mới'}</h2>
-        <div class="reading-links">
-          <p>{en ? 'Read these four guides in order, from your first sitting to bringing attention into everyday activities.' : 'Bốn bài theo thứ tự, từ lần đầu ngồi thiền đến khi mang sự chú tâm vào công việc hằng ngày.'}</p>
-          <nav aria-label={en ? 'Suggested reading path' : 'Lộ trình đọc gợi ý'}><ol>{readingPath.map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol></nav>
-        </div>
-      </section>
     </header>
+
+    <section class="shell journal-lanes" aria-labelledby="journal-lanes-title">
+      <h2 id="journal-lanes-title">{en ? 'Not sure where to begin?' : 'Không biết bắt đầu từ đâu?'}</h2>
+      <p class="journal-lanes__intro">{en ? 'Choose the lane closest to how you feel today. Each one is a short, ordered reading path.' : 'Chọn lối gần nhất với điều bạn đang cảm thấy hôm nay. Mỗi lối là vài bài đọc ngắn, theo thứ tự.'}</p>
+      <ol class="journal-lanes__list">
+        {readingLanes.map((lane, index) => <li class="journal-lane zen-card">
+          <p class="journal-lane__head"><span class="journal-lane__number" aria-hidden="true">{index + 1}</span><span>{laneArticles(lane.slugs).length} {unit}</span></p>
+          <h3>{lane.title[lang]}</h3>
+          <p>{lane.note[lang]}</p>
+          <ol>{laneArticles(lane.slugs).map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
+        </li>)}
+      </ol>
+    </section>
+
     <section class="shell journal-listing-articles" id="journal-articles" aria-labelledby="journal-articles-title">
       <div class="section-heading">
-        <h2 id="journal-articles-title">{en ? 'All articles' : 'Tất cả bài viết'}</h2>
-        <p class="journal-count" data-journal-count role="status" aria-live="polite" aria-atomic="true">{articles.length} {en ? 'articles' : 'bài viết'}</p>
+        <h2 id="journal-articles-title">{en ? 'Browse the library' : 'Tìm trong thư viện'}</h2>
+        <p class="journal-count" data-journal-count role="status" aria-live="polite" aria-atomic="true">{articles.length} {unit}</p>
       </div>
-      <form class="journal-search" role="search" data-journal-search aria-label={en ? 'Search articles by keyword' : 'Tìm bài viết theo từ khóa'}>
-        <label class="sr-only" for="journal-search">{en ? 'Search articles by keyword' : 'Tìm bài viết theo từ khóa'}</label>
-        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7" /><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" /></svg>
-        <input id="journal-search" name="q" type="search" maxlength="80" autocomplete="off" aria-controls="journal-grid" placeholder={en ? 'Search by keyword: breath, mindfulness, nature…' : 'Tìm theo từ khóa: hơi thở, chánh niệm, thiên nhiên…'} />
-        <button type="button" class="journal-search-clear" data-journal-clear hidden>{en ? 'Clear' : 'Xóa'}</button>
-      </form>
-      <p class="journal-empty" data-journal-empty hidden>{en ? 'No article matches that keyword. Try a shorter word.' : 'Chưa có bài nào khớp từ khóa này. Hãy thử một từ ngắn hơn.'}</p>
-      <div class="journal-grid" id="journal-grid">{articles.map((article, index) => <ArticleCard {article} {lang} featured={index === 0} />)}</div>
+      <div class="journal-topics" role="group" aria-label={en ? 'Filter articles by topic' : 'Lọc bài viết theo chủ đề'} data-journal-topics>
+        <button type="button" class="journal-topic" data-topic="all" aria-pressed="true">{en ? 'All' : 'Tất cả'} <span>{articles.length}</span></button>
+        {journalTopics.map(topic => <button type="button" class="journal-topic" data-topic={topic.id} aria-pressed="false">{topic.label[lang]} <span>{counts[topic.id]}</span></button>)}
+      </div>
+      <div class="journal-grid journal-grid--library" id="journal-grid">{articles.map((article, index) => <ArticleCard {article} {lang} heading="h2" number={index + 1} />)}</div>
+    </section>
+
+    <section class="shell journal-invite zen-card" aria-labelledby="journal-invite-title">
+      <h2 id="journal-invite-title">{en ? 'Carrying something you can’t find here?' : 'Đang mang một điều chưa tìm thấy ở đây?'}</h2>
+      <p>{en ? 'Send us a few lines about what you are going through or what you would like to read. We read every message and may write about it in a future piece, without your name.' : 'Gửi cho tụi mình vài dòng về điều bạn đang trải qua hoặc chủ đề bạn muốn đọc. Tụi mình đọc từng lời nhắn, và có thể viết thành một bài sau này, không kèm tên bạn.'}</p>
+      <a class="button" href={contactPath(lang)}>{en ? 'Send a message' : 'Gửi lời nhắn'} <Arrow /></a>
     </section>
   </main>
   <Footer {lang} />

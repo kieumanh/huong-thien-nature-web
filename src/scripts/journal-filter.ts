@@ -1,31 +1,33 @@
-const normalize = (value: string) => value.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[đĐ]/g, 'd').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
-
-const form = document.querySelector<HTMLFormElement>('[data-journal-search]');
-const input = form?.querySelector<HTMLInputElement>('input');
-const clear = form?.querySelector<HTMLButtonElement>('[data-journal-clear]');
+// Topic filter for the journal: progressive enhancement (without JavaScript every article stays visible).
+const group = document.querySelector<HTMLElement>('[data-journal-topics]');
+const buttons = [...(group?.querySelectorAll<HTMLButtonElement>('button[data-topic]') ?? [])];
+const cards = [...document.querySelectorAll<HTMLElement>('#journal-grid [data-journal-card]')];
 const count = document.querySelector<HTMLElement>('[data-journal-count]');
-const empty = document.querySelector<HTMLElement>('[data-journal-empty]');
-const cards = [...document.querySelectorAll<HTMLElement>('[data-journal-card]')];
 
-if (form && input && count && empty && cards.length) {
+if (group && buttons.length && cards.length && count) {
   const en = document.documentElement.lang === 'en';
-  const unit = en ? 'articles' : 'bài viết';
-  const apply = () => {
-    const words = normalize(input.value).split(' ').filter(Boolean);
+  const unit = en ? 'articles' : 'bài đọc';
+  const valid = new Set(buttons.map(button => button.dataset.topic));
+  const apply = (topic: string, push: boolean) => {
+    if (!valid.has(topic)) topic = 'all';
     let shown = 0;
     for (const card of cards) {
-      const text = card.dataset.search ?? '';
-      const match = words.every(word => text.includes(word));
+      const match = topic === 'all' || card.dataset.topic === topic;
       card.hidden = !match;
       if (match) shown += 1;
     }
-    empty.hidden = shown > 0;
-    if (clear) clear.hidden = input.value === '';
-    count.textContent = words.length ? `${shown}/${cards.length} ${unit}` : `${cards.length} ${unit}`;
+    for (const button of buttons) button.setAttribute('aria-pressed', String(button.dataset.topic === topic));
+    count.textContent = topic === 'all' ? `${cards.length} ${unit}` : `${shown}/${cards.length} ${unit}`;
+    if (push) {
+      const url = new URL(location.href);
+      if (topic === 'all') url.searchParams.delete('chu-de'); else url.searchParams.set('chu-de', topic);
+      history.replaceState(null, '', url);
+    }
   };
-  form.addEventListener('submit', event => { event.preventDefault(); apply(); });
-  input.addEventListener('input', apply);
-  clear?.addEventListener('click', () => { input.value = ''; apply(); input.focus(); });
-  const initial = new URLSearchParams(location.search).get('q');
-  if (initial) { input.value = initial.slice(0, 80); apply(); }
+  group.addEventListener('click', event => {
+    const button = (event.target as Element).closest<HTMLButtonElement>('button[data-topic]');
+    if (button) apply(button.dataset.topic ?? 'all', true);
+  });
+  const initial = new URLSearchParams(location.search).get('chu-de');
+  if (initial) apply(initial, false);
 }
