@@ -1,4 +1,4 @@
-// Tản văn listing: search, sort, topic filter, 9-per-page pagination and "Một bài viết hữu duyên".
+// Tản văn listing: search, topic filter, 9-per-page pagination and "Một bài viết hữu duyên".
 // Progressive enhancement: without JavaScript every article stays visible and the search form opens the site-wide search.
 import { normalizeSearch } from './search-engine';
 
@@ -14,14 +14,10 @@ const count = document.querySelector<HTMLElement>('[data-journal-count]');
 const nav = document.querySelector<HTMLElement>('[data-journal-pages]');
 const form = document.querySelector<HTMLFormElement>('[data-journal-form]');
 const input = document.querySelector<HTMLInputElement>('[data-journal-query]');
-const sortSelect = document.querySelector<HTMLSelectElement>('[data-journal-sort]');
 const empty = document.querySelector<HTMLElement>('[data-journal-empty]');
 const siteLink = document.querySelector<HTMLAnchorElement>('[data-journal-site]');
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-// Newest first is the default and always the starting order. Shortest read is an explicit choice.
-type Sort = 'newest' | 'short';
-const sorts: Sort[] = ['newest', 'short'];
 const num = (card: HTMLElement, key: string) => Number.parseFloat(card.dataset[key] ?? '') || 0;
 const slugOf = (card: HTMLElement) => card.dataset.slug ?? '';
 const linkOf = (card: HTMLElement) => card.querySelector<HTMLAnchorElement>('.journal-card-copy a');
@@ -36,7 +32,6 @@ if (grid && group && buttons.length && cards.length && count && nav) {
   let topic = 'all';
   let page = 1;
   let query = '';
-  let sort: Sort = 'newest';
   let loading = false;
 
   // The full text of each article comes from the site search index, fetched once when the reader first uses the box.
@@ -72,14 +67,10 @@ if (grid && group && buttons.length && cards.length && count && nav) {
     return { value, phrase: exact };
   };
 
+  // Newest first; undated articles last; curated rank and order only break ties on the same day.
   const bySort = (a: HTMLElement, b: HTMLElement) => {
-    if (sort === 'newest') {
-      const da = a.dataset.date ?? '', db = b.dataset.date ?? '';
-      if (da !== db) return !da ? 1 : !db ? -1 : db.localeCompare(da);
-    } else if (sort === 'short') {
-      const diff = num(a, 'minutes') - num(b, 'minutes');
-      if (diff) return diff;
-    }
+    const da = a.dataset.date ?? '', db = b.dataset.date ?? '';
+    if (da !== db) return !da ? 1 : !db ? -1 : db.localeCompare(da);
     return num(a, 'curated') - num(b, 'curated') || num(a, 'order') - num(b, 'order');
   };
 
@@ -144,7 +135,6 @@ if (grid && group && buttons.length && cards.length && count && nav) {
       const set = (key: string, value: string, fallback: string) => { if (value === fallback) url.searchParams.delete(key); else url.searchParams.set(key, value); };
       set('chu-de', topic, 'all');
       set('q', query.trim(), '');
-      set('sap-xep', sort, 'newest');
       set('trang', String(page), '1');
       history.replaceState(null, '', url);
     }
@@ -174,11 +164,6 @@ if (grid && group && buttons.length && cards.length && count && nav) {
     render(true, false);
     input?.blur();
     document.getElementById('journal-grid')?.scrollIntoView({ block: 'start', behavior: reducedMotion() ? 'auto' : 'smooth' });
-  });
-  sortSelect?.addEventListener('change', () => {
-    sort = sorts.includes(sortSelect.value as Sort) ? sortSelect.value as Sort : 'newest';
-    page = 1;
-    render(true, false);
   });
   document.querySelector<HTMLButtonElement>('[data-journal-reset]')?.addEventListener('click', () => {
     query = ''; topic = 'all'; page = 1;
@@ -213,9 +198,6 @@ if (grid && group && buttons.length && cards.length && count && nav) {
   const params = new URLSearchParams(location.search);
   const initialTopic = params.get('chu-de');
   if (initialTopic && valid.has(initialTopic)) topic = initialTopic;
-  const initialSort = params.get('sap-xep');
-  if (initialSort && sorts.includes(initialSort as Sort)) sort = initialSort as Sort;
-  if (sortSelect) sortSelect.value = sort;
   query = (params.get('q') ?? '').slice(0, 120);
   if (input) input.value = query;
   if (query) void loadIndex();
