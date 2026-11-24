@@ -1,3 +1,10 @@
+## 2.20.0 — Tarot: minh họa mới và ảnh chia sẻ riêng
+
+- **Ảnh minh họa Tarot mới** (`public/media/guidance/tarot-illustration.webp`, 1200×630, không chữ): một chùm lá bài xòe hình quạt trên nền tím đêm, thay ảnh chụp Pixabay cũ. Ảnh hiện ở thẻ khóa trong Khóa thực hành và Trang chủ, và ở ảnh thu nhỏ tìm kiếm (`/media/thumbs/course-tarot.webp`, 640×400). Đã gỡ tệp ảnh Pixabay cũ khỏi kho. Không dùng ảnh Pixabay mới.
+- **Ảnh chia sẻ link riêng cho trang Tarot** (`/media/social/tarot-course-vi.jpg`, `tarot-course-en.jpg`, 1200×630): có tiêu đề và dòng giới thiệu buổi 1:1 theo ngôn ngữ, canh giữa để Zalo cắt vuông vẫn đủ chữ. Dùng cho `og:image`, `twitter:image` và dữ liệu có cấu trúc (schema.org), kèm mô tả ảnh đúng ngôn ngữ. Trường mới `thumbnail.share` và hàm `courseShareImage` trong `src/data/courses.ts`; Tần Số Vàng giữ nguyên hành vi cũ.
+- **Công cụ dựng ảnh**: `scripts/social-images/render.py` dựng thêm ba ảnh Tarot; `template.html` có biến thể `tarot` (ảnh chia sẻ) và `tarot-art` (minh họa không chữ).
+- **Kiểm tra**: `check`, `audit`, `build`, `audit:build` đạt; các bộ test Tarot, tìm kiếm, Tần Số Vàng, Tản văn, headers, liên hệ, worker, cửa hàng và `wrangler deploy --dry-run` đạt.
+
 ## 2.19.1 — Sửa tuổi lập gia đình trong trang Câu chuyện
 
 - Trang Câu chuyện (`/vi/cau-chuyen/`, `/en/story/`): mốc "lập gia đình" sửa từ 22 tuổi thành 25 tuổi (cả hai ngôn ngữ). Các mốc 13 và 28 tuổi giữ nguyên.

@@ -9,6 +9,8 @@ export type Course = {
     src: string;
     /** Optional per-language social image (text baked into the picture). Falls back to `src`. */
     localized?: Partial<Record<Language, string>>;
+    /** Optional per-language picture for link previews (1200×630, title baked in). Falls back to the card image. */
+    share?: Partial<Record<Language, string>>;
     width: number;
     height: number;
     source?: string;
@@ -22,14 +24,17 @@ export type Course = {
 export const tarotCourse = {
   id: 'tarot',
   thumbnail: {
-    src: '/media/guidance/tarot-thumbnail.jpg',
+    src: '/media/guidance/tarot-illustration.webp',
+    share: {
+      vi: '/media/social/tarot-course-vi.jpg',
+      en: '/media/social/tarot-course-en.jpg',
+    },
     width: 1200,
     height: 630,
-    source: 'https://pixabay.com/photos/craft-tarot-divination-2728227/',
-    credit: 'AlbanyColley · Pixabay',
+    credit: 'Minh họa: Hương Thiền Nature',
     alt: {
-      vi: 'Những lá Tarot trải trên bàn, với lá Bánh xe Vận mệnh ở giữa.',
-      en: 'Tarot cards spread across a table, with the Wheel of Fortune at the centre.',
+      vi: 'Một chùm lá bài Tarot xòe hình quạt trên nền tím đêm, lá giữa có vòng tròn vàng ánh sáng.',
+      en: 'A fan of tarot cards on a deep violet night, the centre card marked with golden rings of light.',
     },
   },
   vi: {
@@ -85,6 +90,11 @@ export function coursePath(lang: Language, course: Course = tarotCourse) {
 
 export function courseImage(course: Course, lang: Language) {
   return course.thumbnail.localized?.[lang] ?? course.thumbnail.src;
+}
+
+/** Picture used when the course page is shared (og:image, twitter:image, schema.org). */
+export function courseShareImage(course: Course, lang: Language) {
+  return course.thumbnail.share?.[lang] ?? courseImage(course, lang);
 }
 
 /**

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.20.0',
+    date: '2026-11-24',
+    vi: ['Tarot có minh họa mới và ảnh chia sẻ riêng', 'Trang khóa Tarot và thẻ khóa học dùng hình vẽ lá bài mới thay ảnh cũ. Khi chia sẻ link, ảnh hiện tiêu đề và dòng giới thiệu buổi 1:1 bằng ngôn ngữ của trang.'],
+    en: ['Tarot has a new illustration and its own share picture', 'The Tarot course page and its course card now use a newly drawn picture of tarot cards in place of the old photo. When a link is shared, the picture shows the title and the one-to-one session line in the language of the page.'],
+  },
+  {
     version: '2.19.1',
     date: '2026-11-24',
     vi: ['Sửa tuổi lập gia đình trong Câu chuyện', 'Trang Câu chuyện ghi đúng mốc lập gia đình ở tuổi 25 (vi và en).'],

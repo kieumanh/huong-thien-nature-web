@@ -1,4 +1,4 @@
-import { coursePath, tarotCourse, tarotOffer } from './courses.ts';
+import { coursePath, courseShareImage, tarotCourse, tarotOffer } from './courses.ts';
 import { tarotLanding } from './tarot-guidance.ts';
 import type { Language } from './site.ts';
 
@@ -22,7 +22,7 @@ export function tarotSchema(lang: Language, offer: { price: number | null; curre
       serviceType: lang === 'vi' ? 'Buổi hướng dẫn tự phản tỉnh 1:1' : 'One-to-one guided self-reflection session',
       inLanguage: lang,
       provider: { '@id': origin + '/#organization' },
-      image: new URL(tarotCourse.thumbnail.src, origin).href,
+      image: new URL(courseShareImage(tarotCourse, lang), origin).href,
       ...(priced ? { offers: { '@type': 'Offer', price: String(Math.round(offer.price as number)), priceCurrency: offer.currency, url } } : {}),
     },
     {
