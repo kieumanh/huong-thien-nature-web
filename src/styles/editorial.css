@@ -186,8 +186,8 @@
 .journal-lane ol { margin: .9rem 0 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--gold-line); }
 .journal-lane ol li { position: relative; padding: .6rem 0 .6rem 1.35rem; border-bottom: 1px solid var(--gold-line); line-height: 1.45; }
 .journal-lane ol li::before { content: ''; position: absolute; inset-inline-start: .1rem; top: 1.12rem; width: .5rem; height: .5rem; border-radius: 50%; background: var(--gold-accent); box-shadow: 0 0 0 .18rem var(--gold-wash); }
-.journal-lane ol a { color: var(--foreground); font-weight: 600; text-decoration: underline; text-decoration-color: var(--gold-accent); text-decoration-thickness: 2px; text-underline-offset: .22em; }
-.journal-lane ol a:is(:hover, :focus-visible) { color: var(--gold-accent); text-decoration-thickness: 3px; }
+.journal-lane ol a { color: var(--foreground); font-weight: 600; text-decoration: none; }
+.journal-lane ol a:is(:hover, :focus-visible) { color: var(--gold-accent); }
 .journal-lane ol a:focus-visible { outline: 2px solid var(--focus); outline-offset: 3px; border-radius: 2px; }
 .journal-topics { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: var(--space-5, 1.4rem); }
 .journal-topic {

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.14.4',
+    date: '2026-11-24',
+    vi: ['Ba lối đọc gọn hơn', 'Tên bài trong ba lối đọc của Tản văn bỏ gạch chân, giữ chấm tròn vàng đầu dòng cho dễ nhận biết.'],
+    en: ['Cleaner reading lanes', 'Article titles in the journal’s three reading lanes no longer carry an underline; the gold bullet stays to mark each one.'],
+  },
+  {
     version: '2.14.3',
     date: '2026-11-24',
     vi: ['Ba lối đọc dễ nhận biết từng bài', 'Trong Tản văn, mỗi bài ở ba lối đọc có chấm đầu dòng và gạch chân vàng, dễ thấy đâu là một bài để bấm vào.'],
