@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.15.2',
+    date: '2026-11-24',
+    vi: ['Menu điện thoại thoáng hơn', 'Khi mở menu trên điện thoại, danh sách liên kết không còn chạm sát nút đóng và khung tiêu đề; các dòng có thêm khoảng thở.'],
+    en: ['A roomier phone menu', 'When the menu is open on a phone, the list of links no longer touches the close button and the header frame, and each row has a little more breathing room.'],
+  },
+  {
     version: '2.15.1',
     date: '2026-11-24',
     vi: ['Thân, Tâm, Trí trở lại vòng quỹ đạo', 'Vòng quỹ đạo ở Trang chủ trở lại với Thân, Tâm, Trí và "Nhận biết" ở trung tâm. Trang Liên hệ có thêm hotline và Zalo của Kiều Mạnh, khối thở gọn hơn với một câu của chủ dự án, và Cửa hàng đá năng lượng ghi rõ Đá Quý Kim Tự Tháp là đối tác.'],

@@ -1,3 +1,7 @@
+## 2.15.2 — Menu điện thoại không còn chạm sát khung tiêu đề
+
+- **Sửa lỗi menu trên điện thoại:** khi mở menu, đường kẻ của danh sách liên kết chạm sát nút đóng (X) và viền nổi bật của nút bị đè; dòng đầu tiên cũng nằm quá gần đường kẻ. Nay có khoảng thở phía trên đường kẻ và phía trên dòng đầu, các mục có lề ngang mềm hơn. Menu dạng thả xuống trên tablet cũng có thêm khoảng đệm phía trên. Đã kiểm tra điện thoại 320 và 390, tablet đứng và ngang.
+
 ## 2.15.1 — Thân, Tâm, Trí trở lại vòng quỹ đạo, thêm hotline Kiều Mạnh, đối tác đá năng lượng
 
 - **Trang chủ:** vòng quỹ đạo trở lại với ba hành tinh **Thân, Tâm, Trí** (Thân ứng với môi trường thiên nhiên từ các farm đối tác, Tâm ứng với pháp môn tu tập, Trí ứng với môi trường thực hành, sách vở, đá thanh lọc); **trung tâm đổi thành "Nhận biết"** (EN: Awareness). Ba thẻ bên trên xếp theo thứ tự Thân, Tâm, Trí.
