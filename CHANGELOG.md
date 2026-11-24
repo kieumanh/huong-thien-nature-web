@@ -1,3 +1,7 @@
+## 2.14.4 — Ba lối đọc Tản văn: bỏ gạch chân, giữ chấm đầu dòng
+
+- Tên bài trong 3 lối đọc không còn gạch chân; giữ chấm tròn vàng đầu dòng, đường kẻ ngăn và chữ đậm. Khi rê chuột hoặc dùng bàn phím, chữ đổi sang màu vàng và có viền focus.
+
 ## 2.14.3 — Ba lối đọc trong Tản văn dễ nhận biết từng bài
 
 - Mỗi bài trong 3 lối đọc ("Không biết bắt đầu từ đâu?") có **chấm đầu dòng màu vàng**, **gạch chân vàng** dưới tên bài, đường kẻ mảnh ngăn giữa các bài và vùng bấm rộng hơn; hiện rõ cả khi rê chuột hoặc dùng bàn phím (viền focus).
