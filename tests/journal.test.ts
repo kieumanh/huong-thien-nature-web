@@ -76,3 +76,14 @@ test('built pages: journal filters by topic without a keyword box, empathy ancho
     for (const article of healingArticles) assert.ok(existsSync(dist(`${articlePath(lang, article.slug)}index.html`)));
   }
 });
+
+test('built practice page: breathing guide, reading path and quick links', () => {
+  for (const [lang, path] of [['vi', '/vi/goi-y/'], ['en', '/en/suggestions/']]) {
+    if (!existsSync(dist(`${path}index.html`))) continue;
+    const page = readFileSync(dist(`${path}index.html`), 'utf8');
+    assert.ok(page.includes('data-breath-button'), `${lang}: breathing guide`);
+    assert.match(page, /115/, `${lang}: crisis line in breathing note`);
+    assert.equal((page.match(/practice-path__item/g) ?? []).length >= 3, true, `${lang}: three reading steps`);
+    for (const id of ['practice', 'start-reading', 'quiet-moments']) assert.ok(page.includes(`id="${id}"`), `${lang}: #${id}`);
+  }
+});

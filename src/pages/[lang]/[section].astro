@@ -9,6 +9,7 @@ import CourseCatalogue from '../../components/CourseCatalogue.astro';
 import StudentFeedback from '../../components/StudentFeedback.astro';
 import AlbumGallery from '../../components/AlbumGallery.astro';
 import AlbumStrip from '../../components/AlbumStrip.astro';
+import BreathGuide from '../../components/BreathGuide.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
 import { ecosystemVision } from '../../data/ecosystem-vision';
@@ -55,6 +56,11 @@ const vision = ecosystemVision[lang];
     {page === 'album' && <AlbumGallery {lang} />}
 
     {page === 'practice' && <>
+      <nav class="practice-jump" aria-label={vi ? 'Đi nhanh tới mục' : 'Jump to a section'}>
+        <a href="#practice">{vi ? '1 · Trở về hơi thở' : '1 · Return to the breath'}</a>
+        <a href="#start-reading">{vi ? '2 · Bài nên đọc' : '2 · Where to read'}</a>
+        <a href="#quiet-moments">{vi ? '3 · Phút lắng lại' : '3 · Moments of stillness'}</a>
+      </nav>
       <section class="material-practice" id="practice" aria-labelledby="practice-title">
         <div class="material-practice__copy">
           <p class="eyebrow">{t.practiceEye}</p>
@@ -68,15 +74,32 @@ const vision = ecosystemVision[lang];
           <figcaption><a href="https://pixabay.com/photos/yoga-pose-exercise-woman-female-3426151/">{vi ? 'Ảnh yoga trên Pixabay' : 'Yoga photograph on Pixabay'}</a></figcaption>
         </figure>
       </section>
-      <section class="journey-section">
-        <h2>{vi ? 'Nên đọc bài nào khi mới tập?' : 'What should I read first?'}</h2>
+      <div class="journey-section"><BreathGuide {lang} /></div>
+      <section class="journey-section practice-reading" id="start-reading" aria-labelledby="start-reading-title">
+        <h2 id="start-reading-title">{vi ? 'Nên đọc bài nào khi mới tập?' : 'What should I read first?'}</h2>
         <p>{vi ? 'Bắt đầu với cách chọn tư thế và chuẩn bị buổi đầu tiên. Khi đã quen với chỗ ngồi, thử quan sát hơi thở theo từng bước.' : 'Begin with a posture you can settle into and prepare for a first sitting. Once you feel at ease, try observing the breath step by step.'}</p>
-        <ol class="journey-reading-list">{beginnerArticles.map(article => <li><a class="quiet-link" href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
-        <a class="quiet-link" href={articlePath(lang, 'when-meditation-is-difficult')}>{vi ? 'Làm gì khi thấy khó ngồi thiền?' : 'What can I do when meditation feels difficult?'}</a>
+        <ol class="practice-path">{beginnerArticles.map((article, index) => <li class="practice-path__item zen-card">
+          <span class="practice-path__number" aria-hidden="true">{index + 1}</span>
+          <div>
+            <p class="practice-path__meta">{vi ? `Bước ${index + 1}` : `Step ${index + 1}`} · {vi ? article.minutesVi ?? article.minutes : article.minutes} {getCopy(lang).readTime}</p>
+            <h3><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></h3>
+            <p>{article.translations[lang].description}</p>
+          </div>
+        </li>)}</ol>
+        <div class="practice-help zen-card">
+          <h3>{vi ? 'Thấy khó ngồi yên? Điều đó rất bình thường.' : 'Finding it hard to sit still? That is very common.'}</h3>
+          <p>{vi ? 'Tâm trí bồn chồn không có nghĩa là bạn làm sai. Có một bài viết riêng cho những ngày như thế.' : 'A restless mind does not mean you are doing it wrong. There is a piece written for days like these.'}</p>
+          <a class="quiet-link" href={articlePath(lang, 'when-meditation-is-difficult')}>{vi ? 'Làm gì khi thấy khó ngồi thiền?' : 'What can I do when meditation feels difficult?'}</a>
+        </div>
       </section>
       <AlbumStrip {lang} id="quiet-moments" photos={['beach-meditate-calm', 'altar-flowers', 'plaque-moon-boat', 'plaque-monk-branch']}
         title={vi ? 'Những phút lắng lại' : 'Moments of stillness'}
         intro={vi ? 'Một bãi biển, một góc bàn nhỏ, vài phút ngồi yên: không cần nơi nào đặc biệt để bắt đầu.' : 'A beach, a small table corner, a few minutes of sitting still: you do not need a special place to begin.'} />
+      <section class="journey-section practice-next zen-card" aria-labelledby="practice-next-title">
+        <h2 id="practice-next-title">{vi ? 'Khi bạn muốn có người đi cùng' : 'When you would like company on the way'}</h2>
+        <p>{vi ? 'Tự thực hành là một khởi đầu đẹp. Nếu bạn muốn được hướng dẫn từng bước hoặc có người lắng nghe, các khóa thực hành luôn mở cửa, không ép buộc.' : 'Practising alone is a lovely beginning. If you would like step-by-step guidance or someone to listen, the practice courses are there, with no pressure.'}</p>
+        <p class="practice-next__links"><a class="button" href={journeyPath(lang, 'guidance')}>{vi ? 'Xem khóa thực hành' : 'See the practice courses'}</a> <a class="quiet-link" href={contactPath(lang)}>{vi ? 'Hoặc nhắn tin cho tụi mình' : 'Or send us a message'}</a></p>
+      </section>
     </>}
 
     {page === 'ecosystem' && <>

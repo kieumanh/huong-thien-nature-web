@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.14.2',
+    date: '2026-11-24',
+    vi: ['Trang Gợi ý dễ dùng hơn', 'Thêm bài thở một phút có vòng sáng dẫn nhịp, lối đọc ba bước cho người mới tập, nút đi nhanh tới từng mục và lời mời cuối trang khi bạn muốn có người đi cùng.'],
+    en: ['A friendlier Suggestions page', 'A guided one-minute breathing exercise, a three-step reading path for beginners, quick links to each section and a closing invitation for those who would like company on the way.'],
+  },
+  {
     version: '2.14.1',
     date: '2026-11-24',
     vi: ['Tản văn chia trang 3 × 3', 'Trang Tản văn hiện bài theo lưới 3 cột × 3 hàng, đủ 9 bài thì sang trang mới, có nút chuyển trang và vẫn lọc được theo chủ đề.'],

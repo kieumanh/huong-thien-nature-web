@@ -1,0 +1,23 @@
+---
+import type { Language } from '../data/site';
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const vi = lang === 'vi';
+const text = vi
+  ? { title: 'Thở cùng nhau một phút', intro: 'Không cần làm đúng. Chỉ cần hít vào theo vòng sáng nở ra, thở ra theo vòng sáng thu lại. Dừng lúc nào cũng được.', start: 'Bắt đầu một phút', stop: 'Dừng lại', again: 'Thở thêm một phút', idle: 'Sẵn sàng khi bạn sẵn sàng', in: 'Hít vào', out: 'Thở ra', done: 'Cảm ơn bạn đã dừng lại. Nhìn quanh một chút rồi hãy tiếp tục.', left: 'giây còn lại', note: 'Nếu thấy chóng mặt hoặc khó chịu, hãy thở tự nhiên trở lại. Khi đang quá tải hoặc khủng hoảng, hãy tìm người hỗ trợ hoặc gọi 115.' }
+  : { title: 'One minute of breathing together', intro: 'There is no right way. Breathe in as the circle opens, out as it softens. Stop whenever you like.', start: 'Begin one minute', stop: 'Stop', again: 'Breathe one more minute', idle: 'Ready when you are', in: 'Breathe in', out: 'Breathe out', done: 'Thank you for pausing. Look around for a moment before you carry on.', left: 'seconds left', note: 'If you feel dizzy or uncomfortable, return to natural breathing. If you are overwhelmed or in crisis, reach out to someone who can support you, or call 115 in Vietnam.' };
+---
+<section class="breath-guide zen-card" data-breath aria-labelledby="breath-guide-title" data-in={text.in} data-out={text.out} data-done={text.done} data-idle={text.idle} data-left={text.left}>
+  <h3 id="breath-guide-title">{text.title}</h3>
+  <p>{text.intro}</p>
+  <div class="breath-guide__stage">
+    <div class="breath-guide__orb" data-breath-orb aria-hidden="true"></div>
+    <p class="breath-guide__label" data-breath-label role="status" aria-live="polite">{text.idle}</p>
+    <p class="breath-guide__time" data-breath-time hidden></p>
+  </div>
+  <button type="button" class="button breath-guide__button" data-breath-button data-start={text.start} data-stop={text.stop} data-again={text.again} hidden>{text.start}</button>
+  <p class="breath-guide__note">{text.note}</p>
+</section>
+<script>
+  import '../scripts/breath-guide';
+</script>
