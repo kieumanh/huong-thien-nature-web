@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.15.1',
+    date: '2026-11-24',
+    vi: ['Thân, Tâm, Trí trở lại vòng quỹ đạo', 'Vòng quỹ đạo ở Trang chủ trở lại với Thân, Tâm, Trí và "Nhận biết" ở trung tâm. Trang Liên hệ có thêm hotline và Zalo của Kiều Mạnh, khối thở gọn hơn với một câu của chủ dự án, và Cửa hàng đá năng lượng ghi rõ Đá Quý Kim Tự Tháp là đối tác.'],
+    en: ['Body, Heart and Mind return to the orbit', 'The orbit on the home page returns to Body, Heart and Mind, with "Awareness" at the centre. Contact gains Kiều Mạnh’s hotline and Zalo, the breathing guide keeps a single sentence from the project owner, and the energy stones shop names Đá Quý Kim Tự Tháp as a partner.'],
+  },
+  {
     version: '2.15.0',
     date: '2026-11-24',
     vi: ['Hệ sinh thái viết lại quanh ba trọng tâm', 'Trang Hệ sinh thái viết lại theo ba trọng tâm: pháp môn tu tập, thiên nhiên từ các farm đối tác, thực hành, sách vở và đá thanh lọc. Trang chủ có thêm phần giới thiệu hai khóa thực hành, Cửa hàng đá năng lượng có bảng giá tham khảo, Liên hệ gộp Hotline và Zalo làm một, và đã sửa khung lạ trong timeline Câu chuyện trên tablet.'],

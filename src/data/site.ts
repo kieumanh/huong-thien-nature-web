@@ -50,12 +50,12 @@ export const copy = {
     "natureNote": "Bạn có thể xem sản phẩm trong Cửa hàng. Giá và tồn kho cần được xác nhận trước khi đặt. Các hoạt động trải nghiệm trực tiếp đang được chuẩn bị và chưa mở đăng ký.",
     "natureCards": [
       [
-        "Pháp môn tu tập",
-        "Thiền, chánh niệm, yoga… để nâng cao trí tuệ, chữa lành, khai sáng, nuôi dưỡng tinh thần lẫn sức khỏe thân tâm."
-      ],
-      [
         "Môi trường thiên nhiên từ các farm đối tác",
         "Lối sống trong lành, chậm rãi, hòa điệu cùng đất, nắng và cây cỏ, cùng thực phẩm sạch nuôi dưỡng thân lẫn tâm."
+      ],
+      [
+        "Pháp môn tu tập",
+        "Thiền, chánh niệm, yoga… để nâng cao trí tuệ, chữa lành, khai sáng, nuôi dưỡng tinh thần lẫn sức khỏe thân tâm."
       ],
       [
         "Môi trường thực hành, sách vở, đá thanh lọc",
@@ -157,12 +157,12 @@ export const copy = {
     "natureNote": "The shop lists products. Please confirm prices and availability before ordering. In-person activities are still being prepared and are not open for registration.",
     "natureCards": [
       [
-        "Paths of practice",
-        "Meditation, mindfulness, yoga and more, to deepen wisdom, heal, awaken, and strengthen spirit and the health of body and mind."
-      ],
-      [
         "Natural settings from our partner farms",
         "A clean, unhurried way of life in harmony with soil, sunlight and plants, with clean food that nourishes body and mind."
+      ],
+      [
+        "Paths of practice",
+        "Meditation, mindfulness, yoga and more, to deepen wisdom, heal, awaken, and strengthen spirit and the health of body and mind."
       ],
       [
         "Practice spaces, books and cleansing stones",

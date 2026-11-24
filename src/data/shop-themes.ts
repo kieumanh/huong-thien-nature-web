@@ -31,7 +31,7 @@ export const shopThemes: readonly ShopTheme[] = [
     door: { vi: 'Vòng tay, đá thô và vật phẩm thiền', en: 'Bracelets, raw stones and meditation objects' },
     note: { vi: 'Ý nghĩa “năng lượng” của đá là niềm tin cá nhân, chưa có bằng chứng khoa học về tác dụng chữa bệnh. Đá không thay thế chăm sóc y tế.', en: 'The “energy” meaning of stones is a personal belief; there is no scientific evidence of healing effects. Stones do not replace medical care.' },
     emptyTitle: { vi: 'Ảnh thật đang được chuẩn bị', en: 'Real photographs are on the way' },
-    emptyBody: { vi: 'Bảng giá tham khảo từ Đá Quý Kim Tự Tháp nằm ngay bên dưới. Ảnh thật và quy cách từng món sẽ được thêm khi sẵn sàng. Gửi lời nhắn để hỏi về viên đá bạn cần.', en: 'The indicative price list from Đá Quý Kim Tự Tháp is just below. Real photographs and details will be added when ready. Send a message to ask about the stone you need.' },
+    emptyBody: { vi: 'Bảng giá tham khảo từ đối tác Đá Quý Kim Tự Tháp nằm ngay bên dưới. Ảnh thật và quy cách từng món sẽ được thêm khi sẵn sàng. Gửi lời nhắn để hỏi về viên đá bạn cần.', en: 'The indicative price list from our partner Đá Quý Kim Tự Tháp is just below. Real photographs and details will be added when ready. Send a message to ask about the stone you need.' },
   },
   {
     id: 'sach', accent: 'book', glyph: '📖',
