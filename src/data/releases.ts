@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.20.1',
+    date: '2026-11-24',
+    vi: ['Khôi phục ảnh Tarot như phiên bản trước', 'Trang khóa Tarot, thẻ khóa học và ảnh chia sẻ link trở về ảnh cũ như phiên bản 2.19.1. Các hình minh họa mới được gỡ.'],
+    en: ['The Tarot picture is restored to the previous version', 'The Tarot course page, its course card and the link-share picture return to the earlier image, as in version 2.19.1. The new illustrations are removed.'],
+  },
+  {
     version: '2.20.0',
     date: '2026-11-24',
     vi: ['Tarot có minh họa mới và ảnh chia sẻ riêng', 'Trang khóa Tarot và thẻ khóa học dùng hình vẽ lá bài mới thay ảnh cũ. Khi chia sẻ link, ảnh hiện tiêu đề và dòng giới thiệu buổi 1:1 bằng ngôn ngữ của trang.'],
