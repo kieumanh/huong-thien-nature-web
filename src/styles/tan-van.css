@@ -131,7 +131,7 @@ html:not(.js) .js-only { display: none !important; }
 /* Resume reading: a small notice that never moves the page. */
 
 /* ---------- Reading mode: "Đọc trong tĩnh lặng" ---------- */
-.reading-bar { position: fixed; z-index: 105; inset: 3px 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding: .45rem var(--site-gutter); border-bottom: 1px solid var(--gold-line); background: var(--surface-raised); }
+.reading-bar { position: sticky; z-index: 105; top: 3px; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem 1rem; padding: .45rem var(--site-gutter); border-bottom: 1px solid var(--gold-line); background: var(--surface-raised); }
 .reading-bar[hidden] { display: none; }
 .reading-bar__group { display: flex; align-items: center; gap: .35rem; }
 .reading-bar button { min-height: 44px; min-width: 44px; padding: .3rem .8rem; border: 1px solid var(--gold-line); border-radius: 999px; background: transparent; color: var(--foreground); font: inherit; font-size: var(--type-label); font-weight: 600; cursor: pointer; }
@@ -140,7 +140,7 @@ html:not(.js) .js-only { display: none !important; }
 .reading-bar__exit { display: inline-flex; align-items: center; gap: .45rem; }
 
 html[data-reading="on"] :is(.topbar, .footer, .breadcrumbs, .related-articles, .seasonal-accent, .article-tools, .author-card, .article-pager) { display: none !important; }
-html[data-reading="on"] .article-page { padding-top: clamp(4.5rem, 12vw, 5.5rem); }
+html[data-reading="on"] .article-page { padding-top: clamp(1.25rem, 4vw, 2rem); }
 html[data-reading="on"] :is(.article-body, .article-header.shell) { width: min(40rem, calc(100% - 2 * var(--site-gutter))); }
 html[data-reading="on"] .article-body { font-size: calc(clamp(1.05rem, 1.5vw, 1.15rem) * var(--reading-scale, 1)); line-height: 1.95; text-wrap: pretty; }
 html[data-reading="on"] .article-body a:not(.button) { color: var(--reading-link); }

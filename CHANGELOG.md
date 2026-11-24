@@ -1,3 +1,11 @@
+## 2.16.2 — Gỡ lời nhắc số 115, thêm ZenWork vào Hệ sinh thái, sửa thanh chế độ đọc và khoảng cách
+
+- **Gỡ nội dung "Trường hợp khẩn cấp, gọi 115" (và "113 hoặc 115") theo yêu cầu** ở mọi nơi: 5 bài Tản văn (vi/en), khối đồng cảm ở Trang chủ, trang khóa Tần Số Vàng, trang Tarot và Hỏi đáp của khóa. Các câu khuyên tìm đến người thân, bác sĩ hoặc chuyên gia được giữ lại; chỉ bỏ số điện thoại khẩn cấp. Test (`tests/journal.test.ts`) nay kiểm tra không còn số 115.
+- **Hệ sinh thái:** thêm thẻ **ZenWork** (zenwork.io.vn) ở mục "Những người đồng hành xung quanh", ghi vai trò công nghệ và truyền thông của hệ sinh thái. Không ghi ngày vì chưa có mốc thời gian được xác nhận.
+- **Chế độ đọc:** thanh công cụ trước đây cố định và đè lên đầu bài viết trên điện thoại (thanh hai hàng che tiêu đề); nay nằm trong luồng trang và dính trên cùng khi cuộn, không còn che nội dung.
+- **Trang Gợi ý:** ba nút "1 · 2 · 3" không còn dính sát khung bài thực tập bên dưới.
+- Không có migration.
+
 ## 2.16.1 — Gỡ "Khu vườn của tôi", canh giữa nút Liên hệ ở Trang chủ
 
 - **Gỡ "Khu vườn của tôi" theo yêu cầu:** bỏ mục trên trang Tản văn, nút "Lưu vào khu vườn", thông báo "Tiếp tục từ chỗ cũ", nhãn "Đã lưu" trên thẻ bài và việc ghi nhớ tiến độ đọc. "Một bài viết hữu duyên" nay gợi ý từ tất cả bài. Chế độ "Đọc trong tĩnh lặng" (nền, cỡ chữ) và nút Chia sẻ giữ nguyên; cỡ chữ và nền vẫn nhớ trên thiết bị người đọc.

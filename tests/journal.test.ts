@@ -21,7 +21,7 @@ test('five new healing articles are 1,200–2,200 Vietnamese words with an Engli
     assert.ok(words >= 1200 && words <= 2200, `${article.slug}: ${words} words`);
     assert.ok(article.translations.en.sections.length >= 3 && article.translations.en.practice.steps.length >= 4);
     assert.match(article.image, /^\/media\/journey\/[a-z0-9-]+\.webp$/, 'covers are our own album photos, not stock');
-    for (const lang of langs) assert.match(article.translations[lang].note, /115/, `${article.slug}: crisis line in the ${lang} note`);
+    for (const lang of langs) assert.doesNotMatch(article.translations[lang].note, /115/, `${article.slug}: no emergency number in the ${lang} note`);
   }
 });
 
@@ -60,7 +60,7 @@ test('empathy blocks speak to real difficulties, offer a step and always include
     for (const block of [homeEmpathy(lang, paths), frequencyEmpathy(lang), tarotEmpathy(lang)]) {
       assert.ok(block.cards.length >= 5);
       for (const card of block.cards) assert.ok(card.feeling && card.understanding.length > 40 && card.step && card.href);
-      assert.match(block.care, /115/);
+      assert.doesNotMatch(block.care, /115/);
     }
   }
 });

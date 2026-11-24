@@ -9,8 +9,8 @@ export type EmpathyBlock = { eyebrow: string; title: string; intro: string; card
 
 type Paths = { practice: string; contact: string; frequency: string; tarot: string; ecosystem: string; article: (slug: string) => string };
 
-const careVi = 'Nếu bạn đang trải qua một giai đoạn quá sức hoặc có ý nghĩ làm hại bản thân, hãy tìm đến người thân, bác sĩ hoặc chuyên gia tâm lý ngay. Trường hợp khẩn cấp, gọi 115. Thiền và những gì tụi mình chia sẻ là người bạn đồng hành, không thay thế chăm sóc y tế.';
-const careEn = 'If you are going through a period that feels like too much, or have thoughts of harming yourself, please reach out to someone close, a doctor or a mental health professional now. In an emergency in Vietnam, call 115. Meditation and what we share are companions on the way, not a replacement for medical care.';
+const careVi = 'Nếu bạn đang trải qua một giai đoạn quá sức hoặc có ý nghĩ làm hại bản thân, hãy tìm đến người thân, bác sĩ hoặc chuyên gia tâm lý ngay. Thiền và những gì tụi mình chia sẻ là người bạn đồng hành, không thay thế chăm sóc y tế.';
+const careEn = 'If you are going through a period that feels like too much, or have thoughts of harming yourself, please reach out to someone close, a doctor or a mental health professional now. Meditation and what we share are companions on the way, not a replacement for medical care.';
 
 export function homeEmpathy(lang: Language, p: Paths): EmpathyBlock & { promisesTitle: string; promises: { title: string; text: string }[] } {
   const vi = lang === 'vi';
