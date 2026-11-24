@@ -3,6 +3,7 @@ import { articleDepth } from './article-depth.ts';
 import { meditationChallenges } from './meditation-challenges.ts';
 import { rootsArticles } from './roots-articles.ts';
 import { healingArticles } from './healing-articles.ts';
+import { coverOverrides } from './article-covers.ts';
 
 export type ArticleTranslation = {
   category: string;
@@ -199,7 +200,16 @@ const baseArticles: Article[] = [
   },
 ];
 
-export const articles: Article[] = baseArticles.map(article => {
+function withCover(article: Article): Article {
+  const cover = coverOverrides[article.slug];
+  if (!cover) return article;
+  return { ...article, image: cover.image, translations: {
+    vi: { ...article.translations.vi, imageAlt: cover.alt.vi },
+    en: { ...article.translations.en, imageAlt: cover.alt.en },
+  } };
+}
+
+export const articles: Article[] = baseArticles.map(withCover).map(article => {
   const additions = articleDepth[article.slug];
   if (!additions) return article;
   const vi = article.translations.vi;

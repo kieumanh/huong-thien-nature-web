@@ -9,6 +9,9 @@ import { journeyPath } from '../../../data/journey-pages';
 import Breadcrumb from '../../../components/Breadcrumb.astro';
 import { journalAuthor as author } from '../../../data/people';
 import '../../../styles/editorial.css';
+import '../../../styles/tan-van.css';
+import { articleReflections } from '../../../data/article-reflections';
+import { neighbours, relatedArticles, topicLabel, topicOf } from '../../../data/journal-topics';
 import Arrow from '../../../components/Arrow.astro';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
 import Header from '../../../components/Header.astro';
@@ -26,9 +29,9 @@ const { article } = Astro.props as { article: Article };
 const t = getCopy(lang);
 const content = article.translations[lang];
 const alternatePath = articlePath(lang === 'vi' ? 'en' : 'vi', article.slug);
-const related = article.relatedSlugs
-  ? article.relatedSlugs.map(slug => articles.find(item => item.slug === slug)).filter((item): item is Article => Boolean(item) && item?.slug !== article.slug).slice(0, 3)
-  : articles.filter(item => item.slug !== article.slug).slice(0, 3);
+const related = relatedArticles(article, 3);
+const { previous, next } = neighbours(article);
+const reflection = articleReflections[article.slug];
 const vi = lang === 'vi';
 const illustration = vi ? articleIllustrations[article.slug] : undefined;
 const figures = figuresFor(article.slug, lang, article.translations.vi.sections.length, content.sections.length);
@@ -36,6 +39,19 @@ const dateFormat = new Intl.DateTimeFormat(vi ? 'vi-VN' : 'en-GB', { dateStyle: 
 const readableDate = (date: string) => dateFormat.format(new Date(date));
 const showModified = article.updatedAt && article.updatedAt !== article.publishedAt;
 const origin = 'https://huongthiennature.com';
+const sectionCount = content.sections.length;
+const pauseAfter = (reflection?.pause ?? []).map((text, index, all) => ({ text: text[lang], after: Math.max(1, Math.min(sectionCount, Math.ceil(sectionCount * (index + 1) / (all.length + 1)))) }));
+const copy = vi ? {
+  tools: 'Công cụ đọc', reading: 'Đọc trong tĩnh lặng', save: 'Lưu vào khu vườn', saved: 'Đã lưu trong khu vườn', share: 'Chia sẻ', copied: 'Đã sao chép liên kết', shareFailed: 'Chưa sao chép được. Bạn có thể chọn và chép địa chỉ trên thanh trình duyệt.',
+  exit: 'Thoát chế độ đọc', smaller: 'Chữ nhỏ hơn', larger: 'Chữ lớn hơn', theme: 'Màu nền khi đọc', light: 'Sáng', ivory: 'Ngà', dim: 'Dịu tối', bar: 'Chế độ đọc trong tĩnh lặng',
+  pause: 'Một khoảng dừng', closing: 'Chúc bạn có một ngày đủ bình yên để lắng nghe chính mình.', previous: 'Bài trước', next: 'Bài sau', pager: 'Bài viết liền kề',
+  resume: 'Bạn đã đọc đến khoảng', resumeGo: 'Tiếp tục từ chỗ cũ', resumeTop: 'Đọc từ đầu', garden: 'Khu vườn của tôi',
+} : {
+  tools: 'Reading tools', reading: 'Read in stillness', save: 'Save to my garden', saved: 'Saved to my garden', share: 'Share', copied: 'Link copied', shareFailed: 'Could not copy. You can select the address in the browser bar instead.',
+  exit: 'Leave reading mode', smaller: 'Smaller text', larger: 'Larger text', theme: 'Reading background', light: 'Light', ivory: 'Ivory', dim: 'Dim', bar: 'Reading in stillness',
+  pause: 'A pause', closing: 'May your day be peaceful enough to hear yourself.', previous: 'Previous', next: 'Next', pager: 'Neighbouring articles',
+  resume: 'You read about', resumeGo: 'Continue where I stopped', resumeTop: 'Start from the top', garden: 'My garden',
+};
 const schema = {
   '@context': 'https://schema.org', '@type': 'BlogPosting',
   headline: content.title, description: content.description, inLanguage: lang,
@@ -45,6 +61,7 @@ const schema = {
   ...(article.updatedAt ? { dateModified: article.updatedAt } : {}),
   author: { '@type': 'Person', '@id': origin + '/#kieu-manh', name: author.name, url: origin + journeyPath(lang, 'team') + '#kieu-manh' },
   publisher: { '@id': origin + '/#organization' },
+  articleSection: topicLabel(topicOf(article), lang),
   ...(article.keywords ? { keywords: article.keywords[lang] } : {}),
 };
 ---
@@ -52,7 +69,26 @@ const schema = {
   <script type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
   <Header lang={lang} alternatePath={alternatePath} />
   <main id="main-content" tabindex="-1">
-    <article class="article-page">
+    <div class="reading-bar js-only" data-reading-bar hidden role="toolbar" aria-label={copy.bar}>
+      <button type="button" class="reading-bar__exit" data-reading-exit>
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><path d="m7 7 10 10M17 7 7 17"/></svg>
+        <span>{copy.exit}</span>
+      </button>
+      <div class="reading-bar__group">
+        <button type="button" class="reading-bar__size" data-reading-size="-1" aria-label={copy.smaller}><span aria-hidden="true">A−</span></button>
+        <button type="button" class="reading-bar__size" data-reading-size="1" aria-label={copy.larger}><span aria-hidden="true">A+</span></button>
+      </div>
+      <div class="reading-bar__group" role="group" aria-label={copy.theme}>
+        <button type="button" class="reading-bar__theme" data-reading-choice="light" aria-pressed="false">{copy.light}</button>
+        <button type="button" class="reading-bar__theme" data-reading-choice="ivory" aria-pressed="false">{copy.ivory}</button>
+        <button type="button" class="reading-bar__theme" data-reading-choice="dim" aria-pressed="false">{copy.dim}</button>
+      </div>
+    </div>
+    <div class="article-resume js-only" data-resume hidden role="status" data-prefix={copy.resume}>
+      <p data-resume-text></p>
+      <div><button type="button" class="button" data-resume-go>{copy.resumeGo}</button> <button type="button" class="button button--tonal" data-resume-top>{copy.resumeTop}</button></div>
+    </div>
+    <article class="article-page" data-article data-slug={article.slug}>
       <header class="article-header shell">
         <Breadcrumb {lang} current={content.title} parent={{ label: t.journalHome, href: journalPath(lang) }} />
         <div class="article-meta"><span>{content.category}</span><span>{(lang === 'vi' ? article.minutesVi ?? article.minutes : article.minutes)} {t.readTime}</span></div>
@@ -64,6 +100,21 @@ const schema = {
           {showModified && <span>{vi ? 'Cập nhật' : 'Updated'} <time datetime={article.updatedAt}>{readableDate(article.updatedAt!)}</time></span>}
           {article.phase === 'roots' && <span>{vi ? 'Biên tập từ Thiền Tinh Hoa' : 'Adapted from Thiền Tinh Hoa'}</span>}
         </p>
+        <div class="article-tools js-only" role="group" aria-label={copy.tools}>
+          <button type="button" class="article-tool" data-reading-toggle aria-pressed="false">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5.5c2.7-.9 5.3-.6 8 1v12.5c-2.7-1.6-5.3-1.9-8-1V5.5ZM20 5.5c-2.7-.9-5.3-.6-8 1v12.5c2.7-1.6 5.3-1.9 8-1V5.5Z"/></svg>
+            <span>{copy.reading}</span>
+          </button>
+          <button type="button" class="article-tool" data-save aria-pressed="false" data-label-on={copy.saved} data-label-off={copy.save}>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5h10v15l-5-3.4-5 3.4v-15Z"/></svg>
+            <span data-save-label>{copy.save}</span>
+          </button>
+          <button type="button" class="article-tool" data-share data-title={content.title} data-copied={copy.copied} data-failed={copy.shareFailed}>
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="12" r="2"/><circle cx="17" cy="6.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="m8.3 11 6.9-3.5M8.3 13l6.9 3.5"/></svg>
+            <span>{copy.share}</span>
+          </button>
+        </div>
+        <p class="article-status" role="status" aria-live="polite" data-article-status></p>
       </header>
       <figure class:list={["shell article-cover", { "article-cover--portrait": articlePhotos[article.image].height > articlePhotos[article.image].width }]}><img src={article.image} alt={content.imageAlt} width={articlePhotos[article.image].width} height={articlePhotos[article.image].height} fetchpriority="high" /><figcaption>{articlePhotos[article.image].source ? <a href={articlePhotos[article.image].source}>{lang === 'vi' ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a> : 'Hương Thiền Nature'}</figcaption></figure>
       <div class="article-body">
@@ -77,10 +128,16 @@ const schema = {
         {content.sections.map((section, index) => (
           <>
             <section id={`section-${index + 1}`}><h2>{section.title}</h2>{section.paragraphs.map(paragraph => <p>{paragraph}</p>)}</section>
+            {index === 0 && reflection?.quote && <blockquote class="article-pullquote"><p>{reflection.quote[lang]}</p></blockquote>}
             {illustration && illustration.afterSection === index + 1 && <figure class="article-illustration">
               <img src={illustration.src} width={illustration.width} height={illustration.height} alt={illustration.alt} loading="lazy" decoding="async" />
               <figcaption>{illustration.caption} <a href={illustration.source}>Ảnh trên Pixabay</a></figcaption>
             </figure>}
+            {pauseAfter.filter(pause => pause.after === index + 1).map(pause => <aside class="article-pause" aria-label={copy.pause}>
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" aria-hidden="true"><path d="M9 6.5v11M15 6.5v11"/></svg>
+              <p class="article-pause__label">{copy.pause}</p>
+              <p class="article-pause__text">{pause.text}</p>
+            </aside>)}
             {figures.filter(figure => figure.after === index + 1).map(figure => <figure class="article-illustration article-figure">
               <img src={figure.src} width={figure.width} height={figure.height} alt={figure.alt} loading="lazy" decoding="async" />
               <figcaption>{figure.caption} <span class="article-figure__credit">{figure.credit}</span></figcaption>
@@ -90,6 +147,19 @@ const schema = {
         <aside class="article-practice"><span class="eyebrow">{lang === 'vi' ? 'Mang vào đời sống' : 'Bring it into daily life'}</span><h2>{content.practice.title}</h2><ol>{content.practice.steps.map(step => <li>{step}</li>)}</ol></aside>
         <p class="article-note">{content.note}</p>
         {content.cta && <p class="article-cta"><a class="button" href={articlePath(lang, content.cta.slug)}>{content.cta.label} <Arrow /></a></p>}
+        <div class="article-end">
+          <p class="article-closing">{copy.closing}</p>
+          <div class="article-end__actions js-only">
+            <button type="button" class="article-tool" data-save aria-pressed="false" data-label-on={copy.saved} data-label-off={copy.save}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 4.5h10v15l-5-3.4-5 3.4v-15Z"/></svg>
+              <span data-save-label>{copy.save}</span>
+            </button>
+            <button type="button" class="article-tool" data-share data-title={content.title} data-copied={copy.copied} data-failed={copy.shareFailed}>
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6.5" cy="12" r="2"/><circle cx="17" cy="6.5" r="2"/><circle cx="17" cy="17.5" r="2"/><path d="m8.3 11 6.9-3.5M8.3 13l6.9 3.5"/></svg>
+              <span>{copy.share}</span>
+            </button>
+          </div>
+        </div>
         {article.sources && <section class="article-sources" aria-labelledby="sources-title">
           <div class="article-sources__head">
             <span class="article-sources__icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22" fill="none"><path d="M5 4.5h10a3 3 0 0 1 3 3V19.5H8a3 3 0 0 1-3-3V4.5Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M9 9h5M9 12.5h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg></span>
@@ -104,6 +174,10 @@ const schema = {
             : <span class="article-sources__plain"><span>{source.title}</span></span>}</li>)}</ul>
         </section>}
         <AuthorProfile {lang} />
+        <nav class="article-pager" aria-label={copy.pager}>
+          <a class="article-pager__link article-pager__link--previous" href={articlePath(lang, previous.slug)} rel="prev"><small><span aria-hidden="true">←</span> {copy.previous}</small><span>{previous.translations[lang].title}</span></a>
+          <a class="article-pager__link article-pager__link--next" href={articlePath(lang, next.slug)} rel="next"><small>{copy.next} <span aria-hidden="true">→</span></small><span>{next.translations[lang].title}</span></a>
+        </nav>
         <a class="quiet-link" href={journalPath(lang)}><span aria-hidden="true">←</span> {lang === 'vi' ? 'Trở về tản văn' : 'Back to the journal'}</a>
       </div>
     </article>
@@ -117,3 +191,6 @@ const schema = {
   </main>
   <Footer lang={lang} />
 </BaseLayout>
+<script>
+  import '../../../scripts/article-tools';
+</script>

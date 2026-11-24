@@ -5,7 +5,10 @@ import { articles, articlePath, journalPath } from '../src/data/articles.ts';
 import { articleFigures, figuresFor, illustrations } from '../src/data/article-figures.ts';
 import { articleIllustrations } from '../src/data/editorial-illustrations.ts';
 import { healingArticles } from '../src/data/healing-articles.ts';
-import { articleTopics, articleWords, journalTopics, readingLanes } from '../src/data/journal-topics.ts';
+import { articleTopics, articleWords, curatedRank, featuredArticle, journalTopics, neighbours, readingLanes, relatedArticles } from '../src/data/journal-topics.ts';
+import { articleReflections } from '../src/data/article-reflections.ts';
+import { coverOverrides } from '../src/data/article-covers.ts';
+import { articlePhotos } from '../src/data/article-photos.ts';
 import { frequencyEmpathy, homeEmpathy, tarotEmpathy } from '../src/data/empathy.ts';
 
 const langs = ['vi', 'en'] as const;
@@ -62,18 +65,49 @@ test('empathy blocks speak to real difficulties, offer a step and always include
   }
 });
 
-test('built pages: journal filters by topic without a keyword box, empathy anchors resolve', () => {
+test('built pages: journal has search, sort, topic chips with icons, an open-page feature and the garden; empathy anchors resolve', () => {
   for (const lang of langs) {
     if (!existsSync(dist(`${journalPath(lang)}index.html`))) continue;
     const journal = readFileSync(dist(`${journalPath(lang)}index.html`), 'utf8');
-    assert.ok(!journal.includes('type="search"') && !journal.includes('data-journal-search'), `${lang}: keyword search removed`);
+    assert.equal((journal.match(/type="search"/g) ?? []).length, 1, `${lang}: one search box`);
+    assert.ok(journal.includes('data-journal-query') && journal.includes('data-journal-sort') && journal.includes('data-chance-button'), `${lang}: search, sort and "a chance encounter"`);
+    assert.equal((journal.match(/<option value="/g) ?? []).length, 3, `${lang}: three sort orders`);
+    assert.match(journal, /action="\/(vi\/timkiem|en\/search)\/"/, `${lang}: without JavaScript the box opens the site search`);
     assert.equal((journal.match(/class="journal-topic"/g) ?? []).length, journalTopics.length + 1);
+    assert.equal((journal.match(/class="topic-icon"/g) ?? []).length, journalTopics.length + 1, `${lang}: every chip has a thin-line icon`);
+    assert.equal((journal.match(/data-journal-card/g) ?? []).length, articles.length, `${lang}: one card per article`);
     assert.equal((journal.match(/data-topic="[a-z-]+"/g) ?? []).length - journalTopics.length - 1, articles.length, 'each card carries its topic');
-    assert.ok(journal.includes('data-journal-pages'), `${lang}: pagination mount present`);
+    for (const key of ['data-slug', 'data-keywords', 'data-minutes', 'data-curated']) assert.equal((journal.match(new RegExp(`${key}=`, 'g')) ?? []).length, articles.length, `${lang}: ${key} on every card`);
+    assert.ok(journal.includes('data-journal-pages') && journal.includes('journal-book') && journal.includes('data-garden'), `${lang}: pagination, open-page feature and garden`);
+    assert.ok(!journal.includes('class="journal-number"'), 'numbers on cards are gone');
+    assert.ok(journal.includes('"@type":"CollectionPage"') && journal.includes('"@type":"BreadcrumbList"'), `${lang}: structured data`);
     assert.ok(articles.length > 9, 'more than one page of articles');
+    const thumbs = journal.match(/src="\/media\/thumbs\/[a-z0-9-]+\.webp"/g) ?? [];
+    assert.equal(thumbs.length, articles.length, `${lang}: every card uses a thumbnail`);
     const home = readFileSync(dist(`/${lang}/index.html`), 'utf8');
     assert.ok(home.indexOf('id="welcome"') > 0 && home.indexOf('id="welcome"') < home.indexOf('id="story"'), 'welcome comes right after the hero');
     for (const article of healingArticles) assert.ok(existsSync(dist(`${articlePath(lang, article.slug)}index.html`)));
+  }
+  const vi = readFileSync(dist('/vi/tan-van/index.html'), 'utf8');
+  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên', 'Khu vườn của tôi', 'Thời gian đọc ngắn', 'Bài viết được tuyển chọn']) assert.ok(vi.includes(line), line);
+});
+
+test('built article pages: reading mode, save, share, pull quote, pause, closing line, neighbours and at most three related pieces', () => {
+  for (const lang of langs) {
+    for (const article of articles) {
+      const file = dist(`${articlePath(lang, article.slug)}index.html`);
+      if (!existsSync(file)) continue;
+      const page = readFileSync(file, 'utf8');
+      assert.ok(page.includes('data-reading-toggle') && page.includes('data-reading-bar') && page.includes('data-save') && page.includes('data-share'), `${article.slug}/${lang}: reading and garden tools`);
+      assert.equal((page.match(/class="article-closing"/g) ?? []).length, 1, `${article.slug}/${lang}: closing line`);
+      assert.ok(page.includes(lang === 'vi' ? 'Chúc bạn có một ngày đủ bình yên để lắng nghe chính mình.' : 'May your day be peaceful enough to hear yourself.'));
+      assert.equal((page.match(/rel="prev"/g) ?? []).length + (page.match(/rel="next"/g) ?? []).length, 2, `${article.slug}/${lang}: previous and next`);
+      const related = page.slice(page.indexOf('class="related-articles'));
+      const cards = (related.match(/data-journal-card/g) ?? []).length;
+      assert.ok(cards >= 1 && cards <= 3, `${article.slug}/${lang}: ${cards} related cards`);
+      assert.ok(page.includes('"@type":"BreadcrumbList"') && page.includes('"@type":"BlogPosting"'), `${article.slug}/${lang}: structured data`);
+      assert.ok(!/(Mua ngay|Đặt mua|Buy now|Add to cart)/.test(page.slice(page.indexOf('class="article-body"'), page.indexOf('class="related-articles'))), `${article.slug}/${lang}: no sales call to action in the article`);
+    }
   }
 });
 
@@ -109,3 +143,45 @@ test('built ecosystem page follows the three focal points; contact shows one pho
   assert.match(css, /\.journey-milestone \{[^}]*align-self: start/, 'timeline labels must not stretch into tall pills on tablet');
 });
 
+
+test('editorial data: pull quotes are the article’s own words, related and neighbouring pieces behave, covers are unique', () => {
+  for (const [slug, reflection] of Object.entries(articleReflections)) {
+    const article = articles.find(item => item.slug === slug);
+    assert.ok(article, `${slug} is a published article`);
+    for (const lang of langs) {
+      const content = article.translations[lang];
+      const text = [content.introduction, ...content.sections.flatMap(section => section.paragraphs), ...content.practice.steps].join(' ');
+      if (reflection.quote) {
+        // Only the first letter may differ in case: a quote may start a sentence the article began mid-sentence.
+        const quote = reflection.quote[lang].replace(/[.…]+$/, '');
+        const lowered = quote.charAt(0).toLowerCase() + quote.slice(1);
+        assert.ok(text.includes(quote) || text.includes(lowered), `${slug}/${lang}: the quote comes word for word from the article`);
+      }
+      for (const pause of reflection.pause ?? []) assert.ok(pause[lang].length > 20 && pause[lang].length < 160, `${slug}/${lang}: a pause is one short invitation`);
+    }
+  }
+  for (const article of articles) {
+    const related = relatedArticles(article, 3);
+    assert.ok(related.length >= 1 && related.length <= 3 && related.every(item => item.slug !== article.slug));
+    assert.equal(new Set(related.map(item => item.slug)).size, related.length);
+    const { previous, next } = neighbours(article);
+    assert.ok(previous.slug !== article.slug && next.slug !== article.slug && articles.length > 2);
+  }
+  assert.equal(new Set(articles.map(article => curatedRank(article.slug))).size, articles.length, 'the curated order ranks every article once');
+  assert.equal(curatedRank(featuredArticle().slug), 0, 'the featured article leads the curated order');
+  const covers = articles.map(article => article.image);
+  const healing = new Set(['healing-as-coming-home', 'staying-with-strong-emotions', 'walking-through-loss', 'gentle-boundaries', 'small-joys-gratitude', 'when-meditation-is-difficult']);
+  const used = new Map<string, string>();
+  for (const article of articles) {
+    if (healing.has(article.slug) || coverOverrides[article.slug]) assert.ok(!used.has(article.image), `${article.slug} repeats the cover of ${used.get(article.image)}`);
+    used.set(article.image, article.slug);
+    assert.ok(articlePhotos[article.image], `${article.slug}: cover has recorded dimensions`);
+    assert.ok(existsSync(new URL(`../public${article.image}`, import.meta.url)), article.image);
+    assert.ok(article.translations.vi.imageAlt.length > 15 && article.translations.en.imageAlt.length > 15, `${article.slug}: alt text in both languages`);
+  }
+  for (const image of covers) {
+    const thumb = new URL(`../public/media/thumbs/${image.split('/').at(-1)}`, import.meta.url);
+    assert.ok(existsSync(thumb), `${image}: thumbnail exists`);
+    assert.ok(readFileSync(thumb).length < 100_000, `${image}: thumbnail is under 100 KB`);
+  }
+});

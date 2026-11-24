@@ -33,6 +33,7 @@ jobs:
       - run: npm run test:frequency
       - run: npm run test:album
       - run: npm run test:journal
+      - run: npm run test:garden
       - run: npm run test:headers
       - run: npm audit --omit=dev --audit-level=high
       - run: npm run build
@@ -82,6 +83,7 @@ jobs:
           python tests/navigation-controls-browser.py || browser_result=1
           python tests/contact-browser.py || browser_result=1
           python tests/music-browser.py || browser_result=1
+          python tests/tan-van-browser.py || browser_result=1
           for label in candidate baseline; do
             if [ "$label" = "baseline" ] && [ -z "${BASELINE_URL:-}" ]; then continue; fi
             server="$APP_BASE_URL"

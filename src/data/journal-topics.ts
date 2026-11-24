@@ -56,3 +56,50 @@ export const laneArticles = (slugs: readonly string[]) => slugs.map(slug => {
   if (!article) throw new Error(`Reading lane article is not published: ${slug}`);
   return article;
 });
+
+/** The article shown as an open book at the top of the journal. Change this one line to feature another. */
+export const featuredSlug = 'healing-as-coming-home';
+export const featuredArticle = () => {
+  const article = articles.find(item => item.slug === featuredSlug);
+  if (!article) throw new Error(`Featured article is not published: ${featuredSlug}`);
+  return article;
+};
+
+/** At most three related pieces: the ones the author linked, then the same topic, then anything else, never the article itself. */
+export function relatedArticles(article: Article, limit = 3): Article[] {
+  const pool = articles.filter(item => item.slug !== article.slug);
+  const picked: Article[] = [];
+  const add = (item?: Article) => { if (item && item.slug !== article.slug && !picked.includes(item) && picked.length < limit) picked.push(item); };
+  for (const slug of article.relatedSlugs ?? []) add(pool.find(item => item.slug === slug));
+  for (const item of pool) if (topicOf(item) === topicOf(article)) add(item);
+  for (const item of pool) add(item);
+  return picked;
+}
+
+/** Previous and next article in the library order, wrapping at the ends. */
+export function neighbours(article: Article) {
+  const index = articles.findIndex(item => item.slug === article.slug);
+  return { previous: articles[(index - 1 + articles.length) % articles.length], next: articles[(index + 1) % articles.length] };
+}
+
+/** Thin-line icon paths (24x24) for the topic chips. */
+export const topicIcons: Record<JournalTopic, string> = {
+  'bat-dau': 'M12 20v-9m0 3c-4 0-6-2-6-6 4 0 6 2 6 6Zm0-2c0-4 2-6 6-6 0 4-2 6-6 6Z',
+  'hoi-tho-co-the': 'M3 9c3-3 5 3 9 0s6 3 9 0M3 15c3-3 5 3 9 0s6 3 9 0',
+  'cam-xuc-chua-lanh': 'M12 19s-7-4-7-9.5C5 7 7 5.5 9 5.5c1.3 0 2.3.7 3 1.8.7-1.1 1.7-1.8 3-1.8 2 0 4 1.5 4 4C19 15 12 19 12 19Z',
+  'yeu-thuong': 'M9 7.5a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm6 3a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z',
+  'doi-song': 'M12 4v2m0 12v2M4 12h2m12 0h2M6.3 6.3l1.4 1.4m8.6 8.6 1.4 1.4m0-11.4-1.4 1.4M7.7 16.3l-1.4 1.4M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z',
+  'thien-nhien': 'M6 18c0-7 5-12 12-12 0 7-5 12-12 12Zm0 0 7-7',
+};
+
+/** Editorial order for "Bài viết được tuyển chọn": the featured piece, then the three reading lanes in order, then the rest as published. */
+export function curatedRank(slug: string): number {
+  const order = [featuredSlug, ...readingLanes.flatMap(lane => lane.slugs)];
+  const index = order.indexOf(slug);
+  return index === -1 ? order.length + articles.findIndex(item => item.slug === slug) : index;
+}
+
+/** Plain text used by the listing search box before the full-text index has loaded. */
+export function articleKeywords(article: Article, lang: Language): string {
+  return [article.translations[lang].title, article.translations[lang].description, article.keywords?.[lang] ?? '', topicLabel(topicOf(article), lang), article.translations[lang].category].join(' ');
+}
