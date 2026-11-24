@@ -1,8 +1,8 @@
 import type { Language } from './site.ts';
 import { formatPrice } from './products.ts';
 
-// Public price list of "Đá Quý Kim Tự Tháp" (kimtuthap.vn). The owner asked for the stones of the partner site kimtuthap.org;
-// that site sells nothing, and the matching store found was kimtuthap.vn. Ownership is NOT verified: confirm before relying on it.
+// Public price list of the partner "Đá Quý Kim Tự Tháp". kimtuthap.vn is the partner's second website (kimtuthap.org is the first);
+// the owner confirmed on 24/11/2026 that both belong to the project's partner. kimtuthap.org itself sells nothing.
 // Names and prices were copied from the partner's public pages on 24/11/2026. They are indicative only:
 // Hương Thiền confirms price, size and availability before any order. No photographs are reused here;
 // real product photos will be added once the partner or Hương Thiền provides them.
@@ -50,15 +50,15 @@ export const partnerStones: Group[] = [
 
 export const partnerStonesCopy = {
   vi: {
-    title: 'Bảng giá tham khảo từ Đá Quý Kim Tự Tháp',
-    intro: 'Các vật phẩm bên dưới được niêm yết công khai trên website Đá Quý Kim Tự Tháp (kimtuthap.vn). Hương Thiền tổng hợp lại để bạn tham khảo trước khi hỏi mua.',
-    note: 'Đây là giá niêm yết công khai, lấy ngày 24/11/2026, có thể đã thay đổi. Ảnh thật và quy cách từng món sẽ được bổ sung; trong lúc chờ, bạn có thể xem ảnh tại website nguồn. Hương Thiền xác nhận giá, kích cỡ và tình trạng hàng trước khi đặt.',
+    title: 'Bảng giá tham khảo từ đối tác Đá Quý Kim Tự Tháp',
+    intro: 'Đá Quý Kim Tự Tháp là đối tác của Hương Thiền Nature. Các vật phẩm bên dưới được niêm yết công khai trên website của đối tác (kimtuthap.vn); Hương Thiền tổng hợp lại để bạn tham khảo trước khi hỏi mua.',
+    note: 'Đây là giá niêm yết công khai, lấy ngày 24/11/2026, có thể đã thay đổi. Ảnh thật và quy cách từng món sẽ được bổ sung; trong lúc chờ, bạn có thể xem ảnh tại website của đối tác. Hương Thiền xác nhận giá, kích cỡ và tình trạng hàng trước khi đặt.',
     from: 'từ', per: '/kg', ask: 'Hỏi về món này', source: 'Xem trên kimtuthap.vn', sourceNote: 'Nguồn:',
   },
   en: {
-    title: 'Indicative price list from Đá Quý Kim Tự Tháp',
-    intro: 'The items below are listed publicly on the Đá Quý Kim Tự Tháp website (kimtuthap.vn). We have gathered them here for you to browse before asking about a purchase.',
-    note: 'These are public list prices, copied on 24 November 2026, and may have changed. Real photographs and details for each item will be added; meanwhile you can see photos on the source website. Hương Thiền confirms price, size and availability before any order.',
+    title: 'Indicative price list from our partner Đá Quý Kim Tự Tháp',
+    intro: 'Đá Quý Kim Tự Tháp is a partner of Hương Thiền Nature. The items below are listed publicly on the partner’s website (kimtuthap.vn), and we have gathered them here for you to browse before asking about a purchase.',
+    note: 'These are public list prices, copied on 24 November 2026, and may have changed. Real photographs and details for each item will be added; meanwhile you can see photos on the partner’s website. Hương Thiền confirms price, size and availability before any order.',
     from: 'from', per: '/kg', ask: 'Ask about this item', source: 'See kimtuthap.vn', sourceNote: 'Source:',
   },
 } satisfies Record<Language, Record<string, string>>;

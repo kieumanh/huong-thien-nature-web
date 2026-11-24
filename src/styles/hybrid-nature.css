@@ -16,7 +16,7 @@
 .solar-planet span {
   position: absolute; z-index: 1; top: 59%; left: 0; width: 100%;
   color: #fffdf2; text-align: center; white-space: nowrap;
-  font: 700 clamp(.36rem, 1.62cqi, .62rem)/1.15 var(--sans); letter-spacing: -.01em;
+  font: 700 clamp(.43rem, 2cqi, .66rem)/1.15 var(--sans);
 }
 .solar-planet--2 { background: #697a59; }
 .solar-planet--3 { background: #84745c; }

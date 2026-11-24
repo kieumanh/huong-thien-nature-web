@@ -4,7 +4,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import ContactForm from './ContactForm.astro';
-import { contactPath, contactEmail, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
+import { contactPath, contactEmail, hotline, internationalPhone, supportHotline, supportPhone, supportZaloUrl, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
 
 interface Props { lang: Language }
@@ -14,6 +14,10 @@ const title = vi ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiề
 const description = vi
   ? 'Gọi hoặc nhắn Zalo 0868499856, gửi email hoặc để lại lời nhắn cho Hương Thiền Nature qua biểu mẫu.'
   : 'Call Hương Thiền Nature, message us on Zalo, send an email or leave a message using the contact form.';
+const phones = [
+  { name: 'Hotline / Zalo · Hương Thiền', number: hotline, tel: internationalPhone, zalo: zaloUrl },
+  { name: vi ? 'Hotline / Zalo hỗ trợ · Kiều Mạnh' : 'Support hotline / Zalo · Kiều Mạnh', number: supportHotline, tel: supportPhone, zalo: supportZaloUrl },
+];
 const alternatePath = contactPath(vi ? 'en' : 'vi');
 const url = new URL(contactPath(lang), Astro.site).href;
 const schema = {
@@ -38,11 +42,11 @@ const schema = {
           ? 'Bạn có thể hỏi về bài tập thiền, sản phẩm trong cửa hàng hoặc gửi góp ý cho nhóm Hương Thiền.'
           : 'Ask us about meditation practices, products in the shop or share your feedback with the Hương Thiền team.'}</p>
         <address class="contact-channels">
-          <div class="zen-card contact-phone">
-            <strong>Hotline / Zalo · Hương Thiền</strong>
-            <span class="contact-phone__number">{hotline}</span>
-            <span class="contact-phone__actions"><a class="quiet-link" href={`tel:${internationalPhone}`}>{vi ? 'Gọi ngay' : 'Call'}</a><a class="quiet-link" href={zaloUrl}>{vi ? 'Nhắn Zalo' : 'Message on Zalo'}</a></span>
-          </div>
+          {phones.map((phone) => <div class="zen-card contact-phone">
+            <strong>{phone.name}</strong>
+            <span class="contact-phone__number">{phone.number}</span>
+            <span class="contact-phone__actions"><a class="quiet-link" href={`tel:${phone.tel}`}>{vi ? 'Gọi ngay' : 'Call'}</a><a class="quiet-link" href={phone.zalo}>{vi ? 'Nhắn Zalo' : 'Message on Zalo'}</a></span>
+          </div>)}
           <a class="zen-card" href={`mailto:${contactEmail}`}><strong>Email</strong><span>{contactEmail}</span></a>
         </address>
       </div>

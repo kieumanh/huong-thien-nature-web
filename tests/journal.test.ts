@@ -82,7 +82,7 @@ test('built practice page: breathing guide, reading path and quick links', () =>
     if (!existsSync(dist(`${path}index.html`))) continue;
     const page = readFileSync(dist(`${path}index.html`), 'utf8');
     assert.ok(page.includes('data-breath-button'), `${lang}: breathing guide`);
-    assert.match(page, /115/, `${lang}: crisis line in breathing note`);
+    assert.ok(page.includes('data-breath') && !page.includes('breath-guide__care'), `${lang}: breathing note is the owner's sentence only`);
     assert.equal((page.match(/practice-path__item/g) ?? []).length >= 3, true, `${lang}: three reading steps`);
     for (const id of ['practice', 'start-reading', 'quiet-moments']) assert.ok(page.includes(`id="${id}"`), `${lang}: #${id}`);
   }
@@ -99,8 +99,8 @@ test('built ecosystem page follows the three focal points; contact shows one pho
     assert.ok(!page.includes('Eco-Retreat') && !page.includes('Academy'), `${lang}: old model removed`);
     assert.match(page, /id="partnerships"/);
     const contactPage = readFileSync(dist(`${contact}index.html`), 'utf8');
-    assert.equal((contactPage.match(/contact-phone__number/g) ?? []).length, 1, `${lang}: one merged Hotline/Zalo card`);
-    assert.ok(contactPage.includes('0868499856') && !contactPage.includes('0388000680'), `${lang}: only Hương Thiền's number`);
+    assert.equal((contactPage.match(/contact-phone__number/g) ?? []).length, 2, `${lang}: one merged Hotline/Zalo card per person`);
+    for (const number of ['0868499856', '0388000680']) assert.ok(contactPage.includes(`>${number}<`) && contactPage.includes(`https://zalo.me/${number}`) && contactPage.includes(`tel:+84${number.slice(1)}`), `${lang}: ${number} has number, call and Zalo`);
     const stonesPage = readFileSync(dist(`${stones}index.html`), 'utf8');
     assert.ok(stonesPage.includes('id="partner-stones"') && stonesPage.includes('kimtuthap.vn'), `${lang}: partner price list with source`);
     assert.ok((stonesPage.match(/partner-stones__price/g) ?? []).length >= 10, `${lang}: priced items`);

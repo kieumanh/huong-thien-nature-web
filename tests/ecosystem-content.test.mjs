@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 for (const [language, path, values, titles, disclaimer] of [
-  ['Vietnamese', 'dist/vi/index.html', ['PHÁP MÔN', 'THIÊN NHIÊN', 'HỖ TRỢ'], ['Pháp môn tu tập', 'Môi trường thiên nhiên từ các farm đối tác', 'Môi trường thực hành, sách vở, đá thanh lọc'], 'chưa mở đăng ký'],
-  ['English', 'dist/en/index.html', ['PRACTICE', 'NATURE', 'SUPPORT'], ['Paths of practice', 'Natural settings from our partner farms', 'Practice spaces, books and cleansing stones'], 'registration']
+  ['Vietnamese', 'dist/vi/index.html', ['THÂN', 'TÂM', 'TRÍ', 'Nhận biết'], ['Môi trường thiên nhiên từ các farm đối tác', 'Pháp môn tu tập', 'Môi trường thực hành, sách vở, đá thanh lọc'], 'chưa mở đăng ký'],
+  ['English', 'dist/en/index.html', ['BODY', 'HEART', 'MIND', 'Awareness'], ['Natural settings from our partner farms', 'Paths of practice', 'Practice spaces, books and cleansing stones'], 'registration']
 ]) {
   test(language + ' page presents the ecosystem as three distinct directions', () => {
     const html = fs.readFileSync(path, 'utf8');
@@ -13,6 +13,8 @@ for (const [language, path, values, titles, disclaimer] of [
     assert(!html.includes('data-orbit-toggle'));
     assert.equal((html.match(/class="solar-pillar solar-pillar--/g) || []).length, 3);
     assert(html.includes('class="solar-sun"'));
+    assert(!/solar-sun[^>]*>.{0,200}Hương Thiền/s.test(html), 'the centre says awareness, not the brand name');
+    assert(!html.includes('PHÁP MÔN</span>') && !html.includes('HỖ TRỢ</span>'), 'planet labels are Thân, Tâm, Trí');
     for (const label of [...values, ...titles]) assert(html.includes(label), 'missing: ' + label);
     assert(html.includes(disclaimer));
     assert(!html.includes('eco-pyramid'));

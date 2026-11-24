@@ -1,3 +1,11 @@
+## 2.15.1 — Thân, Tâm, Trí trở lại vòng quỹ đạo, thêm hotline Kiều Mạnh, đối tác đá năng lượng
+
+- **Trang chủ:** vòng quỹ đạo trở lại với ba hành tinh **Thân, Tâm, Trí** (Thân ứng với môi trường thiên nhiên từ các farm đối tác, Tâm ứng với pháp môn tu tập, Trí ứng với môi trường thực hành, sách vở, đá thanh lọc); **trung tâm đổi thành "Nhận biết"** (EN: Awareness). Ba thẻ bên trên xếp theo thứ tự Thân, Tâm, Trí.
+- **Liên hệ:** thêm thẻ Hotline / Zalo hỗ trợ của Kiều Mạnh (0388000680), cùng kiểu thẻ Hotline / Zalo Hương Thiền, mỗi thẻ có nút Gọi ngay và Nhắn Zalo.
+- **Gợi ý:** bỏ dòng nhắc số 115 dưới câu trong khối thở; chỉ còn câu của chủ dự án.
+- **Cửa hàng · Đá năng lượng:** ghi rõ Đá Quý Kim Tự Tháp là đối tác của Hương Thiền Nature (kimtuthap.vn là website thứ hai của đối tác); bỏ ghi chú chưa xác nhận quan hệ. Bảng giá vẫn là giá niêm yết công khai ngày 24/11/2026, chưa có ảnh.
+- Kiểm thử: cập nhật bài kiểm tra Hệ sinh thái (nhãn Thân/Tâm/Trí, trung tâm Nhận biết), Liên hệ (hai số điện thoại), khối thở.
+
 ## 2.15.0 — Viết lại Hệ sinh thái quanh ba trọng tâm, giới thiệu hai khóa thực hành ở Trang chủ, bảng giá đá, một số Hotline/Zalo
 
 - **Hệ sinh thái viết lại hoàn toàn** theo nội dung của chủ dự án: hệ sinh thái bao quanh ba trọng tâm (Pháp môn tu tập; Môi trường thiên nhiên từ các farm đối tác; Môi trường thực hành, sách vở, đá thanh lọc), các đối tác xung quanh bổ trợ, và một cuộc sống tỉnh thức, lành mạnh, phụng sự. Mỗi trọng tâm có liên kết tới đúng trang (khóa thực hành, Gợi ý, farm đối tác, Cửa hàng, Tản văn). Thêm dòng lưu ý: đá và vật phẩm hỗ trợ là bạn đồng hành, không thay thế chăm sóc y tế. Mô hình cũ Thân/Tâm/Trí (Farm & Botanicals, Eco-Retreat, Academy) đã bỏ.

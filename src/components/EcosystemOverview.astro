@@ -12,8 +12,8 @@ const { lang } = Astro.props as { lang: Language };
 const vi = lang === 'vi';
 const t = getCopy(lang);
 const links = [
-  [journeyPath(lang, 'guidance'), vi ? 'Xem khóa thực hành' : 'See the practice courses'],
   [`${journeyPath(lang, 'ecosystem')}#partnerships`, vi ? 'Gặp farm đối tác' : 'Meet our partner farm'],
+  [journeyPath(lang, 'guidance'), vi ? 'Xem khóa thực hành' : 'See the practice courses'],
   [themePath(lang, themeById('da-nang-luong')!), vi ? 'Xem đá năng lượng' : 'See energy stones'],
 ];
 ---
