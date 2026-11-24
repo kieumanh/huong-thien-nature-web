@@ -1,3 +1,8 @@
+## 2.14.1 — Tản văn chia trang: lưới 3 × 3, 9 bài mỗi trang
+
+- Trang Tản văn hiện bài theo **lưới 3 cột × 3 hàng (9 bài/trang)** trên máy tính; máy tính bảng 2 cột, điện thoại 1 cột (vẫn 9 bài/trang). Đủ 9 bài thì sang trang mới, có nút Trước / số trang / Sau, trang hiện tại được đánh dấu, bấm chuyển trang sẽ cuộn về đầu danh sách.
+- Phân trang chạy cùng bộ lọc chủ đề: chọn chủ đề thì tính lại trang từ trang 1, chủ đề ít hơn 9 bài thì ẩn thanh trang. Dòng đếm cho biết đang xem bài nào ("Đang hiện 1–9/21 bài đọc"). Đường dẫn nhớ trang và chủ đề (`?trang=2&chu-de=...`). Không có JavaScript thì vẫn thấy đủ bài.
+
 ## 2.14.0 — Trang chủ đồng cảm, hai khóa thấu hiểu hơn, 5 bài Tản văn mới, lọc Tản văn theo chủ đề
 
 - Trang chủ: lời mở đầu nói thẳng với người mới ghé ("không cần phải ổn, không cần biết thiền") và khối mới **"Bạn không cần phải ổn rồi mới bắt đầu"** ngay sau phần đầu trang: 6 điều người trên hành trình chữa lành hay mang theo (mệt không rõ vì đâu, đầu óc không chịu tắt, đã thử nhiều mà vẫn xa mình, muốn thương mình, đứng trước ngã rẽ, muốn sống chậm), mỗi điều có một câu thấu hiểu và một bước nhỏ để bắt đầu; ba điều có thể mong ở đây (đi theo nhịp riêng, bước nhỏ thật, có người lắng nghe); lời mời nhắn tin và dòng hướng dẫn khi khủng hoảng (115).
