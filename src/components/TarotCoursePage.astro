@@ -3,7 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import TarotGuidance from './TarotGuidance.astro';
-import { tarotCourse, coursePath } from '../data/courses';
+import { tarotCourse, coursePath, courseShareImage } from '../data/courses';
 import { tarotSchema } from '../data/tarot-schema';
 import type { Language } from '../data/site';
 
@@ -12,7 +12,7 @@ const { title, description } = tarotCourse[lang];
 const { thumbnail } = tarotCourse;
 const alternatePath = coursePath(lang === 'vi' ? 'en' : 'vi');
 ---
-<BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath} image={thumbnail.src} imageDetails={{ width: thumbnail.width, height: thumbnail.height, alt: thumbnail.alt[lang], type: 'image/jpeg' }} aboutOrganization extraGraph={tarotSchema(lang)}>
+<BaseLayout {lang} title={`${title} | Hương Thiền Nature`} {description} {alternatePath} image={courseShareImage(tarotCourse, lang)} imageDetails={{ width: thumbnail.width, height: thumbnail.height, alt: thumbnail.alt[lang], type: 'image/jpeg' }} aboutOrganization extraGraph={tarotSchema(lang)}>
   <Header {lang} {alternatePath} />
   <TarotGuidance {lang} />
   <Footer {lang} />

@@ -36,6 +36,10 @@ body { position: relative; font-family: Inter, "Noto Sans", Arial, sans-serif; c
 .brand-line { position: absolute; left: 0; right: 0; font-size: 60px; }
 .brand-line--1 { top: 408px; }
 .brand-line--2 { top: 478px; }
+/* tarot course (share picture with text, and the text-free illustration used on cards and in search) */
+.fan { position: absolute; inset: 0; width: 1200px; height: 630px; overflow: visible; }
+.tarot-title { position: absolute; top: 64px; left: 0; right: 0; font-size: 96px; }
+.tarot-sub { position: absolute; top: 322px; left: 0; right: 0; text-align: center; font-size: 28px; font-weight: 400; letter-spacing: .01em; color: #f6ecd3; }
 </style>
 </head>
 <body>
@@ -69,7 +73,40 @@ const copy = {
     vi: { title: 'Quỹ ủng hộ', sub: 'Cùng nhau gieo mầm và lan tỏa' },
     en: { title: 'Support fund', sub: 'Sowing seeds and spreading them together' },
   },
+  tarot: {
+    vi: { lines: ['Lắng nghe mình', 'qua tarot'], sub: 'Buổi 1:1 trong 90 phút cùng Hương Thiền' },
+    en: { lines: ['Listening to yourself', 'through tarot'], sub: 'A 90-minute one-to-one session with Hương Thiền' },
+  },
 };
+// A fan of five original cards, pivot below the frame. Motifs are our own (moon, lotus, rays, path, a star and a ring of light for the centre card: "myself").
+function tarotFan(px, py, len, w) {
+  const r = w * 0.26;
+  const cy = -len * 0.52;
+  const motif = {
+    moon: `<circle cx="0" cy="${cy}" r="${r}" fill="#dc9b36"/><circle cx="${(r * 0.42).toFixed(1)}" cy="${(cy - r * 0.12).toFixed(1)}" r="${(r * 0.92).toFixed(1)}" fill="#fff3d0"/>`,
+    rings: `<circle cx="0" cy="${cy}" r="${r}" fill="none" stroke="#dc9b36" stroke-width="2.2"/><circle cx="0" cy="${cy}" r="${(r * 0.62).toFixed(1)}" fill="none" stroke="#6d4f9a" stroke-width="1.6"/><circle cx="0" cy="${cy}" r="${(r * 0.22).toFixed(1)}" fill="#dc9b36"/>`,
+    lotus: [-60, -30, 0, 30, 60].map(a => `<ellipse cx="0" cy="${(cy - r * 0.2).toFixed(1)}" rx="${(r * 0.26).toFixed(1)}" ry="${(r * 0.95).toFixed(1)}" transform="rotate(${a} 0 ${(cy + r * 0.55).toFixed(1)})" fill="none" stroke="#6d4f9a" stroke-width="1.7"/>`).join(''),
+    path: `<path d="M${(-r).toFixed(1)} ${(cy + r * 0.5).toFixed(1)} Q0 ${(cy - r * 1.4).toFixed(1)} ${r.toFixed(1)} ${(cy + r * 0.5).toFixed(1)}" fill="none" stroke="#6d4f9a" stroke-width="2" stroke-dasharray="2 7" stroke-linecap="round"/><circle cx="${r.toFixed(1)}" cy="${(cy + r * 0.5).toFixed(1)}" r="4" fill="#dc9b36"/>`,
+    star: `<path d="M0 ${(cy - r).toFixed(1)} Q${(r * 0.12).toFixed(1)} ${(cy - r * 0.12).toFixed(1)} ${r.toFixed(1)} ${cy.toFixed(1)} Q${(r * 0.12).toFixed(1)} ${(cy + r * 0.12).toFixed(1)} 0 ${(cy + r).toFixed(1)} Q${(-r * 0.12).toFixed(1)} ${(cy + r * 0.12).toFixed(1)} ${(-r).toFixed(1)} ${cy.toFixed(1)} Q${(-r * 0.12).toFixed(1)} ${(cy - r * 0.12).toFixed(1)} 0 ${(cy - r).toFixed(1)}Z" fill="#dc9b36"/>`,
+    self: `<circle cx="0" cy="${cy}" r="${(r * 1.7).toFixed(1)}" fill="none" stroke="#dc9b36" stroke-opacity=".45" stroke-width="1.2"/><circle cx="0" cy="${cy}" r="${(r * 1.1).toFixed(1)}" fill="none" stroke="#dc9b36" stroke-width="2"/><circle cx="0" cy="${cy}" r="${(r * 0.42).toFixed(1)}" fill="#dc9b36"/><circle cx="0" cy="${cy}" r="${(r * 0.18).toFixed(1)}" fill="#fff8e2"/>`,
+  };
+  // Left to right: five angles; the centre card (0°) carries the "self" motif and is drawn last so it sits on top.
+  const angles = [-50, -25, 0, 25, 50];
+  const motifs = [motif.star, motif.moon, motif.self, motif.rings, motif.path];
+  const drawOrder = [0, 1, 3, 4, 2];
+  const cards = drawOrder.map(i => `<g transform="translate(${px} ${py}) rotate(${angles[i]})">
+    <rect x="${-w / 2}" y="${-len}" width="${w}" height="${len}" rx="14" fill="url(#face)" stroke="#f4c76b" stroke-width="2"/>
+    <rect x="${(-w / 2 + 9).toFixed(1)}" y="${(-len + 9).toFixed(1)}" width="${w - 18}" height="${len - 18}" rx="9" fill="none" stroke="#b07a2a" stroke-opacity=".5" stroke-width="1.2"/>
+    ${motifs[i]}</g>`).join('');
+  return `<svg class="fan" viewBox="0 0 1200 630" aria-hidden="true">
+    <defs>
+      <linearGradient id="face" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff6dc"/><stop offset="1" stop-color="#ecd29b"/></linearGradient>
+      <radialGradient id="halo"><stop offset="0" stop-color="#ffe7a8" stop-opacity=".6"/><stop offset="1" stop-color="#f4c76b" stop-opacity="0"/></radialGradient>
+    </defs>
+    <circle cx="${px}" cy="${(py + cy).toFixed(1)}" r="${(w * 2.4).toFixed(1)}" fill="url(#halo)"/>
+    ${cards}
+  </svg>`;
+}
 const stage = document.getElementById('stage');
 if (variant === 'brand') {
   const [a, b] = copy.brand[lang];
@@ -78,6 +115,17 @@ if (variant === 'brand') {
     <p class="script gold brand-line brand-line--1">${a}</p>
     <p class="script gold brand-line brand-line--2">${b}</p>
     <p class="url">huongthiennature.com</p>`;
+} else if (variant === 'tarot' || variant === 'tarot-art') {
+  if (variant === 'tarot-art') {
+    stage.innerHTML = tarotFan(600, 690, 340, 160);
+  } else {
+    const t = copy.tarot[lang];
+    stage.innerHTML = `
+      <p class="eyebrow">HƯƠNG THIỀN NATURE</p>
+      <p class="script gold tarot-title">${t.lines[0]}<br>${t.lines[1]}</p>
+      <p class="tarot-sub">${t.sub}</p>
+      ${tarotFan(600, 700, 280, 132)}`;
+  }
 } else {
   const c = copy.support[lang];
   stage.innerHTML = `
