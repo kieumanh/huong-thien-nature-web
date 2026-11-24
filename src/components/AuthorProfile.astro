@@ -17,7 +17,9 @@ const vi = lang === 'vi';
   <div class="author-card__bio">
     <p>{journalAuthor.bio[lang]}</p>
     <p>{meditationFounder.bio[lang]}</p>
-    <a class="quiet-link" href={`${journeyPath(lang, 'team')}#kieu-manh`}>{vi ? 'Về tác giả' : 'About the author'}</a>
-    <a class="quiet-link" href={`${journalPath(lang)}#journal-articles`}>{vi ? 'Các bài viết của Kiều Mạnh' : 'Articles by Kiều Mạnh'}</a>
+    <p class="author-card__links">
+      <a class="quiet-link" href={`${journeyPath(lang, 'team')}#kieu-manh`}>{vi ? 'Về tác giả' : 'About the author'}</a>
+      <a class="quiet-link" href={`${journalPath(lang)}#journal-articles`}>{vi ? 'Các bài viết' : 'All articles'}</a>
+    </p>
   </div>
 </section>

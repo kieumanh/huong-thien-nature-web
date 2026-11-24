@@ -1,3 +1,8 @@
+## 2.17.1 — Tác giả: tách liên kết, bio gọn hơn
+
+- Hai liên kết "Về tác giả" và "Các bài viết" ở cuối bài không còn dính liền chữ; có khoảng cách và xuống dòng trên điện thoại.
+- Rút gọn đoạn giới thiệu tác giả và người hướng dẫn (dùng chung ở khối tác giả trong bài và trang Đội ngũ).
+
 ## 2.17.0 — Quỹ ủng hộ: trang riêng, mục ở chân trang, thông tin chuyển khoản và mã QR
 
 - **Trang "Quỹ ủng hộ"** (`/vi/quy-ung-ho/`, `/en/support-fund/`): lý do dự án cần được nâng đỡ để xây dựng và hoàn thiện; năm hạng mục sử dụng tài nguyên (không gian và nhà cửa, thiết bị, kênh truyền thông và website, di chuyển trên hành trình lan tỏa, ăn uống và liên lạc); lời mời đến những tấm lòng; thông tin chuyển khoản của thủ quỹ dự án (Kiều Xuân Mạnh, 02871729888, Ngân hàng Tiên Phong TPBank) kèm nút sao chép số và mã QR VietQR; lời cảm ơn và lời mời gửi ý tưởng hoặc kết nối. Nội dung song ngữ ở `src/data/support-fund.ts`, giao diện `src/components/SupportFund.astro`; trang là một mục hành trình nên tự vào route, sitemap, tìm kiếm và `audit:build`.
