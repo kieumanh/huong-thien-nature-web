@@ -1,3 +1,7 @@
+## 2.14.3 — Ba lối đọc trong Tản văn dễ nhận biết từng bài
+
+- Mỗi bài trong 3 lối đọc ("Không biết bắt đầu từ đâu?") có **chấm đầu dòng màu vàng**, **gạch chân vàng** dưới tên bài, đường kẻ mảnh ngăn giữa các bài và vùng bấm rộng hơn; hiện rõ cả khi rê chuột hoặc dùng bàn phím (viền focus).
+
 ## 2.14.2 — Trang Gợi ý dễ dùng hơn: thở một phút có hướng dẫn, lối đọc cho người mới
 
 - **Đi nhanh:** ba nút ở đầu trang dẫn tới ba mục (Trở về hơi thở · Bài nên đọc · Phút lắng lại).

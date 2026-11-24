@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.14.3',
+    date: '2026-11-24',
+    vi: ['Ba lối đọc dễ nhận biết từng bài', 'Trong Tản văn, mỗi bài ở ba lối đọc có chấm đầu dòng và gạch chân vàng, dễ thấy đâu là một bài để bấm vào.'],
+    en: ['Easier-to-spot reading lanes', 'In the journal, every piece in the three reading lanes now has a gold bullet and underline, so each one is easy to recognise as a link.'],
+  },
+  {
     version: '2.14.2',
     date: '2026-11-24',
     vi: ['Trang Gợi ý dễ dùng hơn', 'Thêm bài thở một phút có vòng sáng dẫn nhịp, lối đọc ba bước cho người mới tập, nút đi nhanh tới từng mục và lời mời cuối trang khi bạn muốn có người đi cùng.'],
