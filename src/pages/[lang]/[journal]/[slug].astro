@@ -154,7 +154,7 @@ const schema = {
               <h2 id="sources-title">{vi ? 'Nguồn và đọc thêm' : 'Sources and further reading'}</h2>
             </div>
           </div>
-          <p class="article-sources__note">{vi ? 'Các bài viết này được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'These articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.'}</p>
+          <p class="article-sources__note">{article.sourcesNote?.[lang] ?? (vi ? 'Các bài viết này được biên tập và phát triển từ bản thảo; phần hướng dẫn mới được bổ sung cho website, không phải trích nguyên văn.' : 'These articles adapt and develop the manuscript. New website exercises are editorial additions, not verbatim excerpts.')}</p>
           <ul class="article-sources__list" role="list">{article.sources.map(source => <li>{source.url
             ? <a href={source.url} rel="noopener"><span>{source.title}</span><small>{new URL(source.url).hostname.replace(/^www\./, '')} <Arrow /></small></a>
             : <span class="article-sources__plain"><span>{source.title}</span></span>}</li>)}</ul>

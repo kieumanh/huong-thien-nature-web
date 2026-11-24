@@ -70,7 +70,7 @@ with sync_playwright() as p:
     total = int(page.evaluate('document.querySelectorAll("#journal-grid [data-journal-card]").length'))
     # Topic chip
     page.locator('.journal-topic[data-topic="thien-nhien"]').click()
-    assert visible_cards(page).count() == 2 and page.locator('[data-journal-count]').inner_text().startswith('2')
+    assert visible_cards(page).count() == 3 and page.locator('[data-journal-count]').inner_text().startswith('3')
     assert 'chu-de=thien-nhien' in page.url
     page.locator('.journal-topic[data-topic="all"]').click()
     # Search: diacritic-insensitive on title, then full text (needs the index)

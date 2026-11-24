@@ -23,7 +23,7 @@ export const articleTopics: Record<string, JournalTopic> = {
   'wandering-mind': 'cam-xuc-chua-lanh', 'when-meditation-is-difficult': 'cam-xuc-chua-lanh', 'returning-attention': 'cam-xuc-chua-lanh',
   'loving-kindness-meditation': 'yeu-thuong', 'gentle-boundaries': 'yeu-thuong',
   'everyday-mindfulness': 'doi-song', 'small-joys-gratitude': 'doi-song', 'seven-layers': 'doi-song',
-  'mindful-gardening': 'thien-nhien', 'listening-to-nature': 'thien-nhien',
+  'mindful-gardening': 'thien-nhien', 'listening-to-nature': 'thien-nhien', 'sun-moon-rhythms': 'thien-nhien',
 };
 
 export function topicOf(article: Article): JournalTopic {

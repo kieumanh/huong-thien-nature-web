@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.19.0',
+    date: '2026-11-24',
+    vi: ['Bài mới về Mặt Trời, Mặt Trăng và nhịp sống, cùng năm hình minh họa chuyển động', 'Bài Tản văn mới trong mục Thiên nhiên về ánh sáng Mặt Trời, vòng trăng, ngày rằm, ngày ba mươi và mồng một, tách rõ điều nghiên cứu đã đo, điều chưa chắc và phần chiêm nghiệm; có năm hình minh họa chuyển động (tắt khi chọn giảm chuyển động) và danh sách nguồn. Sửa chế độ đọc nền sáng vào ban đêm.'],
+    en: ['A new article on the Sun, the Moon and our rhythms, with five animated illustrations', 'A new journal article in Nature on sunlight, the lunar cycle, the full moon, the thirtieth and the first of the lunar month, keeping what studies have measured, what is uncertain and what is reflection apart; five animated illustrations (still when reduced motion is chosen) and a source list. Fixes the light reading mode at night.'],
+  },
+  {
     version: '2.18.0',
     date: '2026-11-24',
     vi: ['Tìm kiếm có ảnh, thumbnail chia sẻ mới, dải ảnh Hành trình cân đối', 'Kết quả tìm kiếm hiện ảnh; trang Quỹ ủng hộ và cả site có hình chia sẻ minh họa riêng; dải ảnh ở trang Câu chuyện không còn ô trống trên điện thoại; trang Đội ngũ giữ bản giới thiệu dài; nút Gặp đội ngũ rõ ràng hơn.'],

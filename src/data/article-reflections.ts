@@ -80,4 +80,17 @@ export const articleReflections: Record<string, Reflection> = {
       en: 'Which thought is first in line right now? You may let it wait one more breath.',
     }],
   },
+  'sun-moon-rhythms': {
+    quote: {
+      vi: 'Từ xưa, con người đã nhìn lên Mặt Trời và Mặt Trăng để định ngày giờ, mùa vụ, cả những nhịp sâu kín bên trong.',
+      en: 'For ages people have looked to the Sun and Moon to mark days, seasons and the quiet rhythms inside.',
+    },
+    pause: [{
+      vi: 'Nếu hôm nay là một điểm trên vòng trăng, bạn thấy mình đang gần mồng một, rằm hay cuối tháng?',
+      en: 'If today were a point on the moon’s circle, would you feel closer to the first, the full moon or the month’s end?',
+    }, {
+      vi: 'Nếu ánh trăng chỉ làm sáng những gì đã có sẵn, đêm nay bạn sẵn lòng nhìn điều gì?',
+      en: 'If moonlight only lights what is already there, what are you willing to look at tonight?',
+    }],
+  },
 };

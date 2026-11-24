@@ -4,6 +4,7 @@ import { meditationChallenges } from './meditation-challenges.ts';
 import { rootsArticles } from './roots-articles.ts';
 import { healingArticles } from './healing-articles.ts';
 import { coverOverrides } from './article-covers.ts';
+import { skyRhythmArticle } from './sky-rhythm-article.ts';
 
 export type ArticleTranslation = {
   category: string;
@@ -33,10 +34,13 @@ export type Article = {
   updatedAt?: string;
   relatedSlugs?: string[];
   sources?: { title: string; url?: string }[];
+  /** Replaces the default "adapted from the manuscript" line above the references (for articles that cite studies). */
+  sourcesNote?: Record<Language, string>;
 };
 
 const baseArticles: Article[] = [
   ...healingArticles,
+  skyRhythmArticle,
   meditationChallenges,
   ...rootsArticles,
   {
