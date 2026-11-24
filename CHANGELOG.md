@@ -1,3 +1,8 @@
+## 2.20.1 — Khôi phục ảnh Tarot như phiên bản 2.19.1
+
+- Trang khóa Tarot, thẻ khóa học (Khóa thực hành, Trang chủ), ảnh thu nhỏ tìm kiếm và ảnh chia sẻ link trở về ảnh cũ (`public/media/guidance/tarot-thumbnail.jpg`, `public/media/thumbs/course-tarot.webp`), đúng như bản 2.19.1. Dòng ghi công ảnh cũ được giữ nguyên.
+- Gỡ các tệp của 2.20.0: `tarot-illustration.webp`, `tarot-course-vi.jpg`, `tarot-course-en.jpg`, trường `thumbnail.share`, hàm `courseShareImage` và phần Tarot trong `scripts/social-images/` (`render.py`, `template.html`).
+
 ## 2.20.0 — Tarot: minh họa mới và ảnh chia sẻ riêng
 
 - **Ảnh minh họa Tarot mới** (`public/media/guidance/tarot-illustration.webp`, 1200×630, không chữ): một chùm lá bài xòe hình quạt trên nền tím đêm, thay ảnh chụp Pixabay cũ. Ảnh hiện ở thẻ khóa trong Khóa thực hành và Trang chủ, và ở ảnh thu nhỏ tìm kiếm (`/media/thumbs/course-tarot.webp`, 640×400). Đã gỡ tệp ảnh Pixabay cũ khỏi kho. Không dùng ảnh Pixabay mới.
