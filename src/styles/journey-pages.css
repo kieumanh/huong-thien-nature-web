@@ -150,8 +150,6 @@
 .practice-path__item h3 a::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-card); }
 .practice-path__item:focus-within { outline: 2px solid var(--focus); outline-offset: 3px; }
 .practice-path__item p { color: var(--muted); max-width: 62ch; }
-.practice-help { padding: clamp(1rem, 3vw, 1.5rem); }
-.practice-help h3 { font-size: var(--type-card); font-weight: 400; margin-bottom: .4rem; color: color-mix(in srgb, var(--foreground) 88%, var(--muted)); }
 .practice-next { padding: clamp(1.1rem, 3.5vw, 2rem); }
 .practice-next__links { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.4rem; }
 @media (prefers-reduced-motion: reduce) { .breath-guide__orb { transition: none; } }

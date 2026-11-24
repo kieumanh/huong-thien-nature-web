@@ -18,7 +18,7 @@ import { ecosystemVision } from '../../data/ecosystem-vision';
 import { articlePath, journalPath } from '../../data/articles';
 import { themeById, themePath } from '../../data/shop-themes';
 import Arrow from '../../components/Arrow.astro';
-import { beginnerArticles } from '../../data/home';
+import { practicePath } from '../../data/home';
 import { contactPath } from '../../data/contact-channels';
 import { ecosystemPartnerJourney, journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
 import { getCopy, languages, type Language } from '../../data/site';
@@ -89,19 +89,14 @@ const ecoLinks: Record<string, string> = {
       <section class="journey-section practice-reading" id="start-reading" aria-labelledby="start-reading-title">
         <h2 id="start-reading-title">{vi ? 'Nên đọc bài nào khi mới tập?' : 'What should I read first?'}</h2>
         <p>{vi ? 'Bắt đầu với cách chọn tư thế và chuẩn bị buổi đầu tiên. Khi đã quen với chỗ ngồi, thử quan sát hơi thở theo từng bước.' : 'Begin with a posture you can settle into and prepare for a first sitting. Once you feel at ease, try observing the breath step by step.'}</p>
-        <ol class="practice-path">{beginnerArticles.map((article, index) => <li class="practice-path__item zen-card">
+        <ol class="practice-path">{practicePath(lang).map((step, index) => <li class="practice-path__item zen-card">
           <span class="practice-path__number" aria-hidden="true">{index + 1}</span>
           <div>
-            <p class="practice-path__meta">{vi ? `Bước ${index + 1}` : `Step ${index + 1}`} · {vi ? article.minutesVi ?? article.minutes : article.minutes} {getCopy(lang).readTime}</p>
-            <h3><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></h3>
-            <p>{article.translations[lang].description}</p>
+            <p class="practice-path__meta">{vi ? `Bước ${index + 1}` : `Step ${index + 1}`} · {vi ? step.article.minutesVi ?? step.article.minutes : step.article.minutes} {getCopy(lang).readTime}</p>
+            <h3><a href={articlePath(lang, step.article.slug)}>{step.title}</a></h3>
+            <p>{step.description}</p>
           </div>
         </li>)}</ol>
-        <div class="practice-help zen-card">
-          <h3>{vi ? 'Thấy khó ngồi yên? Điều đó rất bình thường.' : 'Finding it hard to sit still? That is very common.'}</h3>
-          <p>{vi ? 'Tâm trí bồn chồn không có nghĩa là bạn làm sai. Có một bài viết riêng cho những ngày như thế.' : 'A restless mind does not mean you are doing it wrong. There is a piece written for days like these.'}</p>
-          <a class="quiet-link" href={articlePath(lang, 'when-meditation-is-difficult')}>{vi ? 'Làm gì khi thấy khó ngồi thiền?' : 'What can I do when meditation feels difficult?'}</a>
-        </div>
       </section>
       <AlbumStrip {lang} id="quiet-moments" photos={['beach-meditate-calm', 'altar-flowers', 'plaque-moon-boat', 'plaque-monk-branch']}
         title={vi ? 'Những phút lắng lại' : 'Moments of stillness'}

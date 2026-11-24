@@ -125,7 +125,8 @@ test('built practice page: breathing guide, reading path and quick links', () =>
     const page = readFileSync(dist(`${path}index.html`), 'utf8');
     assert.ok(page.includes('data-breath-button'), `${lang}: breathing guide`);
     assert.ok(page.includes('data-breath') && !page.includes('breath-guide__care'), `${lang}: breathing note is the owner's sentence only`);
-    assert.equal((page.match(/practice-path__item/g) ?? []).length >= 3, true, `${lang}: three reading steps`);
+    assert.equal((page.match(/practice-path__item/g) ?? []).length, 4, `${lang}: four reading steps`);
+    assert.ok(!page.includes('practice-help'), `${lang}: the reassurance is step 4, not a separate card`);
     for (const id of ['practice', 'start-reading', 'quiet-moments']) assert.ok(page.includes(`id="${id}"`), `${lang}: #${id}`);
   }
 });
