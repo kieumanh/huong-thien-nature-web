@@ -30,7 +30,8 @@ const searchPath = en ? '/en/search/' : '/vi/timkiem/';
 const counts = Object.fromEntries(journalTopics.map(topic => [topic.id, articles.filter(article => topicOf(article) === topic.id).length]));
 const unit = en ? 'articles' : 'bài đọc';
 const readTime = en ? 'min read' : 'phút đọc';
-const ordered = [...articles].sort((a, b) => curatedRank(a.slug) - curatedRank(b.slug));
+// Newest first. Articles without a publication date go last; the curated rank only orders articles from the same day.
+const ordered = [...articles].sort((a, b) => (b.publishedAt ?? '').localeCompare(a.publishedAt ?? '') || curatedRank(a.slug) - curatedRank(b.slug));
 const lead = featuredArticle();
 const leadText = lead.translations[lang];
 const leadPhoto = articlePhotos[lead.image];
@@ -52,7 +53,7 @@ const copy = en ? {
   ],
   open: 'An open page', read: 'Read this piece',
   library: 'The library', search: 'Search the Journal', placeholder: 'Title, topic or keyword', go: 'Search',
-  sort: 'Sort by', sorts: { featured: 'Curated picks', newest: 'Newest', short: 'Shortest read' },
+  sort: 'Sort by', sorts: { newest: 'Newest', short: 'Shortest read' },
   topics: 'Filter articles by topic', all: 'All', chance: 'An article that finds you', again: 'Another one', suggest: 'Perhaps this one today',
   chanceNote: 'A quiet suggestion, never a push.',
   empty: 'No article matches that yet.', clear: 'Show every article', site: 'Search the whole website',
@@ -68,7 +69,7 @@ const copy = en ? {
   ],
   open: 'Một trang đang mở', read: 'Đọc bài này',
   library: 'Thư viện tản văn', search: 'Tìm trong Tản văn', placeholder: 'Tên bài, chủ đề hoặc từ khóa', go: 'Tìm',
-  sort: 'Sắp xếp', sorts: { featured: 'Bài viết được tuyển chọn', newest: 'Mới nhất', short: 'Thời gian đọc ngắn' },
+  sort: 'Sắp xếp', sorts: { newest: 'Mới nhất', short: 'Thời gian đọc ngắn' },
   topics: 'Lọc bài viết theo chủ đề', all: 'Tất cả', chance: 'Một bài viết hữu duyên', again: 'Bài khác', suggest: 'Có lẽ hôm nay bạn muốn đọc bài này',
   chanceNote: 'Một gợi ý nhẹ, không thúc giục.',
   empty: 'Chưa có bài nào khớp với điều bạn tìm.', clear: 'Xem tất cả bài viết', site: 'Tìm trên toàn website',
@@ -123,7 +124,6 @@ const copy = en ? {
         <div class="journal-sort js-only">
           <label for="journal-sort">{copy.sort}</label>
           <select id="journal-sort" data-journal-sort>
-            <option value="featured">{copy.sorts.featured}</option>
             <option value="newest">{copy.sorts.newest}</option>
             <option value="short">{copy.sorts.short}</option>
           </select>
@@ -161,8 +161,8 @@ const copy = en ? {
       <h2 id="journal-lanes-title">{en ? 'Not sure where to begin?' : 'Không biết bắt đầu từ đâu?'}</h2>
       <p class="journal-lanes__intro">{en ? 'Choose the lane closest to how you feel today. Each one is a short, ordered reading path.' : 'Chọn lối gần nhất với điều bạn đang cảm thấy hôm nay. Mỗi lối là vài bài đọc ngắn, theo thứ tự.'}</p>
       <ol class="journal-lanes__list">
-        {readingLanes.map((lane, index) => <li class="journal-lane zen-card">
-          <p class="journal-lane__head"><span class="journal-lane__number" aria-hidden="true">{index + 1}</span><span>{laneArticles(lane.slugs).length} {unit}</span></p>
+        {readingLanes.map(lane => <li class="journal-lane zen-card">
+          <p class="journal-lane__head"><span>{laneArticles(lane.slugs).length} {unit}</span></p>
           <h3>{lane.title[lang]}</h3>
           <p>{lane.note[lang]}</p>
           <ol>{laneArticles(lane.slugs).map(article => <li><a href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>

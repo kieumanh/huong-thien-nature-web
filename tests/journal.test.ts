@@ -73,7 +73,12 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
     const journal = readFileSync(dist(`${journalPath(lang)}index.html`), 'utf8');
     assert.equal((journal.match(/type="search"/g) ?? []).length, 1, `${lang}: one search box`);
     assert.ok(journal.includes('data-journal-query') && journal.includes('data-journal-sort') && journal.includes('data-chance-button'), `${lang}: search, sort and "a chance encounter"`);
-    assert.equal((journal.match(/<option value="/g) ?? []).length, 3, `${lang}: three sort orders`);
+    assert.equal((journal.match(/<option value="/g) ?? []).length, 2, `${lang}: two sort orders (newest first, shortest read)`);
+    assert.ok(!journal.includes('journal-lane__number'), `${lang}: reading lanes carry no numbers`);
+    const dates = [...journal.matchAll(/data-date="([^"]*)"/g)].map(match => match[1]);
+    const dated = dates.filter(Boolean);
+    assert.deepEqual(dated, [...dated].sort().reverse(), `${lang}: cards are listed newest first`);
+    assert.ok(dates.slice(0, dated.length).every(Boolean) && dates.slice(dated.length).every(date => date === ''), `${lang}: articles without a date come last`);
     assert.match(journal, /action="\/(vi\/timkiem|en\/search)\/"/, `${lang}: without JavaScript the box opens the site search`);
     assert.equal((journal.match(/class="journal-topic"/g) ?? []).length, journalTopics.length + 1);
     assert.equal((journal.match(/class="topic-icon"/g) ?? []).length, journalTopics.length + 1, `${lang}: every chip has a thin-line icon`);
@@ -92,7 +97,7 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
   }
   if (!existsSync(dist('/vi/tan-van/index.html'))) return;
   const vi = readFileSync(dist('/vi/tan-van/index.html'), 'utf8');
-  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên', 'Thời gian đọc ngắn', 'Bài viết được tuyển chọn']) assert.ok(vi.includes(line), line);
+  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên', 'Thời gian đọc ngắn', 'Mới nhất']) assert.ok(vi.includes(line), line);
 });
 
 test('built article pages: reading mode, save, share, pull quote, pause, closing line, neighbours and at most three related pieces', () => {

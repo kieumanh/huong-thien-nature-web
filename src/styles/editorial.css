@@ -181,7 +181,6 @@
 @media (min-width: 860px) { .journal-lanes__list { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 .journal-lane { padding: clamp(1rem, 2.6vw, 1.4rem); }
 .journal-lane__head { display: flex; align-items: center; justify-content: space-between; margin: 0; color: var(--muted); font-size: var(--type-caption); }
-.journal-lane__number { display: grid; place-items: center; width: 2.2rem; height: 2.2rem; border: 1px solid var(--gold-line); border-radius: 50%; background: var(--gold-wash); color: var(--gold-accent); font-family: var(--serif); font-size: 1.05rem; font-weight: 700; }
 .journal-lane h3 { margin-block: .7rem .35rem; font-size: var(--type-card); }
 .journal-lane > p:not(.journal-lane__head) { margin: 0; color: var(--muted); }
 .journal-lane ol { margin: .9rem 0 0; padding: 0; list-style: none; display: grid; gap: 0; border-top: 1px solid var(--gold-line); }

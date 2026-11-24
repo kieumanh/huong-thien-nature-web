@@ -19,8 +19,9 @@ const empty = document.querySelector<HTMLElement>('[data-journal-empty]');
 const siteLink = document.querySelector<HTMLAnchorElement>('[data-journal-site]');
 const reducedMotion = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-type Sort = 'featured' | 'newest' | 'short';
-const sorts: Sort[] = ['featured', 'newest', 'short'];
+// Newest first is the default and always the starting order. Shortest read is an explicit choice.
+type Sort = 'newest' | 'short';
+const sorts: Sort[] = ['newest', 'short'];
 const num = (card: HTMLElement, key: string) => Number.parseFloat(card.dataset[key] ?? '') || 0;
 const slugOf = (card: HTMLElement) => card.dataset.slug ?? '';
 const linkOf = (card: HTMLElement) => card.querySelector<HTMLAnchorElement>('.journal-card-copy a');
@@ -35,7 +36,7 @@ if (grid && group && buttons.length && cards.length && count && nav) {
   let topic = 'all';
   let page = 1;
   let query = '';
-  let sort: Sort = 'featured';
+  let sort: Sort = 'newest';
   let loading = false;
 
   // The full text of each article comes from the site search index, fetched once when the reader first uses the box.
@@ -143,7 +144,7 @@ if (grid && group && buttons.length && cards.length && count && nav) {
       const set = (key: string, value: string, fallback: string) => { if (value === fallback) url.searchParams.delete(key); else url.searchParams.set(key, value); };
       set('chu-de', topic, 'all');
       set('q', query.trim(), '');
-      set('sap-xep', sort, 'featured');
+      set('sap-xep', sort, 'newest');
       set('trang', String(page), '1');
       history.replaceState(null, '', url);
     }
@@ -175,7 +176,7 @@ if (grid && group && buttons.length && cards.length && count && nav) {
     document.getElementById('journal-grid')?.scrollIntoView({ block: 'start', behavior: reducedMotion() ? 'auto' : 'smooth' });
   });
   sortSelect?.addEventListener('change', () => {
-    sort = sorts.includes(sortSelect.value as Sort) ? sortSelect.value as Sort : 'featured';
+    sort = sorts.includes(sortSelect.value as Sort) ? sortSelect.value as Sort : 'newest';
     page = 1;
     render(true, false);
   });

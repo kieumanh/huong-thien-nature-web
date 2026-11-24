@@ -1,3 +1,11 @@
+## 2.21.0 — Tản văn: bài mới nhất lên đầu trang, bỏ số thứ tự ở lối đọc
+
+- **Thứ tự mặc định là bài mới nhất:** trang Tản văn (`/vi/tan-van/`, `/en/journal/`) đưa bài mới nhất lên đầu, bài cũ hơn xếp dần xuống dưới. Thứ tự này cũng áp dụng khi không có JavaScript và trong dữ liệu có cấu trúc (`ItemList`). Bài cùng ngày giữ thứ tự tuyển chọn.
+- **Bài chưa có ngày đăng xếp cuối:** ba bài chưa ghi ngày (`returning-attention`, `seven-layers`, `listening-to-nature`) nằm dưới cùng cho đến khi có ngày đăng thật. Ngày không được tự điền, vì ngày đăng hiển thị trên trang bài viết.
+- **Ô sắp xếp còn hai lựa chọn:** "Mới nhất" (mặc định) và "Thời gian đọc ngắn". Đã bỏ "Bài viết được tuyển chọn". Đường dẫn cũ có `?sap-xep=featured` vẫn mở được và rơi về "Mới nhất".
+- **Bỏ số thứ tự ở lối đọc:** các vòng tròn 1, 2, 3 trong mục "Không biết bắt đầu từ đâu?" đã gỡ; số trang ở cuối danh sách vẫn giữ để chuyển trang.
+- **Kiểm thử:** `test:journal` kiểm tra thứ tự mới nhất trước, bài thiếu ngày xếp cuối, không còn số ở lối đọc và chỉ còn hai lựa chọn sắp xếp. `tests/tan-van-browser.py` đạt ở cả hai ngôn ngữ, trên điện thoại và máy tính.
+
 ## 2.20.1 — Khôi phục ảnh Tarot như phiên bản 2.19.1
 
 - Trang khóa Tarot, thẻ khóa học (Khóa thực hành, Trang chủ), ảnh thu nhỏ tìm kiếm và ảnh chia sẻ link trở về ảnh cũ (`public/media/guidance/tarot-thumbnail.jpg`, `public/media/thumbs/course-tarot.webp`), đúng như bản 2.19.1. Dòng ghi công ảnh cũ được giữ nguyên.

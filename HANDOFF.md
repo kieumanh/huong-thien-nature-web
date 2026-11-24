@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.20.1. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.21.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -28,6 +28,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
 | 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
+| 24/11 | 2.21.0: Tản văn xếp bài mới nhất lên đầu (mặc định), bài chưa có ngày xếp cuối; bỏ tùy chọn "tuyển chọn" và số thứ tự ở lối đọc. Còn chờ chủ dự án cung cấp ngày đăng cho `returning-attention`, `seven-layers`, `listening-to-nature`. |
 | 24/11 | 2.20.1: khôi phục ảnh Tarot như 2.19.1 (`tarot-thumbnail.jpg`, `course-tarot.webp`, ảnh chia sẻ chung); gỡ minh họa mới, `tarot-course-*.jpg`, trường `thumbnail.share` và công cụ dựng ảnh Tarot. |
 | 24/11 | 2.20.0: Tarot có minh họa mới (`tarot-illustration.webp`) thay ảnh Pixabay đã gỡ khỏi kho; ảnh chia sẻ riêng vi/en (`tarot-course-*.jpg`) cho og, twitter và schema; thumbnail tìm kiếm `course-tarot.webp` làm lại. |
 | 24/11 | 2.19.1: sửa mốc lập gia đình trong trang Câu chuyện từ 22 lên 25 tuổi (vi, en). |

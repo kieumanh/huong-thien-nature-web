@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.21.0',
+    date: '2026-11-24',
+    vi: ['Tản văn: bài mới nhất lên đầu trang', 'Trang Tản văn đưa bài mới nhất lên đầu, bài cũ hơn xếp dần xuống dưới. Đã bỏ tùy chọn "tuyển chọn" và các số thứ tự ở mục lối đọc.'],
+    en: ['Journal: newest articles first', 'The Journal lists the newest article first and older ones below it. The "curated picks" option and the numbers on the reading paths have been removed.'],
+  },
+  {
     version: '2.20.1',
     date: '2026-11-24',
     vi: ['Khôi phục ảnh Tarot như phiên bản trước', 'Trang khóa Tarot, thẻ khóa học và ảnh chia sẻ link trở về ảnh cũ như phiên bản 2.19.1. Các hình minh họa mới được gỡ.'],
