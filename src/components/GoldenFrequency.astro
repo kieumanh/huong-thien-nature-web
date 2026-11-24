@@ -1,12 +1,14 @@
 ---
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
+import CourseCompare from './CourseCompare.astro';
 import ContactForm from './ContactForm.astro';
 import FrequencyOrb from './FrequencyOrb.astro';
 import FrequencySelfCheck from './FrequencySelfCheck.astro';
 import GfIcon, { type GfIconName } from './GfIcon.astro';
 import { frequencyCourse, frequencyFeeNote, frequencyPriceLabel, frequencyTopic } from '../data/courses';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, weeklyPlan } from '../data/golden-frequency';
+import { feedbackAnchor, feedbackCopy } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
 import { internationalPhone, zaloUrl } from '../data/contact-channels';
 import { meditationFounder } from '../data/people';
@@ -109,6 +111,19 @@ const petals = [6, 5, 7, 4, 3, 8];
         </a>
       </li>)}
     </ul>
+  </section>
+
+  <section class="gf-info" id="info" aria-labelledby="gf-info-title" data-gf-reveal>
+    <p class="gf-eyebrow">{copy.info.eyebrow}</p>
+    <h2 id="gf-info-title">{copy.info.title}</h2>
+    <dl class="gf-info-grid">
+      {copy.info.items.map(([label, value]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+    </dl>
+    <div class="gf-info-prepare">
+      <h3>{copy.info.prepareTitle}</h3>
+      <ul role="list">{copy.info.prepare.map(item => <li>{item}</li>)}</ul>
+      <p>{copy.info.help}</p>
+    </div>
   </section>
 
   <nav class="gf-jumps" aria-label={copy.navigation}>
@@ -379,6 +394,12 @@ const petals = [6, 5, 7, 4, 3, 8];
       <summary>{question}</summary>
       <p>{answer}</p>
     </details>)}
+  </section>
+
+  <p class="gf-feedback-link"><a class="quiet-link" href={`${journeyPath(lang, 'guidance')}#${feedbackAnchor}`}>{feedbackCopy[lang].link} <Arrow /></a></p>
+
+  <section class="gf-section gf-compare" id="compare" aria-labelledby="course-compare-title" data-gf-reveal>
+    <CourseCompare {lang} current="golden-frequency" />
   </section>
 
   <section class="gf-section" id="howto" aria-labelledby="gf-howto-title">

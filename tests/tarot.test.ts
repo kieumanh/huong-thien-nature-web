@@ -6,8 +6,8 @@ import { tarotLanding } from '../src/data/tarot-guidance.ts';
 
 test('no price is published until the owner supplies one', () => {
   assert.equal(tarotOffer.price, null);
-  assert.equal(tarotPriceLabel('vi'), 'Liên hệ');
-  assert.equal(tarotPriceLabel('en'), 'Ask us');
+  assert.equal(tarotPriceLabel('vi'), 'Báo giá qua tin nhắn');
+  assert.equal(tarotPriceLabel('en'), 'Quote by message');
   for (const lang of ['vi', 'en'] as const) {
     const service = tarotSchema(lang).find(node => node['@type'] === 'Service');
     assert.ok(service && !('offers' in service), 'no Offer without a confirmed price');
@@ -17,7 +17,7 @@ test('no price is published until the owner supplies one', () => {
 test('a confirmed price is formatted and published consistently', () => {
   assert.equal(tarotPriceLabel('vi', { price: 600000 }), '600.000 ₫');
   assert.equal(tarotPriceLabel('en', { price: 600000 }), '600,000 VND');
-  for (const bad of [0, -5, Number.NaN]) assert.equal(tarotPriceLabel('vi', { price: bad }), 'Liên hệ');
+  for (const bad of [0, -5, Number.NaN]) assert.equal(tarotPriceLabel('vi', { price: bad }), 'Báo giá qua tin nhắn');
   const service = tarotSchema('vi', { price: 600000, currency: 'VND' }).find(node => node['@type'] === 'Service') as { offers: { price: string; priceCurrency: string } };
   assert.equal(service.offers.price, '600000');
   assert.equal(service.offers.priceCurrency, 'VND');

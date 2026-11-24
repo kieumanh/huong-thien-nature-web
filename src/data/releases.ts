@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.11.1',
+    date: '2026-11-24',
+    vi: ['Bổ sung thông tin cho người tham khảo đăng ký', 'Tần Số Vàng có khối thông tin khóa học, danh sách cần chuẩn bị và thêm hỏi đáp. Trang Tần Số Vàng, Tarot và Khóa thực hành có bảng so sánh hai khóa. Chi phí buổi Tarot ghi rõ báo giá qua tin nhắn.'],
+    en: ['More information for prospective students', 'The Golden Frequency gains a course information sheet, a what-to-prepare list and more answers. The Golden Frequency, tarot and practice-course pages gain a side-by-side comparison. The tarot cost now says quote by message.'],
+  },
+  {
     version: '2.11.0',
     date: '2026-11-24',
     vi: ['Tinh chỉnh giao diện và tìm kiếm Tản văn', 'Tản văn có ô tìm bài theo từ khóa và bỏ chữ Roots. Tiêu đề trong timeline nổi bật hơn, biểu tượng Farm Gửi yêu thương vào đất rõ hơn, biểu tượng cuối trang bo tròn, thứ tự menu và chân trang đưa Hệ sinh thái và Đội ngũ lên trước. Cửa hàng có thanh điều khiển gọn hơn, trang Liên hệ có thêm hotline và Zalo hỗ trợ.'],

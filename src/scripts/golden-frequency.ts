@@ -205,6 +205,11 @@ function setupSticky() {
   };
   new IntersectionObserver(([entry]) => { passedHero = !entry.isIntersecting && entry.boundingClientRect.top < 0; sync(); }).observe(hero);
   new IntersectionObserver(([entry]) => { reachedQuote = entry.isIntersecting || entry.boundingClientRect.top < 0; sync(); }).observe(quote);
+  // The bar can wrap onto more lines in another language or font; the floating controls follow its real height.
+  if ('ResizeObserver' in window) new ResizeObserver(() => {
+    const height = Math.ceil(bar.getBoundingClientRect().height);
+    if (height > 0) document.body.style.setProperty('--sticky-bar-h', `${height}px`);
+  }).observe(bar);
 }
 
 // A sideways-scrolling card rail must be reachable by keyboard when it has nothing focusable inside.

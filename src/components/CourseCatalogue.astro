@@ -1,4 +1,6 @@
 ---
+import CourseCompare from './CourseCompare.astro';
+import StudentFeedback from './StudentFeedback.astro';
 import { courses, coursePath, courseImage } from '../data/courses';
 import type { Language } from '../data/site';
 const { lang } = Astro.props as { lang: Language };
@@ -19,6 +21,10 @@ const vi = lang === 'vi';
     </div>
   </div>)}
 </section>
+<section class="journey-section" aria-labelledby="course-compare-title">
+  <CourseCompare {lang} />
+</section>
+<StudentFeedback {lang} />
 <style>
   .course-card { display: grid; max-width: 53rem; overflow: hidden; margin-top: 1rem; }
   .course-preview { position: relative; min-height: 0; aspect-ratio: 1200 / 630; background: var(--orchid-mist); }

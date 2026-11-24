@@ -245,6 +245,29 @@
 }
 .gf-quick-card:is(:hover, :focus-visible) { border-color: var(--gf-gold-deep); box-shadow: 0 10px 26px #c88a2c24; }
 .gf-quick-icon { grid-row: span 2; display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; color: var(--gf-ink); background: linear-gradient(140deg, var(--gf-gold-hi), var(--gf-gold) 60%, #e2a442); }
+
+/* Course information fact sheet: what a prospective student needs before enrolling. */
+.gf-info {
+  margin-top: clamp(1rem, 2.6vw, 1.6rem);
+  padding: clamp(1.05rem, 3vw, 1.7rem);
+  border: 1px solid var(--gf-line);
+  border-radius: var(--radius-feature);
+  background: linear-gradient(160deg, var(--gf-wash), var(--surface-raised) 66%);
+}
+.gf-info h2 { margin-top: .3rem; font-size: clamp(1.3rem, 2.6vw, 1.85rem); }
+.gf-info-grid { display: grid; gap: .75rem; margin-top: 1rem; }
+.gf-info-grid > div { padding: .8rem 1rem; border: 1px solid var(--gf-line); border-radius: var(--radius-card); background: var(--surface-raised); }
+.gf-info-grid dt { color: var(--gf-accent); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.gf-info-grid dd { margin: .2rem 0 0; line-height: 1.5; color: var(--foreground); }
+.gf-info-prepare { margin-top: 1.1rem; padding-top: 1rem; border-top: 1px dashed var(--gf-line); }
+.gf-info-prepare h3 { font-size: 1.05rem; }
+.gf-info-prepare ul { display: grid; gap: .45rem; margin-top: .6rem; padding: 0; list-style: none; }
+.gf-info-prepare li { position: relative; padding-left: 1.4rem; line-height: 1.5; }
+.gf-info-prepare li::before { content: ""; position: absolute; left: 0; top: .55em; width: .55rem; height: .55rem; border-radius: 50%; background: linear-gradient(140deg, var(--gf-gold-hi), var(--gf-gold-deep)); }
+.gf-info-prepare p { margin-top: .8rem; color: var(--muted); }
+.gf-compare { max-width: 62rem; }
+@media (min-width: 640px) { .gf-info-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (min-width: 980px) { .gf-info-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
 .gf-quick-text { display: grid; line-height: 1.35; }
 .gf-quick-text strong { font-size: 1.02rem; }
 .gf-quick-text span { color: var(--muted); font-size: .88rem; }
@@ -615,6 +638,7 @@
 .gf-quote-form .contact-card :focus-visible { outline-color: var(--focus); }
 
 /* ---------- Sticky quote bar ---------- */
+.gf-sticky { --gf-cream: #f8f1e3; --gf-lilac: #d4c9ec; --gf-gold: #f4c76b; --gf-gold-hi: #ffe7a8; --gf-ink: #1a1233; } /* the bar sits outside .gf, so it carries its own palette */
 .gf-sticky[hidden] { display: none; }
 .gf-sticky:not([hidden]) {
   position: fixed;
@@ -636,7 +660,7 @@
 .gf-sticky span { color: var(--gf-lilac); font-size: .8rem; }
 .gf-sticky .button { flex: none; min-height: 48px; border-color: #d59a3a; color: var(--gf-ink); background: linear-gradient(100deg, var(--gf-gold-hi), var(--gf-gold) 55%, #e8ab4a); }
 .gf-sticky :focus-visible { outline-color: var(--gf-gold); }
-body[data-gf-sticky-on] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + env(safe-area-inset-bottom) + 4.6rem); }
+body[data-gf-sticky-on] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + var(--sticky-bar-h, calc(4.2rem + env(safe-area-inset-bottom))) + .4rem); }
 html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
 
 /* ---------- Mobile rails: card groups scroll sideways so the page stays short on phones ---------- */
@@ -785,3 +809,5 @@ html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
   .gf-host p:not(.gf-eyebrow) { margin-inline: auto; }
   .gf-host .quiet-link { justify-content: center; }
 }
+
+.gf-feedback-link { margin-top: 1.4rem; text-align: center; }

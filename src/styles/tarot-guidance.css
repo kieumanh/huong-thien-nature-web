@@ -474,6 +474,7 @@
 .guidance-invitation .button--tonal:is(:hover, :active) { background: #6c4861; color: var(--tarot-paper); }
 .guidance-scope { margin-top: 1.1rem; font-size: .86rem; line-height: 1.5; }
 
+.guidance-sticky { --tarot-ink: #281a2a; --tarot-paper: #fff4e9; --tarot-gold: #f6d3a6; --tarot-soft: #f2dce8; } /* the bar sits outside .guidance, so it carries its own palette */
 .guidance-sticky[hidden] { display: none; }
 .guidance-sticky { display: none; }
 @media (max-width: 699px) {
@@ -491,7 +492,7 @@
   .guidance-sticky .button:is(:hover, :active) { background: #ffe8c9; color: var(--tarot-ink); }
   .guidance-sticky :focus-visible { outline-color: var(--tarot-gold); }
   /* Keep the floating music and back-to-top controls above the bar, and keep focused content clear of it (WCAG 2.4.11). */
-  body[data-sticky-cta] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + env(safe-area-inset-bottom) + 4.6rem); }
+  body[data-sticky-cta] :is(.music-dock[data-music-ready], .back-to-top) { bottom: calc(var(--floating-inset) + var(--sticky-bar-h, calc(4.2rem + env(safe-area-inset-bottom))) + .4rem); }
   html:has(body[data-sticky-cta]) { scroll-padding-bottom: 6rem; }
 }
 @media (min-width: 600px) {
@@ -501,3 +502,5 @@
   .guidance-cta-band { grid-template-columns: minmax(0, 1fr) auto; }
   .guidance-cta-band .button { justify-self: end; }
 }
+
+.guidance-feedback-link { margin-top: 1.4rem; text-align: center; }

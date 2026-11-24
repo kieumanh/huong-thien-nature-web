@@ -1,0 +1,41 @@
+---
+import { courseCompare, type CourseKey } from '../data/course-compare';
+import { courses, frequencyCourse, tarotCourse, coursePath } from '../data/courses';
+import type { Language } from '../data/site';
+import Arrow from './Arrow.astro';
+interface Props { lang: Language; current?: CourseKey; headingLevel?: 'h2' | 'h3' }
+const { lang, current, headingLevel = 'h2' } = Astro.props as Props;
+const copy = courseCompare[lang];
+const Heading = headingLevel;
+const order: [CourseKey, (typeof courses)[number]][] = [['golden-frequency', frequencyCourse], ['tarot', tarotCourse]];
+---
+<div class="course-compare">
+  <div class="course-compare__head">
+    <Heading id="course-compare-title">{copy.title}</Heading>
+    <p>{copy.intro}</p>
+  </div>
+  <div class="course-compare__grid">
+    {order.map(([key, course]) => {
+      const data = copy.courses[key];
+      const isCurrent = current === key;
+      return <article class:list={['course-compare__card', { 'is-current': isCurrent }]}>
+        <h3>{data.name}{isCurrent && <span class="course-compare__badge">{copy.current}</span>}</h3>
+        <dl>{copy.rows.map((row, index) => <div><dt>{row}</dt><dd>{data.values[index]}</dd></div>)}</dl>
+        {!isCurrent && <a class="button" href={coursePath(lang, course)}>{data.action} <Arrow /></a>}
+      </article>;
+    })}
+  </div>
+</div>
+<style>
+  .course-compare__head p { max-width: 60ch; margin-top: .5rem; color: var(--muted); }
+  .course-compare__grid { display: grid; gap: clamp(.8rem, 2.5vw, 1.25rem); margin-top: 1.1rem; }
+  .course-compare__card { display: flex; flex-direction: column; gap: .8rem; padding: clamp(1rem, 3.5vw, 1.5rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface-raised); color: var(--foreground); }
+  .course-compare__card.is-current { border-color: var(--primary); box-shadow: 0 0 0 1px var(--primary); }
+  .course-compare__card h3 { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; margin: 0; font-size: var(--type-card); }
+  .course-compare__badge { padding: .15rem .6rem; border-radius: var(--radius-pill); background: var(--primary); color: var(--on-primary, #fff); font: 650 .74rem/1.4 var(--sans); }
+  .course-compare__card dl { display: grid; gap: .7rem; margin: 0; }
+  .course-compare__card dt { color: var(--secondary); font-size: .74rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+  .course-compare__card dd { margin: .15rem 0 0; line-height: 1.55; }
+  .course-compare__card .button { margin-top: auto; align-self: flex-start; }
+  @media (min-width: 760px) { .course-compare__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

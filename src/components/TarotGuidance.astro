@@ -1,10 +1,12 @@
 ---
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
+import CourseCompare from './CourseCompare.astro';
 import GuidanceSequence from './GuidanceSequence.astro';
 import TarotResearch from './TarotResearch.astro';
 import { tarotLanding } from '../data/tarot-guidance';
 import { tarotCourse, tarotPriceLabel, tarotEnquiryPath } from '../data/courses';
+import { feedbackAnchor, feedbackCopy } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
 import { zaloUrl } from '../data/contact-channels';
 import { meditationFounder } from '../data/people';
@@ -154,6 +156,12 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
     </details>
   </section>
 
+  <p class="guidance-feedback-link"><a class="quiet-link" href={`${journeyPath(lang, 'guidance')}#${feedbackAnchor}`}>{feedbackCopy[lang].link} <Arrow /></a></p>
+
+  <section class="guidance-section" id="compare" aria-labelledby="course-compare-title" data-guidance-reveal>
+    <CourseCompare {lang} current="tarot" />
+  </section>
+
   <section class="guidance-section guidance-howto" id="howto" aria-labelledby="howto-title">
     <h2 id="howto-title" data-guidance-reveal>{copy.howtoTitle}</h2>
     <ol class="guidance-howto-steps" role="list">
@@ -209,5 +217,10 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
     };
     new IntersectionObserver(([entry]) => { passedHero = !entry.isIntersecting && entry.boundingClientRect.top < 0; sync(); }).observe(hero);
     new IntersectionObserver(([entry]) => { reachedBooking = entry.isIntersecting || entry.boundingClientRect.top < 0; sync(); }).observe(booking);
+    // The bar can wrap onto more lines in another language or font; the floating controls follow its real height.
+    if ('ResizeObserver' in window) new ResizeObserver(() => {
+      const height = Math.ceil(bar.getBoundingClientRect().height);
+      if (height > 0) document.body.style.setProperty('--sticky-bar-h', `${height}px`);
+    }).observe(bar);
   }
 </script>

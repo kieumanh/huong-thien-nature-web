@@ -320,7 +320,7 @@ def check_tarot_conversion(browser):
             sticky = page.locator('[data-guidance-sticky]')
             expect(sticky).to_be_hidden()
             expect(page.locator('.guidance-hero a.guidance-button')).to_have_attribute('href', 'https://zalo.me/0868499856')
-            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('Liên hệ' if lang == 'vi' else 'Ask us')
+            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('Báo giá qua tin nhắn' if lang == 'vi' else 'Quote by message')
             expect(page.locator('.guidance-howto-steps li')).to_have_count(3)
             expect(page.locator('.guidance-invitation a.button--tonal')).to_have_attribute('href', re.compile(r'topic=tarot'))
             page.evaluate("document.querySelector('#session').scrollIntoView()")
@@ -336,6 +336,18 @@ def check_tarot_conversion(browser):
                     .some(el => el.getBoundingClientRect().bottom > bar.top + 1);
             }""")
             assert not clash, ('floating controls overlap the booking bar', lang, width)
+            # A wider font or a longer translation wraps the bar onto more lines; the controls must follow its real height.
+            wrap_style = page.add_style_tag(content='[data-guidance-sticky] span{font-size:1.05rem!important;letter-spacing:.06em!important}')
+            page.wait_for_timeout(250)
+            wrapped = page.evaluate("""() => {
+                const bar = document.querySelector('[data-guidance-sticky]').getBoundingClientRect();
+                return [...document.querySelectorAll('.back-to-top, .music-dock[data-music-ready]')]
+                    .filter(el => el.getBoundingClientRect().height && getComputedStyle(el).visibility !== 'hidden')
+                    .some(el => el.getBoundingClientRect().bottom > bar.top + 1);
+            }""")
+            assert not wrapped, ('floating controls overlap a wrapped booking bar', lang, width)
+            wrap_style.evaluate('el => el.remove()')
+            page.wait_for_timeout(250)
             if width == 393:
                 check_accessibility(page, lang, 'guidance-booking-bar', width)
             page.evaluate("document.querySelector('#booking').scrollIntoView()")
