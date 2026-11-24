@@ -1,0 +1,49 @@
+---
+import { albumCategories, albumCopy, albumPhotos, albumSections } from '../data/album';
+import { contactPath } from '../data/contact-channels';
+import { journeyPages } from '../data/journey-pages';
+import type { Language } from '../data/site';
+import AlbumRows from './AlbumRows.astro';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = albumCopy[lang];
+const groups = albumCategories.map(category => ({ category, photos: albumPhotos.filter(photo => photo.category === category), ...albumSections[category] }));
+const counterTemplate = copy.counter(1, 2).replace('1', '{n}').replace('2', '{total}');
+---
+<div class="album">
+  <nav aria-label={copy.jump}>
+    <ul class="album-jumps" role="list">
+      {groups.map(({ category, title, photos }) => <li><a href={`#album-${category}`}>{title[lang]}<span>{photos.length}</span></a></li>)}
+    </ul>
+  </nav>
+
+  {groups.map(({ category, title, intro, photos }) => <section class="journey-section album-section" id={`album-${category}`} aria-labelledby={`album-${category}-title`}>
+    <h2 id={`album-${category}-title`}>{title[lang]}</h2>
+    <p>{intro[lang]}</p>
+    <AlbumRows {lang} {photos} mode="gallery" />
+  </section>)}
+
+  <p class="album-note">{copy.credit} {copy.removal} <a class="quiet-link" href={contactPath(lang)}>{copy.removalAction}</a></p>
+
+  <dialog class="album-dialog" data-album-dialog data-counter={counterTemplate} aria-label={journeyPages.album[lang].title}>
+    <div class="album-stage">
+      <button type="button" class="album-close" data-album-close aria-label={copy.close}>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M6 6l12 12M18 6 6 18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" /></svg>
+      </button>
+      <button type="button" class="album-step album-step--prev" data-album-prev aria-label={copy.previous}>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+      <figure>
+        <img alt="" decoding="async" />
+        <figcaption><span data-album-caption></span><span class="album-counter" data-album-counter></span></figcaption>
+      </figure>
+      <button type="button" class="album-step album-step--next" data-album-next aria-label={copy.next}>
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
+      </button>
+    </div>
+  </dialog>
+</div>
+<script>
+  import '../scripts/album-lightbox';
+</script>

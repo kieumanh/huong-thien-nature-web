@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.13.0',
+    date: '2026-11-24',
+    vi: ['Album ảnh hành trình gặp gỡ và chia sẻ', 'Trang Album mới trên menu gồm 20 ảnh thật từ những buổi chia sẻ, khu vườn và bãi biển, bấm vào để xem lớn. Ảnh thật cũng xuất hiện trên Trang chủ, Câu chuyện, Hệ sinh thái, Khóa thực hành, Tần Số Vàng và Tarot.'],
+    en: ['An album of our journey of meeting and sharing', 'A new Album page in the menu holds 20 real photographs from sharing sessions, gardens and beaches, each opening full size. Real photos also appear on the home page, our story, the ecosystem, practice courses, Golden Frequency and Tarot.'],
+  },
+  {
     version: '2.12.1',
     date: '2026-11-24',
     vi: ['Form lời nhắn dễ dùng hơn', 'Form gửi lời nhắn có nhãn vàng, mũi tên chọn chủ đề, bộ đếm ký tự, dòng quyền riêng tư và ô đồng ý rõ hơn. Thẻ phản hồi của Kiều Mạnh có thêm icon sen.'],

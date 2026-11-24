@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.12.1. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.13.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -21,13 +21,14 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.11.0–2.11.2: tinh chỉnh giao diện, tìm kiếm Tản văn, ẩn học phí (báo giá qua tin nhắn), thang tần số kéo được, khối thông tin khóa học, bảng so sánh hai khóa, lời nhắn an toàn ấm áp hơn |
 | 24/11 | 2.12.0: phong cách vàng ánh tím toàn trang (từ trang Tần Số Vàng), trang Phản hồi học viên trên menu, thẻ phản hồi và danh mục khóa làm lại |
 | 24/11 | 2.12.1: form lời nhắn dễ dùng hơn (bộ đếm, mũi tên chọn chủ đề, dòng quyền riêng tư, ô đồng ý), icon sen trên thẻ phản hồi |
+| 24/11 | 2.13.0: trang Album (20 ảnh thật, bốn nhóm, lightbox) trên menu; dải ảnh thật trên Trang chủ, Câu chuyện, Hệ sinh thái, Thực hành, Khóa thực hành, Tần Số Vàng, Tarot; menu gập ☰ đến 1279px |
 
 Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 
 ## Trạng thái hiện tại
 
-- Website: tiếng Việt `/vi`, tiếng Anh `/en`, gốc `/` mở thẳng trang chủ tiếng Việt. 84 trang HTML, 32 bài tản văn, 80 URL trong sitemap.
-- Trang chính: trang chủ (ba quỹ đạo, khám phá, tìm kiếm), Tản văn, Cửa hàng (tổng quan + ba không gian chủ đề), Khóa thực hành (Tần Số Vàng, Tarot 1:1), Phản hồi học viên, Câu chuyện, Đội ngũ, Hệ sinh thái, Liên hệ, Lịch sử phiên bản.
+- Website: tiếng Việt `/vi`, tiếng Anh `/en`, gốc `/` mở thẳng trang chủ tiếng Việt. 86 trang HTML, 32 bài tản văn, 82 URL trong sitemap.
+- Trang chính: trang chủ (ba quỹ đạo, khám phá, tìm kiếm), Tản văn, Cửa hàng (tổng quan + ba không gian chủ đề), Khóa thực hành (Tần Số Vàng, Tarot 1:1), Phản hồi học viên, Album, Câu chuyện, Đội ngũ, Hệ sinh thái, Liên hệ, Lịch sử phiên bản.
 - Kiểm tra ngày 24/11/2026 trên bản clone: `check`, `audit`, `build`, `audit:build`, các bộ test Node (contact, worker, search, shop, tarot, headers, hybrid-nature, ecosystem, home), `wrangler deploy --dry-run`, bảy bài kiểm tra trình duyệt Playwright (axe: 104 lượt quét, 0 lỗi) và quét CSP 81 trang trong trình duyệt thật đều đạt. `npm audit`: 0 lỗ hổng.
 
 ## Việc chưa làm / rủi ro đã biết

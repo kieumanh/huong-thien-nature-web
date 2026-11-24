@@ -118,7 +118,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 .button:not(:disabled):active, .nav-links a:active { box-shadow: inset 0 0 0 2px currentColor; }
 .js .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; padding: .65rem var(--site-gutter) .9rem; max-height: calc(100dvh - 68px); overflow-y: auto; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-card); }
 .js .nav-links.open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem; }
-@media (max-width: 1199px) {
+@media (max-width: 1279px) {
   .nav-actions {
     gap: .1rem;
     padding: 1px;
@@ -150,7 +150,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   .brand-name small { font-size: .54rem; }
   .language .active { min-width: 28px; }
 }
-@media (min-width: 1200px) {
+@media (min-width: 1280px) {
   .nav { flex-wrap: nowrap; min-height: 76px; gap: 1.05rem; }
   .nav-actions { gap: .65rem; }
   .nav-links, .js .nav-links, .js .nav-links.open {

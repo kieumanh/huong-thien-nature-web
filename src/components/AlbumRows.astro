@@ -1,0 +1,36 @@
+---
+import { albumAnchor, albumCopy, albumPath, albumPhotoSrc, albumThumbSrc, type AlbumPhoto } from '../data/album';
+import type { Language } from '../data/site';
+import '../styles/album.css';
+
+interface Props {
+  lang: Language;
+  photos: AlbumPhoto[];
+  // `gallery`: each photo opens the enlarged view. `strip`: each photo links to its place in the album.
+  mode?: 'gallery' | 'strip';
+}
+const { lang, photos, mode = 'strip' } = Astro.props as Props;
+const copy = albumCopy[lang];
+const sizes = '(min-width: 700px) 380px, 60vw';
+---
+<ul class="album-rows" role="list">
+  {photos.map(photo => {
+    const full = albumPhotoSrc(photo);
+    const thumb = albumThumbSrc(photo);
+    const href = mode === 'gallery' ? full : `${albumPath(lang)}#${albumAnchor(photo)}`;
+    return <li class="album-item" id={mode === 'gallery' ? albumAnchor(photo) : undefined} style={`--ar:${(photo.width / photo.height).toFixed(4)}`}>
+      <figure>
+        <a {href}
+          data-album-open={mode === 'gallery' ? '' : undefined}
+          data-width={mode === 'gallery' ? photo.width : undefined}
+          data-height={mode === 'gallery' ? photo.height : undefined}
+          data-caption={mode === 'gallery' ? photo.caption[lang] : undefined}
+          aria-label={mode === 'gallery' ? `${copy.open}: ${photo.alt[lang]}` : undefined}>
+          <img src={thumb} srcset={`${thumb} ${photo.thumbWidth}w, ${full} ${photo.width}w`} {sizes}
+            width={photo.thumbWidth} height={photo.thumbHeight} alt={photo.alt[lang]} loading="lazy" decoding="async" />
+        </a>
+        <figcaption>{photo.caption[lang]}</figcaption>
+      </figure>
+    </li>;
+  })}
+</ul>

@@ -19,6 +19,7 @@ const links = [
   { href: journalUrl(lang), label: t.nav[4] },
   { href: shopPath(lang), label: lang === 'vi' ? 'Cửa hàng' : 'Shop' },
   pageLink('practice'),
+  pageLink('album'),
   pageLink('feedback'),
 ];
 
@@ -73,7 +74,7 @@ const links = [
     document.addEventListener('click', event => {
       if (event.target instanceof Node && !menu.contains(event.target) && !button.contains(event.target)) setOpen(false);
     });
-    matchMedia('(min-width: 1200px)').addEventListener('change', event => {
+    matchMedia('(min-width: 1280px)').addEventListener('change', event => {
       if (event.matches) setOpen(false);
     });
     document.documentElement.classList.add('js');
