@@ -172,7 +172,7 @@
 /* Extra article images (2.14.0): portraits stay within the screen and never crop */
 .article-figure img { display: block; width: auto; max-width: 100%; height: auto; max-height: min(34rem, 80vh); margin-inline: auto; background: var(--surface-container); }
 .article-figure figcaption { text-align: center; text-wrap: pretty; }
-.article-figure__credit { display: block; margin-top: .15rem; font-size: .78rem; opacity: .9; }
+.article-figure__credit { display: block; margin-top: .15rem; font-size: .78rem; } /* full opacity: at .9 the contrast fell to 4.49:1 on the late-afternoon paper colour */
 
 /* Journal library (2.14.0): guided lanes, topic chips, numbered cards, invitation */
 .journal-lanes { margin-block: clamp(1.4rem, 4vw, 2.4rem) clamp(2rem, 5vw, 3.2rem); }

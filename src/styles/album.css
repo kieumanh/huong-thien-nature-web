@@ -40,6 +40,13 @@
 .album-strip { margin-block: clamp(1.8rem, 5vw, 3.2rem); }
 .album-strip-head p { max-width: 62ch; margin-top: .45rem; color: var(--muted); }
 .album-strip-more { margin-top: .9rem; }
+/* Balanced strip: rows are sized from the strip's own width (container units) so portrait + landscape pairs fill every row.
+   Phone: --row 39cqw gives two photos per row (2 x 2 for four photos). From 700px: --row 21cqw puts four photos in one row.
+   The spacer that keeps a short last row from stretching is removed, so no row is left half empty. */
+.album-strip--balanced { container-type: inline-size; }
+.album-strip--balanced .album-rows { --row: 39cqw; }
+.album-strip--balanced .album-rows::after { display: none; }
+@media (min-width: 700px) { .album-strip--balanced .album-rows { --row: 21cqw; } }
 
 /* Lightbox */
 .album-dialog {

@@ -8,6 +8,7 @@ import FounderJourney from '../../components/FounderJourney.astro';
 import CourseCatalogue from '../../components/CourseCatalogue.astro';
 import StudentFeedback from '../../components/StudentFeedback.astro';
 import SupportFund from '../../components/SupportFund.astro';
+import { supportShareImage } from '../../data/support-fund';
 import AlbumGallery from '../../components/AlbumGallery.astro';
 import AlbumStrip from '../../components/AlbumStrip.astro';
 import BreathGuide from '../../components/BreathGuide.astro';
@@ -43,6 +44,7 @@ const ecoLinks: Record<string, string> = {
 };
 ---
 <BaseLayout {lang} title={`${info.heading} | Hương Thiền Nature`} description={info.description} {alternatePath}
+  {...(page === 'support' ? { image: supportShareImage[lang].src, imageDetails: { type: supportShareImage.type, width: supportShareImage.width, height: supportShareImage.height, alt: supportShareImage[lang].alt } } : {})}
   pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
   aboutOrganization={page !== 'practice'}>
   <Header {lang} {alternatePath} />
@@ -167,10 +169,12 @@ const ecoLinks: Record<string, string> = {
         <p>{t.introCopy}</p>
       </section>
       <FounderJourney {lang} />
-      <AlbumStrip {lang} id="journey-moments" photos={['event-banner', 'studio-hug-six', 'hug-closeup']}
+      <AlbumStrip {lang} id="journey-moments" balanced photos={['event-banner', 'studio-group', 'hug-closeup', 'studio-hug-six']}
         title={vi ? 'Trên những chặng gặp gỡ và chia sẻ' : 'Along the way: meeting and sharing'}
         intro={vi ? 'Một vài hình ảnh từ chuyến chia sẻ ở Nha Trang. Phần còn lại của hành trình nằm trong album.' : 'A few photographs from a sharing trip in Nha Trang. The rest of the journey is in the album.'} />
-      <a class="quiet-link" href={journeyPath(lang, 'team')}>{vi ? 'Gặp đội ngũ Hương Thiền Nature' : 'Meet the Hương Thiền Nature team'}</a>
+      <p class="story-team-cta">
+        <a class="button button--tonal" href={journeyPath(lang, 'team')}>{vi ? 'Gặp đội ngũ Hương Thiền Nature' : 'Meet the Hương Thiền Nature team'} <Arrow /></a>
+      </p>
     </>}
 
     {page === 'team' && <>

@@ -34,3 +34,15 @@ test('the page is a registered section and the built pages show the details and 
     assert.ok(html.includes('footer-support') && html.includes(`href="${journeyPath(lang, 'support')}"`), `${lang}: footer entry`);
   }
 });
+
+test('the support page has its own link-share picture (1200 x 630) in both languages', async () => {
+  const { supportShareImage } = await import('../src/data/support-fund.ts');
+  const { existsSync, statSync } = await import('node:fs');
+  assert.deepEqual([supportShareImage.width, supportShareImage.height], [1200, 630]);
+  for (const lang of ['vi', 'en'] as const) {
+    const file = new URL(`../public${supportShareImage[lang].src}`, import.meta.url);
+    assert(existsSync(file), `${lang}: ${supportShareImage[lang].src} exists`);
+    assert(statSync(file).size < 300 * 1024, `${lang}: share picture stays under 300 KB`);
+    assert(supportShareImage[lang].alt.length > 20);
+  }
+});

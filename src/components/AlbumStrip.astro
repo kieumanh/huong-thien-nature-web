@@ -15,12 +15,14 @@ interface Props {
   headingLevel?: 'h2' | 'h3';
   // Extra class so a landing page can reuse its own section spacing.
   extraClass?: string;
+  // Fills every row edge to edge (no short last row): four photos alternating portrait and landscape make a tidy 2 x 2 on a phone and one row on wider screens.
+  balanced?: boolean;
 }
-const { lang, photos, title, intro, id, headingLevel = 'h2', extraClass } = Astro.props as Props;
+const { lang, photos, title, intro, id, headingLevel = 'h2', extraClass, balanced = false } = Astro.props as Props;
 const Heading = headingLevel;
 const copy = albumCopy[lang];
 ---
-<section class:list={['album-strip', extraClass]} {id} aria-labelledby={`${id}-title`}>
+<section class:list={['album-strip', { 'album-strip--balanced': balanced }, extraClass]} {id} aria-labelledby={`${id}-title`}>
   <div class="album-strip-head">
     <Heading id={`${id}-title`}>{title}</Heading>
     {intro && <p>{intro}</p>}

@@ -90,6 +90,24 @@ function renderResult(entry: SearchRecord, en: boolean) {
     stock.textContent = entry.product.stockLabel;
     content.append(unit, price, stock);
   }
+  else if (entry.image && entry.image.src.startsWith('/media/')) {
+    // Decorative thumbnail: the title link already names the result, so the picture is hidden from screen readers and from the tab order.
+    card.classList.add('search-result--thumb');
+    const photo = document.createElement('a');
+    photo.className = 'search-result-thumb';
+    photo.href = entry.url;
+    photo.tabIndex = -1;
+    photo.setAttribute('aria-hidden', 'true');
+    const image = document.createElement('img');
+    image.src = entry.image.src;
+    image.alt = '';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    image.width = entry.image.width;
+    image.height = entry.image.height;
+    photo.append(image);
+    card.append(photo);
+  }
   card.append(content);
   return card;
 }

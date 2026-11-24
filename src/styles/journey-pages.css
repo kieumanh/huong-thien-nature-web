@@ -92,6 +92,14 @@
 /* Partner marks that are dark line art sit on a light tile so they stay visible after dark. */
 .partner-logo--tile { padding: .35rem; border-radius: 1rem; background: #eef3e6; box-shadow: 0 0 0 2px var(--brand-fern), 0 4px 14px rgb(0 0 0 / .22); }
 .team-contact { display: flex; justify-content: center; margin-top: clamp(1.4rem, 4vw, 2.2rem); }
+/* "Meet the team" call to action closing the story page: a real button, centred, full width on a phone. */
+.story-team-cta { display: flex; justify-content: center; margin: clamp(1.6rem, 5vw, 2.6rem) 0 0; }
+.story-team-cta .button { min-height: 52px; padding-inline: 1.5rem; text-align: center; box-shadow: 0 6px 16px #1f1a1218; }
+.story-team-cta .button:is(:hover, :focus-visible) { transform: translateY(-1px); }
+.story-team-cta .button svg { transition: transform var(--motion-fast) var(--motion-ease); }
+.story-team-cta .button:is(:hover, :focus-visible) svg { transform: translateX(3px); }
+@media (max-width: 599px) { .story-team-cta .button { width: 100%; } }
+@media (prefers-reduced-motion: reduce) { .story-team-cta .button, .story-team-cta .button svg { transition: none; transform: none !important; } }
 
 /* Timeline entries: titles lead each milestone. */
 .journey-entry h4 {
