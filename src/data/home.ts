@@ -1,4 +1,5 @@
 import { articles, type Article } from './articles.ts';
+import type { Language } from './site.ts';
 
 function publishedArticle(slug: string): Article {
   const article = articles.find(item => item.slug === slug);
@@ -7,6 +8,27 @@ function publishedArticle(slug: string): Article {
 }
 
 export const beginnerArticles = ['meditation-for-beginners', 'start-meditating-at-home', 'breath-meditation'].map(publishedArticle);
+
+/** Step 4 of the beginner reading path: reassurance for restless sittings, pointing to the article that explains them. */
+export const difficultSittingStep = {
+  article: publishedArticle('when-meditation-is-difficult'),
+  vi: {
+    title: 'Thấy khó ngồi yên? Điều đó rất bình thường.',
+    description: 'Tâm trí bồn chồn không có nghĩa là bạn làm sai. Có một bài viết riêng cho những ngày như thế.',
+  },
+  en: {
+    title: 'Finding it hard to sit still? That is very common.',
+    description: 'A restless mind does not mean you are doing it wrong. There is a piece written for days like these.',
+  },
+};
+
+/** The beginner reading path on the practice page: three articles, then the step for restless sittings. */
+export function practicePath(lang: Language) {
+  return [
+    ...beginnerArticles.map(article => ({ article, title: article.translations[lang].title, description: article.translations[lang].description })),
+    { article: difficultSittingStep.article, title: difficultSittingStep[lang].title, description: difficultSittingStep[lang].description },
+  ];
+}
 export const featuredArticles = ['wandering-mind', 'mindful-gardening', 'loving-kindness-meditation'].map(publishedArticle);
 
 export const homeCopy = {

@@ -1,3 +1,9 @@
+## 2.21.1 — Lối đọc Gợi ý có bước 4 về thấy khó ngồi yên
+
+- Trang Gợi ý (`/vi/goi-y/`, `/en/suggestions/`): khối "Thấy khó ngồi yên? Điều đó rất bình thường." đã thành **bước 4** của lối đọc, cùng kiểu thẻ với ba bước trước (số tròn, "Bước 4 · 10 phút đọc", tiêu đề có liên kết). Bước 4 dẫn tới bài "Những ngày ngồi thiền thấy khó". Lời nhắn giữ nguyên; liên kết "Làm gì khi thấy khó ngồi thiền?" được gộp vào tiêu đề.
+- Lối đọc được ghép bởi `practicePath(lang)` trong `src/data/home.ts`, dùng chung ba bài `beginnerArticles` và bước `difficultSittingStep`. Trang chủ vẫn chỉ hiện ba bài như trước.
+- Kiểm thử: `test:journal` kiểm tra đúng bốn bước và không còn khối rời.
+
 ## 2.21.0 — Tản văn: bài mới nhất lên đầu trang, bỏ số thứ tự ở lối đọc
 
 - **Thứ tự mặc định là bài mới nhất:** trang Tản văn (`/vi/tan-van/`, `/en/journal/`) đưa bài mới nhất lên đầu, bài cũ hơn xếp dần xuống dưới. Thứ tự này cũng áp dụng khi không có JavaScript và trong dữ liệu có cấu trúc (`ItemList`). Bài cùng ngày giữ thứ tự tuyển chọn.

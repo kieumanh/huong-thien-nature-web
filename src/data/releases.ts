@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.21.1',
+    date: '2026-11-24',
+    vi: ['Lối đọc Gợi ý có bước 4 về thấy khó ngồi yên', 'Khối "Thấy khó ngồi yên?" trở thành bước 4 của lối đọc cho người mới, cùng kiểu với ba bước trước và dẫn tới bài "Những ngày ngồi thiền thấy khó".'],
+    en: ['The suggestions reading path gains a fourth step on restless sitting', 'The "Finding it hard to sit still?" card is now step 4 of the beginner reading path, in the same style as the first three, and leads to the article on difficult sittings.'],
+  },
+  {
     version: '2.21.0',
     date: '2026-11-24',
     vi: ['Tản văn: bài mới nhất lên đầu trang', 'Trang Tản văn đưa bài mới nhất lên đầu, bài cũ hơn xếp dần xuống dưới. Đã bỏ tùy chọn "tuyển chọn" và các số thứ tự ở mục lối đọc.'],
