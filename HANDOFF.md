@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.16.2. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.17.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -28,6 +28,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
 | 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
+| 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
 | 24/11 | 2.16.0: Tản văn "Một khoảng lặng giữa dòng đời": trang sách mở, tìm kiếm + sắp xếp, "Một bài viết hữu duyên", chế độ Đọc trong tĩnh lặng, Khu vườn của tôi (localStorage), trích dẫn/khoảng dừng, ảnh thu nhỏ, sửa CLS |

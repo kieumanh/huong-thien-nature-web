@@ -25,6 +25,10 @@ export const journeyPages = {
     vi: { slug: 'phan-hoi-hoc-vien', title: 'Phản hồi học viên', heading: 'Học viên nói gì về hành trình cùng Hương Thiền', description: 'Những chia sẻ do chính học viên gửi, được đăng khi có sự đồng ý của họ, để bạn tự xem trước khi chọn khóa thực hành.' },
     en: { slug: 'student-feedback', title: 'Student feedback', heading: 'What students say about learning with Hương Thiền', description: 'Words shared by the students themselves and published with their consent, so you can read them for yourself before choosing a practice course.' },
   },
+  support: {
+    vi: { slug: 'quy-ung-ho', title: 'Quỹ ủng hộ', heading: 'Quỹ ủng hộ: cùng nhau gieo mầm và lan tỏa', description: 'Nếu bạn có khả năng và có lòng, hãy góp sức để dự án có không gian, thiết bị, kênh truyền thông và hành trình lan tỏa thiền, chánh niệm đến cộng đồng. Có thông tin chuyển khoản và mã QR.' },
+    en: { slug: 'support-fund', title: 'Support fund', heading: 'Support fund: sowing seeds and spreading them together', description: 'If you are able and willing, help the project gain a space, equipment, media channels and a journey of sharing meditation and mindfulness with the community. Transfer details and QR code included.' },
+  },
   team: {
     vi: { slug: 'doi-ngu', title: 'Đội ngũ', heading: 'Những người làm nên Hương Thiền Nature', description: 'Hương Thiền sáng lập và phụ trách chuyên môn thiền. Kiều Mạnh đồng sáng lập, viết, biên tập và phụ trách truyền thông. Dự án còn có cố vấn, đối tác làm nông và nhóm phát triển công nghệ.' },
     en: { slug: 'team', title: 'Team', heading: 'The people behind Hương Thiền Nature', description: 'Hương Thiền founded the project and leads meditation practice. Co-founder Kiều Mạnh writes, edits and leads communications. An adviser, a farming partner and a technology team work alongside them.' },

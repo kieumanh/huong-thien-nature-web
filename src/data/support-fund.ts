@@ -1,0 +1,108 @@
+// Quỹ ủng hộ (Support fund). The wording follows the brief from the project owner; nothing here promises amounts,
+// dates, receipts or results. The bank details are the ones the owner supplied for the project treasurer, and
+// `public/media/support/tpbank-vietqr.webp` is the owner's own VietQR image (it decodes to the same account).
+export const supportAccount = {
+  holder: 'Kiều Xuân Mạnh',
+  number: '02871729888',
+  numberSpaced: '0287 1729 888',
+  qr: '/media/support/tpbank-vietqr.webp',
+  qrSize: { width: 800, height: 960 },
+} as const;
+
+export const supportItemIds = ['space', 'equipment', 'media', 'journey', 'care'] as const;
+export type SupportItemId = typeof supportItemIds[number];
+
+export const supportFund = {
+  vi: {
+    eyebrow: 'Quỹ ủng hộ',
+    introTitle: 'Vì sao dự án cần được nâng đỡ',
+    lead: 'Hương Thiền Nature đang trong quá trình xây dựng và hoàn thiện. Điều dự án cần lúc này không chỉ là ý tưởng hay thiện chí, mà là những điều kiện thật để ý tưởng ấy có chỗ đứng: một không gian để thực tập, những thiết bị để làm việc, một kênh để người đang cần có thể tìm thấy, và những chuyến đi để mang thiền đến nơi mọi người đang sống.',
+    reasons: [
+      'Thiền, chánh niệm và lối sống thuận tự nhiên chỉ thật sự chạm tới người khác khi có một nơi để gặp nhau, có người đủ sức đi đến, và có cách để câu chuyện được kể rõ ràng, tử tế.',
+      'Dự án được vận hành bằng công sức và tấm lòng của một nhóm nhỏ. Để đi xa hơn trong cộng đồng xã hội, dự án cần thêm tài nguyên để xây dựng và hoàn thiện nền tảng của mình, vững chãi và bền bỉ hơn.',
+      'Mỗi đóng góp, lớn hay nhỏ, là một hạt giống được gieo vào con đường chung. Không có đóng góp nào là bắt buộc; bạn chỉ cần góp theo khả năng và theo lòng mình.',
+    ],
+    illustrationLabel: 'Hình minh họa: một mầm cây nảy lên từ đất, những vòng sáng lan tỏa ra xung quanh',
+    itemsTitle: 'Tài nguyên sẽ được dùng vào đâu',
+    itemsIntro: 'Dự án sẽ dùng các nguồn đóng góp vào năm hạng mục sau.',
+    items: {
+      space: ['Không gian và nhà cửa', 'Xây dựng không gian và nhà cửa để có một nơi thật cho việc thực hành, gặp gỡ và sống chậm giữa thiên nhiên.'],
+      equipment: ['Trang bị thiết bị', 'Trang bị những thiết bị cần thiết để dự án thực hành, làm việc và chia sẻ được ổn định.'],
+      media: ['Kênh truyền thông và website', 'Xây dựng và hoàn thiện website cùng các kênh truyền thông để bài viết, bài tập và câu chuyện đến được với người đang cần.'],
+      journey: ['Di chuyển trên hành trình lan tỏa', 'Hỗ trợ tài nguyên đi lại để đến với các nhóm, các cộng đồng và những nơi cần được lắng nghe.'],
+      care: ['Ăn uống và liên lạc', 'Hỗ trợ bữa ăn và việc liên lạc trên đường, để hành trình đi được bền bỉ và không đứt quãng.'],
+    },
+    callTitle: 'Lời mời đến những tấm lòng',
+    call: [
+      'Nếu bạn là người có khả năng và mong muốn góp sức, dự án rất trân trọng sự đồng hành của bạn.',
+      'Sự giúp đỡ của bạn không chỉ là một khoản đóng góp. Đó là cách bạn cùng nâng đỡ một con đường để thiền, chánh niệm và lối sống tỉnh thức đi xa hơn trong cộng đồng.',
+    ],
+    transferTitle: 'Thông tin chuyển khoản',
+    transferIntro: 'Tài khoản của thủ quỹ dự án.',
+    rows: { holder: 'Chủ tài khoản (thủ quỹ dự án)', number: 'Số tài khoản', bank: 'Ngân hàng' },
+    bank: 'Ngân hàng Tiên Phong (TPBank)',
+    copy: 'Sao chép số tài khoản',
+    copied: 'Đã sao chép số tài khoản',
+    copyFailed: 'Chưa sao chép được. Bạn hãy chọn số và sao chép thủ công.',
+    qrTitle: 'Hoặc quét mã QR',
+    qrHint: 'Mở ứng dụng ngân hàng, chọn quét mã QR và đưa vào khung hình.',
+    qrAlt: 'Mã QR VietQR của ngân hàng TPBank, tài khoản 02871729888, chủ tài khoản Kiều Xuân Mạnh',
+    safety: 'Trước khi xác nhận, hãy kiểm tra tên người nhận hiển thị là KIEU XUAN MANH và số tài khoản trùng với số ở đây.',
+    thanksTitle: 'Lời cảm ơn',
+    thanks: [
+      'Xin gửi lời cảm ơn và tri ân sâu sắc đến những người đã ủng hộ.',
+      'Nếu bạn có ý tưởng xây dựng hoặc kết nối hay, xin hãy chủ động liên hệ để chúng ta cùng nhau lan tỏa tốt hơn nhé.',
+    ],
+    sign: 'Thân ái',
+    contact: 'Gửi ý tưởng hoặc lời nhắn',
+    footerTitle: 'Quỹ ủng hộ',
+    footerText: 'Góp sức theo khả năng để dự án có không gian, thiết bị và hành trình lan tỏa đến cộng đồng.',
+    footerAction: 'Cùng nâng đỡ dự án',
+  },
+  en: {
+    eyebrow: 'Support fund',
+    introTitle: 'Why the project needs support',
+    lead: 'Hương Thiền Nature is still being built and refined. What it needs now is not only ideas or goodwill, but real conditions for those ideas to stand on: a space to practise, equipment to work with, a channel through which people who need it can find us, and journeys that carry meditation to where people live.',
+    reasons: [
+      'Meditation, mindfulness and a way of life in tune with nature only reach other people when there is a place to meet, someone with the strength to go to them, and a clear, kind way to tell the story.',
+      'The project is run on the effort and goodwill of a small team. To go further in the community, it needs more resources to build and complete its foundations, so they are steadier and last longer.',
+      'Every contribution, large or small, is a seed sown on a shared path. None is expected; give only what suits your means and your heart.',
+    ],
+    illustrationLabel: 'Illustration: a seedling rising from the soil, rings of light spreading around it',
+    itemsTitle: 'Where the resources will go',
+    itemsIntro: 'The project will put contributions into the following five areas.',
+    items: {
+      space: ['Space and housing', 'Building a space and housing, a real place to practise, meet and live slowly among nature.'],
+      equipment: ['Equipment', 'Providing the equipment the project needs to practise, work and share steadily.'],
+      media: ['Media channels and website', 'Building and completing the website and media channels so articles, practices and stories reach the people who need them.'],
+      journey: ['Travel on the journey of sharing', 'Supporting travel resources to reach groups, communities and places that need to be heard.'],
+      care: ['Meals and communication', 'Supporting meals and communication on the road, so the journey can go on steadily and without breaks.'],
+    },
+    callTitle: 'An invitation to kind hearts',
+    call: [
+      'If you are able and willing to give, the project is truly grateful to have you alongside.',
+      'Your help is more than a contribution. It is a way of holding up a path so that meditation, mindfulness and a mindful way of life can go further in the community.',
+    ],
+    transferTitle: 'Transfer details',
+    transferIntro: 'The project treasurer’s account.',
+    rows: { holder: 'Account holder (project treasurer)', number: 'Account number', bank: 'Bank' },
+    bank: 'Tien Phong Commercial Joint Stock Bank (TPBank)',
+    copy: 'Copy account number',
+    copied: 'Account number copied',
+    copyFailed: 'Could not copy. Please select the number and copy it by hand.',
+    qrTitle: 'Or scan the QR code',
+    qrHint: 'Open your banking app, choose QR scan and point it at the code.',
+    qrAlt: 'VietQR code for TPBank account 02871729888, account holder Kiều Xuân Mạnh',
+    safety: 'Before you confirm, check that the recipient name shows KIEU XUAN MANH and that the account number matches the one here.',
+    thanksTitle: 'With thanks',
+    thanks: [
+      'Our deepest thanks and gratitude to everyone who has given their support.',
+      'If you have an idea for building something, or a good connection to suggest, please reach out so we can spread this together even better.',
+    ],
+    sign: 'With warmth',
+    contact: 'Send an idea or a message',
+    footerTitle: 'Support fund',
+    footerText: 'Give what you can so the project has space, equipment and a journey of sharing with the community.',
+    footerAction: 'Help sustain the project',
+  },
+} as const;
