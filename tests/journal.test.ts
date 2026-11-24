@@ -69,6 +69,8 @@ test('built pages: journal filters by topic without a keyword box, empathy ancho
     assert.ok(!journal.includes('type="search"') && !journal.includes('data-journal-search'), `${lang}: keyword search removed`);
     assert.equal((journal.match(/class="journal-topic"/g) ?? []).length, journalTopics.length + 1);
     assert.equal((journal.match(/data-topic="[a-z-]+"/g) ?? []).length - journalTopics.length - 1, articles.length, 'each card carries its topic');
+    assert.ok(journal.includes('data-journal-pages'), `${lang}: pagination mount present`);
+    assert.ok(articles.length > 9, 'more than one page of articles');
     const home = readFileSync(dist(`/${lang}/index.html`), 'utf8');
     assert.ok(home.indexOf('id="welcome"') > 0 && home.indexOf('id="welcome"') < home.indexOf('id="story"'), 'welcome comes right after the hero');
     for (const article of healingArticles) assert.ok(existsSync(dist(`${articlePath(lang, article.slug)}index.html`)));

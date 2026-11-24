@@ -61,6 +61,7 @@ const unit = en ? 'articles' : 'bài đọc';
         {journalTopics.map(topic => <button type="button" class="journal-topic" data-topic={topic.id} aria-pressed="false">{topic.label[lang]} <span>{counts[topic.id]}</span></button>)}
       </div>
       <div class="journal-grid journal-grid--library" id="journal-grid">{articles.map((article, index) => <ArticleCard {article} {lang} heading="h2" number={index + 1} />)}</div>
+      <nav class="journal-pages-wrap" aria-label={en ? 'Journal pages' : 'Phân trang Tản văn'}><ol class="journal-pages" data-journal-pages hidden></ol></nav>
     </section>
 
     <section class="shell journal-invite zen-card" aria-labelledby="journal-invite-title">

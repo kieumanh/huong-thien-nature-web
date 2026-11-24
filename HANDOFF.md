@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.14.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.14.1. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -23,6 +23,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.12.1: form lời nhắn dễ dùng hơn (bộ đếm, mũi tên chọn chủ đề, dòng quyền riêng tư, ô đồng ý), icon sen trên thẻ phản hồi |
 | 24/11 | 2.13.0: trang Album (34 ảnh thật, sáu nhóm, lightbox) trên menu; dải ảnh thật trên Trang chủ, Câu chuyện, Hệ sinh thái, Gợi ý, Khóa thực hành, Tần Số Vàng, Tarot; menu gập ☰ đến 1279px |
 | 24/11 | 2.14.0: khối đồng cảm trên Trang chủ, Tần Số Vàng, Tarot; 5 bài Tản văn mới (chữa lành, cảm xúc, ranh giới, mất mát, biết ơn); mọi bài ≥ 3 ảnh (12 tranh minh họa SVG tự vẽ + ảnh album); Tản văn lọc theo 6 chủ đề thay ô tìm kiếm |
+| 24/11 | 2.14.1: Tản văn chia trang, lưới 3 × 3 (9 bài/trang), phân trang chạy cùng bộ lọc chủ đề |
 
 Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.14.1',
+    date: '2026-11-24',
+    vi: ['Tản văn chia trang 3 × 3', 'Trang Tản văn hiện bài theo lưới 3 cột × 3 hàng, đủ 9 bài thì sang trang mới, có nút chuyển trang và vẫn lọc được theo chủ đề.'],
+    en: ['Journal pages in a 3 × 3 grid', 'The journal now shows articles in a 3-column by 3-row grid, nine per page, with page controls that work together with the topic filters.'],
+  },
+  {
     version: '2.14.0',
     date: '2026-11-24',
     vi: ['Trang chủ đồng cảm, 5 bài Tản văn mới, lọc theo chủ đề', 'Trang chủ và hai khóa thực hành có thêm phần thấu hiểu những khó khăn người đọc đang mang, kèm một bước nhỏ để bắt đầu. Tản văn có 5 bài mới về chữa lành, cảm xúc, ranh giới, mất mát và lòng biết ơn; mỗi bài có ít nhất ba ảnh, và có thể lọc bài theo chủ đề.'],
