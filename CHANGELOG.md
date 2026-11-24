@@ -1,3 +1,8 @@
+## 2.21.3 — Ảnh bài "Sự trở lại cũng là thực tập" và ảnh đại diện Kiều Mạnh
+
+- **Bìa bài "Sự trở lại cũng là thực tập"** (`/vi/tan-van/`, `/en/journal/`, trang bài): thay ảnh chùa có nhang bằng ảnh bàn chân trần trên cỏ, nguồn Pixabay đã ghi nhận trong `article-photos.ts`. Ảnh này không có khuôn mặt và chưa làm bìa bài nào khác.
+- **Ảnh đại diện trong "Phản hồi học viên"**: phần đại diện của Kiều Mạnh dùng ảnh thật (`public/media/author-kieu-manh-avatar.webp`, cắt từ ảnh tác giả) thay cho chữ viết tắt "KM". Trường `avatar` là tùy chọn; học viên khác vẫn hiện chữ viết tắt cho đến khi có ảnh được cung cấp.
+
 ## 2.21.2 — Tản văn: bỏ ô sắp xếp, ghi ngày cho ba bài
 
 - **Danh sách luôn mới nhất trước:** đã bỏ ô "Sắp xếp" và tùy chọn "Thời gian đọc ngắn" trên trang Tản văn (`/vi/tan-van/`, `/en/journal/`). Bài mới nhất luôn ở đầu, bài cũ hơn xếp dần xuống dưới. Đường dẫn cũ có `?sap-xep=` vẫn mở được và bỏ qua tham số này.

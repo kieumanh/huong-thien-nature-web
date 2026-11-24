@@ -7,6 +7,11 @@ import type { Language } from './site';
 type Cover = { image: string; alt: Record<Language, string> };
 
 export const coverOverrides: Record<string, Cover> = {
+  // A bare foot on the grass: attention coming back to the body and the ground (was a temple incense photo).
+  'returning-attention': {
+    image: '/media/pixabay-2268333.webp',
+    alt: { vi: 'Một bàn chân trần đặt trên thảm cỏ xanh, phía trên là ống quần jean.', en: 'A bare foot rests on green grass, with the hem of blue jeans above it.' },
+  },
   // Water, for a piece about the days when sitting is hard (was a bamboo path shared with another article).
   'when-meditation-is-difficult': {
     image: '/media/pixabay-58125.webp',

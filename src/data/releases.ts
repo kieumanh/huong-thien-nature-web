@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.21.3',
+    date: '2026-11-24',
+    vi: ['Ảnh bài Sự trở lại cũng là thực tập và ảnh đại diện Kiều Mạnh', 'Bài về sự trở lại có ảnh bàn chân trên cỏ thay ảnh chùa; phần phản hồi học viên hiện ảnh thật của Kiều Mạnh.'],
+    en: ['Cover for the returning-attention article and Kiều Mạnh’s real photo', 'The article on returning attention now shows a bare foot on grass instead of a temple; the student feedback shows Kiều Mạnh’s real portrait.'],
+  },
+  {
     version: '2.21.2',
     date: '2026-11-24',
     vi: ['Tản văn luôn mới nhất trước', 'Đã bỏ ô sắp xếp; bài mới nhất luôn ở đầu. Ba bài trước đây chưa có ngày nay đã ghi ngày đăng 22/11/2026.'],
