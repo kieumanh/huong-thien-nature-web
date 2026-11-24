@@ -25,7 +25,7 @@ export const courseCompare = {
         name: 'Tarot tâm lý học 1:1',
         values: [
           'Bạn có một câu hỏi hoặc tình huống cụ thể muốn làm rõ.',
-          'Một buổi 1:1 cùng Hương Thiền, 90 phút. Hỏi lịch và hình thức gặp khi nhắn.',
+          'Một buổi 1:1 cùng Hương Thiền, 90 phút. Gặp trực tiếp nếu ở cùng vị trí, online cho bạn ở xa.',
           'Một cảm xúc được gọi tên, một cách hiểu mới và một bước nhỏ vừa sức.',
           'Đối thoại trực tiếp với Hương Thiền trong buổi gặp.',
           'Báo giá qua tin nhắn.',
@@ -55,7 +55,7 @@ export const courseCompare = {
         name: 'Psychological tarot 1:1',
         values: [
           'You have a specific question or situation you want to make clearer.',
-          'A one-to-one, 90-minute session with Hương Thiền. Ask about dates and format when you message.',
+          'A one-to-one, 90-minute session with Hương Thiền. In person if you are nearby, online if you are far away.',
           'A feeling named, a new way of seeing it and one small, manageable step.',
           'A direct conversation with Hương Thiền during the session.',
           'Quote by message.',

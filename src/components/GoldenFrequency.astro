@@ -8,6 +8,7 @@ import FrequencySelfCheck from './FrequencySelfCheck.astro';
 import GfIcon, { type GfIconName } from './GfIcon.astro';
 import { frequencyCourse, frequencyFeeNote, frequencyPriceLabel, frequencyTopic } from '../data/courses';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, weeklyPlan } from '../data/golden-frequency';
+import { feedbackAnchor, feedbackCopy } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
 import { internationalPhone, zaloUrl } from '../data/contact-channels';
 import { meditationFounder } from '../data/people';
@@ -394,6 +395,8 @@ const petals = [6, 5, 7, 4, 3, 8];
       <p>{answer}</p>
     </details>)}
   </section>
+
+  <p class="gf-feedback-link"><a class="quiet-link" href={`${journeyPath(lang, 'guidance')}#${feedbackAnchor}`}>{feedbackCopy[lang].link} <Arrow /></a></p>
 
   <section class="gf-section gf-compare" id="compare" aria-labelledby="course-compare-title" data-gf-reveal>
     <CourseCompare {lang} current="golden-frequency" />

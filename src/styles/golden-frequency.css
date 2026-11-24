@@ -809,3 +809,5 @@ html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
   .gf-host p:not(.gf-eyebrow) { margin-inline: auto; }
   .gf-host .quiet-link { justify-content: center; }
 }
+
+.gf-feedback-link { margin-top: 1.4rem; text-align: center; }

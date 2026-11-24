@@ -1,0 +1,30 @@
+---
+import { feedbackAnchor, feedbackCopy, studentFeedback } from '../data/student-feedback';
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const copy = feedbackCopy[lang];
+---
+<section class="journey-section" id={feedbackAnchor} aria-labelledby="student-feedback-title">
+  <h2 id="student-feedback-title">{copy.title}</h2>
+  <p class="feedback-intro">{copy.intro}</p>
+  {studentFeedback.map(item => <figure class="feedback-card zen-card" lang={lang === 'vi' ? 'vi' : 'en'}>
+    <figcaption>
+      <strong>{item.name}</strong>
+      <span>{item.role[lang]}</span>
+    </figcaption>
+    <blockquote>
+      {(lang === 'vi' ? item.quote : item.quoteEn).map(paragraph => <p>{paragraph}</p>)}
+    </blockquote>
+    {lang === 'en' && <p class="feedback-note">{copy.translated}</p>}
+    {item.disclosure && <p class="feedback-note">{item.disclosure[lang]}</p>}
+  </figure>)}
+</section>
+<style>
+  .feedback-intro { max-width: 60ch; margin-top: .5rem; color: var(--muted); }
+  .feedback-card { max-width: 53rem; margin: 1rem 0 0; padding: clamp(1.1rem, 4vw, 2rem); }
+  .feedback-card figcaption { display: grid; gap: .15rem; margin-bottom: .8rem; }
+  .feedback-card figcaption span { color: var(--secondary); font-size: .9rem; }
+  .feedback-card blockquote { display: grid; gap: .8rem; margin: 0; padding-left: 1rem; border-left: 3px solid var(--primary); line-height: 1.7; }
+  .feedback-card blockquote p { margin: 0; }
+  .feedback-note { margin-top: .8rem; color: var(--muted); font-size: .85rem; }
+</style>

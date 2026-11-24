@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, showFrequencyFee, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
 import { courseCompare } from '../src/data/course-compare.ts';
+import { studentFeedback } from '../src/data/student-feedback.ts';
 import { frequencySchema } from '../src/data/golden-frequency-schema.ts';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, selfCheckDomains, weeklyPlan } from '../src/data/golden-frequency.ts';
 
@@ -116,4 +117,12 @@ test('the course information sheet and the course comparison answer what a stude
   }
   assert.deepEqual(Object.keys(courseCompare.vi.courses), Object.keys(courseCompare.en.courses));
   assert.ok(!courseCompare.vi.courses['golden-frequency'].values.join(' ').match(/\d[\d.,]*\s?(tr|đ|₫|vnd)/i), 'no fee figures in the comparison');
+});
+
+test('student feedback keeps the original text and an equal English translation', () => {
+  assert.ok(studentFeedback.length >= 1);
+  for (const item of studentFeedback) {
+    assert.equal(item.quote.length, item.quoteEn.length);
+    assert.ok(item.quote.every(paragraph => paragraph.length > 20) && item.name && item.role.vi && item.role.en);
+  }
 });

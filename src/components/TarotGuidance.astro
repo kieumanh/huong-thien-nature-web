@@ -6,6 +6,7 @@ import GuidanceSequence from './GuidanceSequence.astro';
 import TarotResearch from './TarotResearch.astro';
 import { tarotLanding } from '../data/tarot-guidance';
 import { tarotCourse, tarotPriceLabel, tarotEnquiryPath } from '../data/courses';
+import { feedbackAnchor, feedbackCopy } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
 import { zaloUrl } from '../data/contact-channels';
 import { meditationFounder } from '../data/people';
@@ -154,6 +155,8 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       </ul>
     </details>
   </section>
+
+  <p class="guidance-feedback-link"><a class="quiet-link" href={`${journeyPath(lang, 'guidance')}#${feedbackAnchor}`}>{feedbackCopy[lang].link} <Arrow /></a></p>
 
   <section class="guidance-section" id="compare" aria-labelledby="course-compare-title" data-guidance-reveal>
     <CourseCompare {lang} current="tarot" />

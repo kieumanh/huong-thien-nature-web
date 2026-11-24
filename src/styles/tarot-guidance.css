@@ -502,3 +502,5 @@
   .guidance-cta-band { grid-template-columns: minmax(0, 1fr) auto; }
   .guidance-cta-band .button { justify-self: end; }
 }
+
+.guidance-feedback-link { margin-top: 1.4rem; text-align: center; }
