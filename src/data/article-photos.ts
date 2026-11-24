@@ -15,6 +15,8 @@ const pixabayPhotos: Record<string, { source?: string; width: number; height: nu
   '/media/pixabay-8259984.webp': { source: 'https://pixabay.com/photos/vietnam-tea-plantation-agriculture-8259984/', width: 1200, height: 800 },
   '/media/pixabay-2641446.webp': { source: 'https://pixabay.com/photos/water-buffalo-vietnam-nature-2641446/', width: 1200, height: 656 },
   '/media/pixabay-6540843.webp': { source: 'https://pixabay.com/photos/waterfall-vietnam-nature-landscape-6540843/', width: 1200, height: 800 },
+  // Our own illustration, drawn for the Sun and Moon article (2.19.0; scripts/illustrations/sky-rhythm.py).
+  '/media/illustrations/sun-moon-cover.webp': { width: 1200, height: 800 },
   // Already hosted for in-article figures; reused as covers in 2.16.0 (see article-covers.ts). Source pages as recorded in editorial-illustrations.ts.
   '/media/pixabay-2608830.webp': { source: 'https://pixabay.com/photos/nature-water-river-stream-rocks-2608830/', width: 880, height: 586 },
   '/media/pixabay-58125.webp': { source: 'https://pixabay.com/photos/water-rocks-stone-river-nature-58125/', width: 880, height: 586 },

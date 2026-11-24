@@ -158,6 +158,8 @@ html[data-reading="on"] *, html[data-reading="on"] *::before, html[data-reading=
   --forest: #2b3a2f; --moss: #4d6140; --ink-soft: #554f40; --border: #d1c196; --gold-line: #d6c79c; --gold-wash: #efe3c2; --gold-accent: #735013; --gold-deep: #9a6a1c;
   --orchid: #6a3459; --orchid-deep: #492742; --on-primary: #faf6e8;
 }
+/* The night title colour (gold.css) is a pale gold meant for a dark page. The light reading themes keep the day colour, whatever the hour. */
+:root[data-reading="on"][data-reading-theme="light"] body h1, :root[data-reading="on"][data-reading-theme="ivory"] body h1 { color: var(--orchid); }
 :root[data-reading="on"][data-reading-theme="dim"] {
   color-scheme: dark; --reading-link: #f0c4e3;
   --surface: #1d1b19; --surface-raised: #262320; --surface-container: #2d2a26; --surface-warm: #2a2622;

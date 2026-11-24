@@ -40,9 +40,11 @@ test('every article shows at least three images in both languages, none from new
       }
     }
   }
-  for (const id of Object.keys(illustrations)) {
-    const svg = readFileSync(new URL(`../public/media/illustrations/${id}.svg`, import.meta.url), 'utf8');
-    assert.ok(svg.startsWith('<svg') && svg.includes('<title>') && !/<script|href="http/i.test(svg), `${id}.svg is a safe, titled illustration`);
+  for (const [id, art] of Object.entries(illustrations)) {
+    for (const file of art.localized ? [`${id}.svg`, `${id}.en.svg`] : [`${id}.svg`]) {
+      const svg = readFileSync(new URL(`../public/media/illustrations/${file}`, import.meta.url), 'utf8');
+      assert.ok(svg.startsWith('<svg') && svg.includes('<title>') && !/<script|href="http/i.test(svg), `${file} is a safe, titled illustration`);
+    }
   }
   assert.ok(Object.values(articleFigures).flat().every(item => /^(album|ill):/.test(item.ref)));
 });

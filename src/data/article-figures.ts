@@ -6,7 +6,8 @@ import { albumPhoto, albumPhotoSrc } from './album.ts';
 // the English version, which has fewer sections, places the figure proportionally.
 
 type Text = Record<Language, string>;
-export const illustrations: Record<string, { alt: Text; caption: Text }> = {
+// `localized`: the drawing carries words, so there is one file per language (<id>.svg is Vietnamese, <id>.en.svg is English).
+export const illustrations: Record<string, { alt: Text; caption: Text; localized?: true }> = {
   'breath-waves': { alt: { vi: 'Minh họa những con sóng mảnh màu vàng lên xuống quanh một điểm sáng trên nền trời đêm.', en: 'Illustration of thin golden waves rising and falling around a point of light on a night sky.' }, caption: { vi: 'Hơi thở lên xuống như sóng, và luôn có một điểm để quay về.', en: 'The breath rises and falls like waves, with a point to return to.' } },
   'footsteps': { alt: { vi: 'Minh họa những dấu chân trần nối nhau trên một lối đất màu kem.', en: 'Illustration of bare footprints following one another along a cream-coloured path.' }, caption: { vi: 'Từng bước chân, biết mình đang bước.', en: 'One step at a time, knowing that we are stepping.' } },
   'held-light': { alt: { vi: 'Minh họa hai bàn tay khum lại nâng một ngọn lửa nhỏ màu vàng.', en: 'Illustration of two cupped hands holding a small golden flame.' }, caption: { vi: 'Nâng niu ngọn lửa nhỏ bên trong mình.', en: 'Caring for the small flame within.' } },
@@ -18,6 +19,11 @@ export const illustrations: Record<string, { alt: Text; caption: Text }> = {
   'sitting-still': { alt: { vi: 'Minh họa bóng một người ngồi thiền trước vầng sáng vàng lúc hoàng hôn.', en: 'Illustration of the silhouette of a person meditating before a golden glow at dusk.' }, caption: { vi: 'Ngồi xuống, và cho phép mình được yên một lát.', en: 'Sitting down and allowing ourselves a moment of stillness.' } },
   'small-vase': { alt: { vi: 'Minh họa một bình hoa nhỏ trên bàn, quanh là những đốm sáng vàng.', en: 'Illustration of a small vase of flowers on a table, surrounded by points of golden light.' }, caption: { vi: 'Những điều tốt đẹp nhỏ bé vẫn luôn có mặt.', en: 'Small good things are always present.' } },
   'soft-boundary': { alt: { vi: 'Minh họa hai vòng tròn chạm nhau với đường viền mềm, mỗi vòng giữ một điểm sáng riêng.', en: 'Illustration of two touching circles with soft edges, each holding its own light.' }, caption: { vi: 'Gần nhau mà vẫn giữ được ánh sáng riêng.', en: 'Close together, each keeping its own light.' } },
+  'sun-daily-light': { localized: true, alt: { vi: 'Minh họa Mặt Trời đi qua cung trời từ sáng đến chiều, bên dưới là hai đường cong: tỉnh táo dâng lên vào ban ngày, buồn ngủ cao ở hai đầu ngày.', en: 'Illustration of the Sun crossing the sky from morning to evening, with two curves below: alertness rising by day and sleepiness high at both ends of the day.' }, caption: { vi: 'Ánh sáng ban ngày lên dây cho đồng hồ sinh học: tỉnh táo lên cao quanh trưa, cơn buồn ngủ trở lại khi chiều tối. Đường cong chỉ mang tính minh họa.', en: 'Daylight sets the body clock: alertness peaks around noon and sleepiness returns toward evening. The curves are illustrative only.' } },
+  'moon-phase-cycle': { localized: true, alt: { vi: 'Minh họa tám pha của Mặt Trăng xếp thành vòng tròn, một vòng sáng chạy quanh; mồng một ở đỉnh, rằm ở đáy, ngày ba mươi ngay trước khi vòng khép lại.', en: 'Illustration of eight moon phases arranged in a circle with a ring of light moving around it: day 1 at the top, day 15 at the bottom, day 30 just before the circle closes.' }, caption: { vi: 'Một vòng trăng kéo dài khoảng 29,5 ngày: mồng một trăng tối, rằm trăng tròn, rồi mảnh dần đến cuối tháng.', en: 'One lunar month lasts about 29.5 days: dark on day 1, full on day 15, then thinning to the end of the month.' } },
+  'earth-moon-tides': { localized: true, alt: { vi: 'Minh họa Mặt Trăng quay quanh Trái Đất với Mặt Trời ở bên trái; vùng nước biển dâng quanh Trái Đất phình to khi ba thiên thể thẳng hàng và thu nhỏ khi vuông góc.', en: 'Illustration of the Moon orbiting Earth with the Sun on the left; the ocean bulge around Earth swells when the three bodies are in line and shrinks at right angles.' }, caption: { vi: 'Nước biển dâng nhiều nhất quanh mồng một và rằm, khi ba thiên thể gần thẳng hàng. Hình không theo tỉ lệ thật; lực này quá nhỏ để tác động lên một cơ thể người.', en: 'The sea swells most around the first and the full moon, when the three bodies are nearly in line. Not to scale; the pull is far too small to act on a human body.' } },
+  'moon-mirror': { alt: { vi: 'Minh họa bóng một người ngồi yên bên mặt nước đêm, ánh trăng rọi xuống và những đốm sáng nhỏ từ trong lòng nhẹ nhàng bay lên.', en: 'Illustration of the silhouette of a person sitting still by night water, moonlight falling on them while small points of light drift up from within.' }, caption: { vi: 'Ánh trăng không gieo điều gì mới; nó chỉ làm sáng những gì đã có sẵn.', en: 'Moonlight plants nothing new; it only lights up what was already there.' } },
+  'monthly-wheel': { localized: true, alt: { vi: 'Minh họa vòng thực hành theo tuần trăng với bốn điểm: mồng một gieo, mồng tám nuôi, rằm soi, hai mươi hai buông; một chấm sáng chạy quanh, ở giữa là vầng trăng đổi pha.', en: 'Illustration of a monthly practice wheel with four points: day 1 sow, day 8 tend, day 15 reflect, day 22 release; a point of light travels around it with a changing moon at the centre.' }, caption: { vi: 'Bốn mùa nhỏ trong một tháng trăng: gieo ý định, nuôi dưỡng, soi chiếu, buông bớt. Ngày trong hình chỉ là điểm tham khảo.', en: 'Four small seasons in a lunar month: sow an intention, tend it, reflect, release. The days shown are only guides.' } },
   'still-lake': { alt: { vi: 'Minh họa dãy núi và mặt trời in bóng trên mặt hồ phẳng lặng.', en: 'Illustration of mountains and the sun reflected in a still lake.' }, caption: { vi: 'Khi mặt hồ lặng, mình thấy rõ điều đang có.', en: 'When the lake is still, we see clearly what is there.' } },
 };
 
@@ -43,6 +49,7 @@ export const articleFigures: Record<string, { ref: string; after: number }[]> = 
   'returning-attention': [{ ref: 'ill:returning-path', after: 1 }, { ref: 'album:beach-sitting', after: 3 }],
   'seven-layers': [{ ref: 'ill:lotus-dawn', after: 1 }, { ref: 'album:wooden-house', after: 3 }],
   'listening-to-nature': [{ ref: 'album:hands-together-garden', after: 1 }, { ref: 'album:veggie-sunset', after: 3 }],
+  'sun-moon-rhythms': [{ ref: 'ill:sun-daily-light', after: 1 }, { ref: 'ill:moon-phase-cycle', after: 3 }, { ref: 'ill:earth-moon-tides', after: 4 }, { ref: 'ill:moon-mirror', after: 6 }, { ref: 'ill:monthly-wheel', after: 8 }],
 };
 
 export type ResolvedFigure = { src: string; width: number; height: number; alt: string; caption: string; credit: string; after: number };
@@ -55,7 +62,7 @@ export function resolveFigure(ref: string, lang: Language): Omit<ResolvedFigure,
   }
   const art = illustrations[id];
   if (kind !== 'ill' || !art) throw new Error(`Unknown article figure: ${ref}`);
-  return { src: `/media/illustrations/${id}.svg`, width: 1200, height: 800, alt: art.alt[lang], caption: art.caption[lang], credit: lang === 'vi' ? 'Minh họa: Hương Thiền Nature' : 'Illustration: Hương Thiền Nature' };
+  return { src: `/media/illustrations/${id}${art.localized && lang === 'en' ? '.en' : ''}.svg`, width: 1200, height: 800, alt: art.alt[lang], caption: art.caption[lang], credit: lang === 'vi' ? 'Minh họa: Hương Thiền Nature' : 'Illustration: Hương Thiền Nature' };
 }
 
 /** Figures for one article in one language, each placed after a section that exists in that language. */
