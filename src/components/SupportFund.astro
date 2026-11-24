@@ -1,0 +1,280 @@
+---
+import { supportAccount, supportFund, supportItemIds, type SupportItemId } from '../data/support-fund';
+import { contactPath } from '../data/contact-channels';
+import type { Language } from '../data/site';
+import Arrow from './Arrow.astro';
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = supportFund[lang];
+---
+<div class="support">
+  <section class="support-intro" aria-labelledby="support-intro-title">
+    <div class="support-intro__copy">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h2 id="support-intro-title">{copy.introTitle}</h2>
+      <p class="lead">{copy.lead}</p>
+      {copy.reasons.map(text => <p>{text}</p>)}
+    </div>
+    <figure class="support-seed" role="img" aria-label={copy.illustrationLabel}>
+      <svg viewBox="0 0 360 320" aria-hidden="true" focusable="false">
+        <defs>
+          <radialGradient id="seed-glow" cx="50%" cy="62%" r="55%">
+            <stop offset="0" stop-color="#f2c45a" stop-opacity=".55" />
+            <stop offset="1" stop-color="#f2c45a" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="seed-soil" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#9a7550" />
+            <stop offset="1" stop-color="#6f5239" />
+          </linearGradient>
+        </defs>
+        <circle class="seed-glow" cx="180" cy="196" r="150" fill="url(#seed-glow)" />
+        <g class="seed-rings" fill="none" stroke="#d99a2b" stroke-width="1.6">
+          <ellipse class="seed-ring seed-ring--1" cx="180" cy="248" rx="40" ry="11" />
+          <ellipse class="seed-ring seed-ring--2" cx="180" cy="248" rx="40" ry="11" />
+          <ellipse class="seed-ring seed-ring--3" cx="180" cy="248" rx="40" ry="11" />
+        </g>
+        <path d="M70 262c28-24 70-34 110-34s82 10 110 34c-30 20-70 30-110 30s-80-10-110-30z" fill="url(#seed-soil)" />
+        <path d="M120 258c16-8 40-12 60-12s44 4 60 12" fill="none" stroke="#b99468" stroke-width="2" stroke-linecap="round" opacity=".7" />
+        <g class="seed-plant">
+          <path class="seed-stem" d="M180 244c-2-34 4-62-2-92" fill="none" stroke="#4d7f49" stroke-width="5" stroke-linecap="round" pathLength="1" />
+          <g class="seed-leaf seed-leaf--left"><path d="M178 190c-32-4-52-24-56-52 30-2 54 14 56 52z" fill="#6aa05f" /><path d="M178 190c-18-14-32-30-42-46" fill="none" stroke="#4d7f49" stroke-width="2" stroke-linecap="round" /></g>
+          <g class="seed-leaf seed-leaf--right"><path d="M178 168c30-6 50-26 52-56-30 0-52 18-52 56z" fill="#86b77a" /><path d="M178 168c16-14 30-28 40-44" fill="none" stroke="#4d7f49" stroke-width="2" stroke-linecap="round" /></g>
+          <g class="seed-bud">
+            <circle cx="176" cy="148" r="10" fill="#f0c05a" />
+            <path d="M176 138c-8-10-4-20 0-26 4 6 8 16 0 26zM176 138c10-6 22-4 28 0-6 6-18 8-28 0zM176 138c-10-6-22-4-28 0 6 6 18 8 28 0z" fill="#f7d98a" opacity=".92" />
+          </g>
+        </g>
+        <g class="seed-motes" fill="#f0c05a">
+          <circle class="seed-mote seed-mote--1" cx="120" cy="230" r="3" />
+          <circle class="seed-mote seed-mote--2" cx="240" cy="220" r="2.6" />
+          <circle class="seed-mote seed-mote--3" cx="150" cy="200" r="2.2" />
+          <circle class="seed-mote seed-mote--4" cx="214" cy="190" r="3" />
+          <circle class="seed-mote seed-mote--5" cx="100" cy="190" r="2" />
+          <circle class="seed-mote seed-mote--6" cx="262" cy="176" r="2.2" />
+        </g>
+      </svg>
+    </figure>
+  </section>
+
+  <section class="support-items" aria-labelledby="support-items-title">
+    <h2 id="support-items-title">{copy.itemsTitle}</h2>
+    <p class="support-items__intro">{copy.itemsIntro}</p>
+    <ol class="support-items__list">
+      {supportItemIds.map((id: SupportItemId, index: number) => (
+        <li class="support-item zen-card" style={`--i: ${index}`}>
+          <span class="support-icon" aria-hidden="true">
+            {id === 'space' && <svg viewBox="0 0 72 72" focusable="false">
+              <path d="M10 60h52" stroke="#8b6a4a" stroke-width="3" stroke-linecap="round" fill="none" />
+              <path d="M14 34 36 14l22 20" fill="none" stroke="#b5542f" stroke-width="4" stroke-linejoin="round" stroke-linecap="round" />
+              <rect x="18" y="34" width="36" height="26" rx="2" fill="#f3e3c3" stroke="#8b6a4a" stroke-width="2.4" />
+              <rect class="icon-window" x="24" y="40" width="10" height="9" rx="1.5" fill="#f0c05a" />
+              <rect x="40" y="42" width="8" height="18" rx="1.5" fill="#8b6a4a" />
+              <path class="icon-sway" d="M60 60c-1-8 1-12 0-18M60 52c4-2 6-5 6-9-4 0-6 3-6 9z" fill="none" stroke="#4d7f49" stroke-width="2.4" stroke-linecap="round" />
+            </svg>}
+            {id === 'equipment' && <svg viewBox="0 0 72 72" focusable="false">
+              <g class="icon-gear">
+                <circle cx="36" cy="36" r="19" fill="none" stroke="#b9822a" stroke-width="9" stroke-dasharray="7.4 7.4" />
+                <circle cx="36" cy="36" r="17" fill="#f3e3c3" stroke="#b9822a" stroke-width="3" />
+                <circle cx="36" cy="36" r="6.5" fill="#fff8e6" stroke="#b9822a" stroke-width="3" />
+              </g>
+            </svg>}
+            {id === 'media' && <svg viewBox="0 0 72 72" focusable="false">
+              <rect x="10" y="30" width="30" height="24" rx="3.5" fill="#f3e3c3" stroke="#6b4f93" stroke-width="3" />
+              <path d="M10 38h30" stroke="#6b4f93" stroke-width="3" />
+              <circle cx="15.5" cy="34" r="1.3" fill="#6b4f93" />
+              <path d="M18 46h14M18 50h8" stroke="#b9822a" stroke-width="2.6" stroke-linecap="round" />
+              <g fill="none" stroke="#d99a2b" stroke-width="3.2" stroke-linecap="round">
+                <path class="icon-wave icon-wave--1" d="M48 36c4 3 4 9 0 12" />
+                <path class="icon-wave icon-wave--2" d="M53 31c8 6 8 18 0 24" />
+                <path class="icon-wave icon-wave--3" d="M58 26c12 9 12 27 0 36" />
+              </g>
+            </svg>}
+            {id === 'journey' && <svg viewBox="0 0 72 72" focusable="false">
+              <path class="icon-road" d="M10 62c14-4 6-18 20-20s10-14 14-18" fill="none" stroke="#b9822a" stroke-width="3.4" stroke-linecap="round" stroke-dasharray="3 7" />
+              <g class="icon-pin">
+                <path d="M50 8c-7 0-12 5-12 11 0 8 12 19 12 19s12-11 12-19c0-6-5-11-12-11z" fill="#b5542f" />
+                <circle cx="50" cy="19" r="4.4" fill="#fff4dc" />
+              </g>
+              <ellipse class="icon-pin-shadow" cx="50" cy="42" rx="7" ry="2" fill="#6f5239" opacity=".3" />
+            </svg>}
+            {id === 'care' && <svg viewBox="0 0 72 72" focusable="false">
+              <path d="M12 38h40c0 12-8 20-20 20s-20-8-20-20z" fill="#f3e3c3" stroke="#b5542f" stroke-width="3" stroke-linejoin="round" />
+              <path d="M26 62h12" stroke="#b5542f" stroke-width="3" stroke-linecap="round" />
+              <g fill="none" stroke="#8d8a9e" stroke-width="2.8" stroke-linecap="round">
+                <path class="icon-steam icon-steam--1" d="M24 32c-3-4 3-6 0-10" />
+                <path class="icon-steam icon-steam--2" d="M32 32c-3-4 3-6 0-10" />
+                <path class="icon-steam icon-steam--3" d="M40 32c-3-4 3-6 0-10" />
+              </g>
+              <g class="icon-chat">
+                <rect x="50" y="14" width="18" height="14" rx="5" fill="#6b4f93" />
+                <path d="M55 28l-2 6 7-6z" fill="#6b4f93" />
+                <circle cx="56" cy="21" r="1.6" fill="#fff" /><circle cx="60" cy="21" r="1.6" fill="#fff" /><circle cx="64" cy="21" r="1.6" fill="#fff" />
+              </g>
+            </svg>}
+          </span>
+          <div>
+            <h3>{copy.items[id][0]}</h3>
+            <p>{copy.items[id][1]}</p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="support-call" aria-labelledby="support-call-title">
+    <h2 id="support-call-title">{copy.callTitle}</h2>
+    {copy.call.map(text => <p>{text}</p>)}
+  </section>
+
+  <section class="support-transfer" id="chuyen-khoan" aria-labelledby="support-transfer-title">
+    <div class="support-transfer__info">
+      <h2 id="support-transfer-title">{copy.transferTitle}</h2>
+      <p>{copy.transferIntro}</p>
+      <dl class="support-account">
+        <div><dt>{copy.rows.holder}</dt><dd>{supportAccount.holder}</dd></div>
+        <div>
+          <dt>{copy.rows.number}</dt>
+          <dd>
+            <span class="support-number" translate="no">{supportAccount.numberSpaced}</span>
+            <button type="button" class="button button--tonal support-copy js-only" data-copy={supportAccount.number} data-done={copy.copied} data-fail={copy.copyFailed}>{copy.copy}</button>
+          </dd>
+        </div>
+        <div><dt>{copy.rows.bank}</dt><dd>{copy.bank}</dd></div>
+      </dl>
+      <p class="support-status" role="status" aria-live="polite" data-copy-status></p>
+      <p class="support-safety">{copy.safety}</p>
+    </div>
+    <figure class="support-qr">
+      <figcaption>{copy.qrTitle}</figcaption>
+      <img src={supportAccount.qr} alt={copy.qrAlt} width={supportAccount.qrSize.width} height={supportAccount.qrSize.height} loading="lazy" decoding="async" />
+      <p>{copy.qrHint}</p>
+    </figure>
+  </section>
+
+  <section class="support-thanks" aria-labelledby="support-thanks-title">
+    <svg class="support-thanks__ripples" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+      <circle class="thanks-ring thanks-ring--1" cx="60" cy="60" r="14" />
+      <circle class="thanks-ring thanks-ring--2" cx="60" cy="60" r="14" />
+      <circle class="thanks-ring thanks-ring--3" cx="60" cy="60" r="14" />
+      <circle cx="60" cy="60" r="7" fill="#d99a2b" />
+    </svg>
+    <h2 id="support-thanks-title">{copy.thanksTitle}</h2>
+    {copy.thanks.map(text => <p>{text}</p>)}
+    <p class="support-sign">{copy.sign}</p>
+    <p><a class="button" href={contactPath(lang)}>{copy.contact} <Arrow /></a></p>
+  </section>
+</div>
+
+<script>
+  const status = document.querySelector<HTMLElement>('[data-copy-status]');
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-copy]')) {
+    button.addEventListener('click', async () => {
+      let done = false;
+      try { await navigator.clipboard.writeText(button.dataset.copy ?? ''); done = true; } catch { done = false; }
+      if (status) status.textContent = (done ? button.dataset.done : button.dataset.fail) ?? '';
+    });
+  }
+</script>
+
+<style>
+  .support { display: grid; gap: clamp(2rem, 5vw, 3.5rem); margin-top: clamp(1.5rem, 4vw, 2.5rem); }
+  .support h2 { font-family: var(--serif); }
+  .support p { max-width: 64ch; margin-top: .75rem; line-height: 1.8; }
+  .support .lead { margin-top: .6rem; }
+
+  /* ---- intro with the sprouting seed ---- */
+  .support-intro { display: grid; gap: clamp(1.2rem, 4vw, 2.4rem); align-items: center; }
+  .support-seed { margin: 0; justify-self: center; width: min(100%, 24rem); border-radius: var(--radius-feature); background: var(--surface-container); border: 1px solid var(--gold-line); overflow: hidden; }
+  .support-seed svg { display: block; width: 100%; height: auto; }
+  .seed-glow { transform-origin: 180px 196px; animation: seed-breathe 6s ease-in-out infinite; }
+  .seed-ring { transform-box: fill-box; transform-origin: center; opacity: 0; animation: seed-ripple 5.4s ease-out infinite; }
+  .seed-ring--2 { animation-delay: 1.8s; }
+  .seed-ring--3 { animation-delay: 3.6s; }
+  .seed-stem { stroke-dasharray: 1; stroke-dashoffset: 1; animation: seed-draw 2.2s .3s ease-out forwards; }
+  .seed-leaf { transform-box: fill-box; opacity: 0; transform: scale(.2); animation: seed-unfurl 1.4s ease-out forwards; }
+  .seed-leaf--left { transform-origin: 100% 100%; animation-delay: 1.5s; }
+  .seed-leaf--right { transform-origin: 0 100%; animation-delay: 1.9s; }
+  .seed-bud { transform-box: fill-box; transform-origin: 50% 90%; opacity: 0; transform: scale(.2); animation: seed-unfurl 1.4s 2.4s ease-out forwards, seed-glint 4.5s 4s ease-in-out infinite; }
+  .seed-plant { transform-box: fill-box; transform-origin: 50% 100%; animation: seed-sway 7s 4s ease-in-out infinite; }
+  .seed-mote { opacity: 0; animation: seed-float 7s ease-in infinite; }
+  .seed-mote--1 { animation-delay: .6s; } .seed-mote--2 { animation-delay: 1.8s; } .seed-mote--3 { animation-delay: 3s; }
+  .seed-mote--4 { animation-delay: 4.1s; } .seed-mote--5 { animation-delay: 5.2s; } .seed-mote--6 { animation-delay: 2.5s; }
+  @keyframes seed-breathe { 0%, 100% { opacity: .75; transform: scale(.94); } 50% { opacity: 1; transform: scale(1.04); } }
+  @keyframes seed-ripple { 0% { opacity: .75; transform: scale(.5); } 100% { opacity: 0; transform: scale(3.4); } }
+  @keyframes seed-draw { to { stroke-dashoffset: 0; } }
+  @keyframes seed-unfurl { 0% { opacity: 0; transform: scale(.2); } 100% { opacity: 1; transform: scale(1); } }
+  @keyframes seed-glint { 0%, 100% { filter: none; } 50% { filter: drop-shadow(0 0 6px #f0c05a); } }
+  @keyframes seed-sway { 0%, 100% { transform: rotate(-1.6deg); } 50% { transform: rotate(1.6deg); } }
+  @keyframes seed-float { 0% { opacity: 0; transform: translateY(0); } 20% { opacity: .95; } 100% { opacity: 0; transform: translateY(-70px); } }
+
+  /* ---- five areas ---- */
+  .support-items__intro { margin-top: .5rem; color: var(--muted); }
+  .support-items__list { list-style: none; padding: 0; display: grid; gap: clamp(.85rem, 2.4vw, 1.2rem); margin: 1.1rem 0 0; }
+  .support-item { display: grid; grid-template-columns: 4.5rem minmax(0, 1fr); gap: .3rem 1rem; align-items: start; padding: clamp(.95rem, 3vw, 1.35rem); }
+  .support-item h3 { font: 500 var(--type-card)/1.3 var(--serif); margin: 0; }
+  .support-item p { margin-top: .35rem; color: var(--muted); line-height: 1.7; }
+  .support-icon { display: grid; place-items: center; width: 4.5rem; height: 4.5rem; border-radius: 50%; background: var(--gold-wash); border: 1px solid var(--gold-line); }
+  .support-icon svg { width: 3.4rem; height: 3.4rem; }
+  .icon-window { animation: icon-glow 3.2s ease-in-out infinite; }
+  .icon-sway { transform-box: fill-box; transform-origin: 50% 100%; animation: seed-sway 4s ease-in-out infinite; }
+  .icon-gear { transform-box: fill-box; transform-origin: center; animation: icon-turn 14s linear infinite; }
+  .icon-wave { opacity: .2; animation: icon-wave 2.4s ease-in-out infinite; }
+  .icon-wave--2 { animation-delay: .35s; } .icon-wave--3 { animation-delay: .7s; }
+  .icon-road { animation: icon-dash 2.6s linear infinite; }
+  .icon-pin { transform-box: fill-box; transform-origin: 50% 100%; animation: icon-bob 2.4s ease-in-out infinite; }
+  .icon-pin-shadow { transform-box: fill-box; transform-origin: center; animation: icon-shadow 2.4s ease-in-out infinite; }
+  .icon-steam { opacity: 0; animation: icon-steam 3s ease-in-out infinite; }
+  .icon-steam--2 { animation-delay: .7s; } .icon-steam--3 { animation-delay: 1.4s; }
+  .icon-chat { transform-box: fill-box; transform-origin: 20% 100%; animation: icon-pop 3.6s ease-in-out infinite; }
+  @keyframes icon-glow { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+  @keyframes icon-turn { to { transform: rotate(360deg); } }
+  @keyframes icon-wave { 0%, 100% { opacity: .2; } 40% { opacity: 1; } }
+  @keyframes icon-dash { to { stroke-dashoffset: -20; } }
+  @keyframes icon-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+  @keyframes icon-shadow { 0%, 100% { transform: scale(1); opacity: .3; } 50% { transform: scale(.7); opacity: .15; } }
+  @keyframes icon-steam { 0% { opacity: 0; transform: translateY(5px); } 40% { opacity: .9; } 100% { opacity: 0; transform: translateY(-7px); } }
+  @keyframes icon-pop { 0%, 70%, 100% { transform: scale(1); } 80% { transform: scale(1.12); } 90% { transform: scale(.97); } }
+
+  /* ---- call to kind hearts ---- */
+  .support-call { padding: clamp(1.2rem, 4vw, 2.2rem); border-radius: var(--radius-feature); background: var(--surface-warm); border-inline-start: 4px solid var(--gold-deep); }
+
+  /* ---- transfer details ---- */
+  .support-transfer { display: grid; gap: clamp(1.2rem, 4vw, 2.4rem); padding: clamp(1.1rem, 4vw, 2.1rem); border-radius: var(--radius-feature); border: 1px solid var(--gold-line); background: var(--surface-raised); }
+  .support-account { display: grid; gap: .85rem; margin: 1rem 0 0; }
+  .support-account dt { font-size: var(--type-caption); color: var(--muted); }
+  .support-account dd { margin: .15rem 0 0; font-weight: 650; font-size: 1.1rem; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .9rem; overflow-wrap: anywhere; }
+  .support-number { font: 650 clamp(1.35rem, 5vw, 1.8rem)/1.2 var(--serif); letter-spacing: .04em; user-select: all; }
+  .support-copy { min-height: 44px; }
+  :global(html:not(.js)) .support-copy { display: none; }
+  .support-status { min-height: 1.5em; margin-top: .6rem; color: var(--secondary); font-weight: 600; }
+  .support-safety { padding: .75rem .9rem; border-radius: var(--radius-input); background: var(--gold-wash); font-size: var(--type-caption); line-height: 1.6; }
+  .support-qr { margin: 0; justify-self: center; width: min(100%, 19rem); text-align: center; }
+  .support-qr figcaption { font: 500 var(--type-card)/1.3 var(--serif); margin-bottom: .6rem; }
+  .support-qr img { display: block; width: 100%; height: auto; border-radius: var(--radius-card); border: 1px solid var(--gold-line); background: #fff; }
+  .support-qr p { margin: .6rem auto 0; font-size: var(--type-caption); color: var(--muted); }
+
+  /* ---- thanks ---- */
+  .support-thanks { position: relative; isolation: isolate; padding: clamp(1.4rem, 5vw, 2.6rem); border-radius: var(--radius-feature); background: var(--surface-container); text-align: center; overflow: hidden; }
+  .support-thanks p { margin-inline: auto; }
+  .support-thanks__ripples { width: 6.5rem; height: 6.5rem; margin: 0 auto .4rem; display: block; }
+  .thanks-ring { fill: none; stroke: #d99a2b; stroke-width: 1.6; transform-box: fill-box; transform-origin: center; opacity: 0; animation: seed-ripple 4.8s ease-out infinite; }
+  .thanks-ring--2 { animation-delay: 1.6s; } .thanks-ring--3 { animation-delay: 3.2s; }
+  .support-sign { font: italic 500 1.25rem/1.4 var(--serif); color: var(--secondary); }
+  .support-thanks .button { margin-top: .4rem; }
+
+  @media (min-width: 48rem) {
+    .support-intro { grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); }
+    .support-items__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .support-items__list .support-item:last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .support-transfer { grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); align-items: center; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .support *, .support *::before, .support *::after { animation: none !important; transition: none !important; }
+    .seed-stem { stroke-dashoffset: 0; }
+    .seed-leaf, .seed-bud { opacity: 1; transform: none; }
+    .seed-glow { opacity: .9; }
+    .icon-wave { opacity: .8; }
+    .icon-steam { opacity: .7; }
+  }
+</style>

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.17.0',
+    date: '2026-11-24',
+    vi: ['Quỹ ủng hộ', 'Thêm trang Quỹ ủng hộ: vì sao dự án cần được nâng đỡ, năm hạng mục sử dụng tài nguyên, thông tin chuyển khoản và mã QR của thủ quỹ, cùng các hình động nhẹ nhàng. Chân trang có mục Quỹ ủng hộ ở mọi trang.'],
+    en: ['Support fund', 'A new Support fund page explains why the project needs support, the five areas the resources will go to, the treasurer’s transfer details and QR code, with gentle animated illustrations. The footer links to it on every page.'],
+  },
+  {
     version: '2.16.2',
     date: '2026-11-24',
     vi: ['ZenWork trong Hệ sinh thái, chế độ đọc gọn hơn', 'Thêm ZenWork vào Hệ sinh thái với vai trò công nghệ và truyền thông. Thanh chế độ đọc không còn đè lên đầu bài viết, trang Gợi ý có khoảng cách gọn hơn, và gỡ các dòng số khẩn cấp.'],

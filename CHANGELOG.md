@@ -1,3 +1,12 @@
+## 2.17.0 — Quỹ ủng hộ: trang riêng, mục ở chân trang, thông tin chuyển khoản và mã QR
+
+- **Trang "Quỹ ủng hộ"** (`/vi/quy-ung-ho/`, `/en/support-fund/`): lý do dự án cần được nâng đỡ để xây dựng và hoàn thiện; năm hạng mục sử dụng tài nguyên (không gian và nhà cửa, thiết bị, kênh truyền thông và website, di chuyển trên hành trình lan tỏa, ăn uống và liên lạc); lời mời đến những tấm lòng; thông tin chuyển khoản của thủ quỹ dự án (Kiều Xuân Mạnh, 02871729888, Ngân hàng Tiên Phong TPBank) kèm nút sao chép số và mã QR VietQR; lời cảm ơn và lời mời gửi ý tưởng hoặc kết nối. Nội dung song ngữ ở `src/data/support-fund.ts`, giao diện `src/components/SupportFund.astro`; trang là một mục hành trình nên tự vào route, sitemap, tìm kiếm và `audit:build`.
+- **Hình động tinh tế (SVG, CSS):** mầm cây nảy lên từ đất với những vòng sáng lan tỏa và hạt sáng bay lên; năm biểu tượng động cho năm hạng mục (ngôi nhà sáng đèn, bánh răng, sóng truyền thông, con đường có điểm đến, bát ăn có hơi nóng); vòng lan tỏa ở lời cảm ơn. Tất cả tắt chuyển động khi người đọc chọn "giảm chuyển động" và vẫn đọc rõ khi không có JavaScript.
+- **Chân trang:** thêm khối "Quỹ ủng hộ" có mầm cây nhỏ và nút "Cùng nâng đỡ dự án", hiện ở mọi trang.
+- **Mã QR:** cắt từ ảnh VietQR do chủ dự án gửi (`public/media/support/tpbank-vietqr.webp`, lossless); đã giải mã thử và khớp số tài khoản 02871729888 và tên KIEU XUAN MANH.
+- Không ghi số tiền mục tiêu, ngày, biên nhận hay cam kết nào ngoài lời chủ dự án cung cấp. Trang nhắc người chuyển kiểm tra tên người nhận trước khi xác nhận.
+- Kiểm thử: `tests/support.test.ts` (`npm run test:support`, chạy lại sau build trong CI).
+
 ## 2.16.2 — Gỡ lời nhắc số 115, thêm ZenWork vào Hệ sinh thái, sửa thanh chế độ đọc và khoảng cách
 
 - **Gỡ nội dung "Trường hợp khẩn cấp, gọi 115" (và "113 hoặc 115") theo yêu cầu** ở mọi nơi: 5 bài Tản văn (vi/en), khối đồng cảm ở Trang chủ, trang khóa Tần Số Vàng, trang Tarot và Hỏi đáp của khóa. Các câu khuyên tìm đến người thân, bác sĩ hoặc chuyên gia được giữ lại; chỉ bỏ số điện thoại khẩn cấp. Test (`tests/journal.test.ts`) nay kiểm tra không còn số 115.

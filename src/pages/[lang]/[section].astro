@@ -7,6 +7,7 @@ import ContemplativeScene from '../../components/ContemplativeScene.astro';
 import FounderJourney from '../../components/FounderJourney.astro';
 import CourseCatalogue from '../../components/CourseCatalogue.astro';
 import StudentFeedback from '../../components/StudentFeedback.astro';
+import SupportFund from '../../components/SupportFund.astro';
 import AlbumGallery from '../../components/AlbumGallery.astro';
 import AlbumStrip from '../../components/AlbumStrip.astro';
 import BreathGuide from '../../components/BreathGuide.astro';
@@ -60,6 +61,8 @@ const ecoLinks: Record<string, string> = {
     {page === 'feedback' && <div class="journey-section"><StudentFeedback {lang} hideHead /></div>}
 
     {page === 'album' && <AlbumGallery {lang} />}
+
+    {page === 'support' && <SupportFund {lang} />}
 
     {page === 'practice' && <>
       <nav class="practice-jump" aria-label={vi ? 'Đi nhanh tới mục' : 'Jump to a section'}>
