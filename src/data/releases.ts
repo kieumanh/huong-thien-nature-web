@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.11.2',
+    date: '2026-11-24',
+    vi: ['Lời nhắn thân thiện hơn và chân trang', 'Tần Số Vàng viết lại phần khó khăn ấm áp hơn, giữ hướng dẫn an toàn và mời trao đổi trước với người hỗ trợ học viên. Mục Gợi ý đứng trước Phiên bản ở chân trang.'],
+    en: ['Warmer guidance and footer order', 'The Golden Frequency rewrites its hard-times answer more warmly, keeps the safety guidance and invites a conversation with the student support person first. Suggestions now sits before Versions in the footer.'],
+  },
+  {
     version: '2.11.1',
     date: '2026-11-24',
     vi: ['Bổ sung thông tin cho người tham khảo đăng ký', 'Tần Số Vàng có khối thông tin khóa học, danh sách cần chuẩn bị và thêm hỏi đáp. Trang Tần Số Vàng, Tarot và Khóa thực hành có bảng so sánh hai khóa. Chi phí buổi Tarot ghi rõ báo giá qua tin nhắn.'],

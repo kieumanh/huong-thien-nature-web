@@ -1,3 +1,8 @@
+## 2.11.2 — Lời nhắn an toàn và thân thiện hơn; đổi thứ tự chân trang
+
+- Tần Số Vàng: viết lại câu hỏi đáp về giai đoạn khó khăn theo giọng ấm áp hơn. Giữ hướng dẫn an toàn (gọi 115 hoặc cơ sở y tế gần nhất, nhờ người thân ở cạnh, trò chuyện với chuyên gia sức khỏe tâm thần nơi mình sống), và thêm lời mời trao đổi trước với Kiều Mạnh qua số 0388 000 680, không áp lực quyết định ngay. Bản tiếng Anh tương ứng.
+- Chân trang: mục "Gợi ý" đứng trước "Phiên bản" trong nhóm Khám phá.
+
 ## 2.11.1 — Bổ sung thông tin cho người tham khảo đăng ký
 
 Rà soát hai trang Tarot tâm lý học và Tần Số Vàng từ góc nhìn người sắp đăng ký, bổ sung những gì còn thiếu mà không thêm thông tin chưa được xác nhận.
