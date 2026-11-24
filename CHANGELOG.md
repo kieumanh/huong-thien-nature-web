@@ -1,3 +1,11 @@
+## 2.14.2 — Trang Gợi ý dễ dùng hơn: thở một phút có hướng dẫn, lối đọc cho người mới
+
+- **Đi nhanh:** ba nút ở đầu trang dẫn tới ba mục (Trở về hơi thở · Bài nên đọc · Phút lắng lại).
+- **Trở về với hơi thở:** thêm khối **"Thở cùng nhau một phút"**: vòng sáng nở ra/thu lại theo nhịp hít 4 giây, thở ra 6 giây, có đếm ngược, nút bắt đầu/dừng, đọc được bằng trình đọc màn hình, tôn trọng chế độ giảm chuyển động, kèm lưu ý an toàn và 115. Không có JavaScript thì khối này chỉ hiện phần giải thích, không có nút. Mã ở `BreathGuide.astro` + `src/scripts/breath-guide.ts`.
+- **Nên đọc bài nào khi mới tập:** danh sách chữ thành 3 thẻ "Bước 1/2/3" có số, thời gian đọc, mô tả ngắn, bấm cả thẻ để đọc; thẻ riêng "Thấy khó ngồi yên? Điều đó rất bình thường."
+- **Những phút lắng lại:** giữ dải ảnh thật; thêm khối cuối trang **"Khi bạn muốn có người đi cùng"** dẫn tới Khóa thực hành và lời nhắn, không ép buộc.
+- Kiểm tra: axe sáng/tối, VI/EN, 390px và 1366px không lỗi mới, không tràn ngang.
+
 ## 2.14.1 — Tản văn chia trang: lưới 3 × 3, 9 bài mỗi trang
 
 - Trang Tản văn hiện bài theo **lưới 3 cột × 3 hàng (9 bài/trang)** trên máy tính; máy tính bảng 2 cột, điện thoại 1 cột (vẫn 9 bài/trang). Đủ 9 bài thì sang trang mới, có nút Trước / số trang / Sau, trang hiện tại được đánh dấu, bấm chuyển trang sẽ cuộn về đầu danh sách.

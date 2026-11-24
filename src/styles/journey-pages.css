@@ -99,3 +99,49 @@
 }
 .journey-entry h4::before { content: ""; position: absolute; inset-block: .18em; inset-inline-start: 0; width: 4px; border-radius: 4px; background: linear-gradient(180deg, var(--orchid), var(--primary)); }
 .journey-milestone { display: inline-block; width: fit-content; padding: .18rem .65rem; border-radius: var(--radius-pill); background: var(--orchid-mist); color: var(--orchid-deep); font-weight: 700; letter-spacing: .01em; }
+
+/* Gợi ý: đi nhanh, bài thở một phút, lối đọc cho người mới */
+.practice-jump { display: flex; flex-wrap: wrap; gap: .5rem; margin-block: clamp(1rem, 3vw, 1.6rem) 0; }
+.practice-jump a {
+  display: inline-flex; align-items: center; min-height: 44px; padding: .35rem 1rem; border: 1px solid var(--gold-line);
+  border-radius: var(--radius-pill); color: var(--foreground); font-size: var(--type-label); font-weight: 650; text-decoration: none;
+}
+.practice-jump a:hover { border-color: var(--gold-deep); background: var(--gold-wash); }
+.practice-jump a:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+#practice, #start-reading, #quiet-moments { scroll-margin-top: 5.5rem; }
+
+.breath-guide { padding: clamp(1.1rem, 3.5vw, 2rem); text-align: center; }
+.breath-guide > p { max-width: 52ch; margin-inline: auto; }
+.breath-guide__stage { display: grid; justify-items: center; gap: .6rem; margin-block: 1.2rem; }
+.breath-guide__orb {
+  width: clamp(7rem, 32vw, 10rem); aspect-ratio: 1; border-radius: 50%;
+  background: radial-gradient(circle at 50% 40%, var(--gold-wash), var(--gold-line));
+  box-shadow: 0 0 0 .6rem color-mix(in srgb, var(--gold-line) 35%, transparent);
+  transform: scale(.7); transition: transform 6s ease-in-out;
+}
+.breath-guide__orb[data-phase="in"] { transform: scale(1.12); transition-duration: 4s; }
+.breath-guide__orb[data-phase="out"] { transform: scale(.7); transition-duration: 6s; }
+.breath-guide__orb[data-phase="idle"] { transition-duration: .6s; }
+.breath-guide__orb[data-motion="off"] { transition: none; }
+.breath-guide__label { font-family: var(--serif); font-size: var(--type-card); min-height: 1.6em; }
+.breath-guide__time { color: var(--muted); font-size: var(--type-caption); }
+.breath-guide__button { margin-inline: auto; }
+.breath-guide__note { margin-top: 1rem; max-width: 56ch; margin-inline: auto; color: var(--muted); font-size: var(--type-caption); }
+
+.practice-path { list-style: none; display: grid; gap: clamp(.8rem, 2.4vw, 1.2rem); padding: 0; margin-block: 1.2rem; }
+.practice-path__item { display: grid; grid-template-columns: 2.6rem minmax(0, 1fr); gap: 1rem; align-items: start; padding: clamp(1rem, 3vw, 1.5rem); position: relative; }
+.practice-path__number {
+  display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+  background: var(--gold-wash); border: 1px solid var(--gold-deep); font-family: var(--serif); font-size: 1.2rem;
+}
+.practice-path__meta { color: var(--muted); font-size: var(--type-caption); }
+.practice-path__item h3 { margin-block: .2rem .4rem; font-size: var(--type-card); }
+.practice-path__item h3 a { text-decoration: none; }
+.practice-path__item h3 a::after { content: ''; position: absolute; inset: 0; border-radius: var(--radius-card); }
+.practice-path__item:focus-within { outline: 2px solid var(--focus); outline-offset: 3px; }
+.practice-path__item p { color: var(--muted); max-width: 62ch; }
+.practice-help { padding: clamp(1rem, 3vw, 1.5rem); }
+.practice-help h3 { font-size: var(--type-card); margin-bottom: .4rem; }
+.practice-next { padding: clamp(1.1rem, 3.5vw, 2rem); }
+.practice-next__links { display: flex; flex-wrap: wrap; align-items: center; gap: .8rem 1.4rem; }
+@media (prefers-reduced-motion: reduce) { .breath-guide__orb { transition: none; } }
