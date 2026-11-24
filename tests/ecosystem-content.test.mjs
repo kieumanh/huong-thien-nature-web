@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
 for (const [language, path, values, titles, disclaimer] of [
-  ['Vietnamese', 'dist/vi/index.html', ['THÂN', 'TÂM', 'TRÍ'], ['Hương Thiền Farm &amp; Botanicals', 'Hương Thiền Eco-Retreat', 'Hương Thiền Academy'], 'chưa mở đăng ký'],
-  ['English', 'dist/en/index.html', ['BODY', 'HEART', 'MIND'], ['Hương Thiền Farm &amp; Botanicals', 'Hương Thiền Eco-Retreat', 'Hương Thiền Academy'], 'registration']
+  ['Vietnamese', 'dist/vi/index.html', ['PHÁP MÔN', 'THIÊN NHIÊN', 'HỖ TRỢ'], ['Pháp môn tu tập', 'Môi trường thiên nhiên từ các farm đối tác', 'Môi trường thực hành, sách vở, đá thanh lọc'], 'chưa mở đăng ký'],
+  ['English', 'dist/en/index.html', ['PRACTICE', 'NATURE', 'SUPPORT'], ['Paths of practice', 'Natural settings from our partner farms', 'Practice spaces, books and cleansing stones'], 'registration']
 ]) {
   test(language + ' page presents the ecosystem as three distinct directions', () => {
     const html = fs.readFileSync(path, 'utf8');
@@ -16,6 +16,9 @@ for (const [language, path, values, titles, disclaimer] of [
     for (const label of [...values, ...titles]) assert(html.includes(label), 'missing: ' + label);
     assert(html.includes(disclaimer));
     assert(!html.includes('eco-pyramid'));
+    assert(!html.includes('Eco-Retreat') && !html.includes('Farm &amp; Botanicals'), 'old three-direction model removed');
+    assert(html.indexOf('id="nature"') < html.indexOf('id="courses"'), 'two practice courses follow the ecosystem block');
+    assert.equal((html.match(/class="home-course"/g) || []).length, 2);
     const story = html.split('<section id="story"')[1]?.split('</section>')[0] || '';
     assert(!story.includes('class="pillar'));
   });

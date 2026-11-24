@@ -1,0 +1,58 @@
+---
+import Arrow from './Arrow.astro';
+import { courseCompare, type CourseKey } from '../data/course-compare';
+import { courses, coursePath, courseImage } from '../data/courses';
+import { journeyPath } from '../data/journey-pages';
+import type { Language } from '../data/site';
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+---
+<section class="shell home-courses" id="courses" aria-labelledby="home-courses-title">
+  <div class="section-heading">
+    <div>
+      <p class="eyebrow">{vi ? 'Khóa thực hành' : 'Practice courses'}</p>
+      <h2 id="home-courses-title">{vi ? 'Hai cách để đi cùng Hương Thiền' : 'Two ways to walk with Hương Thiền'}</h2>
+    </div>
+    <a class="quiet-link" href={journeyPath(lang, 'guidance')}>{vi ? 'So sánh hai khóa' : 'Compare the two courses'} <Arrow /></a>
+  </div>
+  <p class="home-courses__lead">{vi
+    ? 'Khi bạn muốn có người hướng dẫn, ở đây có hai hướng thực hành khác nhau. Chọn theo điều bạn đang cần lúc này, không cần vội.'
+    : 'When you would like guidance, there are two different kinds of practice here. Choose by what you need right now, with no rush.'}</p>
+  <div class="home-courses__grid">
+    {courses.map(course => {
+      const facts = courseCompare[lang].courses[course.id as CourseKey];
+      return <article class="home-course" data-course={course.id}>
+        <div class="home-course__image">
+          <img src={courseImage(course, lang)} alt={course.thumbnail.alt[lang]} width={course.thumbnail.width} height={course.thumbnail.height} loading="lazy" decoding="async" />
+        </div>
+        <div class="home-course__copy">
+          <p class="eyebrow">{course[lang].eyebrow}</p>
+          <h3>{course[lang].title}</h3>
+          <p>{course[lang].description}</p>
+          <p class="home-course__when"><strong>{courseCompare[lang].rows[0]}</strong> {facts.values[0]}</p>
+          <ul class="home-course__chips" role="list">{facts.chips.map(chip => <li>{chip}</li>)}</ul>
+          <a class="button" href={coursePath(lang, course)}>{course[lang].action} <Arrow /></a>
+        </div>
+      </article>;
+    })}
+  </div>
+</section>
+<style>
+  .home-courses { margin-block: clamp(2rem, 6vw, 4rem); }
+  .home-courses__lead { max-width: 62ch; margin: .6rem 0 1.2rem; color: var(--muted); }
+  .home-courses__grid { display: grid; gap: clamp(1rem, 3vw, 1.6rem); }
+  .home-course { display: flex; flex-direction: column; min-width: 0; overflow: hidden; border: 1px solid var(--gold-line); border-radius: var(--radius-feature); background: linear-gradient(160deg, var(--gold-wash), var(--surface-raised) 62%); box-shadow: 0 10px 30px #3b2a0b12; }
+  .home-course__image { aspect-ratio: 1200 / 630; overflow: hidden; background: var(--plum-deep); }
+  .home-course__image img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .home-course[data-course="golden-frequency"] .home-course__image img { object-position: 30% 50%; }
+  .home-course__copy { display: flex; flex: 1; flex-direction: column; align-items: flex-start; gap: .55rem; padding: clamp(1rem, 3.5vw, 1.7rem); }
+  .home-course__copy h3 { margin: 0; font-weight: 500; }
+  .home-course__copy p { margin: 0; }
+  .home-course__when { color: var(--muted); line-height: 1.65; }
+  .home-course__when strong { color: var(--foreground); font-weight: 600; }
+  .home-course__chips { display: flex; flex-wrap: wrap; gap: .4rem; margin: .2rem 0 0; padding: 0; list-style: none; }
+  .home-course__chips li { padding: .2rem .7rem; border: 1px solid var(--gold-line); border-radius: var(--radius-pill); background: var(--surface-raised); font-size: .8rem; font-weight: 600; }
+  .home-course__copy .button { margin-top: auto; align-self: flex-start; }
+  .home-course__chips + .button { margin-top: .9rem; }
+  @media (min-width: 860px) { .home-courses__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+</style>

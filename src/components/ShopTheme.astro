@@ -9,6 +9,7 @@ import ProductCard from './ProductCard.astro';
 import { products, productCategories, shopPath, productPath } from '../data/products';
 import { shopThemes, themeById, themePath, type ThemeId } from '../data/shop-themes';
 import type { Language } from '../data/site';
+import { partnerStones, partnerStonesCopy, partnerStonesSource, partnerPriceLabel } from '../data/partner-stones';
 import '../styles/shop.css';
 interface Props { lang: Language; themeId: ThemeId }
 const { lang, themeId } = Astro.props as Props;
@@ -62,6 +63,19 @@ const image = fallback[0]?.image;
         <a class="button" href={`${contactPath(lang)}?item=${encodeURIComponent(theme.name[lang])}#connect`}>{vi ? 'Gửi lời nhắn' : 'Send a message'} <Arrow /></a>
       </div>
     </section>
+    {themeId === 'da-nang-luong' && <section class="shell partner-stones" id="partner-stones" aria-labelledby="partner-stones-title">
+      <h2 id="partner-stones-title">{partnerStonesCopy[lang].title}</h2>
+      <p class="partner-stones__intro">{partnerStonesCopy[lang].intro}</p>
+      {partnerStones.map(group => <div class="partner-stones__group">
+        <h3>{group[lang]}</h3>
+        <ul class="partner-stones__list">{group.items.map(item => <li>
+          <span class="partner-stones__name">{item[lang]}</span>
+          <span class="partner-stones__price">{partnerPriceLabel(item, lang)}</span>
+          <a class="quiet-link" href={`${contactPath(lang)}?item=${encodeURIComponent(item[lang])}#connect`}>{partnerStonesCopy[lang].ask}</a>
+        </li>)}</ul>
+      </div>)}
+      <p class="partner-stones__note">{partnerStonesCopy[lang].note} <span>{partnerStonesCopy[lang].sourceNote} <a href={partnerStonesSource.site}>{partnerStonesSource.label}</a></span></p>
+    </section>}
     {theme.note && <aside class="shop-note shell" aria-label={vi ? 'Lưu ý' : 'Note'}><p>{theme.note[lang]}</p></aside>}
     <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'ORDERING'}</span><h2>{vi ? 'Bạn muốn đặt hoặc hỏi thêm?' : 'Want to order or ask more?'}</h2><p>{vi ? 'Gửi lời nhắn, chúng tôi xác nhận giá, tình trạng hàng và cách thanh toán trước khi bạn chuyển khoản.' : 'Send a message. We confirm price, availability and payment details before you transfer anything.'}</p></div><a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
   </main>

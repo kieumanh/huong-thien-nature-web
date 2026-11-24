@@ -5,6 +5,3 @@ export const contactEmail = 'huongthiennature@gmail.com';
 export const hotline = '0868499856';
 export const internationalPhone = '+84868499856';
 export const zaloUrl = `https://zalo.me/${hotline}`;
-export const supportHotline = '0388000680';
-export const supportPhone = '+84388000680';
-export const supportZaloUrl = `https://zalo.me/${supportHotline}`;

@@ -4,7 +4,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import ContactForm from './ContactForm.astro';
-import { contactPath, contactEmail, hotline, internationalPhone, supportHotline, supportPhone, supportZaloUrl, zaloUrl } from '../data/contact-channels';
+import { contactPath, contactEmail, hotline, internationalPhone, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
 
 interface Props { lang: Language }
@@ -38,10 +38,11 @@ const schema = {
           ? 'Bạn có thể hỏi về bài tập thiền, sản phẩm trong cửa hàng hoặc gửi góp ý cho nhóm Hương Thiền.'
           : 'Ask us about meditation practices, products in the shop or share your feedback with the Hương Thiền team.'}</p>
         <address class="contact-channels">
-          <a class="zen-card" href={`tel:${internationalPhone}`}><strong>Hotline</strong><span>{hotline}</span></a>
-          <a class="zen-card" href={zaloUrl}><strong>Zalo</strong><span>{hotline}</span></a>
-          <a class="zen-card contact-support" href={`tel:${supportPhone}`}><strong>{vi ? 'Hotline hỗ trợ · Kiều Mạnh' : 'Support hotline · Kiều Mạnh'}</strong><span>{supportHotline}</span></a>
-          <a class="zen-card contact-support" href={supportZaloUrl}><strong>{vi ? 'Zalo hỗ trợ · Kiều Mạnh' : 'Support Zalo · Kiều Mạnh'}</strong><span>{supportHotline}</span></a>
+          <div class="zen-card contact-phone">
+            <strong>Hotline / Zalo · Hương Thiền</strong>
+            <span class="contact-phone__number">{hotline}</span>
+            <span class="contact-phone__actions"><a class="quiet-link" href={`tel:${internationalPhone}`}>{vi ? 'Gọi ngay' : 'Call'}</a><a class="quiet-link" href={zaloUrl}>{vi ? 'Nhắn Zalo' : 'Message on Zalo'}</a></span>
+          </div>
           <a class="zen-card" href={`mailto:${contactEmail}`}><strong>Email</strong><span>{contactEmail}</span></a>
         </address>
       </div>

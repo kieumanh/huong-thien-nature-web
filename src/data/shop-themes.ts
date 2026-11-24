@@ -30,8 +30,8 @@ export const shopThemes: readonly ShopTheme[] = [
     lead: { vi: 'Đá tự nhiên để đặt ở góc thiền, đeo như vòng nhắc mình thở chậm lại, hoặc tặng người thân. Đá là vật đồng hành trong thực hành, không phải phương thuốc.', en: 'Natural stones for a meditation corner, a wrist reminder to slow your breath, or a gift. They accompany practice; they are not a remedy.' },
     door: { vi: 'Vòng tay, đá thô và vật phẩm thiền', en: 'Bracelets, raw stones and meditation objects' },
     note: { vi: 'Ý nghĩa “năng lượng” của đá là niềm tin cá nhân, chưa có bằng chứng khoa học về tác dụng chữa bệnh. Đá không thay thế chăm sóc y tế.', en: 'The “energy” meaning of stones is a personal belief; there is no scientific evidence of healing effects. Stones do not replace medical care.' },
-    emptyTitle: { vi: 'Bộ sưu tập đang được chuẩn bị', en: 'The collection is being prepared' },
-    emptyBody: { vi: 'Chúng tôi chỉ đăng những viên đá đã có ảnh thật và giá rõ ràng. Gửi lời nhắn để được báo khi có hàng.', en: 'We only list stones that have real photographs and a confirmed price. Send a message to be told when stock arrives.' },
+    emptyTitle: { vi: 'Ảnh thật đang được chuẩn bị', en: 'Real photographs are on the way' },
+    emptyBody: { vi: 'Bảng giá tham khảo từ Đá Quý Kim Tự Tháp nằm ngay bên dưới. Ảnh thật và quy cách từng món sẽ được thêm khi sẵn sàng. Gửi lời nhắn để hỏi về viên đá bạn cần.', en: 'The indicative price list from Đá Quý Kim Tự Tháp is just below. Real photographs and details will be added when ready. Send a message to ask about the stone you need.' },
   },
   {
     id: 'sach', accent: 'book', glyph: '📖',

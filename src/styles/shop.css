@@ -163,3 +163,14 @@
   .shop-catalogue .shop-controls { grid-template-columns: minmax(16rem, 26rem) minmax(0, 1fr); align-items: center; }
   .shop-catalogue .shop-filters { flex-wrap: wrap; margin-inline: 0; padding-inline: 0; overflow: visible; }
 }
+
+.partner-stones { margin-block: clamp(1.8rem, 5vw, 3rem); }
+.partner-stones__intro { max-width: 66ch; margin-block: .5rem 1rem; color: var(--muted); line-height: 1.75; }
+.partner-stones__group { margin-top: 1.2rem; }
+.partner-stones__group h3 { font-size: var(--type-card); font-weight: 500; margin-bottom: .4rem; }
+.partner-stones__list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.partner-stones__list li { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: .1rem 1rem; align-items: baseline; padding: .65rem 0; border-bottom: 1px solid var(--border); }
+.partner-stones__price { font-family: var(--serif); font-size: 1.05rem; text-align: end; white-space: nowrap; }
+.partner-stones__list li .quiet-link { grid-column: 1 / -1; min-height: 40px; }
+.partner-stones__note { margin-top: 1rem; max-width: 70ch; color: var(--muted); font-size: var(--type-caption); line-height: 1.7; }
+@media (min-width: 720px) { .partner-stones__list li { grid-template-columns: minmax(0, 1fr) auto auto; } .partner-stones__list li .quiet-link { grid-column: auto; } }

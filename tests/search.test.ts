@@ -31,7 +31,7 @@ test('an introductory meditation query leads with a directly relevant article',(
   const results=searchRecords(buildSearchIndex('vi'),'thiền');
   assert.match(results[0]?.title ?? '',/^Thiền/i);
 });
-test('founder journey and all ecosystem pillars are searchable',()=>{for(const lang of ['vi','en'] as const){const data=buildSearchIndex(lang);assert(searchRecords(data,'Do Thi Kim Huong').some(row=>row.url===journeyPath(lang,'story')));for(const query of ['Farm Botanicals','Eco-Retreat','Academy']){assert(searchRecords(data,query).some(row=>row.url===journeyPath(lang,'ecosystem')));}}});
+test('founder journey and all ecosystem pillars are searchable',()=>{for(const lang of ['vi','en'] as const){const data=buildSearchIndex(lang);assert(searchRecords(data,'Do Thi Kim Huong').some(row=>row.url===journeyPath(lang,'story')));for(const query of lang==='vi'?['Pháp môn tu tập','farm đối tác','đá thanh lọc']:['Paths of practice','partner farms','cleansing stones']){assert(searchRecords(data,query).some(row=>row.url===journeyPath(lang,'ecosystem')));}}});
 
 test('partner names find the localized team page', () => {
   for (const lang of ['vi', 'en'] as const) {

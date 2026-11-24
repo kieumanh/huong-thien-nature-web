@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.15.0',
+    date: '2026-11-24',
+    vi: ['Hệ sinh thái viết lại quanh ba trọng tâm', 'Trang Hệ sinh thái viết lại theo ba trọng tâm: pháp môn tu tập, thiên nhiên từ các farm đối tác, thực hành, sách vở và đá thanh lọc. Trang chủ có thêm phần giới thiệu hai khóa thực hành, Cửa hàng đá năng lượng có bảng giá tham khảo, Liên hệ gộp Hotline và Zalo làm một, và đã sửa khung lạ trong timeline Câu chuyện trên tablet.'],
+    en: ['The ecosystem, rewritten around three focal points', 'The Ecosystem page is rewritten around three focal points: paths of practice, nature from our partner farms, and practice spaces, books and cleansing stones. The home page introduces both practice courses, the energy stones shop gains an indicative price list, Contact merges Hotline and Zalo into one, and the odd frames in the story timeline on tablets are fixed.'],
+  },
+  {
     version: '2.14.4',
     date: '2026-11-24',
     vi: ['Ba lối đọc gọn hơn', 'Tên bài trong ba lối đọc của Tản văn bỏ gạch chân, giữ chấm tròn vàng đầu dòng cho dễ nhận biết.'],

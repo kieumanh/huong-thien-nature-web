@@ -5,16 +5,16 @@ import HomePhoto from './HomePhoto.astro';
 import RiceLandscapes from './RiceLandscapes.astro';
 import { articlePath, journalPath } from '../data/articles';
 import { journeyPath } from '../data/journey-pages';
-import { shopPath } from '../data/products';
+import { themeById, themePath } from '../data/shop-themes';
 import { getCopy, type Language } from '../data/site';
 
 const { lang } = Astro.props as { lang: Language };
 const vi = lang === 'vi';
 const t = getCopy(lang);
 const links = [
-  [shopPath(lang), vi ? 'Ghé cửa hàng' : 'Browse the shop'],
-  [articlePath(lang, 'listening-to-nature'), vi ? 'Thử đi bộ chánh niệm' : 'Try a mindful walk'],
-  [journalPath(lang), vi ? 'Khám phá Tản văn' : 'Explore the journal'],
+  [journeyPath(lang, 'guidance'), vi ? 'Xem khóa thực hành' : 'See the practice courses'],
+  [`${journeyPath(lang, 'ecosystem')}#partnerships`, vi ? 'Gặp farm đối tác' : 'Meet our partner farm'],
+  [themePath(lang, themeById('da-nang-luong')!), vi ? 'Xem đá năng lượng' : 'See energy stones'],
 ];
 ---
 <section class="home-ecosystem home-ecosystem-story" id="nature" aria-labelledby="nature-title">
@@ -23,7 +23,7 @@ const links = [
     <div class="section-heading">
       <div>
         <p class="eyebrow">{vi ? 'Hệ sinh thái' : 'Ecosystem'}</p>
-        <h2 id="nature-title">{vi ? 'Từ bữa cơm đến một cách sống' : 'From a meal to a way of living'}</h2>
+        <h2 id="nature-title">{t.natureTitle}</h2>
       </div>
     </div>
     <p class="lead">{t.natureCopy}</p>
@@ -32,7 +32,7 @@ const links = [
       <h3>{vi ? 'Hiện tại mình có thể tham gia gì?' : 'What can I do right now?'}</h3>
       <p class="ecosystem-note">{t.natureNote}</p>
       <dl class="ecosystem-current">{t.phases.map(([, title, description]) => <div class="zen-card"><dt>{title}</dt><dd>{description}</dd></div>)}</dl>
-      <a class="quiet-link" href={journeyPath(lang, 'ecosystem')}>{vi ? 'Đọc định hướng phát triển' : 'Read our development plans'}</a>
+      <a class="quiet-link" href={journeyPath(lang, 'ecosystem')}>{vi ? 'Khám phá toàn bộ hệ sinh thái' : 'Explore the whole ecosystem'}</a>
     </section>
     <section class="reading-section ecosystem-photos">
       <h3>{vi ? 'Ảnh thiên nhiên và đời sống' : 'Photographs from nature and everyday life'}</h3>

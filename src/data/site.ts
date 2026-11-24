@@ -45,21 +45,21 @@ export const copy = {
       ]
     ],
     "natureEye": "Từ việc tập thiền đến cách mình sống",
-    "natureTitle": "Từ bữa cơm, khu vườn đến việc học",
-    "natureCopy": "Một bữa cơm khiến mình nghĩ đến người trồng rau. Một buổi đi bộ ngoài trời cho mình dịp để ý thân thể đã mỏi đến đâu. Từ những việc nhỏ ấy, mình muốn vun đắp ba hướng cho Hương Thiền Nature. Đó là chăm chút bữa ăn, tạo dịp nghỉ ngơi giữa thiên nhiên và chia sẻ những điều có thể đem ra thực tập.",
-    "natureNote": "Bạn có thể xem sản phẩm trong Cửa hàng. Giá và tồn kho cần được xác nhận trước khi đặt. Eco-Retreat, Academy và chương trình thành viên đang trong giai đoạn chuẩn bị và chưa mở đăng ký.",
+    "natureTitle": "Ba trọng tâm nuôi dưỡng một cách sống",
+    "natureCopy": "Hệ sinh thái Hương Thiền Nature bao quanh ba trọng tâm. Các đối tác xung quanh bổ trợ cho việc nuôi dưỡng, chữa lành và phát triển ba trọng tâm này một cách hài hòa, bền vững.",
+    "natureNote": "Bạn có thể xem sản phẩm trong Cửa hàng. Giá và tồn kho cần được xác nhận trước khi đặt. Các hoạt động trải nghiệm trực tiếp đang được chuẩn bị và chưa mở đăng ký.",
     "natureCards": [
       [
-        "Hương Thiền Farm & Botanicals",
-        "Thân • Định hướng phát triển thực phẩm, thảo mộc và sản phẩm tự nhiên. Từ bữa ăn, ta có thể tìm hiểu nguồn nguyên liệu, người làm nông và mảnh đất nuôi sống mình."
+        "Pháp môn tu tập",
+        "Thiền, chánh niệm, yoga… để nâng cao trí tuệ, chữa lành, khai sáng, nuôi dưỡng tinh thần lẫn sức khỏe thân tâm."
       ],
       [
-        "Hương Thiền Eco-Retreat",
-        "Tâm • Định hướng một khoảng vườn rừng để nghỉ ngơi, đi bộ trong chánh niệm, dùng bữa giản dị và gặp gỡ nhau. Nhóm mong tạo được một nơi để mọi người có thời gian nghỉ ngơi và lắng nghe nhau."
+        "Môi trường thiên nhiên từ các farm đối tác",
+        "Lối sống trong lành, chậm rãi, hòa điệu cùng đất, nắng và cây cỏ, cùng thực phẩm sạch nuôi dưỡng thân lẫn tâm."
       ],
       [
-        "Hương Thiền Academy",
-        "Trí • Học liệu và lộ trình về thiền, chánh niệm, sống thuận tự nhiên. Mỗi chủ đề sẽ đi cùng một bài tập để người học tự quan sát và đặt câu hỏi."
+        "Môi trường thực hành, sách vở, đá thanh lọc",
+        "Những phương tiện nâng đỡ trên đường tu tập: thanh lọc, bảo hộ, nâng cao tinh thần, để cùng nhau vượt qua thử thách mà không nản lòng."
       ]
     ],
     "peopleEye": "Người sáng lập và đồng sáng lập",
@@ -152,21 +152,21 @@ export const copy = {
       ]
     ],
     "natureEye": "From sitting practice to daily life",
-    "natureTitle": "The table, the garden and the place we learn",
-    "natureCopy": "A meal brings to mind the people who grew it. A walk outdoors gives me a chance to notice how tired my body has become. These small things shape three directions for Hương Thiền Nature: caring for what we eat, making room to rest in nature, and sharing what we can put into practice.",
-    "natureNote": "The shop lists products. Please confirm prices and availability before ordering. The Eco-Retreat, Academy and membership programme are still being planned and are not open for registration.",
+    "natureTitle": "Three focal points that nourish a way of living",
+    "natureCopy": "The Hương Thiền Nature ecosystem is built around three focal points. The partners around it help nurture, heal and develop these points in a harmonious and lasting way.",
+    "natureNote": "The shop lists products. Please confirm prices and availability before ordering. In-person activities are still being prepared and are not open for registration.",
     "natureCards": [
       [
-        "Hương Thiền Farm & Botanicals",
-        "Body • Develop food, herbs and natural products. Through a meal, learn where ingredients come from and value the people and soil that sustain us."
+        "Paths of practice",
+        "Meditation, mindfulness, yoga and more, to deepen wisdom, heal, awaken, and strengthen spirit and the health of body and mind."
       ],
       [
-        "Hương Thiền Eco-Retreat",
-        "Heart • Envision a forest garden for rest, mindful walks, simple meals and time together. Carry some of that rest back into ordinary days."
+        "Natural settings from our partner farms",
+        "A clean, unhurried way of life in harmony with soil, sunlight and plants, with clean food that nourishes body and mind."
       ],
       [
-        "Hương Thiền Academy",
-        "Mind • Learning materials and paths in meditation, mindfulness and nature-connected living. Join study with practice, questions and observation, so each person can keep learning for themselves."
+        "Practice spaces, books and cleansing stones",
+        "Supportive companions on the path: cleansing, protecting and lifting the spirit, so we can help each other through challenge without losing heart."
       ]
     ],
     "peopleEye": "The founders",

@@ -13,7 +13,9 @@ import BreathGuide from '../../components/BreathGuide.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
 import { ecosystemVision } from '../../data/ecosystem-vision';
-import { articlePath } from '../../data/articles';
+import { articlePath, journalPath } from '../../data/articles';
+import { themeById, themePath } from '../../data/shop-themes';
+import Arrow from '../../components/Arrow.astro';
 import { beginnerArticles } from '../../data/home';
 import { contactPath } from '../../data/contact-channels';
 import { ecosystemPartnerJourney, journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
@@ -34,6 +36,10 @@ const t = getCopy(lang);
 const info = journeyPages[page][lang];
 const alternatePath = journeyPath(vi ? 'en' : 'vi', page);
 const vision = ecosystemVision[lang];
+const ecoLinks: Record<string, string> = {
+  guidance: journeyPath(lang, 'guidance'), practice: journeyPath(lang, 'practice'), partnerships: '#partnerships',
+  food: themePath(lang, themeById('thuc-pham-sach')!), stones: themePath(lang, themeById('da-nang-luong')!), journal: journalPath(lang),
+};
 ---
 <BaseLayout {lang} title={`${info.heading} | Hương Thiền Nature`} description={info.description} {alternatePath}
   pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
@@ -103,46 +109,52 @@ const vision = ecosystemVision[lang];
     </>}
 
     {page === 'ecosystem' && <>
-      <section class="journey-section" id="nature" aria-labelledby="vision-title">
-        <h2 id="vision-title">{vision.question}</h2>
-        <p>{vision.introduction}</p>
-        <EcosystemIllustration {...vision.loop} variant="loop" />
+      <section class="journey-section eco-intro" id="eco-intro" aria-labelledby="eco-focus-title">
+        <p class="lead eco-intro__lead">{vision.intro}</p>
+        <h2 id="eco-focus-title">{vision.focusTitle}</h2>
+        <ol class="eco-focus-list">
+          {vision.focus.map((item, index) => <li class={`eco-focus zen-card eco-focus--${index + 1}`} id={item.id}>
+            <span class="eco-focus__number" aria-hidden="true">{index + 1}</span>
+            <div>
+              <p class="eco-focus__tagline">{item.tagline}</p>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <p class="eco-focus__links">{item.links.map(([key, label]) => <a class="quiet-link" href={ecoLinks[key]}>{label} <Arrow /></a>)}</p>
+            </div>
+          </li>)}
+        </ol>
+        <p class="eco-note">{vision.note}</p>
       </section>
-      <section class="journey-section" aria-labelledby="directions-title">
-        <h2 id="directions-title">{vision.pathsTitle}</h2>
-        <div class="vision-grid">
-          {vision.paths.map((path, index) => <article class="zen-card vision-card">
-            <h3>{path.title}</h3>
-            <p><strong>{path.focus}</strong></p>
-            <p>{path.text}</p>
-            {index === 0 && <a class="quiet-link" href="#partnerships">{vi ? 'Gặp đối tác nông nghiệp' : 'Meet our farming partner'}</a>}
-          </article>)}
-        </div>
+      <section class="journey-section" aria-labelledby="eco-loop-title">
+        <h2 id="eco-loop-title" class="sr-only">{vision.loop.title}</h2>
+        <EcosystemIllustration {...vision.loop} variant="loop" />
       </section>
       <AlbumStrip {lang} id="garden-moments" photos={['veggie-bed-trellis', 'wooden-house', 'flowers-red-path', 'toddler-squat']}
         title={vi ? 'Từ khu vườn Gửi Yêu Thương Vào Đất' : 'From the Gửi Yêu Thương Vào Đất garden'}
-        intro={vi ? 'Hình ảnh thật từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, giàn tre, căn nhà gỗ và lối đất đỏ.' : 'Real photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, bamboo trellises, a timber house and a red-earth path.'} />
+        intro={vi ? 'Hình ảnh thật từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, giàn tre, căn nhà gỗ và lối đất đỏ.' : 'Real photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, a bamboo trellis, a wooden house and a red-earth path.'} />
       <section class="journey-section" id="partnerships" aria-labelledby="partnerships-title">
-        <h2 id="partnerships-title">{vi ? 'Hành trình kết nối đối tác' : 'How our partnerships took shape'}</h2>
-        <p>{vi ? 'Hai mối hợp tác giúp Hương Thiền Nature đưa việc chăm đất, sống xanh và kinh nghiệm của những người đồng hành vào thực tế.' : 'Two partnerships bring natural farming, greener living and the experience of trusted advisers into Hương Thiền Nature.'}</p>
+        <h2 id="partnerships-title">{vision.partnersTitle}</h2>
+        <p>{vision.partnersIntro}</p>
         <div class="partner-journey-grid">
           {ecosystemPartnerJourney.map(({ partner, date, [lang]: entry }) => <article class="zen-card vision-card">
             <p class="eyebrow">{date ? <time datetime={date}>{entry.milestone}</time> : entry.milestone}</p>
             <h3>{partner.name}</h3>
             <p><strong>{entry.affiliation}</strong></p>
             <p>{entry.description}</p>
+            <p class="eco-supports">{(vision.supports as Record<string, string>)[partner.name]}</p>
             <a class="quiet-link" href={partner.site}>{partner.label}</a>
           </article>)}
         </div>
       </section>
-      <section class="journey-section" aria-labelledby="advantages-title">
-        <h2 id="advantages-title">{vision.advantagesTitle}</h2>
-        <dl class="vision-principles">{vision.advantages.map(([title, detail]) => <div><dt>{title}</dt><dd>{detail}</dd></div>)}</dl>
+      <section class="journey-section eco-closing" aria-labelledby="eco-closing-title">
+        <h2 id="eco-closing-title">{vision.closingTitle}</h2>
+        <p class="eco-closing__text">{vision.closing}</p>
+        <EcosystemIllustration {...vision.start} variant="roadmap" />
       </section>
-      <section class="journey-section" id="path" aria-label={vision.roadmap.title}>
-        <EcosystemIllustration {...vision.roadmap} variant="roadmap" />
-        <p>{t.natureNote}</p>
-        <a class="quiet-link" href={`/${lang}/#nature`}>{vi ? 'Xem ba quỹ đạo trên trang chủ' : 'See the three orbits on the homepage'}</a>
+      <section class="journey-section eco-cta zen-card" aria-labelledby="eco-cta-title">
+        <h2 id="eco-cta-title">{vision.cta.title}</h2>
+        <p>{vision.cta.text}</p>
+        <p class="eco-cta__actions"><a class="button" href={contactPath(lang)}>{vision.cta.action} <Arrow /></a> <a class="quiet-link" href={`/${lang}/#nature`}>{vi ? 'Xem tóm tắt trên trang chủ' : 'See the summary on the home page'}</a></p>
       </section>
     </>}
 

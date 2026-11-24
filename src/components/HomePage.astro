@@ -1,6 +1,7 @@
 ---
 import { contactPath } from '../data/contact-channels';
 import EcosystemOverview from './EcosystemOverview.astro';
+import HomeCourses from './HomeCourses.astro';
 import '../styles/story-home.css';
 import '../styles/hybrid-nature.css';
 import { practicePhoto } from '../data/editorial-illustrations';
@@ -29,8 +30,8 @@ const vi = lang === 'vi';
 const t = getCopy(lang);
 const alternatePath = `/${vi ? 'en' : 'vi'}/`;
 const description = vi
-  ? 'Hương Thiền Nature là dự án về thiền định, chánh niệm và sống thuận tự nhiên do Đỗ Thị Kim Hương sáng lập. Bắt đầu bằng một phút thực hành hoặc tìm hiểu hệ sinh thái Thân, Tâm và Trí.'
-  : 'Hương Thiền Nature is a project for meditation, mindfulness and living closer to nature, founded by Đỗ Thị Kim Hương. Begin with a minute of practice or explore its three areas: Body, Heart and Mind.';
+  ? 'Hương Thiền Nature là dự án về thiền định, chánh niệm và sống thuận tự nhiên do Đỗ Thị Kim Hương sáng lập. Bắt đầu bằng một phút thực hành hoặc tìm hiểu ba trọng tâm của hệ sinh thái.'
+  : 'Hương Thiền Nature is a project for meditation, mindfulness and living closer to nature, founded by Đỗ Thị Kim Hương. Begin with a minute of practice or explore the three focal points of its ecosystem.';
 const practicePath = journeyPath(lang, 'practice');
 const storyPath = journeyPath(lang, 'story');
 const teamPath = journeyPath(lang, 'team');
@@ -73,6 +74,8 @@ const welcome = homeEmpathy(lang, {
     </section>
 
     <EcosystemOverview {lang} />
+
+    <HomeCourses {lang} />
 
     <section class="shell material-practice" id="practice" aria-labelledby="practice-title">
       <div class="material-practice__copy">
