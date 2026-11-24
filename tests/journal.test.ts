@@ -65,7 +65,7 @@ test('empathy blocks speak to real difficulties, offer a step and always include
   }
 });
 
-test('built pages: journal has search, sort, topic chips with icons, an open-page feature and the garden; empathy anchors resolve', () => {
+test('built pages: journal has search, sort, topic chips with icons, an open-page feature; empathy anchors resolve', () => {
   for (const lang of langs) {
     if (!existsSync(dist(`${journalPath(lang)}index.html`))) continue;
     const journal = readFileSync(dist(`${journalPath(lang)}index.html`), 'utf8');
@@ -78,7 +78,7 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
     assert.equal((journal.match(/data-journal-card/g) ?? []).length, articles.length, `${lang}: one card per article`);
     assert.equal((journal.match(/data-topic="[a-z-]+"/g) ?? []).length - journalTopics.length - 1, articles.length, 'each card carries its topic');
     for (const key of ['data-slug', 'data-keywords', 'data-minutes', 'data-curated']) assert.equal((journal.match(new RegExp(`${key}=`, 'g')) ?? []).length, articles.length, `${lang}: ${key} on every card`);
-    assert.ok(journal.includes('data-journal-pages') && journal.includes('journal-book') && journal.includes('data-garden'), `${lang}: pagination, open-page feature and garden`);
+    assert.ok(journal.includes('data-journal-pages') && journal.includes('journal-book'), `${lang}: pagination and open-page feature`);
     assert.ok(!journal.includes('class="journal-number"'), 'numbers on cards are gone');
     assert.ok(journal.includes('"@type":"CollectionPage"') && journal.includes('"@type":"BreadcrumbList"'), `${lang}: structured data`);
     assert.ok(articles.length > 9, 'more than one page of articles');
@@ -90,7 +90,7 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
   }
   if (!existsSync(dist('/vi/tan-van/index.html'))) return;
   const vi = readFileSync(dist('/vi/tan-van/index.html'), 'utf8');
-  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên', 'Khu vườn của tôi', 'Thời gian đọc ngắn', 'Bài viết được tuyển chọn']) assert.ok(vi.includes(line), line);
+  for (const line of ['Một khoảng lặng giữa dòng đời.', 'Có những điều không cần vội vã để hiểu.', 'như cách ta bắt đầu lại từ một hơi thở.', 'Một bài viết hữu duyên', 'Thời gian đọc ngắn', 'Bài viết được tuyển chọn']) assert.ok(vi.includes(line), line);
 });
 
 test('built article pages: reading mode, save, share, pull quote, pause, closing line, neighbours and at most three related pieces', () => {
@@ -99,7 +99,7 @@ test('built article pages: reading mode, save, share, pull quote, pause, closing
       const file = dist(`${articlePath(lang, article.slug)}index.html`);
       if (!existsSync(file)) continue;
       const page = readFileSync(file, 'utf8');
-      assert.ok(page.includes('data-reading-toggle') && page.includes('data-reading-bar') && page.includes('data-save') && page.includes('data-share'), `${article.slug}/${lang}: reading and garden tools`);
+      assert.ok(page.includes('data-reading-toggle') && page.includes('data-reading-bar') && page.includes('data-share'), `${article.slug}/${lang}: reading and share tools`);
       assert.equal((page.match(/class="article-closing"/g) ?? []).length, 1, `${article.slug}/${lang}: closing line`);
       assert.ok(page.includes(lang === 'vi' ? 'Chúc bạn có một ngày đủ bình yên để lắng nghe chính mình.' : 'May your day be peaceful enough to hear yourself.'));
       assert.equal((page.match(/rel="prev"/g) ?? []).length + (page.match(/rel="next"/g) ?? []).length, 2, `${article.slug}/${lang}: previous and next`);

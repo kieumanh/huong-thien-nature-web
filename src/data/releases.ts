@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.16.1',
+    date: '2026-11-24',
+    vi: ['Gọn lại Tản văn và nút Liên hệ', 'Gỡ mục "Khu vườn của tôi" cùng nút Lưu và nhắc đọc tiếp. Nút "Liên hệ" ở Trang chủ được canh giữa.'],
+    en: ['A simpler Journal and a centred Contact button', 'The “My garden” section, the Save button and the resume notice are removed. The Contact button on the home page is now centred.'],
+  },
+  {
     version: '2.16.0',
     date: '2026-11-24',
     vi: ['Tản văn: một khoảng lặng giữa dòng đời', 'Trang Tản văn có trang sách mở cho bài nổi bật, tìm kiếm và sắp xếp, "Một bài viết hữu duyên". Mỗi bài có chế độ Đọc trong tĩnh lặng, Lưu vào khu vườn, Chia sẻ và bài trước/sau. "Khu vườn của tôi" chỉ nằm trên thiết bị của bạn, không cần tài khoản.'],

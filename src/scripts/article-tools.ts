@@ -1,7 +1,7 @@
-// Article page: "Đọc trong tĩnh lặng" reading mode, save to "Khu vườn của tôi", share, resume reading.
+// Article page: "Đọc trong tĩnh lặng" reading mode and share.
 // Reading mode is never switched on automatically: it starts only when the reader asks for it and is not remembered as "on".
 // Only the text size and background the reader chose are remembered, on this device.
-import { loadGarden, loadPrefs, onGardenChange, recordProgress, savePrefs, sizeSteps, toggleSaved, type ReadingPrefs } from './garden-store';
+import { loadPrefs, savePrefs, sizeSteps, type ReadingPrefs } from './garden-store';
 
 const root = document.documentElement;
 const en = root.lang === 'en';
@@ -18,28 +18,6 @@ const say = (message: string) => {
 };
 
 if (article && slug) {
-  // ---- Save to the garden
-  const saveButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-save]')];
-  const syncSave = () => {
-    const saved = loadGarden().saved.includes(slug);
-    for (const button of saveButtons) {
-      button.setAttribute('aria-pressed', String(saved));
-      const label = button.querySelector('[data-save-label]');
-      if (label) label.textContent = (saved ? button.dataset.labelOn : button.dataset.labelOff) ?? '';
-    }
-  };
-  for (const button of saveButtons) {
-    button.addEventListener('click', () => {
-      const wanted = toggleSaved(slug);
-      syncSave();
-      const stored = loadGarden().saved.includes(slug) === wanted;
-      if (!stored) say(en ? 'This browser is blocking storage, so the article could not be saved.' : 'Trình duyệt đang chặn lưu trữ nên chưa lưu được bài này.');
-      else say(wanted ? (en ? 'Saved to my garden.' : 'Đã lưu vào khu vườn của bạn.') : (en ? 'Removed from my garden.' : 'Đã bỏ khỏi khu vườn của bạn.'));
-    });
-  }
-  onGardenChange(syncSave);
-  syncSave();
-
   // ---- Share: the system share sheet when there is one, otherwise copy the link.
   for (const button of document.querySelectorAll<HTMLButtonElement>('[data-share]')) {
     button.addEventListener('click', async () => {
@@ -132,43 +110,4 @@ if (article && slug) {
     });
   }
 
-  // ---- Reading progress and resume (this device only)
-  const span = () => {
-    const rect = article.getBoundingClientRect();
-    const start = rect.top + window.scrollY;
-    return { start, end: Math.max(start + 1, start + rect.height - window.innerHeight) };
-  };
-  const current = () => {
-    const { start, end } = span();
-    return Math.max(0, Math.min(100, Math.round(((window.scrollY - start) / (end - start)) * 100)));
-  };
-  const before = loadGarden().history[slug];
-  recordProgress(slug, before?.pct ?? 0); // opened: remembered as visited without losing where the reader got to
-  let lastSaved = before?.pct ?? 0;
-  let timer: number | undefined;
-  const flush = () => {
-    window.clearTimeout(timer);
-    const pct = current();
-    if (Math.abs(pct - lastSaved) >= 1 && (window.scrollY > 0 || lastSaved === 0)) { lastSaved = pct; recordProgress(slug, pct); }
-  };
-  window.addEventListener('scroll', () => { window.clearTimeout(timer); timer = window.setTimeout(flush, 1200); }, { passive: true });
-  document.addEventListener('visibilitychange', () => { if (document.visibilityState === 'hidden') flush(); });
-  window.addEventListener('pagehide', flush);
-
-  const toast = document.querySelector<HTMLElement>('[data-resume]');
-  const toastText = document.querySelector<HTMLElement>('[data-resume-text]');
-  if (toast && toastText && before && before.pct >= 4 && before.pct < 96 && !location.hash && window.scrollY < 200) {
-    toastText.textContent = `${toast.dataset.prefix ?? ''} ${before.pct}%.`;
-    toast.hidden = false;
-    const hide = () => { toast.hidden = true; window.removeEventListener('scroll', onScroll); window.clearTimeout(hideTimer); };
-    const onScroll = () => { if (window.scrollY > 320) hide(); };
-    const hideTimer = window.setTimeout(hide, 16000);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    toast.querySelector('[data-resume-go]')?.addEventListener('click', () => {
-      const { start, end } = span();
-      window.scrollTo({ top: start + ((end - start) * before.pct) / 100, behavior: reduced() ? 'auto' : 'smooth' });
-      hide();
-    });
-    toast.querySelector('[data-resume-top]')?.addEventListener('click', hide);
-  }
 }

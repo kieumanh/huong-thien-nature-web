@@ -1,4 +1,4 @@
-"""Tản văn in a real browser: search, sort, topics, "a chance encounter", the garden, reading mode, resume, privacy, axe and layout."""
+"""Tản văn in a real browser: search, sort, topics, "a chance encounter", reading mode, privacy, axe and layout."""
 from pathlib import Path
 import os, shutil, json
 from playwright.sync_api import sync_playwright
@@ -124,25 +124,15 @@ with sync_playwright() as p:
 
     # ---------- Article: tools, save, garden ----------
     page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
-    page.wait_for_function('!!document.querySelector("[data-save]")')
+    page.wait_for_function('!!document.querySelector("[data-share]")')
     assert page.locator('.article-pullquote').count() == 1 and page.locator('.article-pause').count() >= 1
     assert page.locator('.article-closing').inner_text() == 'Chúc bạn có một ngày đủ bình yên để lắng nghe chính mình.'
     assert page.locator('.article-pager a').count() == 2
     assert page.locator('.related-articles [data-journal-card]').count() <= 3
-    page.locator('.article-tools [data-save]').click()
-    assert page.locator('.article-tools [data-save]').get_attribute('aria-pressed') == 'true'
-    assert page.locator('.article-end [data-save]').get_attribute('aria-pressed') == 'true', 'both save buttons stay in step'
-    assert 'Đã lưu' in page.locator('.article-tools [data-save]').inner_text()
-    garden = json.loads(stored(page)[0])
-    assert garden['saved'] == ['healing-as-coming-home']
+    assert page.locator('[data-save]').count() == 0, 'no save buttons'
     page.goto(base + listing('vi'), wait_until='domcontentloaded')
-    page.wait_for_function('document.querySelectorAll("[data-garden-saved] li").length > 0')
-    assert page.locator('[data-journal-saved]:not([hidden])').count() == 1
-    assert 'Chữa lành' in page.locator('[data-garden-saved]').inner_text()
-    page.locator('.journal-garden__remove').click()
-    assert page.locator('[data-journal-saved]:not([hidden])').count() == 0
-    assert json.loads(stored(page)[0])['saved'] == []
-    report.append('Article: pull quote, pause, closing line, previous/next, at most three related; saving updates both buttons, the garden and the card badge, and removing clears it')
+    assert page.locator('[data-garden]').count() == 0 and page.locator('#khu-vuon').count() == 0, 'the garden section is gone'
+    report.append('Article: pull quote, pause, closing line, previous/next, at most three related; no save buttons and no garden section')
 
     # ---------- Reading mode ----------
     page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
@@ -180,31 +170,6 @@ with sync_playwright() as p:
     page.locator('[data-reading-exit]').click()
     report.append('Reading mode: opt-in only, hides menu/footer/related, size and three backgrounds work and are remembered, Esc and Exit leave and return focus, no animation, axe clean in all themes, single music player kept')
 
-    # ---------- Resume reading, history, clearing ----------
-    page.evaluate('window.scrollTo({top: document.documentElement.scrollHeight * 0.45, behavior: "instant"})')
-    page.wait_for_timeout(1700)
-    garden = json.loads(stored(page)[0])
-    pct = garden['history']['healing-as-coming-home']['pct']
-    assert 20 <= pct <= 80, pct
-    page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
-    page.wait_for_function('!document.querySelector("[data-resume]").hidden')
-    assert str(pct) in page.locator('[data-resume-text]').inner_text()
-    page.locator('[data-resume-go]').click()
-    page.wait_for_timeout(300)
-    assert page.evaluate('scrollY') > 300
-    page.goto(base + listing('vi'), wait_until='domcontentloaded')
-    page.wait_for_function('document.querySelector("[data-garden-continue] a")')
-    assert 'Chữa lành' in page.locator('[data-garden-continue]').inner_text()
-    clear = page.locator('[data-garden-clear-history]')
-    clear.click()
-    assert 'lần nữa' in clear.inner_text() and json.loads(stored(page)[0])['history'], 'first press only asks'
-    clear.click()
-    assert json.loads(stored(page)[0])['history'] == {}
-    page.locator('[data-garden-clear-all]').click()
-    page.locator('[data-garden-clear-all]').click()
-    assert stored(page) == [None, None], 'clear all leaves nothing on this device'
-    report.append('Resume and history: progress remembered, the notice returns to the place, "continue reading" shows it, clearing asks twice and then really removes the history and every stored key')
-
     # ---------- Privacy: nothing leaves the device ----------
     foreign = [url for method, url in requests if not url.startswith(base)]
     posts = [url for method, url in requests if method != 'GET']
@@ -225,10 +190,8 @@ with sync_playwright() as p:
     copied = page.evaluate('navigator.clipboard.readText()')
     assert copied.endswith('/en/journal/healing-as-coming-home/'), copied
     assert page.locator('.article-closing').inner_text() == 'May your day be peaceful enough to hear yourself.'
-    page.locator('.article-tools [data-save]').click()
-    assert page.locator('.article-tools [data-save]').inner_text().strip() == 'Saved to my garden'
     assert page.evaluate('document.documentElement.scrollWidth <= innerWidth')
-    report.append('English article on a phone: share falls back to copying the canonical link, save and closing line are translated, no horizontal scroll')
+    report.append('English article on a phone: share falls back to copying the canonical link, closing line is translated, no horizontal scroll')
     context.close()
 
     # ---------- Accessibility (axe) on the default views ----------
@@ -250,7 +213,7 @@ with sync_playwright() as p:
     page = context.new_page()
     page.goto(base + listing('vi'), wait_until='domcontentloaded')
     assert page.locator('#journal-grid [data-journal-card]:visible').count() == total, 'every article stays visible without JavaScript'
-    assert page.locator('.journal-sort').is_hidden() and page.locator('[data-garden]').is_hidden() and page.locator('[data-chance-button]').is_hidden()
+    assert page.locator('.journal-sort').is_hidden() and page.locator('[data-chance-button]').is_hidden()
     assert page.locator('form[role="search"]').get_attribute('action') == '/vi/timkiem/'
     page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
     assert page.locator('.article-tools').is_hidden() and page.locator('.article-body section').count() >= 3

@@ -1,7 +1,6 @@
-// Tản văn listing: search, sort, topic filter, 9-per-page pagination, "Một bài viết hữu duyên" and "Khu vườn của tôi".
+// Tản văn listing: search, sort, topic filter, 9-per-page pagination and "Một bài viết hữu duyên".
 // Progressive enhancement: without JavaScript every article stays visible and the search form opens the site-wide search.
 import { normalizeSearch } from './search-engine';
-import { clearAll, clearHistory, loadGarden, onGardenChange, toggleSaved, unfinished } from './garden-store';
 
 const PAGE_SIZE = 9;
 const root = document.documentElement;
@@ -195,9 +194,7 @@ if (grid && group && buttons.length && cards.length && count && nav) {
   const chanceOpen = document.querySelector<HTMLAnchorElement>('[data-chance-open]');
   let lastChance = '';
   const suggest = () => {
-    const garden = loadGarden();
-    const unread = cards.filter(card => !garden.history[slugOf(card)]);
-    const pool = (unread.length ? unread : cards).filter(card => slugOf(card) !== lastChance);
+    const pool = cards.filter(card => slugOf(card) !== lastChance);
     const pick = (pool.length ? pool : cards)[Math.floor(Math.random() * (pool.length || cards.length))];
     if (!pick || !chanceBox || !chanceLink || !chanceMeta || !chanceOpen) return;
     lastChance = slugOf(pick);
@@ -210,105 +207,6 @@ if (grid && group && buttons.length && cards.length && count && nav) {
   };
   chanceButton?.addEventListener('click', suggest);
   document.querySelector<HTMLButtonElement>('[data-chance-again]')?.addEventListener('click', suggest);
-
-  // ---- Khu vườn của tôi
-  const garden = document.querySelector<HTMLElement>('[data-garden]');
-  const continueBox = garden?.querySelector<HTMLElement>('[data-garden-continue]');
-  const savedList = garden?.querySelector<HTMLElement>('[data-garden-saved]');
-  const savedCount = garden?.querySelector<HTMLElement>('[data-garden-count]');
-  const status = garden?.querySelector<HTMLElement>('[data-garden-status]');
-  const bySlug = new Map(cards.map(card => [slugOf(card), card]));
-
-  const renderGarden = () => {
-    const data = loadGarden();
-    for (const card of cards) {
-      const badge = card.querySelector<HTMLElement>('[data-journal-saved]');
-      if (badge) badge.hidden = !data.saved.includes(slugOf(card));
-    }
-    if (!garden || !continueBox || !savedList) return;
-    // Continue reading
-    continueBox.replaceChildren();
-    const slug = unfinished(data);
-    const card = slug ? bySlug.get(slug) : undefined;
-    if (slug && card) {
-      const title = document.createElement('p');
-      title.className = 'journal-garden__title';
-      const link = document.createElement('a');
-      link.href = linkOf(card)?.getAttribute('href') ?? '#';
-      link.textContent = titleOf(card);
-      title.append(link);
-      const meta = document.createElement('p');
-      meta.className = 'journal-garden__meta';
-      const pct = data.history[slug]?.pct ?? 0;
-      meta.textContent = `${metaOf(card).split(' · ').slice(1).join(' · ')} · ${en ? `${pct}% read` : `đã đọc ${pct}%`}`.replace(/^ · /, '');
-      const bar = document.createElement('div');
-      bar.className = 'journal-garden__bar';
-      bar.setAttribute('aria-hidden', 'true');
-      const fill = document.createElement('span');
-      fill.style.width = `${pct}%`;
-      bar.append(fill);
-      continueBox.append(title, bar, meta);
-    } else {
-      const note = document.createElement('p');
-      note.className = 'journal-garden__empty';
-      note.textContent = garden.dataset.msgNoneContinue ?? '';
-      continueBox.append(note);
-    }
-    // Saved pieces
-    savedList.replaceChildren();
-    const saved = data.saved.filter(item => bySlug.has(item));
-    if (savedCount) savedCount.textContent = saved.length ? `(${saved.length})` : '';
-    if (!saved.length) {
-      const item = document.createElement('li');
-      item.className = 'journal-garden__empty';
-      item.textContent = garden.dataset.msgNoneSaved ?? '';
-      savedList.append(item);
-    }
-    for (const id of saved) {
-      const source = bySlug.get(id)!;
-      const item = document.createElement('li');
-      const link = document.createElement('a');
-      link.href = linkOf(source)?.getAttribute('href') ?? '#';
-      link.textContent = titleOf(source);
-      const small = document.createElement('small');
-      small.textContent = metaOf(source);
-      const remove = document.createElement('button');
-      remove.type = 'button';
-      remove.className = 'journal-garden__remove';
-      remove.textContent = en ? 'Remove' : 'Bỏ lưu';
-      remove.setAttribute('aria-label', `${en ? 'Remove from my garden' : 'Bỏ lưu khỏi khu vườn'}: ${titleOf(source)}`);
-      remove.addEventListener('click', () => { toggleSaved(id); });
-      const text = document.createElement('span');
-      text.append(link, small);
-      item.append(text, remove);
-      savedList.append(item);
-    }
-  };
-
-  const armed = new WeakMap<HTMLButtonElement, { label: string; timer: number }>();
-  const confirmed = (button: HTMLButtonElement, action: () => void, message: string | undefined) => {
-    button.addEventListener('click', () => {
-      const pending = armed.get(button);
-      if (!pending) {
-        const label = button.textContent ?? '';
-        button.textContent = garden?.dataset.confirm ?? label;
-        const timer = window.setTimeout(() => { button.textContent = label; armed.delete(button); }, 6000);
-        armed.set(button, { label, timer });
-        return;
-      }
-      window.clearTimeout(pending.timer);
-      button.textContent = pending.label;
-      armed.delete(button);
-      action();
-      if (status) status.textContent = message ?? '';
-    });
-  };
-  const historyButton = garden?.querySelector<HTMLButtonElement>('[data-garden-clear-history]');
-  const allButton = garden?.querySelector<HTMLButtonElement>('[data-garden-clear-all]');
-  if (historyButton) confirmed(historyButton, clearHistory, garden?.dataset.msgHistory);
-  if (allButton) confirmed(allButton, clearAll, garden?.dataset.msgCleared);
-  onGardenChange(renderGarden);
-  renderGarden();
 
   // ---- Initial state from the address bar
   const params = new URLSearchParams(location.search);
