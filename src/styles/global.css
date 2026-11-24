@@ -116,7 +116,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   outline-offset: 2px;
 }
 .button:not(:disabled):active, .nav-links a:active { box-shadow: inset 0 0 0 2px currentColor; }
-.js .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; padding: .65rem var(--site-gutter) .9rem; max-height: calc(100dvh - 68px); overflow-y: auto; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-card); }
+.js .nav-links { display: none; position: absolute; top: 100%; inset-inline: 0; padding: 1rem var(--site-gutter) 1rem; max-height: calc(100dvh - 68px); overflow-y: auto; background: var(--surface); border-bottom: 1px solid var(--border); box-shadow: var(--shadow-card); }
 .js .nav-links.open { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: .3rem; }
 @media (max-width: 1279px) {
   .nav-actions {
@@ -140,7 +140,9 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 }
 @media (max-width: 759px) {
   .js .topbar { position: relative; }
-  .js .nav-links.open { position: static; padding: .6rem 0; border: 0; border-top: 1px solid var(--border); box-shadow: none; }
+  /* The open menu sits in the header flow: keep air above the divider so it never touches the action pill or its focus ring. */
+  .js .nav-links.open { position: static; margin-top: .7rem; padding: 1rem 0 .7rem; border: 0; border-top: 1px solid var(--border); box-shadow: none; }
+  .js .nav-links.open a { padding-inline: .75rem; }
 }
 @media (max-width: 374px) {
   .nav { width: calc(100% - 1.5rem); column-gap: .25rem; }

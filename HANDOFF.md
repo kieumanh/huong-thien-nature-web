@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.15.1. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-24, phiên bản 2.15.2. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -27,6 +27,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.2: trang Gợi ý: thở một phút có hướng dẫn, lối đọc 3 bước, nút đi nhanh, lời mời cuối trang |
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
+| 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
 | 24/11 | 2.15.1: vòng quỹ đạo Trang chủ trở lại Thân/Tâm/Trí, trung tâm "Nhận biết"; Liên hệ có 2 thẻ (Hương Thiền 0868499856, Kiều Mạnh 0388000680); bỏ dòng 115 dưới khối thở theo yêu cầu chủ dự án; kimtuthap.vn đã được chủ dự án xác nhận là website thứ hai của đối tác |
 | 24/11 | 2.15.0: Hệ sinh thái viết lại quanh 3 trọng tâm (Pháp môn / Thiên nhiên từ farm đối tác / Thực hành-sách-đá); Trang chủ thêm khối 2 khóa; đá năng lượng có bảng giá tham khảo từ kimtuthap.vn (chưa có ảnh, cần xác nhận quan hệ với kimtuthap.org); Hotline/Zalo gộp một số 0868499856; sửa nhãn timeline tablet |
 
