@@ -11,7 +11,7 @@ const publicFile = (path: string) => new URL(`../public${path}`, import.meta.url
 test('every album photo has unique ids, a known category and both image files', () => {
   const ids = albumPhotos.map(photo => photo.id);
   assert.equal(new Set(ids).size, ids.length, 'photo ids must be unique');
-  assert.ok(ids.length >= 20, 'the first album holds the twenty shared photos');
+  assert.ok(ids.length >= 31, 'the album holds all thirty-one shared photos');
   for (const photo of albumPhotos) {
     assert.ok((albumCategories as readonly string[]).includes(photo.category), `${photo.id}: unknown category`);
     assert.match(photo.id, /^[a-z0-9-]+$/, `${photo.id}: ids are lowercase kebab-case`);
@@ -61,6 +61,16 @@ test('every category has a bilingual heading, an intro and at least one photo', 
     assert.ok(copy.counter(2, 20).includes('2') && copy.counter(2, 20).includes('20'));
     assert.ok(copy.credit.length > 5 && copy.removal.length > 20, 'credit and removal-request note are present');
   }
+});
+
+test('the garden group credits the Gửi Yêu Thương Vào Đất farm collaboration with Lê Lam Sơn', () => {
+  for (const lang of languages) {
+    const intro = albumSections.garden.intro[lang];
+    assert.ok(intro.includes('Gửi Yêu Thương Vào Đất'), `${lang}: farm name`);
+    assert.ok(intro.includes('Lê Lam Sơn'), `${lang}: partner name`);
+  }
+  assert.ok(albumPhotos.filter(photo => photo.category === 'garden').length >= 10);
+  assert.ok(albumCategories.includes('practice'), 'meditation, tarot and the practice corner form their own group');
 });
 
 test('albumPhoto rejects unknown ids so a typo cannot ship a blank slot', () => {

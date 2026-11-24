@@ -7,7 +7,7 @@ import type { Language } from './site.ts';
 // where the photo itself shows them (the event banner). Add a photo by adding its two files
 // and one entry below; keep `vi` and `en` in step.
 
-export const albumCategories = ['meeting', 'garden', 'sea', 'daily'] as const;
+export const albumCategories = ['meeting', 'garden', 'sea', 'practice', 'daily'] as const;
 export type AlbumCategory = (typeof albumCategories)[number];
 
 type Text = Record<Language, string>;
@@ -30,11 +30,15 @@ export const albumSections: Record<AlbumCategory, { title: Text; intro: Text }> 
   },
   garden: {
     title: { vi: 'Giữa vườn và thiên nhiên', en: 'In the garden' },
-    intro: { vi: 'Luống rau, lối đất đỏ, hàng đu đủ và chuối: những ngày ở giữa vườn.', en: 'Vegetable beds, red-earth paths, papaya and banana trees: days spent in the garden.' },
+    intro: { vi: 'Hình ảnh từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, lối đất đỏ, hàng đu đủ và chuối.', en: 'Photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, red-earth paths, papaya and banana trees.' },
   },
   sea: {
     title: { vi: 'Bên biển', en: 'By the sea' },
     intro: { vi: 'Bãi cát, sóng và những lúc nghỉ chân.', en: 'Sand, waves and moments of rest.' },
+  },
+  practice: {
+    title: { vi: 'Thiền, Tarot và góc thực hành', en: 'Meditation, tarot and the practice corner' },
+    intro: { vi: 'Ngồi yên bên biển, những bộ bài tarot và một góc bàn nhỏ với hoa và đá.', en: 'Sitting still by the sea, tarot decks, and a small table corner with flowers and stones.' },
   },
   daily: {
     title: { vi: 'Những khoảnh khắc nhỏ', en: 'Small moments' },
@@ -75,6 +79,17 @@ export const albumPhotos: AlbumPhoto[] = [
     id: 'hug-closeup', category: 'meeting', ...size(960, 1280),
     caption: { vi: 'Một cái ôm nữa, mỉm cười trước ống kính.', en: 'Another hug, smiling at the camera.' },
     alt: { vi: 'Hai người phụ nữ ôm nhau và mỉm cười gần ống kính.', en: 'Two women embrace and smile close to the camera.' },
+  },
+
+  {
+    id: 'studio-hug-six', category: 'meeting', ...size(1280, 960),
+    caption: { vi: 'Sáu người ôm vai nhau chụp ảnh trong phòng tập yoga.', en: 'Six people with their arms around each other in the yoga studio.' },
+    alt: { vi: 'Sáu người phụ nữ đứng sát bên nhau, khoác vai và mỉm cười, phía sau là tường gương và những quả bóng tập.', en: 'Six women stand close together with their arms around each other, smiling, in front of a mirrored wall and a stack of exercise balls.' },
+  },
+  {
+    id: 'three-tree', category: 'meeting', ...size(960, 1280),
+    caption: { vi: 'Ba người chụp chung cạnh cây thông Giáng sinh nhỏ.', en: 'Three people pose together beside a small Christmas tree.' },
+    alt: { vi: 'Ba người phụ nữ đứng sát nhau, chân trần, trong phòng yoga; bên phải có cây thông Giáng sinh nhỏ buộc ruy băng đỏ.', en: 'Three women stand close together barefoot in a yoga studio, with a small Christmas tree tied with red ribbons on the right.' },
   },
 
   // In the garden
@@ -124,6 +139,12 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Một người phụ nữ đội mũ đan màu xanh mỉm cười, ôm em bé đội mũ lưỡi trai, chụp ảnh tự sướng.', en: 'A woman in a green crocheted hat smiles while holding a toddler in a cap for a selfie.' },
   },
 
+  {
+    id: 'toddler-squat', category: 'garden', ...size(960, 1280),
+    caption: { vi: 'Em bé ngồi xổm giữa luống đất, cạnh chai nước xanh.', en: 'A toddler squatting on turned soil beside a green bottle.' },
+    alt: { vi: 'Một em bé đội mũ lưỡi trai quay ngược ngồi xổm và cười trên nền đất nâu giữa hàng đu đủ; bên phải có vòi tưới phun mưa, bên trái có chai nước màu xanh.', en: 'A toddler in a backwards cap squats and smiles on brown soil among papaya trees, with a sprinkler on the right and a green water bottle on the left.' },
+  },
+
   // By the sea
   {
     id: 'beach-dance', category: 'sea', ...size(960, 1280),
@@ -139,6 +160,49 @@ export const albumPhotos: AlbumPhoto[] = [
     id: 'beach-palms', category: 'sea', ...size(1280, 960),
     caption: { vi: 'Nghỉ chân dưới hàng dừa.', en: 'A rest in the shade of the palms.' },
     alt: { vi: 'Một người phụ nữ cầm quạt xanh ngồi trên ghế dưới hàng dừa, cạnh là em bé đang ăn.', en: 'A woman holding a teal fan sits on a lounger under coconut palms, a toddler eating beside her.' },
+  },
+
+  {
+    id: 'beach-selfie', category: 'sea', ...size(960, 1280),
+    caption: { vi: 'Tự chụp bên bãi biển cùng một em bé.', en: 'A selfie on the beach with a baby.' },
+    alt: { vi: 'Một người đàn ông, một người phụ nữ và một em bé mặc bộ đồ chấm bi vàng cùng cười trước hàng dừa và tòa nhà cao tầng.', en: 'A man, a woman and a baby in a yellow polka-dot outfit smile together in front of palm trees and a tall building.' },
+  },
+  {
+    id: 'beach-carry', category: 'sea', ...size(960, 1280),
+    caption: { vi: 'Bế em bé đi dọc bờ biển.', en: 'Carrying a baby along the shore.' },
+    alt: { vi: 'Một người phụ nữ chân trần, váy bay trong gió, bế em bé mặc đồ chấm bi vàng trên bãi cát; sóng nhỏ vỗ bên trái, nhà cao tầng ở phía xa.', en: 'A barefoot woman with her skirt blowing in the wind carries a baby in a yellow polka-dot outfit along the sand; small waves roll in on the left with tall buildings beyond.' },
+  },
+  {
+    id: 'beach-sit-side', category: 'sea', ...size(960, 1280),
+    caption: { vi: 'Ngồi yên, mắt khép, bên bờ biển.', en: 'Sitting still by the shore with eyes closed.' },
+    alt: { vi: 'Một người phụ nữ tóc dài, áo xanh lá, váy trắng thêu hoa, ngồi nghiêng người trên cát, mắt khép, bên cạnh có chiếc túi đan màu xanh nhạt; sóng và núi xa ở phía sau.', en: 'A woman with long hair in a green top and a white embroidered skirt sits sideways on the sand with her eyes closed, a pale green crocheted bag beside her, waves and distant mountains behind.' },
+  },
+
+  // Meditation, tarot and the practice corner
+  {
+    id: 'beach-meditate-smile', category: 'practice', ...size(870, 656),
+    caption: { vi: 'Ngồi xếp bằng trên cát, hai tay mở trên gối, mỉm cười.', en: 'Sitting cross-legged on the sand, palms open on the knees, smiling.' },
+    alt: { vi: 'Một người phụ nữ đội mũ đan xanh nhạt, áo xanh lá, ngồi xếp bằng trên bãi cát, hai tay mở trên gối và mỉm cười; phía sau là tòa nhà ven biển, bầu trời xanh và sóng.', en: 'A woman in a pale green crocheted hat and a green top sits cross-legged on the beach, palms open on her knees, smiling, with seafront buildings, blue sky and waves behind her.' },
+  },
+  {
+    id: 'beach-meditate-calm', category: 'practice', ...size(870, 1161),
+    caption: { vi: 'Ngồi xếp bằng, mắt nhắm, giữa bãi cát.', en: 'Sitting cross-legged with eyes closed on the sand.' },
+    alt: { vi: 'Một người phụ nữ đội mũ đan xanh nhạt ngồi xếp bằng trên cát, mắt nhắm, hai tay đặt trên gối; phía sau là các tòa nhà ven biển và dãy núi xa.', en: 'A woman in a pale green crocheted hat sits cross-legged on the sand with her eyes closed and her hands resting on her knees, with seafront buildings and distant mountains behind.' },
+  },
+  {
+    id: 'tarot-decks', category: 'practice', ...size(960, 1280),
+    caption: { vi: 'Hai bộ bài tarot đặt cạnh nhau trên bàn gỗ.', en: 'Two tarot decks side by side on a wooden table.' },
+    alt: { vi: 'Hai hộp bài tarot, một hộp màu xanh ngọc và một hộp màu vàng, đặt trên cuốn sổ cạnh ly và tách trên bàn gỗ.', en: 'Two tarot deck boxes, one teal and one yellow, rest on a notebook next to a glass and a cup on a wooden table.' },
+  },
+  {
+    id: 'tarot-cards-beach', category: 'practice', ...size(960, 1280),
+    caption: { vi: 'Hai lá bài tarot cầm trên tay bên bờ biển.', en: 'Two tarot cards held in a hand by the sea.' },
+    alt: { vi: 'Một bàn tay cầm hai lá bài tarot màu xanh lá trước bãi cát và những con sóng nhỏ.', en: 'A hand holds two green tarot cards in front of sand and small waves.' },
+  },
+  {
+    id: 'altar-flowers', category: 'practice', ...size(960, 1280),
+    caption: { vi: 'Bình hoa nhỏ, vài viên đá và những mô hình kim tự tháp trên bàn gỗ.', en: 'A small vase of flowers, a few stones and pyramid models on a wooden table.' },
+    alt: { vi: 'Bình hoa nhỏ với cành lá xanh, hoa hồng và hoa trắng đặt giữa một cụm đá tím, một viên đá vàng và một khối đá nâu nhạt; phía sau mờ là các mô hình kim tự tháp trong suốt.', en: 'A small vase with green leaves, a pink flower and white blossoms stands among a purple stone cluster, a yellow crystal and a pale brown stone, with blurred clear pyramid models behind.' },
   },
 
   // Small moments

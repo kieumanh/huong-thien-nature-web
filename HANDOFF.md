@@ -21,7 +21,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.11.0–2.11.2: tinh chỉnh giao diện, tìm kiếm Tản văn, ẩn học phí (báo giá qua tin nhắn), thang tần số kéo được, khối thông tin khóa học, bảng so sánh hai khóa, lời nhắn an toàn ấm áp hơn |
 | 24/11 | 2.12.0: phong cách vàng ánh tím toàn trang (từ trang Tần Số Vàng), trang Phản hồi học viên trên menu, thẻ phản hồi và danh mục khóa làm lại |
 | 24/11 | 2.12.1: form lời nhắn dễ dùng hơn (bộ đếm, mũi tên chọn chủ đề, dòng quyền riêng tư, ô đồng ý), icon sen trên thẻ phản hồi |
-| 24/11 | 2.13.0: trang Album (20 ảnh thật, bốn nhóm, lightbox) trên menu; dải ảnh thật trên Trang chủ, Câu chuyện, Hệ sinh thái, Thực hành, Khóa thực hành, Tần Số Vàng, Tarot; menu gập ☰ đến 1279px |
+| 24/11 | 2.13.0: trang Album (31 ảnh thật, năm nhóm, lightbox) trên menu; dải ảnh thật trên Trang chủ, Câu chuyện, Hệ sinh thái, Gợi ý, Khóa thực hành, Tần Số Vàng, Tarot; menu gập ☰ đến 1279px |
 
 Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8.3 (mất khi gộp nhánh song song). 2.8.x đã được khôi phục ở 2.8.4. Mô tả 2.0.0 xem `RELEASE_2.0.0.md`.
 

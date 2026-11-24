@@ -18,8 +18,8 @@ export const journeyPages = {
     en: { slug: 'story', title: 'Our story', heading: 'From a quiet seat to Hương Thiền Nature', description: 'Đỗ Thị Kim Hương, known as Hương Thiền, founded Hương Thiền Nature to bring meditation and mindfulness into everyday life. Her story begins in Quảng Nam, where she learned to look after herself early.' },
   },
   album: {
-    vi: { slug: 'album', title: 'Album', heading: 'Album hành trình gặp gỡ và chia sẻ', description: 'Những hình ảnh thật từ các buổi chia sẻ, những lần gặp gỡ, khu vườn và bãi biển trên hành trình của Hương Thiền Nature.' },
-    en: { slug: 'album', title: 'Album', heading: 'Album of our journey of meeting and sharing', description: 'Real photographs from sharing sessions, meetings, gardens and beaches along the journey of Hương Thiền Nature.' },
+    vi: { slug: 'album', title: 'Album', heading: 'Album hành trình gặp gỡ và chia sẻ', description: 'Những hình ảnh thật từ các buổi chia sẻ, những lần gặp gỡ, khu vườn Gửi Yêu Thương Vào Đất, bãi biển và góc thực hành trên hành trình của Hương Thiền Nature.' },
+    en: { slug: 'album', title: 'Album', heading: 'Album of our journey of meeting and sharing', description: 'Real photographs from sharing sessions, meetings, the Gửi Yêu Thương Vào Đất garden, beaches and the practice corner along the journey of Hương Thiền Nature.' },
   },
   feedback: {
     vi: { slug: 'phan-hoi-hoc-vien', title: 'Phản hồi học viên', heading: 'Học viên nói gì về hành trình cùng Hương Thiền', description: 'Những chia sẻ do chính học viên gửi, được đăng khi có sự đồng ý của họ, để bạn tự xem trước khi chọn khóa thực hành.' },

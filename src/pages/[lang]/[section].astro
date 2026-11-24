@@ -74,9 +74,9 @@ const vision = ecosystemVision[lang];
         <ol class="journey-reading-list">{beginnerArticles.map(article => <li><a class="quiet-link" href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
         <a class="quiet-link" href={articlePath(lang, 'when-meditation-is-difficult')}>{vi ? 'Làm gì khi thấy khó ngồi thiền?' : 'What can I do when meditation feels difficult?'}</a>
       </section>
-      <AlbumStrip {lang} id="quiet-moments" photos={['hands-together-garden', 'beach-sitting', 'beach-dance']}
-        title={vi ? 'Những lúc lắng lại giữa thiên nhiên' : 'Quiet moments in nature'}
-        intro={vi ? 'Một khu vườn, một bãi biển, vài phút đứng yên: không cần nơi nào đặc biệt để bắt đầu.' : 'A garden, a beach, a few minutes standing still: you do not need a special place to begin.'} />
+      <AlbumStrip {lang} id="quiet-moments" photos={['beach-meditate-calm', 'beach-meditate-smile', 'beach-sit-side', 'altar-flowers']}
+        title={vi ? 'Những phút lắng lại' : 'Moments of stillness'}
+        intro={vi ? 'Một bãi biển, một góc bàn nhỏ, vài phút ngồi yên: không cần nơi nào đặc biệt để bắt đầu.' : 'A beach, a small table corner, a few minutes of sitting still: you do not need a special place to begin.'} />
     </>}
 
     {page === 'ecosystem' && <>
@@ -96,9 +96,9 @@ const vision = ecosystemVision[lang];
           </article>)}
         </div>
       </section>
-      <AlbumStrip {lang} id="garden-moments" photos={['veggie-bed-trellis', 'wooden-house', 'flowers-red-path']}
-        title={vi ? 'Những khoảnh khắc giữa vườn' : 'Moments in the garden'}
-        intro={vi ? 'Luống rau, giàn tre, căn nhà gỗ và lối đất đỏ: hình ảnh thật từ những ngày ở giữa vườn.' : 'Vegetable beds, bamboo trellises, a timber house and a red-earth path: real photographs from days spent in the garden.'} />
+      <AlbumStrip {lang} id="garden-moments" photos={['veggie-bed-trellis', 'wooden-house', 'flowers-red-path', 'toddler-squat']}
+        title={vi ? 'Từ khu vườn Gửi Yêu Thương Vào Đất' : 'From the Gửi Yêu Thương Vào Đất garden'}
+        intro={vi ? 'Hình ảnh thật từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, giàn tre, căn nhà gỗ và lối đất đỏ.' : 'Real photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, bamboo trellises, a timber house and a red-earth path.'} />
       <section class="journey-section" id="partnerships" aria-labelledby="partnerships-title">
         <h2 id="partnerships-title">{vi ? 'Hành trình kết nối đối tác' : 'How our partnerships took shape'}</h2>
         <p>{vi ? 'Hai mối hợp tác giúp Hương Thiền Nature đưa việc chăm đất, sống xanh và kinh nghiệm của những người đồng hành vào thực tế.' : 'Two partnerships bring natural farming, greener living and the experience of trusted advisers into Hương Thiền Nature.'}</p>
@@ -129,7 +129,7 @@ const vision = ecosystemVision[lang];
         <p>{t.introCopy}</p>
       </section>
       <FounderJourney {lang} />
-      <AlbumStrip {lang} id="journey-moments" photos={['event-banner', 'studio-group', 'hug-closeup']}
+      <AlbumStrip {lang} id="journey-moments" photos={['event-banner', 'studio-hug-six', 'hug-closeup']}
         title={vi ? 'Trên những chặng gặp gỡ và chia sẻ' : 'Along the way: meeting and sharing'}
         intro={vi ? 'Một vài hình ảnh từ chuyến chia sẻ ở Nha Trang. Phần còn lại của hành trình nằm trong album.' : 'A few photographs from a sharing trip in Nha Trang. The rest of the journey is in the album.'} />
       <a class="quiet-link" href={journeyPath(lang, 'team')}>{vi ? 'Gặp đội ngũ Hương Thiền Nature' : 'Meet the Hương Thiền Nature team'}</a>
