@@ -7,7 +7,7 @@ import type { Language } from './site.ts';
 // where the photo itself shows them (the event banner). Add a photo by adding its two files
 // and one entry below; keep `vi` and `en` in step.
 
-export const albumCategories = ['meeting', 'garden', 'sea', 'practice', 'daily'] as const;
+export const albumCategories = ['meeting', 'garden', 'sea', 'practice', 'wall', 'daily'] as const;
 export type AlbumCategory = (typeof albumCategories)[number];
 
 type Text = Record<Language, string>;
@@ -39,6 +39,10 @@ export const albumSections: Record<AlbumCategory, { title: Text; intro: Text }> 
   practice: {
     title: { vi: 'Thiền, Tarot và góc thực hành', en: 'Meditation, tarot and the practice corner' },
     intro: { vi: 'Ngồi yên bên biển, những bộ bài tarot và một góc bàn nhỏ với hoa và đá.', en: 'Sitting still by the sea, tarot decks, and a small table corner with flowers and stones.' },
+  },
+  wall: {
+    title: { vi: 'Tranh nhỏ trên tường', en: 'Small pictures on the wall' },
+    intro: { vi: 'Những tấm tranh treo tường nhắc về chánh niệm, hơi thở và nụ cười.', en: 'Wall pictures that speak of mindfulness, the breath and a smile.' },
   },
   daily: {
     title: { vi: 'Những khoảnh khắc nhỏ', en: 'Small moments' },
@@ -203,6 +207,23 @@ export const albumPhotos: AlbumPhoto[] = [
     id: 'altar-flowers', category: 'practice', ...size(960, 1280),
     caption: { vi: 'Bình hoa nhỏ, vài viên đá và những mô hình kim tự tháp trên bàn gỗ.', en: 'A small vase of flowers, a few stones and pyramid models on a wooden table.' },
     alt: { vi: 'Bình hoa nhỏ với cành lá xanh, hoa hồng và hoa trắng đặt giữa một cụm đá tím, một viên đá vàng và một khối đá nâu nhạt; phía sau mờ là các mô hình kim tự tháp trong suốt.', en: 'A small vase with green leaves, a pink flower and white blossoms stands among a purple stone cluster, a yellow crystal and a pale brown stone, with blurred clear pyramid models behind.' },
+  },
+
+  // Small pictures on the wall (printed pictures; the signature of Thích Nhất Hạnh is visible on each)
+  {
+    id: 'plaque-moon-boat', category: 'wall', ...size(960, 1280),
+    caption: { vi: 'Tranh treo tường: một người ngồi trên thuyền nhỏ trước vầng trăng vàng.', en: 'A wall picture: a figure sitting in a small boat before a golden moon.' },
+    alt: { vi: 'Tấm tranh gỗ treo trên tường vàng vẽ một người ngồi trên thuyền giữa mặt nước, phía sau là vầng trăng lớn màu vàng và cành tre; phía trên có dòng chữ viết tay.', en: 'A wooden wall picture on a yellow wall shows a figure sitting in a boat on still water before a large golden moon and a bamboo branch, with handwritten lettering above.' },
+  },
+  {
+    id: 'plaque-monk-branch', category: 'wall', ...size(960, 1280),
+    caption: { vi: 'Tranh treo tường: chú tiểu nhắm mắt ngồi trên cành cây.', en: 'A wall picture: a young monk sitting on a branch with eyes closed.' },
+    alt: { vi: 'Tấm tranh gỗ vẽ chú tiểu mặc áo nâu nhắm mắt ngồi thiền trên một cành cây khô, phía trên là một đoạn chữ; tranh treo trên tường vàng.', en: 'A wooden picture of a young monk in an orange robe sitting with eyes closed on a dry branch, a passage of text above, hanging on a yellow wall.' },
+  },
+  {
+    id: 'plaque-lotus-leaf', category: 'wall', ...size(960, 1280),
+    caption: { vi: 'Tranh treo tường: chú tiểu và chú mèo dưới tán lá sen.', en: 'A wall picture: a young monk and a kitten under a lotus leaf.' },
+    alt: { vi: 'Tấm tranh vẽ chú tiểu má hồng và một chú mèo trắng ngồi cạnh nhau trên tảng đá giữa nước, che bên trên là chiếc lá sen lớn; phía trên có một dòng chữ.', en: 'A picture of a rosy-cheeked young monk and a white kitten sitting side by side on a rock in the water beneath a large lotus leaf, with a line of text above.' },
   },
 
   // Small moments

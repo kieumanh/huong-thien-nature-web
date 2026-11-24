@@ -74,7 +74,7 @@ const vision = ecosystemVision[lang];
         <ol class="journey-reading-list">{beginnerArticles.map(article => <li><a class="quiet-link" href={articlePath(lang, article.slug)}>{article.translations[lang].title}</a></li>)}</ol>
         <a class="quiet-link" href={articlePath(lang, 'when-meditation-is-difficult')}>{vi ? 'Làm gì khi thấy khó ngồi thiền?' : 'What can I do when meditation feels difficult?'}</a>
       </section>
-      <AlbumStrip {lang} id="quiet-moments" photos={['beach-meditate-calm', 'beach-meditate-smile', 'beach-sit-side', 'altar-flowers']}
+      <AlbumStrip {lang} id="quiet-moments" photos={['beach-meditate-calm', 'altar-flowers', 'plaque-moon-boat', 'plaque-monk-branch']}
         title={vi ? 'Những phút lắng lại' : 'Moments of stillness'}
         intro={vi ? 'Một bãi biển, một góc bàn nhỏ, vài phút ngồi yên: không cần nơi nào đặc biệt để bắt đầu.' : 'A beach, a small table corner, a few minutes of sitting still: you do not need a special place to begin.'} />
     </>}

@@ -18,8 +18,8 @@ export const releases: Release[] = [
   {
     version: '2.13.0',
     date: '2026-11-24',
-    vi: ['Album ảnh hành trình gặp gỡ và chia sẻ', 'Trang Album mới trên menu gồm 31 ảnh thật từ những buổi chia sẻ, khu vườn Gửi Yêu Thương Vào Đất, bãi biển và góc thực hành, bấm vào để xem lớn. Ảnh thật cũng xuất hiện trên Trang chủ, Câu chuyện, Hệ sinh thái, Gợi ý, Khóa thực hành, Tần Số Vàng và Tarot.'],
-    en: ['An album of our journey of meeting and sharing', 'A new Album page in the menu holds 31 real photographs from sharing sessions, the Gửi Yêu Thương Vào Đất garden, beaches and the practice corner, each opening full size. Real photos also appear on the home page, our story, the ecosystem, suggestions, practice courses, Golden Frequency and Tarot.'],
+    vi: ['Album ảnh hành trình gặp gỡ và chia sẻ', 'Trang Album mới trên menu gồm 34 ảnh thật từ những buổi chia sẻ, khu vườn Gửi Yêu Thương Vào Đất, bãi biển và góc thực hành, bấm vào để xem lớn. Ảnh thật cũng xuất hiện trên Trang chủ, Câu chuyện, Hệ sinh thái, Gợi ý, Khóa thực hành, Tần Số Vàng và Tarot.'],
+    en: ['An album of our journey of meeting and sharing', 'A new Album page in the menu holds 34 real photographs from sharing sessions, the Gửi Yêu Thương Vào Đất garden, beaches and the practice corner, each opening full size. Real photos also appear on the home page, our story, the ecosystem, suggestions, practice courses, Golden Frequency and Tarot.'],
   },
   {
     version: '2.12.1',

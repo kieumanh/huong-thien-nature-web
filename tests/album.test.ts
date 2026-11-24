@@ -11,7 +11,7 @@ const publicFile = (path: string) => new URL(`../public${path}`, import.meta.url
 test('every album photo has unique ids, a known category and both image files', () => {
   const ids = albumPhotos.map(photo => photo.id);
   assert.equal(new Set(ids).size, ids.length, 'photo ids must be unique');
-  assert.ok(ids.length >= 31, 'the album holds all thirty-one shared photos');
+  assert.ok(ids.length >= 34, 'the album holds all thirty-four shared photos');
   for (const photo of albumPhotos) {
     assert.ok((albumCategories as readonly string[]).includes(photo.category), `${photo.id}: unknown category`);
     assert.match(photo.id, /^[a-z0-9-]+$/, `${photo.id}: ids are lowercase kebab-case`);
