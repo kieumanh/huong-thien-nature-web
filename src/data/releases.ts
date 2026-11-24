@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.12.1',
+    date: '2026-11-24',
+    vi: ['Form lời nhắn dễ dùng hơn', 'Form gửi lời nhắn có nhãn vàng, mũi tên chọn chủ đề, bộ đếm ký tự, dòng quyền riêng tư và ô đồng ý rõ hơn. Thẻ phản hồi của Kiều Mạnh có thêm icon sen.'],
+    en: ['An easier message form', 'The message form gains gold labels, a clear topic arrow, a character counter, the privacy note and a clearer consent box. Kiều Mạnh\'s feedback card gains a lotus icon.'],
+  },
+  {
     version: '2.12.0',
     date: '2026-11-24',
     vi: ['Phong cách vàng ánh tím và trang Phản hồi học viên', 'Toàn website mang màu vàng kim, tím đêm và chữ viết tay của trang Tần Số Vàng. Có trang Phản hồi học viên riêng trên menu, thẻ phản hồi và danh mục khóa thực hành được làm lại cho dễ đọc hơn.'],

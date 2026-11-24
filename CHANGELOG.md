@@ -1,3 +1,8 @@
+## 2.12.1 — Form lời nhắn dễ dùng hơn; icon cho phản hồi của Kiều Mạnh
+
+- Form "Gửi một lời nhắn": nhãn và tiêu đề theo màu vàng của phong cách mới; ô chọn chủ đề có mũi tên rõ ràng; ô nhập lời nhắn có gợi ý độ dài và bộ đếm ký tự (tối đa 5.000); hiển thị dòng quyền riêng tư đã có sẵn trong nội dung; ô đồng ý nằm trong khung riêng; nút gửi chiếm đủ chiều rộng trên điện thoại. Mã trường, tên và giá trị không đổi, nên kiểm thử form vẫn đạt.
+- Phản hồi học viên: thêm icon sen vàng trên ảnh chữ cái đầu của Kiều Mạnh.
+
 ## 2.12.0 — Phong cách vàng ánh tím toàn trang, trang Phản hồi học viên, danh mục khóa học mới
 
 Áp dụng ngôn ngữ thiết kế của trang Tần Số Vàng (vàng kim, tím đêm, chữ Dancing Script) cho toàn website, đồng thời làm lại phần danh mục khóa và phần phản hồi học viên.
