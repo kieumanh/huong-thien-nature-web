@@ -65,14 +65,14 @@ export const frequencyCourse = {
     slug: 'tan-so-vang',
     title: 'Tần Số Vàng: làm chủ năng lượng tần số cao',
     description: 'Khóa thực hành 6 chặng cùng Hương Thiền: hiểu 5 dạng tần số, tự định vị trạng thái của mình và mang năng lượng bình an, sáng suốt vào mối quan hệ, công việc, sự nghiệp và tài chính.',
-    eyebrow: 'Khóa thực hành 6 chặng · Online 1 tháng',
+    eyebrow: 'Khóa thực hành 6 chặng · 2 tháng, mỗi tuần 1 buổi',
     action: 'Xem khóa Tần Số Vàng',
   },
   en: {
     slug: 'golden-frequency',
     title: 'The Golden Frequency: mastering high-frequency energy',
     description: 'A six-stage practice course with Hương Thiền: understand five kinds of frequency, locate where you are today and bring calm, clear energy into your relationships, work, career and finances.',
-    eyebrow: 'Six-stage practice course · Online, one month',
+    eyebrow: 'Six-stage practice course · Two months, weekly',
     action: 'Explore The Golden Frequency',
   },
 } satisfies Course;

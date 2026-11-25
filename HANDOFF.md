@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-25, phiên bản 2.22.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-25, phiên bản 2.23.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -28,6 +28,8 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
 | 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
+| 25/11 | 2.23.0: Tần Số Vàng học 2 tháng, 1 buổi/tuần, 2 giờ/buổi; ở gần học trực tiếp, ở xa 100% online; học phí đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên (`priceNote`, mục "Học phí đã gồm"). Còn chờ chủ dự án xác nhận: nhóm đồng hành 30 ngày / buổi gặp lại sau 30 ngày trong phần hỗ trợ sau khóa có giữ nguyên không. |
+| 25/11 | 2.22.1: mục Những người đồng hành (ecosystem) hiển thị nhãn "Dự án" rõ ràng và link website là nút toàn chiều rộng (`.partner-card__site`); tên farm tiếng Anh thống nhất. |
 | 25/11 | 2.22.0: công bố giá. Tần Số Vàng 5,6 triệu đến hết giao thừa Tết Âm lịch 2027 (đồng hồ đếm ngược), sau đó 6,6 triệu; Tarot 600.000 ₫/phiên 90 phút; bỏ phần nhắn hỏi giá. **Việc cần làm: build lại site sau 06/02/2027** để dữ liệu có cấu trúc chuyển sang 6,6 triệu. |
 | 24/11 | 2.21.3: bìa `returning-attention` đổi sang `pixabay-2268333.webp` (bàn chân trần trên cỏ, nguồn đã ghi trong `article-photos.ts`); avatar Kiều Mạnh trong Phản hồi học viên là `author-kieu-manh-avatar.webp` (trường `avatar`). |
 | 24/11 | 2.21.2: bỏ ô sắp xếp Tản văn (luôn mới nhất trước); ba bài `returning-attention`, `seven-layers`, `listening-to-nature` có ngày đăng 22/11/2026 (chủ dự án cung cấp). |
@@ -59,7 +61,7 @@ Ghi chú lịch sử: CHANGELOG từng thiếu mục 2.0.0/2.0.1 và 2.8.0–2.8
 1. **Form liên hệ chưa xác minh gửi thật.** Test dùng mock. Cần gửi thử một thư thật sau khi đủ 4 biến cấu hình trong Cloudflare (`CONTACT_SETUP.md`).
 2. **Feed cửa hàng phụ thuộc Zen Flow Inventory đã được triển khai** (`zen-flow-inventory.huongthiennature.com`). Nếu chưa deploy hoặc chưa xuất bản sản phẩm, cửa hàng dùng danh mục dự phòng (thực phẩm sạch 8 sản phẩm; Đá năng lượng và Sách hiện trạng thái trống/liên hệ). `src/pages/catalogue/inventory.json.ts` là di sản của site ChatGPT cũ, Worker không còn dùng; có thể xóa khi chủ dự án đồng ý.
 3. **Giá buổi Tarot chưa công bố** — ô giá hiện "Báo giá qua tin nhắn". Nếu muốn hiện giá, chủ dự án cung cấp rồi đặt tại `tarotOffer.price`.
-   **Khóa Tần Số Vàng**: học phí đã xác nhận (5,6tr năm 2026, 6,6tr từ 2027, `frequencyFees`); người hỗ trợ học viên là Kiều Mạnh. Hình thức: lớp online 1 tháng, khai giảng hằng tháng (ngày cụ thể gửi kèm báo giá). Phúc lợi sau khóa (nhóm 30 ngày, buổi gặp lại, sổ tay, bản ghi thiền, hỏi đáp 30 ngày, ưu tiên học viên) là đề xuất, cần chủ dự án xác nhận; trang ghi "phạm vi cụ thể theo báo giá".
+   **Khóa Tần Số Vàng**: học phí đã công bố (5,6tr đến hết giao thừa Tết Âm lịch 2027, 6,6tr từ mùng 1 Tết; mốc trong `frequencyPricing` ở `src/data/courses.ts`); học phí đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên hỗ trợ thầy cô. Người hỗ trợ học viên là Kiều Mạnh. Hình thức (2.23.0): 2 tháng, 1 buổi/tuần, 2 giờ/buổi; ở gần học trực tiếp, ở xa 100% online; khai giảng hằng tháng. Phúc lợi sau khóa: nhóm đồng hành 60 ngày, kết nối khi cần sau 2 tháng, buổi gặp lại sau 30 ngày, sổ tay, bản ghi thiền, ưu tiên học viên. Phần này là nội dung chủ dự án cung cấp, cần giữ đúng khi sửa.
    **Còn thiếu để người tham khảo yên tâm đăng ký (chờ chủ dự án)**: số buổi học trực tiếp và nền tảng của lớp Tần Số Vàng; sĩ số; chính sách hoàn/dời lịch; cam kết bảo mật buổi 1:1; thêm phản hồi học viên khác (mới có 1, của Kiều Mạnh, ở `src/data/student-feedback.ts`; không tự tạo).
 4. **Phân tích số liệu (analytics)** chưa có, quyết định xây ở CMS sau.
 5. **Hiệu ứng chuyển động**: mọi chuyển động tôn trọng `prefers-reduced-motion`, nhưng quỹ đạo trang chủ không có nút dừng (quyết định thiết kế từ 2.7.3); cân nhắc lại nếu cần đạt WCAG 2.2.2 tuyệt đối.

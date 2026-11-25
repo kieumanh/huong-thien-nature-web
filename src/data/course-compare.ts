@@ -14,12 +14,12 @@ export const courseCompare = {
         name: 'Tần Số Vàng',
         values: [
           'Bạn muốn một lộ trình thực hành để nâng trạng thái sống trong mối quan hệ, công việc và đời sống.',
-          'Lớp online, 1 tháng, khai giảng hằng tháng.',
+          '2 tháng, mỗi tuần 1 buổi 2 giờ. Trực tiếp nếu ở gần, 100% online nếu ở xa. Khai giảng hằng tháng.',
           'Bản đồ tần số, bộ công cụ 10 phút mỗi ngày, bài tập tuần và hỗ trợ sau khóa.',
           'Hương Thiền hướng dẫn; Kiều Mạnh hỗ trợ học viên.',
-          'Giá khuyến nghị 5.600.000 ₫ đến hết giao thừa Tết Âm lịch 2027; từ mùng 1 Tết là 6.600.000 ₫.',
+          'Giá khuyến nghị 5.600.000 ₫ đến hết giao thừa Tết Âm lịch 2027; từ mùng 1 Tết là 6.600.000 ₫. Đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên.',
         ],
-        chips: ['Lớp online', '1 tháng · 6 chặng', 'Khai giảng hằng tháng'],
+        chips: ['2 tháng · 6 chặng', '1 buổi 2 giờ mỗi tuần', 'Trực tiếp hoặc online'],
         action: 'Xem khóa Tần Số Vàng',
       },
       tarot: {
@@ -46,12 +46,12 @@ export const courseCompare = {
         name: 'The Golden Frequency',
         values: [
           'You want a practice path to raise your state of living in relationships, work and daily life.',
-          'Online class, one month, starting every month.',
+          'Two months, one 2-hour session a week. In person if you are nearby, 100% online if you are far away. Starts every month.',
           'A frequency map, a 10-minutes-a-day toolkit, weekly exercises and support after the course.',
           'Hương Thiền guides; Kiều Mạnh supports students.',
-          'Recommended price 5,600,000 VND until Lunar New Year’s Eve 2027; 6,600,000 VND from the first day of Tết.',
+          'Recommended price 5,600,000 VND until Lunar New Year’s Eve 2027; 6,600,000 VND from the first day of Tết. Includes the space, equipment, supporting materials, lesson plans and resources.',
         ],
-        chips: ['Online class', 'One month · six stages', 'Starts every month'],
+        chips: ['Two months · six stages', 'One 2-hour session a week', 'In person or online'],
         action: 'View The Golden Frequency',
       },
       tarot: {

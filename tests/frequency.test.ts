@@ -122,7 +122,7 @@ test('quote links carry the allow-listed topic that the contact form understands
 test('the course information sheet and the course comparison answer what a student asks before enrolling', () => {
   for (const lang of languages) {
     const { info, faq } = frequencyLanding[lang];
-    assert.equal(info.items.length, 8);
+    assert.equal(info.items.length, 9);
     assert.equal(info.prepare.length, 3);
     assert.ok(info.items.every(([label, value]) => label.length > 2 && value.length > 4));
     assert.ok(info.items.some(([, value]) => /online/i.test(value)));

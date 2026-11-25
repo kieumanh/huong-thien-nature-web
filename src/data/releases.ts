@@ -16,6 +16,18 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.23.0',
+    date: '2026-11-25',
+    vi: ['Tần Số Vàng: học 2 tháng, mỗi tuần một buổi', 'Khóa học kéo dài 2 tháng, mỗi tuần 1 buổi 2 giờ; ở gần thì ưu tiên học trực tiếp, ở xa thì 100% online. Học phí đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên.'],
+    en: ['The Golden Frequency: two months, one session a week', 'The course lasts two months, with one 2-hour session a week; in person is preferred for those nearby and it is 100% online for those far away. The fee includes the space, equipment, supporting materials, lesson plans and resources.'],
+  },
+  {
+    version: '2.22.1',
+    date: '2026-11-25',
+    vi: ['Đối tác: tên dự án và link website dễ đọc hơn', 'Mục Những người đồng hành có nhãn Dự án rõ ràng, và link website là nút toàn chiều rộng hiện tên miền đầy đủ.'],
+    en: ['Partners: clearer project name and website link', 'The partners section now labels the project clearly, and the website link is a full-width button showing the full domain.'],
+  },
+  {
     version: '2.22.0',
     date: '2026-11-25',
     vi: ['Công bố học phí hai khóa', 'Tần Số Vàng: 5.600.000 ₫ đến hết Tết Âm lịch 2027, sau đó 6.600.000 ₫, có đồng hồ đếm ngược. Tarot 1:1: 90 phút, 600.000 ₫ mỗi phiên. Đã bỏ các phần nhắn tin hỏi giá.'],

@@ -83,8 +83,8 @@ export const ecosystemPartnerJourney = [
     },
     en: {
       milestone: 'September 2026',
-      affiliation: 'Gửi Yêu Thương Vào Đất Farm',
-      description: 'Hương Thiền Nature joined forces with Lê Lam Sơn and Gửi Yêu Thương Vào Đất Farm to bring natural farming and hands-on experiences of greener living into the ecosystem. Sơn oversees the ecosystem’s entire supply of naturally grown food. The partnership connects the farm to the table and helps people see how their food is grown and cared for.',
+      affiliation: 'Farm Gửi Yêu Thương Vào Đất',
+      description: 'Hương Thiền Nature joined forces with Lê Lam Sơn and Farm Gửi Yêu Thương Vào Đất to bring natural farming and hands-on experiences of greener living into the ecosystem. Sơn oversees the ecosystem’s entire supply of naturally grown food. The partnership connects the farm to the table and helps people see how their food is grown and cared for.',
     },
   },
   {
