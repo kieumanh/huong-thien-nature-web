@@ -16,6 +16,18 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.22.0',
+    date: '2026-11-25',
+    vi: ['Công bố học phí hai khóa', 'Tần Số Vàng: 5.600.000 ₫ đến hết Tết Âm lịch 2027, sau đó 6.600.000 ₫, có đồng hồ đếm ngược. Tarot 1:1: 90 phút, 600.000 ₫ mỗi phiên. Đã bỏ các phần nhắn tin hỏi giá.'],
+    en: ['Course fees are now published', 'The Golden Frequency: 5,600,000 VND until Lunar New Year 2027, then 6,600,000 VND, with a countdown. 1:1 tarot: 90 minutes, 600,000 VND per session. The price-enquiry prompts have been removed.'],
+  },
+  {
+    version: '2.21.3',
+    date: '2026-11-24',
+    vi: ['Ảnh bài Sự trở lại cũng là thực tập và ảnh đại diện Kiều Mạnh', 'Bài về sự trở lại có ảnh bàn chân trên cỏ thay ảnh chùa; phần phản hồi học viên hiện ảnh thật của Kiều Mạnh.'],
+    en: ['Cover for the returning-attention article and Kiều Mạnh’s real photo', 'The article on returning attention now shows a bare foot on grass instead of a temple; the student feedback shows Kiều Mạnh’s real portrait.'],
+  },
+  {
     version: '2.21.2',
     date: '2026-11-24',
     vi: ['Tản văn luôn mới nhất trước', 'Đã bỏ ô sắp xếp; bài mới nhất luôn ở đầu. Ba bài trước đây chưa có ngày nay đã ghi ngày đăng 22/11/2026.'],

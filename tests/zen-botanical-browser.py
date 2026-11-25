@@ -312,7 +312,7 @@ def check_daylight(browser):
     report['passes'].append('Vietnam clock sets day, twilight and night correctly. Night contrast and finite tarot sequence motion tested.')
 
 def check_tarot_conversion(browser):
-    """Booking path of the tarot page: direct CTA, honest price slot, mobile booking bar, schema, prefilled enquiry."""
+    """Booking path of the tarot page: direct CTA, confirmed price, mobile booking bar, schema, prefilled enquiry."""
     for lang, entries in routes.items():
         for width in (320, 393):
             page = browser.new_page(viewport={'width': width, 'height': 850}, reduced_motion='reduce')
@@ -321,7 +321,7 @@ def check_tarot_conversion(browser):
             sticky = page.locator('[data-guidance-sticky]')
             expect(sticky).to_be_hidden()
             expect(page.locator('.guidance-hero a.guidance-button')).to_have_attribute('href', 'https://zalo.me/0868499856')
-            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('Báo giá qua tin nhắn' if lang == 'vi' else 'Quote by message')
+            expect(page.locator('.guidance-facts dd').nth(2)).to_have_text('600.000 ₫ / phiên' if lang == 'vi' else '600,000 VND / session')
             expect(page.locator('.guidance-howto-steps li')).to_have_count(3)
             expect(page.locator('.guidance-invitation a.button--tonal')).to_have_attribute('href', re.compile(r'topic=tarot'))
             page.evaluate("document.querySelector('#session').scrollIntoView()")
@@ -356,7 +356,8 @@ def check_tarot_conversion(browser):
             blocks = [json.loads(text) for text in page.locator('script[type="application/ld+json"]').all_inner_texts()]
             graph = next(block['@graph'] for block in blocks if '@graph' in block)
             assert {'Service', 'FAQPage'} <= {node['@type'] for node in graph}, ('tarot schema', lang)
-            assert 'offers' not in json.dumps(graph), 'no price may be published before the owner supplies it'
+            service = next(node for node in graph if node['@type'] == 'Service')
+            assert service['offers']['price'] == '600000' and service['offers']['priceCurrency'] == 'VND', ('tarot offer must be the confirmed 600.000 VND', lang)
             page.close()
         page = browser.new_page(viewport={'width': 393, 'height': 850}, reduced_motion='reduce')
         arrange_api(page)
@@ -365,7 +366,7 @@ def check_tarot_conversion(browser):
         page.goto(base + entries['contact'] + '?topic=%3Cscript%3E', wait_until='load')
         expect(page.locator('[name="message"]')).to_have_value('')
         page.close()
-    report['passes'].append('Tarot page: direct Zalo CTA, honest price slot, mobile booking bar clear of floating controls, schema without invented price, prefilled enquiry.')
+    report['passes'].append('Tarot page: direct Zalo CTA, honest price slot, mobile booking bar clear of floating controls, schema with the confirmed 600.000 VND offer, prefilled enquiry.')
 
 with sync_playwright() as playwright:
     browser = playwright.chromium.launch(headless=True, args=['--no-sandbox'])

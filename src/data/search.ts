@@ -51,7 +51,7 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
       text: plain([
         frequencyLanding[lang], frequencyTypes.map(type => type[lang]), selfCheckDomains.map(domain => domain[lang]),
         weeklyPlan.map(entry => entry[lang]), frequencyScientists.map(person => [person.name, person[lang]]),
-        lang === 'vi' ? 'tần số cao năng lượng rung động báo giá học phí khai giảng' : 'high frequency vibration energy quote fee start date',
+        lang === 'vi' ? 'tần số cao năng lượng rung động học phí 5.600.000 6.600.000 đăng ký khai giảng' : 'high frequency vibration energy fee 5,600,000 6,600,000 enrol start date',
       ]),
     },
     { title: lang === 'vi' ? 'Liên hệ Hương Thiền Nature' : 'Contact Hương Thiền Nature', description: t.contactCopy, url: contactPath(lang), text: [t.contactCopy, 'Zalo', hotline, contactEmail].join(' ') },

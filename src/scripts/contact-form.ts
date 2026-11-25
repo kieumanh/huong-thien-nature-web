@@ -10,13 +10,13 @@ declare global {
 
 const enquiryTopics: Record<string, { vi: string; en: string; interest: 'courses' | 'other' }> = {
   tarot: {
-    vi: 'Tôi muốn hỏi lịch, hình thức gặp và chi phí buổi Tarot tâm lý học 1:1 (90 phút).',
-    en: 'I would like to ask about availability, format and cost for the 1:1 tarot reflection session (90 minutes).',
+    vi: 'Tôi muốn đặt lịch buổi Tarot tâm lý học 1:1 (90 phút) và hỏi về hình thức gặp.',
+    en: 'I would like to book the 1:1 tarot reflection session (90 minutes) and ask about the format.',
     interest: 'other',
   },
   'tan-so-vang': {
-    vi: 'Tôi muốn nhận báo giá khóa Tần Số Vàng: lịch khai giảng gần nhất, hình thức học và học phí.',
-    en: 'I would like a quote for The Golden Frequency course: the next start date, format and fee.',
+    vi: 'Tôi muốn đăng ký khóa Tần Số Vàng: lịch khai giảng gần nhất và hình thức học.',
+    en: 'I would like to enrol in The Golden Frequency course: the next start date and format.',
     interest: 'courses',
   },
 };

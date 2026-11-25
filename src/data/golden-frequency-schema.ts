@@ -6,9 +6,12 @@ const origin = 'https://huongthiennature.com';
 
 /**
  * schema.org nodes for the Golden Frequency course page. A fee is published only when
- * `frequencyOffer.price` holds a confirmed figure, never a placeholder.
+ * `frequencyOffer.price` holds a confirmed figure, never a placeholder. While the recommended price runs, the Offer is valid
+ * until the day before `endsAt` (Vietnam time).
  */
-export function frequencySchema(lang: Language, offer: { price: number | null; currency: string; year?: number } = frequencyOffer) {
+const lastDay = (endsAt: string) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(Date.parse(endsAt) - 1));
+
+export function frequencySchema(lang: Language, offer: { price: number | null; currency: string; endsAt?: string } = frequencyOffer) {
   const url = origin + coursePath(lang, frequencyCourse);
   const { title, description } = frequencyCourse[lang];
   const priced = offer.price !== null && Number.isFinite(offer.price) && offer.price > 0;
@@ -23,7 +26,7 @@ export function frequencySchema(lang: Language, offer: { price: number | null; c
       inLanguage: lang,
       provider: { '@id': origin + '/#organization' },
       image: new URL(courseImage(frequencyCourse, lang), origin).href,
-      ...(priced ? { offers: { '@type': 'Offer', price: String(Math.round(offer.price as number)), priceCurrency: offer.currency, url, availability: 'https://schema.org/InStock', ...(offer.year ? { priceValidUntil: `${offer.year}-12-31` } : {}) } } : {}),
+      ...(priced ? { offers: { '@type': 'Offer', price: String(Math.round(offer.price as number)), priceCurrency: offer.currency, url, availability: 'https://schema.org/InStock', ...(offer.endsAt ? { priceValidUntil: lastDay(offer.endsAt) } : {}) } } : {}),
     },
     {
       '@type': 'FAQPage',

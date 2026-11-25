@@ -13,6 +13,7 @@ const pixabayPhotos: Record<string, { source?: string; width: number; height: nu
   '/media/pixabay-3358870.webp': { source: 'https://pixabay.com/photos/tea-plantation-landscape-vietnam-3358870/', width: 1200, height: 801 },
   '/media/pixabay-1287964.webp': { source: 'https://pixabay.com/photos/vietnam-saigon-temple-incense-1287964/', width: 1200, height: 900 },
   '/media/pixabay-8259984.webp': { source: 'https://pixabay.com/photos/vietnam-tea-plantation-agriculture-8259984/', width: 1200, height: 800 },
+  '/media/pixabay-2268333.webp': { source: 'https://pixabay.com/photos/foot-grass-fingers-barefoot-2268333/', width: 880, height: 585 },
   '/media/pixabay-2641446.webp': { source: 'https://pixabay.com/photos/water-buffalo-vietnam-nature-2641446/', width: 1200, height: 656 },
   '/media/pixabay-6540843.webp': { source: 'https://pixabay.com/photos/waterfall-vietnam-nature-landscape-6540843/', width: 1200, height: 800 },
   // Our own illustration, drawn for the Sun and Moon article (2.19.0; scripts/illustrations/sky-rhythm.py).

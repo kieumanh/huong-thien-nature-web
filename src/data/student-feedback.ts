@@ -7,6 +7,8 @@ export const feedbackPath = (lang: Language) => journeyPath(lang, 'feedback');
 export type StudentFeedback = {
   id: string;
   name: string;
+  /** Optional portrait, only when the student (or the author) has supplied it. */
+  avatar?: string;
   role: Record<Language, string>;
   /** Authors who also work with Hương Thiền Nature say so openly. */
   disclosure?: Record<Language, string>;
@@ -54,6 +56,7 @@ export const studentFeedback: StudentFeedback[] = [
   {
     id: 'kieu-manh',
     name: 'Kiều Mạnh',
+    avatar: '/media/author-kieu-manh-avatar.webp',
     role: { vi: 'Học trò đầu tiên của giảng viên Hương Thiền', en: 'First student of teacher Hương Thiền' },
     disclosure: {
       vi: 'Kiều Mạnh hiện cũng là người hỗ trợ học viên của Hương Thiền Nature.',

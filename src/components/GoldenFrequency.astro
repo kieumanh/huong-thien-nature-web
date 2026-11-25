@@ -9,7 +9,7 @@ import ContactForm from './ContactForm.astro';
 import FrequencyOrb from './FrequencyOrb.astro';
 import FrequencySelfCheck from './FrequencySelfCheck.astro';
 import GfIcon, { type GfIconName } from './GfIcon.astro';
-import { frequencyCourse, frequencyFeeNote, frequencyPriceLabel, frequencyTopic } from '../data/courses';
+import { frequencyCourse, frequencyFeeNote, frequencyOffer, frequencyPriceLabel, frequencyRegularLabel, frequencyTopic } from '../data/courses';
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, weeklyPlan } from '../data/golden-frequency';
 import { feedbackCopy, feedbackPath } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
@@ -23,6 +23,8 @@ const vi = lang === 'vi';
 const copy = frequencyLanding[lang];
 const priceLabel = frequencyPriceLabel(lang);
 const priced = priceLabel !== frequencyPriceLabel(lang, { price: null });
+const offer = frequencyOffer;
+const regularLabel = frequencyRegularLabel(lang);
 const tel = `tel:${internationalPhone}`;
 
 const valueIcons: GfIconName[] = ['wave', 'compass', 'timer', 'heart', 'target', 'sun'];
@@ -81,9 +83,16 @@ const petals = [6, 5, 7, 4, 3, 8];
         {copy.reassure.map(item => <li><GfIcon name="check" size={18} />{item}</li>)}
       </ul>
       <dl class="gf-facts">
-        {[...copy.facts, [priceLabel, copy.priceLabel]].map(([value, label]) => <div><dt>{label}</dt><dd>{value}</dd></div>)}
+        {[...copy.facts, [priceLabel, copy.priceLabel]].map(([value, label]) => <div><dt>{label}</dt><dd data-gf-price={label === copy.priceLabel ? '' : undefined}>{value}</dd></div>)}
       </dl>
-      <p class="gf-price-note">{priced ? frequencyFeeNote(lang) : copy.priceNote}</p>
+      <p class="gf-price-note" data-gf-note>{priced ? frequencyFeeNote(lang) : copy.priceNote}</p>
+      {offer.endsAt && <div class="gf-countdown" data-gf-countdown data-ends={offer.endsAt} data-regular={regularLabel} data-ended={copy.countdown.endedNote} role="timer" aria-live="off">
+        <p class="gf-countdown-title">{copy.countdown.title}</p>
+        <ol class="gf-countdown-cells js-only" role="list">
+          {copy.countdown.units.map((unit, index) => <li><strong data-gf-unit={['d', 'h', 'm', 's'][index]}>--</strong><span>{unit}</span></li>)}
+        </ol>
+        <p class="gf-countdown-after">{copy.countdown.regular}: <strong>{regularLabel}</strong></p>
+      </div>}
       <a class="gf-outline-link" href="#curriculum">{copy.outline} <span aria-hidden="true">↓</span></a>
     </div>
     <div class="gf-hero-art" data-gf-reveal><FrequencyOrb {lang} label={copy.artLabel} /></div>
@@ -430,7 +439,7 @@ const petals = [6, 5, 7, 4, 3, 8];
       <ul class="gf-quote-list" role="list">
         {copy.quoteIncludes.map(item => <li><GfIcon name="check" size={18} />{item}</li>)}
       </ul>
-      <p class="gf-quote-price"><span>{copy.priceLabel}</span> <strong>{priceLabel}</strong></p>
+      <p class="gf-quote-price"><span>{copy.priceLabel}</span> <strong data-gf-price>{priceLabel}</strong>{offer.endsAt && <s class="gf-price-was" data-gf-was>{regularLabel}</s>}</p>
       <div class="gf-actions">
         <a class="button gf-button" href={zaloUrl}>{copy.quoteZaloAction} <Arrow /></a>
         <a class="button gf-button--ghost" href={tel}>{copy.quoteCall}</a>
@@ -442,7 +451,7 @@ const petals = [6, 5, 7, 4, 3, 8];
 </main>
 
 <aside class="gf-sticky" data-gf-sticky hidden aria-label={copy.stickyLabel}>
-  <p><strong>{copy.stickyLabel}</strong><span>{copy.priceLabel}: {priceLabel}</span></p>
+  <p><strong>{copy.stickyLabel}</strong><span>{copy.priceLabel}: <span data-gf-price>{priceLabel}</span></span></p>
   <a class="button gf-button" href={zaloUrl}>{copy.stickyAction}</a>
 </aside>
 

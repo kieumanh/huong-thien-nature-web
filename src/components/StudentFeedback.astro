@@ -21,7 +21,7 @@ const initials = (name: string) => name.split(/\s+/).map(part => part[0]).slice(
       const highlight = lang === 'vi' ? item.highlight : item.highlightEn;
       return <figure class="feedback-card" lang={lang}>
         <div class="feedback-person">
-          <span class="feedback-avatar" aria-hidden="true">{initials(item.name)}<span class="feedback-badge"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3.5c1.9 2.3 2.5 4.9 1.6 8.2-.5.4-1.1.6-1.6.6s-1.1-.2-1.6-.6C9.5 8.4 10.1 5.8 12 3.5z" /><path d="M7.3 6.6c2 .3 3.3 1.8 3.6 4.4.1.6-.1 1.2-.4 1.7-2.2-.1-3.6-1.4-4.2-3.2-.3-1 0-2.2 1-2.9z" /><path d="M16.7 6.6c-2 .3-3.3 1.8-3.6 4.4-.1.6.1 1.2.4 1.7 2.2-.1 3.6-1.4 4.2-3.2.3-1 0-2.2-1-2.9z" /><path d="M4 14.2c2.6 1.4 5.2 1.9 8 1.9s5.4-.5 8-1.9c-.9 3.2-3.9 5.3-8 5.3s-7.1-2.1-8-5.3z" /></svg></span></span>
+          <span class="feedback-avatar" aria-hidden="true">{item.avatar ? <img src={item.avatar} alt="" width="240" height="240" loading="lazy" decoding="async" /> : initials(item.name)}<span class="feedback-badge"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 3.5c1.9 2.3 2.5 4.9 1.6 8.2-.5.4-1.1.6-1.6.6s-1.1-.2-1.6-.6C9.5 8.4 10.1 5.8 12 3.5z" /><path d="M7.3 6.6c2 .3 3.3 1.8 3.6 4.4.1.6-.1 1.2-.4 1.7-2.2-.1-3.6-1.4-4.2-3.2-.3-1 0-2.2 1-2.9z" /><path d="M16.7 6.6c-2 .3-3.3 1.8-3.6 4.4-.1.6.1 1.2.4 1.7 2.2-.1 3.6-1.4 4.2-3.2.3-1 0-2.2-1-2.9z" /><path d="M4 14.2c2.6 1.4 5.2 1.9 8 1.9s5.4-.5 8-1.9c-.9 3.2-3.9 5.3-8 5.3s-7.1-2.1-8-5.3z" /></svg></span></span>
           <figcaption><strong>{item.name}</strong><span>{item.role[lang]}</span></figcaption>
         </div>
         <div class="feedback-body">
@@ -66,6 +66,7 @@ const initials = (name: string) => name.split(/\s+/).map(part => part[0]).slice(
     position: relative; border: 2px solid var(--gold); background: radial-gradient(circle at 35% 30%, #4a3578, var(--plum-deep));
     color: var(--gold-hi); font: 400 1.25rem/1 var(--serif);
   }
+  .feedback-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; }
   .feedback-badge {
     position: absolute; right: -.35rem; bottom: -.35rem; display: grid; place-items: center;
     width: 1.6rem; height: 1.6rem; border-radius: 50%; border: 2px solid var(--plum-night);

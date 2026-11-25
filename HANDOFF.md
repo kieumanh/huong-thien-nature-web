@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-24, phiên bản 2.21.2. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-25, phiên bản 2.22.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -28,6 +28,8 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
 | 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
+| 25/11 | 2.22.0: công bố giá. Tần Số Vàng 5,6 triệu đến hết giao thừa Tết Âm lịch 2027 (đồng hồ đếm ngược), sau đó 6,6 triệu; Tarot 600.000 ₫/phiên 90 phút; bỏ phần nhắn hỏi giá. **Việc cần làm: build lại site sau 06/02/2027** để dữ liệu có cấu trúc chuyển sang 6,6 triệu. |
+| 24/11 | 2.21.3: bìa `returning-attention` đổi sang `pixabay-2268333.webp` (bàn chân trần trên cỏ, nguồn đã ghi trong `article-photos.ts`); avatar Kiều Mạnh trong Phản hồi học viên là `author-kieu-manh-avatar.webp` (trường `avatar`). |
 | 24/11 | 2.21.2: bỏ ô sắp xếp Tản văn (luôn mới nhất trước); ba bài `returning-attention`, `seven-layers`, `listening-to-nature` có ngày đăng 22/11/2026 (chủ dự án cung cấp). |
 | 24/11 | 2.21.1: lối đọc Gợi ý có bước 4 "Thấy khó ngồi yên?" (cùng kiểu thẻ, dẫn tới `when-meditation-is-difficult`); khối rời `practice-help` đã gỡ; ghép bằng `practicePath(lang)` trong `src/data/home.ts`. |
 | 24/11 | 2.21.0: Tản văn xếp bài mới nhất lên đầu (mặc định), bài chưa có ngày xếp cuối; bỏ tùy chọn "tuyển chọn" và số thứ tự ở lối đọc. Còn chờ chủ dự án cung cấp ngày đăng cho `returning-attention`, `seven-layers`, `listening-to-nature`. |
