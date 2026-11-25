@@ -7,11 +7,11 @@ interface Props { lang: Language; variant?: 'home' | 'full'; id?: string }
 const { lang, variant = 'home', id = 'living-zen' } = Astro.props;
 const copy = livingZen[lang];
 const full = variant === 'full';
-// Icons from brand/icons/brand (24 × 24, 1.75 stroke): plant = cây, meditation = thiền, mind = trí tuệ.
+// Icons drawn on a 24 × 24 grid (1.75 stroke). Motion is defined in living-zen.css and turned off under reduced motion.
 const icons: Record<QualityIcon, string> = {
-  plant: '<path d="M12 21v-8"/><path d="M12 13c-4.4 0-7-2.7-7-6.3C5 4.6 7.2 3 9.2 3c1.2 0 2.2.5 2.8 1.3.6-.8 1.6-1.3 2.8-1.3 2 0 4.2 1.6 4.2 3.7 0 3.6-2.6 6.3-7 6.3Z"/><path d="M8.5 21h7"/>',
-  meditation: '<circle cx="12" cy="5.5" r="2"/><path d="M12 8.5v5"/><path d="M7.5 12.5 12 10l4.5 2.5"/><path d="M4.5 18.5c2.5-2.6 4.8-3.5 7.5-3.5s5 .9 7.5 3.5"/><path d="M6.5 20h11"/>',
-  mind: '<path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3Z"/><path d="M12 7v3"/>',
+  plant: '<path class="lz-ico-soil" d="M6 20.5h12"/><path class="lz-ico-stem" d="M12 20.5V13"/><path class="lz-ico-leaf lz-ico-leaf--left" d="M12 13C10.6 9.9 8.6 8.4 5.6 8.2c-.2 3.1 1.9 5.1 6.4 4.8Z"/><path class="lz-ico-leaf lz-ico-leaf--right" d="M12 10c1.2-3 3.2-4.6 6.3-4.9.2 3-1.9 4.9-6.3 4.9Z"/>',
+  meditation: '<g class="lz-ico-figure"><circle cx="12" cy="5.5" r="2"/><path d="M12 8.5v5"/><path d="M7.5 12.5 12 10l4.5 2.5"/></g><path class="lz-ico-base" d="M4.5 18.5c2.5-2.6 4.8-3.5 7.5-3.5s5 .9 7.5 3.5"/><path d="M6.5 20h11"/>',
+  mind: '<circle class="lz-ico-glow" cx="12" cy="9.5" r="7.2"/><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3Z"/><path class="lz-ico-filament" d="M12 7v3"/>',
 };
 ---
 <section class:list={['lz-values', full ? 'journey-section lz-values--full' : 'shell lz-values--home']} {id} aria-labelledby={`${id}-title`}>

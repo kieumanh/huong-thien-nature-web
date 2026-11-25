@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.24.2',
+    date: '2026-11-26',
+    vi: ['Living Zen: căn mô tả và icon chuyển động', 'Phần mô tả của Thân, Tâm, Trí thẳng hàng; bỏ thanh màu bên trái; icon cây, thiền và ánh sáng trong trí có chuyển động nhẹ, căn giữa khung; tắt chuyển động khi bật chế độ giảm chuyển động.'],
+    en: ['Living Zen: aligned descriptions and moving icons', 'The Body, Mind and Wisdom descriptions line up; the left accent bar is removed; the plant, meditation and light-of-wisdom icons move gently and are centred in their cards; motion stops when reduced motion is on.'],
+  },
+  {
     version: '2.24.1',
     date: '2026-11-26',
     vi: ['Living Zen và Tần Số Vàng: tinh chỉnh giao diện và nội dung', 'Viết lại đoạn 28 tuổi; sửa đường kẻ đè chữ trong phản hồi học viên; icon Thân – Tâm – Trí mới; chân trang thu gọn; Tần Số Vàng giảm độ chói của khung nền vàng, thêm ảnh còn thiếu, dùng số hỗ trợ 0388.000.680 và căn lại đường kẻ của lịch sinh hoạt.'],
