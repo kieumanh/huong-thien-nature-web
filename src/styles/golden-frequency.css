@@ -811,3 +811,15 @@ html:has(body[data-gf-sticky-on]) { scroll-padding-bottom: 6rem; }
 }
 
 .gf-feedback-link { margin-top: 1.4rem; text-align: center; }
+
+/* Countdown to the end of the recommended price */
+.gf-countdown { margin-top: 1rem; padding: .9rem 1rem; max-width: 30rem; border: 1px solid #f4c76b4d; border-radius: 1rem; background: #f4c76b14; }
+.gf-countdown-title { margin: 0; color: var(--gf-lilac); font-size: .82rem; letter-spacing: .02em; }
+.gf-countdown-cells { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .5rem; margin: .5rem 0 .6rem; padding: 0; list-style: none; }
+.gf-countdown-cells li { display: grid; justify-items: center; padding: .45rem .2rem; border-radius: .7rem; background: #0d0a2399; }
+.gf-countdown-cells strong { color: var(--gf-gold-hi); font: 400 clamp(1.3rem, 5vw, 1.8rem)/1.1 var(--serif); font-variant-numeric: tabular-nums; }
+.gf-countdown-cells span { color: var(--gf-lilac); font-size: .74rem; }
+.gf-countdown-after { margin: 0; font-size: .86rem; }
+.gf-countdown-after strong { color: var(--gf-gold-hi); }
+html:not(.js) .gf-countdown-cells { display: none; }
+.gf-price-was { color: var(--gf-lilac); font-size: .95rem; text-decoration-thickness: 1px; }

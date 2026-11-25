@@ -1,4 +1,4 @@
-// Golden Frequency page: reveal-on-scroll, the six-area self-check map, the weekly tracker and the sticky quote bar.
+// Golden Frequency page: reveal-on-scroll, the six-area self-check map, the weekly tracker, the price countdown and the sticky enrol bar.
 // All text is written with textContent / value; nothing is sent anywhere unless the visitor submits the contact form.
 
 type CheckCopy = {
@@ -29,6 +29,7 @@ if ('IntersectionObserver' in window && !motion.matches && !saveData) {
 setupSelfCheck();
 setupScale();
 setupWeek();
+setupCountdown();
 setupSticky();
 setupRails();
 
@@ -188,6 +189,36 @@ function setupWeek() {
   list.addEventListener('change', update);
   reset?.addEventListener('click', () => { boxes.forEach(box => { box.checked = false; }); update(); });
   update();
+}
+
+// Countdown to the end of the recommended price. When the moment passes, the official fee replaces the price everywhere on the page.
+function setupCountdown() {
+  const boxes = [...document.querySelectorAll<HTMLElement>('[data-gf-countdown]')];
+  const box = boxes[0];
+  const ends = box ? Date.parse(box.dataset.ends ?? '') : NaN;
+  if (!box || !Number.isFinite(ends)) return;
+  const pad = (value: number) => String(value).padStart(2, '0');
+  const finish = () => {
+    const regular = box.dataset.regular ?? '';
+    document.querySelectorAll('[data-gf-price]').forEach(node => { node.textContent = regular; });
+    document.querySelectorAll('[data-gf-was]').forEach(node => node.remove());
+    const note = document.querySelector('[data-gf-note]');
+    if (note && box.dataset.ended) note.textContent = box.dataset.ended;
+    boxes.forEach(node => node.remove());
+  };
+  const tick = () => {
+    const left = ends - Date.now();
+    if (left <= 0) { finish(); return false; }
+    const total = Math.floor(left / 1000);
+    const parts = { d: Math.floor(total / 86400), h: Math.floor((total % 86400) / 3600), m: Math.floor((total % 3600) / 60), s: total % 60 };
+    for (const node of boxes) for (const [unit, value] of Object.entries(parts)) {
+      const cell = node.querySelector<HTMLElement>(`[data-gf-unit="${unit}"]`);
+      if (cell) cell.textContent = unit === 'd' ? String(value) : pad(value);
+    }
+    return true;
+  };
+  if (!tick()) return;
+  const timer = window.setInterval(() => { if (!tick()) window.clearInterval(timer); }, 1000);
 }
 
 // Quote bar: appears once the hero has scrolled away and leaves when the quote section arrives.

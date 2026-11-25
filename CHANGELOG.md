@@ -1,3 +1,10 @@
+## 2.22.0 — Công bố học phí và bỏ phần nhắn hỏi giá
+
+- **Tần Số Vàng:** công bố giá khuyến nghị 2026 là 5.600.000 ₫, áp dụng đến hết giao thừa Tết Âm lịch 2027 (05/02/2027); từ mùng 1 Tết (06/02/2027) học phí chính thức là 6.600.000 ₫. Trang có đồng hồ đếm ngược; khi hết hạn, trình duyệt tự đổi giá hiển thị sang 6.600.000 ₫ (cả thanh cố định và mục đăng ký). Dữ liệu có cấu trúc ghi Offer 5.600.000 ₫ có hạn đến 05/02/2027; cần build lại sau Tết để Offer chuyển sang 6.600.000 ₫. Mốc nằm ở `frequencyPricing.promoEndsAt` (`src/data/courses.ts`). Thay quy tắc cũ "đổi giá từ 01/01/2027".
+- **Tarot tâm lý học 1:1:** 90 phút, 600.000 ₫ mỗi phiên (`tarotOffer.price`), hiển thị ở đầu trang, thanh cố định, bảng so sánh và dữ liệu có cấu trúc.
+- **Bỏ phần nhắn hỏi giá ở cả hai trang:** nút, tiêu đề, bước hướng dẫn, hỏi đáp và tin nhắn điền sẵn đổi từ "báo giá/hỏi chi phí" sang "đăng ký/đặt lịch". Kênh Zalo, điện thoại và biểu mẫu vẫn giữ để đăng ký và hỏi lịch.
+- Kiểm thử: `test:frequency` và `test:tarot` theo giá và mốc mới; kiểm tra trên trình duyệt đếm ngược chạy và giá đổi khi quá mốc.
+
 ## 2.21.3 — Ảnh bài "Sự trở lại cũng là thực tập" và ảnh đại diện Kiều Mạnh
 
 - **Bìa bài "Sự trở lại cũng là thực tập"** (`/vi/tan-van/`, `/en/journal/`, trang bài): thay ảnh chùa có nhang bằng ảnh bàn chân trần trên cỏ, nguồn Pixabay đã ghi nhận trong `article-photos.ts`. Ảnh này không có khuôn mặt và chưa làm bìa bài nào khác.

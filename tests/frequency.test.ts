@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
-import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, showFrequencyFee, frequencyOfferFor, frequencyPriceLabel, frequencyTopic } from '../src/data/courses.ts';
+import { courseImage, coursePath, courses, frequencyCourse, frequencyEnquiryPath, frequencyFeeNote, frequencyOffer, frequencyOfferFor, frequencyPriceLabel, frequencyPricing, frequencyTopic } from '../src/data/courses.ts';
 import { courseCompare } from '../src/data/course-compare.ts';
 import { studentFeedback } from '../src/data/student-feedback.ts';
 import { journeyPageKeys, journeyPath } from '../src/data/journey-pages.ts';
@@ -23,28 +23,46 @@ test('the course is listed with bilingual routes and social images that exist', 
   assert.notEqual(courseImage(frequencyCourse, 'vi'), courseImage(frequencyCourse, 'en'));
 });
 
-test('confirmed fee: 5.600.000 ₫ in 2026, 6.600.000 ₫ from 2027', () => {
-  assert.equal(frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00')).price, 5600000);
-  assert.equal(frequencyOfferFor(new Date('2026-12-31T23:59:00+07:00')).price, 5600000);
-  assert.equal(frequencyOfferFor(new Date('2027-01-01T00:00:00+07:00')).price, 6600000);
+test('confirmed fee: 5.600.000 ₫ until Tết Âm lịch 2027, then 6.600.000 ₫', () => {
+  assert.equal(frequencyPricing.promo, 5600000);
+  assert.equal(frequencyPricing.regular, 6600000);
+  assert.equal(frequencyPricing.promoEndsAt, '2027-02-06T00:00:00+07:00', 'mùng 1 Tết Đinh Mùi is Saturday 6 February 2027');
+  assert.equal(frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00')).price, 5600000);
+  assert.equal(frequencyOfferFor(new Date('2027-01-01T00:00:00+07:00')).price, 5600000, 'the recommended price runs past 1 January');
+  assert.equal(frequencyOfferFor(new Date('2027-02-05T23:59:59+07:00')).price, 5600000);
+  assert.equal(frequencyOfferFor(new Date('2027-02-06T00:00:00+07:00')).price, 6600000);
   assert.equal(frequencyOfferFor(new Date('2030-06-01T00:00:00+07:00')).price, 6600000);
-  assert.equal(frequencyPriceLabel('vi', frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00'))), '5.600.000 ₫');
-  assert.equal(frequencyPriceLabel('en', frequencyOfferFor(new Date('2027-02-01T00:00:00+07:00'))), '6,600,000 VND');
-  assert.match(frequencyFeeNote('vi', frequencyOfferFor(new Date('2026-11-24T00:00:00+07:00'))), /6\.600\.000/);
-  for (const bad of [0, -1, Number.NaN]) assert.equal(frequencyPriceLabel('en', { price: bad }), 'Quote by message');
-  assert.equal(showFrequencyFee, false, 'the fee is quoted by message and is not published');
-  assert.equal(frequencyOffer.price, null);
-  assert.equal(frequencyPriceLabel('vi'), 'Báo giá qua tin nhắn');
-  assert.equal(frequencyPriceLabel('en'), 'Quote by message');
+  assert.equal(frequencyPriceLabel('vi', frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00'))), '5.600.000 ₫');
+  assert.equal(frequencyPriceLabel('en', frequencyOfferFor(new Date('2027-03-01T00:00:00+07:00'))), '6,600,000 VND');
+  assert.match(frequencyFeeNote('vi', frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00'))), /05\/02\/2027.*6\.600\.000/);
+  assert.match(frequencyFeeNote('en', frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00'))), /5 February 2027.*6,600,000/);
+  for (const bad of [0, -1, Number.NaN]) assert.equal(frequencyPriceLabel('en', { price: bad }), 'Ask us');
+  assert.ok(frequencyOffer.price === 5600000 || frequencyOffer.price === 6600000);
   for (const lang of languages) {
-    const published = frequencySchema(lang).find(node => node['@type'] === 'Service');
-    assert.ok(published && !('offers' in published), 'no fee in the published structured data');
     const service = frequencySchema(lang, { price: null, currency: 'VND' }).find(node => node['@type'] === 'Service');
-    assert.ok(service && !('offers' in service));
+    assert.ok(service && !('offers' in service), 'no Offer without a figure');
   }
-  const priced = frequencySchema('vi', { price: 5600000, currency: 'VND', year: 2026 }).find(node => node['@type'] === 'Service') as { offers: { price: string; priceValidUntil: string } };
+  const priced = frequencySchema('vi', frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00'))).find(node => node['@type'] === 'Service') as { offers: { price: string; priceValidUntil: string } };
   assert.equal(priced.offers.price, '5600000');
-  assert.equal(priced.offers.priceValidUntil, '2026-12-31');
+  assert.equal(priced.offers.priceValidUntil, '2027-02-05');
+  const official = frequencySchema('vi', frequencyOfferFor(new Date('2027-03-01T00:00:00+07:00'))).find(node => node['@type'] === 'Service') as { offers: { price: string } & Record<string, unknown> };
+  assert.equal(official.offers.price, '6600000');
+  assert.ok(!('priceValidUntil' in official.offers));
+});
+
+test('the written fee on the page and in the compare table matches the pricing figures, and no quote-by-message copy is left', () => {
+  const dots = (value: number) => new Intl.NumberFormat('vi-VN').format(value);
+  const commas = (value: number) => new Intl.NumberFormat('en-US').format(value);
+  const info = frequencyLanding.vi.info.items.find(([label]) => label === 'Học phí')?.[1] ?? '';
+  assert.ok(info.includes(dots(frequencyPricing.promo)) && info.includes(dots(frequencyPricing.regular)));
+  const infoEn = frequencyLanding.en.info.items.find(([label]) => label === 'Fee')?.[1] ?? '';
+  assert.ok(infoEn.includes(commas(frequencyPricing.promo)) && infoEn.includes(commas(frequencyPricing.regular)));
+  for (const lang of languages) {
+    const text = JSON.stringify([frequencyLanding[lang], courseCompare[lang]]);
+    assert.ok(!/báo giá|quote by message|get a quote|request a quote|ask for a quote/i.test(text), `${lang}: price enquiries removed`);
+  }
+  assert.equal(frequencyLanding.vi.countdown.units.length, 4);
+  assert.equal(frequencyLanding.en.countdown.units.length, 4);
 });
 
 test('structured data mirrors the visible questions', () => {
@@ -117,7 +135,10 @@ test('the course information sheet and the course comparison answer what a stude
     }
   }
   assert.deepEqual(Object.keys(courseCompare.vi.courses), Object.keys(courseCompare.en.courses));
-  assert.ok(!courseCompare.vi.courses['golden-frequency'].values.join(' ').match(/\d[\d.,]*\s?(tr|đ|₫|vnd)/i), 'no fee figures in the comparison');
+  const fees = (lang: 'vi' | 'en', key: 'golden-frequency' | 'tarot') => courseCompare[lang].courses[key].values[4];
+  assert.ok(fees('vi', 'golden-frequency').includes('5.600.000') && fees('vi', 'golden-frequency').includes('6.600.000'));
+  assert.ok(fees('en', 'golden-frequency').includes('5,600,000') && fees('en', 'golden-frequency').includes('6,600,000'));
+  assert.ok(fees('vi', 'tarot').includes('600.000') && fees('en', 'tarot').includes('600,000'));
 });
 
 test('student feedback keeps the original text and an equal English translation', () => {
