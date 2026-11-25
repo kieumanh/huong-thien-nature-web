@@ -1,3 +1,9 @@
+## 2.22.1 — Đối tác: tên dự án và link website dễ đọc hơn
+
+- **Mục "Những người đồng hành xung quanh"** (`/vi/he-sinh-thai/`, `/en/ecosystem/`): tên dự án nay có nhãn "Dự án" / "Project" và hiển thị riêng, cỡ chữ lớn hơn, không còn in đậm lẫn trong đoạn. Link website là một nút toàn chiều rộng, hiện tên miền đầy đủ và mũi tên, dễ bấm trên điện thoại.
+- **Tên đối tác farm (tiếng Anh):** đổi thành "Farm Gửi Yêu Thương Vào Đất", khớp với tên tiếng Việt.
+- Kiểm thử: `check`, `audit`, `build`, `audit:build` đạt; kiểm tra trên khung 390px không tràn ngang và nút link đủ cao 48px.
+
 ## 2.22.0 — Công bố học phí và bỏ phần nhắn hỏi giá
 
 - **Tần Số Vàng:** công bố giá khuyến nghị 2026 là 5.600.000 ₫, áp dụng đến hết giao thừa Tết Âm lịch 2027 (05/02/2027); từ mùng 1 Tết (06/02/2027) học phí chính thức là 6.600.000 ₫. Trang có đồng hồ đếm ngược; khi hết hạn, trình duyệt tự đổi giá hiển thị sang 6.600.000 ₫ (cả thanh cố định và mục đăng ký). Dữ liệu có cấu trúc ghi Offer 5.600.000 ₫ có hạn đến 05/02/2027; cần build lại sau Tết để Offer chuyển sang 6.600.000 ₫. Mốc nằm ở `frequencyPricing.promoEndsAt` (`src/data/courses.ts`). Thay quy tắc cũ "đổi giá từ 01/01/2027".

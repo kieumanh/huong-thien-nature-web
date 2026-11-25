@@ -171,3 +171,11 @@
 .eco-cta { padding: clamp(1.1rem, 3.5vw, 2rem); }
 .eco-cta__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .6rem 1.4rem; }
 @media (max-width: 520px) { .eco-focus { grid-template-columns: minmax(0, 1fr); } }
+
+/* Partner cards: the project name reads as a title, the website as a full-width button on a phone. */
+.partner-card__project { margin-top: .6rem; }
+.partner-card__label { display: block; color: var(--muted); font-size: .78rem; font-weight: 650; letter-spacing: .06em; text-transform: uppercase; }
+.partner-card__name { margin: .2rem 0 0; color: var(--ink); font: 600 clamp(1.15rem, 3.4vw, 1.3rem)/1.3 var(--serif); }
+.partner-card__site { display: flex; align-items: center; justify-content: space-between; gap: .75rem; box-sizing: border-box; width: 100%; min-height: 48px; margin-top: 1rem; padding: .65rem 1rem; border: 1px solid var(--primary); border-radius: 999px; color: var(--primary); font-weight: 650; overflow-wrap: anywhere; text-decoration: none; transition: background-color var(--motion-fast) var(--motion-ease); }
+.partner-card__site:is(:hover, :focus-visible) { background: color-mix(in srgb, var(--primary) 10%, transparent); }
+.partner-card__site span { min-width: 0; }

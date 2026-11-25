@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.22.1',
+    date: '2026-11-25',
+    vi: ['Đối tác: tên dự án và link website dễ đọc hơn', 'Mục Những người đồng hành có nhãn Dự án rõ ràng, và link website là nút toàn chiều rộng hiện tên miền đầy đủ.'],
+    en: ['Partners: clearer project name and website link', 'The partners section now labels the project clearly, and the website link is a full-width button showing the full domain.'],
+  },
+  {
     version: '2.22.0',
     date: '2026-11-25',
     vi: ['Công bố học phí hai khóa', 'Tần Số Vàng: 5.600.000 ₫ đến hết Tết Âm lịch 2027, sau đó 6.600.000 ₫, có đồng hồ đếm ngược. Tarot 1:1: 90 phút, 600.000 ₫ mỗi phiên. Đã bỏ các phần nhắn tin hỏi giá.'],
