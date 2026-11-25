@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.24.0',
+    date: '2026-11-26',
+    vi: ['Living Zen 2.0: bộ nhận diện thương hiệu mới', 'Xanh rừng trở lại làm màu chính, vàng kim chỉ còn là điểm nhấn; thêm font Lora, lựa chọn giao diện sáng/tối ở cuối trang và khối Thân – Tâm – Trí trên Trang chủ, Hệ sinh thái. Bộ nhận diện đầy đủ (logo đề xuất, màu, họa tiết, mẫu in, brand book) nằm trong thư mục brand/.'],
+    en: ['Living Zen 2.0: a new brand identity', 'Forest green is the main colour again and gold becomes an accent; adds the Lora typeface, a light/dark appearance choice in the footer and the Body – Mind – Wisdom block on the home and ecosystem pages. The full identity kit (proposed logo, colours, patterns, print templates, brand book) lives in the brand/ folder.'],
+  },
+  {
     version: '2.23.0',
     date: '2026-11-25',
     vi: ['Tần Số Vàng: học 2 tháng, mỗi tuần một buổi', 'Khóa học kéo dài 2 tháng, mỗi tuần 1 buổi 2 giờ; ở gần thì ưu tiên học trực tiếp, ở xa thì 100% online. Học phí đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên.'],

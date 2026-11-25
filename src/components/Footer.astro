@@ -86,10 +86,28 @@ const groups = [
     <p class="footer-notice">{notice}</p>
     <div class="footer-bottom">
       <span>© {new Date().getFullYear()} Hương Thiền Nature</span>
+      <div class="theme-choice js-only">
+        <label for="theme-choice">{vi ? 'Giao diện' : 'Appearance'}</label>
+        <select id="theme-choice" data-theme-choice>
+          <option value="auto">{vi ? 'Theo giờ trong ngày' : 'By time of day'}</option>
+          <option value="light">{vi ? 'Luôn sáng' : 'Always light'}</option>
+          <option value="dark">{vi ? 'Luôn tối' : 'Always dark'}</option>
+          <option value="system">{vi ? 'Theo hệ điều hành' : 'Match my device'}</option>
+        </select>
+      </div>
       <p class="footer-credit">{vi ? 'Thiết kế và phát triển bởi' : 'Designed and developed by'} <a href="https://zenwork.io.vn/">Zenwork.io.vn</a></p>
     </div>
   </div>
 </footer>
+
+<script>
+  const select = document.querySelector<HTMLSelectElement>('[data-theme-choice]');
+  const theme = (window as unknown as { htnTheme?: { get(): string; set(mode: string): void } }).htnTheme;
+  if (select && theme) {
+    select.value = theme.get();
+    select.addEventListener('change', () => theme.set(select.value));
+  }
+</script>
 
 <style>
   .footer-grid {

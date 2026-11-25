@@ -1,0 +1,185 @@
+{
+  "primary": [
+    {
+      "id": "forest",
+      "name": "Forest Green",
+      "vi": "Xanh rừng",
+      "hex": "#243F32",
+      "role": "Màu nhận diện chính: logo, điều hướng, nút chính ban ngày, footer ban ngày."
+    },
+    {
+      "id": "orchid",
+      "name": "Orchid",
+      "vi": "Tím lan",
+      "hex": "#713C63",
+      "role": "Tiêu đề cảm xúc, trích dẫn, nội dung thiền và đời sống nội tâm."
+    },
+    {
+      "id": "golden",
+      "name": "Golden Light",
+      "vi": "Vàng kim",
+      "hex": "#F4C76B",
+      "role": "Điểm nhấn có chủ đích: ánh sáng, dấu mốc, hành động đặc biệt. Không dùng cho chữ trên nền sáng."
+    }
+  ],
+  "supporting": [
+    {
+      "id": "paper",
+      "name": "Organic Paper",
+      "vi": "Giấy mộc",
+      "hex": "#FBF6EA",
+      "role": "Nền đọc, nền mặc định."
+    },
+    {
+      "id": "moss",
+      "name": "Moss Green",
+      "vi": "Xanh rêu",
+      "hex": "#526747",
+      "role": "Thiên nhiên, thực hành, không gian THÂN."
+    },
+    {
+      "id": "clay",
+      "name": "Earth Clay",
+      "vi": "Đất nung",
+      "hex": "#8B523D",
+      "role": "Đất, dinh dưỡng, nguồn cội, cửa hàng."
+    },
+    {
+      "id": "night",
+      "name": "Night Plum",
+      "vi": "Tím đêm",
+      "hex": "#100C24",
+      "role": "Không gian ban đêm, Tần Số Vàng."
+    }
+  ],
+  "extended": [
+    {
+      "id": "forest-hover",
+      "name": "Forest Hover",
+      "hex": "#365544"
+    },
+    {
+      "id": "leaf",
+      "name": "Leaf",
+      "hex": "#536C4C"
+    },
+    {
+      "id": "ink-soft",
+      "name": "Soft Ink",
+      "hex": "#586557"
+    },
+    {
+      "id": "cream",
+      "name": "Warm Cream",
+      "hex": "#F6EED9"
+    },
+    {
+      "id": "herbal",
+      "name": "Herbal Cream",
+      "hex": "#F3EBD4"
+    },
+    {
+      "id": "raised",
+      "name": "Raised Paper",
+      "hex": "#FFFDF7"
+    },
+    {
+      "id": "sand",
+      "name": "Sand",
+      "hex": "#DDD5BF"
+    },
+    {
+      "id": "rice",
+      "name": "Rice Gold",
+      "hex": "#EFE0B8"
+    },
+    {
+      "id": "orchid-deep",
+      "name": "Deep Orchid",
+      "hex": "#492742"
+    },
+    {
+      "id": "orchid-mist",
+      "name": "Orchid Mist",
+      "hex": "#F1E4EE"
+    },
+    {
+      "id": "orchid-line",
+      "name": "Orchid Line",
+      "hex": "#CDB1C7"
+    },
+    {
+      "id": "gold-hi",
+      "name": "Golden Highlight",
+      "hex": "#FFE7A8"
+    },
+    {
+      "id": "gold-deep",
+      "name": "Golden Deep",
+      "hex": "#C88A2C"
+    },
+    {
+      "id": "gold-accent",
+      "name": "Golden Accent",
+      "hex": "#855510"
+    },
+    {
+      "id": "gold-wash",
+      "name": "Golden Wash",
+      "hex": "#FBF2DD"
+    },
+    {
+      "id": "gold-ink",
+      "name": "Golden Ink",
+      "hex": "#1A1233"
+    },
+    {
+      "id": "plum-deep",
+      "name": "Plum Deep",
+      "hex": "#1A1338"
+    },
+    {
+      "id": "plum",
+      "name": "Cosmic Plum",
+      "hex": "#2C1F50"
+    },
+    {
+      "id": "night-orchid",
+      "name": "Night Orchid",
+      "hex": "#EDB9DD"
+    }
+  ],
+  "semantic": [
+    {
+      "id": "success",
+      "text": "#2B5741",
+      "surface": "#E1F0E5",
+      "rule": "Thành công — kèm icon ✓ và chữ"
+    },
+    {
+      "id": "warning",
+      "text": "#6B4C22",
+      "surface": "#F3E8CE",
+      "rule": "Cảnh báo — kèm icon ! và chữ"
+    },
+    {
+      "id": "error",
+      "text": "#7C392C",
+      "surface": "#F4E5DF",
+      "rule": "Lỗi — kèm icon × và chữ mô tả cách sửa"
+    },
+    {
+      "id": "info",
+      "text": "#2F4F63",
+      "surface": "#E3EDF2",
+      "rule": "Thông tin — kèm icon i"
+    }
+  ],
+  "proportion_day": {
+    "paper & neutrals": 55,
+    "forest & greens": 25,
+    "orchid": 10,
+    "earth clay": 5,
+    "golden light": 5
+  }
+}

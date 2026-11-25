@@ -42,6 +42,7 @@ const ecoLinks: Record<string, string> = {
   guidance: journeyPath(lang, 'guidance'), practice: journeyPath(lang, 'practice'), partnerships: '#partnerships',
   food: themePath(lang, themeById('thuc-pham-sach')!), stones: themePath(lang, themeById('da-nang-luong')!), journal: journalPath(lang),
 };
+import LivingZenValues from '../../components/LivingZenValues.astro';
 ---
 <BaseLayout {lang} title={`${info.heading} | Hương Thiền Nature`} description={info.description} {alternatePath}
   {...(page === 'support' ? { image: supportShareImage[lang].src, imageDetails: { type: supportShareImage.type, width: supportShareImage.width, height: supportShareImage.height, alt: supportShareImage[lang].alt } } : {})}
@@ -125,6 +126,7 @@ const ecoLinks: Record<string, string> = {
         </ol>
         <p class="eco-note">{vision.note}</p>
       </section>
+      <LivingZenValues {lang} variant="full" id="living-zen" />
       <section class="journey-section" aria-labelledby="eco-loop-title">
         <h2 id="eco-loop-title" class="sr-only">{vision.loop.title}</h2>
         <EcosystemIllustration {...vision.loop} variant="loop" />

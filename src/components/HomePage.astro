@@ -39,6 +39,7 @@ const welcome = homeEmpathy(lang, {
   practice: practicePath, contact: contactPath(lang), frequency: coursePath(lang, frequencyCourse), tarot: coursePath(lang),
   ecosystem: journeyPath(lang, 'ecosystem'), article: slug => articlePath(lang, slug),
 });
+import LivingZenValues from './LivingZenValues.astro';
 ---
 <BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} canonicalPath={`/${lang}/`} aboutOrganization>
   <Header {lang} {alternatePath} />
@@ -55,6 +56,8 @@ const welcome = homeEmpathy(lang, {
       </div>
       <div class="material-hero__art"><ContemplativeScene motif="meditation" /></div>
     </section>
+
+    <LivingZenValues {lang} />
 
     <EmpathyPaths block={welcome} id="welcome" extraClass="shell home-welcome" />
 

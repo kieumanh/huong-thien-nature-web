@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "./tokens.css";
+@import "./living-zen-tokens.css";
 @import "./handwritten.css";
 @import "./daylight.css";
 
@@ -317,3 +318,4 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
 .contact-channels .contact-phone__number { font-family: var(--serif); font-size: 1.5rem; letter-spacing: .02em; }
 .contact-channels .contact-phone__actions { display: flex; flex-wrap: wrap; gap: .2rem 1.4rem; }
 .contact-channels .contact-phone__actions a { display: inline-flex; min-height: 44px; padding: 0; justify-content: flex-start; }
+html:not(.js) .js-only { display: none !important; }

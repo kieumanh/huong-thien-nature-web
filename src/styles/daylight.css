@@ -38,7 +38,10 @@
   --border: #6b5c4a;
   --border-control: #a99bad;
   --brand-fern: #3a2f4a;
-  --footer-surface: color-mix(in srgb, #17231f, #302630 var(--twilight));
+  --footer-surface: color-mix(in srgb, #100c24, #2a1d35 var(--twilight));
+  --footer-heading: #ffe7a8;
+  --info: #b9d9ec;
+  --info-surface: #20323d;
   --footer-muted: #d7d9cf;
   --footer-link: #e5eadf;
   --orchid: #edb9dd;

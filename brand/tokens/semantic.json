@@ -1,0 +1,23 @@
+{
+  "bg": "var(--surface)",
+  "surface": "var(--surface-raised)",
+  "surface-muted": "var(--surface-container)",
+  "fg": "var(--foreground)",
+  "fg-muted": "var(--muted)",
+  "primary": "var(--primary)",
+  "primary-hover": "var(--primary-hover)",
+  "on-primary": "var(--on-primary)",
+  "secondary": "var(--surface-warm)",
+  "on-secondary": "var(--foreground)",
+  "accent": "var(--orchid)",
+  "special": "var(--gold)",
+  "on-special": "var(--gold-ink)",
+  "special-text": "var(--gold-accent)",
+  "border": "var(--border)",
+  "border-strong": "var(--border-control)",
+  "focus": "var(--focus)",
+  "success": "var(--success)",
+  "warning": "var(--warning)",
+  "error": "var(--error)",
+  "info": "var(--info)"
+}

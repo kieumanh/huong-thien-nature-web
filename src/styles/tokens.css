@@ -32,6 +32,9 @@
   --warning-surface: #f3e8ce;
   --error: #7c392c;
   --error-surface: #f4e5df;
+  --info: #2f4f63;
+  --info-surface: #e3edf2;
+  --footer-heading: #fbf6ea;
 
   --ink: var(--foreground);
   --line: var(--border);
@@ -53,7 +56,7 @@
   --brand-clay: var(--clay);
   --brand-rice: var(--surface-warm);
   --display-face: "Dancing Script", Georgia, "Times New Roman", serif;
-  --serif: Georgia, "Noto Serif", "Times New Roman", serif;
+  --serif: "Lora Variable", Georgia, "Noto Serif", "Times New Roman", serif;
   --sans: system-ui, "Segoe UI", "Noto Sans", Arial, sans-serif;
   --type-display: clamp(2.65rem, 5.5vw, 5rem);
   --type-page: clamp(2.05rem, 5vw, 4rem);
@@ -84,7 +87,10 @@
   --shadow-card: 0 6px 24px #243f3210;
   --shadow-floating: 0 2px 6px #243f3226, 0 6px 16px #243f321f;
   --control-size: 48px;
-  --motion-fast: 160ms;
+  --motion-instant: 60ms;
+  --motion-fast: 150ms;
+  --motion-standard: 260ms;
+  --motion-gentle: 600ms;
   --motion-ease: cubic-bezier(.2, .65, .3, 1);
   --header-offset: 90px;
 }

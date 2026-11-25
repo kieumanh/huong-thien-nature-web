@@ -1,83 +1,84 @@
-/* Gold and night-plum layer, taken from The Golden Frequency and applied site-wide.
-   Colour tokens live in tokens.css (day) and daylight.css (night). */
+/* Living Zen 2.0 accent layer (loaded last by BaseLayout.astro).
+   Replaces the 2.12 "gold everywhere" layer: forest is the everyday colour, orchid carries feeling,
+   golden light is a purposeful accent. Tokens: tokens.css, living-zen-tokens.css (generated from
+   brand/scripts/foundation.py) and daylight.css (night). Brand rules: brand/guidelines/brand-book.md. */
 
-/* Eyebrow labels read as small gold captions. */
-.eyebrow { color: var(--gold-accent); }
+/* Eyebrow labels: moss by day, warm gold at night (where gold reads well on plum). */
+.eyebrow { color: var(--secondary); }
+:where([data-sky="night"]) .eyebrow { color: var(--gold-accent); }
 
-/* Primary buttons carry the gold light; ink text keeps them readable day and night. */
-.button:not(.button--tonal) {
-  border-color: var(--gold-deep); background: var(--gold-gradient); color: var(--gold-ink);
-  box-shadow: 0 6px 18px #c88a2c2e;
-}
-.button:not(.button--tonal):not(:disabled):hover { background: linear-gradient(100deg, #fff3c9, #ffd986 55%, #f0b655); }
-.button:not(.button--tonal):not(:disabled):active { background: linear-gradient(100deg, var(--gold), #d99a38); }
-.button:disabled { box-shadow: none; }
-.button--tonal { border-color: var(--gold-line); background: var(--gold-wash); }
+/* Actions. Primary = forest; secondary = warm cream; special = golden light, only where a page opts in
+   (Tần Số Vàng, highlighted moments) with .button--special or inside .gf. */
+.button:not(.button--tonal) { border-color: var(--lz-button-primary-bg); background: var(--lz-button-primary-bg); color: var(--lz-button-primary-fg); box-shadow: var(--lz-shadow-subtle); }
+.button:not(.button--tonal):not(:disabled):hover { background: var(--lz-button-primary-hover); }
+.button--tonal { border-color: var(--border); background: var(--surface-warm); color: var(--foreground); }
 .button--tonal:not(:disabled):hover { background: var(--brand-fern); }
 [data-sky="night"] .button--tonal:not(:disabled):active { background: #4a3a5a; }
+:is(.button--special, .gf .button:not(.button--tonal)) {
+  border-color: var(--gold-deep); background: var(--gold-gradient); color: var(--gold-ink); box-shadow: 0 6px 18px #c88a2c2e;
+}
+:is(.button--special, .gf .button:not(.button--tonal)):not(:disabled):hover { background: linear-gradient(100deg, #fff3c9, #ffd986 55%, #f0b655); color: var(--gold-ink); }
 
-/* Header: a hairline of gold light under the bar and a gold mark for the active page. */
-.topbar { border-bottom-color: transparent; }
+/* Header: a quiet sand hairline; the current page is marked with a forest underline. */
 .topbar::after {
   content: ""; position: absolute; inset: auto 0 0; height: 1px; pointer-events: none;
-  background: linear-gradient(90deg, transparent, var(--gold-deep) 18%, var(--gold) 50%, var(--gold-deep) 82%, transparent); opacity: .75;
+  background: linear-gradient(90deg, transparent, var(--border) 15%, var(--border) 85%, transparent);
 }
-.brand-name small { color: var(--gold-accent); }
+.brand-name small { color: var(--secondary); }
 .nav-links a.active, .nav-links a[aria-current], .nav-connect[aria-current] {
-  background: var(--gold-wash); color: var(--foreground); box-shadow: inset 0 -2px 0 var(--gold-deep);
+  background: var(--surface-warm); color: var(--foreground); box-shadow: inset 0 -2px 0 var(--lz-nav-active-indicator);
 }
 :is(.nav-links a, .nav-actions a, .nav-toggle):is(:hover, :focus-visible) {
-  background: var(--gold-wash); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--gold-deep);
+  background: var(--surface-warm); color: var(--foreground); box-shadow: inset 0 0 0 1px var(--border-control);
 }
 @media (max-width: 1279px) {
-  .nav-search[aria-current], .nav-toggle[aria-expanded="true"] { background: var(--gold-wash); color: var(--foreground); }
+  .nav-search[aria-current], .nav-toggle[aria-expanded="true"] { background: var(--surface-warm); color: var(--foreground); }
 }
-[data-sky="night"] .nav-links a[aria-current], [data-sky="night"] .nav-links a.active { color: var(--gold-hi); }
+[data-sky="night"] .nav-links a[aria-current], [data-sky="night"] .nav-links a.active { color: var(--gold-hi); box-shadow: inset 0 -2px 0 var(--gold); }
 
-/* Cards: warm gold wash with a fine gold border. */
-.zen-card, .related-card, .search-result {
-  background: linear-gradient(160deg, var(--gold-wash), var(--surface-raised) 62%);
-  box-shadow: 0 8px 26px #3b2a0b0d;
-}
+/* Cards: raised paper, fine border, subtle elevation. */
+.zen-card, .related-card, .search-result { background: var(--surface-raised); box-shadow: var(--lz-shadow-subtle); }
 
-/* Section titles end in a short gold rule. */
-.journey-section > h2::after, .section-heading h2::after, .team-group > h2::after {
-  content: ""; display: block; width: 3.4rem; height: 2px; margin-top: .55rem;
-  background: var(--gold-gradient); border-radius: 2px;
-}
-
-/* Page headers on the journey pages: a night-plum panel with gold lettering and a gold mandala. */
+/* Journey page headers: organic paper with a soft leaf-green light; night keeps the plum sky. */
 .journey-page .journey-page-header {
+  background: radial-gradient(ellipse at 88% 8%, color-mix(in srgb, var(--brand-fern) 70%, transparent) 0, transparent 60%), linear-gradient(150deg, var(--surface-warm), var(--surface-container));
+  border: 1px solid var(--border);
+}
+.journey-page .journey-page-header .contemplative-scene--mandala { color: var(--secondary); opacity: .18; }
+[data-sky="night"] .journey-page .journey-page-header {
   background: radial-gradient(ellipse at 85% 12%, #4a3578 0, transparent 58%), linear-gradient(145deg, var(--plum-night), var(--plum-deep) 55%, var(--plum));
-  color: #f8f1e3; box-shadow: 0 18px 44px #100c2433;
+  border-color: #c88a2c55; color: #f8f1e3;
 }
-.journey-page .journey-page-header .contemplative-scene--mandala { color: var(--gold); opacity: .3; }
-.journey-page .journey-page-header .breadcrumbs, .journey-page .journey-page-header .breadcrumbs a { color: #d4c9ec; }
-.journey-page .journey-page-header h1 { color: var(--gold-hi); background: var(--gold-text); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-.journey-page .journey-page-header .lead { color: #e6def5; }
-.journey-page .journey-page-header :focus-visible { outline-color: var(--gold); }
+[data-sky="night"] .journey-page .journey-page-header .contemplative-scene--mandala { color: var(--gold); opacity: .28; }
+[data-sky="night"] .journey-page .journey-page-header h1 { color: var(--gold-hi); }
 
-/* Other page titles: deep plum script on the warm page, with a gold rule. */
-.journal-intro h1::after, .contact h1::after, .search-page h1::after, .versions-header h1::after, .shop-intro h1::after {
-  content: ""; display: block; width: 4.2rem; height: 3px; margin-top: .55rem; background: var(--gold-gradient); border-radius: 3px;
-}
+/* Quotes and pull-quotes speak in orchid with a fine orchid rule. */
+:where(blockquote) { border-inline-start: 2px solid var(--lz-quote-rule); color: var(--lz-quote-fg); }
 
-/* Floating controls and the progress bar share the night-plum and gold. */
-.music-dock, .back-to-top { --floating-bg: #1a1338; --floating-fg: #ffe7a8; --floating-border: #8d733a; --floating-state: #ffe7a828; }
-[data-floating-tone="light"] { --floating-bg: #fbf2dd; --floating-fg: #1a1233; --floating-border: #c88a2c; --floating-state: #1a123318; }
-.reading-progress span { background: var(--gold-gradient); }
-[data-sky="night"] .reading-progress span { background: var(--gold-gradient); }
-::selection { background: var(--gold); color: var(--gold-ink); }
+/* Floating controls: forest by day, plum at night. */
+.music-dock, .back-to-top { --floating-bg: var(--forest); --floating-fg: #fbf6ea; --floating-border: #536c4c; --floating-state: #fbf6ea24; }
+[data-sky="night"] :is(.music-dock, .back-to-top) { --floating-bg: #1a1338; --floating-fg: #ffe7a8; --floating-border: #8d733a; --floating-state: #ffe7a828; }
+[data-floating-tone="light"] { --floating-bg: #fbf6ea; --floating-fg: #243f32; --floating-border: #7e8a7b; --floating-state: #243f3218; }
+.reading-progress span { background: var(--lz-progress-fill); }
+[data-sky="night"] .reading-progress span { background: var(--gold); }
+::selection { background: var(--brand-fern); color: var(--forest); }
+[data-sky="night"] ::selection { background: var(--gold); color: var(--gold-ink); }
 
-/* Footer: night-plum with gold headings. */
-.footer {
-  --footer-surface: var(--plum-night); --footer-muted: #d7cfe6; --footer-link: #f1e6c6; --footer-divider: #f4c76b40; --footer-chip: #f4c76b26;
-  background: radial-gradient(ellipse at 15% 0, #2c1f50 0, transparent 55%), linear-gradient(180deg, var(--plum-deep), var(--plum-night));
-  border-top: 1px solid #c88a2c99;
-}
-.footer-group h2, .footer-brand { color: var(--gold-hi); }
-.footer a:hover { color: var(--gold-hi); }
+/* Footer: forest by day, night plum after dark; one restrained gold line. */
+.footer { border-top: 3px solid var(--gold); }
+.footer-group h2, .footer-brand { color: var(--footer-heading); }
+.footer a:hover { color: var(--footer-heading); }
 .footer a:focus-visible { outline-color: var(--gold); }
 
-/* At night the page titles take the gold of the lamp; panels with their own title colour keep it. */
+/* At night page titles take the gold of the lamp; panels with their own title colour keep it. */
 :where([data-sky="night"]) body h1 { color: var(--gold-hi); }
+
+/* Theme preference control (footer). */
+.theme-choice { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; }
+.theme-choice label { font-size: .8rem; color: var(--footer-muted); }
+.theme-choice select {
+  min-height: 44px; padding: .3rem 2rem .3rem .75rem; border: 1px solid var(--footer-divider); border-radius: var(--radius-input);
+  background: color-mix(in srgb, var(--footer-chip) 70%, transparent); color: var(--footer-link); font-size: .85rem;
+}
+.theme-choice select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+.theme-choice option { color: #243f32; background: #fbf6ea; }

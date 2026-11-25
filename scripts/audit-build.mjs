@@ -22,7 +22,7 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 12 + (products.length + 1 + shopThemes.length) * 2, 'Build must contain both shop catalogues, every theme space, every product translation and all existing pages');
+assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 13 + (products.length + 1 + shopThemes.length) * 2, 'Build must contain both shop catalogues, every theme space, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, (articleEntries.length + products.length + shopThemes.length + journeyPageKeys.length + courses.length + 5) * 2, 'Sitemap must list all localized pages and products');

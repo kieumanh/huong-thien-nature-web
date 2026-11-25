@@ -11,3 +11,6 @@ dist/
 .artifacts/
 __pycache__/
 public/content/roots-articles.json
+
+# Brand kit ZIP is a build artefact (python3 brand/scripts/build.py, kits.py, book.py, then zip brand/)
+brand/releases/*.zip
