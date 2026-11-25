@@ -1,3 +1,11 @@
+## 2.23.0 — Tần Số Vàng: học 2 tháng, mỗi tuần một buổi, trực tiếp hoặc online
+
+- **Thời gian học:** 2 tháng, mỗi tuần 1 buổi, mỗi buổi 2 giờ (trước đây ghi online 1 tháng). Cập nhật ở đầu trang, mục Thông tin khóa học, hỏi đáp, bước đăng ký, tin nhắn điền sẵn, bảng so sánh khóa, thẻ khóa học và hỏi đáp của trang Tarot.
+- **Hình thức:** ở gần nhau thì ưu tiên học trực tiếp để kết nối và nâng cao năng lượng; ở xa thì 100% lớp học online.
+- **Học phí đã gồm:** chi phí không gian, thiết bị, phương tiện hỗ trợ, cùng giáo án và tài nguyên hỗ trợ thầy cô. Hiển thị ngay dưới giá ở đầu trang, trong mục Thông tin khóa học (thêm mục "Học phí đã gồm"), hỏi đáp về học phí và bảng so sánh. Giá 5.600.000 ₫ / 6.600.000 ₫ và đồng hồ đếm ngược giữ nguyên.
+- Khai giảng hằng tháng, 6 chặng và phần hỗ trợ sau khóa giữ nguyên. Nhóm đồng hành 30 ngày và buổi gặp lại sau 30 ngày thuộc phần hỗ trợ sau khóa, chưa đổi.
+- Kiểm thử: `test:frequency` cập nhật còn 9 mục thông tin khóa học.
+
 ## 2.22.1 — Đối tác: tên dự án và link website dễ đọc hơn
 
 - **Mục "Những người đồng hành xung quanh"** (`/vi/he-sinh-thai/`, `/en/ecosystem/`): tên dự án nay có nhãn "Dự án" / "Project" và hiển thị riêng, cỡ chữ lớn hơn, không còn in đậm lẫn trong đoạn. Link website là một nút toàn chiều rộng, hiện tên miền đầy đủ và mũi tên, dễ bấm trên điện thoại.

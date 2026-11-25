@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-25, phiên bản 2.22.1. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
+Cập nhật: 2026-11-25, phiên bản 2.23.0. Đọc cùng `AGENTS.md` (quy tắc làm việc) và `CHANGELOG.md`.
 
 ## Nguồn sự thật
 
@@ -28,6 +28,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.14.3: ba lối đọc Tản văn có chấm đầu dòng vàng và gạch chân từng bài |
 | 24/11 | 2.14.4: ba lối đọc bỏ gạch chân, giữ chấm • đầu dòng |
 | 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
+| 25/11 | 2.23.0: Tần Số Vàng học 2 tháng, 1 buổi/tuần, 2 giờ/buổi; ở gần học trực tiếp, ở xa 100% online; học phí đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên (`priceNote`, mục "Học phí đã gồm"). Còn chờ chủ dự án xác nhận: nhóm đồng hành 30 ngày / buổi gặp lại sau 30 ngày trong phần hỗ trợ sau khóa có giữ nguyên không. |
 | 25/11 | 2.22.1: mục Những người đồng hành (ecosystem) hiển thị nhãn "Dự án" rõ ràng và link website là nút toàn chiều rộng (`.partner-card__site`); tên farm tiếng Anh thống nhất. |
 | 25/11 | 2.22.0: công bố giá. Tần Số Vàng 5,6 triệu đến hết giao thừa Tết Âm lịch 2027 (đồng hồ đếm ngược), sau đó 6,6 triệu; Tarot 600.000 ₫/phiên 90 phút; bỏ phần nhắn hỏi giá. **Việc cần làm: build lại site sau 06/02/2027** để dữ liệu có cấu trúc chuyển sang 6,6 triệu. |
 | 24/11 | 2.21.3: bìa `returning-attention` đổi sang `pixabay-2268333.webp` (bàn chân trần trên cỏ, nguồn đã ghi trong `article-photos.ts`); avatar Kiều Mạnh trong Phản hồi học viên là `author-kieu-manh-avatar.webp` (trường `avatar`). |

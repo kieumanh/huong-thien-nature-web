@@ -86,6 +86,7 @@ const petals = [6, 5, 7, 4, 3, 8];
         {[...copy.facts, [priceLabel, copy.priceLabel]].map(([value, label]) => <div><dt>{label}</dt><dd data-gf-price={label === copy.priceLabel ? '' : undefined}>{value}</dd></div>)}
       </dl>
       <p class="gf-price-note" data-gf-note>{priced ? frequencyFeeNote(lang) : copy.priceNote}</p>
+      <p class="gf-price-note gf-price-includes">{copy.priceNote}</p>
       {offer.endsAt && <div class="gf-countdown" data-gf-countdown data-ends={offer.endsAt} data-regular={regularLabel} data-ended={copy.countdown.endedNote} role="timer" aria-live="off">
         <p class="gf-countdown-title">{copy.countdown.title}</p>
         <ol class="gf-countdown-cells js-only" role="list">
@@ -387,7 +388,7 @@ const petals = [6, 5, 7, 4, 3, 8];
 
   <AlbumStrip {lang} id="gf-moments" extraClass="gf-section" photos={['event-banner', 'lobby-group', 'hug-lobby']}
     title={lang === 'vi' ? 'Từ những buổi chia sẻ và gặp gỡ' : 'From our sharing sessions and meetings'}
-    intro={lang === 'vi' ? 'Hình ảnh thật từ một chuyến chia sẻ ở Nha Trang. Lớp Tần Số Vàng học trực tuyến; đây là không khí những lần gặp gỡ của dự án.' : 'Real photographs from a sharing trip in Nha Trang. The Golden Frequency is taught online; these show the atmosphere of the project’s meetings.'} />
+    intro={lang === 'vi' ? 'Hình ảnh thật từ một chuyến chia sẻ ở Nha Trang. Lớp Tần Số Vàng học trực tiếp nếu ở gần, online nếu ở xa; đây là không khí những lần gặp gỡ của dự án.' : 'Real photographs from a sharing trip in Nha Trang. The Golden Frequency is taught in person for those nearby and online for those far away; these show the atmosphere of the project’s meetings.'} />
 
   <section class="gf-section" id="support" aria-labelledby="gf-support-title">
     <div class="gf-head" data-gf-reveal>
