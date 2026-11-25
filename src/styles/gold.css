@@ -74,11 +74,11 @@
 :where([data-sky="night"]) body h1 { color: var(--gold-hi); }
 
 /* Theme preference control (footer). */
-.theme-choice { display: inline-flex; flex-wrap: wrap; align-items: center; gap: .4rem .6rem; }
-.theme-choice label { font-size: .8rem; color: var(--footer-muted); }
+.theme-choice { display: inline-flex; flex-wrap: nowrap; align-items: center; gap: .35rem .5rem; min-height: 44px; padding: 0 .3rem 0 .85rem; border: 1px solid var(--footer-divider); border-radius: var(--radius-pill); background: color-mix(in srgb, var(--footer-chip) 55%, transparent); }
+.theme-choice label { font-size: .78rem; color: var(--footer-muted); white-space: nowrap; }
 .theme-choice select {
-  min-height: 44px; padding: .3rem 2rem .3rem .75rem; border: 1px solid var(--footer-divider); border-radius: var(--radius-input);
-  background: color-mix(in srgb, var(--footer-chip) 70%, transparent); color: var(--footer-link); font-size: .85rem;
+  min-height: 36px; width: auto; max-width: min(14rem, 60vw); padding: .2rem 1.4rem .2rem .3rem; border: 0; border-radius: var(--radius-pill);
+  background: transparent; color: var(--footer-link); font-size: .82rem; font-weight: 600; cursor: pointer;
 }
 .theme-choice select:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
 .theme-choice option { color: #243f32; background: #fbf6ea; }

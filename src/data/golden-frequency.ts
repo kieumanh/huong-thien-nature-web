@@ -381,7 +381,7 @@ export const frequencyLanding = {
       title: 'Đăng ký chỉ với một tin nhắn',
       note: 'Chọn cách bạn thấy tiện nhất. Khóa học 2 tháng, mỗi tuần 1 buổi 2 giờ, khai giảng hằng tháng. Hương Thiền Nature sẽ gửi ngày khai giảng gần nhất.',
       zalo: ['Zalo', 'Nhắn nhanh, trao đổi trực tiếp', 'Mở Zalo'],
-      call: ['Gọi điện', '0868 499 856', 'Gọi ngay'],
+      call: ['Gọi điện', 'Kiều Mạnh · 0388.000.680', 'Gọi ngay'],
       form: ['Biểu mẫu', 'Để lại email, nhận ngày khai giảng', 'Điền biểu mẫu'],
     },
     info: {
@@ -575,7 +575,6 @@ export const frequencyLanding = {
       intro: 'Khóa học khép lại, hành trình của bạn thì tiếp tục. Hương Thiền Nature đồng hành để bạn giữ được nhịp thực hành.',
       items: [
         ['Nhóm đồng hành 60 ngày', 'Nhóm nhắn tin chung để nhắc bài tập tuần, chia sẻ trải nghiệm và giữ động lực cùng nhau trong 60 ngày sau khóa.'],
-        ['Buổi gặp lại sau 30 ngày', 'Cùng nhìn lại bản đồ tần số và điều chỉnh bài tập cho chặng tiếp theo.'],
         ['Sổ tay Tần Số Vàng', 'Tóm tắt 6 chặng, bộ công cụ, bài tập tuần và mẫu nhật ký 30 ngày.'],
         ['Bản ghi thiền hướng dẫn', 'Thở cộng hưởng, thiền từ bi và thư giãn toàn thân để tập tại nhà.'],
         ['Kết nối khi cần', 'Sau 2 tháng học, bạn vẫn có thể kết nối với thầy cô và bộ phận hỗ trợ khi cần gỡ rối, hỏi đáp.'],
@@ -611,7 +610,7 @@ export const frequencyLanding = {
     quoteNote: 'Nhắn Zalo, gọi điện hoặc để lại lời nhắn. Bạn sẽ nhận được:',
     quoteIncludes: ['Ngày khai giảng gần nhất (hằng tháng)', 'Học 2 tháng, mỗi tuần 1 buổi 2 giờ', 'Hướng dẫn các bước đăng ký', 'Phạm vi hỗ trợ sau khóa'],
     quoteZaloAction: 'Nhắn Zalo đăng ký',
-    quoteCall: 'Gọi 0868 499 856',
+    quoteCall: 'Gọi 0388.000.680',
     scope: 'Khóa học là chương trình thực hành chánh niệm và phát triển bản thân, không thay thế chẩn đoán, điều trị y khoa, trị liệu tâm lý hay tư vấn tài chính.',
     stickyLabel: 'Tần Số Vàng · 6 chặng',
     stickyAction: 'Đăng ký',
@@ -634,7 +633,7 @@ export const frequencyLanding = {
       title: 'Enrol with a single message',
       note: 'Choose whatever suits you. The course lasts two months, with one 2-hour session a week, and starts every month. Hương Thiền Nature will send the nearest start date.',
       zalo: ['Zalo', 'Quick message, direct conversation', 'Open Zalo'],
-      call: ['Call', '+84 868 499 856', 'Call now'],
+      call: ['Call', 'Kiều Mạnh · 0388.000.680', 'Call now'],
       form: ['Form', 'Leave your email to get the start date', 'Fill in the form'],
     },
     info: {
@@ -828,7 +827,6 @@ export const frequencyLanding = {
       intro: 'The course comes to a close; your journey continues. Hương Thiền Nature stays alongside you so the practice keeps its rhythm.',
       items: [
         ['A 60-day practice group', 'A shared message group for weekly reminders, shared experiences and mutual encouragement for 60 days after the course.'],
-        ['A reunion after 30 days', 'Look at your frequency map again and adjust your practice for the next stage.'],
         ['The Golden Frequency handbook', 'A summary of the six stages, the toolkit, the weekly plan and a 30-day journal template.'],
         ['Guided meditation recordings', 'Resonance breathing, loving-kindness and full-body relaxation to practise at home.'],
         ['Stay in touch when needed', 'After the two months of class, you can still reach the teachers and the support team when you need help untangling a practice or a question.'],
@@ -864,7 +862,7 @@ export const frequencyLanding = {
     quoteNote: 'Message us on Zalo, call or leave a note. You will receive:',
     quoteIncludes: ['The nearest start date (monthly)', 'Two months, one 2-hour session a week', 'The steps to enrol', 'Support after the course'],
     quoteZaloAction: 'Enrol on Zalo',
-    quoteCall: 'Call +84 868 499 856',
+    quoteCall: 'Call 0388.000.680',
     scope: 'This course is a mindfulness and personal development practice programme. It does not replace medical diagnosis or treatment, psychological therapy or financial advice.',
     stickyLabel: 'The Golden Frequency · 6 stages',
     stickyAction: 'Enrol',
