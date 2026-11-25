@@ -1,3 +1,9 @@
+## 2.24.2 — Living Zen: căn mô tả, icon chuyển động
+
+- **Thân – Tâm – Trí:** phần mô tả của ba khung nằm thẳng hàng với nhau, kể cả khi tiêu đề TÂM dài hai dòng (dùng subgrid; trình duyệt cũ hơn dùng phương án dự phòng, tiêu đề có chiều cao tối thiểu hai dòng).
+- **Bỏ thanh màu bên trái** của các khung.
+- **Icon mới, có chuyển động nhẹ:** cây đung đưa theo gió, người ngồi thiền thở chậm, bóng đèn trí tuệ sáng dần. Icon nằm giữa khung. Chuyển động tắt khi thiết bị bật chế độ giảm chuyển động.
+
 ## 2.24.1 — Living Zen và Tần Số Vàng: tinh chỉnh giao diện và nội dung
 
 - **Hành trình, 28 tuổi:** viết lại đoạn "Dành thời gian tìm hiểu về nỗi khổ" (VI và EN), giữ nguyên các chi tiết đã có, không thêm sự kiện mới.
