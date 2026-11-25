@@ -1,10 +1,12 @@
-## 2.24.1 — Living Zen: tinh chỉnh nội dung và giao diện
+## 2.24.1 — Living Zen và Tần Số Vàng: tinh chỉnh giao diện và nội dung
 
-- **Hành trình, 28 tuổi:** viết lại đoạn "Dành thời gian tìm hiểu về nỗi khổ" (VI và EN) theo giọng nhẹ nhàng hơn, giữ nguyên các chi tiết đã có, không thêm sự kiện mới.
-- **Phản hồi học viên:** bỏ đường kẻ tím của kiểu trích dẫn chung đang đè lên chữ trong thẻ phản hồi của Kiều Mạnh.
-- **Thân – Tâm – Trí:** thay icon bằng bộ icon thương hiệu có sẵn trong `brand/icons/brand`: cây (THÂN), người ngồi thiền (TÂM), ánh sáng trong trí (TRÍ).
-- **Chân trang:** chọn giao diện thu gọn thành một khung viên nhỏ, dễ chạm trên điện thoại.
-- **Tần Số Vàng:** gỡ mục "Buổi gặp lại sau 30 ngày" (VI và EN), còn 5 mục hỗ trợ sau khóa; cập nhật kiểm thử.
+- **Hành trình, 28 tuổi:** viết lại đoạn "Dành thời gian tìm hiểu về nỗi khổ" (VI và EN), giữ nguyên các chi tiết đã có, không thêm sự kiện mới.
+- **Phản hồi học viên:** bỏ đường kẻ tím của kiểu trích dẫn chung đang đè lên chữ trong thẻ của Kiều Mạnh.
+- **Thân – Tâm – Trí:** icon thương hiệu có sẵn trong `brand/icons/brand`: cây (THÂN), người ngồi thiền (TÂM), ánh sáng trong trí (TRÍ).
+- **Chân trang:** lựa chọn giao diện thu gọn thành một khung nhỏ, dễ chạm trên điện thoại.
+- **Tần Số Vàng:** khung "Muốn biết lịch khai giảng gần nhất?" chuyển sang nền tối ánh vàng, bớt chói khi đọc ban đêm; thêm ảnh "Chắp tay chào nhau" để lấp khoảng trống trong phần khoảnh khắc; đường kẻ của lịch sinh hoạt căn thẳng với icon trên điện thoại và máy tính bảng; các nút liên hệ trên trang dùng hỗ trợ Kiều Mạnh 0388.000.680 (gọi và Zalo).
+- **Gỡ mục** "Buổi gặp lại sau 30 ngày" (VI và EN); còn 5 mục hỗ trợ sau khóa.
+- Trang Tarot và trang Liên hệ vẫn dùng số hotline 0868 499 856 như trước.
 
 ## 2.24.0 — Living Zen 2.0: bộ nhận diện thương hiệu mới
 

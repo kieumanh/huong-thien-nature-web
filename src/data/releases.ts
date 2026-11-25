@@ -18,8 +18,8 @@ export const releases: Release[] = [
   {
     version: '2.24.1',
     date: '2026-11-26',
-    vi: ['Living Zen: tinh chỉnh giao diện và nội dung', 'Viết lại đoạn 28 tuổi, sửa đường kẻ tím đè lên chữ trong phần phản hồi học viên, thay icon Thân – Tâm – Trí bằng bộ icon tinh tế hơn, thu gọn lựa chọn giao diện ở chân trang, và gỡ mục "Buổi gặp lại sau 30 ngày" khỏi khóa Tần Số Vàng.'],
-    en: ['Living Zen: refinements to content and interface', 'Rewrote the age-28 passage, fixed the purple rule overlapping text in student feedback, replaced the Body–Mind–Wisdom icons with more refined ones, made the footer appearance control more compact, and removed the "A reunion after 30 days" item from The Golden Frequency.'],
+    vi: ['Living Zen và Tần Số Vàng: tinh chỉnh giao diện và nội dung', 'Viết lại đoạn 28 tuổi; sửa đường kẻ đè chữ trong phản hồi học viên; icon Thân – Tâm – Trí mới; chân trang thu gọn; Tần Số Vàng giảm độ chói của khung nền vàng, thêm ảnh còn thiếu, dùng số hỗ trợ 0388.000.680 và căn lại đường kẻ của lịch sinh hoạt.'],
+    en: ['Living Zen and The Golden Frequency: interface and content refinements', 'Rewrote the age-28 passage; fixed the rule overlapping text in student feedback; new Body–Mind–Wisdom icons; a more compact footer; The Golden Frequency now has a calmer gold panel, a missing photo, the support line 0388.000.680, and an aligned timeline line.'],
   },
   {
     version: '2.24.0',

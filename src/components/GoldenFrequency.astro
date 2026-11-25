@@ -13,7 +13,7 @@ import { frequencyCourse, frequencyFeeNote, frequencyOffer, frequencyPriceLabel,
 import { frequencyLanding, frequencyReferences, frequencyScientists, frequencyTypes, weeklyPlan } from '../data/golden-frequency';
 import { feedbackCopy, feedbackPath } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
-import { internationalPhone, zaloUrl } from '../data/contact-channels';
+import { supportPhone, supportZaloUrl } from '../data/contact-channels';
 import { meditationFounder } from '../data/people';
 import type { Language } from '../data/site';
 import '../styles/golden-frequency.css';
@@ -25,7 +25,7 @@ const priceLabel = frequencyPriceLabel(lang);
 const priced = priceLabel !== frequencyPriceLabel(lang, { price: null });
 const offer = frequencyOffer;
 const regularLabel = frequencyRegularLabel(lang);
-const tel = `tel:${internationalPhone}`;
+const tel = `tel:${supportPhone}`;
 
 const valueIcons: GfIconName[] = ['wave', 'compass', 'timer', 'heart', 'target', 'sun'];
 const domainIcons: GfIconName[] = ['heart', 'briefcase', 'rise', 'coin'];
@@ -34,7 +34,7 @@ const momentIcons: GfIconName[] = ['sunrise', 'briefcase', 'pulse', 'bubbles', '
 const supportIcons: GfIconName[] = ['group', 'calendar', 'book', 'headphones', 'chat', 'star'];
 const frequencyOf = Object.fromEntries(frequencyTypes.map(type => [type.id, type[lang].short]));
 const quickChannels: { copy: readonly [string, string, string]; href: string; icon: GfIconName }[] = [
-  { copy: copy.quick.zalo, href: zaloUrl, icon: 'chat' },
+  { copy: copy.quick.zalo, href: supportZaloUrl, icon: 'chat' },
   { copy: copy.quick.call, href: tel, icon: 'phone' },
   { copy: copy.quick.form, href: '#quote', icon: 'form' },
 ];
@@ -76,7 +76,7 @@ const petals = [6, 5, 7, 4, 3, 8];
       <h1 id="gf-title"><span class="gf-title-script">{copy.titleScript}</span><span class="gf-title-line">{copy.titleLine}</span></h1>
       <p class="gf-lead">{copy.lead}</p>
       <div class="gf-actions">
-        <a class="button gf-button" href={zaloUrl}>{copy.quoteZalo} <Arrow /></a>
+        <a class="button gf-button" href={supportZaloUrl}>{copy.quoteZalo} <Arrow /></a>
         <a class="button gf-button--ghost" href="#quote">{copy.quoteForm}</a>
       </div>
       <ul class="gf-reassure" role="list">
@@ -288,7 +288,7 @@ const petals = [6, 5, 7, 4, 3, 8];
       <p>{copy.midNote}</p>
     </div>
     <div class="gf-band-actions">
-      <a class="button gf-button--dark" href={zaloUrl}>{copy.quoteZalo} <Arrow /></a>
+      <a class="button gf-button" href={supportZaloUrl}>{copy.quoteZalo} <Arrow /></a>
       <a class="gf-band-link" href="#quote">{copy.quoteForm}</a>
     </div>
   </aside>
@@ -386,7 +386,7 @@ const petals = [6, 5, 7, 4, 3, 8];
     </div>
   </section>
 
-  <AlbumStrip {lang} id="gf-moments" extraClass="gf-section" photos={['event-banner', 'lobby-group', 'hug-lobby']}
+  <AlbumStrip {lang} id="gf-moments" extraClass="gf-section" photos={['event-banner', 'lobby-group', 'hug-lobby', 'three-greeting']}
     title={lang === 'vi' ? 'Từ những buổi chia sẻ và gặp gỡ' : 'From our sharing sessions and meetings'}
     intro={lang === 'vi' ? 'Hình ảnh thật từ một chuyến chia sẻ ở Nha Trang. Lớp Tần Số Vàng học trực tiếp nếu ở gần, online nếu ở xa; đây là không khí những lần gặp gỡ của dự án.' : 'Real photographs from a sharing trip in Nha Trang. The Golden Frequency is taught in person for those nearby and online for those far away; these show the atmosphere of the project’s meetings.'} />
 
@@ -442,7 +442,7 @@ const petals = [6, 5, 7, 4, 3, 8];
       </ul>
       <p class="gf-quote-price"><span>{copy.priceLabel}</span> <strong data-gf-price>{priceLabel}</strong>{offer.endsAt && <s class="gf-price-was" data-gf-was>{regularLabel}</s>}</p>
       <div class="gf-actions">
-        <a class="button gf-button" href={zaloUrl}>{copy.quoteZaloAction} <Arrow /></a>
+        <a class="button gf-button" href={supportZaloUrl}>{copy.quoteZaloAction} <Arrow /></a>
         <a class="button gf-button--ghost" href={tel}>{copy.quoteCall}</a>
       </div>
       <p class="gf-scope">{copy.scope}</p>
@@ -453,7 +453,7 @@ const petals = [6, 5, 7, 4, 3, 8];
 
 <aside class="gf-sticky" data-gf-sticky hidden aria-label={copy.stickyLabel}>
   <p><strong>{copy.stickyLabel}</strong><span>{copy.priceLabel}: <span data-gf-price>{priceLabel}</span></span></p>
-  <a class="button gf-button" href={zaloUrl}>{copy.stickyAction}</a>
+  <a class="button gf-button" href={supportZaloUrl}>{copy.stickyAction}</a>
 </aside>
 
 <script>
