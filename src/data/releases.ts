@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.24.1',
+    date: '2026-11-26',
+    vi: ['Living Zen: tinh chỉnh giao diện và nội dung', 'Viết lại đoạn 28 tuổi, sửa đường kẻ tím đè lên chữ trong phần phản hồi học viên, thay icon Thân – Tâm – Trí bằng bộ icon tinh tế hơn, thu gọn lựa chọn giao diện ở chân trang, và gỡ mục "Buổi gặp lại sau 30 ngày" khỏi khóa Tần Số Vàng.'],
+    en: ['Living Zen: refinements to content and interface', 'Rewrote the age-28 passage, fixed the purple rule overlapping text in student feedback, replaced the Body–Mind–Wisdom icons with more refined ones, made the footer appearance control more compact, and removed the "A reunion after 30 days" item from The Golden Frequency.'],
+  },
+  {
     version: '2.24.0',
     date: '2026-11-26',
     vi: ['Living Zen 2.0: bộ nhận diện thương hiệu mới', 'Xanh rừng trở lại làm màu chính, vàng kim chỉ còn là điểm nhấn; thêm font Lora, lựa chọn giao diện sáng/tối ở cuối trang và khối Thân – Tâm – Trí trên Trang chủ, Hệ sinh thái. Bộ nhận diện đầy đủ (logo đề xuất, màu, họa tiết, mẫu in, brand book) nằm trong thư mục brand/.'],

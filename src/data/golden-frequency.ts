@@ -575,7 +575,6 @@ export const frequencyLanding = {
       intro: 'Khóa học khép lại, hành trình của bạn thì tiếp tục. Hương Thiền Nature đồng hành để bạn giữ được nhịp thực hành.',
       items: [
         ['Nhóm đồng hành 60 ngày', 'Nhóm nhắn tin chung để nhắc bài tập tuần, chia sẻ trải nghiệm và giữ động lực cùng nhau trong 60 ngày sau khóa.'],
-        ['Buổi gặp lại sau 30 ngày', 'Cùng nhìn lại bản đồ tần số và điều chỉnh bài tập cho chặng tiếp theo.'],
         ['Sổ tay Tần Số Vàng', 'Tóm tắt 6 chặng, bộ công cụ, bài tập tuần và mẫu nhật ký 30 ngày.'],
         ['Bản ghi thiền hướng dẫn', 'Thở cộng hưởng, thiền từ bi và thư giãn toàn thân để tập tại nhà.'],
         ['Kết nối khi cần', 'Sau 2 tháng học, bạn vẫn có thể kết nối với thầy cô và bộ phận hỗ trợ khi cần gỡ rối, hỏi đáp.'],
@@ -828,7 +827,6 @@ export const frequencyLanding = {
       intro: 'The course comes to a close; your journey continues. Hương Thiền Nature stays alongside you so the practice keeps its rhythm.',
       items: [
         ['A 60-day practice group', 'A shared message group for weekly reminders, shared experiences and mutual encouragement for 60 days after the course.'],
-        ['A reunion after 30 days', 'Look at your frequency map again and adjust your practice for the next stage.'],
         ['The Golden Frequency handbook', 'A summary of the six stages, the toolkit, the weekly plan and a 30-day journal template.'],
         ['Guided meditation recordings', 'Resonance breathing, loving-kindness and full-body relaxation to practise at home.'],
         ['Stay in touch when needed', 'After the two months of class, you can still reach the teachers and the support team when you need help untangling a practice or a question.'],

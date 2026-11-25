@@ -80,7 +80,7 @@ test('the six stages, five frequencies, six life areas and seven days are comple
     assert.deepEqual(copy.stages.map(stage => stage[3]), ['frequencies', 'benefits', 'methods', 'self-check', 'daily', 'weekly']);
     assert.equal(copy.benefits.domains.length, 4);
     assert.equal(copy.methods.groups.length, 3);
-    assert.equal(copy.support.items.length, 6);
+    assert.equal(copy.support.items.length, 5);
     assert.equal(copy.howto.length, 3);
     assert.ok(copy.faq.length >= 8);
     assert.equal(copy.selfCheck.levels.length, 4);

@@ -1,3 +1,11 @@
+## 2.24.1 — Living Zen: tinh chỉnh nội dung và giao diện
+
+- **Hành trình, 28 tuổi:** viết lại đoạn "Dành thời gian tìm hiểu về nỗi khổ" (VI và EN) theo giọng nhẹ nhàng hơn, giữ nguyên các chi tiết đã có, không thêm sự kiện mới.
+- **Phản hồi học viên:** bỏ đường kẻ tím của kiểu trích dẫn chung đang đè lên chữ trong thẻ phản hồi của Kiều Mạnh.
+- **Thân – Tâm – Trí:** thay icon bằng bộ icon thương hiệu có sẵn trong `brand/icons/brand`: cây (THÂN), người ngồi thiền (TÂM), ánh sáng trong trí (TRÍ).
+- **Chân trang:** chọn giao diện thu gọn thành một khung viên nhỏ, dễ chạm trên điện thoại.
+- **Tần Số Vàng:** gỡ mục "Buổi gặp lại sau 30 ngày" (VI và EN), còn 5 mục hỗ trợ sau khóa; cập nhật kiểm thử.
+
 ## 2.24.0 — Living Zen 2.0: bộ nhận diện thương hiệu mới
 
 - **Điểm neo:** trước khi thay đổi, mã nguồn 2.23.0 được giữ ở nhánh `anchor/2026-11-26-v2.23.0` (cách quay lại: `brand/releases/deploy-and-rollback.md`).

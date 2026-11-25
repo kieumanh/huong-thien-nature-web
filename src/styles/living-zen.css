@@ -11,8 +11,8 @@
   background: var(--surface-raised); box-shadow: var(--lz-shadow-subtle);
 }
 .lz-quality svg { width: 2.25rem; height: 2.25rem; color: var(--lz-q-colour, var(--forest)); }
-.lz-quality--lotus { --lz-q-colour: var(--orchid); }
-.lz-quality--light { --lz-q-colour: var(--gold-accent); }
+.lz-quality--meditation { --lz-q-colour: var(--orchid); }
+.lz-quality--mind { --lz-q-colour: var(--gold-accent); }
 .lz-quality__label { margin-top: .75rem; color: var(--lz-q-colour, var(--secondary)); font-size: .74rem; font-weight: 700; letter-spacing: .14em; }
 .lz-quality h3 { margin-top: .2rem; font-size: var(--type-card); }
 .lz-quality p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
