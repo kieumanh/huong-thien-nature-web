@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.26.3',
+    date: '2026-11-26',
+    vi: ['Trang Hệ sinh thái: minh họa ngang tự vẽ', 'Phần kết của trang Hệ sinh thái dùng một minh họa ngang tự vẽ: cây bên hồ, mặt nước lặng và mặt trời dịu, thay cho ảnh đứng cũ.'],
+    en: ['Ecosystem page: a hand-drawn horizontal illustration', 'The closing part of the Ecosystem page now uses a hand-drawn horizontal illustration of a tree by a still lake and a soft sun, in place of the upright photograph.'],
+  },
+  {
     version: '2.26.2',
     date: '2026-11-26',
     vi: ['Hero Trang chủ gọn hơn: một ảnh tĩnh', 'Bỏ slide tự chuyển ảnh và các họa tiết quanh ảnh đầu trang (ảnh tròn nhỏ, lá bay, vòng thở). Đầu Trang chủ còn một ảnh hoàng hôn trên lối đá trong khung vòm, nhìn đơn giản và dễ cảm nhận hơn.'],
