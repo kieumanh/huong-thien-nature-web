@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.24.5',
+    date: '2026-11-26',
+    vi: ['Hệ sinh thái: bỏ phần lặp Thân – Tâm – Trí', 'Trang Hệ sinh thái chỉ kể ba trọng tâm một lần (kèm vòng "nuôi nhau"); icon chuyển động nằm trong thẻ ba trọng tâm; khối Living Zen chỉ còn các sợi đan và lời hứa.'],
+    en: ['Ecosystem: no more repeated Body – Mind – Wisdom', 'The Ecosystem page now tells the three focal points once (with the "nourish each other" loop); the moving icons sit in the focal-point cards; the Living Zen block keeps only the threads and promises.'],
+  },
+  {
     version: '2.24.4',
     date: '2026-11-26',
     vi: ['Trang chủ: bỏ phần lặp Thân – Tâm – Trí', 'Thân – Tâm – Trí chỉ còn ở phần Hệ sinh thái; khối đầu trang được viết lại thành ba điều tụi mình luôn giữ: nói rõ từng điều, không hứa quá lời, mời bằng sự tử tế.'],

@@ -1,0 +1,22 @@
+/* Animated pillar icons (PillarIcon.astro). Used in the ecosystem focal-point cards. */
+.pillar-icon { display: block; width: 2.25rem; height: 2.25rem; margin-inline: auto; overflow: visible; color: var(--pillar-colour, var(--forest)); }
+.pillar-icon--meditation { --pillar-colour: var(--orchid); }
+.pillar-icon--mind { --pillar-colour: var(--gold-accent); }
+
+.pillar-ico-glow { fill: currentColor; stroke: none; transform-origin: 12px 9.5px; animation: pillar-glow 4.8s ease-in-out infinite; }
+.pillar-ico-filament { animation: pillar-filament 4.8s ease-in-out infinite; }
+.pillar-ico-seed { transform-origin: 12px 12px; animation: pillar-seed-breathe 5.6s ease-in-out infinite; }
+.pillar-ico-seed-core { transform-origin: 12px 20px; animation: pillar-seed-core 5.6s ease-in-out infinite; }
+.pillar-ico-figure { animation: pillar-breathe-figure 6s ease-in-out infinite; }
+.pillar-ico-base { transform-origin: 12px 17px; animation: pillar-breathe-base 6s ease-in-out infinite; }
+
+@keyframes pillar-glow { 0%, 100% { opacity: .06; transform: scale(.92); } 50% { opacity: .2; transform: scale(1.06); } }
+@keyframes pillar-filament { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
+@keyframes pillar-seed-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes pillar-seed-core { 0%, 100% { opacity: .55; transform: scaleY(.9); } 50% { opacity: 1; transform: scaleY(1); } }
+@keyframes pillar-breathe-figure { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.9px); } }
+@keyframes pillar-breathe-base { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(1.035); } }
+@media (prefers-reduced-motion: reduce) {
+  .pillar-icon * { animation: none !important; }
+  .pillar-ico-glow { opacity: .12; }
+}

@@ -38,11 +38,14 @@ const t = getCopy(lang);
 const info = journeyPages[page][lang];
 const alternatePath = journeyPath(vi ? 'en' : 'vi', page);
 const vision = ecosystemVision[lang];
+// Each focal point carries the icon of its pillar (the order of the cards is decorative, not a sequence).
+const focusIcons = { 'phap-mon': 'meditation', 'thien-nhien': 'seed', 'ho-tro': 'mind' } as const;
 const ecoLinks: Record<string, string> = {
   guidance: journeyPath(lang, 'guidance'), practice: journeyPath(lang, 'practice'), partnerships: '#partnerships',
   food: themePath(lang, themeById('thuc-pham-sach')!), stones: themePath(lang, themeById('da-nang-luong')!), journal: journalPath(lang),
 };
 import LivingZenValues from '../../components/LivingZenValues.astro';
+import PillarIcon from '../../components/PillarIcon.astro';
 ---
 <BaseLayout {lang} title={`${info.heading} | Hương Thiền Nature`} description={info.description} {alternatePath}
   {...(page === 'support' ? { image: supportShareImage[lang].src, imageDetails: { type: supportShareImage.type, width: supportShareImage.width, height: supportShareImage.height, alt: supportShareImage[lang].alt } } : {})}
@@ -115,7 +118,7 @@ import LivingZenValues from '../../components/LivingZenValues.astro';
         <h2 id="eco-focus-title">{vision.focusTitle}</h2>
         <ol class="eco-focus-list">
           {vision.focus.map((item, index) => <li class={`eco-focus zen-card eco-focus--${index + 1}`} id={item.id}>
-            <span class="eco-focus__number" aria-hidden="true">{index + 1}</span>
+            <span class="eco-focus__number" aria-hidden="true"><PillarIcon name={focusIcons[item.id as keyof typeof focusIcons]} /></span>
             <div>
               <p class="eco-focus__tagline">{item.tagline}</p>
               <h3>{item.title}</h3>
@@ -126,11 +129,11 @@ import LivingZenValues from '../../components/LivingZenValues.astro';
         </ol>
         <p class="eco-note">{vision.note}</p>
       </section>
-      <LivingZenValues {lang} variant="full" id="living-zen" />
       <section class="journey-section" aria-labelledby="eco-loop-title">
         <h2 id="eco-loop-title" class="sr-only">{vision.loop.title}</h2>
         <EcosystemIllustration {...vision.loop} variant="loop" />
       </section>
+      <LivingZenValues {lang} variant="full" id="living-zen" />
       <AlbumStrip {lang} id="garden-moments" photos={['veggie-bed-trellis', 'wooden-house', 'flowers-red-path', 'toddler-squat']}
         title={vi ? 'Từ khu vườn Gửi Yêu Thương Vào Đất' : 'From the Gửi Yêu Thương Vào Đất garden'}
         intro={vi ? 'Hình ảnh thật từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, giàn tre, căn nhà gỗ và lối đất đỏ.' : 'Real photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, a bamboo trellis, a wooden house and a red-earth path.'} />

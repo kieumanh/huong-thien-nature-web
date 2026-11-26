@@ -1,0 +1,13 @@
+---
+// Soft animated line icons for the three pillars (24 × 24 grid, 1.75 stroke). Motion lives in pillar-icons.css and is switched off under reduced motion.
+import '../styles/pillar-icons.css';
+
+type Props = { name: 'seed' | 'meditation' | 'mind' };
+const { name } = Astro.props;
+const icons: Record<Props['name'], string> = {
+  seed: '<path class="pillar-ico-seed" d="M12 20c-3.3 0-5.5-2.6-5.5-6S9 6.5 12 4c3 2.5 5.5 6.6 5.5 10S15.3 20 12 20Z"/><path class="pillar-ico-seed-core" d="M12 9.5c-1 2.3-1 5.2 0 7.5"/>',
+  meditation: '<g class="pillar-ico-figure"><circle cx="12" cy="5.5" r="2"/><path d="M12 8.5v5"/><path d="M7.5 12.5 12 10l4.5 2.5"/></g><path class="pillar-ico-base" d="M4.5 18.5c2.5-2.6 4.8-3.5 7.5-3.5s5 .9 7.5 3.5"/><path d="M6.5 20h11"/>',
+  mind: '<circle class="pillar-ico-glow" cx="12" cy="9.5" r="7.2"/><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3Z"/><path class="pillar-ico-filament" d="M12 7v3"/>',
+};
+---
+<svg class={`pillar-icon pillar-icon--${name}`} viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" set:html={icons[name]} />
