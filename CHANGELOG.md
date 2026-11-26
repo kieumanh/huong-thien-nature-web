@@ -1,3 +1,9 @@
+## 2.26.3 — Trang Hệ sinh thái: ảnh ngang tự vẽ thay ảnh đứng
+
+- **Khối kết trang Hệ sinh thái** đổi ảnh hoa sen đứng sang một minh họa ngang tự vẽ, `public/media/illustrations/eco-closing-horizon.svg` (1200 × 600): một buổi chiều yên ắng bên hồ, cây xanh bên bờ (Thân), mặt nước lặng với vòng sóng nhẹ (Tâm), mặt trời dịu phía chân trời (Trí). Chỉ vẽ phẳng, ba lớp màu xanh – vàng nhạt, không chữ, không họa tiết thừa.
+- Chuyển động chỉ bằng CSS (vòng sóng lan nhẹ, mặt trời thở chậm); tắt khi bật giảm chuyển động. Chú thích alt song ngữ mô tả hình.
+- CSS: `.eco-closing__art` (khung ngang, bo góc, tối đa 44rem) thay `.eco-closing__photo`.
+
 ## 2.26.2 — Hero Trang chủ: một ảnh tĩnh, gọn và dễ cảm nhận
 
 - **Bỏ slide ảnh tự chuyển** ở đầu Trang chủ (và nút tạm dừng, các chấm chọn ảnh đi kèm). Đã xóa `HeroSlides.astro`, `src/scripts/hero-slides.ts`, `heroPhotos` và cờ `hero: true` trong `src/data/album.ts`.
