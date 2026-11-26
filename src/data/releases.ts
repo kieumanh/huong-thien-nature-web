@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.26.2',
+    date: '2026-11-26',
+    vi: ['Hero Trang chủ gọn hơn: một ảnh tĩnh', 'Bỏ slide tự chuyển ảnh và các họa tiết quanh ảnh đầu trang (ảnh tròn nhỏ, lá bay, vòng thở). Đầu Trang chủ còn một ảnh hoàng hôn trên lối đá trong khung vòm, nhìn đơn giản và dễ cảm nhận hơn.'],
+    en: ['A simpler Home hero: one still photo', 'The automatic slideshow and the ornaments around the top photo (small round photos, drifting leaves, breathing ring) are gone. The top of the Home page now shows one sunset-path photograph in an arch frame, calmer and easier to take in.'],
+  },
+  {
     version: '2.26.1',
     date: '2026-11-26',
     vi: ['Trang 404 song ngữ, Những người đồng hành canh giữa', 'Mỗi ngôn ngữ có trang 404 riêng, với menu và chân trang đúng ngôn ngữ. Tiêu đề Những người đồng hành bỏ chữ "xung quanh", và ba thẻ luôn canh giữa trên mọi thiết bị.'],

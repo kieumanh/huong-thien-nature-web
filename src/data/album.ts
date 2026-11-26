@@ -21,8 +21,6 @@ export type AlbumPhoto = {
   thumbHeight: number;
   caption: Text;
   alt: Text;
-  // Shown in the Home page hero slideshow (portrait photos that sit well in the arch frame). Mark more photos to add slides.
-  hero?: boolean;
 };
 
 export const albumSections: Record<AlbumCategory, { title: Text; intro: Text }> = {
@@ -109,7 +107,7 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Căn nhà gỗ mái ngói giữa cây cối xanh, trời trong với những dải mây mỏng.', en: 'A timber house with a tiled roof among green plants beneath a clear sky streaked with thin clouds.' },
   },
   {
-    id: 'veggie-bed-trellis', category: 'garden', hero: true, ...size(960, 1280),
+    id: 'veggie-bed-trellis', category: 'garden', ...size(960, 1280),
     caption: { vi: 'Luống rau xanh mướt bên những giàn tre.', en: 'A lush bed of greens beside bamboo trellises.' },
     alt: { vi: 'Luống rau xanh dài chạy tới những giàn tre dựng trong nắng.', en: 'A long bed of green vegetables leading to bamboo trellises in the sunlight.' },
   },
@@ -156,7 +154,7 @@ export const albumPhotos: AlbumPhoto[] = [
   },
 
   {
-    id: 'banana-grove-house', category: 'garden', hero: true, ...size(960, 1280),
+    id: 'banana-grove-house', category: 'garden', ...size(960, 1280),
     caption: { vi: 'Những buồng chuối xanh bên căn nhà gỗ mái ngói.', en: 'Bunches of green bananas beside a timber house with a tiled roof.' },
     alt: { vi: 'Những buồng chuối xanh treo trên cây chuối giữa vườn, phía sau là căn nhà gỗ mái ngói đỏ, phía trước là bụi cỏ lá dài.', en: 'Bunches of green bananas hang from a banana plant in the garden, with a timber house under a red tiled roof behind and a clump of long-leaved grass in front.' },
   },
@@ -173,12 +171,12 @@ export const albumPhotos: AlbumPhoto[] = [
 
   // Flowers, leaves and paths
   {
-    id: 'sunset-lake-path', category: 'nature', hero: true, ...size(960, 1280),
+    id: 'sunset-lake-path', category: 'nature', ...size(960, 1280),
     caption: { vi: 'Lối bước bằng đá dẫn ra mặt nước lúc hoàng hôn.', en: 'A stepping-stone path leading to the water at sunset.' },
     alt: { vi: 'Lối bước lát đá trên thảm cỏ xanh dẫn tới mặt nước, mặt trời lặn lấp ló sau hàng dừa và những cây tre cao, bầu trời nhiều mây.', en: 'A path of stepping stones across green lawn leads toward the water, with the setting sun glowing behind coconut palms and tall bamboo under a cloudy sky.' },
   },
   {
-    id: 'stepping-stones-lawn', category: 'nature', hero: true, ...size(960, 1280),
+    id: 'stepping-stones-lawn', category: 'nature', ...size(960, 1280),
     caption: { vi: 'Lối đá trên thảm cỏ, dưới hàng dừa và cây ăn quả.', en: 'A stone path across the lawn beneath coconut palms and fruit trees.' },
     alt: { vi: 'Những phiến đá lát thành lối đi giữa thảm cỏ xanh mướt, hai bên là cây ăn quả và cây dừa, phía xa thấp thoáng căn nhà gỗ dưới trời xanh có mây.', en: 'Stone slabs form a path across lush green lawn between fruit trees and coconut palms, with a timber house glimpsed in the distance under a blue, cloud-streaked sky.' },
   },
@@ -188,7 +186,7 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Một bông sen hồng đang nở trên cuống dài, quanh là những tàu lá sen xanh to; phía sau là hàng dừa và chiếc ghế dài màu xanh.', en: 'A pink lotus blooms on a tall stem among large green leaves, with coconut palms and a blue bench behind.' },
   },
   {
-    id: 'pink-gerbera', category: 'nature', hero: true, ...size(960, 1280),
+    id: 'pink-gerbera', category: 'nature', ...size(960, 1280),
     caption: { vi: 'Một bông cúc đồng tiền hồng đang nở trong vườn.', en: 'A pink gerbera in bloom in the garden.' },
     alt: { vi: 'Cận cảnh một bông cúc đồng tiền cánh hồng nhọn đang nở; phía sau mờ là lối đi, cây cối và mái nhà gạch.', en: 'A close view of a pink gerbera with pointed petals in bloom, with a path, trees and a brick house softly blurred behind.' },
   },
@@ -233,7 +231,7 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Một người phụ nữ đội mũ đan xanh nhạt, áo xanh lá, ngồi xếp bằng trên bãi cát, hai tay mở trên gối và mỉm cười; phía sau là tòa nhà ven biển, bầu trời xanh và sóng.', en: 'A woman in a pale green crocheted hat and a green top sits cross-legged on the beach, palms open on her knees, smiling, with seafront buildings, blue sky and waves behind her.' },
   },
   {
-    id: 'beach-meditate-calm', category: 'practice', hero: true, ...size(870, 1161),
+    id: 'beach-meditate-calm', category: 'practice', ...size(870, 1161),
     caption: { vi: 'Ngồi xếp bằng, mắt nhắm, giữa bãi cát.', en: 'Sitting cross-legged with eyes closed on the sand.' },
     alt: { vi: 'Một người phụ nữ đội mũ đan xanh nhạt ngồi xếp bằng trên cát, mắt nhắm, hai tay đặt trên gối; phía sau là các tòa nhà ven biển và dãy núi xa.', en: 'A woman in a pale green crocheted hat sits cross-legged on the sand with her eyes closed and her hands resting on her knees, with seafront buildings and distant mountains behind.' },
   },
@@ -259,12 +257,12 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Một người đội mũ lưỡi trai xanh, áo khoác xanh nhạt, chắp hai bàn tay trước ngực và nhắm mắt; phía sau là bờ biển nhiều đá, sóng nhẹ và dãy núi có mây phủ.', en: 'A person in a green cap and pale blue jacket holds their palms together at the chest with eyes closed, with a rocky shore, gentle waves and cloud-covered mountains behind.' },
   },
   {
-    id: 'park-heart-hands', category: 'practice', hero: true, ...size(960, 1280),
+    id: 'park-heart-hands', category: 'practice', ...size(960, 1280),
     caption: { vi: 'Ngồi xếp bằng trên cỏ, hai tay làm hình trái tim.', en: 'Sitting cross-legged on the grass, hands shaped into a heart.' },
     alt: { vi: 'Một người phụ nữ áo trắng thêu, tết hai bím tóc, ngồi xếp bằng trên bãi cỏ, hai bàn tay ghép thành hình trái tim; bên cạnh có chiếc nón lá, phía sau là công viên với những cây cắt tỉa tròn.', en: 'A woman in an embroidered white top with two braids sits cross-legged on the grass, her hands forming a heart, a conical hat beside her and a park of round-clipped trees behind.' },
   },
   {
-    id: 'park-arms-open', category: 'practice', hero: true, ...size(960, 1280),
+    id: 'park-arms-open', category: 'practice', ...size(960, 1280),
     caption: { vi: 'Dang rộng hai tay đón nắng chiều giữa công viên.', en: 'Arms wide open to the late sun in the park.' },
     alt: { vi: 'Một người phụ nữ mặc đồ trắng, chân trần, đứng trên bãi cỏ, ngẩng mặt và dang rộng hai tay; phía sau là cây cắt tỉa tròn, mái nhà và ánh nắng chiều xuyên qua tán cây.', en: 'A barefoot woman in white stands on the grass with her face lifted and her arms wide open, with round-clipped trees, rooftops and late sunlight through the leaves behind her.' },
   },
@@ -335,7 +333,6 @@ export const albumPhotos: AlbumPhoto[] = [
 ];
 
 const byId = new Map(albumPhotos.map(photo => [photo.id, photo]));
-export const heroPhotos = albumPhotos.filter(photo => photo.hero);
 export const albumPhoto = (id: string) => {
   const photo = byId.get(id);
   if (!photo) throw new Error(`Unknown album photo: ${id}`);

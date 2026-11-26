@@ -8,7 +8,6 @@ import HomePhoto from './HomePhoto.astro';
 import HomeShop from './HomeShop.astro';
 import AlbumStrip from './AlbumStrip.astro';
 import AlbumImage from './AlbumImage.astro';
-import HeroSlides from './HeroSlides.astro';
 import AnimatedIcon from './AnimatedIcon.astro';
 import BreathRing from './BreathRing.astro';
 import LandingFeelings from './LandingFeelings.astro';
@@ -60,12 +59,7 @@ const welcome = homeEmpathy(lang, {
         </div>
       </div>
       <div class="landing-hero__art">
-        <div class="landing-arch"><HeroSlides {lang} /></div>
-        <div class="landing-orb landing-orb--a"><AlbumImage id="pink-lotus" {lang} sizes="(min-width: 860px) 12vw, 30vw" /></div>
-        <div class="landing-orb landing-orb--b"><AlbumImage id="toddler-stone-path" {lang} sizes="(min-width: 860px) 10vw, 26vw" /></div>
-        <span class="landing-hero__leaf landing-hero__leaf--1" aria-hidden="true"><AnimatedIcon name="leaf" /></span>
-        <span class="landing-hero__leaf landing-hero__leaf--2" aria-hidden="true"><AnimatedIcon name="lotus" /></span>
-        <BreathRing {lang} />
+        <AlbumImage id="sunset-lake-path" {lang} eager sizes="(min-width: 860px) 28vw, 88vw" />
       </div>
     </section>
 

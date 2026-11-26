@@ -1,4 +1,4 @@
-"""Menu-bar search opens in place with live results; Home hero slideshow changes every 6 seconds and can be paused; 404 offers a way back."""
+"""Menu-bar search opens in place with live results; Home hero is one still photograph; 404 offers a way back."""
 import os, shutil
 from playwright.sync_api import sync_playwright, expect
 
@@ -27,26 +27,12 @@ with sync_playwright() as p:
         page.locator('#nav-search-input').fill(query)
         page.keyboard.press('Enter')
         page.wait_for_url('**' + search + '?q=*')
-        # Hero slideshow (Home only).
+        # The Home hero is one still photograph (no slideshow, no ornaments).
         page.goto(base + path, wait_until='networkidle')
-        slides = page.locator('[data-hero-slide]')
-        assert slides.count() >= 6
-        assert 'is-active' in slides.nth(0).get_attribute('class')
-        page.wait_for_function('document.querySelectorAll("[data-hero-slide]")[1].classList.contains("is-active")', timeout=9000)
-        page.locator('[data-hero-toggle]').click()
-        assert page.locator('[data-hero-toggle]').get_attribute('aria-pressed') == 'true'
-        page.wait_for_timeout(7000)
-        assert 'is-active' in slides.nth(1).get_attribute('class'), 'paused slideshow must not move'
-        page.locator('[data-hero-dot]').nth(3).click()
-        assert 'is-active' in slides.nth(3).get_attribute('class')
-        assert slides.nth(3).locator('img').get_attribute('src'), 'photo loads when it is shown'
+        assert page.locator('.landing-hero__art img').count() == 1
+        assert page.locator('[data-hero-slide], [data-hero-toggle], .landing-orb, .landing-hero__leaf').count() == 0
         assert errors == [], errors
         ctx.close()
-    # Reduced motion: no automatic change.
-    ctx = browser.new_context(viewport={'width': 1280, 'height': 800}, reduced_motion='reduce')
-    page = ctx.new_page(); page.goto(base + '/vi/', wait_until='networkidle'); page.wait_for_timeout(7000)
-    assert 'is-active' in page.locator('[data-hero-slide]').nth(0).get_attribute('class')
-    ctx.close()
     # 404: each language has its own page (English under /en/, Vietnamese elsewhere), with working header, footer and home link.
     ctx = browser.new_context(viewport={'width': 393, 'height': 850})
     page = ctx.new_page(); page.goto(base + '/en/404.html', wait_until='domcontentloaded')
@@ -60,4 +46,4 @@ with sync_playwright() as p:
     assert page.evaluate("document.documentElement.lang") == 'vi'
     page.locator('main a.button').click(); page.wait_for_url('**/vi/')
     ctx.close(); browser.close()
-print('Menu search, hero slideshow and 404 pass')
+print('Menu search, still hero and 404 pass')
