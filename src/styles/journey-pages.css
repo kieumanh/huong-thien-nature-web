@@ -83,11 +83,15 @@
 }
 
 .partner-journey-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin-top: 1.25rem;
 }
+
+/* Cards share each row and any short last row sits centred (1, 2 or 3 per row on every device). */
+.partner-journey-grid > .eco-partner { flex: 1 1 min(100%, 20rem); max-width: 24rem; }
 
 /* Partner marks that are dark line art sit on a light tile so they stay visible after dark. */
 .partner-logo--tile { padding: .35rem; border-radius: 1rem; background: #eef3e6; box-shadow: 0 0 0 2px var(--brand-fern), 0 4px 14px rgb(0 0 0 / .22); }

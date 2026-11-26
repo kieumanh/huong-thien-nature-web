@@ -22,7 +22,7 @@ async function collect(directory) {
   }
 }
 await collect(dist);
-assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 13 + (products.length + 1 + shopThemes.length) * 2, 'Build must contain both shop catalogues, every theme space, every product translation and all existing pages');
+assert.equal(files.length, (articleEntries.length + journeyPageKeys.length + courses.length) * 2 + 14 + (products.length + 1 + shopThemes.length) * 2, 'Build must contain both shop catalogues, every theme space, every product translation and all existing pages');
 const sitemap = await readFile(join(dist, 'sitemap.xml'), 'utf8');
 const locations = [...sitemap.matchAll(/<loc>([^<]+)<\/loc>/g)].map(match => match[1]);
 assert.equal(new Set(locations).size, (articleEntries.length + products.length + shopThemes.length + journeyPageKeys.length + courses.length + 5) * 2, 'Sitemap must list all localized pages and products');
@@ -41,7 +41,8 @@ for (const file of files) {
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]);
   assert.equal(new Set(ids).size, ids.length, `Duplicate IDs on ${route}`);
   assert(!html.includes('undefined'), `Unresolved content on ${route}`);
-  const localized = /^\/(vi|en)\//.exec(route);
+  // The 404 pages (/404.html and /en/404.html) are not indexed and have no sitemap entry, so they are not treated as localized routes.
+  const localized = route.endsWith('404.html') ? null : /^\/(vi|en)\//.exec(route);
   if (localized) {
     const lang = localized[1];
     assert(html.includes(`<html lang="${lang}">`), `Incorrect language on ${route}`);

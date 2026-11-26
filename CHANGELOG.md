@@ -1,3 +1,9 @@
+## 2.26.1 — Trang 404 song ngữ thật, Những người đồng hành canh giữa
+
+- **Trang 404 hai ngôn ngữ:** mỗi ngôn ngữ có một trang riêng, gồm tiêu đề, menu, chân trang và liên kết về trang chủ đúng ngôn ngữ. `src/pages/404.astro` (tiếng Việt) và `src/pages/en/404.astro` (tiếng Anh) cùng dựng từ `src/components/NotFoundPage.astro`. Host trả về `404.html` gần nhất theo thư mục, nên địa chỉ `/en/…` sai hiện bản tiếng Anh. Bỏ cơ chế đổi ngôn ngữ bằng script.
+- **Những người đồng hành (Hệ sinh thái):** tiêu đề bỏ chữ "xung quanh" (tiếng Anh: "Our companions on the path"). Ba thẻ luôn canh giữa trên mọi thiết bị: một cột trên điện thoại, hai thẻ một hàng và thẻ thứ ba canh giữa trên máy tính bảng, ba thẻ một hàng trên máy tính (`journey-pages.css`, bố cục flex).
+- **Kiểm thử:** `home-discovery.test.mjs` kiểm tra hai trang 404; `nav-search-browser.py` mở `/en/404` và `/vi/…` để xác nhận ngôn ngữ, menu và nút về trang chủ.
+
 ## 2.26.0 — Tìm kiếm ngay trên menu, 404 động, slide hero, chỉnh Trang chủ
 
 - **Tìm kiếm trên thanh menu:** bấm kính lúp, một thanh tìm kiếm mở rộng từ phải sang trái ngay trên menu, kết quả hiện ngay bên dưới (6 kết quả đầu, gợi ý từ khóa khi chưa gõ, nút "Xem tất cả kết quả"). Không phải rời trang. Phím `/` mở nhanh, Esc đóng, mũi tên lên xuống chọn kết quả, Enter mở trang tìm kiếm đầy đủ. Không có JavaScript thì kính lúp vẫn là liên kết tới trang tìm kiếm. Mã: `src/scripts/nav-search.ts`, kiểu ở cuối `global.css`.
