@@ -1,7 +1,11 @@
 ---
 import type { Language } from '../data/site';
 import Arrow from './Arrow.astro';
-const { lang, cards, links } = Astro.props as { lang: Language; cards: string[][]; links: string[][] };
+import AlbumImage from './AlbumImage.astro';
+import PillarIcon from './PillarIcon.astro';
+// `photos`: one album id per card (in card order), shown above the text; `focus` is the CSS object-position of each photo.
+const { lang, cards, links, photos = [], focus = [] } = Astro.props as { lang: Language; cards: string[][]; links: string[][]; photos?: string[]; focus?: string[] };
+const pillarIcons = ['seed', 'meditation', 'mind'] as const;
 const en = lang === 'en';
 const values = en ? ['BODY', 'HEART', 'MIND'] : ['THÂN', 'TÂM', 'TRÍ'];
 const status = en ? ['With partner farms', 'Courses available', 'Shop available'] : ['Cùng farm đối tác', 'Có khóa thực hành', 'Có Cửa hàng'];
@@ -10,16 +14,20 @@ const orbitDurations = ['26s', '42s', '58s'];
 <div class="ecosystem-motion" data-ecosystem>
 
   <div class="solar-system-pillars">
-    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`}>
-      <span class="solar-pillar__index">{values[index]}</span>
-      <h3>{title}</h3>
-      <p>{text}</p>
-      <span class="ecosystem-status">{status[index]}</span>
-      <a class="quiet-link" href={links[index][0]}>{links[index][1]} <Arrow /></a>
+    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`} data-reveal="fade">
+      {photos[index] && <figure class="solar-pillar__photo" style={focus[index] ? `--pp:${focus[index]}` : undefined}><AlbumImage id={photos[index]} {lang} sizes="(min-width: 900px) 30vw, 92vw" /></figure>}
+      <div class="solar-pillar__body">
+        <span class="solar-pillar__badge"><PillarIcon name={pillarIcons[index]} /></span>
+        <span class="solar-pillar__index">{values[index]}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+        <span class="ecosystem-status">{status[index]}</span>
+        <a class="quiet-link" href={links[index][0]}>{links[index][1]} <Arrow /></a>
+      </div>
     </article>)}
   </div>
   <section class="reading-section ecosystem-visual">
-    <h3 class="reading-heading">{en ? 'Three orbits around awareness' : 'Ba quỹ đạo quanh sự nhận biết'}</h3>
+    <h3 class="reading-heading sr-only">{en ? 'Three orbits around awareness' : 'Ba quỹ đạo quanh sự nhận biết'}</h3>
   <figure class="ecosystem-solar-system" aria-label={en ? 'Awareness at the centre, with three planets for Body, Heart and Mind.' : 'Nhận biết ở trung tâm, cùng ba hành tinh Thân, Tâm và Trí.'}>
     <div class="solar-system-scene" aria-hidden="true">
       <div class="solar-system-starfield"></div>

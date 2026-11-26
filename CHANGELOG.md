@@ -1,3 +1,12 @@
+## 2.25.0 — Trang chủ và Hệ sinh thái dựng lại theo phong cách landing page
+
+- **Ít chữ, nhiều khoảng thở, nhiều ảnh.** Trang chủ giảm từ khoảng 1.840 xuống 1.190 chữ (vi) và Hệ sinh thái từ khoảng 1.100 xuống 760 chữ; số ảnh thật trên Hệ sinh thái tăng từ 4 lên 14. Mỗi khối chỉ giữ một ý chính, phần còn lại nằm sau đường dẫn.
+- **Trang chủ** mở bằng một khung vòm có ảnh thật, hai vòng tròn nhỏ và một vòng thở chuyển động ("Hít vào / Thở ra", 4 giây vào, 6 giây ra). Khối "Có thể bạn đang…" gọn thành sáu ô cảm xúc có icon, mỗi ô dẫn tới một bước nhỏ. Các phần Câu chuyện, Ba trọng tâm, Khóa thực hành, Gợi ý, Tản văn và lời mời cuối trang đều ngắn lại và có ảnh.
+- **Hệ sinh thái** mở bằng ba vòm Thân – Tâm – Trí, mỗi trọng tâm một hàng ảnh lớn kèm một dòng ngắn; lời của chủ dự án giữ nguyên đầy đủ trong dữ liệu (và trong tìm kiếm), trang chỉ hiển thị bản rút gọn (`short`), cùng ý với thẻ ở Trang chủ. Đối tác rút còn tên, dự án, phần hỗ trợ và đường dẫn.
+- **Icon chuyển động mới** (`AnimatedIcon.astro`, `animated-icons.css`): hơi thở, lá, mầm, tim, sóng, lối đi, la bàn, hoa sen, mặt trời, ngôi nhà, sách, đá, trò chuyện, đôi tay. Chỉ dùng CSS, luôn `aria-hidden`, tắt khi bật giảm chuyển động. Các khối hiện dần khi cuộn tới (`landing-motion.ts`), không chạy khi giảm chuyển động hoặc bật tiết kiệm dữ liệu.
+- **Album:** thêm 17 ảnh mới (nhóm mới "Thiên nhiên"); album có 51 ảnh. Đã loại 3 ảnh trùng (2449 và 2445 trùng hệt ảnh đã có, 304 gần như trùng 293). 11 ảnh còn lại được đặt thêm vào Liên hệ, Thực phẩm sạch và Quỹ ủng hộ.
+- **Kiểm thử:** thêm `tests/landing.test.mjs` (ngân sách chữ, số ảnh, icon, alt và kích thước ảnh); sửa `zen-botanical-browser.py` theo hero mới; vá lỗi tràn ngang 3–6px trên điện thoại do chiếc lá trang trí.
+
 ## 2.24.5 — Hệ sinh thái: bỏ phần lặp Thân – Tâm – Trí
 
 - **Trang Hệ sinh thái** kể Thân – Tâm – Trí bốn lần (ba trọng tâm, ba thẻ phẩm chất Living Zen, ba thẻ "không gian", vòng "nuôi nhau"). Nay chỉ còn ba trọng tâm (lời của chủ dự án, có đường dẫn) và vòng "Ba trọng tâm nuôi nhau" đặt ngay dưới chúng.

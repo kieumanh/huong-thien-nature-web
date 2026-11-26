@@ -1,5 +1,7 @@
 // Ecosystem page content. The three focal points and the closing paragraph follow the wording
 // provided by the project owner; everything else only points to pages and offers that exist.
+// `short` is the one-sentence version shown on the landing-style page (it repeats the wording of the Home cards in site.ts);
+// `text` keeps the owner's full wording for search and for any page that wants the long form.
 export const ecosystemVision = {
   vi: {
     intro: 'Hệ sinh thái Hương Thiền Nature bao quanh bởi ba trọng tâm. Các đối tác xung quanh bổ trợ cho việc nuôi dưỡng, chữa lành và phát triển ba trọng tâm này một cách hài hòa, bền vững.',
@@ -9,6 +11,7 @@ export const ecosystemVision = {
         id: 'phap-mon',
         title: 'Pháp môn tu tập',
         tagline: 'Nuôi dưỡng từ bên trong',
+        short: 'Thiền, chánh niệm, yoga… để nâng cao trí tuệ, chữa lành, khai sáng, nuôi dưỡng tinh thần lẫn sức khỏe thân tâm.',
         text: 'Thiền, chánh niệm, yoga… nhằm nâng cao trí tuệ, chữa lành, khai sáng, nâng cao tinh thần lẫn sức khỏe thân tâm.',
         links: [['guidance', 'Xem khóa thực hành'], ['practice', 'Thực tập một phút']],
       },
@@ -16,6 +19,7 @@ export const ecosystemVision = {
         id: 'thien-nhien',
         title: 'Môi trường thiên nhiên từ các farm đối tác',
         tagline: 'Nuôi dưỡng từ đất và nắng',
+        short: 'Lối sống trong lành, chậm rãi, hòa điệu cùng đất, nắng và cây cỏ, cùng thực phẩm sạch nuôi dưỡng thân lẫn tâm.',
         text: 'Xây dựng lối sống trong lành, chậm rãi, hòa điệu cùng thiên nhiên, chữa lành từ chính sinh khí tự nhiên của đất đai, nắng ấm, cây cối và thực vật trong quần thể ấy. Đồng thời cung cấp thực phẩm sạch nuôi dưỡng sức khỏe thể chất lẫn tinh thần, để đạt đến sự hòa điệu cùng tự nhiên.',
         links: [['partnerships', 'Gặp farm đối tác'], ['food', 'Thực phẩm sạch']],
       },
@@ -23,6 +27,7 @@ export const ecosystemVision = {
         id: 'ho-tro',
         title: 'Môi trường thực hành, sách vở, đá thanh lọc',
         tagline: 'Nâng đỡ trên đường đi',
+        short: 'Những phương tiện nâng đỡ trên đường tu tập: thanh lọc, bảo hộ, nâng cao tinh thần, để cùng nhau vượt qua thử thách mà không nản lòng.',
         text: 'Những phương tiện hỗ trợ cho sự thanh lọc, bảo hộ và nâng cao từ trường lẫn trí tuệ, tầm nhìn, tình bạn, tình thầy trò. Giúp nâng cao tinh thần và sự hăng hái trên hành trình tu tập, tỉnh thức, để cùng giúp nhau vượt qua gian khó, thử thách mà không nản lòng.',
         links: [['stones', 'Xem đá năng lượng'], ['journal', 'Đọc Tản văn']],
       },
@@ -51,6 +56,7 @@ export const ecosystemVision = {
         id: 'phap-mon',
         title: 'Paths of practice',
         tagline: 'Nourishing from within',
+        short: 'Meditation, mindfulness, yoga and more, to deepen wisdom, heal, awaken, and strengthen spirit and the health of body and mind.',
         text: 'Meditation, mindfulness, yoga and more, to deepen wisdom, heal, awaken, and strengthen both spirit and the health of body and mind.',
         links: [['guidance', 'See the practice courses'], ['practice', 'Practise for one minute']],
       },
@@ -58,6 +64,7 @@ export const ecosystemVision = {
         id: 'thien-nhien',
         title: 'Natural settings from our partner farms',
         tagline: 'Nourishing from soil and sunlight',
+        short: 'A clean, unhurried way of life in harmony with soil, sunlight and plants, with clean food that nourishes body and mind.',
         text: 'Building a clean, unhurried way of life in harmony with nature, and healing through the natural vitality of the soil, the sunshine, the trees and plants of those places. It also means supplying clean food that nourishes physical and mental health, so we can live in tune with nature.',
         links: [['partnerships', 'Meet our partner farm'], ['food', 'Clean food']],
       },
@@ -65,6 +72,7 @@ export const ecosystemVision = {
         id: 'ho-tro',
         title: 'Practice spaces, books and cleansing stones',
         tagline: 'Support along the way',
+        short: 'Supportive companions on the path: cleansing, protecting and lifting the spirit, so we can help each other through challenge without losing heart.',
         text: 'Supportive companions for cleansing, protecting and lifting our energy field as well as our wisdom, vision, friendships and bonds between teacher and student. They help sustain spirit and enthusiasm on the path of practice and awakening, so we can help each other through hardship and challenge without losing heart.',
         links: [['stones', 'See energy stones'], ['journal', 'Read the journal']],
       },

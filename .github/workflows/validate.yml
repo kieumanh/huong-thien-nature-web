@@ -41,7 +41,7 @@ jobs:
       - run: npm run audit:build
       - run: npm run test:journal # built-page checks need dist, so they run again after the build
       - run: npm run test:support # built-page checks need dist, so they run again after the build
-      - run: node --test tests/ecosystem-content.test.mjs tests/ecosystem-orbit.test.mjs tests/home-discovery.test.mjs
+      - run: node --test tests/ecosystem-content.test.mjs tests/ecosystem-orbit.test.mjs tests/home-discovery.test.mjs tests/landing.test.mjs
       - run: npm run build:pages-functions
         env:
           WRANGLER_SEND_METRICS: 'false'

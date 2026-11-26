@@ -7,7 +7,7 @@ import type { Language } from './site.ts';
 // where the photo itself shows them (the event banner). Add a photo by adding its two files
 // and one entry below; keep `vi` and `en` in step.
 
-export const albumCategories = ['meeting', 'garden', 'sea', 'practice', 'wall', 'daily'] as const;
+export const albumCategories = ['meeting', 'garden', 'nature', 'sea', 'practice', 'wall', 'daily'] as const;
 export type AlbumCategory = (typeof albumCategories)[number];
 
 type Text = Record<Language, string>;
@@ -32,13 +32,17 @@ export const albumSections: Record<AlbumCategory, { title: Text; intro: Text }> 
     title: { vi: 'Giữa vườn và thiên nhiên', en: 'In the garden' },
     intro: { vi: 'Hình ảnh từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, lối đất đỏ, hàng đu đủ và chuối.', en: 'Photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, red-earth paths, papaya and banana trees.' },
   },
+  nature: {
+    title: { vi: 'Hoa, lá và lối đi', en: 'Flowers, leaves and paths' },
+    intro: { vi: 'Một bông sen, một đóa cúc đồng tiền, những phiến đá dẫn ra mặt nước lúc hoàng hôn.', en: 'A lotus, a gerbera, and stepping stones leading to the water at sunset.' },
+  },
   sea: {
     title: { vi: 'Bên biển', en: 'By the sea' },
     intro: { vi: 'Bãi cát, sóng và những lúc nghỉ chân.', en: 'Sand, waves and moments of rest.' },
   },
   practice: {
     title: { vi: 'Thiền, Tarot và góc thực hành', en: 'Meditation, tarot and the practice corner' },
-    intro: { vi: 'Ngồi yên bên biển, những bộ bài tarot và một góc bàn nhỏ với hoa và đá.', en: 'Sitting still by the sea, tarot decks, and a small table corner with flowers and stones.' },
+    intro: { vi: 'Ngồi yên và chắp tay bên biển, giữa công viên, những bộ bài tarot và một góc bàn nhỏ với hoa và đá.', en: 'Sitting still and holding palms together by the sea and in the park, tarot decks, and a small table corner with flowers and stones.' },
   },
   wall: {
     title: { vi: 'Tranh nhỏ trên tường', en: 'Small pictures on the wall' },
@@ -46,7 +50,7 @@ export const albumSections: Record<AlbumCategory, { title: Text; intro: Text }> 
   },
   daily: {
     title: { vi: 'Những khoảnh khắc nhỏ', en: 'Small moments' },
-    intro: { vi: 'Vài khoảnh khắc nhỏ giữa ngày.', en: 'A few small moments from the day.' },
+    intro: { vi: 'Tiếng cười của em bé, nồi nước trên bếp củi và những khoảnh khắc nhỏ giữa ngày.', en: 'A baby’s laughter, a pot on a wood fire and other small moments from the day.' },
   },
 };
 
@@ -149,6 +153,44 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Một em bé đội mũ lưỡi trai quay ngược ngồi xổm và cười trên nền đất nâu giữa hàng đu đủ; bên phải có vòi tưới phun mưa, bên trái có chai nước màu xanh.', en: 'A toddler in a backwards cap squats and smiles on brown soil among papaya trees, with a sprinkler on the right and a green water bottle on the left.' },
   },
 
+  {
+    id: 'banana-grove-house', category: 'garden', ...size(960, 1280),
+    caption: { vi: 'Những buồng chuối xanh bên căn nhà gỗ mái ngói.', en: 'Bunches of green bananas beside a timber house with a tiled roof.' },
+    alt: { vi: 'Những buồng chuối xanh treo trên cây chuối giữa vườn, phía sau là căn nhà gỗ mái ngói đỏ, phía trước là bụi cỏ lá dài.', en: 'Bunches of green bananas hang from a banana plant in the garden, with a timber house under a red tiled roof behind and a clump of long-leaved grass in front.' },
+  },
+  {
+    id: 'cabbage-rows-red-soil', category: 'garden', ...size(960, 1280),
+    caption: { vi: 'Hai hàng bắp cải trên đất đỏ, cạnh một cây đu đủ.', en: 'Two rows of cabbages on red soil beside a papaya tree.' },
+    alt: { vi: 'Hai hàng bắp cải xanh nhạt trên nền đất đỏ, bên phải là cây đu đủ cao và những bụi hoa dại nhỏ màu trắng.', en: 'Two rows of pale green cabbages on red soil, with a tall papaya tree and small white wildflowers on the right.' },
+  },
+  {
+    id: 'seedling-coconut-shell', category: 'garden', ...size(720, 960),
+    caption: { vi: 'Hai tay nâng cây con đang lớn trong gáo dừa.', en: 'Both hands holding a young seedling growing in a coconut shell.' },
+    alt: { vi: 'Một người phụ nữ áo tím, quần hồng mỉm cười, hai tay nâng một cây non xanh mọc trong chiếc gáo dừa giữa đám cỏ cây xanh.', en: 'A woman in a lilac top and pink trousers smiles as she holds a young green seedling growing in a coconut shell, among green grass and plants.' },
+  },
+
+  // Flowers, leaves and paths
+  {
+    id: 'sunset-lake-path', category: 'nature', ...size(960, 1280),
+    caption: { vi: 'Lối bước bằng đá dẫn ra mặt nước lúc hoàng hôn.', en: 'A stepping-stone path leading to the water at sunset.' },
+    alt: { vi: 'Lối bước lát đá trên thảm cỏ xanh dẫn tới mặt nước, mặt trời lặn lấp ló sau hàng dừa và những cây tre cao, bầu trời nhiều mây.', en: 'A path of stepping stones across green lawn leads toward the water, with the setting sun glowing behind coconut palms and tall bamboo under a cloudy sky.' },
+  },
+  {
+    id: 'stepping-stones-lawn', category: 'nature', ...size(960, 1280),
+    caption: { vi: 'Lối đá trên thảm cỏ, dưới hàng dừa và cây ăn quả.', en: 'A stone path across the lawn beneath coconut palms and fruit trees.' },
+    alt: { vi: 'Những phiến đá lát thành lối đi giữa thảm cỏ xanh mướt, hai bên là cây ăn quả và cây dừa, phía xa thấp thoáng căn nhà gỗ dưới trời xanh có mây.', en: 'Stone slabs form a path across lush green lawn between fruit trees and coconut palms, with a timber house glimpsed in the distance under a blue, cloud-streaked sky.' },
+  },
+  {
+    id: 'pink-lotus', category: 'nature', ...size(960, 1280),
+    caption: { vi: 'Một bông sen hồng giữa những tàu lá lớn.', en: 'A pink lotus among large leaves.' },
+    alt: { vi: 'Một bông sen hồng đang nở trên cuống dài, quanh là những tàu lá sen xanh to; phía sau là hàng dừa và chiếc ghế dài màu xanh.', en: 'A pink lotus blooms on a tall stem among large green leaves, with coconut palms and a blue bench behind.' },
+  },
+  {
+    id: 'pink-gerbera', category: 'nature', ...size(960, 1280),
+    caption: { vi: 'Một bông cúc đồng tiền hồng đang nở trong vườn.', en: 'A pink gerbera in bloom in the garden.' },
+    alt: { vi: 'Cận cảnh một bông cúc đồng tiền cánh hồng nhọn đang nở; phía sau mờ là lối đi, cây cối và mái nhà gạch.', en: 'A close view of a pink gerbera with pointed petals in bloom, with a path, trees and a brick house softly blurred behind.' },
+  },
+
   // By the sea
   {
     id: 'beach-dance', category: 'sea', ...size(960, 1280),
@@ -209,6 +251,22 @@ export const albumPhotos: AlbumPhoto[] = [
     alt: { vi: 'Bình hoa nhỏ với cành lá xanh, hoa hồng và hoa trắng đặt giữa một cụm đá tím, một viên đá vàng và một khối đá nâu nhạt; phía sau mờ là các mô hình kim tự tháp trong suốt.', en: 'A small vase with green leaves, a pink flower and white blossoms stands among a purple stone cluster, a yellow crystal and a pale brown stone, with blurred clear pyramid models behind.' },
   },
 
+  {
+    id: 'prayer-hands-seashore', category: 'practice', ...size(1280, 720),
+    caption: { vi: 'Chắp tay, mắt nhắm, bên bờ biển đá.', en: 'Hands together, eyes closed, on a rocky shore.' },
+    alt: { vi: 'Một người đội mũ lưỡi trai xanh, áo khoác xanh nhạt, chắp hai bàn tay trước ngực và nhắm mắt; phía sau là bờ biển nhiều đá, sóng nhẹ và dãy núi có mây phủ.', en: 'A person in a green cap and pale blue jacket holds their palms together at the chest with eyes closed, with a rocky shore, gentle waves and cloud-covered mountains behind.' },
+  },
+  {
+    id: 'park-heart-hands', category: 'practice', ...size(960, 1280),
+    caption: { vi: 'Ngồi xếp bằng trên cỏ, hai tay làm hình trái tim.', en: 'Sitting cross-legged on the grass, hands shaped into a heart.' },
+    alt: { vi: 'Một người phụ nữ áo trắng thêu, tết hai bím tóc, ngồi xếp bằng trên bãi cỏ, hai bàn tay ghép thành hình trái tim; bên cạnh có chiếc nón lá, phía sau là công viên với những cây cắt tỉa tròn.', en: 'A woman in an embroidered white top with two braids sits cross-legged on the grass, her hands forming a heart, a conical hat beside her and a park of round-clipped trees behind.' },
+  },
+  {
+    id: 'park-arms-open', category: 'practice', ...size(960, 1280),
+    caption: { vi: 'Dang rộng hai tay đón nắng chiều giữa công viên.', en: 'Arms wide open to the late sun in the park.' },
+    alt: { vi: 'Một người phụ nữ mặc đồ trắng, chân trần, đứng trên bãi cỏ, ngẩng mặt và dang rộng hai tay; phía sau là cây cắt tỉa tròn, mái nhà và ánh nắng chiều xuyên qua tán cây.', en: 'A barefoot woman in white stands on the grass with her face lifted and her arms wide open, with round-clipped trees, rooftops and late sunlight through the leaves behind her.' },
+  },
+
   // Small pictures on the wall (printed pictures; the signature of Thích Nhất Hạnh is visible on each)
   {
     id: 'plaque-moon-boat', category: 'wall', ...size(960, 1280),
@@ -236,6 +294,41 @@ export const albumPhotos: AlbumPhoto[] = [
     id: 'painting-tree', category: 'daily', ...size(960, 1280),
     caption: { vi: 'Chăm chú tô màu một cái cây.', en: 'Painting a tree with full attention.' },
     alt: { vi: 'Một bạn nhỏ cúi xuống tô màu bức tranh cái cây xanh trong cuốn sổ.', en: 'A child leans over a notebook, painting a green tree.' },
+  },
+  {
+    id: 'toddler-stone-path', category: 'daily', ...size(960, 1280),
+    caption: { vi: 'Em bé chân trần cười tươi trên lối đá.', en: 'A barefoot toddler smiling on a stone path.' },
+    alt: { vi: 'Một em bé tóc vàng nhạt, chân trần, áo trắng thêu và quần hồng, cười tươi trên lối đá cạnh hàng rào tre trắng và hoa tím.', en: 'A barefoot toddler with light hair, in an embroidered white top and pink shorts, smiles on a stone path beside a white bamboo fence and purple flowers.' },
+  },
+  {
+    id: 'selfie-toddler-laugh', category: 'daily', ...size(960, 1280),
+    caption: { vi: 'Tự chụp cùng em bé giữa sân vườn.', en: 'A selfie with a toddler in the garden yard.' },
+    alt: { vi: 'Một người phụ nữ tóc dài mỉm cười, bế em bé áo hồng nhạt đang há miệng, chụp ảnh tự sướng trước thân cây và bức tường gạch.', en: 'A long-haired woman smiles while holding a toddler in a pale pink top with an open mouth, in a selfie in front of a tree trunk and a brick wall.' },
+  },
+  {
+    id: 'pot-on-wood-fire', category: 'daily', ...size(720, 1280),
+    caption: { vi: 'Chiếc nồi bốc khói trên bếp củi.', en: 'A steaming pot on a wood fire.' },
+    alt: { vi: 'Một chiếc nồi có nắp kính bốc hơi trên bếp củi kê bằng gạch, ngọn lửa nhỏ cháy bên dưới, phía sau là đống lá cọ khô và cây xanh.', en: 'A pot with a glass lid steams on a wood fire set between bricks, a small flame below and a pile of dry palm fronds and greenery behind.' },
+  },
+  {
+    id: 'baby-conical-hat-look-up', category: 'daily', ...size(960, 1280),
+    caption: { vi: 'Em bé đội nón lá bò trên chiếu, ngước nhìn lên.', en: 'A baby in a conical hat crawling on a mat, looking up.' },
+    alt: { vi: 'Một em bé váy trắng in hình trái cây, đội chiếc nón lá nhỏ, chống hai tay bò trên chiếu hoa và ngước nhìn lên mỉm cười; bên cạnh có chiếc ghế nhựa xanh.', en: 'A baby in a white fruit-print dress and a small conical hat crawls on a patterned mat, looking up and smiling, with a blue plastic stool beside.' },
+  },
+  {
+    id: 'baby-conical-hat-smile', category: 'daily', ...size(960, 1280),
+    caption: { vi: 'Em bé đội nón lá vẽ màu, cười toe trên chiếc chiếu.', en: 'A baby in a painted conical hat, grinning on the mat.' },
+    alt: { vi: 'Một em bé váy trắng in hình trái cây, đội chiếc nón lá có vẽ hoa hồng và mảng xanh, bò trên chiếu và cười rạng rỡ.', en: 'A baby in a white fruit-print dress and a conical hat painted with pink flowers and patches of blue crawls on a mat, beaming.' },
+  },
+  {
+    id: 'park-peace-sign-baby', category: 'daily', ...size(719, 1280),
+    caption: { vi: 'Chân trần trên cỏ, bế em bé và giơ hai ngón tay chào.', en: 'Barefoot on the grass, holding a baby and flashing a peace sign.' },
+    alt: { vi: 'Một người phụ nữ đội mũ cói, tết hai bím tóc, mặc váy họa tiết, chân trần trên bãi cỏ, bế em bé váy vàng đội mũ hồng và giơ tay làm dấu chữ V; xung quanh là những cây cắt tỉa tròn.', en: 'A barefoot woman in a straw hat, with two braids and a patterned dress, stands on the grass holding a baby in a yellow dress and pink hat while making a peace sign, with round-clipped trees around.' },
+  },
+  {
+    id: 'elder-and-baby-carrier', category: 'daily', ...size(720, 1280),
+    caption: { vi: 'Một cụ bà và một người phụ nữ bế em bé, chụp ảnh chung trong quán.', en: 'An elderly woman and a woman carrying a baby, posing together in an eatery.' },
+    alt: { vi: 'Một cụ bà tóc bạc mặc bộ đồ họa tiết lá đứng cạnh một người phụ nữ đội nón lá, tết hai bím tóc, đang bế em bé trong địu xanh nhạt; cả hai mỉm cười trong một quán ăn.', en: 'An elderly woman with silver hair in a leaf-print outfit stands beside a woman in a conical hat with two braids who carries a baby in a pale blue carrier; both smile in an eatery.' },
   },
 ];
 

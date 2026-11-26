@@ -1,0 +1,16 @@
+---
+// A calm ring that grows and softens in time with a slow breath (4 s in, 6 s out, as in the breathing guide). Decorative; the words
+// next to it carry the meaning. Under reduced motion it stays still and shows both words.
+import type { Language } from '../data/site';
+interface Props { lang: Language; class?: string }
+const { lang, class: extra } = Astro.props as Props;
+const vi = lang === 'vi';
+---
+<div class:list={['breath-ring', extra]} aria-hidden="true">
+  <span class="breath-ring__halo"></span>
+  <span class="breath-ring__core"></span>
+  <span class="breath-ring__label">
+    <span class="breath-ring__in">{vi ? 'Hít vào' : 'Breathe in'}</span>
+    <span class="breath-ring__out">{vi ? 'Thở ra' : 'Breathe out'}</span>
+  </span>
+</div>

@@ -6,6 +6,7 @@ import Footer from './Footer.astro';
 import Arrow from './Arrow.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import ProductCard from './ProductCard.astro';
+import AlbumStrip from './AlbumStrip.astro';
 import { products, productCategories, shopPath, productPath } from '../data/products';
 import { shopThemes, themeById, themePath, type ThemeId } from '../data/shop-themes';
 import type { Language } from '../data/site';
@@ -77,6 +78,9 @@ const image = fallback[0]?.image;
       <p class="partner-stones__note">{partnerStonesCopy[lang].note} <span>{partnerStonesCopy[lang].sourceNote} <a href={partnerStonesSource.site}>{partnerStonesSource.label}</a></span></p>
     </section>}
     {theme.note && <aside class="shop-note shell" aria-label={vi ? 'Lưu ý' : 'Note'}><p>{theme.note[lang]}</p></aside>}
+    {themeId === 'thuc-pham-sach' && <div class="shell"><AlbumStrip {lang} id="food-moments" balanced photos={['pot-on-wood-fire', 'toddler-papaya', 'toddler-squat', 'selfie-papaya']}
+      title={vi ? 'Bữa ăn bắt đầu từ đất và lửa bếp' : 'Meals begin with soil and a kitchen fire'}
+      intro={vi ? 'Vài hình ảnh đời thường từ vườn và bếp nhà.' : 'A few everyday pictures from the garden and the home kitchen.'} /></div>}
     <section class="shop-invitation shell"><div><span class="eyebrow">{vi ? 'CÙNG CHĂM CHÚT BỮA ĂN' : 'ORDERING'}</span><h2>{vi ? 'Bạn muốn đặt hoặc hỏi thêm?' : 'Want to order or ask more?'}</h2><p>{vi ? 'Gửi lời nhắn, chúng tôi xác nhận giá, tình trạng hàng và cách thanh toán trước khi bạn chuyển khoản.' : 'Send a message. We confirm price, availability and payment details before you transfer anything.'}</p></div><a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ Hương Thiền' : 'Connect with Hương Thiền'} <Arrow /></a></section>
   </main>
   <Footer lang={lang} />

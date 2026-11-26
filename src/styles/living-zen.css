@@ -1,37 +1,38 @@
 /* Living Zen block (LivingZenValues.astro): three pledges on the home page; threads, what we are not and promises on the ecosystem page. */
 .lz-values { padding-block: var(--space-section) 0; }
 .lz-values--full { padding-block: 0; }
-.lz-values__head { max-width: 44rem; }
+.lz-values__head { display: grid; justify-items: center; max-width: 44rem; margin-inline: auto; text-align: center; }
 .lz-values__tagline { margin-top: .35rem; font-family: var(--display-face); font-weight: 600; color: var(--orchid); font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.2; letter-spacing: 0; }
-.lz-values__intro { margin-top: .75rem; color: var(--muted); font-size: var(--type-body-large); line-height: 1.65; }
 
 /* Home: three pledges (no Thân / Tâm / Trí here; the Ecosystem section carries those). */
 .lz-pledges { display: grid; gap: var(--lz-space-4); margin: var(--lz-space-6) 0 0; padding: 0; list-style: none; }
 .lz-pledge {
-  padding: var(--lz-space-5); border: 1px solid var(--border); border-radius: var(--lz-radius-card);
-  background: var(--surface-raised); box-shadow: var(--lz-shadow-subtle);
+  display: grid; justify-items: center; gap: .25rem; padding: clamp(1.3rem, 3vw, 1.9rem); border: 1px solid var(--border); border-radius: var(--lz-radius-card);
+  background: var(--surface-raised); box-shadow: var(--lz-shadow-subtle); text-align: center;
 }
+.lz-pledge .landing-icon { margin-bottom: .5rem; }
 .lz-pledge__label { color: var(--secondary); font-size: .74rem; font-weight: 700; letter-spacing: .14em; }
 .lz-pledge h3 { margin-top: .2rem; font-size: var(--type-card); }
 .lz-pledge p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
 
-.lz-columns { display: grid; gap: var(--lz-space-6); margin-top: var(--lz-space-7); }
-.lz-columns h3 { font-size: var(--type-card); }
-.lz-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: .9rem 0 0; padding: 0; list-style: none; }
+.lz-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: .55rem; margin: clamp(1.4rem, 4vw, 2.2rem) 0 0; padding: 0; list-style: none; }
 .lz-chips li { padding: .35rem .8rem; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface-warm); font-size: .88rem; }
-.lz-not-title { margin-top: var(--lz-space-5); }
-.lz-not, .lz-promises { margin: .7rem 0 0; padding-inline-start: 1.15rem; color: var(--muted); line-height: 1.65; }
-.lz-not li::marker { content: "– "; }
-.lz-promises li + li, .lz-not li + li { margin-top: .35rem; }
-.lz-promises li::marker { color: var(--forest); }
 
 @media (min-width: 760px) {
   .lz-pledges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   /* The three pledges share rows (label, title, text) so the texts line up even when a title wraps. */
   .lz-pledges { row-gap: 0; }
-  .lz-pledge { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+  .lz-pledge { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
   @supports not (grid-template-rows: subgrid) {
     .lz-pledge h3 { min-height: 2.5lh; }
   }
-  .lz-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
+
+/* Ecosystem page: four promises as icon tiles, and one quiet line for what we are not. */
+.lz-tiles { display: grid; gap: 1.4rem; margin: clamp(1.6rem, 4vw, 2.6rem) 0 0; padding: 0; list-style: none; }
+.lz-tile { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 1rem; align-items: center; }
+.lz-tile p { margin: 0; color: var(--foreground); font-family: var(--serif); line-height: 1.55; }
+.lz-not-line { max-width: 44rem; margin: clamp(1.4rem, 4vw, 2.2rem) auto 0; color: var(--muted); font-size: var(--type-caption); line-height: 1.7; text-align: center; }
+.lz-not-line strong { color: var(--foreground); }
+@media (min-width: 760px) { .lz-tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.8rem 2.4rem; } }
+@media (min-width: 1080px) { .lz-tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); } .lz-tile { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; } }

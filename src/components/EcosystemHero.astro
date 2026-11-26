@@ -1,0 +1,40 @@
+---
+// Landing-style opening of the Ecosystem page: the title, one warm line, two ways in, and the three focal points as a small triptych.
+import AlbumImage from './AlbumImage.astro';
+import AnimatedIcon from './AnimatedIcon.astro';
+import Arrow from './Arrow.astro';
+import Breadcrumb from './Breadcrumb.astro';
+import PillarIcon from './PillarIcon.astro';
+import type { Language } from '../data/site';
+import '../styles/landing.css';
+
+interface Props { lang: Language; title: string; current: string }
+const { lang, title, current } = Astro.props as Props;
+const vi = lang === 'vi';
+const trio = [
+  { id: 'veggie-bed-trellis', icon: 'seed', label: vi ? 'THÂN' : 'BODY', position: '50% 55%' },
+  { id: 'beach-meditate-calm', icon: 'meditation', label: vi ? 'TÂM' : 'HEART', position: '50% 28%' },
+  { id: 'altar-flowers', icon: 'mind', label: vi ? 'TRÍ' : 'MIND', position: '50% 50%' },
+] as const;
+---
+<header class="eco-hero-wrap">
+  <Breadcrumb {lang} {current} />
+  <div class="eco-hero">
+    <div class="eco-hero__copy">
+      <p class="eyebrow">{vi ? 'Từ thiên nhiên, trở về với chính mình' : 'Rooted in nature. Awakened within.'}</p>
+      <h1>{title}</h1>
+      <p class="lead">{vi ? 'Một mái nhà chung, được nuôi dưỡng từ Thân, chăm sóc Tâm và mở sáng Trí.' : 'One shared home, held by care for body, heart and mind.'}</p>
+      <div class="material-actions">
+        <a class="button" href="#eco-intro">{vi ? 'Ba trọng tâm' : 'The three focal points'} <Arrow /></a>
+        <a class="quiet-link" href="#partnerships">{vi ? 'Gặp người đồng hành' : 'Meet our partners'}</a>
+      </div>
+    </div>
+    <div class="eco-hero__trio" role="presentation">
+      <span class="eco-hero__sun landing-icon landing-icon--gold" aria-hidden="true"><AnimatedIcon name="sun" /></span>
+      {trio.map((item, index) => <div class={`eco-trio__item eco-trio__item--${index + 1}`}>
+        <div class="eco-trio__arch" style={`--pp:${item.position}`}><AlbumImage id={item.id} {lang} eager={index === 1} sizes="(min-width: 860px) 14vw, 28vw" /></div>
+        <span class="eco-trio__label"><PillarIcon name={item.icon} />{item.label}</span>
+      </div>)}
+    </div>
+  </div>
+</header>

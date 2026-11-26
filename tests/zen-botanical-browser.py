@@ -214,7 +214,7 @@ def check_flows(browser):
     }""")
     for width in widths:
         page.set_viewport_size({'width': width, 'height': 900})
-        expect(page.locator('.material-hero__art')).to_be_visible() if width >= 760 else expect(page.locator('.material-hero__art')).to_be_hidden()
+        expect(page.locator('.landing-hero__art')).to_be_visible()
         assert page.locator('.solar-pillar').evaluate_all("""cards => {
           function luminance(color) {
             const scale = color.startsWith('color(srgb ') ? 1 : 255;

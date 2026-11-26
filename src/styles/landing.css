@@ -1,0 +1,215 @@
+/* Landing style for the Home and Ecosystem pages (2.25.0): wide breathing space, short copy, real photographs, soft animated icons.
+   Colours come from tokens.css / daylight.css so day, dusk and night keep working. Motion stops under prefers-reduced-motion. */
+:root { --landing-gap: clamp(4rem, 10vw, 8rem); --arch: 999px 999px 1.7rem 1.7rem; }
+
+.landing-home { gap: var(--landing-gap); padding-block: clamp(.5rem, 2vw, 1.5rem) var(--landing-gap); }
+.landing-head { display: grid; justify-items: center; gap: .65rem; max-width: 42rem; margin-inline: auto; text-align: center; }
+.landing-head h2 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.15; text-wrap: balance; }
+.landing-head .lead { margin-inline: auto; }
+.landing-lead-serif { max-width: 34rem; margin-inline: auto; font-family: var(--serif); font-size: clamp(1.1rem, 2.4vw, 1.4rem); line-height: 1.7; text-align: center; }
+
+/* Gentle reveal (landing-motion.ts). Text blocks slide only; photos and icons also fade. */
+.landing-motion [data-reveal] { transition: transform .9s cubic-bezier(.2, .7, .2, 1) var(--reveal-delay, 0ms), opacity .9s ease var(--reveal-delay, 0ms); }
+.landing-motion [data-reveal="up"]:not(.is-in) { transform: translateY(1.5rem); }
+.landing-motion [data-reveal="fade"]:not(.is-in) { opacity: 0; transform: translateY(1rem) scale(.985); }
+
+/* Hero */
+.landing-hero { display: grid; gap: clamp(2rem, 6vw, 4rem); align-items: center; padding-block: clamp(.5rem, 3vw, 2rem); }
+.landing-hero__copy { display: grid; justify-items: start; gap: 1rem; min-width: 0; }
+.landing-hero__copy h1 { margin: 0; font-size: clamp(2.7rem, 7.6vw, 5.3rem); line-height: 1.04; letter-spacing: 0; text-wrap: initial; }
+.landing-hero__copy .lead { max-width: 30ch; margin: 0; text-wrap: balance; font-size: clamp(1.08rem, 2.3vw, 1.32rem); }
+.landing-hero__copy .material-actions { margin-top: .6rem; }
+@media (min-width: 860px) { .landing-hero { grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr); } }
+
+.landing-hero__art { position: relative; width: min(100%, 31rem); aspect-ratio: 5 / 6; margin-inline: auto; isolation: isolate; }
+.landing-arch { position: absolute; inset: 0 15% 7% 0; overflow: hidden; border-radius: var(--arch); background: var(--surface-container); box-shadow: 0 24px 60px #2a3a2a2e; }
+.landing-arch img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.landing-hero__art::before { content: ''; position: absolute; inset: 1.2rem -.4rem -.2rem 1.4rem; z-index: -1; border: 1px solid var(--border-control); border-radius: var(--arch); opacity: .35; }
+.landing-orb { position: absolute; overflow: hidden; aspect-ratio: 1; border: 5px solid var(--surface); border-radius: 50%; background: var(--surface-container); box-shadow: 0 14px 34px #2a3a2a33; }
+.landing-orb img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.landing-orb--a { top: 10%; right: 0; width: 36%; animation: landing-float 9s ease-in-out infinite; }
+.landing-orb--b { right: 6%; bottom: 0; width: 31%; animation: landing-float 11s ease-in-out -3.5s infinite; }
+.landing-orb--b img { object-position: 50% 62%; }
+.landing-hero__art .breath-ring { position: absolute; left: -3%; bottom: 3%; }
+.landing-hero__leaf { position: absolute; z-index: 2; color: var(--moss); opacity: .8; animation: landing-drift 13s ease-in-out infinite; }
+.landing-hero__leaf .ai { width: 1.7rem; height: 1.7rem; }
+.landing-hero__leaf--1 { top: 2%; left: 6%; }
+.landing-hero__leaf--2 { top: 46%; right: 1%; color: var(--orchid); animation-delay: -5s; }
+@keyframes landing-float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.7rem); } }
+@keyframes landing-drift { 0%, 100% { transform: translate(0, 0) rotate(0deg); } 50% { transform: translate(.5rem, .9rem) rotate(14deg); } }
+
+/* Breathing ring */
+.breath-ring { position: relative; display: grid; place-items: center; width: 6.4rem; aspect-ratio: 1; }
+.breath-ring__halo, .breath-ring__core { position: absolute; inset: 0; border-radius: 50%; }
+.breath-ring__halo { background: radial-gradient(circle, #f3ebd4cc, #f3ebd400 70%); animation: breath-halo 10s ease-in-out infinite; }
+.breath-ring__core { inset: 14%; border: 1.5px solid var(--moss); background: #fffdf7e6; box-shadow: 0 8px 22px #2a3a2a22; animation: breath-core 10s ease-in-out infinite; }
+.breath-ring__label { position: relative; display: grid; place-items: center; width: 100%; height: 1.3em; color: var(--forest); font-size: .78rem; font-weight: 700; letter-spacing: .02em; text-align: center; }
+.breath-ring__in, .breath-ring__out { position: absolute; inset: 0; display: grid; place-items: center; opacity: 0; }
+.breath-ring__in { animation: breath-in 10s ease-in-out infinite; }
+.breath-ring__out { animation: breath-out 10s ease-in-out infinite; }
+@keyframes breath-core { 0%, 100% { transform: scale(.78); } 40% { transform: scale(1); } }
+@keyframes breath-halo { 0%, 100% { transform: scale(.7); opacity: .5; } 40% { transform: scale(1.12); opacity: 1; } }
+@keyframes breath-in { 0%, 6% { opacity: 0; } 12%, 34% { opacity: 1; } 40%, 100% { opacity: 0; } }
+@keyframes breath-out { 0%, 42% { opacity: 0; } 50%, 90% { opacity: 1; } 98%, 100% { opacity: 0; } }
+
+/* "Có thể bạn đang…" */
+.landing-feelings { display: grid; gap: clamp(2rem, 5vw, 3.2rem); }
+.feeling-grid { display: grid; gap: 1.2rem; margin: 0; padding: 0; list-style: none; }
+.feeling { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .3rem 1rem; align-items: center; }
+.feeling .landing-icon { grid-row: span 2; }
+.feeling__text { margin: 0; color: var(--foreground); font-family: var(--serif); font-size: 1.08rem; line-height: 1.4; }
+.feeling__step { display: inline-flex; align-items: center; gap: .35rem; min-height: 44px; color: var(--gold-accent); font-size: .94rem; font-weight: 650; text-underline-offset: .18em; }
+.landing-feelings__close { display: grid; justify-items: center; gap: 1rem; text-align: center; }
+.landing-feelings__close .empathy-care { margin: .4rem 0 0; text-align: left; }
+@media (min-width: 700px) {
+  .feeling-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.6rem 2rem; }
+  .feeling { grid-template-columns: minmax(0, 1fr); justify-items: center; gap: .8rem; text-align: center; }
+  .feeling .landing-icon { grid-row: auto; width: 4rem; height: 4rem; }
+  .feeling .landing-icon .ai { width: 2rem; height: 2rem; }
+  .feeling__text { font-size: 1.2rem; max-width: 17rem; }
+}
+
+/* Story */
+.landing-story { display: grid; gap: clamp(2rem, 5vw, 4.5rem); align-items: center; }
+.landing-story .home-story__photo { position: relative; width: min(100%, 26rem); margin-inline: auto; }
+.landing-story .home-story__photo img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 35%; border-radius: var(--arch); box-shadow: 0 24px 60px #2a3a2a2e; }
+.landing-story .home-story__copy { display: grid; justify-items: start; gap: 1rem; max-width: 34rem; }
+.landing-story .home-story__copy h2 { margin: 0; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.15; }
+.landing-story .home-story__copy p { margin: 0; font-family: var(--serif); font-size: clamp(1.05rem, 2.2vw, 1.22rem); line-height: 1.75; }
+@media (min-width: 860px) {
+  .landing-story { grid-template-columns: minmax(0, .85fr) minmax(0, 1fr); }
+  .landing-story--reverse .home-story__photo { order: 2; }
+}
+
+/* Ecosystem band on the Home page */
+.home-ecosystem.landing-band { padding-block: var(--landing-gap); }
+.home-ecosystem.landing-band .shell { display: grid; gap: clamp(2.4rem, 6vw, 4rem); }
+.landing-steps { display: grid; justify-items: center; gap: 1.4rem; text-align: center; }
+.landing-steps h3 { font-size: clamp(1.3rem, 3vw, 1.7rem); }
+.landing-steps__list { display: grid; gap: 1.2rem; margin: 0; padding: 0; list-style: none; }
+.landing-steps__list li { display: grid; justify-items: center; gap: .6rem; font-family: var(--serif); font-size: 1.1rem; line-height: 1.4; }
+.landing-steps .ecosystem-note { max-width: 40rem; margin: 0; color: var(--muted); font-size: var(--type-caption); line-height: 1.7; }
+@media (min-width: 700px) { .landing-steps__list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2.4rem; max-width: 52rem; } }
+
+/* Practice: a quiet photograph beside one sentence */
+.landing-practice { display: grid; gap: clamp(1.6rem, 4vw, 3.4rem); align-items: center; }
+.landing-practice__photo { position: relative; overflow: hidden; border-radius: var(--radius-feature); box-shadow: 0 24px 60px #2a3a2a2e; }
+.landing-practice__photo img { display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: 50% 30%; }
+.landing-practice__photo .breath-ring { position: absolute; right: 4%; bottom: 6%; width: 5.6rem; }
+.landing-practice__copy { display: grid; justify-items: start; gap: .9rem; max-width: 30rem; }
+.landing-practice__copy h2 { margin: 0; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.15; }
+.landing-practice__copy p:not(.eyebrow) { margin: 0; font-family: var(--serif); font-size: clamp(1.1rem, 2.3vw, 1.3rem); line-height: 1.7; }
+@media (min-width: 860px) { .landing-practice { grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr); } }
+
+/* Journal and moments */
+.landing-journal { display: grid; gap: clamp(1.8rem, 4vw, 2.8rem); }
+.landing-journal .journal-grid { margin: 0; }
+.landing-journal__more { display: flex; flex-wrap: wrap; justify-content: center; gap: .2rem 1.8rem; margin: 0; }
+.landing-moments .album-strip-head { display: grid; justify-items: center; gap: .5rem; text-align: center; margin-inline: auto; }
+.landing-moments .album-strip-head h2 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.15; }
+.landing-moments .album-strip-more { display: flex; justify-content: center; }
+
+/* Closing: a path home */
+.landing-close { display: grid; overflow: hidden; border-radius: var(--radius-feature); background: var(--surface-raised); box-shadow: 0 24px 60px #2a3a2a24; }
+.landing-close__photo img { display: block; width: 100%; height: 100%; min-height: 16rem; max-height: 26rem; object-fit: cover; object-position: 50% 70%; }
+.landing-close__card { display: grid; justify-items: start; align-content: center; gap: 1rem; padding: clamp(1.6rem, 5vw, 3.4rem); }
+.landing-close__card h2 { margin: 0; font-size: clamp(1.9rem, 4.2vw, 2.9rem); line-height: 1.15; text-wrap: balance; }
+.landing-close__card p { margin: 0; max-width: 30rem; font-family: var(--serif); font-size: 1.12rem; line-height: 1.7; }
+.landing-close__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem 1.4rem; margin-top: .4rem; }
+@media (min-width: 860px) {
+  .landing-close { grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr); }
+  .landing-close__photo img { min-height: 100%; max-height: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-orb, .landing-hero__leaf, .breath-ring__halo, .breath-ring__core { animation: none !important; }
+  .breath-ring__in, .breath-ring__out { position: static; animation: none !important; opacity: 1; }
+  .breath-ring__label { display: grid; gap: .1rem; height: auto; }
+  .landing-motion [data-reveal] { transition: none; }
+}
+
+/* Three pillar cards with a photograph (Home, orbit block) */
+.landing-band .solar-system-pillars { grid-template-columns: minmax(0, 1fr); gap: clamp(1.2rem, 3vw, 1.8rem); }
+@media (min-width: 900px) { .landing-band .solar-system-pillars { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.landing-band .solar-pillar { padding: 0; overflow: hidden; border-radius: var(--radius-feature); box-shadow: 0 18px 44px #2a3a2a1f; }
+.solar-pillar__photo { align-self: stretch; width: 100%; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; background: var(--surface-container); }
+.solar-pillar__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pp, 50% 50%); transition: transform 1.2s ease; }
+.solar-pillar:hover .solar-pillar__photo img { transform: scale(1.04); }
+.solar-pillar__body { display: grid; align-self: stretch; flex: 1; align-content: start; justify-items: start; gap: .4rem; padding: clamp(1.1rem, 3vw, 1.5rem); }
+.solar-pillar__body h3 { margin: 0; }
+.solar-pillar__body p { margin: 0; }
+.solar-pillar__badge { display: grid; place-items: center; width: 2.9rem; height: 2.9rem; margin-top: -2.9rem; margin-bottom: .2rem; border: 1px solid var(--border); border-radius: 50%; background: var(--surface-raised); box-shadow: 0 6px 16px #2a3a2a26; }
+.solar-pillar__badge .pillar-icon { width: 1.6rem; height: 1.6rem; }
+.landing-band .solar-pillar .quiet-link { margin-top: .3rem; }
+@media (min-width: 900px) { .solar-pillar__photo { aspect-ratio: 4 / 3; } }
+@media (prefers-reduced-motion: reduce) { .solar-pillar__photo img { transition: none; } .solar-pillar:hover .solar-pillar__photo img { transform: none; } }
+
+/* Orbit visual sits in its own soft card */
+.landing-band .ecosystem-visual { background: var(--surface-raised); box-shadow: 0 18px 44px #2a3a2a14; }
+
+/* Living Zen pledges on the Home page */
+.landing-home .lz-values--home { padding-block: 0; }
+
+/* Ecosystem page opening */
+.eco-hero-wrap { display: grid; gap: clamp(1rem, 3vw, 1.6rem); }
+.eco-hero { display: grid; gap: clamp(2rem, 6vw, 4rem); align-items: center; padding-block: clamp(.5rem, 3vw, 2rem) 0; }
+.eco-hero__copy { display: grid; justify-items: start; gap: 1rem; min-width: 0; }
+.eco-hero__copy h1 { margin: 0; font-size: clamp(2.3rem, 6.2vw, 4.3rem); line-height: 1.08; text-wrap: balance; }
+.eco-hero__copy .lead { max-width: 28ch; margin: 0; text-wrap: balance; font-family: var(--serif); font-size: clamp(1.1rem, 2.4vw, 1.4rem); line-height: 1.65; }
+.eco-hero__copy .material-actions { margin-top: .5rem; }
+.eco-hero__trio { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(.55rem, 2vw, 1.1rem); align-items: end; width: min(100%, 34rem); margin: 2.2rem auto 0; padding-top: 1.2rem; }
+.eco-hero__sun { position: absolute; top: -2.1rem; left: 50%; z-index: 2; width: 3rem; height: 3rem; transform: translateX(-50%); }
+.eco-hero__sun .ai { width: 1.6rem; height: 1.6rem; }
+.eco-trio__item { display: grid; gap: .7rem; justify-items: center; min-width: 0; }
+.eco-trio__item--2 { transform: translateY(-1.4rem); }
+.eco-trio__arch { width: 100%; aspect-ratio: 3 / 5; overflow: hidden; border-radius: 999px 999px 1.2rem 1.2rem; background: var(--surface-container); box-shadow: 0 20px 44px #2a3a2a2e; }
+.eco-trio__arch img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pp, 50% 50%); }
+.eco-trio__label { display: inline-flex; align-items: center; gap: .35rem; color: var(--secondary); font-size: .74rem; font-weight: 700; letter-spacing: .1em; }
+.eco-trio__label .pillar-icon { width: 1.25rem; height: 1.25rem; margin: 0; }
+@media (min-width: 860px) { .eco-hero { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+
+/* Ecosystem page: the three focal points as photo rows */
+.eco-intro .landing-head { margin-bottom: clamp(2rem, 6vw, 3.6rem); }
+.eco-intro__lead { max-width: 36rem; font-family: var(--serif); font-size: clamp(1.1rem, 2.4vw, 1.4rem); line-height: 1.7; }
+.eco-focus-list { gap: clamp(2.4rem, 7vw, 4.6rem); margin-top: 0; }
+.eco-focus-list .eco-focus { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1.2rem, 4vw, 3rem); align-items: center; padding: 0; border: 0; border-radius: 0; background: none; box-shadow: none; }
+.eco-focus__media { position: relative; display: grid; grid-template-columns: minmax(0, 1fr); margin-bottom: 1.8rem; }
+.eco-focus__photo { margin: 0; overflow: hidden; border-radius: var(--radius-feature); background: var(--surface-container); box-shadow: 0 22px 54px #2a3a2a2b; }
+.eco-focus__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: var(--pp, 50% 50%); }
+.eco-focus__photo--main { aspect-ratio: 4 / 3; }
+.eco-focus__photo--side { position: absolute; right: -.4rem; bottom: -1.4rem; width: 34%; aspect-ratio: 1; border: 5px solid var(--surface); border-radius: 50%; }
+.eco-focus__body { display: grid; justify-items: start; gap: .55rem; min-width: 0; padding-block-end: 1.2rem; }
+.eco-focus-list .eco-focus__number { display: grid; place-items: center; width: 3.4rem; height: 3.4rem; border: 1px solid var(--gold-line); border-radius: 50%; background: var(--gold-wash); }
+.eco-focus-list .eco-focus__number .pillar-icon { width: 1.8rem; height: 1.8rem; }
+.eco-focus-list .eco-focus h3 { margin: 0; font-size: clamp(1.5rem, 3.4vw, 2.1rem); line-height: 1.25; }
+.eco-focus-list .eco-focus__text { max-width: 30rem; margin: 0; font-family: var(--serif); font-size: clamp(1.05rem, 2.2vw, 1.22rem); line-height: 1.7; }
+@media (min-width: 860px) {
+  .eco-focus-list .eco-focus { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); }
+  .eco-focus-list .eco-focus:nth-child(even) .eco-focus__media { order: 2; }
+  .eco-focus-list .eco-focus:nth-child(even) .eco-focus__photo--side { right: auto; left: -.4rem; }
+}
+.eco-note { max-width: 40rem; margin: clamp(1.6rem, 4vw, 2.6rem) auto 0; text-align: center; }
+
+/* Ecosystem page: loop figure, partners, closing */
+.landing-eco .ecosystem-illustration { background: var(--surface-container); }
+.landing-eco .partner-journey-grid { margin-top: clamp(1.6rem, 4vw, 2.4rem); }
+.eco-partner { display: grid; justify-items: center; gap: .55rem; padding: clamp(1.3rem, 3vw, 1.8rem); text-align: center; }
+.eco-partner h3 { margin: 0; }
+.eco-partner .eco-supports { margin: 0; }
+.eco-partner .partner-card__name { margin: 0; color: var(--muted); }
+.eco-partners__more { display: flex; justify-content: center; width: 100%; max-width: none; margin: 1.4rem 0 0; }
+.eco-closing { display: grid; gap: clamp(1.6rem, 4vw, 2.6rem); justify-items: center; text-align: center; }
+.eco-closing__photo { width: min(100%, 22rem); aspect-ratio: 4 / 5; overflow: hidden; border-radius: var(--arch); box-shadow: 0 24px 60px #2a3a2a2e; }
+.eco-closing__photo img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 62% 32%; }
+.eco-closing h2 { margin: 0; font-size: clamp(1.9rem, 4.4vw, 3rem); line-height: 1.15; text-wrap: balance; }
+.eco-closing .eco-closing__text { max-width: 36rem; margin: 0; }
+.eco-closing .ecosystem-illustration { width: 100%; text-align: left; }
+.eco-cta { display: grid; justify-items: center; gap: .8rem; text-align: center; }
+.eco-cta h2, .eco-cta p { margin: 0; }
+.eco-cta__actions { justify-content: center; }
+
+.landing-eco .album-strip-head { display: grid; justify-items: center; gap: .5rem; text-align: center; margin-inline: auto; }
+.landing-eco .album-strip-head h2 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.15; }
+.landing-eco .album-strip-more { display: flex; justify-content: center; }
+.landing-eco .lz-tiles { align-items: start; }
+.landing-eco .lz-not-line { margin-top: clamp(2rem, 5vw, 3rem); }

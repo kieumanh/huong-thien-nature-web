@@ -1,0 +1,37 @@
+---
+// "Có thể bạn đang…" in landing form: six short feelings, each with a soft animated icon and one small step.
+// The longer "we understand" sentences stay in src/data/empathy.ts (used by the course pages); here the page leaves room to breathe.
+import type { EmpathyBlock } from '../data/empathy';
+import type { Language } from '../data/site';
+import AnimatedIcon, { type IconName } from './AnimatedIcon.astro';
+import Arrow from './Arrow.astro';
+import '../styles/empathy.css';
+
+interface Props { block: EmpathyBlock; id: string; lang: Language }
+const { block, id, lang } = Astro.props as Props;
+const vi = lang === 'vi';
+const icons: IconName[] = ['breath', 'wave', 'path', 'heart', 'compass', 'sprout'];
+const tones = ['', 'landing-icon--orchid', 'landing-icon--gold', 'landing-icon--clay'];
+const lead = vi
+  ? 'Nhiều người tìm đến thiền khi trong lòng có một điều chưa gọi được tên. Nếu bạn thấy mình ở đây, có một bước nhỏ để bắt đầu.'
+  : 'Many people come to meditation carrying something they cannot yet name. If you see yourself here, there is a small way to begin.';
+---
+<section class="landing-feelings shell home-welcome" {id} aria-labelledby={`${id}-title`}>
+  <div class="landing-head" data-reveal="up">
+    <p class="eyebrow">{block.eyebrow}</p>
+    <h2 id={`${id}-title`}>{block.title}</h2>
+    <p class="lead">{lead}</p>
+  </div>
+  <ul class="feeling-grid" role="list">
+    {block.cards.map((card, index) => <li class="feeling" data-reveal="fade">
+      <span class={['landing-icon', tones[index % tones.length]].filter(Boolean).join(' ')}><AnimatedIcon name={icons[index % icons.length]} /></span>
+      <p class="feeling__text">{card.feeling}</p>
+      <a class="feeling__step" href={card.href}>{card.step} <Arrow /></a>
+    </li>)}
+  </ul>
+  <div class="landing-feelings__close" data-reveal="up">
+    <p class="landing-lead-serif">{block.closing}</p>
+    {block.action && <a class="button" href={block.action.href}>{block.action.label} <Arrow /></a>}
+    <p class="empathy-care" role="note">{block.care}</p>
+  </div>
+</section>

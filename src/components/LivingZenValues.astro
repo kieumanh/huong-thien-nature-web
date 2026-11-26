@@ -1,38 +1,38 @@
 ---
 import { livingZen } from '../data/living-zen';
 import type { Language } from '../data/site';
+import AnimatedIcon, { type IconName } from './AnimatedIcon.astro';
 import '../styles/living-zen.css';
 
 interface Props { lang: Language; variant?: 'home' | 'full'; id?: string }
 const { lang, variant = 'home', id = 'living-zen' } = Astro.props;
 const copy = livingZen[lang];
 const full = variant === 'full';
+// Clarity, honesty, kindness (and, on the Ecosystem page, "begin where you are").
+const pledgeIcons: IconName[] = ['sun', 'heart', 'leaf', 'path'];
+const pledgeTones = ['landing-icon--gold', 'landing-icon--orchid', '', 'landing-icon--clay'];
 ---
 <section class:list={['lz-values', full ? 'journey-section lz-values--full' : 'shell lz-values--home']} {id} aria-labelledby={`${id}-title`}>
-  <div class="lz-values__head">
+  <div class="lz-values__head" data-reveal="up">
     <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id={`${id}-title`} class="lz-values__tagline">{copy.tagline}</h2>
-    <p class="lz-values__intro">{full ? copy.intro : copy.home.intro}</p>
   </div>
   {!full && <ul class="lz-pledges" role="list">
-    {copy.home.pledges.map(item => <li class="lz-pledge">
+    {copy.home.pledges.map((item, index) => <li class="lz-pledge" data-reveal="fade">
+      <span class={`landing-icon ${pledgeTones[index]}`}><AnimatedIcon name={pledgeIcons[index]} /></span>
       <p class="lz-pledge__label">{item.label}</p>
       <h3>{item.title}</h3>
       <p>{item.text}</p>
     </li>)}
   </ul>}
   {full && <>
-    <div class="lz-columns">
-      <div>
-        <h3>{copy.essenceTitle}</h3>
-        <ul class="lz-chips" role="list">{copy.essence.map(item => <li>{item}</li>)}</ul>
-        <h3 class="lz-not-title">{copy.notTitle}</h3>
-        <ul class="lz-not">{copy.not.map(item => <li>{item}</li>)}</ul>
-      </div>
-      <div>
-        <h3>{copy.promiseTitle}</h3>
-        <ul class="lz-promises">{copy.promises.map(item => <li>{item}</li>)}</ul>
-      </div>
-    </div>
+    <ul class="lz-chips" role="list" data-reveal="up">{copy.essence.map(item => <li>{item}</li>)}</ul>
+    <ul class="lz-tiles" role="list">
+      {copy.promises.map((item, index) => <li class="lz-tile" data-reveal="fade">
+        <span class={`landing-icon ${pledgeTones[index]}`}><AnimatedIcon name={pledgeIcons[index]} /></span>
+        <p>{item}</p>
+      </li>)}
+    </ul>
+    <p class="lz-not-line" data-reveal="up"><strong>{copy.notTitle}:</strong> {copy.not.join(' · ')}.</p>
   </>}
 </section>
