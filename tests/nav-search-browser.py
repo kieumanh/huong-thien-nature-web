@@ -47,13 +47,17 @@ with sync_playwright() as p:
     page = ctx.new_page(); page.goto(base + '/vi/', wait_until='networkidle'); page.wait_for_timeout(7000)
     assert 'is-active' in page.locator('[data-hero-slide]').nth(0).get_attribute('class')
     ctx.close()
-    # 404
+    # 404: each language has its own page (English under /en/, Vietnamese elsewhere), with working header, footer and home link.
     ctx = browser.new_context(viewport={'width': 393, 'height': 850})
-    page = ctx.new_page(); page.goto(base + '/en/not-here/', wait_until='domcontentloaded')
-    expect(page.locator('[data-lost-lang="en"]')).to_be_visible(); expect(page.locator('[data-lost-lang="vi"]')).to_be_hidden()
-    assert page.locator('[data-lost-lang="en"] [data-lost-path]').inner_text() == '/en/not-here/'
-    page.locator('[data-lost-lang="en"] a.button').click(); page.wait_for_url('**/en/')
-    page.goto(base + '/vi/', wait_until='networkidle'); page.goto(base + '/vi/khong-co/', wait_until='domcontentloaded')
-    expect(page.locator('[data-lost-lang="vi"]')).to_be_visible()
+    page = ctx.new_page(); page.goto(base + '/en/404.html', wait_until='domcontentloaded')
+    expect(page.locator('h1')).to_have_text('We couldn’t find this page.')
+    assert page.evaluate("document.documentElement.lang") == 'en'
+    assert page.locator('header a.brand').get_attribute('href') == '/en/'
+    assert page.locator('[data-lost-path]').inner_text() == '/en/404.html'
+    page.locator('main a.button').click(); page.wait_for_url('**/en/')
+    page.goto(base + '/vi/khong-co/', wait_until='domcontentloaded')
+    expect(page.locator('h1')).to_have_text('Không tìm thấy trang này.')
+    assert page.evaluate("document.documentElement.lang") == 'vi'
+    page.locator('main a.button').click(); page.wait_for_url('**/vi/')
     ctx.close(); browser.close()
 print('Menu search, hero slideshow and 404 pass')

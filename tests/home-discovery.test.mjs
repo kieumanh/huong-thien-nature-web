@@ -22,7 +22,12 @@ for (const [language, home, searchPath] of [['Vietnamese', 'dist/vi/index.html',
   });
 }
 
-test('404 page is bilingual, animated and offers a way back', () => {
-  const html = fs.readFileSync('dist/404.html', 'utf8');
-  for (const needle of ['data-lost-lang="vi"', 'data-lost-lang="en"', 'data-lost-back', 'lost__orb', 'href="/vi/"', 'href="/en/"']) assert(html.includes(needle), needle);
+test('404 pages: one per language, animated, with a way back', () => {
+  const vi = fs.readFileSync('dist/404.html', 'utf8');
+  const en = fs.readFileSync('dist/en/404.html', 'utf8');
+  for (const needle of ['data-not-found', 'data-lost-back', 'lost__orb', 'href="/vi/"', 'lang="vi"', 'Không tìm thấy trang này.']) assert(vi.includes(needle), `vi: ${needle}`);
+  for (const needle of ['data-not-found', 'data-lost-back', 'lost__orb', 'href="/en/"', 'lang="en"', 'We couldn’t find this page.']) assert(en.includes(needle), `en: ${needle}`);
+  assert(!vi.includes('data-lost-lang') && !en.includes('data-lost-lang'), 'no language-switching blocks any more');
+  assert(!/<h1[^>]*>[^<]*Không tìm thấy/.test(en), 'English 404 must not show the Vietnamese heading');
+  assert(en.includes('<meta name="robots" content="noindex, follow"'), 'the 404 pages are not indexed');
 });

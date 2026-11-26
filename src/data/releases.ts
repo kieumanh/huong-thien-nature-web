@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.26.1',
+    date: '2026-11-26',
+    vi: ['Trang 404 song ngữ, Những người đồng hành canh giữa', 'Mỗi ngôn ngữ có trang 404 riêng, với menu và chân trang đúng ngôn ngữ. Tiêu đề Những người đồng hành bỏ chữ "xung quanh", và ba thẻ luôn canh giữa trên mọi thiết bị.'],
+    en: ['Bilingual 404 page, companions centred', 'Each language has its own 404 page, with the menu and footer in that language. The Companions heading drops the word "around", and the three cards stay centred on every device.'],
+  },
+  {
     version: '2.26.0',
     date: '2026-11-26',
     vi: ['Tìm kiếm trên menu, trang 404 động, slide hero', 'Tìm kiếm mở rộng ngay trên thanh menu với kết quả hiện tức thì; trang 404 có hình động và đường về; ảnh đầu trang chủ đổi tự động mỗi 6 giây từ album; Trang chủ có lối vào Cửa hàng, ba hành tinh lên đầu phần Hệ sinh thái và ảnh bài viết không còn cắt mất khuôn mặt.'],
