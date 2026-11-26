@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.24.3',
+    date: '2026-11-26',
+    vi: ['Tarot dùng số hỗ trợ; icon Thân là hạt giống', 'Nút Zalo ở trang Tarot dùng số 0388.000.680; icon THÂN đổi sang hạt giống có chuyển động nhẹ; khối trích dẫn ví dụ ở Tarot không còn sát lằn tím.'],
+    en: ['Tarot uses the support number; the Body icon is a seed', 'The Zalo button on the Tarot page uses 0388.000.680; the BODY icon is now a seed with gentle motion; the example quote on the Tarot page no longer touches the rule.'],
+  },
+  {
     version: '2.24.2',
     date: '2026-11-26',
     vi: ['Living Zen: căn mô tả và icon chuyển động', 'Phần mô tả của Thân, Tâm, Trí thẳng hàng; bỏ thanh màu bên trái; icon cây, thiền và ánh sáng trong trí có chuyển động nhẹ, căn giữa khung; tắt chuyển động khi bật chế độ giảm chuyển động.'],

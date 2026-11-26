@@ -259,6 +259,7 @@
 .guidance-note blockquote {
   max-width: 46ch;
   margin: .9rem 0 0;
+  padding-inline-start: .95rem;
   color: var(--orchid-deep);
   font: italic clamp(1.05rem, 2.4vw, 1.32rem)/1.58 var(--serif);
   text-wrap: pretty;
