@@ -162,3 +162,5 @@ html[data-reading="on"] *, html[data-reading="on"] *::before, html[data-reading=
   --forest: #e8e2d3; --moss: #c9d3bd; --ink-soft: #bdb5a4; --border: #4a443b; --gold-line: #5b4a2e; --gold-wash: #2e2820; --gold-accent: #e6bf7a; --gold-deep: #c99a4a;
   --orchid: #edb9dd; --orchid-deep: #ffe1f6; --on-primary: #1d1b19; --primary-hover: #fffaf0;
 }
+/* Floating controls take their background from --forest, which is pale in this theme. Give them a dark surface so their cream labels stay readable by day. */
+:root[data-reading="on"][data-reading-theme="dim"] :is(.music-dock, .back-to-top) { --floating-bg: #2d2a26; --floating-fg: #fbf6ea; --floating-border: #5b4a2e; --floating-state: #fbf6ea24; }
