@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-26, phiên bản 2.24.2 (căn mô tả và icon chuyển động Living Zen). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-26, phiên bản 2.24.3 (Tarot dùng số hỗ trợ; icon Thân là hạt giống). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 26/11 | 2.24.3: Tarot — nút Zalo dùng 0388.000.680 (Kiều Mạnh); trang Liên hệ giữ hai thẻ; icon THÂN là hạt giống (`brand/icons/brand/hat-giong.svg`) có chuyển động nhẹ; khối trích dẫn ví dụ Tarot có khoảng đệm, không còn sát lằn tím; chế độ đọc Tối ban ngày: nút nhạc và nút đầu trang có nền tối riêng (`src/styles/tan-van.css`), sửa lỗi tương phản 1,19:1 mà CI bắt được vào ban ngày. |
 | 26/11 | 2.24.2: Living Zen — mô tả Thân/Tâm/Trí thẳng hàng (subgrid), bỏ thanh màu bên trái, icon cây/thiền/ánh sáng trong trí có chuyển động nhẹ và căn giữa khung; tắt khi bật giảm chuyển động. |
 | 26/11 | 2.24.1: Living Zen và Tần Số Vàng — viết lại đoạn 28 tuổi; sửa đường kẻ đè chữ trong phản hồi học viên; icon Thân–Tâm–Trí (cây / thiền / ánh sáng trong trí, `brand/icons/brand`); chân trang thu gọn; Tần Số Vàng: khung vàng dịu hơn, thêm ảnh thứ tư, căn đường kẻ lịch sinh hoạt (mobile và tablet), liên hệ trang này dùng 0388.000.680 (Kiều Mạnh); gỡ "Buổi gặp lại sau 30 ngày" (còn 5 mục hỗ trợ). Trang Tarot và Liên hệ vẫn dùng hotline 0868 499 856. |
 | 26/11 | 2.24.0: Living Zen 2.0 — thư mục `brand/` (kiểm kê, 3 logo đề xuất, màu, chữ Lora, token, icon, họa tiết, 75 mẫu, brand book), lớp màu mới (xanh rừng chính, vàng là điểm nhấn), lựa chọn giao diện, khối Thân – Tâm – Trí, trang nội bộ `/living-zen/` |

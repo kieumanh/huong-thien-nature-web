@@ -3,7 +3,7 @@
 // THÂN / TÂM / TRÍ follow the labels already used by the home orbit (EcosystemOrbit.astro).
 import type { Language } from './site.ts';
 
-export type QualityIcon = 'plant' | 'meditation' | 'mind';
+export type QualityIcon = 'seed' | 'meditation' | 'mind';
 
 export const livingZen = {
   vi: {
@@ -11,7 +11,7 @@ export const livingZen = {
     tagline: 'Từ thiên nhiên, trở về với chính mình.',
     intro: 'Hương Thiền Nature là một hệ sinh thái học tập, thực hành và nuôi dưỡng đời sống tỉnh thức: kết nối mỗi người với chính mình, với thiên nhiên và với cộng đồng. Mọi điều tụi mình làm, từ một bài tản văn đến một luống rau, đều muốn giữ ba phẩm chất này.',
     qualities: [
-      { icon: 'plant', label: 'THÂN', title: 'Có gốc rễ trong đất', text: 'Ăn sạch, sống chậm, chạm tay vào đất cùng các farm đối tác. Thân khỏe là chỗ dựa cho tâm an.' },
+      { icon: 'seed', label: 'THÂN', title: 'Có gốc rễ trong đất', text: 'Ăn sạch, sống chậm, chạm tay vào đất cùng các farm đối tác. Thân khỏe là chỗ dựa cho tâm an.' },
       { icon: 'meditation', label: 'TÂM', title: 'Có khoảng lặng trong tâm', text: 'Thiền, chánh niệm, hơi thở và yoga để trở về, lắng nghe và đối xử dịu dàng với chính mình.' },
       { icon: 'mind', label: 'TRÍ', title: 'Có ánh sáng trong trí', text: 'Tản văn, sách vở, lớp học và bạn đồng hành để hiểu sâu hơn và sống sáng suốt hơn mỗi ngày.' },
     ] as { icon: QualityIcon; label: string; title: string; text: string }[],
@@ -38,7 +38,7 @@ export const livingZen = {
     tagline: 'Rooted in Nature. Awakened Within.',
     intro: 'Hương Thiền Nature is an ecosystem for learning, practising and nurturing an awakened life: reconnecting each person with themselves, with nature and with community. Everything we make, from a journal piece to a vegetable bed, aims to keep these three qualities.',
     qualities: [
-      { icon: 'plant', label: 'BODY', title: 'Roots in the soil', text: 'Eating clean, living slowly and putting our hands in the soil with partner farms. A healthy body is the ground for a settled mind.' },
+      { icon: 'seed', label: 'BODY', title: 'Roots in the soil', text: 'Eating clean, living slowly and putting our hands in the soil with partner farms. A healthy body is the ground for a settled mind.' },
       { icon: 'meditation', label: 'MIND', title: 'Stillness in the heart', text: 'Meditation, mindfulness, breath and yoga to come home, listen and treat ourselves gently.' },
       { icon: 'mind', label: 'WISDOM', title: 'Light in the mind', text: 'Journal pieces, books, classes and companions to understand more deeply and live more clearly each day.' },
     ] as { icon: QualityIcon; label: string; title: string; text: string }[],

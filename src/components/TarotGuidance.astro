@@ -11,7 +11,7 @@ import { tarotLanding } from '../data/tarot-guidance';
 import { tarotCourse, tarotPriceLabel, tarotEnquiryPath } from '../data/courses';
 import { feedbackCopy, feedbackPath } from '../data/student-feedback';
 import { journeyPages, journeyPath } from '../data/journey-pages';
-import { zaloUrl } from '../data/contact-channels';
+import { supportZaloUrl } from '../data/contact-channels';
 import { meditationFounder } from '../data/people';
 import type { Language } from '../data/site';
 import '../styles/tarot-guidance.css';
@@ -32,7 +32,7 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       <h1 id="guidance-title"><span class="handwritten">{vi ? 'Lắng nghe mình' : 'Listening to yourself'}</span>{' '}{vi ? 'qua tarot' : 'through tarot'}</h1>
       <p class="lead">{copy.lead}</p>
       <div class="guidance-actions">
-        <a class="button guidance-button" href={zaloUrl}>{copy.bookingZalo} <Arrow /></a>
+        <a class="button guidance-button" href={supportZaloUrl}>{copy.bookingZalo} <Arrow /></a>
         <a class="button button--tonal" href="#session">{copy.outline}</a>
       </div>
       <ul class="guidance-reassure" role="list">
@@ -95,7 +95,7 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
       <h2 id="mid-cta-title">{copy.midTitle}</h2>
       <p>{copy.midNote}</p>
     </div>
-    <a class="button guidance-button" href={zaloUrl}>{copy.bookingZalo} <Arrow /></a>
+    <a class="button guidance-button" href={supportZaloUrl}>{copy.bookingZalo} <Arrow /></a>
   </aside>
 
   <section class="guidance-section guidance-ai" id="human-guidance" aria-labelledby="human-guidance-title">
@@ -186,7 +186,7 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
     <p>{copy.invitationNote}</p>
     <p class="guidance-invitation-price"><span>{copy.priceLabel}</span> <strong>{priceLabel}</strong></p>
     <div class="guidance-actions">
-      <a class="button guidance-button" href={zaloUrl}>{copy.invitationAction} <Arrow /></a>
+      <a class="button guidance-button" href={supportZaloUrl}>{copy.invitationAction} <Arrow /></a>
       <a class="button button--tonal" href={tarotEnquiryPath(lang)}>{copy.contact}</a>
     </div>
     <p class="guidance-scope">{copy.scope}</p>
@@ -195,7 +195,7 @@ const cardSource = 'https://commons.wikimedia.org/wiki/File:RWS_Tarot_01_Magicia
 
 <aside class="guidance-sticky" data-guidance-sticky hidden aria-label={copy.stickyLabel}>
   <p><strong>{copy.stickyLabel}</strong><span>{copy.priceLabel}: {priceLabel}</span></p>
-  <a class="button guidance-button" href={zaloUrl}>{copy.stickyAction}</a>
+  <a class="button guidance-button" href={supportZaloUrl}>{copy.stickyAction}</a>
 </aside>
 
 <script>

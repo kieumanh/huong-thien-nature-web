@@ -18,15 +18,15 @@
 .lz-quality p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
 .lz-ico-glow { fill: currentColor; stroke: none; transform-origin: 12px 9.5px; animation: lz-glow 4.8s ease-in-out infinite; }
 .lz-ico-filament { animation: lz-filament 4.8s ease-in-out infinite; }
-.lz-ico-leaf--left { transform-origin: 12px 13px; animation: lz-sway-left 6.5s ease-in-out infinite; }
-.lz-ico-leaf--right { transform-origin: 12px 10px; animation: lz-sway-right 6.5s ease-in-out infinite; }
+.lz-ico-seed { transform-origin: 12px 12px; animation: lz-seed-breathe 5.6s ease-in-out infinite; }
+.lz-ico-seed-core { transform-origin: 12px 20px; animation: lz-seed-core 5.6s ease-in-out infinite; }
 .lz-ico-figure { animation: lz-breathe-figure 6s ease-in-out infinite; }
 .lz-ico-base { transform-origin: 12px 17px; animation: lz-breathe-base 6s ease-in-out infinite; }
 
 @keyframes lz-glow { 0%, 100% { opacity: .06; transform: scale(.92); } 50% { opacity: .2; transform: scale(1.06); } }
 @keyframes lz-filament { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
-@keyframes lz-sway-left { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-@keyframes lz-sway-right { 0%, 100% { transform: rotate(3deg); } 50% { transform: rotate(-3deg); } }
+@keyframes lz-seed-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
+@keyframes lz-seed-core { 0%, 100% { opacity: .55; transform: scaleY(.9); } 50% { opacity: 1; transform: scaleY(1); } }
 @keyframes lz-breathe-figure { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.9px); } }
 @keyframes lz-breathe-base { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(1.035); } }
 @media (prefers-reduced-motion: reduce) {

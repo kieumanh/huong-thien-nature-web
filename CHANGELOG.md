@@ -1,3 +1,10 @@
+## 2.24.3 — Số hỗ trợ ở Tarot, icon Thân là hạt giống, trích dẫn Tarot
+
+- **Tarot:** các nút Zalo và đặt lịch chuyển sang số hỗ trợ 0388 000 680 (Kiều Mạnh), đồng bộ với Tần Số Vàng. Trang Liên hệ giữ hai thẻ như cũ.
+- **Thân:** icon là hạt giống từ bộ icon thương hiệu, thay cho icon cây; chuyển động nhẹ, căn giữa khung.
+- **Trích dẫn ví dụ ở trang Tarot:** chữ không còn sát lằn tím bên trái (đã rà 29 trang có trích dẫn ở màn 390px và 1280px; chỉ khối này bị).
+- **Chế độ đọc Tối ban ngày:** nút nhạc và nút đầu trang có nền tối riêng, chữ kem không còn chìm trên nền sáng (trước đây tương phản 1,19:1; CI chỉ bắt được lỗi này khi chạy vào ban ngày).
+
 ## 2.24.2 — Living Zen: căn mô tả, icon chuyển động
 
 - **Thân – Tâm – Trí:** phần mô tả của ba khung nằm thẳng hàng với nhau, kể cả khi tiêu đề TÂM dài hai dòng (dùng subgrid; trình duyệt cũ hơn dùng phương án dự phòng, tiêu đề có chiều cao tối thiểu hai dòng).
