@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.25.1',
+    date: '2026-11-26',
+    vi: ['Tần Số Vàng: dữ liệu giá đúng cả sau Tết', 'Dữ liệu cho công cụ tìm kiếm liệt kê cả hai mức học phí với thời hạn hiệu lực rõ ràng, nên sau Tết 2027 không cần build lại site.'],
+    en: ['Golden Frequency: prices stay correct after Tết', 'The data for search engines lists both fees with clear validity dates, so the site needs no rebuild after Lunar New Year 2027.'],
+  },
+  {
     version: '2.25.0',
     date: '2026-11-26',
     vi: ['Trang chủ và Hệ sinh thái: phong cách landing page', 'Hai trang được dựng lại thoáng hơn: ít chữ, nhiều ảnh thật, icon chuyển động nhẹ và vòng thở; thêm 17 ảnh mới vào album và đặt ảnh vào Liên hệ, Thực phẩm sạch, Quỹ ủng hộ.'],

@@ -11,6 +11,15 @@ const origin = 'https://huongthiennature.com';
  */
 const lastDay = (endsAt: string) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Ho_Chi_Minh', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date(Date.parse(endsAt) - 1));
 
+// While the recommended price runs, list both fees: the recommended one valid until the last day before Tết and the official one
+// valid from Tết on. The page is static, so this keeps the data right after Tết without a rebuild.
+function offers(offer: { price: number | null; currency: string; regular?: number; endsAt?: string }, url: string) {
+  const base = { '@type': 'Offer', priceCurrency: offer.currency, url, availability: 'https://schema.org/InStock' };
+  const current = { ...base, price: String(Math.round(offer.price as number)), ...(offer.endsAt ? { priceValidUntil: lastDay(offer.endsAt) } : {}) };
+  if (!offer.endsAt || !offer.regular) return current;
+  return [current, { ...base, price: String(Math.round(offer.regular)), validFrom: offer.endsAt.slice(0, 10) }];
+}
+
 export function frequencySchema(lang: Language, offer: { price: number | null; currency: string; endsAt?: string } = frequencyOffer) {
   const url = origin + coursePath(lang, frequencyCourse);
   const { title, description } = frequencyCourse[lang];
@@ -26,7 +35,7 @@ export function frequencySchema(lang: Language, offer: { price: number | null; c
       inLanguage: lang,
       provider: { '@id': origin + '/#organization' },
       image: new URL(courseImage(frequencyCourse, lang), origin).href,
-      ...(priced ? { offers: { '@type': 'Offer', price: String(Math.round(offer.price as number)), priceCurrency: offer.currency, url, availability: 'https://schema.org/InStock', ...(offer.endsAt ? { priceValidUntil: lastDay(offer.endsAt) } : {}) } } : {}),
+      ...(priced ? { offers: offers(offer, url) } : {}),
     },
     {
       '@type': 'FAQPage',

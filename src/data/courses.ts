@@ -107,8 +107,8 @@ export function tarotEnquiryPath(lang: Language) {
 /**
  * Golden Frequency course fee, confirmed by the owner (25/11/2026). 5.600.000 ₫ is the recommended fee for 2026 and holds until
  * Tết Âm lịch 2027 (mùng 1 = 06/02/2027, Vietnam time); from then the official fee is 6.600.000 ₫. The page shows a countdown to
- * `promoEndsAt`, and the browser swaps in the official fee when it passes. Structured data follows the build date, so rebuild the
- * site after Tết to publish the official fee there too.
+ * `promoEndsAt`, and the browser swaps in the official fee when it passes. Structured data lists both fees with validity dates, so no
+ * rebuild is needed after Tết.
  */
 export const frequencyPricing = {
   promo: 5_600_000,
