@@ -1,3 +1,9 @@
+## 2.26.2 — Hero Trang chủ: một ảnh tĩnh, gọn và dễ cảm nhận
+
+- **Bỏ slide ảnh tự chuyển** ở đầu Trang chủ (và nút tạm dừng, các chấm chọn ảnh đi kèm). Đã xóa `HeroSlides.astro`, `src/scripts/hero-slides.ts`, `heroPhotos` và cờ `hero: true` trong `src/data/album.ts`.
+- **Bỏ họa tiết quanh ảnh:** hai ảnh tròn nhỏ, hai chiếc lá bay, vòng thở "Hít vào/Thở ra" và đường viền vòm phía sau. Hero còn đúng một ảnh hoàng hôn trên lối đá (`sunset-lake-path`) trong khung vòm, đổ bóng nhẹ, cỡ ảnh đồng nhất trên điện thoại, máy tính bảng và máy tính (`landing.css`: `.landing-hero__art`). Vòng thở vẫn còn ở khối thực hành phía dưới.
+- **Kiểm thử:** `landing.test.mjs` và `nav-search-browser.py` kiểm tra hero chỉ có một ảnh và không còn slide hay họa tiết.
+
 ## 2.26.1 — Trang 404 song ngữ thật, Những người đồng hành canh giữa
 
 - **Trang 404 hai ngôn ngữ:** mỗi ngôn ngữ có một trang riêng, gồm tiêu đề, menu, chân trang và liên kết về trang chủ đúng ngôn ngữ. `src/pages/404.astro` (tiếng Việt) và `src/pages/en/404.astro` (tiếng Anh) cùng dựng từ `src/components/NotFoundPage.astro`. Host trả về `404.html` gần nhất theo thư mục, nên địa chỉ `/en/…` sai hiện bản tiếng Anh. Bỏ cơ chế đổi ngôn ngữ bằng script.
