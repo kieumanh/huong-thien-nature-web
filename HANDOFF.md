@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-26, phiên bản 2.24.4 (Trang chủ: bỏ phần lặp Thân – Tâm – Trí). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-26, phiên bản 2.24.5 (Hệ sinh thái: bỏ phần lặp Thân – Tâm – Trí). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 26/11 | 2.24.5: Trang Hệ sinh thái — chỉ còn ba trọng tâm (`vision.focus`) + vòng "nuôi nhau" ngay dưới; icon chuyển động ở huy hiệu ba thẻ (`PillarIcon.astro`, `pillar-icons.css`); khối Living Zen `full` chỉ còn sợi đan / không phải là / lời hứa; đã xóa `qualities` và `spaces` khỏi `living-zen.ts`. |
 | 26/11 | 2.24.4: Trang chủ — Thân/Tâm/Trí chỉ còn ở khối Hệ sinh thái (`EcosystemOverview` + `EcosystemOrbit`); khối Living Zen đầu trang đổi thành ba lời hứa (`livingZen.*.home.pledges` trong `src/data/living-zen.ts`, lớp `.lz-pledge`). Ba phẩm chất có icon chuyển động chỉ còn ở trang Hệ sinh thái (biến thể `full`). |
 | 26/11 | 2.24.3: Tarot — nút Zalo dùng 0388.000.680 (Kiều Mạnh); trang Liên hệ giữ hai thẻ; icon THÂN là hạt giống (`brand/icons/brand/hat-giong.svg`) có chuyển động nhẹ; khối trích dẫn ví dụ Tarot có khoảng đệm, không còn sát lằn tím; chế độ đọc Tối ban ngày: nút nhạc và nút đầu trang có nền tối riêng (`src/styles/tan-van.css`), sửa lỗi tương phản 1,19:1 mà CI bắt được vào ban ngày. |
 | 26/11 | 2.24.2: Living Zen — mô tả Thân/Tâm/Trí thẳng hàng (subgrid), bỏ thanh màu bên trái, icon cây/thiền/ánh sáng trong trí có chuyển động nhẹ và căn giữa khung; tắt khi bật giảm chuyển động. |

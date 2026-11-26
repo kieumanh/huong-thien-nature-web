@@ -1,3 +1,9 @@
+## 2.24.5 — Hệ sinh thái: bỏ phần lặp Thân – Tâm – Trí
+
+- **Trang Hệ sinh thái** kể Thân – Tâm – Trí bốn lần (ba trọng tâm, ba thẻ phẩm chất Living Zen, ba thẻ "không gian", vòng "nuôi nhau"). Nay chỉ còn ba trọng tâm (lời của chủ dự án, có đường dẫn) và vòng "Ba trọng tâm nuôi nhau" đặt ngay dưới chúng.
+- **Icon chuyển động** (hạt giống, thiền, ánh sáng trong trí) chuyển vào huy hiệu của ba thẻ trọng tâm, thay cho số 1, 2, 3; thành phần dùng chung `PillarIcon.astro`. Vẫn tắt khi bật giảm chuyển động.
+- **Khối Living Zen** trên trang này chỉ còn các sợi đan, "tụi mình không phải là" và lời hứa; lời dẫn viết lại nối với ba trọng tâm ở trên. Bỏ phần màu sắc từng không gian (thông tin của bộ nhận diện, không dành cho người đọc).
+
 ## 2.24.4 — Trang chủ: bỏ phần lặp Thân – Tâm – Trí
 
 - **Trang chủ:** Thân – Tâm – Trí trước đây xuất hiện ba lần (khối Living Zen, khối "Ba trọng tâm" và vòng quỹ đạo). Nay chỉ còn ở phần Hệ sinh thái (lời của chủ dự án, có đường dẫn tới farm, khóa thực hành và đá).

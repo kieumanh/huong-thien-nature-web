@@ -1,5 +1,5 @@
 ---
-import { livingZen, type QualityIcon } from '../data/living-zen';
+import { livingZen } from '../data/living-zen';
 import type { Language } from '../data/site';
 import '../styles/living-zen.css';
 
@@ -7,12 +7,6 @@ interface Props { lang: Language; variant?: 'home' | 'full'; id?: string }
 const { lang, variant = 'home', id = 'living-zen' } = Astro.props;
 const copy = livingZen[lang];
 const full = variant === 'full';
-// Icons drawn on a 24 × 24 grid (1.75 stroke). Motion is defined in living-zen.css and turned off under reduced motion.
-const icons: Record<QualityIcon, string> = {
-  seed: '<path class="lz-ico-seed" d="M12 20c-3.3 0-5.5-2.6-5.5-6S9 6.5 12 4c3 2.5 5.5 6.6 5.5 10S15.3 20 12 20Z"/><path class="lz-ico-seed-core" d="M12 9.5c-1 2.3-1 5.2 0 7.5"/>',
-  meditation: '<g class="lz-ico-figure"><circle cx="12" cy="5.5" r="2"/><path d="M12 8.5v5"/><path d="M7.5 12.5 12 10l4.5 2.5"/></g><path class="lz-ico-base" d="M4.5 18.5c2.5-2.6 4.8-3.5 7.5-3.5s5 .9 7.5 3.5"/><path d="M6.5 20h11"/>',
-  mind: '<circle class="lz-ico-glow" cx="12" cy="9.5" r="7.2"/><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.5 1.1 1.3 1.1 2.2h5c0-.9.4-1.7 1.1-2.2A6 6 0 0 0 12 3Z"/><path class="lz-ico-filament" d="M12 7v3"/>',
-};
 ---
 <section class:list={['lz-values', full ? 'journey-section lz-values--full' : 'shell lz-values--home']} {id} aria-labelledby={`${id}-title`}>
   <div class="lz-values__head">
@@ -28,14 +22,6 @@ const icons: Record<QualityIcon, string> = {
     </li>)}
   </ul>}
   {full && <>
-    <ol class="lz-qualities" role="list">
-      {copy.qualities.map(item => <li class={`lz-quality lz-quality--${item.icon}`}>
-        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" set:html={icons[item.icon]} />
-        <p class="lz-quality__label">{item.label}</p>
-        <h3>{item.title}</h3>
-        <p>{item.text}</p>
-      </li>)}
-    </ol>
     <div class="lz-columns">
       <div>
         <h3>{copy.essenceTitle}</h3>
@@ -48,14 +34,5 @@ const icons: Record<QualityIcon, string> = {
         <ul class="lz-promises">{copy.promises.map(item => <li>{item}</li>)}</ul>
       </div>
     </div>
-    <h3 class="lz-spaces-title">{copy.spacesTitle}</h3>
-    <ul class="lz-spaces" role="list">
-      {copy.spaces.map(space => <li class={`lz-space lz-space--${space.key}`}>
-        <p class="lz-quality__label">{space.label}</p>
-        <p class="lz-space__name">{space.name}</p>
-        <p>{space.holds}</p>
-        <p class="lz-space__tone">{space.tone}</p>
-      </li>)}
-    </ul>
   </>}
 </section>

@@ -160,7 +160,8 @@
 .eco-focus { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 1rem; align-items: start; padding: clamp(1.1rem, 3.2vw, 1.8rem); border-top: 3px solid var(--gold-deep); }
 .eco-focus--2 { border-top-color: var(--secondary); }
 .eco-focus--3 { border-top-color: var(--clay); }
-.eco-focus__number { display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: var(--gold-wash); border: 1px solid var(--gold-deep); font-family: var(--serif); font-size: 1.3rem; }
+.eco-focus__number { display: grid; place-items: center; width: 2.8rem; height: 2.8rem; border-radius: 50%; background: var(--gold-wash); border: 1px solid var(--gold-deep); }
+.eco-focus__number .pillar-icon { width: 1.6rem; height: 1.6rem; }
 .eco-focus__tagline { color: var(--muted); font-size: var(--type-caption); letter-spacing: .04em; margin: 0; }
 .eco-focus h3 { margin-block: .15rem .5rem; font-size: clamp(1.25rem, 3vw, 1.65rem); font-weight: 500; }
 .eco-focus p { max-width: 64ch; line-height: 1.8; }

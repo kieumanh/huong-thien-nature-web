@@ -1,21 +1,10 @@
-/* Living Zen values block (LivingZenValues.astro): home summary and full ecosystem section. */
+/* Living Zen block (LivingZenValues.astro): three pledges on the home page; threads, what we are not and promises on the ecosystem page. */
 .lz-values { padding-block: var(--space-section) 0; }
 .lz-values--full { padding-block: 0; }
 .lz-values__head { max-width: 44rem; }
 .lz-values__tagline { margin-top: .35rem; font-family: var(--display-face); font-weight: 600; color: var(--orchid); font-size: clamp(1.9rem, 4.2vw, 3rem); line-height: 1.2; letter-spacing: 0; }
 .lz-values__intro { margin-top: .75rem; color: var(--muted); font-size: var(--type-body-large); line-height: 1.65; }
 
-.lz-qualities { display: grid; gap: var(--lz-space-4); margin: var(--lz-space-6) 0 0; padding: 0; list-style: none; }
-.lz-quality {
-  position: relative; padding: var(--lz-space-5); border: 1px solid var(--border); border-radius: var(--lz-radius-card);
-  background: var(--surface-raised); box-shadow: var(--lz-shadow-subtle);
-}
-.lz-quality svg { display: block; width: 2.25rem; height: 2.25rem; margin-inline: auto; overflow: visible; color: var(--lz-q-colour, var(--forest)); }
-.lz-quality--meditation { --lz-q-colour: var(--orchid); }
-.lz-quality--mind { --lz-q-colour: var(--gold-accent); }
-.lz-quality__label { margin-top: .75rem; color: var(--lz-q-colour, var(--secondary)); font-size: .74rem; font-weight: 700; letter-spacing: .14em; }
-.lz-quality h3 { margin-top: .2rem; font-size: var(--type-card); }
-.lz-quality p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
 /* Home: three pledges (no Thân / Tâm / Trí here; the Ecosystem section carries those). */
 .lz-pledges { display: grid; gap: var(--lz-space-4); margin: var(--lz-space-6) 0 0; padding: 0; list-style: none; }
 .lz-pledge {
@@ -26,26 +15,8 @@
 .lz-pledge h3 { margin-top: .2rem; font-size: var(--type-card); }
 .lz-pledge p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
 
-.lz-ico-glow { fill: currentColor; stroke: none; transform-origin: 12px 9.5px; animation: lz-glow 4.8s ease-in-out infinite; }
-.lz-ico-filament { animation: lz-filament 4.8s ease-in-out infinite; }
-.lz-ico-seed { transform-origin: 12px 12px; animation: lz-seed-breathe 5.6s ease-in-out infinite; }
-.lz-ico-seed-core { transform-origin: 12px 20px; animation: lz-seed-core 5.6s ease-in-out infinite; }
-.lz-ico-figure { animation: lz-breathe-figure 6s ease-in-out infinite; }
-.lz-ico-base { transform-origin: 12px 17px; animation: lz-breathe-base 6s ease-in-out infinite; }
-
-@keyframes lz-glow { 0%, 100% { opacity: .06; transform: scale(.92); } 50% { opacity: .2; transform: scale(1.06); } }
-@keyframes lz-filament { 0%, 100% { opacity: .55; } 50% { opacity: 1; } }
-@keyframes lz-seed-breathe { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.035); } }
-@keyframes lz-seed-core { 0%, 100% { opacity: .55; transform: scaleY(.9); } 50% { opacity: 1; transform: scaleY(1); } }
-@keyframes lz-breathe-figure { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-.9px); } }
-@keyframes lz-breathe-base { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(1.035); } }
-@media (prefers-reduced-motion: reduce) {
-  .lz-quality svg * { animation: none !important; }
-  .lz-ico-glow { opacity: .12; }
-}
-
 .lz-columns { display: grid; gap: var(--lz-space-6); margin-top: var(--lz-space-7); }
-.lz-columns h3, .lz-spaces-title { font-size: var(--type-card); }
+.lz-columns h3 { font-size: var(--type-card); }
 .lz-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin: .9rem 0 0; padding: 0; list-style: none; }
 .lz-chips li { padding: .35rem .8rem; border: 1px solid var(--border); border-radius: var(--radius-pill); background: var(--surface-warm); font-size: .88rem; }
 .lz-not-title { margin-top: var(--lz-space-5); }
@@ -54,30 +25,13 @@
 .lz-promises li + li, .lz-not li + li { margin-top: .35rem; }
 .lz-promises li::marker { color: var(--forest); }
 
-.lz-spaces-title { margin-top: var(--lz-space-7); }
-.lz-spaces { display: grid; gap: var(--lz-space-4); margin: var(--lz-space-4) 0 0; padding: 0; list-style: none; }
-.lz-space { padding: var(--lz-space-5); border-radius: var(--lz-radius-card); border: 1px solid var(--border); }
-.lz-space--than { --lz-q-colour: var(--moss); background: color-mix(in srgb, var(--brand-fern) 40%, var(--surface-raised)); }
-.lz-space--tam { --lz-q-colour: var(--orchid); background: color-mix(in srgb, var(--orchid-mist) 70%, var(--surface-raised)); }
-.lz-space--tri { --lz-q-colour: var(--gold-accent); background: color-mix(in srgb, var(--gold-wash) 80%, var(--surface-raised)); }
-.lz-space .lz-quality__label { margin-top: 0; }
-.lz-space__name { margin-top: .2rem; font: 500 1.2rem/1.3 var(--serif); }
-.lz-space p + p { margin-top: .35rem; color: var(--muted); }
-.lz-space__tone { font-size: .82rem; }
-
 @media (min-width: 760px) {
-  .lz-qualities, .lz-spaces, .lz-pledges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lz-pledges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   /* The three pledges share rows (label, title, text) so the texts line up even when a title wraps. */
   .lz-pledges { row-gap: 0; }
   .lz-pledge { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
   @supports not (grid-template-rows: subgrid) {
     .lz-pledge h3 { min-height: 2.5lh; }
-  }
-  /* Three cards share rows (icon, label, title, text) so the descriptions line up even when a title wraps. */
-  .lz-qualities { row-gap: 0; }
-  .lz-quality { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
-  @supports not (grid-template-rows: subgrid) {
-    .lz-quality h3 { min-height: 2.5lh; }
   }
   .lz-columns { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
