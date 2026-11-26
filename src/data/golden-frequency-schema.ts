@@ -1,4 +1,4 @@
-import { courseImage, coursePath, frequencyCourse, frequencyOffer, type FrequencyOffer } from './courses.ts';
+import { courseImage, coursePath, frequencyCourse, frequencyOffer } from './courses.ts';
 import { frequencyLanding } from './golden-frequency.ts';
 import type { Language } from './site.ts';
 
@@ -13,7 +13,7 @@ const lastDay = (endsAt: string) => new Intl.DateTimeFormat('en-CA', { timeZone:
 
 // While the recommended price runs, list both fees: the recommended one valid until the last day before Tết and the official one
 // valid from Tết on. The page is static, so this keeps the data right after Tết without a rebuild.
-function offers(offer: FrequencyOffer, url: string) {
+function offers(offer: { price: number | null; currency: string; regular?: number; endsAt?: string }, url: string) {
   const base = { '@type': 'Offer', priceCurrency: offer.currency, url, availability: 'https://schema.org/InStock' };
   const current = { ...base, price: String(Math.round(offer.price as number)), ...(offer.endsAt ? { priceValidUntil: lastDay(offer.endsAt) } : {}) };
   if (!offer.endsAt || !offer.regular) return current;
