@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-26, phiên bản 2.25.0 (Trang chủ và Hệ sinh thái dựng lại theo phong cách landing page). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-26, phiên bản 2.25.1 (Tần Số Vàng: JSON-LD có cả hai mức giá). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -30,7 +30,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.15.2: sửa khoảng cách menu điện thoại (đường kẻ không còn chạm nút đóng) |
 | 25/11 | 2.23.0: Tần Số Vàng học 2 tháng, 1 buổi/tuần, 2 giờ/buổi; ở gần học trực tiếp, ở xa 100% online; học phí đã gồm không gian, thiết bị, phương tiện hỗ trợ, giáo án và tài nguyên (`priceNote`, mục "Học phí đã gồm"). Còn chờ chủ dự án xác nhận: nhóm đồng hành 30 ngày / buổi gặp lại sau 30 ngày trong phần hỗ trợ sau khóa có giữ nguyên không. |
 | 25/11 | 2.22.1: mục Những người đồng hành (ecosystem) hiển thị nhãn "Dự án" rõ ràng và link website là nút toàn chiều rộng (`.partner-card__site`); tên farm tiếng Anh thống nhất. |
-| 25/11 | 2.22.0: công bố giá. Tần Số Vàng 5,6 triệu đến hết giao thừa Tết Âm lịch 2027 (đồng hồ đếm ngược), sau đó 6,6 triệu; Tarot 600.000 ₫/phiên 90 phút; bỏ phần nhắn hỏi giá. **Việc cần làm: build lại site sau 06/02/2027** để dữ liệu có cấu trúc chuyển sang 6,6 triệu. |
+| 25/11 | 2.22.0: công bố giá. Tần Số Vàng 5,6 triệu đến hết giao thừa Tết Âm lịch 2027 (đồng hồ đếm ngược), sau đó 6,6 triệu; Tarot 600.000 ₫/phiên 90 phút; bỏ phần nhắn hỏi giá. (Đã xử lý ở 2.25.1: không cần build lại sau Tết.)|
 | 24/11 | 2.21.3: bìa `returning-attention` đổi sang `pixabay-2268333.webp` (bàn chân trần trên cỏ, nguồn đã ghi trong `article-photos.ts`); avatar Kiều Mạnh trong Phản hồi học viên là `author-kieu-manh-avatar.webp` (trường `avatar`). |
 | 24/11 | 2.21.2: bỏ ô sắp xếp Tản văn (luôn mới nhất trước); ba bài `returning-attention`, `seven-layers`, `listening-to-nature` có ngày đăng 22/11/2026 (chủ dự án cung cấp). |
 | 24/11 | 2.21.1: lối đọc Gợi ý có bước 4 "Thấy khó ngồi yên?" (cùng kiểu thẻ, dẫn tới `when-meditation-is-difficult`); khối rời `practice-help` đã gỡ; ghép bằng `practicePath(lang)` trong `src/data/home.ts`. |
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 26/11 | 2.25.1: `golden-frequency-schema.ts` liệt kê hai Offer (5,6 triệu `priceValidUntil` 05/02/2027; 6,6 triệu `validFrom` 06/02/2027) nên không còn việc phải build lại sau Tết. |
 | 26/11 | 2.25.0: Trang chủ (`HomePage.astro`, `LandingFeelings.astro`, `EcosystemOverview.astro`) và Hệ sinh thái (`EcosystemHero.astro` + nhánh `ecosystem` của `[section].astro`) dựng lại kiểu landing: ít chữ, ảnh từ album qua `AlbumImage.astro`, icon chuyển động `AnimatedIcon.astro` (`animated-icons.css`), vòng thở `BreathRing.astro`, hiện dần `landing-motion.ts`, CSS chung `landing.css`. `ecosystem-vision.ts` có thêm trường `short` (bản rút gọn hiển thị; `text` đầy đủ của chủ dự án vẫn giữ và vẫn được tìm kiếm). Album 51 ảnh, nhóm mới `nature`; dải ảnh thêm ở Liên hệ, Thực phẩm sạch, Quỹ ủng hộ. Thêm `tests/landing.test.mjs`. |
 | 26/11 | 2.24.5: Trang Hệ sinh thái — chỉ còn ba trọng tâm (`vision.focus`) + vòng "nuôi nhau" ngay dưới; icon chuyển động ở huy hiệu ba thẻ (`PillarIcon.astro`, `pillar-icons.css`); khối Living Zen `full` chỉ còn sợi đan / không phải là / lời hứa; đã xóa `qualities` và `spaces` khỏi `living-zen.ts`. |
 | 26/11 | 2.24.4: Trang chủ — Thân/Tâm/Trí chỉ còn ở khối Hệ sinh thái (`EcosystemOverview` + `EcosystemOrbit`); khối Living Zen đầu trang đổi thành ba lời hứa (`livingZen.*.home.pledges` trong `src/data/living-zen.ts`, lớp `.lz-pledge`). Ba phẩm chất có icon chuyển động chỉ còn ở trang Hệ sinh thái (biến thể `full`). |

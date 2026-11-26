@@ -42,9 +42,11 @@ test('confirmed fee: 5.600.000 ₫ until Tết Âm lịch 2027, then 6.600.000 �
     const service = frequencySchema(lang, { price: null, currency: 'VND' }).find(node => node['@type'] === 'Service');
     assert.ok(service && !('offers' in service), 'no Offer without a figure');
   }
-  const priced = frequencySchema('vi', frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00'))).find(node => node['@type'] === 'Service') as { offers: { price: string; priceValidUntil: string } };
-  assert.equal(priced.offers.price, '5600000');
-  assert.equal(priced.offers.priceValidUntil, '2027-02-05');
+  const priced = frequencySchema('vi', frequencyOfferFor(new Date('2026-11-25T00:00:00+07:00'))).find(node => node['@type'] === 'Service') as { offers: { price: string; priceValidUntil?: string; validFrom?: string }[] };
+  assert.equal(priced.offers[0].price, '5600000');
+  assert.equal(priced.offers[0].priceValidUntil, '2027-02-05');
+  assert.equal(priced.offers[1].price, '6600000', 'the official fee is already listed, valid from Tết');
+  assert.equal(priced.offers[1].validFrom, '2027-02-06');
   const official = frequencySchema('vi', frequencyOfferFor(new Date('2027-03-01T00:00:00+07:00'))).find(node => node['@type'] === 'Service') as { offers: { price: string } & Record<string, unknown> };
   assert.equal(official.offers.price, '6600000');
   assert.ok(!('priceValidUntil' in official.offers));

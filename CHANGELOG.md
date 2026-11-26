@@ -1,3 +1,8 @@
+## 2.25.1 — Tần Số Vàng: dữ liệu giá đúng cả sau Tết, không cần build lại
+
+- Dữ liệu có cấu trúc (JSON-LD) của trang Tần Số Vàng nay liệt kê cả hai mức: 5.600.000 ₫ hiệu lực đến 05/02/2027 và 6.600.000 ₫ hiệu lực từ 06/02/2027 (`validFrom`). Sau Tết dữ liệu vẫn đúng mà không phải build lại. Chữ hiển thị trên trang vẫn tự đổi sang 6,6 triệu nhờ đồng hồ đếm ngược như trước.
+- Cập nhật `tests/frequency.test.ts`.
+
 ## 2.25.0 — Trang chủ và Hệ sinh thái dựng lại theo phong cách landing page
 
 - **Ít chữ, nhiều khoảng thở, nhiều ảnh.** Trang chủ giảm từ khoảng 1.840 xuống 1.190 chữ (vi) và Hệ sinh thái từ khoảng 1.100 xuống 760 chữ; số ảnh thật trên Hệ sinh thái tăng từ 4 lên 14. Mỗi khối chỉ giữ một ý chính, phần còn lại nằm sau đường dẫn.
