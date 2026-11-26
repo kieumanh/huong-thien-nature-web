@@ -1,3 +1,9 @@
+## 2.24.4 — Trang chủ: bỏ phần lặp Thân – Tâm – Trí
+
+- **Trang chủ:** Thân – Tâm – Trí trước đây xuất hiện ba lần (khối Living Zen, khối "Ba trọng tâm" và vòng quỹ đạo). Nay chỉ còn ở phần Hệ sinh thái (lời của chủ dự án, có đường dẫn tới farm, khóa thực hành và đá).
+- **Khối Living Zen ở đầu trang** được viết lại thành "ba điều tụi mình luôn giữ": nói rõ từng điều, không hứa quá lời, mời bằng sự tử tế. Ý lấy từ các cam kết đã có trong bộ nhận diện, không thêm cam kết mới. Ba thẻ thẳng hàng, không có thanh màu bên trái.
+- Trang Hệ sinh thái giữ nguyên (vẫn có ba phẩm chất có icon chuyển động).
+
 ## 2.24.3 — Số hỗ trợ ở Tarot, icon Thân là hạt giống, trích dẫn Tarot
 
 - **Tarot:** các nút Zalo và đặt lịch chuyển sang số hỗ trợ 0388 000 680 (Kiều Mạnh), đồng bộ với Tần Số Vàng. Trang Liên hệ giữ hai thẻ như cũ.

@@ -1,9 +1,11 @@
 // Living Zen 2.0: the brand essence written for visitors. Source: the owner's master prompt
 // "Hương Thiền Nature — Living Zen 2.0" (2026-11-26) and the ecosystem wording in ecosystem-vision.ts.
 // THÂN / TÂM / TRÍ follow the labels already used by the home orbit (EcosystemOrbit.astro).
+// The home page shows `home` (three pledges) only: Thân / Tâm / Trí already live in its Ecosystem section, so `qualities` appear on the Ecosystem page (variant 'full').
 import type { Language } from './site.ts';
 
 export type QualityIcon = 'seed' | 'meditation' | 'mind';
+export type Pledge = { label: string; title: string; text: string };
 
 export const livingZen = {
   vi: {
@@ -15,6 +17,14 @@ export const livingZen = {
       { icon: 'meditation', label: 'TÂM', title: 'Có khoảng lặng trong tâm', text: 'Thiền, chánh niệm, hơi thở và yoga để trở về, lắng nghe và đối xử dịu dàng với chính mình.' },
       { icon: 'mind', label: 'TRÍ', title: 'Có ánh sáng trong trí', text: 'Tản văn, sách vở, lớp học và bạn đồng hành để hiểu sâu hơn và sống sáng suốt hơn mỗi ngày.' },
     ] as { icon: QualityIcon; label: string; title: string; text: string }[],
+    home: {
+      intro: 'Hương Thiền Nature là một hệ sinh thái học tập, thực hành và nuôi dưỡng đời sống tỉnh thức: kết nối mỗi người với chính mình, với thiên nhiên và với cộng đồng. Trước khi bạn đọc tiếp, đây là ba điều tụi mình luôn giữ.',
+      pledges: [
+        { label: 'RÕ RÀNG', title: 'Nói rõ từng điều', text: 'Điều khoa học đã đo được, điều thuộc giáo lý, trải nghiệm cá nhân và niềm tin tâm linh được kể riêng, để bạn tự cân nhắc.' },
+        { label: 'THẬT LÒNG', title: 'Không hứa quá lời', text: 'Tụi mình không hứa chữa khỏi bệnh hay chuyển hóa siêu nhiên. Thực hành ở đây không thay thế chăm sóc y tế.' },
+        { label: 'TỬ TẾ', title: 'Mời bằng sự tử tế', text: 'Không dùng nỗi sợ hay sự dễ tổn thương của bạn để mời đăng ký hay mua hàng.' },
+      ] as Pledge[],
+    },
     essenceTitle: 'Hệ sinh thái này đan từ những sợi nào',
     essence: ['Thiền định', 'Chánh niệm', 'Trí tuệ phương Đông', 'Tâm lý học ứng dụng', 'Tình yêu thương', 'Sống thuận tự nhiên', 'Nông nghiệp và hệ sinh thái', 'Ẩm thực chay', 'Công nghệ phục vụ con người', 'Tinh thần phụng sự'],
     notTitle: 'Tụi mình không phải là',
@@ -42,6 +52,14 @@ export const livingZen = {
       { icon: 'meditation', label: 'MIND', title: 'Stillness in the heart', text: 'Meditation, mindfulness, breath and yoga to come home, listen and treat ourselves gently.' },
       { icon: 'mind', label: 'WISDOM', title: 'Light in the mind', text: 'Journal pieces, books, classes and companions to understand more deeply and live more clearly each day.' },
     ] as { icon: QualityIcon; label: string; title: string; text: string }[],
+    home: {
+      intro: 'Hương Thiền Nature is an ecosystem for learning, practising and nurturing an awakened life: reconnecting each person with themselves, with nature and with community. Before you read on, here are three things we always keep.',
+      pledges: [
+        { label: 'CLARITY', title: 'Clear about what is what', text: 'Measured science, teaching, personal experience and spiritual belief are told apart, so you can weigh each for yourself.' },
+        { label: 'HONESTY', title: 'No big promises', text: 'We do not promise cures or supernatural transformation. Practice here does not replace medical care.' },
+        { label: 'KINDNESS', title: 'Invited with kindness', text: 'We never use fear or vulnerability to invite you to sign up or buy.' },
+      ] as Pledge[],
+    },
     essenceTitle: 'The threads this ecosystem is woven from',
     essence: ['Meditation', 'Mindfulness', 'Eastern wisdom', 'Applied psychology', 'Loving kindness', 'Living with nature', 'Farming and ecosystems', 'Plant-based cooking', 'Technology in service of people', 'A spirit of service'],
     notTitle: 'What we are not',
