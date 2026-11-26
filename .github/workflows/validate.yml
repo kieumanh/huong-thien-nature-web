@@ -87,6 +87,7 @@ jobs:
           python tests/contact-browser.py || browser_result=1
           python tests/music-browser.py || browser_result=1
           python tests/tan-van-browser.py || browser_result=1
+          python tests/nav-search-browser.py || browser_result=1
           for label in candidate baseline; do
             if [ "$label" = "baseline" ] && [ -z "${BASELINE_URL:-}" ]; then continue; fi
             server="$APP_BASE_URL"

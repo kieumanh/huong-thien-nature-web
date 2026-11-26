@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.26.0',
+    date: '2026-11-26',
+    vi: ['Tìm kiếm trên menu, trang 404 động, slide hero', 'Tìm kiếm mở rộng ngay trên thanh menu với kết quả hiện tức thì; trang 404 có hình động và đường về; ảnh đầu trang chủ đổi tự động mỗi 6 giây từ album; Trang chủ có lối vào Cửa hàng, ba hành tinh lên đầu phần Hệ sinh thái và ảnh bài viết không còn cắt mất khuôn mặt.'],
+    en: ['Menu search, animated 404, hero slideshow', 'Search opens right on the menu bar with instant results; the 404 page has gentle motion and a way back; the Home hero photo changes every 6 seconds from the album; Home gains a doorway to the shop, the three planets lead the Ecosystem section and an article photo no longer crops out faces.'],
+  },
+  {
     version: '2.25.1',
     date: '2026-11-26',
     vi: ['Tần Số Vàng: dữ liệu giá đúng cả sau Tết', 'Dữ liệu cho công cụ tìm kiếm liệt kê cả hai mức học phí với thời hạn hiệu lực rõ ràng, nên sau Tết 2027 không cần build lại site.'],
