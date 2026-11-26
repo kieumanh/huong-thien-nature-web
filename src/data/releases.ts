@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.24.4',
+    date: '2026-11-26',
+    vi: ['Trang chủ: bỏ phần lặp Thân – Tâm – Trí', 'Thân – Tâm – Trí chỉ còn ở phần Hệ sinh thái; khối đầu trang được viết lại thành ba điều tụi mình luôn giữ: nói rõ từng điều, không hứa quá lời, mời bằng sự tử tế.'],
+    en: ['Home: no more repeated Body – Mind – Wisdom', 'Body, Mind and Wisdom now appear only in the Ecosystem section; the opening block is rewritten as three things we always keep: clear about what is what, no big promises, invited with kindness.'],
+  },
+  {
     version: '2.24.3',
     date: '2026-11-26',
     vi: ['Tarot dùng số hỗ trợ; icon Thân là hạt giống', 'Nút Zalo ở trang Tarot dùng số 0388.000.680; icon THÂN đổi sang hạt giống có chuyển động nhẹ; khối trích dẫn ví dụ ở Tarot không còn sát lằn tím; chế độ đọc Tối ban ngày có nút nhạc đọc được.'],

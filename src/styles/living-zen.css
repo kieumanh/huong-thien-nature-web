@@ -16,6 +16,16 @@
 .lz-quality__label { margin-top: .75rem; color: var(--lz-q-colour, var(--secondary)); font-size: .74rem; font-weight: 700; letter-spacing: .14em; }
 .lz-quality h3 { margin-top: .2rem; font-size: var(--type-card); }
 .lz-quality p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
+/* Home: three pledges (no Thân / Tâm / Trí here; the Ecosystem section carries those). */
+.lz-pledges { display: grid; gap: var(--lz-space-4); margin: var(--lz-space-6) 0 0; padding: 0; list-style: none; }
+.lz-pledge {
+  padding: var(--lz-space-5); border: 1px solid var(--border); border-radius: var(--lz-radius-card);
+  background: var(--surface-raised); box-shadow: var(--lz-shadow-subtle);
+}
+.lz-pledge__label { color: var(--secondary); font-size: .74rem; font-weight: 700; letter-spacing: .14em; }
+.lz-pledge h3 { margin-top: .2rem; font-size: var(--type-card); }
+.lz-pledge p:last-child { margin-top: .4rem; color: var(--muted); line-height: 1.6; }
+
 .lz-ico-glow { fill: currentColor; stroke: none; transform-origin: 12px 9.5px; animation: lz-glow 4.8s ease-in-out infinite; }
 .lz-ico-filament { animation: lz-filament 4.8s ease-in-out infinite; }
 .lz-ico-seed { transform-origin: 12px 12px; animation: lz-seed-breathe 5.6s ease-in-out infinite; }
@@ -56,7 +66,13 @@
 .lz-space__tone { font-size: .82rem; }
 
 @media (min-width: 760px) {
-  .lz-qualities, .lz-spaces { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lz-qualities, .lz-spaces, .lz-pledges { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  /* The three pledges share rows (label, title, text) so the texts line up even when a title wraps. */
+  .lz-pledges { row-gap: 0; }
+  .lz-pledge { display: grid; grid-row: span 3; grid-template-rows: subgrid; row-gap: 0; }
+  @supports not (grid-template-rows: subgrid) {
+    .lz-pledge h3 { min-height: 2.5lh; }
+  }
   /* Three cards share rows (icon, label, title, text) so the descriptions line up even when a title wraps. */
   .lz-qualities { row-gap: 0; }
   .lz-quality { display: grid; grid-row: span 4; grid-template-rows: subgrid; row-gap: 0; }
