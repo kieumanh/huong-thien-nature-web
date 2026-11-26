@@ -60,3 +60,18 @@ test('landing pages only use photographs that exist in the album', async () => {
   const photoLike = [...used].filter(id => ids.has(id));
   assert(photoLike.length >= 20, 'the landing pages should draw on the shared album');
 });
+
+test('the Home hero is a slideshow fed by the album: 6-second change, a pause button, dots and one eager photo', () => {
+  const album = fs.readFileSync('src/data/album.ts', 'utf8');
+  const heroIds = [...album.matchAll(/id: '([a-z0-9-]+)', category: '\w+', hero: true/g)].map(m => m[1]);
+  assert(heroIds.length >= 6, 'at least six album photos are marked for the hero');
+  for (const lang of ['vi', 'en']) {
+    const html = page(`${lang}/index.html`);
+    assert(html.includes('data-hero-slides data-interval="6000"'), 'changes every 6 seconds');
+    assert.equal(count(html, /<figure[^>]*data-hero-slide\b/g), heroIds.length, 'one slide per marked photo');
+    assert.equal(count(html, /<button[^>]*data-hero-dot\b/g), heroIds.length);
+    assert(html.includes('data-hero-toggle'), 'a pause button for people who need the picture to stay still');
+    assert.equal(count(html, /<img[^>]*fetchpriority="high"/g), 1, 'only the first slide is loaded at once');
+    assert.equal(count(html, /<img data-src=/g), heroIds.length - 1, 'later slides load just before they show');
+  }
+});

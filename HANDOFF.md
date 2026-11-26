@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-26, phiên bản 2.25.1 (Tần Số Vàng: JSON-LD có cả hai mức giá). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-26, phiên bản 2.26.0 (tìm kiếm trên menu, 404 động, slide hero). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 26/11 | 2.26.0: tìm kiếm mở rộng trên menu (`Header.astro` + `nav-search.ts`, dùng `/<lang>/search-index.json` và `search-engine.ts`); 404 mới bilingual (`pages/404.astro`); slide hero 6 giây từ album (`hero: true` trong `album.ts`, `HeroSlides.astro`, `hero-slides.ts`); Trang chủ bỏ `HomeDiscovery` (đã xóa) và thêm `HomeShop.astro`; orbit lên đầu phần Hệ sinh thái; thu nhỏ `thumbs/hug-closeup.webp` cắt lại. Thêm `tests/nav-search-browser.py`. |
 | 26/11 | 2.25.1: `golden-frequency-schema.ts` liệt kê hai Offer (5,6 triệu `priceValidUntil` 05/02/2027; 6,6 triệu `validFrom` 06/02/2027) nên không còn việc phải build lại sau Tết. |
 | 26/11 | 2.25.0: Trang chủ (`HomePage.astro`, `LandingFeelings.astro`, `EcosystemOverview.astro`) và Hệ sinh thái (`EcosystemHero.astro` + nhánh `ecosystem` của `[section].astro`) dựng lại kiểu landing: ít chữ, ảnh từ album qua `AlbumImage.astro`, icon chuyển động `AnimatedIcon.astro` (`animated-icons.css`), vòng thở `BreathRing.astro`, hiện dần `landing-motion.ts`, CSS chung `landing.css`. `ecosystem-vision.ts` có thêm trường `short` (bản rút gọn hiển thị; `text` đầy đủ của chủ dự án vẫn giữ và vẫn được tìm kiếm). Album 51 ảnh, nhóm mới `nature`; dải ảnh thêm ở Liên hệ, Thực phẩm sạch, Quỹ ủng hộ. Thêm `tests/landing.test.mjs`. |
 | 26/11 | 2.24.5: Trang Hệ sinh thái — chỉ còn ba trọng tâm (`vision.focus`) + vòng "nuôi nhau" ngay dưới; icon chuyển động ở huy hiệu ba thẻ (`PillarIcon.astro`, `pillar-icons.css`); khối Living Zen `full` chỉ còn sợi đan / không phải là / lời hứa; đã xóa `qualities` và `spaces` khỏi `living-zen.ts`. |

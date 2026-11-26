@@ -62,16 +62,6 @@
 }
 
 .material-inline-link { margin-top: .55rem; }
-.home-discovery { padding: clamp(1rem, 3vw, 1.5rem); border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface-raised); }
-.home-discovery-content { max-width: 49rem; margin-inline: auto; }
-.home-discovery h2 { font-size: clamp(1.45rem, 3vw, 2.1rem); text-wrap: pretty; }
-.home-search-form { margin-top: .75rem; }
-.home-search-suggestions { display: flex; flex-wrap: wrap; align-items: center; gap: .2rem .75rem; margin-block: .25rem .55rem; }
-.home-search-suggestions a { display: grid; min-height: 44px; place-items: center; color: var(--muted); font-size: var(--type-caption); text-decoration: underline; text-underline-offset: .17em; }
-.home-beginner-links { margin-top: .7rem; padding-top: 1rem; border-top: 1px solid var(--border); }
-.home-beginner-links nav { display: grid; }
-.home-beginner-link { display: flex; align-items: center; gap: .45rem; min-height: 44px; font-size: var(--type-caption); }
-.home-beginner-link:hover { text-decoration: underline; text-underline-offset: .15em; }
 
 .material-founders { display: grid; gap: .75rem; }
 .material-founder {

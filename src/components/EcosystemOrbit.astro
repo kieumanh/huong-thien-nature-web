@@ -13,19 +13,6 @@ const orbitDurations = ['26s', '42s', '58s'];
 ---
 <div class="ecosystem-motion" data-ecosystem>
 
-  <div class="solar-system-pillars">
-    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`} data-reveal="fade">
-      {photos[index] && <figure class="solar-pillar__photo" style={focus[index] ? `--pp:${focus[index]}` : undefined}><AlbumImage id={photos[index]} {lang} sizes="(min-width: 900px) 30vw, 92vw" /></figure>}
-      <div class="solar-pillar__body">
-        <span class="solar-pillar__badge"><PillarIcon name={pillarIcons[index]} /></span>
-        <span class="solar-pillar__index">{values[index]}</span>
-        <h3>{title}</h3>
-        <p>{text}</p>
-        <span class="ecosystem-status">{status[index]}</span>
-        <a class="quiet-link" href={links[index][0]}>{links[index][1]} <Arrow /></a>
-      </div>
-    </article>)}
-  </div>
   <section class="reading-section ecosystem-visual">
     <h3 class="reading-heading sr-only">{en ? 'Three orbits around awareness' : 'Ba quỹ đạo quanh sự nhận biết'}</h3>
   <figure class="ecosystem-solar-system" aria-label={en ? 'Awareness at the centre, with three planets for Body, Heart and Mind.' : 'Nhận biết ở trung tâm, cùng ba hành tinh Thân, Tâm và Trí.'}>
@@ -63,6 +50,20 @@ const orbitDurations = ['26s', '42s', '58s'];
   </figure>
 
   </section>
+
+  <div class="solar-system-pillars">
+    {cards.map(([title, text], index) => <article class={`solar-pillar solar-pillar--${index + 1}`} data-reveal="fade">
+      {photos[index] && <figure class="solar-pillar__photo" style={focus[index] ? `--pp:${focus[index]}` : undefined}><AlbumImage id={photos[index]} {lang} sizes="(min-width: 900px) 30vw, 92vw" /></figure>}
+      <div class="solar-pillar__body">
+        <span class="solar-pillar__badge"><PillarIcon name={pillarIcons[index]} /></span>
+        <span class="solar-pillar__index">{values[index]}</span>
+        <h3>{title}</h3>
+        <p>{text}</p>
+        <span class="ecosystem-status">{status[index]}</span>
+        <a class="quiet-link" href={links[index][0]}>{links[index][1]} <Arrow /></a>
+      </div>
+    </article>)}
+  </div>
 </div>
 <script>
   import '../scripts/ecosystem-orbit';

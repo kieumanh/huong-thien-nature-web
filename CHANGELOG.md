@@ -1,3 +1,12 @@
+## 2.26.0 — Tìm kiếm ngay trên menu, 404 động, slide hero, chỉnh Trang chủ
+
+- **Tìm kiếm trên thanh menu:** bấm kính lúp, một thanh tìm kiếm mở rộng từ phải sang trái ngay trên menu, kết quả hiện ngay bên dưới (6 kết quả đầu, gợi ý từ khóa khi chưa gõ, nút "Xem tất cả kết quả"). Không phải rời trang. Phím `/` mở nhanh, Esc đóng, mũi tên lên xuống chọn kết quả, Enter mở trang tìm kiếm đầy đủ. Không có JavaScript thì kính lúp vẫn là liên kết tới trang tìm kiếm. Mã: `src/scripts/nav-search.ts`, kiểu ở cuối `global.css`.
+- **Trang 404 mới** (`src/pages/404.astro`): số 404 với vòng thở ở giữa, lá rơi nhẹ, hai ngôn ngữ (hiện theo địa chỉ /en/ hoặc còn lại), nút Về trang chủ, nút Quay lại trang trước (chỉ hiện khi người đọc đến từ trang khác của site), gợi ý bốn nơi để ghé.
+- **Slide hero Trang chủ** (`HeroSlides.astro`, `hero-slides.ts`): đổi ảnh mờ dần mỗi 6 giây, lấy từ các ảnh trong album được đánh dấu `hero: true` trong `src/data/album.ts` (hiện 8 ảnh; đánh dấu thêm ảnh để thêm slide). Ảnh đầu tải ngay, ảnh sau chỉ tải trước khi hiện. Có nút tạm dừng và chấm chọn ảnh; dừng khi chuột/bàn phím đang ở trên slide hoặc tab bị ẩn; không tự chạy khi bật giảm chuyển động hoặc tiết kiệm dữ liệu.
+- **Trang chủ:** gỡ khối "Hôm nay bạn muốn đọc gì?" (tìm kiếm đã có trên menu, ba bài gợi ý trùng với "Có thể bạn đang…") và thay bằng lối vào Cửa hàng (thực phẩm sạch, đá năng lượng, sách; `HomeShop.astro`). Ba hành tinh Thân – Tâm – Trí chuyển lên đầu phần Hệ sinh thái, trước ba thẻ. Icon ngôi nhà ở lời mời cuối trang được căn giữa (cùng chữ và nút) trên điện thoại. Nhãn "Hít vào/Thở ra" của vòng thở luôn đọc được trong chế độ đêm.
+- **Tản văn:** ảnh bìa bài "Thiền tâm từ cho người mới" cắt lại để thấy đủ khuôn mặt (thu nhỏ dùng chung cho mọi giao diện).
+- **Kiểm thử:** `tests/nav-search-browser.py` (mới, vào CI), cập nhật `home-discovery.test.mjs` và `landing.test.mjs`; `tan-van-browser.py` chọn đúng biểu mẫu tìm kiếm của trang Tản văn (nay có thêm biểu mẫu trên menu).
+
 ## 2.25.1 — Tần Số Vàng: dữ liệu giá đúng cả sau Tết, không cần build lại
 
 - Dữ liệu có cấu trúc (JSON-LD) của trang Tần Số Vàng nay liệt kê cả hai mức: 5.600.000 ₫ hiệu lực đến 05/02/2027 và 6.600.000 ₫ hiệu lực từ 06/02/2027 (`validFrom`). Sau Tết dữ liệu vẫn đúng mà không phải build lại. Chữ hiển thị trên trang vẫn tự đổi sang 6,6 triệu nhờ đồng hồ đếm ngược như trước.

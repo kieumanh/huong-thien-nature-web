@@ -71,7 +71,8 @@ test('built pages: journal has search, sort, topic chips with icons, an open-pag
   for (const lang of langs) {
     if (!existsSync(dist(`${journalPath(lang)}index.html`))) continue;
     const journal = readFileSync(dist(`${journalPath(lang)}index.html`), 'utf8');
-    assert.equal((journal.match(/type="search"/g) ?? []).length, 1, `${lang}: one search box`);
+    const mainHtml = journal.match(/<main[\s\S]*?<\/main>/)?.[0] ?? journal; // the menu bar has its own search (2.26.0)
+    assert.equal((mainHtml.match(/type="search"/g) ?? []).length, 1, `${lang}: one search box on the page itself`);
     assert.ok(journal.includes('data-journal-query') && journal.includes('data-chance-button'), `${lang}: search, sort and "a chance encounter"`);
     assert.ok(!journal.includes('data-journal-sort'), `${lang}: no sort control, the list is always newest first`);
     assert.ok(!journal.includes('journal-lane__number'), `${lang}: reading lanes carry no numbers`);

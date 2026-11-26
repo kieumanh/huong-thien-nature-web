@@ -1,0 +1,29 @@
+---
+// Home: a soft doorway to the shop, built from the shop themes in src/data/shop-themes.ts (names, one-line taglines and what is inside).
+import { shopThemes, themePath } from '../data/shop-themes';
+import { shopPath } from '../data/products';
+import type { Language } from '../data/site';
+import AnimatedIcon from './AnimatedIcon.astro';
+import Arrow from './Arrow.astro';
+const { lang } = Astro.props as { lang: Language };
+const vi = lang === 'vi';
+const icons = { leaf: 'sprout', stone: 'gem', book: 'book' } as const;
+const tones = { leaf: '', stone: 'landing-icon--orchid', book: 'landing-icon--gold' } as const;
+---
+<section class="shell landing-shop" id="shop" aria-labelledby="shop-title">
+  <div class="landing-head" data-reveal="up">
+    <p class="eyebrow">{vi ? 'Cửa hàng' : 'Shop'}</p>
+    <h2 id="shop-title">{vi ? 'Vài món nhỏ đồng hành cùng thực hành' : 'Small companions for your practice'}</h2>
+  </div>
+  <ul class="landing-shop__list" role="list">
+    {shopThemes.map((theme, index) => <li data-reveal="up" style={`--reveal-delay:${index * 90}ms`}>
+      <a class="landing-shop__card" href={themePath(lang, theme)}>
+        <span class={['landing-icon', 'landing-icon--large', tones[theme.accent]].join(' ')}><AnimatedIcon name={icons[theme.accent]} /></span>
+        <h3>{theme.name[lang]}</h3>
+        <p>{theme.tagline[lang]}</p>
+        <span class="landing-shop__door">{theme.door[lang]}</span>
+      </a>
+    </li>)}
+  </ul>
+  <p class="landing-shop__more"><a class="quiet-link" href={shopPath(lang)}>{vi ? 'Vào Cửa hàng' : 'Visit the shop'} <Arrow /></a></p>
+</section>

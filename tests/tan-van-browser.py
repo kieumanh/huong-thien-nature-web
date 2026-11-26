@@ -210,7 +210,7 @@ with sync_playwright() as p:
     page.goto(base + listing('vi'), wait_until='domcontentloaded')
     assert page.locator('#journal-grid [data-journal-card]:visible').count() == total, 'every article stays visible without JavaScript'
     assert page.locator('[data-chance-button]').is_hidden()
-    assert page.locator('form[role="search"]').get_attribute('action') == '/vi/timkiem/'
+    assert page.locator('form[data-journal-form]').get_attribute('action') == '/vi/timkiem/'
     page.goto(base + ARTICLE['vi'], wait_until='domcontentloaded')
     assert page.locator('.article-tools').is_hidden() and page.locator('.article-body section').count() >= 3
     report.append('Without JavaScript: all articles readable, search box opens the site search, script-only tools stay hidden')

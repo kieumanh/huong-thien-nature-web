@@ -5,11 +5,14 @@ import Arrow from './Arrow.astro';
 import { getCopy, type Language } from '../data/site';
 import { journeyPageKeys, journeyPages, journeyPath } from '../data/journey-pages';
 import { shopPath } from '../data/products';
+import { homeCopy } from '../data/home';
 const { lang, alternatePath } = Astro.props as {
   lang: Language; alternatePath: string;
 };
 const t = getCopy(lang);
 const searchPath = lang === 'vi' ? '/vi/timkiem/' : '/en/search/';
+const vi = lang === 'vi';
+const suggestions: readonly string[] = homeCopy[lang].suggestions;
 const pageLink = (page: typeof journeyPageKeys[number]) => ({ href: journeyPath(lang, page), label: journeyPages[page][lang].title });
 const links = [
   pageLink('ecosystem'),
@@ -36,7 +39,7 @@ const links = [
       <a class="nav-contact-mobile" href={contactPath(lang)} aria-current={Astro.url.pathname === contactPath(lang) ? 'page' : undefined}>{lang === "vi" ? "Liên hệ" : "Contact"}</a>
     </nav>
     <div class="nav-actions">
-      <a class="nav-search" href={searchPath} aria-current={Astro.url.pathname === searchPath ? 'page' : undefined} aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'} title={lang === 'vi' ? 'Tìm kiếm' : 'Search'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
+      <a class="nav-search" data-nav-search href={searchPath} aria-current={Astro.url.pathname === searchPath ? 'page' : undefined} aria-label={lang === 'vi' ? 'Tìm kiếm' : 'Search'} title={lang === 'vi' ? 'Tìm kiếm' : 'Search'}><svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg></a>
       <nav class="language" aria-label={lang === 'vi' ? 'Ngôn ngữ' : 'Language'}>
         {lang === 'vi' ? <span class="active" aria-current="true" lang="vi"><span class="sr-only">Tiếng Việt</span><span aria-hidden="true">VI</span></span> : <a href={alternatePath} hreflang="vi" lang="vi" aria-label="Tiếng Việt">VI</a>}
         {lang === 'en' ? <span class="active" aria-current="true" lang="en"><span class="sr-only">English</span><span aria-hidden="true">EN</span></span> : <a href={alternatePath} hreflang="en" lang="en" aria-label="English">EN</a>}
@@ -47,8 +50,30 @@ const links = [
       </button>
     </div>
   </div>
+  <div class="nav-searchbar" data-searchbar hidden>
+    <form class="shell nav-searchbar__inner" role="search" action={searchPath} method="get" aria-label={vi ? 'Tìm kiếm trên trang' : 'Search the site'}>
+      <svg class="nav-searchbar__icon" viewBox="0 0 24 24" width="22" height="22" fill="none" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5" stroke="currentColor" stroke-width="1.7"/><path d="m16 16 4.5 4.5" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
+      <label class="sr-only" for="nav-search-input">{vi ? 'Tìm bài viết, khóa học, sản phẩm' : 'Search articles, courses, products'}</label>
+      <input id="nav-search-input" name="q" type="search" maxlength="120" autocomplete="off" enterkeyhint="search" placeholder={vi ? 'Hơi thở, chánh niệm, làm vườn…' : 'Breath, mindfulness, gardening…'} aria-controls="nav-search-panel" />
+      <button class="nav-searchbar__close" type="button" data-search-close aria-label={vi ? 'Đóng tìm kiếm' : 'Close search'}><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg></button>
+    </form>
+  </div>
+  <div class="nav-search-panel" id="nav-search-panel" data-search-panel hidden>
+    <div class="shell">
+      <div class="nav-search-card">
+        <p class="nav-search-status" role="status" data-search-status></p>
+        <ul class="nav-search-results" role="list" data-search-results></ul>
+        <div class="nav-search-suggest" data-search-suggest>
+          <p>{homeCopy[lang].suggestionsLabel}</p>
+          <div>{suggestions.map(query => <a href={`${searchPath}?q=${encodeURIComponent(query)}`}>{query}</a>)}</div>
+        </div>
+        <a class="nav-search-all" href={searchPath} data-search-all hidden data-label={vi ? 'Xem tất cả kết quả' : 'See all results'}></a>
+      </div>
+    </div>
+  </div>
 </header>
 <script>
+  import '../scripts/nav-search';
   const button = document.querySelector<HTMLButtonElement>('.nav-toggle');
   const menu = document.querySelector<HTMLElement>('#main-nav');
   if (button && menu) {
