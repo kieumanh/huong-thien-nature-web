@@ -4,11 +4,14 @@ import EcosystemOverview from './EcosystemOverview.astro';
 import HomeCourses from './HomeCourses.astro';
 import '../styles/story-home.css';
 import '../styles/hybrid-nature.css';
-import { practicePhoto } from '../data/editorial-illustrations';
 import HomePhoto from './HomePhoto.astro';
 import HomeDiscovery from './HomeDiscovery.astro';
 import AlbumStrip from './AlbumStrip.astro';
-import EmpathyPaths from './EmpathyPaths.astro';
+import AlbumImage from './AlbumImage.astro';
+import AnimatedIcon from './AnimatedIcon.astro';
+import BreathRing from './BreathRing.astro';
+import LandingFeelings from './LandingFeelings.astro';
+import LandingMotion from './LandingMotion.astro';
 import { homeEmpathy } from '../data/empathy';
 import { coursePath, frequencyCourse } from '../data/courses';
 import ArticleCard from './ArticleCard.astro';
@@ -17,13 +20,15 @@ import ContemplativeScene from './ContemplativeScene.astro';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
+import LivingZenValues from './LivingZenValues.astro';
 import { getCopy, type Language } from '../data/site';
 import { articlePath, journalPath } from '../data/articles';
 import { homeCopy, featuredArticles } from '../data/home';
-import { journeyPages, journeyPath } from '../data/journey-pages';
+import { journeyPath } from '../data/journey-pages';
 import '../styles/material-home.css';
 import '../styles/editorial.css';
 import '../styles/journey-pages.css';
+import '../styles/landing.css';
 
 const { lang } = Astro.props as { lang: Language };
 const vi = lang === 'vi';
@@ -39,36 +44,40 @@ const welcome = homeEmpathy(lang, {
   practice: practicePath, contact: contactPath(lang), frequency: coursePath(lang, frequencyCourse), tarot: coursePath(lang),
   ecosystem: journeyPath(lang, 'ecosystem'), article: slug => articlePath(lang, slug),
 });
-import LivingZenValues from './LivingZenValues.astro';
 ---
 <BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} canonicalPath={`/${lang}/`} aboutOrganization>
   <Header {lang} {alternatePath} />
-  <main id="main-content" class="material-home" tabindex="-1">
-    <section class="shell material-hero" aria-labelledby="hero-title">
-      <div class="material-hero__copy">
+  <main id="main-content" class="material-home landing-home" tabindex="-1">
+    <section class="shell landing-hero material-hero" aria-labelledby="hero-title">
+      <div class="landing-hero__copy">
         <p class="eyebrow">{t.eyebrow}</p>
         <h1 id="hero-title">{vi ? 'Có mặt trong' : 'Be present for'}<br /><span class="handwritten">{vi ? 'đời mình.' : 'your own life.'}</span></h1>
-        <p class="lead">{vi ? 'Dù hôm nay bạn đến với một nỗi mệt, một câu hỏi chưa có lời đáp, hay chỉ là mong được thở chậm lại, ở đây có chỗ để bạn ngồi xuống. Không cần phải ổn, không cần biết thiền. Chỉ cần bắt đầu từ chỗ bạn đang đứng.' : 'Whether you arrive today with tiredness, a question without an answer, or simply a wish to breathe more slowly, there is a place here to sit down. You don’t need to be okay or know how to meditate. Just begin where you are.'}</p>
+        <p class="lead">{vi ? 'Không cần phải ổn, không cần biết thiền. Ở đây có chỗ để bạn ngồi xuống và thở chậm lại.' : 'You don’t need to be okay or know how to meditate. There is a place here to sit down and breathe more slowly.'}</p>
         <div class="material-actions">
           <a class="button" href={practicePath}>{vi ? 'Thực tập một phút' : 'Practise for one minute'} <Arrow /></a>
           <a class="quiet-link" href={storyPath}>{vi ? 'Đọc câu chuyện' : 'Read our story'}</a>
         </div>
       </div>
-      <div class="material-hero__art"><ContemplativeScene motif="meditation" /></div>
+      <div class="landing-hero__art">
+        <div class="landing-arch"><AlbumImage id="sunset-lake-path" {lang} eager sizes="(min-width: 860px) 28vw, 80vw" /></div>
+        <div class="landing-orb landing-orb--a"><AlbumImage id="pink-lotus" {lang} sizes="(min-width: 860px) 12vw, 30vw" /></div>
+        <div class="landing-orb landing-orb--b"><AlbumImage id="toddler-stone-path" {lang} sizes="(min-width: 860px) 10vw, 26vw" /></div>
+        <span class="landing-hero__leaf landing-hero__leaf--1" aria-hidden="true"><AnimatedIcon name="leaf" /></span>
+        <span class="landing-hero__leaf landing-hero__leaf--2" aria-hidden="true"><AnimatedIcon name="lotus" /></span>
+        <BreathRing {lang} />
+      </div>
     </section>
 
-    <LivingZenValues {lang} />
+    <LandingFeelings block={welcome} id="welcome" {lang} />
 
-    <EmpathyPaths block={welcome} id="welcome" extraClass="shell home-welcome" />
-
-    <section class="shell home-story" id="story" aria-labelledby="story-title">
-      <div class="home-story__photo"><HomePhoto photo="barefoot-by-sea" {lang} /></div>
-      <div class="home-story__copy">
+    <section class="shell home-story landing-story" id="story" aria-labelledby="story-title">
+      <div class="home-story__photo" data-reveal="fade"><HomePhoto photo="barefoot-by-sea" {lang} /></div>
+      <div class="home-story__copy" data-reveal="up">
         <ContemplativeScene motif="mandala" />
         <p class="eyebrow">Hương Thiền</p>
         <h2 id="story-title">{vi ? 'Học cách ở lại với mình' : 'Learning to stay with myself'}</h2>
-        <p>{vi ? 'Mình là Hương Thiền, tên đầy đủ là Đỗ Thị Kim Hương. Lớn lên ở Quảng Nam, mình quen tự lo từ sớm. Mãi sau, khi có thời gian ngồi yên, mình mới nhận ra có những ngày điều mình cần nhất là thừa nhận mình đã mỏi và cho phép mình nghỉ một lát.' : 'I’m Hương Thiền, and my full name is Đỗ Thị Kim Hương. Growing up in Quảng Nam, I learned to look after myself early. It took years, and time sitting quietly, to see that some days the kindest thing I could do was admit I was tired and take a rest.'}</p>
-        <p>{vi ? 'Từ chỗ ngồi ấy, sự chú tâm theo mình ra khỏi phòng: đến bữa cơm, những bước chân ngoài vườn và cách mình lắng nghe một người. Hương Thiền Nature là nơi tụi mình chia sẻ cách đem thiền định và chánh niệm vào những việc bình thường như thế.' : 'From that seat, attention followed me out of the room. It came with me to the table, into the garden, and into the way I listened to another person. Hương Thiền Nature is where we share ways to bring meditation and mindfulness to ordinary moments like these.'}</p>
+        <p>{vi ? 'Mình là Hương Thiền (Đỗ Thị Kim Hương). Lớn lên ở Quảng Nam, mình quen tự lo từ sớm, và mãi sau mới nhận ra có những ngày điều tử tế nhất là thừa nhận mình đã mỏi và cho phép mình nghỉ một lát.' : 'I’m Hương Thiền (Đỗ Thị Kim Hương). Growing up in Quảng Nam, I learned to look after myself early, and only years later saw that some days the kindest thing was to admit I was tired and rest a while.'}</p>
+        <p>{vi ? 'Từ chỗ ngồi yên ấy, sự chú tâm theo mình ra bữa cơm, ra vườn, ra cách mình lắng nghe một người.' : 'From that quiet seat, attention followed me to the table, into the garden, and into the way I listen to another person.'}</p>
         <div id="journey" class="home-story__links">
           <a class="quiet-link" href={`${storyPath}#journey`}>{vi ? 'Đọc hành trình đầy đủ' : 'Read the full journey'} <Arrow /></a>
         </div>
@@ -76,50 +85,58 @@ import LivingZenValues from './LivingZenValues.astro';
       </div>
     </section>
 
+    <LivingZenValues {lang} />
+
     <EcosystemOverview {lang} />
 
     <HomeCourses {lang} />
 
-    <section class="shell material-practice" id="practice" aria-labelledby="practice-title">
-      <div class="material-practice__copy">
-        <h2 id="practice-title">{vi ? 'Bắt đầu ở chỗ bạn đang ngồi' : 'Start where you are sitting'}</h2>
-        <p>{vi ? 'Thử đặt hai bàn chân xuống sàn và để ý một hơi thở đang diễn ra. Khi nhận ra mình đã mải nghĩ, hãy quay lại với bàn chân hoặc hơi thở, nhẹ như khi đặt một chiếc chén xuống bàn.' : 'Set both feet on the floor and notice one breath as it comes and goes. When you realise you’ve been thinking, return to your feet or the breath as gently as setting a cup on the table.'}</p>
-        <a class="quiet-link" href={practicePath}>{vi ? 'Xem hướng dẫn thực hành' : 'Open the practice guide'} <Arrow /></a>
+    <section class="shell landing-practice" id="practice" aria-labelledby="practice-title">
+      <div class="landing-practice__photo" data-reveal="fade">
+        <AlbumImage id="prayer-hands-seashore" {lang} sizes="(min-width: 860px) 56vw, 92vw" />
+        <BreathRing {lang} />
       </div>
-      <figure class="home-practice-photo">
-        <img src={practicePhoto.src} width={practicePhoto.width} height={practicePhoto.height} alt={practicePhoto.alt[lang]} loading="lazy" decoding="async" />
-        <figcaption><a href={practicePhoto.source}>{vi ? 'Ảnh trên Pixabay' : 'Photo on Pixabay'}</a></figcaption>
-      </figure>
+      <div class="landing-practice__copy" data-reveal="up">
+        <p class="eyebrow">{vi ? 'Chỉ một phút' : 'Just one minute'}</p>
+        <h2 id="practice-title">{vi ? 'Bắt đầu ở chỗ bạn đang ngồi' : 'Start where you are sitting'}</h2>
+        <p>{vi ? 'Đặt hai bàn chân xuống sàn. Để ý một hơi thở đang đến, đang đi.' : 'Set both feet on the floor. Notice one breath as it comes and goes.'}</p>
+        <a class="button" href={practicePath}>{vi ? 'Mở hướng dẫn thực hành' : 'Open the practice guide'} <Arrow /></a>
+      </div>
     </section>
 
-    <section id="journal" class="shell material-block" aria-labelledby="journal-title">
-      <div class="section-heading">
-        <div><p class="eyebrow">{vi ? 'Đọc và học' : 'Read and learn'}</p><h2 id="journal-title">{homeCopy[lang].featuredTitle}</h2></div>
-        <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Tất cả bài viết' : 'All articles'} <Arrow /></a>
+    <section id="journal" class="shell landing-journal" aria-labelledby="journal-title">
+      <div class="landing-head" data-reveal="up">
+        <p class="eyebrow">{vi ? 'Đọc và học' : 'Read and learn'}</p>
+        <h2 id="journal-title">{homeCopy[lang].featuredTitle}</h2>
       </div>
       <div class="journal-grid home-journal-grid">{featuredArticles.map(article => <ArticleCard {article} {lang} />)}</div>
-      <p id="layers" class="material-inline-link"><a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{vi ? 'Tìm hiểu khung chiêm nghiệm bảy tầng' : 'Explore the seven-layer framework'} <Arrow /></a></p>
+      <p id="layers" class="landing-journal__more">
+        <a class="quiet-link" href={journalPath(lang)}>{vi ? 'Tất cả bài viết' : 'All articles'} <Arrow /></a>
+        <a class="quiet-link" href={articlePath(lang, 'seven-layers')}>{vi ? 'Khung chiêm nghiệm bảy tầng' : 'The seven-layer framework'} <Arrow /></a>
+      </p>
     </section>
+
     <HomeDiscovery {lang} />
 
-    <div class="shell">
-      <AlbumStrip {lang} id="journey-photos" photos={['studio-hug-six', 'veggie-sunset', 'beach-meditate-smile', 'plaque-lotus-leaf']}
+    <div class="shell landing-moments">
+      <AlbumStrip {lang} id="journey-photos" balanced photos={['studio-hug-six', 'veggie-sunset', 'park-arms-open', 'baby-conical-hat-smile']}
         title={vi ? 'Khoảnh khắc trên hành trình' : 'Moments along the way'}
-        intro={vi ? 'Hình ảnh thật từ các buổi chia sẻ, khu vườn, bãi biển và những góc nhỏ trên hành trình.' : 'Real photographs from sharing sessions, the garden, the beach and small corners along the way.'} />
+        intro={vi ? 'Hình thật từ các buổi chia sẻ, khu vườn và những góc nhỏ trên đường.' : 'Real photographs from sharing sessions, the garden and small corners along the way.'} />
     </div>
 
-    <section class="shell home-connection" id="people">
-      <ContemplativeScene motif="mandala" />
-      <div>
-        <h2>{vi ? 'Những người đi cùng nhau' : 'The people walking together'}</h2>
-        <p>{journeyPages.team[lang].description}</p>
-        <a class="quiet-link" href={teamPath}>{vi ? 'Gặp đội ngũ và đối tác' : 'Meet the team and our partners'} <Arrow /></a>
-      </div>
-      <div id="connect">
-        <p>{t.contactCopy}</p>
-        <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ' : 'Contact us'}</a>
+    <section class="shell landing-close" id="people" aria-labelledby="close-title">
+      <div class="landing-close__photo" data-reveal="fade"><AlbumImage id="stepping-stones-lawn" {lang} sizes="(min-width: 860px) 45vw, 92vw" /></div>
+      <div class="landing-close__card" data-reveal="up">
+        <span class="landing-icon landing-icon--gold landing-icon--large"><AnimatedIcon name="home" /></span>
+        <h2 id="close-title">{vi ? 'Khi bạn sẵn sàng, tụi mình ở đây' : 'When you are ready, we are here'}</h2>
+        <p>{vi ? 'Một câu hỏi, một lời chia sẻ hay chỉ một lời chào đều được. Nhóm Hương Thiền sẽ hồi âm khi có thể.' : 'A question, something you wish to share, or simply a hello. The Hương Thiền team will reply when we can.'}</p>
+        <div id="connect" class="landing-close__actions">
+          <a class="button" href={contactPath(lang)}>{vi ? 'Liên hệ' : 'Contact us'}</a>
+          <a class="quiet-link" href={teamPath}>{vi ? 'Gặp đội ngũ và đối tác' : 'Meet the team and our partners'} <Arrow /></a>
+        </div>
       </div>
     </section>
   </main>
   <Footer {lang} />
+  <LandingMotion />
 </BaseLayout>

@@ -4,6 +4,7 @@ import Header from './Header.astro';
 import Footer from './Footer.astro';
 import Breadcrumb from './Breadcrumb.astro';
 import ContactForm from './ContactForm.astro';
+import AlbumStrip from './AlbumStrip.astro';
 import { contactPath, contactEmail, hotline, internationalPhone, supportHotline, supportPhone, supportZaloUrl, zaloUrl } from '../data/contact-channels';
 import type { Language } from '../data/site';
 
@@ -51,6 +52,11 @@ const schema = {
         </address>
       </div>
       <div id="connect"><ContactForm {lang} standalone /></div>
+    </div>
+    <div class="shell">
+      <AlbumStrip {lang} id="contact-moments" balanced photos={['selfie-toddler-laugh', 'park-peace-sign-baby', 'elder-and-baby-carrier', 'baby-conical-hat-look-up']}
+        title={vi ? 'Một mái nhà để ghé' : 'A home to drop by'}
+        intro={vi ? 'Vài khoảnh khắc đời thường của tụi mình. Bạn cứ nhắn, tụi mình luôn vui lòng trả lời.' : 'A few everyday moments of ours. Just write; we are always glad to reply.'} />
     </div>
   </main>
   <Footer {lang} />

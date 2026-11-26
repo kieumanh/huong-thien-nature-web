@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.25.0',
+    date: '2026-11-26',
+    vi: ['Trang chủ và Hệ sinh thái: phong cách landing page', 'Hai trang được dựng lại thoáng hơn: ít chữ, nhiều ảnh thật, icon chuyển động nhẹ và vòng thở; thêm 17 ảnh mới vào album và đặt ảnh vào Liên hệ, Thực phẩm sạch, Quỹ ủng hộ.'],
+    en: ['Home and Ecosystem: landing-page style', 'Both pages are rebuilt to feel airy: fewer words, more real photographs, gently moving icons and a breathing ring; 17 new photos join the album and appear on Contact, Clean food and Support.'],
+  },
+  {
     version: '2.24.5',
     date: '2026-11-26',
     vi: ['Hệ sinh thái: bỏ phần lặp Thân – Tâm – Trí', 'Trang Hệ sinh thái chỉ kể ba trọng tâm một lần (kèm vòng "nuôi nhau"); icon chuyển động nằm trong thẻ ba trọng tâm; khối Living Zen chỉ còn các sợi đan và lời hứa.'],

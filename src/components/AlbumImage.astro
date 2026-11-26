@@ -1,0 +1,21 @@
+---
+// One album photograph as a plain <img> for the landing layouts. The photo, its sizes and its alt text come from src/data/album.ts.
+import { albumPhoto, albumPhotoSrc, albumThumbSrc } from '../data/album';
+import type { Language } from '../data/site';
+
+interface Props {
+  id: string;
+  lang: Language;
+  sizes?: string;
+  // Above-the-fold photo: loaded at once with high priority.
+  eager?: boolean;
+  class?: string;
+}
+const { id, lang, sizes = '(min-width: 900px) 40vw, 92vw', eager = false, class: extra } = Astro.props as Props;
+const photo = albumPhoto(id);
+const full = albumPhotoSrc(photo);
+const thumb = albumThumbSrc(photo);
+---
+<img class={extra} src={eager ? full : thumb} srcset={`${thumb} ${photo.thumbWidth}w, ${full} ${photo.width}w`} {sizes}
+  width={photo.width} height={photo.height} alt={photo.alt[lang]}
+  loading={eager ? 'eager' : 'lazy'} fetchpriority={eager ? 'high' : undefined} decoding="async" />

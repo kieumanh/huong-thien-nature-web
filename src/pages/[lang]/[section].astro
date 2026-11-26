@@ -14,6 +14,11 @@ import AlbumStrip from '../../components/AlbumStrip.astro';
 import BreathGuide from '../../components/BreathGuide.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
+import EcosystemHero from '../../components/EcosystemHero.astro';
+import LandingMotion from '../../components/LandingMotion.astro';
+import AlbumImage from '../../components/AlbumImage.astro';
+import AnimatedIcon, { type IconName } from '../../components/AnimatedIcon.astro';
+import '../../styles/landing.css';
 import { ecosystemVision } from '../../data/ecosystem-vision';
 import { articlePath, journalPath } from '../../data/articles';
 import { themeById, themePath } from '../../data/shop-themes';
@@ -44,6 +49,14 @@ const ecoLinks: Record<string, string> = {
   guidance: journeyPath(lang, 'guidance'), practice: journeyPath(lang, 'practice'), partnerships: '#partnerships',
   food: themePath(lang, themeById('thuc-pham-sach')!), stones: themePath(lang, themeById('da-nang-luong')!), journal: journalPath(lang),
 };
+// Photographs of the three focal points: [album id, object-position] for the main picture and the small round one.
+const focusPhotos: Record<string, { main: [string, string]; side: [string, string] }> = {
+  'phap-mon': { main: ['park-heart-hands', '50% 45%'], side: ['prayer-hands-seashore', '50% 40%'] },
+  'thien-nhien': { main: ['wooden-house', '50% 55%'], side: ['cabbage-rows-red-soil', '40% 60%'] },
+  'ho-tro': { main: ['tarot-decks', '50% 50%'], side: ['plaque-lotus-leaf', '50% 35%'] },
+};
+const partnerIcons: Record<string, IconName> = { 'Lê Lam Sơn': 'sprout', 'Nguyễn Trần Quyết': 'gem', ZenWork: 'wave' };
+const partnerTones: Record<string, string> = { 'Nguyễn Trần Quyết': 'landing-icon--gold', ZenWork: 'landing-icon--orchid' };
 import LivingZenValues from '../../components/LivingZenValues.astro';
 import PillarIcon from '../../components/PillarIcon.astro';
 ---
@@ -52,15 +65,15 @@ import PillarIcon from '../../components/PillarIcon.astro';
   pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
   aboutOrganization={page !== 'practice'}>
   <Header {lang} {alternatePath} />
-  <main id="main-content" class="shell journey-page" tabindex="-1">
-    <header class="journey-page-header">
+  <main id="main-content" class:list={['shell journey-page', { 'landing-eco': page === 'ecosystem' }]} tabindex="-1">
+    {page === 'ecosystem' ? <EcosystemHero {lang} title={info.heading} current={info.title} /> : <header class="journey-page-header">
       <ContemplativeScene motif="mandala" />
       <Breadcrumb {lang} current={info.title} />
       <div class="journey-page-lead">
         <h1>{info.heading}</h1>
         <p class="lead">{info.description}</p>
       </div>
-    </header>
+    </header>}
 
     {page === 'guidance' && <CourseCatalogue {lang} />}
 
@@ -68,7 +81,12 @@ import PillarIcon from '../../components/PillarIcon.astro';
 
     {page === 'album' && <AlbumGallery {lang} />}
 
-    {page === 'support' && <SupportFund {lang} />}
+    {page === 'support' && <>
+      <SupportFund {lang} />
+      <AlbumStrip {lang} id="support-moments" photos={['beach-dance', 'beach-selfie', 'painting-tree']}
+        title={vi ? 'Những điều nhỏ bé được nuôi lớn' : 'Small things, nourished to grow'}
+        intro={vi ? 'Sự đồng hành của bạn giúp những khoảnh khắc bình yên như thế này được lan tỏa.' : 'Your support helps peaceful moments like these reach more people.'} />
+    </>}
 
     {page === 'practice' && <>
       <nav class="practice-jump" aria-label={vi ? 'Đi nhanh tới mục' : 'Jump to a section'}>
@@ -114,15 +132,22 @@ import PillarIcon from '../../components/PillarIcon.astro';
 
     {page === 'ecosystem' && <>
       <section class="journey-section eco-intro" id="eco-intro" aria-labelledby="eco-focus-title">
-        <p class="lead eco-intro__lead">{vision.intro}</p>
-        <h2 id="eco-focus-title">{vision.focusTitle}</h2>
+        <div class="landing-head" data-reveal="up">
+          <span class="landing-icon landing-icon--gold landing-icon--large" aria-hidden="true"><AnimatedIcon name="sprout" /></span>
+          <h2 id="eco-focus-title">{vision.focusTitle}</h2>
+          <p class="lead eco-intro__lead">{vision.intro}</p>
+        </div>
         <ol class="eco-focus-list">
           {vision.focus.map((item, index) => <li class={`eco-focus zen-card eco-focus--${index + 1}`} id={item.id}>
-            <span class="eco-focus__number" aria-hidden="true"><PillarIcon name={focusIcons[item.id as keyof typeof focusIcons]} /></span>
-            <div>
+            <div class="eco-focus__media" data-reveal="fade">
+              <figure class="eco-focus__photo eco-focus__photo--main" style={`--pp:${focusPhotos[item.id].main[1]}`}><AlbumImage id={focusPhotos[item.id].main[0]} {lang} sizes="(min-width: 860px) 52vw, 92vw" /></figure>
+              <figure class="eco-focus__photo eco-focus__photo--side" style={`--pp:${focusPhotos[item.id].side[1]}`}><AlbumImage id={focusPhotos[item.id].side[0]} {lang} sizes="(min-width: 860px) 18vw, 32vw" /></figure>
+            </div>
+            <div class="eco-focus__body" data-reveal="up">
+              <span class="eco-focus__number" aria-hidden="true"><PillarIcon name={focusIcons[item.id as keyof typeof focusIcons]} /></span>
               <p class="eco-focus__tagline">{item.tagline}</p>
               <h3>{item.title}</h3>
-              <p>{item.text}</p>
+              <p class="eco-focus__text">{item.short}</p>
               <p class="eco-focus__links">{item.links.map(([key, label]) => <a class="quiet-link" href={ecoLinks[key]}>{label} <Arrow /></a>)}</p>
             </div>
           </li>)}
@@ -134,29 +159,29 @@ import PillarIcon from '../../components/PillarIcon.astro';
         <EcosystemIllustration {...vision.loop} variant="loop" />
       </section>
       <LivingZenValues {lang} variant="full" id="living-zen" />
-      <AlbumStrip {lang} id="garden-moments" photos={['veggie-bed-trellis', 'wooden-house', 'flowers-red-path', 'toddler-squat']}
+      <AlbumStrip {lang} id="garden-moments" balanced photos={['banana-grove-house', 'seedling-coconut-shell', 'flowers-red-path', 'veggie-sunset']}
         title={vi ? 'Từ khu vườn Gửi Yêu Thương Vào Đất' : 'From the Gửi Yêu Thương Vào Đất garden'}
-        intro={vi ? 'Hình ảnh thật từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn: luống rau, giàn tre, căn nhà gỗ và lối đất đỏ.' : 'Real photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn: vegetable beds, a bamboo trellis, a wooden house and a red-earth path.'} />
+        intro={vi ? 'Hình thật từ khu vườn của dự án hợp tác Farm Gửi Yêu Thương Vào Đất cùng anh Lê Lam Sơn.' : 'Real photographs from the garden of the Gửi Yêu Thương Vào Đất Farm collaboration with Lê Lam Sơn.'} />
       <section class="journey-section" id="partnerships" aria-labelledby="partnerships-title">
-        <h2 id="partnerships-title">{vision.partnersTitle}</h2>
-        <p>{vision.partnersIntro}</p>
+        <div class="landing-head" data-reveal="up">
+          <h2 id="partnerships-title">{vision.partnersTitle}</h2>
+        </div>
         <div class="partner-journey-grid">
-          {ecosystemPartnerJourney.map(({ partner, date, [lang]: entry }) => <article class="zen-card vision-card">
+          {ecosystemPartnerJourney.map(({ partner, date, [lang]: entry }) => <article class="zen-card vision-card eco-partner" data-reveal="fade">
+            <span class={`landing-icon ${partnerTones[partner.name] ?? ''}`} aria-hidden="true"><AnimatedIcon name={partnerIcons[partner.name] ?? 'leaf'} /></span>
             <p class="eyebrow">{date ? <time datetime={date}>{entry.milestone}</time> : entry.milestone}</p>
             <h3>{partner.name}</h3>
-            <div class="partner-card__project">
-              <span class="partner-card__label">{vi ? 'Dự án' : 'Project'}</span>
-              <p class="partner-card__name">{entry.affiliation}</p>
-            </div>
-            <p>{entry.description}</p>
+            <p class="partner-card__name">{entry.affiliation}</p>
             <p class="eco-supports">{(vision.supports as Record<string, string>)[partner.name]}</p>
             <a class="partner-card__site" href={partner.site}><span>{partner.label}</span><Arrow /></a>
           </article>)}
         </div>
+        <p class="eco-partners__more"><a class="quiet-link" href={`${journeyPath(lang, 'team')}#doi-tac`}>{vi ? 'Đọc về từng người đồng hành' : 'Read about each partner'} <Arrow /></a></p>
       </section>
       <section class="journey-section eco-closing" aria-labelledby="eco-closing-title">
-        <h2 id="eco-closing-title">{vision.closingTitle}</h2>
-        <p class="eco-closing__text">{vision.closing}</p>
+        <div class="eco-closing__photo" data-reveal="fade"><AlbumImage id="pink-gerbera" {lang} sizes="(min-width: 860px) 22rem, 80vw" /></div>
+        <h2 id="eco-closing-title" data-reveal="up">{vision.closingTitle}</h2>
+        <p class="eco-closing__text" data-reveal="up">{vision.closing}</p>
         <EcosystemIllustration {...vision.start} variant="roadmap" />
       </section>
       <section class="journey-section eco-cta zen-card" aria-labelledby="eco-cta-title">
@@ -186,4 +211,5 @@ import PillarIcon from '../../components/PillarIcon.astro';
     </>}
   </main>
   <Footer {lang} />
+  {page === 'ecosystem' && <LandingMotion />}
 </BaseLayout>
