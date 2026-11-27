@@ -164,6 +164,11 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   .js .nav-toggle, .nav-links .nav-contact-mobile { display: none; }
   .nav-connect { display: flex; gap: .35rem; }
 }
+/* Nine menu items plus the Contact button: a little tighter between 1280 and 1439px so the longer "Triết lý sống" label still fits (2.28.0). */
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .nav { gap: .8rem; }
+  .nav-links a, .nav-connect { padding-inline: .4rem; }
+}
 
 .reading-progress { position: fixed; inset: 0 0 auto; height: 3px; z-index: 100; pointer-events: none; }
 .reading-progress span { display: block; width: 100%; height: 100%; background: #b88c55; transform: scaleX(0); transform-origin: left; }

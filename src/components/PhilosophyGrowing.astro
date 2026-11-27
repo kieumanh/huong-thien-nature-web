@@ -1,0 +1,58 @@
+---
+// Section 10: a philosophy that keeps growing. The version, the real publication date, the last update, the change history
+// and the way to send thoughts. Figure: growth rings of a trunk (inner ring = this version, the outer ring slowly growing).
+import Arrow from './Arrow.astro';
+import { philosophyCopy, philosophyVersion } from '../data/philosophy';
+import { resolveTarget } from '../data/philosophy-links';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].growing;
+const labels = copy.labels;
+const contact = resolveTarget(lang, { to: 'contact' });
+const dateText = (iso: string) => new Date(`${iso}T00:00:00Z`).toLocaleDateString(lang === 'vi' ? 'vi-VN' : 'en-GB', lang === 'vi'
+  ? { day: '2-digit', month: '2-digit', year: 'numeric', timeZone: 'UTC' }
+  : { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+const history = philosophyCopy[lang].changelog;
+---
+<section class="ph-section ph-growing" id="ph-growing" aria-labelledby="ph-growing-title">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-growing-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+  </div>
+  <div class="ph-growing__grid">
+    <figure class="ph-figure ph-growing__figure" data-reveal="fade">
+      <svg class="ph-art ph-growing-art" viewBox="0 0 360 360" role="img" aria-label={copy.figure}>
+        <circle class="ph-g-ring ph-g-ring--future ph-g-ring--d" cx="180" cy="180" r="150" />
+        <circle class="ph-g-ring ph-g-ring--future ph-g-ring--c" cx="180" cy="180" r="118" />
+        <circle class="ph-g-ring ph-g-ring--growing" cx="180" cy="180" r="86" pathLength="100" />
+        <circle class="ph-g-ring ph-g-ring--solid" cx="180" cy="180" r="62" />
+        <circle class="ph-g-ring ph-g-ring--solid" cx="180" cy="180" r="48" />
+        <circle class="ph-g-core" cx="180" cy="180" r="36" />
+        <text class="ph-g-text" x="180" y="188" text-anchor="middle">v{philosophyVersion.number}</text>
+      </svg>
+    </figure>
+    <div class="ph-growing__info" data-reveal="up">
+      <dl class="ph-facts">
+        <div><dt>{labels.version}</dt><dd>Living Zen Philosophy {philosophyVersion.id}</dd></div>
+        <div><dt>{labels.published}</dt><dd><time datetime={philosophyVersion.published}>{dateText(philosophyVersion.published)}</time></dd></div>
+        <div><dt>{labels.updated}</dt><dd><time datetime={philosophyVersion.updated}>{dateText(philosophyVersion.updated)}</time></dd></div>
+        <div><dt>{labels.review}</dt><dd>{labels.reviewValue}</dd></div>
+      </dl>
+      <p class="ph-growing__independent">{copy.independent}</p>
+      <h3 id="ph-history-title">{labels.history}</h3>
+      <ol class="ph-history" aria-labelledby="ph-history-title" id="ph-history">
+        {history.map(entry => <li>
+          <p class="ph-history__head"><strong>v{entry.version}</strong> · <time datetime={entry.date}>{dateText(entry.date)}</time></p>
+          <p><strong>{labels.change}:</strong> {entry.change}</p>
+          <p><strong>{labels.reason}:</strong> {entry.reason}</p>
+          <p><strong>{labels.impact}:</strong> {entry.impact}</p>
+        </li>)}
+      </ol>
+      <h3>{copy.feedbackTitle}</h3>
+      <p>{copy.feedback} <a class="quiet-link" href={contact.href}>{copy.feedbackLink} <Arrow /></a></p>
+    </div>
+  </div>
+</section>

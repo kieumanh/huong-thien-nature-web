@@ -1,0 +1,29 @@
+---
+// Section 03: the manifesto, set as an editorial page (space, rhythm, one real photograph) rather than a boxed text.
+import AlbumImage from './AlbumImage.astro';
+import { philosophyCopy, philosophyTagline } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].manifesto;
+const tagline = philosophyTagline[lang];
+---
+<section class="ph-section ph-manifesto" id="ph-manifesto" aria-labelledby="ph-manifesto-title">
+  <div class="ph-manifesto__grid">
+    <div class="ph-manifesto__photo" data-reveal="fade">
+      <div class="ph-arch"><AlbumImage id="pink-lotus" {lang} sizes="(min-width: 860px) 24rem, 80vw" /></div>
+    </div>
+    <div class="ph-manifesto__text">
+      <p class="eyebrow" data-reveal="up">{copy.eyebrow}</p>
+      <h2 id="ph-manifesto-title" data-reveal="up">{copy.title}</h2>
+      {copy.intro.map(paragraph => <p class="ph-prose" data-reveal="up">{paragraph}</p>)}
+      <ul class="ph-refusals" data-reveal="up">{copy.refusals.map(line => <li>{line}</li>)}</ul>
+      {copy.outro.map(paragraph => <p class="ph-prose" data-reveal="up">{paragraph}</p>)}
+      <p class="ph-seal" data-reveal="up">
+        <span class="ph-seal__line">{tagline.map(word => <span>{word}</span>)}</span>
+        <strong>{copy.seal}</strong>
+      </p>
+    </div>
+  </div>
+</section>

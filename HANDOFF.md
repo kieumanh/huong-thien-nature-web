@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-27, phiên bản 2.27.1 (Hệ sinh thái: "Vì sao là hệ sinh thái" viết lại theo vườn rừng đa tầng, hình động vẽ lại). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-27, phiên bản 2.28.0 (trang "Triết lý sống" / Living Zen Philosophy v1.0; Album chuyển xuống footer Khám phá). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 27/11 | 2.28.0: trang "Triết lý sống" (`/vi/triet-ly/`, `/en/philosophy/`; dữ liệu `src/data/philosophy.ts`, 10 thành phần `Philosophy*.astro` + `LivingZenModel.astro`, `src/styles/philosophy.css`, `src/scripts/philosophy-model.ts`); khối `PhilosophyPointer.astro` ở Trang chủ, dòng nối ở Câu chuyện, bản ghi tìm kiếm cho trang và 10 giá trị; Album bỏ khỏi menu, vào footer Khám phá trên "Phiên bản"; thu nhẹ khoảng cách menu 1280–1439px; `docs/living-zen-index.md`; `tests/philosophy.test.ts` |
 | 27/11 | 2.27.1: viết lại "Vì sao là hệ sinh thái" theo khái niệm đồng nhất vs hệ sinh thái (vườn rừng đa tầng, không nhắc Linux) và vẽ lại hình động (`EcosystemWhy.astro`, `ecosystem-why.ts`) |
 | 27/11 | 2.27.0: phần "Vì sao là hệ sinh thái" (so sánh Linux, hình động) trên trang Hệ sinh thái: `EcosystemWhy.astro`, `ecosystem-why.ts`, neo `#why-ecosystem` |
 | 27/11 | 2.26.6: phần kết Hệ sinh thái dùng ảnh album `beach-palms` (4:3) (`[section].astro`) |

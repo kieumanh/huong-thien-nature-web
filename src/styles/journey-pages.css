@@ -97,6 +97,8 @@
 .partner-logo--tile { padding: .35rem; border-radius: 1rem; background: #eef3e6; box-shadow: 0 0 0 2px var(--brand-fern), 0 4px 14px rgb(0 0 0 / .22); }
 .team-contact { display: flex; justify-content: center; margin-top: clamp(1.4rem, 4vw, 2.2rem); }
 /* "Meet the team" call to action closing the story page: a real button, centred, full width on a phone. */
+.story-philosophy-note { max-width: 44rem; margin: clamp(1.6rem, 5vw, 2.4rem) auto 0; color: var(--muted); line-height: 1.8; text-align: center; font-family: var(--serif); font-size: 1.08rem; }
+.story-philosophy-note .quiet-link { display: inline-flex; margin-left: .3rem; font-family: inherit; }
 .story-team-cta { display: flex; justify-content: center; margin: clamp(1.6rem, 5vw, 2.6rem) 0 0; }
 .story-team-cta .button { min-height: 52px; padding-inline: 1.5rem; text-align: center; box-shadow: 0 6px 16px #1f1a1218; }
 .story-team-cta .button:is(:hover, :focus-visible) { transform: translateY(-1px); }

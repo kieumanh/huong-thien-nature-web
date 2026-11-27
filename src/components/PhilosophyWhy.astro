@@ -1,0 +1,55 @@
+---
+// Section 02: why Living Zen exists. A calm list of what is hard to hold on to today (no fear), one animated figure
+// (scattered dots slowly settling into a quiet line beside a breathing glow) and what Living Zen is and is not.
+import AnimatedIcon from './AnimatedIcon.astro';
+import { philosophyCopy } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].why;
+
+// Dots start scattered (more on the left) and settle onto one line; the offsets are fixed so the page renders the same every time.
+const dots = Array.from({ length: 21 }, (_, i) => {
+  const amp = 74 * Math.pow(1 - i / 20, 1.5);
+  return {
+    x: 60 + i * 42,
+    r: (5.4 - i * 0.07).toFixed(1),
+    nx: (Math.cos(i * 1.9 + 0.6) * amp * 0.55).toFixed(1),
+    ny: (Math.sin(i * 2.7 + 1.1) * amp).toFixed(1),
+    delay: `${(i * 0.14).toFixed(2)}s`,
+  };
+});
+---
+<section class="ph-section ph-why" id="ph-why" aria-labelledby="ph-why-title">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-why-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+  </div>
+  <figure class="ph-figure ph-why__figure" data-reveal="fade">
+    <svg class="ph-art ph-why-art" viewBox="0 0 960 220" role="img" aria-label={copy.figure} preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <radialGradient id="ph-w-glow"><stop offset="0" style="stop-color:var(--ph-glow);stop-opacity:.8" /><stop offset="1" style="stop-color:var(--ph-glow);stop-opacity:0" /></radialGradient>
+      </defs>
+      <path class="ph-w-line" d="M410 110C520 106 640 114 790 110" />
+      <path class="ph-w-line ph-w-line--faint" d="M470 132C580 128 680 136 790 132M520 88C600 86 700 92 790 88" />
+      <g>{dots.map(dot => <circle class="ph-w-dot" cx={dot.x} cy="110" r={dot.r} style={`--nx:${dot.nx}px;--ny:${dot.ny}px;animation-delay:${dot.delay}`} />)}</g>
+      <circle class="ph-w-halo" cx="858" cy="110" r="74" fill="url(#ph-w-glow)" />
+      <circle class="ph-w-core" cx="858" cy="110" r="17" />
+    </svg>
+  </figure>
+  <ul class="ph-why__list">
+    {copy.items.map((item, index) => <li data-reveal="up">
+      <span class={`landing-icon ${index % 3 === 1 ? 'landing-icon--gold' : ''}`} aria-hidden="true"><AnimatedIcon name={item.icon as any} /></span>
+      <h3>{item.title}</h3>
+      <p>{item.text}</p>
+    </li>)}
+  </ul>
+  <p class="landing-lead-serif ph-why__closing" data-reveal="up">{copy.closing}</p>
+  <div class="ph-nature" data-reveal="up">
+    <h3>{copy.natureTitle}</h3>
+    <p>{copy.nature}</p>
+    <p class="ph-nature__place">{copy.place}</p>
+  </div>
+</section>

@@ -1,0 +1,50 @@
+---
+// Small pointer on the Home page to the Living Zen philosophy page: one short paragraph, the three tiers as quiet chips and one link.
+// It deliberately does not list the ten values; those live on the philosophy page.
+import Arrow from './Arrow.astro';
+import { philosophyCopy, philosophyTiers } from '../data/philosophy';
+import { journeyPath } from '../data/journey-pages';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].home;
+---
+<section class="shell ph-pointer" id="living-zen-philosophy" aria-labelledby="ph-pointer-title">
+  <svg class="ph-pointer__art" viewBox="0 0 120 120" aria-hidden="true" focusable="false">
+    <circle class="ph-pointer__ring ph-pointer__ring--3" cx="60" cy="60" r="54" />
+    <circle class="ph-pointer__ring ph-pointer__ring--2" cx="60" cy="60" r="38" />
+    <circle class="ph-pointer__ring ph-pointer__ring--1" cx="60" cy="60" r="23" />
+    <circle class="ph-pointer__core" cx="60" cy="60" r="10" />
+  </svg>
+  <div class="ph-pointer__copy" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-pointer-title">{copy.title}</h2>
+    <p>{copy.text}</p>
+    <ul class="ph-pointer__tiers" role="list">{philosophyTiers.map(tier => <li>{tier.name[lang]}</li>)}</ul>
+    <a class="quiet-link" href={journeyPath(lang, 'philosophy')}>{copy.link} <Arrow /></a>
+  </div>
+</section>
+
+<style>
+  .ph-pointer { display: grid; grid-template-columns: minmax(0, 1fr); justify-items: center; gap: 1.4rem; align-items: center; padding-block: clamp(2rem, 6vw, 4rem); }
+  .ph-pointer__art { width: clamp(6.5rem, 22vw, 9rem); height: auto; overflow: visible; }
+  .ph-pointer__ring { fill: none; stroke: var(--gold-line, #d9c48f); stroke-width: 1.4; }
+  .ph-pointer__ring--1 { fill: color-mix(in srgb, var(--primary) 10%, transparent); stroke: color-mix(in srgb, var(--primary) 55%, transparent); }
+  .ph-pointer__ring--2 { stroke: color-mix(in srgb, var(--primary) 38%, transparent); }
+  .ph-pointer__ring--3 { stroke: color-mix(in srgb, var(--primary) 24%, transparent); stroke-dasharray: 2 5; }
+  .ph-pointer__core { fill: var(--gold-accent, #c8923a); transform-box: fill-box; transform-origin: center; animation: ph-pointer-breathe 6s ease-in-out infinite; }
+  .ph-pointer__copy { display: grid; gap: .7rem; justify-items: center; max-width: 40rem; text-align: center; }
+  .ph-pointer__copy h2 { margin: 0; font-size: clamp(1.7rem, 4vw, 2.5rem); line-height: 1.15; }
+  .ph-pointer__copy p { margin: 0; }
+  .ph-pointer__copy > p:not(.eyebrow) { color: var(--muted); line-height: 1.75; }
+  .ph-pointer__tiers { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem; margin: .3rem 0 .2rem; padding: 0; list-style: none; }
+  .ph-pointer__tiers li { padding: .3rem .85rem; border: 1px solid var(--border); border-radius: 999px; color: var(--primary); font-size: .9rem; }
+  @media (min-width: 800px) {
+    .ph-pointer { grid-template-columns: auto minmax(0, 1fr); gap: clamp(2rem, 5vw, 4rem); justify-items: start; }
+    .ph-pointer__copy { justify-items: start; text-align: left; }
+    .ph-pointer__tiers { justify-content: flex-start; }
+  }
+  @keyframes ph-pointer-breathe { 0%, 100% { transform: scale(1); opacity: .92; } 50% { transform: scale(1.28); opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .ph-pointer__core { animation: none; } }
+</style>

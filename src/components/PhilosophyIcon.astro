@@ -1,0 +1,23 @@
+---
+// The ten Living Zen value icons: one family (48 x 48, 2px rounded line, natural geometry, readable in a single colour).
+// The part drawn in `.ph-ic-accent` takes the accent colour but stays legible without it.
+import type { PhilosophyIconName } from '../data/philosophy';
+
+interface Props { name: PhilosophyIconName; class?: string }
+const { name, class: extra } = Astro.props as Props;
+
+const petals = [0, 60, 120, 180, 240, 300].map(angle => `<ellipse cx="24" cy="11.5" rx="3.6" ry="6.2" transform="rotate(${angle} 24 24)"/>`).join('');
+const icons: Record<PhilosophyIconName, string> = {
+  'open-wisdom': '<path d="M24 38C19 34.5 12.5 34 6 36.5V21.5C12.5 19 19 19.5 24 23C29 19.5 35.5 19 42 21.5V36.5C35.5 34 29 34.5 24 38Z"/><path d="M24 23V38"/><g class="ph-ic-accent"><path d="M24 23V12"/><path d="M24 17.5C20 17.5 17.5 15 17.5 11.5C21.5 11.5 24 14 24 17.5Z"/><path d="M24 14.5C24 11 26.5 8.5 30.5 8.5C30.5 12 28 14.5 24 14.5Z"/></g>',
+  'inner-sovereignty': '<path d="M24 5L38 10.5V23C38 32.5 32 39.5 24 43C16 39.5 10 32.5 10 23V10.5L24 5Z"/><g class="ph-ic-accent"><path d="M24 34V24"/><path d="M24 27.5C20 27.5 18 25 18 22C21.5 22 24 24 24 27.5Z"/><path d="M24 24.5C24 21 26 19 30 19C30 22.5 27.5 24.5 24 24.5Z"/></g>',
+  'regenerative-living': '<path d="M24 6A18 18 0 0 1 42 24"/><path d="M42 24l-3-3.2M42 24l3-3.2"/><path d="M24 42A18 18 0 0 1 6 24"/><path d="M6 24l-3 3.2M6 24l3 3.2"/><g class="ph-ic-accent"><path d="M24 29V17"/><path d="M24 21C20.5 21 18.5 19 18.5 16C21.5 16 24 18 24 21Z"/><path d="M24 18.5C24 15.5 26 13.5 29.5 13.5C29.5 16.5 27.5 18.5 24 18.5Z"/></g><path d="M24 29C24 32 22 33.5 19.5 34.5M24 29C24 32 26 33.5 28.5 34.5M24 29V35"/>',
+  'interconnected-living': '<circle cx="24" cy="17.5" r="9.5"/><circle cx="17" cy="29.5" r="9.5"/><circle cx="31" cy="29.5" r="9.5"/><circle class="ph-ic-accent ph-ic-solid" cx="24" cy="25.5" r="1.9"/>',
+  'conscious-economy': '<path d="M7 27C7 35 14 41 24 41C34 41 41 35 41 27"/><path d="M7 27C9 25 11.5 25.2 12.5 27.5M41 27C39 25 36.5 25.2 35.5 27.5"/><g class="ph-ic-accent"><path d="M24 34V19"/><path d="M24 24.5C19.5 24.5 17 22 17 18.5C21 18.5 24 21 24 24.5Z"/><path d="M24 21C24 17 26.5 14.5 31 14.5C31 18.5 28 21 24 21Z"/></g>',
+  'collective-wisdom': `${petals}<circle class="ph-ic-accent ph-ic-solid" cx="24" cy="24" r="3"/>`,
+  'mindful-innovation': '<path d="M24 11C28.5 16 28.5 25 24 31C19.5 25 19.5 16 24 11Z"/><path d="M24 31C15.5 31 9.5 26.5 9 19C16.5 19.5 22 24 24 31Z"/><path d="M24 31C32.5 31 38.5 26.5 39 19C31.5 19.5 26 24 24 31Z"/><g class="ph-ic-accent"><path d="M24 31V40M11 40H37"/><circle cx="11" cy="40" r="1.8"/><circle cx="37" cy="40" r="1.8"/><circle cx="24" cy="40" r="1.8"/></g>',
+  'compassionate-service': '<path class="ph-ic-accent" d="M24 28C14.5 21.5 14.5 11 21 11C23 11 24 12.5 24 14C24 12.5 25 11 27 11C33.5 11 33.5 21.5 24 28Z"/><path d="M6 34C12 40 20 40 24 33.5"/><path d="M42 34C36 40 28 40 24 33.5"/>',
+  'embodied-wisdom': '<path d="M20 17C20 13 24 12 27 13.5C30 15 30.5 19 29 22C28 25 28.5 28 28 31C27.5 35 25 37 22.5 37C20 37 18.5 34.5 19 31C19.5 27 20 25 20 22Z"/><circle cx="31" cy="12" r="1.7"/><circle cx="27.2" cy="9.4" r="1.5"/><circle cx="23.6" cy="9.4" r="1.4"/><circle cx="20.4" cy="11.4" r="1.3"/><path d="M10 42H38"/><g class="ph-ic-accent"><path d="M37 42V36"/><path d="M37 39C35 39 33.5 37.5 33.5 35.5C35.5 35.5 37 37 37 39Z"/></g>',
+  'freedom-from-attachment': '<path d="M6 12C11 11 16 12.5 20 12"/><g class="ph-ic-accent"><path d="M33 7C42 9.5 44 18 38.5 24.5C31 23.5 27.5 14.5 33 7Z"/><path d="M33 7C34 13 36 19 38.5 24.5"/></g><path d="M7 29H23C28 29 28 23.5 23.5 23.5"/><path d="M12 36H32C37 36 37 31 32.5 31"/>',
+};
+---
+<svg class:list={['ph-icon', extra]} viewBox="0 0 48 48" width="48" height="48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false" set:html={icons[name]} />

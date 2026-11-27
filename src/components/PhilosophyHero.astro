@@ -1,0 +1,66 @@
+---
+// Opening of the Living Zen philosophy page: the title, the tagline, one calm paragraph and a small animated landscape
+// (a young tree beside still water at dawn). No sales call to action here. The animation is CSS only and is off under reduced motion.
+import Breadcrumb from './Breadcrumb.astro';
+import { philosophyCopy, philosophyTagline } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language; current: string }
+const { lang, current } = Astro.props as Props;
+const copy = philosophyCopy[lang].hero;
+const tagline = philosophyTagline[lang];
+const leaves = [
+  { x: 128, y: 252, delay: '0s', dur: '12s', dx: '34px', rot: '160deg' },
+  { x: 176, y: 238, delay: '3.2s', dur: '14s', dx: '-30px', rot: '-140deg' },
+  { x: 150, y: 270, delay: '6.1s', dur: '13s', dx: '26px', rot: '120deg' },
+  { x: 108, y: 276, delay: '8.4s', dur: '15s', dx: '-22px', rot: '-110deg' },
+  { x: 190, y: 266, delay: '10.3s', dur: '12.5s', dx: '38px', rot: '170deg' },
+];
+const motes = [[300, 96, '0s'], [64, 140, '1.3s'], [236, 60, '2.1s'], [336, 244, '3.4s'], [92, 214, '4.2s'], [210, 150, '5.5s'], [356, 150, '6.3s']];
+---
+<header class="ph-hero-wrap">
+  <Breadcrumb {lang} {current} />
+  <div class="landing-hero ph-hero">
+    <div class="landing-hero__copy ph-hero__copy">
+      <p class="eyebrow">{copy.eyebrow}</p>
+      <h1>{copy.title}</h1>
+      <p class="ph-hero__sub"><span lang="vi">{copy.name}</span><span class="ph-hero__dot" aria-hidden="true"> · </span><span lang="en">{copy.subtitle}</span></p>
+      <p class="ph-hero__tagline">{tagline.map(word => <span>{word}</span>)}</p>
+      <p class="lead">{copy.lead}</p>
+      <p class="ph-hero__note">{copy.note}</p>
+      <p class="ph-hero__scroll"><a class="quiet-link" href="#ph-why">{copy.scroll} <span aria-hidden="true">↓</span></a></p>
+    </div>
+    <div class="landing-hero__art ph-hero__art">
+      <svg class="ph-art ph-hero-art" viewBox="0 0 400 500" role="img" aria-label={copy.figure} preserveAspectRatio="xMidYMid slice">
+        <defs>
+          <linearGradient id="ph-h-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ph-sky-a)" /><stop offset="1" style="stop-color:var(--ph-sky-b)" /></linearGradient>
+          <radialGradient id="ph-h-glow"><stop offset="0" style="stop-color:var(--ph-glow);stop-opacity:.85" /><stop offset="1" style="stop-color:var(--ph-glow);stop-opacity:0" /></radialGradient>
+          <linearGradient id="ph-h-water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ph-water-a)" /><stop offset="1" style="stop-color:var(--ph-water-b)" /></linearGradient>
+        </defs>
+        <rect width="400" height="500" fill="url(#ph-h-sky)" />
+        <circle class="ph-h-halo" cx="268" cy="186" r="92" fill="url(#ph-h-glow)" />
+        <circle class="ph-h-sun" cx="268" cy="186" r="25" />
+        <g class="ph-h-motes">{motes.map(([x, y, delay]) => <circle cx={x} cy={y} r="1.7" style={`animation-delay:${delay}`} />)}</g>
+        <path class="ph-h-hill-far" d="M0 322C58 296 118 304 178 322C238 340 318 292 400 312V470H0Z" />
+        <path class="ph-h-hill-near" d="M0 346C74 322 170 334 236 356C300 376 352 350 400 336V470H0Z" />
+        <rect class="ph-h-water" y="366" width="400" height="134" fill="url(#ph-h-water)" />
+        <g class="ph-h-shine"><ellipse cx="268" cy="388" rx="34" ry="2.4" /><ellipse cx="268" cy="402" rx="22" ry="2" /><ellipse cx="268" cy="418" rx="12" ry="1.8" /></g>
+        <g class="ph-h-ripples"><ellipse cx="150" cy="380" rx="24" ry="5" /><ellipse cx="150" cy="380" rx="24" ry="5" /><ellipse cx="150" cy="380" rx="24" ry="5" /></g>
+        <path class="ph-h-land" d="M0 360C70 346 150 350 222 374C174 396 74 404 0 400Z" />
+        <g class="ph-h-tree">
+          <path class="ph-h-trunk" d="M148 376C148 344 143 322 150 292C152 282 156 276 157 270" />
+          <path class="ph-h-trunk ph-h-trunk--thin" d="M149 322C139 312 132 304 128 292M150 306C160 296 168 290 174 278" />
+          <g class="ph-h-crown">
+            <circle class="ph-h-leaf-1" cx="152" cy="246" r="36" />
+            <circle class="ph-h-leaf-2" cx="122" cy="264" r="25" />
+            <circle class="ph-h-leaf-2" cx="182" cy="262" r="26" />
+            <circle class="ph-h-leaf-3" cx="138" cy="224" r="22" />
+            <circle class="ph-h-leaf-3" cx="168" cy="220" r="21" />
+            <circle class="ph-h-leaf-1" cx="152" cy="272" r="20" />
+          </g>
+        </g>
+        {leaves.map(leaf => <g transform={`translate(${leaf.x} ${leaf.y})`}><path class="ph-h-fall" d="M0 0C4 -5 10 -3 12 3C6 6 1 5 0 0Z" style={`--dx:${leaf.dx};--rot:${leaf.rot};animation-delay:${leaf.delay};animation-duration:${leaf.dur}`} /></g>)}
+      </svg>
+    </div>
+  </div>
+</header>
