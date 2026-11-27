@@ -1,3 +1,11 @@
+## 2.27.1 — "Vì sao là hệ sinh thái": viết lại theo khái niệm vườn rừng đa tầng, vẽ lại hình động
+
+- **Viết lại nội dung** (`src/data/ecosystem-why.ts`): Linux chỉ là cách chủ dự án chỉ ra sự tương tự, nên không còn nhắc đến Linux trên trang. Phần chữ dựa trên chính khái niệm: mô hình đồng nhất (một hệ thống thống nhất, dễ quản lý tập trung nhưng ít đa dạng) so với mô hình hệ sinh thái (nhiều tầng, nhiều thành phần, tương tác và phát triển dựa trên nền tảng chung), như vườn rừng đa tầng đang học hỏi tại Farm Lê Lam Sơn. Hai câu mô tả dùng nguyên văn của chủ dự án.
+- Ba lý do Hương Thiền Nature chọn hướng hệ sinh thái: chung một nền (sống tỉnh thức, lành mạnh và phụng sự), nhiều lối để thích nghi, lan tỏa như hạt giống. Dòng cuối nói rằng đa dạng vẫn cần chăm sóc và quản trị để các tầng không lấn nhau.
+- **Vẽ lại hình minh họa** (`EcosystemWhy.astro`, SVG nội tuyến + CSS keyframes, không SMIL), khung 4:3 mỗi bên. Bên trái, mô hình đồng nhất: ba cây giống hệt nhau cùng một tầm cao (có vạch nét đứt), rễ không nối, hạt rơi chỉ nằm lại dưới gốc, màu nhạt và lặng. Bên phải, vườn rừng đa tầng: tán cao, tán giữa, tầng thấp, cây chuối, mầm non; ánh nắng len qua từng tầng; mạng sợi vàng nối rễ với ánh sáng chạy dọc; hạt giống bay từ tán cây xuống mọc thành mầm mới ở xa; bướm và bụi sáng bay nhẹ. Ban đêm hiện trăng và sao.
+- Giảm chuyển động: hình đứng yên, mầm đã lớn, không có hạt bay, ánh sáng chạy hay bướm.
+- Ngân sách chữ trang Hệ sinh thái giữ ở mức 2.27.0 (vi 980, en 820); bài kiểm tra mới yêu cầu hai nhãn mô hình, cụm "vườn rừng" và không có chữ Linux.
+
 ## 2.27.0 — Trang Hệ sinh thái: vì sao là hệ sinh thái (so sánh với Linux), kèm hình động
 
 - **Phần mới "Vì sao là hệ sinh thái"** (`#why-ecosystem`) đặt trên trang Hệ sinh thái, ngay sau vòng lặp "eco-loop" và trước khối Living Zen. Chọn trang Hệ sinh thái thay vì Trang chủ vì đây là nơi giải thích ý nghĩa; Trang chủ đã dày và có ngân sách chữ chặt. Nội dung mượn hình ảnh Linux mã nguồn mở (nhiều cộng đồng cùng xây trên một nền chung) để giải thích vì sao Hương Thiền Nature lan tỏa theo kiểu hệ sinh thái chứ không theo kiểu một cây đơn lẻ.

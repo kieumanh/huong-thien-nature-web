@@ -1,6 +1,9 @@
 ---
-// "Vì sao là hệ sinh thái": Linux-style comparison between one lone tree and a layered garden with shared roots.
-// Words come from src/data/ecosystem-why.ts; the picture is inline SVG moved only by CSS (off when motion is reduced).
+// "Vì sao là hệ sinh thái": the owner's comparison, drawn. Left, the uniform model (identical trees at one height,
+// roots that never meet). Right, the ecosystem model, a layered forest garden (tiers of different species, sunlight
+// reaching every layer, roots joined by a golden network, seeds that travel and sprout somewhere new).
+// Words come from src/data/ecosystem-why.ts; the pictures are inline SVG moved only by CSS keyframes (no SMIL),
+// and they rest as a finished still picture when motion is reduced.
 import AnimatedIcon from './AnimatedIcon.astro';
 import { ecosystemWhy } from '../data/ecosystem-why';
 import type { Language } from '../data/site';
@@ -9,15 +12,28 @@ interface Props { lang: Language }
 const { lang } = Astro.props as Props;
 const copy = ecosystemWhy[lang];
 
-// Nutrient pulses along the shared roots (pathLength 100 so one dash length works for every path).
+// Roots of the four plants of the garden (each one is a thin line under the soil).
 const roots = [
-  { d: 'M172 196 C172 224 140 238 112 246', delay: 0 },
-  { d: 'M172 196 C172 226 212 240 254 246', delay: 0 },
-  { d: 'M100 196 C100 222 104 236 112 246', delay: 1.1 },
-  { d: 'M256 196 C256 220 256 234 254 246', delay: 1.3 },
-  { d: 'M254 246 C288 254 322 244 332 220 L332 196', delay: 1.8 },
-  { d: 'M112 246 C80 250 56 238 46 218 L46 196', delay: 1.8 },
+  'M190 258 C190 288 186 308 178 326', 'M190 266 C174 278 156 286 140 300', 'M190 266 C208 278 224 284 240 296',
+  'M312 258 C312 284 316 304 322 322', 'M312 266 C298 278 284 284 268 294', 'M312 266 C328 276 344 282 360 292',
+  'M252 258 C252 278 250 294 246 306',
+  'M108 258 C108 282 104 300 96 318', 'M108 266 C92 278 76 286 62 298', 'M108 266 C124 276 140 284 150 296',
 ];
+// The golden network that joins the roots. `delay` staggers the travelling light so it reads left to right.
+const network = [
+  { d: 'M62 298 C100 324 140 324 178 326', delay: 0 },
+  { d: 'M150 296 C176 312 214 312 240 296', delay: 0.6 },
+  { d: 'M178 326 C210 338 240 330 246 306', delay: 1.2 },
+  { d: 'M246 306 C264 324 300 328 322 322', delay: 1.8 },
+  { d: 'M268 294 C262 300 256 304 246 306', delay: 2.1 },
+  { d: 'M322 322 C350 332 372 316 360 292', delay: 2.6 },
+  { d: 'M360 292 C392 308 410 294 406 262', delay: 3.4 },
+  { d: 'M62 298 C48 290 44 276 48 262', delay: 1.4 },
+];
+const nodes = [[62, 298], [150, 296], [178, 326], [240, 296], [246, 306], [322, 322], [360, 292]];
+const motes = [[118, 178, 0], [224, 150, 2.4], [290, 116, 4.6], [352, 190, 1.2], [184, 214, 6.2], [420, 150, 3.4]];
+const stars = [[40, 40], [92, 78], [150, 30], [262, 24], [330, 50]];
+const pebbles = [[60, 322, 3], [124, 332, 2.4], [206, 330, 3.2], [286, 336, 2.4], [352, 330, 3], [420, 318, 2.6], [96, 286, 2.2], [398, 282, 2.4]];
 ---
 <section class="journey-section eco-why" id="why-ecosystem" aria-labelledby="eco-why-title">
   <div class="landing-head" data-reveal="up">
@@ -28,59 +44,129 @@ const roots = [
 
   <figure class="eco-why__figure" data-eco-why-figure data-reveal="fade" role="group" aria-label={copy.figureLabel}>
     <div class="eco-why__panel eco-why__panel--single">
-      <svg viewBox="0 0 400 280" aria-hidden="true" focusable="false">
-        <rect class="ew-soil" x="16" y="196" width="368" height="68" rx="18" />
-        <g class="ew-roots ew-roots--solo">
-          <path d="M200 196 C200 222 188 236 176 250" />
-          <path d="M200 196 C200 222 212 236 224 250" />
-          <path d="M200 198 C200 218 200 232 200 244" />
+      <svg viewBox="0 0 480 360" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="ew-sky-u" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ew-usky-a)" /><stop offset="1" style="stop-color:var(--ew-usky-b)" /></linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="url(#ew-sky-u)" />
+        <circle class="ew-sun ew-sun--flat" cx="404" cy="62" r="24" />
+        <path class="ew-hill-u" d="M0 236 C90 220 170 226 250 232 C340 238 410 226 480 230 L480 256 L0 256Z" />
+        <rect class="ew-soil-u" x="24" y="252" width="432" height="88" rx="22" />
+        <rect class="ew-grass-u" x="30" y="250" width="420" height="8" rx="4" />
+        <g class="ew-soil-lines"><path d="M44 284 H436" /><path d="M44 304 H436" /><path d="M44 324 H436" /></g>
+        <path class="ew-level" d="M36 76 H444" />
+        <g class="ew-rows">
+          {[120, 240, 360].map(x => <g class="ew-row">
+            <path class="ew-root-u" d={`M${x} 258 V292`} />
+            <g class="ew-tree ew-tree--u">
+              <rect class="ew-trunk-u" x={x - 6} y="132" width="12" height="124" rx="5" />
+              {[-40, -20, 0, 20, 40].map(dx => <circle class="ew-u-deep" cx={x + dx} cy="120" r="22" />)}
+              {[-24, 0, 24].map(dx => <circle class="ew-u-soft" cx={x + dx} cy="100" r="24" />)}
+            </g>
+          </g>)}
         </g>
-        <g class="ew-tree ew-tree--solo">
-          <rect class="ew-trunk" x="192" y="104" width="16" height="94" rx="6" />
-          <ellipse class="ew-leaf ew-leaf--deep" cx="200" cy="84" rx="68" ry="58" />
-          <ellipse class="ew-leaf ew-leaf--mid" cx="176" cy="74" rx="30" ry="26" />
-        </g>
-        <ellipse class="ew-seed ew-seed--solo" cx="266" cy="100" rx="6.5" ry="4.3" />
+        <ellipse class="ew-seed ew-seed--u" cx="258" cy="106" rx="6.5" ry="4.3" />
       </svg>
       <h3>{copy.single.title}</h3>
       <p>{copy.single.text}</p>
     </div>
 
     <div class="eco-why__panel eco-why__panel--eco">
-      <svg viewBox="0 0 400 280" aria-hidden="true" focusable="false">
-        <rect class="ew-soil" x="16" y="196" width="368" height="68" rx="18" />
-        <g class="ew-roots">
-          {roots.map(({ d }) => <path d={d} />)}
+      <svg viewBox="0 0 480 360" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="ew-sky-e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ew-sky-a)" /><stop offset="1" style="stop-color:var(--ew-sky-b)" /></linearGradient>
+          <radialGradient id="ew-sun-e"><stop offset="0" style="stop-color:var(--ew-sun-glow);stop-opacity:.9" /><stop offset="1" style="stop-color:var(--ew-sun-glow);stop-opacity:0" /></radialGradient>
+          <linearGradient id="ew-ray-e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ew-ray);stop-opacity:.55" /><stop offset="1" style="stop-color:var(--ew-ray);stop-opacity:0" /></linearGradient>
+          <linearGradient id="ew-soil-e" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ew-soil-a)" /><stop offset="1" style="stop-color:var(--ew-soil-b)" /></linearGradient>
+          <filter id="ew-glow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="2.4" result="b" /><feMerge><feMergeNode in="b" /><feMergeNode in="SourceGraphic" /></feMerge></filter>
+          <g id="ew-sd">
+            <path class="ew-stem" d="M0 0 V-12" />
+            <path class="ew-c-mid" d="M0 -5 C-1 -11 -7 -15 -12 -15 C-11 -9 -6 -5 0 -5Z" />
+            <path class="ew-c-deep" d="M0 -8 C1 -14 7 -18 12 -18 C11 -12 6 -8 0 -8Z" />
+          </g>
+        </defs>
+        <rect width="480" height="360" fill="url(#ew-sky-e)" />
+        {stars.map(([x, y], i) => <circle class="ew-star" cx={x} cy={y} r="1.6" style={`--d:${i * 0.9}s`} />)}
+        <circle class="ew-sun-glow" cx="404" cy="62" r="66" fill="url(#ew-sun-e)" />
+        <circle class="ew-sun" cx="404" cy="62" r="24" />
+        <g class="ew-rays">
+          <polygon points="398,74 412,78 350,254 318,254" fill="url(#ew-ray-e)" />
+          <polygon points="396,76 408,82 270,254 236,254" fill="url(#ew-ray-e)" />
+          <polygon points="392,78 402,86 190,254 156,254" fill="url(#ew-ray-e)" />
         </g>
-        <g class="ew-pulses">
-          {roots.map(({ d, delay }) => <path class="ew-pulse" d={d} pathLength="100" style={`--d:${delay}s`} />)}
-        </g>
+        <path class="ew-hill-far" d="M0 222 C60 196 120 206 190 220 C260 234 330 196 410 208 C440 214 462 222 480 220 L480 256 L0 256Z" />
+        <path class="ew-hill-near" d="M0 238 C80 218 150 232 230 236 C310 240 380 216 480 232 L480 256 L0 256Z" />
+
+        <rect class="ew-soil-e" x="24" y="252" width="432" height="88" rx="22" fill="url(#ew-soil-e)" />
+        {pebbles.map(([x, y, r]) => <circle class="ew-pebble" cx={x} cy={y} r={r} />)}
+        <rect class="ew-grass-e" x="30" y="250" width="420" height="8" rx="4" />
+        <g class="ew-roots">{roots.map(d => <path d={d} />)}</g>
+        <g class="ew-net">{network.map(({ d }) => <path d={d} />)}</g>
+        <g class="ew-pulses" filter="url(#ew-glow)">{network.map(({ d, delay }) => <path class="ew-pulse" d={d} pathLength="100" style={`--d:${delay}s`} />)}</g>
+        <g class="ew-nodes">{nodes.map(([x, y], i) => <circle class="ew-node" cx={x} cy={y} r="3.2" style={`--d:${i * 0.55}s`} />)}</g>
+
         <g class="ew-tree ew-tree--a">
-          <rect class="ew-trunk" x="165" y="70" width="14" height="128" rx="6" />
-          <ellipse class="ew-leaf ew-leaf--deep" cx="172" cy="62" rx="52" ry="44" />
-          <ellipse class="ew-leaf ew-leaf--mid" cx="156" cy="54" rx="22" ry="18" />
+          <path class="ew-branch" d="M190 176 C201 166 210 160 220 150" />
+          <path class="ew-branch" d="M190 150 C180 142 172 138 164 128" />
+          <rect class="ew-trunk" x="183" y="108" width="14" height="148" rx="6" />
+          <rect class="ew-trunk-hi" x="185" y="112" width="3" height="136" rx="1.5" />
+          <ellipse class="ew-c-deep" cx="190" cy="86" rx="68" ry="50" />
+          <ellipse class="ew-c-deep" cx="146" cy="102" rx="34" ry="26" />
+          <ellipse class="ew-c-deep" cx="234" cy="100" rx="34" ry="26" />
+          <ellipse class="ew-c-mid" cx="190" cy="68" rx="46" ry="30" />
+          <ellipse class="ew-c-mid" cx="150" cy="98" rx="22" ry="15" />
+          <ellipse class="ew-c-light" cx="166" cy="62" rx="26" ry="14" />
         </g>
         <g class="ew-tree ew-tree--b">
-          <rect class="ew-trunk" x="250.5" y="122" width="11" height="76" rx="5" />
-          <ellipse class="ew-leaf ew-leaf--mid" cx="256" cy="112" rx="40" ry="34" />
-          <ellipse class="ew-leaf ew-leaf--soft" cx="244" cy="104" rx="16" ry="13" />
+          <rect class="ew-trunk" x="306" y="164" width="12" height="92" rx="5" />
+          <rect class="ew-trunk-hi" x="308" y="168" width="2.6" height="82" rx="1.3" />
+          <ellipse class="ew-c-deep" cx="312" cy="148" rx="52" ry="38" />
+          <ellipse class="ew-c-deep" cx="282" cy="160" rx="26" ry="20" />
+          <ellipse class="ew-c-deep" cx="342" cy="158" rx="26" ry="20" />
+          <ellipse class="ew-c-mid" cx="312" cy="132" rx="34" ry="23" />
+          <ellipse class="ew-c-light" cx="296" cy="134" rx="18" ry="10" />
+          <circle class="ew-fruit" cx="292" cy="160" r="3.4" style="--d:0s" />
+          <circle class="ew-fruit" cx="332" cy="148" r="3.4" style="--d:1.2s" />
+          <circle class="ew-fruit" cx="318" cy="170" r="3.4" style="--d:2.4s" />
+          <circle class="ew-fruit" cx="346" cy="168" r="3" style="--d:3.4s" />
         </g>
         <g class="ew-tree ew-tree--c">
-          <rect class="ew-trunk" x="98" y="188" width="4" height="10" rx="2" />
-          <ellipse class="ew-leaf ew-leaf--soft" cx="100" cy="182" rx="32" ry="20" />
+          <rect class="ew-trunk" x="248" y="206" width="8" height="50" rx="4" />
+          <ellipse class="ew-c-soft" cx="252" cy="196" rx="38" ry="26" />
+          <ellipse class="ew-c-soft" cx="230" cy="206" rx="18" ry="13" />
+          <ellipse class="ew-c-soft" cx="276" cy="204" rx="18" ry="13" />
+          <ellipse class="ew-c-light" cx="240" cy="188" rx="16" ry="9" />
         </g>
-        <g transform="translate(332 196)"><g class="ew-sprout ew-sprout--r">
-          <path class="ew-stem" d="M0 0 L0 -20" />
-          <path class="ew-leaf ew-leaf--mid" d="M0 -8 C-2 -18 -12 -24 -20 -24 C-18 -14 -10 -8 0 -8Z" />
-          <path class="ew-leaf ew-leaf--deep" d="M0 -14 C2 -24 12 -30 20 -30 C18 -20 10 -14 0 -14Z" />
+        <g class="ew-tree ew-tree--d">
+          <rect class="ew-stalk" x="104" y="198" width="8" height="58" rx="4" />
+          <path class="ew-c-mid" d="M108 200 C90 178 62 174 44 186 C64 194 86 198 108 200Z" />
+          <path class="ew-c-deep" d="M108 200 C124 174 152 166 172 176 C150 188 128 196 108 200Z" />
+          <path class="ew-c-mid" d="M108 200 C100 170 104 150 118 136 C124 158 118 182 108 200Z" />
+          <path class="ew-c-deep" d="M108 206 C88 202 70 210 58 226 C80 224 96 218 108 206Z" />
+          <path class="ew-rib" d="M108 200 C84 186 64 184 50 188" />
+          <path class="ew-rib" d="M108 200 C132 184 150 176 166 178" />
+          <path class="ew-rib" d="M108 200 C106 176 108 156 116 142" />
+        </g>
+
+        <g class="ew-seedlings">
+          <g transform="translate(70 254)"><g class="ew-sprout ew-sway-s" style="--d:-1s"><use href="#ew-sd" transform="scale(1.1)" /></g></g>
+          <g transform="translate(150 254)"><g class="ew-sprout ew-sway-s" style="--d:-3s"><use href="#ew-sd" transform="scale(1.3)" /></g></g>
+          <g transform="translate(220 254)"><g class="ew-sprout ew-sway-s" style="--d:-2s"><use href="#ew-sd" transform="scale(1)" /></g></g>
+          <g transform="translate(286 254)"><g class="ew-sprout ew-sway-s" style="--d:-4s"><use href="#ew-sd" transform="scale(1.2)" /></g></g>
+          <g transform="translate(368 254)"><g class="ew-sprout ew-sway-s" style="--d:-1.6s"><use href="#ew-sd" transform="scale(1.1)" /></g></g>
+        </g>
+        <g transform="translate(48 254)"><g class="ew-sprout ew-grow ew-grow--l"><use href="#ew-sd" transform="scale(1.5)" /></g></g>
+        <g transform="translate(406 254)"><g class="ew-sprout ew-grow ew-grow--r1"><use href="#ew-sd" transform="scale(1.5)" /></g></g>
+        <g transform="translate(438 254)"><g class="ew-sprout ew-grow ew-grow--r2"><use href="#ew-sd" transform="scale(1.35)" /></g></g>
+
+        <g class="ew-motes">{motes.map(([x, y, d]) => <circle class="ew-mote" cx={x} cy={y} r="1.8" style={`--d:${d}s`} />)}</g>
+        <ellipse class="ew-seed ew-seed--a" cx="224" cy="72" rx="6.5" ry="4.3" />
+        <ellipse class="ew-seed ew-seed--b" cx="346" cy="140" rx="6.5" ry="4.3" />
+        <g transform="translate(292 224)"><g class="ew-bfly">
+          <path class="ew-wing ew-wing--l" d="M0 0 C-3 -9 -14 -12 -16 -6 C-17 0 -8 4 0 2Z" />
+          <path class="ew-wing ew-wing--r" d="M0 0 C3 -9 14 -12 16 -6 C17 0 8 4 0 2Z" />
+          <path class="ew-bug" d="M0 -3 V6" />
         </g></g>
-        <g transform="translate(46 196)"><g class="ew-sprout ew-sprout--l">
-          <path class="ew-stem" d="M0 0 L0 -20" />
-          <path class="ew-leaf ew-leaf--mid" d="M0 -8 C-2 -18 -12 -24 -20 -24 C-18 -14 -10 -8 0 -8Z" />
-          <path class="ew-leaf ew-leaf--deep" d="M0 -14 C2 -24 12 -30 20 -30 C18 -20 10 -14 0 -14Z" />
-        </g></g>
-        <ellipse class="ew-seed ew-seed--r" cx="222" cy="64" rx="6.5" ry="4.3" />
-        <ellipse class="ew-seed ew-seed--l" cx="122" cy="64" rx="6.5" ry="4.3" />
       </svg>
       <h3>{copy.eco.title}</h3>
       <p>{copy.eco.text}</p>
@@ -99,14 +185,33 @@ const roots = [
 </section>
 
 <style>
-  .eco-why { --ew-trunk: #8b6a4a; --ew-deep: #5f8055; --ew-mid: #739a68; --ew-soft: #a6b36a; --ew-root: #a07a4c; --ew-pulse: #e3b04b; --ew-soil: color-mix(in srgb, #b08a5e 34%, var(--surface-container)); }
+  .eco-why {
+    --ew-sky-a: #fff3d4; --ew-sky-b: #e6f0d6; --ew-usky-a: #efebe0; --ew-usky-b: #e3e2d8;
+    --ew-sun: #f6cf72; --ew-sun-glow: #ffe6a0; --ew-ray: #fff1bc;
+    --ew-hill-far: #cfe0b9; --ew-hill-near: #b6cf9f; --ew-hill-u: #d5dacb;
+    --ew-deep: #4d7a50; --ew-mid: #6c9b61; --ew-soft: #a8b96a; --ew-light: #d6e29c;
+    --ew-trunk: #8a6544; --ew-trunk-hi: #b08a62; --ew-grass: #7fae6a;
+    --ew-soil-a: #94704c; --ew-soil-b: #5d422c; --ew-pebble: #d9bd92; --ew-root: #d9b47c; --ew-net: #f3e1a4; --ew-pulse: #ffcc55;
+    --ew-fruit: #f09a45; --ew-wing: #f4b45d; --ew-mote: #fff2b8;
+    --ew-u-deep: #7d9b7b; --ew-u-soft: #98b093; --ew-u-trunk: #9a8268; --ew-u-soil: #d9cdb7; --ew-u-line: #b9aa90; --ew-u-grass: #a9b79c;
+  }
+  :global(:root[data-sky="night"]) .eco-why {
+    --ew-sky-a: #14213a; --ew-sky-b: #214038; --ew-usky-a: #1b2233; --ew-usky-b: #252b36;
+    --ew-sun: #e8edfb; --ew-sun-glow: #9db3e6; --ew-ray: #cfe0ff;
+    --ew-hill-far: #26453f; --ew-hill-near: #1e3a35; --ew-hill-u: #2b3441;
+    --ew-deep: #3f6d4d; --ew-mid: #568759; --ew-soft: #8d9d5a; --ew-light: #b9cb80;
+    --ew-trunk: #7b5b40; --ew-trunk-hi: #a07c58; --ew-grass: #4f7d57;
+    --ew-soil-a: #4b392a; --ew-soil-b: #2a1f17; --ew-pebble: #8a7355; --ew-root: #bf955f; --ew-net: #ead08a; --ew-pulse: #ffd36a;
+    --ew-fruit: #f2a65a; --ew-wing: #f2bd75; --ew-mote: #e8efff;
+    --ew-u-deep: #4c6650; --ew-u-soft: #607a62; --ew-u-trunk: #66584a; --ew-u-soil: #3a3b3f; --ew-u-line: #56565c; --ew-u-grass: #556357;
+  }
   .eco-why .landing-head { margin-bottom: clamp(1.6rem, 5vw, 2.6rem); }
-  .eco-why__lead { max-width: 38rem; }
+  .eco-why__lead { max-width: 40rem; }
 
-  .eco-why__figure { display: grid; gap: clamp(.9rem, 3vw, 1.5rem); max-width: 62rem; margin: 0 auto; }
-  .eco-why__panel { display: grid; gap: .5rem; align-content: start; padding: clamp(.8rem, 2.6vw, 1.3rem); border: 1px solid var(--border); border-radius: var(--radius-feature); background: var(--surface-raised); text-align: center; }
-  .eco-why__panel--eco { border-color: var(--ew-deep); box-shadow: 0 18px 44px #2a3a2a1f; }
-  .eco-why__panel svg { display: block; width: 100%; height: auto; border-radius: 1rem; background: color-mix(in srgb, var(--surface-container) 62%, var(--surface-raised)); }
+  .eco-why__figure { display: grid; gap: clamp(.9rem, 3vw, 1.5rem); max-width: 64rem; margin: 0 auto; }
+  .eco-why__panel { display: grid; gap: .5rem; align-content: start; padding: clamp(.7rem, 2.4vw, 1.1rem); border: 1px solid var(--border); border-radius: var(--radius-feature); background: var(--surface-raised); text-align: center; }
+  .eco-why__panel--eco { border-color: var(--ew-deep); box-shadow: 0 20px 48px #2a3a2a24; }
+  .eco-why__panel svg { display: block; width: 100%; height: auto; overflow: hidden; border-radius: 1rem; }
   .eco-why__panel h3 { margin: .4rem 0 0; font-family: var(--serif); font-weight: 500; font-size: clamp(1.2rem, 3vw, 1.45rem); color: var(--primary); }
   .eco-why__panel p { margin: 0 auto; max-width: 28rem; color: var(--muted); }
   @media (min-width: 720px) { .eco-why__figure { grid-template-columns: 1fr 1fr; align-items: stretch; } }
@@ -120,38 +225,92 @@ const roots = [
   .eco-why__care { max-width: 40rem; margin: clamp(1.8rem, 5vw, 2.8rem) auto 0; text-align: center; font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; }
 
   /* Picture colours */
-  .ew-soil { fill: var(--ew-soil); }
-  .ew-trunk { fill: var(--ew-trunk); }
-  .ew-leaf--deep { fill: var(--ew-deep); }
-  .ew-leaf--mid { fill: var(--ew-mid); }
-  .ew-leaf--soft { fill: var(--ew-soft); }
-  .ew-stem { fill: none; stroke: var(--ew-deep); stroke-width: 3; stroke-linecap: round; }
-  .ew-roots path { fill: none; stroke: var(--ew-root); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
-  .ew-pulse { fill: none; stroke: var(--ew-pulse); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 9 200; stroke-dashoffset: 9; opacity: 0; }
+  .ew-sun { fill: var(--ew-sun); }
+  .ew-sun--flat { opacity: .7; }
+  .ew-hill-far { fill: var(--ew-hill-far); }
+  .ew-hill-near { fill: var(--ew-hill-near); }
+  .ew-hill-u { fill: var(--ew-hill-u); }
+  .ew-soil-u { fill: var(--ew-u-soil); }
+  .ew-grass-u { fill: var(--ew-u-grass); }
+  .ew-soil-lines path, .ew-level { fill: none; stroke: var(--ew-u-line); stroke-width: 1.6; stroke-linecap: round; }
+  .ew-soil-lines path { opacity: .55; }
+  .ew-level { stroke-dasharray: 3 7; opacity: .75; }
+  .ew-root-u { fill: none; stroke: var(--ew-u-line); stroke-width: 3; stroke-linecap: round; }
+  .ew-trunk-u { fill: var(--ew-u-trunk); }
+  .ew-u-deep { fill: var(--ew-u-deep); }
+  .ew-u-soft { fill: var(--ew-u-soft); }
+  .ew-grass-e { fill: var(--ew-grass); }
+  .ew-pebble { fill: var(--ew-pebble); opacity: .22; }
+  .ew-trunk, .ew-stalk { fill: var(--ew-trunk); }
+  .ew-trunk-hi { fill: var(--ew-trunk-hi); opacity: .5; }
+  .ew-branch { fill: none; stroke: var(--ew-trunk); stroke-width: 4; stroke-linecap: round; }
+  .ew-c-deep { fill: var(--ew-deep); }
+  .ew-c-mid { fill: var(--ew-mid); }
+  .ew-c-soft { fill: var(--ew-soft); }
+  .ew-c-light { fill: var(--ew-light); opacity: .55; }
+  .ew-rib { fill: none; stroke: var(--ew-light); stroke-width: 1.2; stroke-linecap: round; opacity: .55; }
+  .ew-stem { fill: none; stroke: var(--ew-deep); stroke-width: 2.4; stroke-linecap: round; }
+  .ew-fruit { fill: var(--ew-fruit); }
+  .ew-roots path { fill: none; stroke: var(--ew-root); stroke-width: 2.6; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+  .ew-net path { fill: none; stroke: var(--ew-net); stroke-width: 1.3; stroke-linecap: round; opacity: .5; }
+  .ew-pulse { fill: none; stroke: var(--ew-pulse); stroke-width: 3.4; stroke-linecap: round; stroke-dasharray: 8 200; stroke-dashoffset: 8; opacity: 0; }
+  .ew-node { fill: var(--ew-net); opacity: .7; transform-box: fill-box; transform-origin: center; }
+  .ew-rays polygon { opacity: .55; }
   .ew-seed { fill: #f2d98d; stroke: var(--ew-trunk); stroke-width: 1.3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+  .ew-mote { fill: var(--ew-mote); opacity: 0; }
+  .ew-star { fill: #fff; opacity: 0; }
+  .ew-wing { fill: var(--ew-wing); opacity: .95; }
+  .ew-bug { fill: none; stroke: var(--ew-trunk); stroke-width: 1.4; stroke-linecap: round; }
 
-  /* Motion: each part keeps a slow, quiet rhythm */
+  /* Motion: slow and quiet; the uniform half moves in lockstep, the garden half each in its own rhythm. */
   .ew-tree { transform-box: fill-box; transform-origin: 50% 100%; animation: ew-sway 7s ease-in-out infinite alternate; }
+  .ew-tree--u { animation-duration: 6s; }
   .ew-tree--b { animation-duration: 8.5s; animation-delay: -2s; }
   .ew-tree--c { animation-duration: 6s; animation-delay: -4s; }
+  .ew-tree--d { animation-name: ew-bsway; animation-duration: 5.5s; animation-delay: -1s; }
+  .ew-sway-s { transform-box: fill-box; transform-origin: 50% 100%; animation: ew-sway-s 5s ease-in-out infinite alternate; animation-delay: var(--d, 0s); }
   .ew-pulse { animation: ew-flow 4.8s ease-in-out infinite; animation-delay: var(--d, 0s); }
-  .ew-sprout { transform-box: fill-box; transform-origin: 50% 100%; animation: ew-grow 8s ease-in-out infinite; }
-  .ew-sprout--l { animation-delay: -4s; }
-  .ew-seed--solo { animation: ew-seed-solo 8s ease-in-out infinite; }
-  .ew-seed--r { animation: ew-seed-r 8s ease-in-out infinite; }
-  .ew-seed--l { animation: ew-seed-l 8s ease-in-out infinite; animation-delay: -4s; }
+  .ew-node { animation: ew-node 3.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .ew-rays { animation: ew-ray 9s ease-in-out infinite alternate; }
+  .ew-sun-glow { transform-box: fill-box; transform-origin: center; animation: ew-halo 8s ease-in-out infinite alternate; }
+  .ew-fruit { animation: ew-fruit 4.6s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .ew-mote { animation: ew-mote 10s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .ew-star { animation: ew-twinkle 4.5s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .ew-bfly { animation: ew-flit 16s ease-in-out infinite; }
+  .ew-wing { animation: ew-flap .9s ease-in-out infinite alternate; transform-origin: 0 0; }
+  .ew-seed--u { animation: ew-seed-u 8s ease-in-out infinite; }
+  .ew-seed--a { animation: ew-seed-a 9s ease-in-out infinite; }
+  .ew-seed--b { animation: ew-seed-b 9s ease-in-out infinite; animation-delay: -4.5s; }
+  .ew-grow { transform-box: fill-box; transform-origin: 50% 100%; }
+  .ew-grow--r1 { animation: ew-grow 9s ease-in-out infinite; }
+  .ew-grow--r2 { animation: ew-grow 9s ease-in-out infinite; animation-delay: -4.5s; }
+  .ew-grow--l { animation: ew-grow 9s ease-in-out infinite; animation-delay: -2s; }
+  :global(:root[data-sky="night"]) .eco-why .ew-star { opacity: .7; }
+  :global(:root[data-sky="night"]) .eco-why .ew-rays polygon { opacity: .3; }
+  :global(:root[data-sky="night"]) .eco-why .ew-sun-glow { opacity: .7; }
 
-  @keyframes ew-sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
-  @keyframes ew-flow { 0% { stroke-dashoffset: 9; opacity: 0; } 10% { opacity: 1; } 80% { opacity: 1; } 100% { stroke-dashoffset: -100; opacity: 0; } }
-  @keyframes ew-grow { 0%, 50% { transform: scale(.22); opacity: .4; } 62%, 90% { transform: scale(1); opacity: 1; } 100% { transform: scale(.22); opacity: .4; } }
-  @keyframes ew-seed-solo { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 50% { opacity: 1; transform: translate(-34px, 90px) rotate(80deg); } 64%, 100% { opacity: 0; transform: translate(-34px, 90px) rotate(80deg); } }
-  @keyframes ew-seed-r { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 30% { transform: translate(50px, -26px) rotate(40deg); } 54% { opacity: 1; transform: translate(110px, 128px) rotate(150deg); } 64%, 100% { opacity: 0; transform: translate(110px, 128px) rotate(150deg); } }
-  @keyframes ew-seed-l { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 30% { transform: translate(-40px, -22px) rotate(-40deg); } 54% { opacity: 1; transform: translate(-76px, 128px) rotate(-150deg); } 64%, 100% { opacity: 0; transform: translate(-76px, 128px) rotate(-150deg); } }
+  @keyframes ew-sway { from { transform: rotate(-1.1deg); } to { transform: rotate(1.1deg); } }
+  @keyframes ew-bsway { from { transform: rotate(-2.2deg); } to { transform: rotate(2.2deg); } }
+  @keyframes ew-sway-s { from { transform: rotate(-4deg); } to { transform: rotate(4deg); } }
+  @keyframes ew-flow { 0% { stroke-dashoffset: 8; opacity: 0; } 12% { opacity: 1; } 80% { opacity: 1; } 100% { stroke-dashoffset: -100; opacity: 0; } }
+  @keyframes ew-node { 0%, 100% { opacity: .45; transform: scale(1); } 50% { opacity: 1; transform: scale(1.5); } }
+  @keyframes ew-ray { from { opacity: .55; } to { opacity: 1; } }
+  @keyframes ew-halo { from { transform: scale(.94); opacity: .75; } to { transform: scale(1.06); opacity: 1; } }
+  @keyframes ew-fruit { 0%, 100% { opacity: .75; } 50% { opacity: 1; } }
+  @keyframes ew-mote { 0% { opacity: 0; transform: translate(0, 0); } 20% { opacity: .85; } 80% { opacity: .5; } 100% { opacity: 0; transform: translate(16px, -54px); } }
+  @keyframes ew-twinkle { 0%, 100% { opacity: .25; } 50% { opacity: .85; } }
+  @keyframes ew-flit { 0%, 100% { transform: translate(0, 0); } 25% { transform: translate(28px, -16px); } 50% { transform: translate(54px, 6px); } 75% { transform: translate(22px, 20px); } }
+  @keyframes ew-flap { from { transform: scaleX(1); } to { transform: scaleX(.3); } }
+  @keyframes ew-grow { 0%, 52% { transform: scale(.1); opacity: 0; } 68%, 90% { transform: scale(1); opacity: 1; } 100% { transform: scale(1); opacity: 0; } }
+  @keyframes ew-seed-u { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 56% { opacity: 1; transform: translate(14px, 146px) rotate(70deg); } 74%, 100% { opacity: 0; transform: translate(14px, 146px) rotate(70deg); } }
+  @keyframes ew-seed-a { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 22% { transform: translate(70px, -30px) rotate(40deg); } 40% { transform: translate(150px, 48px) rotate(110deg); } 56% { opacity: 1; transform: translate(182px, 182px) rotate(170deg); } 66%, 100% { opacity: 0; transform: translate(182px, 182px) rotate(170deg); } }
+  @keyframes ew-seed-b { 0% { opacity: 0; transform: translate(0, 0); } 8% { opacity: 1; } 24% { transform: translate(34px, -30px) rotate(40deg); } 42% { transform: translate(78px, 34px) rotate(100deg); } 56% { opacity: 1; transform: translate(92px, 114px) rotate(160deg); } 66%, 100% { opacity: 0; transform: translate(92px, 114px) rotate(160deg); } }
 
-  /* Still picture for visitors who ask for less motion: trees upright, sprouts grown, no travelling seeds or pulses */
+  /* Still picture for visitors who ask for less motion: trees upright, new sprouts grown, light resting, no travelling seeds, pulses or insects. */
   @media (prefers-reduced-motion: reduce) {
-    .ew-tree, .ew-pulse, .ew-sprout, .ew-seed { animation: none; }
-    .ew-pulse, .ew-seed { opacity: 0; }
-    .ew-sprout { transform: none; opacity: 1; }
+    .ew-tree, .ew-sway-s, .ew-pulse, .ew-node, .ew-rays, .ew-sun-glow, .ew-fruit, .ew-mote, .ew-star, .ew-bfly, .ew-wing, .ew-seed, .ew-grow { animation: none; }
+    .ew-pulse, .ew-seed, .ew-mote { opacity: 0; }
+    .ew-grow { transform: none; opacity: 1; }
+    .ew-wing--l, .ew-wing--r { transform: scaleX(.85); }
   }
 </style>

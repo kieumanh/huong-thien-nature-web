@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.27.1',
+    date: '2026-11-27',
+    vi: ['Vì sao là hệ sinh thái: vườn rừng đa tầng, hình động mới', 'Phần giải thích được viết lại theo đúng khái niệm: mô hình đồng nhất so với mô hình hệ sinh thái, như một vườn rừng đa tầng. Hình minh họa động được vẽ lại tinh tế hơn, có ánh nắng, mạng rễ nối nhau và hạt giống nảy mầm ở nơi mới.'],
+    en: ['Why an ecosystem: a layered forest garden, redrawn', 'The explanation is rewritten around the concept itself: the uniform model against the ecosystem model, like a layered forest garden. The animated picture is redrawn with more care, with sunlight, joined roots and seeds that sprout in new places.'],
+  },
+  {
     version: '2.27.0',
     date: '2026-11-27',
     vi: ['Vì sao là hệ sinh thái: so sánh với Linux, có hình động', 'Trang Hệ sinh thái có thêm phần giải thích vì sao Hương Thiền Nature lan tỏa theo kiểu hệ sinh thái, như cộng đồng Linux cùng xây trên một nền chung, kèm hình động một cây đơn lẻ và một khu vườn nhiều tầng.'],
