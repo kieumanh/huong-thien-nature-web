@@ -1,7 +1,11 @@
+## 2.29.3 — Sửa menu ở 1440px
+
+- Bản 2.29.2 làm trang Hệ sinh thái (vi) rộng hơn màn hình 2px ở 1440px khi dựng bằng font của máy CI (kiểm tra tự động báo lỗi, bản đó đã lên production). Nay: thanh menu rộng tới 1560px từ 1440px (dư chỗ >140px), cỡ chữ lớn hơn chỉ dùng từ 1600px, 1280–1599px giữ cỡ 14px; ở 1280–1439px thu gọn khoảng cách và đệm nút Liên hệ. Đã kiểm tra áp lực với chữ rộng hơn 4%: không mục nào tràn. Gạch chân mục hiện tại và nút Liên hệ giữ nguyên.
+
 ## 2.29.2 — Menu máy tính dễ đọc hơn
 
 - Trang đang xem có gạch chân (không chỉ đổi nền nhạt), nhận ra ngay ở chế độ ngày và đêm.
-- Cỡ chữ và khoảng cách mục menu tăng dần theo màn hình: 14px ở 1280–1439px, 14,4px từ 1440px, 15,2px từ 1600px, 16px từ 1800px; từ 1600px thanh menu rộng tới 1560px để các mục thoáng hơn.
+- Cỡ chữ và khoảng cách mục menu tăng dần theo màn hình: 14px ở 1280–1599px, 15,2px từ 1600px, 16px từ 1800px; từ 1600px thanh menu rộng tới 1560px để các mục thoáng hơn.
 - Nút "Liên hệ" thành nút viên thuốc nền xanh rừng (chữ sáng, viền nổi khi rê chuột/bàn phím).
 - Đã đo ở 1280–2560px, vi/en, nhiều trang: không mục nào xuống dòng, không tràn ngang, khoảng cách tới logo và cụm tìm kiếm ≥ 13px. Chỉ đổi CSS (`global.css`), không đổi nội dung hay thứ tự mục.
 
