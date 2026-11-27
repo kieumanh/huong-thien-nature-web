@@ -52,8 +52,8 @@ const image = fallback[0]?.image;
             <button type="button" data-filter="all" aria-pressed="true">{vi ? 'Tất cả' : 'All'} <span>{fallback.length}</span></button>
             {fallback.length > 0 && productCategories.map(category => <button type="button" data-filter={category.id} aria-pressed="false">{category[lang]} <span>{fallback.filter(product => product.category === category.id).length}</span></button>)}
           </div>
+          <div class="shop-results"><p data-shop-count role="status" aria-live="polite" aria-atomic="true">{fallback.length} {vi ? 'sản phẩm' : 'products'}</p><button type="button" class="shop-clear" data-shop-clear hidden>{vi ? 'Xóa bộ lọc' : 'Clear filters'}</button><p data-shop-price-note>{vi ? 'Giá tham khảo. Vui lòng hỏi giá và tình trạng hàng trước khi đặt.' : 'Prices are estimates. Please confirm price and availability before ordering.'}</p></div>
         </div>
-        <div class="shop-results"><p data-shop-count role="status" aria-live="polite" aria-atomic="true">{fallback.length} {vi ? 'sản phẩm' : 'products'}</p><p data-shop-price-note>{vi ? 'Giá tham khảo. Vui lòng hỏi giá và tình trạng hàng trước khi đặt.' : 'Prices are estimates. Please confirm price and availability before ordering.'}</p></div>
       </div>
       <p class="stock-status" role="status" data-feed-status></p>
       <div class="shop-grid" id="shop-grid" data-source="catalogue">{fallback.map(product => <ProductCard product={product} lang={lang} heading="h3" compact />)}</div>

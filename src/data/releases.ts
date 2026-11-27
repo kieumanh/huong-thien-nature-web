@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.30.0',
+    date: '2026-11-28',
+    vi: ['Câu chủ đạo ở chân trang; khung tìm kiếm cửa hàng gọn hơn', 'Chân trang hiện đủ câu chủ đạo và logo không còn chồng lên tên. Ba không gian cửa hàng có nhóm lọc một dòng, nút xóa bộ lọc và số đếm theo bộ lọc.'],
+    en: ['Full tagline in the footer; a tidier shop search panel', 'The footer shows the full tagline, and the logo no longer crowds the name. The three shop spaces get a single-line category bar, a clear-filters button and a count that follows the filter.'],
+  },
+  {
     version: '2.29.3',
     date: '2026-11-28',
     vi: ['Sửa menu ở màn hình 1440px', 'Menu không còn làm trang rộng thêm vài điểm ảnh ở 1440px; chữ menu chỉ lớn hơn từ 1600px.'],
