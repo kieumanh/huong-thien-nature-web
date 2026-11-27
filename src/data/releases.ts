@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.26.4',
+    date: '2026-11-27',
+    vi: ['Phần kết Hệ sinh thái: ảnh ngang thật', 'Thay minh họa vẽ tay bằng một ảnh thật ngang từ album: chắp tay bên bờ biển đá, sóng nhẹ và dãy núi phía xa.'],
+    en: ['Ecosystem closing: a real horizontal photograph', 'The hand-drawn illustration is replaced by a real horizontal photograph from the album: hands together on a rocky shore, gentle waves and mountains in the distance.'],
+  },
+  {
     version: '2.26.3',
     date: '2026-11-26',
     vi: ['Trang Hệ sinh thái: minh họa ngang tự vẽ', 'Phần kết của trang Hệ sinh thái dùng một minh họa ngang tự vẽ: cây bên hồ, mặt nước lặng và mặt trời dịu, thay cho ảnh đứng cũ.'],

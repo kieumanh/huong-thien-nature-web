@@ -1,3 +1,9 @@
+## 2.26.4 — Phần kết Hệ sinh thái dùng ảnh thật ngang
+
+- **Thay minh họa tự vẽ (2.26.3) bằng ảnh thật** trong album: `prayer-hands-seashore` (1280 × 720), chắp tay bên bờ biển đá, sóng nhẹ và dãy núi phía xa. Khung `.eco-closing__art` giữ tỷ lệ 16:9, bo góc, tối đa 44rem.
+- Gỡ `public/media/illustrations/eco-closing-horizon.svg` và phần mô tả đi kèm.
+- Ảnh lấy từ `AlbumImage`, nên alt song ngữ và tải ảnh thu nhỏ theo `srcset` như các khối khác.
+
 ## 2.26.3 — Trang Hệ sinh thái: ảnh ngang tự vẽ thay ảnh đứng
 
 - **Khối kết trang Hệ sinh thái** đổi ảnh hoa sen đứng sang một minh họa ngang tự vẽ, `public/media/illustrations/eco-closing-horizon.svg` (1200 × 600): một buổi chiều yên ắng bên hồ, cây xanh bên bờ (Thân), mặt nước lặng với vòng sóng nhẹ (Tâm), mặt trời dịu phía chân trời (Trí). Chỉ vẽ phẳng, ba lớp màu xanh – vàng nhạt, không chữ, không họa tiết thừa.
