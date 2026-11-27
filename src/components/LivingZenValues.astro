@@ -1,38 +1,40 @@
 ---
+// The one Living Zen block outside the philosophy page: the main line, a short lead, the three tiers as quiet chips and a link to
+// /vi/triet-ly/ (/en/philosophy/). The Home page also shows three pledges ("home"); the Ecosystem page shows only the pointer ("compact").
+// Everything else about Living Zen (values, what we choose not to do, commitments) lives on the philosophy page, so it is told once.
 import { livingZen } from '../data/living-zen';
+import { philosophyCopy, philosophyTiers } from '../data/philosophy';
+import { journeyPath } from '../data/journey-pages';
 import type { Language } from '../data/site';
 import AnimatedIcon, { type IconName } from './AnimatedIcon.astro';
+import Arrow from './Arrow.astro';
 import '../styles/living-zen.css';
 
-interface Props { lang: Language; variant?: 'home' | 'full'; id?: string }
+interface Props { lang: Language; variant?: 'home' | 'compact'; id?: string }
 const { lang, variant = 'home', id = 'living-zen' } = Astro.props;
 const copy = livingZen[lang];
-const full = variant === 'full';
-// Clarity, honesty, kindness (and, on the Ecosystem page, "begin where you are").
-const pledgeIcons: IconName[] = ['sun', 'heart', 'leaf', 'path'];
-const pledgeTones = ['landing-icon--gold', 'landing-icon--orchid', '', 'landing-icon--clay'];
+const pointer = philosophyCopy[lang].home;
+const compact = variant === 'compact';
+// Clarity, honesty, kindness.
+const pledgeIcons: IconName[] = ['sun', 'heart', 'leaf'];
+const pledgeTones = ['landing-icon--gold', 'landing-icon--orchid', ''];
 ---
-<section class:list={['lz-values', full ? 'journey-section lz-values--full' : 'shell lz-values--home']} {id} aria-labelledby={`${id}-title`}>
+<section class:list={['lz-values', compact ? 'journey-section lz-values--compact' : 'shell lz-values--home']} {id} aria-labelledby={`${id}-title`}>
   <div class="lz-values__head" data-reveal="up">
     <p class="eyebrow">{copy.eyebrow}</p>
     <h2 id={`${id}-title`} class="lz-values__tagline">{copy.tagline}</h2>
+    <p class="lz-values__lead">{pointer.text}</p>
   </div>
-  {!full && <ul class="lz-pledges" role="list">
-    {copy.home.pledges.map((item, index) => <li class="lz-pledge" data-reveal="fade">
+  {!compact && <ul class="lz-pledges" role="list">
+    {copy.pledges.map((item, index) => <li class="lz-pledge" data-reveal="fade">
       <span class={`landing-icon ${pledgeTones[index]}`}><AnimatedIcon name={pledgeIcons[index]} /></span>
       <p class="lz-pledge__label">{item.label}</p>
       <h3>{item.title}</h3>
       <p>{item.text}</p>
     </li>)}
   </ul>}
-  {full && <>
-    <ul class="lz-chips" role="list" data-reveal="up">{copy.essence.map(item => <li>{item}</li>)}</ul>
-    <ul class="lz-tiles" role="list">
-      {copy.promises.map((item, index) => <li class="lz-tile" data-reveal="fade">
-        <span class={`landing-icon ${pledgeTones[index]}`}><AnimatedIcon name={pledgeIcons[index]} /></span>
-        <p>{item}</p>
-      </li>)}
-    </ul>
-    <p class="lz-not-line" data-reveal="up"><strong>{copy.notTitle}:</strong> {copy.not.join(' · ')}.</p>
-  </>}
+  <div class="lz-more" data-reveal="up">
+    <ul class="lz-chips" role="list">{philosophyTiers.map(tier => <li>{tier.name[lang]}</li>)}</ul>
+    <a class="quiet-link" href={journeyPath(lang, 'philosophy')}>{pointer.link} <Arrow /></a>
+  </div>
 </section>

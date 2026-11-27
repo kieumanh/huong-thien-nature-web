@@ -29,7 +29,7 @@ const essay = (slug: string) => {
     {philosophyValues.map(value => {
       const title = valueTitle(lang, value);
       const example = value.example;
-      const target = example ? resolveTarget(lang, example.target) : undefined;
+      const target = example?.target ? resolveTarget(lang, example.target) : undefined;
       const related = value.relatedArticles.map(essay).filter(Boolean) as { title: string; href: string }[];
       return <details class="ph-value" id={value.slug} data-tier={value.tier} data-reveal="up">
         <summary>
@@ -51,9 +51,9 @@ const essay = (slug: string) => {
           <p class="ph-value__commit">{value.commitment[lang]}</p>
           <h4>{labels.reflection}</h4>
           <p class="ph-value__ask">{value.reflectionQuestion[lang]}</p>
-          {example && target && <>
+          {example && <>
             <h4>{labels.example}</h4>
-            <p>{example.text[lang]} <a class="quiet-link" href={target.href} rel={target.external ? 'noopener' : undefined} target={target.external ? '_blank' : undefined}>{example.label[lang]} <Arrow /></a></p>
+            <p>{example.text[lang]}{target && example.label && <> <a class="quiet-link" href={target.href} rel={target.external ? 'noopener' : undefined} target={target.external ? '_blank' : undefined}>{example.label[lang]} <Arrow /></a></>}</p>
           </>}
           {related.length > 0 && <>
             <h4>{labels.related}</h4>

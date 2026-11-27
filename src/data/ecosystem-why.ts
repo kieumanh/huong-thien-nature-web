@@ -23,7 +23,7 @@ export const ecosystemWhy: Record<Language, EcosystemWhy> = {
   vi: {
     eyebrow: 'Vì sao là hệ sinh thái',
     title: 'Một vườn rừng nhiều tầng, thay vì một hàng cây đồng nhất',
-    lead: 'Có hai cách làm một khu vườn: trồng thật đều cho gọn và dễ quản, hoặc để nhiều tầng cùng sống trên một mảnh đất, rễ nối rễ, mỗi loài một vai. Hương Thiền Nature chọn cách thứ hai, theo tinh thần vườn rừng đa tầng mà tụi mình đang học hỏi tại Farm Lê Lam Sơn.',
+    lead: 'Có hai cách làm một khu vườn: trồng thật đều cho gọn và dễ quản, hoặc để nhiều tầng cùng sống trên một mảnh đất, rễ nối rễ, mỗi loài một vai. Hương Thiền Nature chọn cách thứ hai.',
     single: { title: 'Mô hình đồng nhất', text: 'Một hệ thống thống nhất, dễ quản lý tập trung nhưng ít đa dạng.' },
     eco: { title: 'Mô hình hệ sinh thái', text: 'Nhiều tầng, nhiều thành phần, tương tác và phát triển dựa trên nền tảng chung.' },
     points: [
@@ -37,7 +37,7 @@ export const ecosystemWhy: Record<Language, EcosystemWhy> = {
   en: {
     eyebrow: 'Why an ecosystem',
     title: 'A layered forest garden, not a row of identical trees',
-    lead: 'There are two ways to make a garden: plant everything evenly, tidy and easy to manage, or let many layers share one patch of soil, roots reaching roots, each species holding its own role. Hương Thiền Nature takes the second way, in the spirit of the layered forest garden we are learning from at Lê Lam Sơn Farm.',
+    lead: 'There are two ways to make a garden: plant everything evenly, tidy and easy to manage, or let many layers share one patch of soil, roots reaching roots, each species holding its own role. Hương Thiền Nature takes the second way.',
     single: { title: 'Uniform model', text: 'One unified system, easy to manage centrally, but with little diversity.' },
     eco: { title: 'Ecosystem model', text: 'Many layers and many parts that interact and grow on a shared foundation.' },
     points: [
