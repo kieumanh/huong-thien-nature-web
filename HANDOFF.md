@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-27, phiên bản 2.29.3 (sửa menu máy tính ở 1440px; 2.29.2 thêm gạch chân trang hiện tại, cỡ chữ lớn từ 1600px, nút Liên hệ viên thuốc). Trước đó, 2.29.1 (bộ nhận diện đồng bộ câu chủ đạo mới; khung riêng cho câu bổ sung ở Triết lý sống). Trước đó, 2.29.0 (một câu chủ đạo "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành."; một khối Living Zen; Living Zen Philosophy v1.1 đủ mười ví dụ). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-28, phiên bản 2.30.0 (chân trang có câu chủ đạo đầy đủ; khung lọc cửa hàng gọn hơn; 2.29.3 sửa menu máy tính ở 1440px; 2.29.2 thêm gạch chân trang hiện tại, cỡ chữ lớn từ 1600px, nút Liên hệ viên thuốc). Trước đó, 2.29.1 (bộ nhận diện đồng bộ câu chủ đạo mới; khung riêng cho câu bổ sung ở Triết lý sống). Trước đó, 2.29.0 (một câu chủ đạo "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành."; một khối Living Zen; Living Zen Philosophy v1.1 đủ mười ví dụ). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 28/11 | 2.30.0: chân trang hiện đủ câu chủ đạo (`Footer.astro`, `philosophyTagline`), logo giữ tỷ lệ và không chồng tên; khung lọc cửa hàng một dòng, nút "Xóa bộ lọc", số đếm theo bộ lọc (`ShopTheme.astro`, `shop.css`, `shop-catalogue.ts`) |
 | 28/11 | 2.29.3: bỏ mức chữ lớn ở 1440–1599px (làm /vi/he-sinh-thai/ rộng thêm 2px với font CI); chữ lớn chỉ từ 1600px |
 | 27/11 | 2.29.2: menu máy tính (`global.css` cuối phần nav): gạch chân mục hiện tại, cỡ chữ 14/14,4/15,2/16px theo 1280/1440/1600/1800px, thanh menu rộng 1560px từ 1600px, nút Liên hệ nền xanh rừng; đã đo 1280–2560px vi/en |
 | 27/11 | 2.29.1: bộ nhận diện đồng bộ câu chủ đạo mới (`brand/README.md`, brand book và `chapters/02`, `quick-guide.md`, `kits.py` và mẫu SVG/PNG/PDF có chữ, `book.py`, `build.py`, `src/pages/living-zen/index.astro`); font cài qua `build.py` `install_fonts()` trước khi dựng lại mẫu; biển hiệu, bìa Facebook/YouTube/Zalo sửa bố cục; khung `.ph-nature__place` ở Triết lý sống; test quét `brand/` |

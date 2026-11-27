@@ -1,3 +1,11 @@
+## 2.30.0 — Câu chủ đạo ở chân trang; khung tìm kiếm cửa hàng gọn hơn
+
+- **Chân trang**: logo giữ nguyên tỷ lệ, không còn cắt tròn, đứng riêng. Bên cạnh là tên thương hiệu và câu chủ đạo đầy đủ "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." (lấy từ `philosophyTagline`, cùng nguồn với trang Triết lý). Bản tiếng Anh dùng câu tương ứng.
+- **Khung tìm kiếm cửa hàng** (ba không gian, vi và en): một hàng ô tìm kiếm; nhóm sản phẩm nằm trên một dòng, vuốt ngang trên điện thoại và không còn xuống dòng lẻ trên máy tính; dòng kết quả có số đếm, giá tham khảo và nút "Xóa bộ lọc" (chỉ hiện khi đang lọc hoặc tìm kiếm).
+- **Số đếm theo bộ lọc**: "8 sản phẩm" khi không lọc; "Hiển thị 4 / 8 sản phẩm" khi đang lọc.
+- Nhóm sản phẩm không còn viền hồng sau khi bấm chuột; bàn phím vẫn có viền focus rõ.
+- Còn lại, chưa đổi (chờ chủ dự án duyệt): tiêu đề trang chủ, `site.webmanifest` và chữ mô tả logo chia sẻ vẫn ghi câu mô tả cũ.
+
 ## 2.29.3 — Sửa menu ở 1440px
 
 - Bản 2.29.2 làm trang Hệ sinh thái (vi) rộng hơn màn hình 2px ở 1440px khi dựng bằng font của máy CI (kiểm tra tự động báo lỗi, bản đó đã lên production). Nay: thanh menu rộng tới 1560px từ 1440px (dư chỗ >140px), cỡ chữ lớn hơn chỉ dùng từ 1600px, 1280–1599px giữ cỡ 14px; ở 1280–1439px thu gọn khoảng cách và đệm nút Liên hệ. Đã kiểm tra áp lực với chữ rộng hơn 4%: không mục nào tràn. Gạch chân mục hiện tại và nút Liên hệ giữ nguyên.
