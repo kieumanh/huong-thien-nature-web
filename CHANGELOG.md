@@ -1,3 +1,8 @@
+## 2.26.5 — Phần kết Hệ sinh thái: ảnh ngồi thiền bên biển
+
+- Đổi ảnh phần kết sang `beach-meditate-smile` (870 × 656, tỷ lệ 4:3): một người ngồi xếp bằng trên bãi cát, hai tay mở trên gối và mỉm cười. Khung `.eco-closing__art` giữ đúng tỷ lệ ảnh (4:3) thay vì 16:9.
+- Ảnh chắp tay `prayer-hands-seashore` không còn dùng ở đây (vẫn còn trong album).
+
 ## 2.26.4 — Phần kết Hệ sinh thái dùng ảnh thật ngang
 
 - **Thay minh họa tự vẽ (2.26.3) bằng ảnh thật** trong album: `prayer-hands-seashore` (1280 × 720), chắp tay bên bờ biển đá, sóng nhẹ và dãy núi phía xa. Khung `.eco-closing__art` giữ tỷ lệ 16:9, bo góc, tối đa 44rem.
