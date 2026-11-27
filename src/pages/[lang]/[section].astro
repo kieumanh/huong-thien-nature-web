@@ -179,10 +179,7 @@ import PillarIcon from '../../components/PillarIcon.astro';
         <p class="eco-partners__more"><a class="quiet-link" href={`${journeyPath(lang, 'team')}#doi-tac`}>{vi ? 'Đọc về từng người đồng hành' : 'Read about each partner'} <Arrow /></a></p>
       </section>
       <section class="journey-section eco-closing" aria-labelledby="eco-closing-title">
-        <figure class="eco-closing__art" data-reveal="fade">
-          <img src="/media/illustrations/eco-closing-horizon.svg" width="1200" height="600" loading="lazy" decoding="async"
-            alt={vi ? 'Minh họa một buổi chiều yên ắng bên hồ: cây xanh bên bờ, mặt nước lặng với vài vòng sóng nhẹ, và mặt trời dịu phía chân trời.' : 'Illustration of a still afternoon by a lake: a green tree on the shore, calm water with a few gentle ripples, and a soft sun near the horizon.'} />
-        </figure>
+        <figure class="eco-closing__art" data-reveal="fade"><AlbumImage id="prayer-hands-seashore" {lang} sizes="(min-width: 860px) 44rem, 92vw" /></figure>
         <h2 id="eco-closing-title" data-reveal="up">{vision.closingTitle}</h2>
         <p class="eco-closing__text" data-reveal="up">{vision.closing}</p>
         <EcosystemIllustration {...vision.start} variant="roadmap" />
