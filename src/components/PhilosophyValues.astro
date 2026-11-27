@@ -1,0 +1,66 @@
+---
+// Section 05: the ten core values as progressive disclosure. Each card is a native <details>: keyboard accessible, readable
+// by search engines (the full text is in the page) and open by default when JavaScript is off in print or reading modes.
+import PhilosophyIcon from './PhilosophyIcon.astro';
+import Arrow from './Arrow.astro';
+import { articles, articlePath } from '../data/articles';
+import { philosophyCopy, philosophyTiers, philosophyValues, valueTitle } from '../data/philosophy';
+import { resolveTarget } from '../data/philosophy-links';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].values;
+const labels = copy.labels;
+const tierName = (tier: number) => philosophyTiers.find(item => item.tier === tier)!.name[lang];
+const essay = (slug: string) => {
+  const article = articles.find(item => item.slug === slug);
+  return article ? { title: article.translations[lang].title, href: articlePath(lang, slug) } : undefined;
+};
+---
+<section class="ph-section ph-values" id="ph-values" aria-labelledby="ph-values-title">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-values-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+    <p class="ph-note">{copy.note}</p>
+  </div>
+  <div class="ph-values__grid" data-ph-values data-active-tier="centre">
+    {philosophyValues.map(value => {
+      const title = valueTitle(lang, value);
+      const example = value.example;
+      const target = example ? resolveTarget(lang, example.target) : undefined;
+      const related = value.relatedArticles.map(essay).filter(Boolean) as { title: string; href: string }[];
+      return <details class="ph-value" id={value.slug} data-tier={value.tier} data-reveal="up">
+        <summary>
+          <span class="ph-value__icon"><PhilosophyIcon name={value.icon} /></span>
+          <span class="ph-value__head">
+            <span class="ph-value__tier">{String(value.no).padStart(2, '0')} · {tierName(value.tier)}</span>
+            <h3 class="ph-value__name">{title.main}</h3>
+            <span class="ph-value__alt" lang={title.altLang}>{title.alt}</span>
+          </span>
+          <span class="ph-value__summary">{value.summary[lang]}</span>
+          <span class="ph-value__toggle" aria-hidden="true"><span class="ph-value__open">{labels.open}</span><span class="ph-value__close">{labels.close}</span></span>
+        </summary>
+        <div class="ph-value__body">
+          <h4>{labels.philosophy}</h4>
+          {value.philosophy[lang].map(paragraph => <p>{paragraph}</p>)}
+          <h4>{labels.applications}</h4>
+          <ul>{value.practicalApplications[lang].map(item => <li>{item}</li>)}</ul>
+          <h4>{labels.commitment}</h4>
+          <p class="ph-value__commit">{value.commitment[lang]}</p>
+          <h4>{labels.reflection}</h4>
+          <p class="ph-value__ask">{value.reflectionQuestion[lang]}</p>
+          {example && target && <>
+            <h4>{labels.example}</h4>
+            <p>{example.text[lang]} <a class="quiet-link" href={target.href} rel={target.external ? 'noopener' : undefined} target={target.external ? '_blank' : undefined}>{example.label[lang]} <Arrow /></a></p>
+          </>}
+          {related.length > 0 && <>
+            <h4>{labels.related}</h4>
+            <ul class="ph-value__related">{related.map(item => <li><a href={item.href}>{item.title}</a></li>)}</ul>
+          </>}
+        </div>
+      </details>;
+    })}
+  </div>
+</section>

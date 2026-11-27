@@ -1,0 +1,19 @@
+---
+// Section 06: what we choose not to do. Stated calmly, as a boundary we hold for ourselves, never as a judgement of others.
+import { philosophyCopy } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].refrain;
+---
+<section class="ph-section ph-refrain" id="ph-refrain" aria-labelledby="ph-refrain-title">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-refrain-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+  </div>
+  <ul class="ph-refrain__list">
+    {copy.items.map(item => <li data-reveal="up"><span class="ph-refrain__mark" aria-hidden="true"></span><span>{item}</span></li>)}
+  </ul>
+</section>

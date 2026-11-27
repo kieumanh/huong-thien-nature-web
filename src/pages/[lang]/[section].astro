@@ -16,6 +16,17 @@ import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
 import EcosystemWhy from '../../components/EcosystemWhy.astro';
 import EcosystemHero from '../../components/EcosystemHero.astro';
+import PhilosophyHero from '../../components/PhilosophyHero.astro';
+import PhilosophyWhy from '../../components/PhilosophyWhy.astro';
+import PhilosophyManifesto from '../../components/PhilosophyManifesto.astro';
+import LivingZenModel from '../../components/LivingZenModel.astro';
+import PhilosophyValues from '../../components/PhilosophyValues.astro';
+import PhilosophyRefrain from '../../components/PhilosophyRefrain.astro';
+import PhilosophyInPractice from '../../components/PhilosophyInPractice.astro';
+import PhilosophyCommitments from '../../components/PhilosophyCommitments.astro';
+import PhilosophyEssays from '../../components/PhilosophyEssays.astro';
+import PhilosophyGrowing from '../../components/PhilosophyGrowing.astro';
+import PhilosophyClosing from '../../components/PhilosophyClosing.astro';
 import LandingMotion from '../../components/LandingMotion.astro';
 import AlbumImage from '../../components/AlbumImage.astro';
 import AnimatedIcon, { type IconName } from '../../components/AnimatedIcon.astro';
@@ -27,10 +38,12 @@ import Arrow from '../../components/Arrow.astro';
 import { practicePath } from '../../data/home';
 import { contactPath } from '../../data/contact-channels';
 import { ecosystemPartnerJourney, journeyPageKeys, journeyPages, journeyPath, type JourneyPage } from '../../data/journey-pages';
+import { philosophyCopy } from '../../data/philosophy';
 import { getCopy, languages, type Language } from '../../data/site';
 import '../../styles/story-home.css';
 import '../../styles/material-home.css';
 import '../../styles/journey-pages.css';
+import '../../styles/philosophy.css';
 
 export function getStaticPaths() {
   return languages.flatMap(lang => journeyPageKeys.map(page => ({
@@ -66,8 +79,8 @@ import PillarIcon from '../../components/PillarIcon.astro';
   pageType={page === 'team' || page === 'story' ? 'AboutPage' : 'WebPage'}
   aboutOrganization={page !== 'practice'}>
   <Header {lang} {alternatePath} />
-  <main id="main-content" class:list={['shell journey-page', { 'landing-eco': page === 'ecosystem' }]} tabindex="-1">
-    {page === 'ecosystem' ? <EcosystemHero {lang} title={info.heading} current={info.title} /> : <header class="journey-page-header">
+  <main id="main-content" class:list={['shell journey-page', { 'landing-eco': page === 'ecosystem', 'philosophy-page': page === 'philosophy' }]} tabindex="-1">
+    {page === 'ecosystem' ? <EcosystemHero {lang} title={info.heading} current={info.title} /> : page === 'philosophy' ? <PhilosophyHero {lang} current={info.title} /> : <header class="journey-page-header">
       <ContemplativeScene motif="mandala" />
       <Breadcrumb {lang} current={info.title} />
       <div class="journey-page-lead">
@@ -75,6 +88,19 @@ import PillarIcon from '../../components/PillarIcon.astro';
         <p class="lead">{info.description}</p>
       </div>
     </header>}
+
+    {page === 'philosophy' && <>
+      <PhilosophyWhy {lang} />
+      <PhilosophyManifesto {lang} />
+      <LivingZenModel {lang} />
+      <PhilosophyValues {lang} />
+      <PhilosophyRefrain {lang} />
+      <PhilosophyInPractice {lang} />
+      <PhilosophyCommitments {lang} />
+      <PhilosophyEssays {lang} />
+      <PhilosophyGrowing {lang} />
+      <PhilosophyClosing {lang} />
+    </>}
 
     {page === 'guidance' && <CourseCatalogue {lang} />}
 
@@ -202,6 +228,9 @@ import PillarIcon from '../../components/PillarIcon.astro';
       <AlbumStrip {lang} id="journey-moments" balanced photos={['event-banner', 'studio-group', 'hug-closeup', 'studio-hug-six']}
         title={vi ? 'Trên những chặng gặp gỡ và chia sẻ' : 'Along the way: meeting and sharing'}
         intro={vi ? 'Một vài hình ảnh từ chuyến chia sẻ ở Nha Trang. Phần còn lại của hành trình nằm trong album.' : 'A few photographs from a sharing trip in Nha Trang. The rest of the journey is in the album.'} />
+      <p class="story-philosophy-note">
+        {philosophyCopy[lang].story.text} <a class="quiet-link" href={journeyPath(lang, 'philosophy')}>{philosophyCopy[lang].story.link} <Arrow /></a>
+      </p>
       <p class="story-team-cta">
         <a class="button button--tonal" href={journeyPath(lang, 'team')}>{vi ? 'Gặp đội ngũ Hương Thiền Nature' : 'Meet the Hương Thiền Nature team'} <Arrow /></a>
       </p>
@@ -213,5 +242,5 @@ import PillarIcon from '../../components/PillarIcon.astro';
     </>}
   </main>
   <Footer {lang} />
-  {page === 'ecosystem' && <LandingMotion />}
+  {(page === 'ecosystem' || page === 'philosophy') && <LandingMotion />}
 </BaseLayout>

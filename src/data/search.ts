@@ -10,6 +10,7 @@ import { getCopy, type Language } from './site.ts';
 import { products, productPath, shopPath, productCategories, formatPrice, stockLabel } from './products.ts';
 import { shopThemes, themePath } from './shop-themes.ts';
 import { thumbOf } from './article-thumbs.ts';
+import { philosophyCopy, philosophyTagline, philosophyValues, philosophyVersion, valueTitle } from './philosophy.ts';
 import { supportFund } from './support-fund.ts';
 import type { SearchImage, SearchRecord } from '../scripts/search-engine.ts';
 export type SearchEntry = SearchRecord;
@@ -17,7 +18,7 @@ export type SearchEntry = SearchRecord;
 const thumb = (name: string): SearchImage => ({ src: `/media/thumbs/${name}.webp`, width: 640, height: 400 });
 const pageImages: Record<string, SearchImage> = {
   practice: thumb('page-practice'), guidance: thumb('course-frequency'), ecosystem: thumb('page-ecosystem'), story: thumb('page-story'),
-  album: thumb('altar-flowers'), feedback: thumb('page-feedback'), support: thumb('page-support'), team: thumb('page-team'),
+  album: thumb('altar-flowers'), philosophy: thumb('page-philosophy'), feedback: thumb('page-feedback'), support: thumb('page-support'), team: thumb('page-team'),
 };
 const plain = (value: unknown): string => {
   if (typeof value === 'string') return value.replace(/<[^>]*>/g, ' ');
@@ -37,6 +38,7 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
         page === 'story' ? [t.introCopy, t.founderCopy, 'Carla Phương Cao, Thích Nhất Hạnh, Patriji, Hoàng Thị Phương Thảo, PSSM Việt Nam, Tịnh độ, Quảng Nam'] : '',
         page === 'practice' ? [t.practiceCopy, t.steps] : '',
         page === 'ecosystem' ? [t.natureCards, t.natureNote, t.phases, ecosystemVision[lang], ecosystemWhy[lang]] : '',
+        page === 'philosophy' ? [philosophyTagline[lang], philosophyCopy[lang].hero, philosophyCopy[lang].why, philosophyCopy[lang].manifesto, philosophyCopy[lang].model, philosophyCopy[lang].refrain, philosophyCopy[lang].commitments, philosophyCopy[lang].growing, philosophyVersion.id, philosophyValues.map(value => [value[lang === 'vi' ? 'titleVi' : 'titleEn'], value.summary[lang]])] : '',
         page === 'team' ? partnerProfiles.map(partner => [partner.name, partner[lang], partner.label]) : '',
         page === 'support' ? [supportFund[lang], 'TPBank Tiên Phong'] : '',
       ]),
@@ -64,5 +66,14 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
     return { title: copy.name, description: copy.description, url: productPath(lang, product.slug), category: shopCategory, text: plain([copy, product.keywords[lang], productCategories.find(category => category.id === product.category)?.[lang]]), product: { image: product.image, imageAlt: copy.alt, price: product.price, priceLabel: formatPrice(product.price, lang), unit: copy.unit, stock: product.stock, stockLabel: stockLabel(product.stock, lang) } };
   });
   const themeEntries = shopThemes.map(theme => ({ title: theme.name[lang], description: `${theme.tagline[lang]}. ${theme.lead[lang]}`, url: themePath(lang, theme), category: shopCategory, text: [theme.name.vi, theme.name.en, theme.tagline[lang], theme.door[lang]].join(' ') }));
-  return [...sections,...articles.map(article => { const cover = thumbOf(article.image); return {title:article.translations[lang].title,description:article.translations[lang].description,url:articlePath(lang,article.slug),category:article.translations[lang].category,text:plain([article.translations[lang],article.keywords?.[lang]]),...(cover.isThumb?{image:{src:cover.src,width:cover.width,height:cover.height}}:{})}; }), catalogue, ...themeEntries, ...productEntries];
+  const valueCategory = lang === 'vi' ? 'Triết lý sống' : 'Philosophy';
+  const valueEntries = philosophyValues.map(value => ({
+    title: `${valueTitle(lang, value).main} (${valueTitle(lang, value).alt})`,
+    description: value.summary[lang],
+    url: `${journeyPath(lang, 'philosophy')}#${value.slug}`,
+    category: valueCategory,
+    image: pageImages.philosophy,
+    text: plain([value.philosophy[lang], value.practicalApplications[lang], value.commitment[lang], value.reflectionQuestion[lang]]),
+  }));
+  return [...sections, ...valueEntries,...articles.map(article => { const cover = thumbOf(article.image); return {title:article.translations[lang].title,description:article.translations[lang].description,url:articlePath(lang,article.slug),category:article.translations[lang].category,text:plain([article.translations[lang],article.keywords?.[lang]]),...(cover.isThumb?{image:{src:cover.src,width:cover.width,height:cover.height}}:{})}; }), catalogue, ...themeEntries, ...productEntries];
 }

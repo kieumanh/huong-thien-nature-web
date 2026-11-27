@@ -79,16 +79,18 @@ test('albumPhoto rejects unknown ids so a typo cannot ship a blank slot', () => 
   assert.equal(albumAnchor(albumPhoto('event-banner')), 'photo-event-banner');
 });
 
-test('the album page has bilingual routes and sits in the menu between Practice and Feedback', () => {
+test('the album page has bilingual routes and sits in the footer Discover group, directly above the version link (not in the top menu)', () => {
   assert.ok(journeyPageKeys.includes('album'));
   assert.equal(albumPath('vi'), '/vi/album/');
   assert.equal(albumPath('en'), '/en/album/');
   assert.equal(journeyPath('vi', 'album'), albumPath('vi'));
   const header = read('src/components/Header.astro');
-  const at = header.indexOf("pageLink('album')");
-  assert.ok(at > header.indexOf("pageLink('practice')"), 'album follows the practice courses');
-  assert.ok(at < header.indexOf("pageLink('feedback')"), 'album comes before student feedback');
-  assert.ok(at < header.indexOf('nav-connect'), 'album comes before the Contact button');
+  assert.ok(!header.includes("pageLink('album')"), 'the album link has left the top menu (from 2.28.0)');
+  const footer = read('src/components/Footer.astro');
+  const album = footer.indexOf("journeyPath(lang, 'album')");
+  const versions = footer.indexOf('url: versionPath');
+  assert.ok(album > -1 && versions > album, 'the footer lists the album before the version link');
+  assert.equal((footer.slice(album, versions).match(/url:/g) ?? []).length, 0, 'nothing sits between the album link and the version link');
 });
 
 test('the menu collapses into the toggle below 1280px so nine links never overflow', () => {

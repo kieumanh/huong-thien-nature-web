@@ -1,0 +1,75 @@
+---
+// Section 04: the three-layer Living Zen model. Awareness sits at the centre; three growth rings carry the values
+// (3, 3 and 4 seeds). The rings are mutually supporting dimensions, never ranks. Without JavaScript every panel is
+// visible as plain text (the text alternative); with JavaScript the tabs, the rings and the Home pointer show one at a time.
+import PhilosophyIcon from './PhilosophyIcon.astro';
+import { philosophyCopy, philosophyTiers, philosophyValueById, valueTitle } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].model;
+const other: Language = lang === 'vi' ? 'en' : 'vi';
+const radii = { 1: 68, 2: 116, 3: 164 } as const;
+const angles = { 1: [-90, 30, 150], 2: [-60, 60, 180], 3: [-70, 20, 110, 200] } as const;
+const seeds = philosophyTiers.flatMap(tier => angles[tier.tier].map((angle, index) => {
+  const radius = radii[tier.tier];
+  const rad = (angle * Math.PI) / 180;
+  return { tier: tier.tier, id: `${tier.id}-${index}`, x: +(200 + radius * Math.cos(rad)).toFixed(1), y: +(200 + radius * Math.sin(rad)).toFixed(1), turn: angle + 90 };
+}));
+---
+<section class="ph-section ph-model" id="ph-model" aria-labelledby="ph-model-title" data-ph-model data-active="centre">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-model-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+  </div>
+  <div class="ph-model__stage">
+    <figure class="ph-model__figure" data-reveal="fade">
+      <svg class="ph-art ph-model-art" viewBox="0 0 400 400" role="img" aria-label={copy.figure}>
+        <defs>
+          <radialGradient id="ph-m-core"><stop offset="0" style="stop-color:var(--ph-core-a);stop-opacity:.9" /><stop offset="1" style="stop-color:var(--ph-core-b);stop-opacity:0" /></radialGradient>
+        </defs>
+        <circle class="ph-band ph-band--3" data-band="3" cx="200" cy="200" r="190" />
+        <circle class="ph-band ph-band--2" data-band="2" cx="200" cy="200" r="142" />
+        <circle class="ph-band ph-band--1" data-band="1" cx="200" cy="200" r="94" />
+        {[1, 2, 3].map(tier => <g class={`ph-rot ph-rot--${tier}`}>{seeds.filter(seed => seed.tier === tier).map(seed => <g transform={`translate(${seed.x} ${seed.y}) rotate(${seed.turn})`}><path class={`ph-seed ph-seed--${tier}`} d="M0 -10C7 -4 7 6 0 10C-7 6 -7 -4 0 -10Z" /></g>)}</g>)}
+        <circle class="ph-core-halo" cx="200" cy="200" r="58" fill="url(#ph-m-core)" />
+        <circle class="ph-core" data-band="centre" cx="200" cy="200" r="44" />
+        <text class="ph-core-text" x="200" y="206" text-anchor="middle">{copy.awareness.name}</text>
+      </svg>
+    </figure>
+    <div class="ph-model__panel">
+      <div class="ph-tabs js-only" role="tablist" aria-label={copy.tabsLabel}>
+        <button type="button" role="tab" id="ph-tab-centre" aria-controls="ph-panel-centre" aria-selected="true" data-key="centre">{copy.centreTab}</button>
+        {philosophyTiers.map(tier => <button type="button" role="tab" id={`ph-tab-${tier.tier}`} aria-controls={`ph-panel-${tier.tier}`} aria-selected="false" tabindex="-1" data-key={String(tier.tier)}>{tier.name[lang]}</button>)}
+      </div>
+      <div class="ph-panels">
+        <div class="ph-panel" id="ph-panel-centre" role="tabpanel" aria-labelledby="ph-tab-centre" data-key="centre">
+          <h3>{copy.awareness.name} <small lang={other}>{copy.awareness.english}</small></h3>
+          <p>{copy.awareness.text}</p>
+        </div>
+        {philosophyTiers.map(tier => <div class="ph-panel" id={`ph-panel-${tier.tier}`} role="tabpanel" aria-labelledby={`ph-tab-${tier.tier}`} data-key={String(tier.tier)}>
+          <h3>{tier.name[lang]} <small lang={other}>{tier.name[other]}</small></h3>
+          <p>{tier.meaning[lang]}</p>
+          <p class="ph-panel__label">{copy.valuesLabel}</p>
+          <ul class="ph-panel__values">
+            {tier.values.map(id => {
+              const value = philosophyValueById(id)!;
+              const title = valueTitle(lang, value);
+              return <li><a href={`#${value.slug}`}><PhilosophyIcon name={value.icon} /><span>{title.main}<small lang={title.altLang}>{title.alt}</small></span></a></li>;
+            })}
+          </ul>
+        </div>)}
+      </div>
+    </div>
+  </div>
+  <p class="ph-model__note" data-reveal="up">{copy.noHierarchy}</p>
+  <div class="ph-model__relation" data-reveal="up">
+    <h3>{copy.relationTitle}</h3>
+    <p>{copy.relation}</p>
+  </div>
+</section>
+<script>
+  import '../scripts/philosophy-model';
+</script>

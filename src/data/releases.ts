@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.28.0',
+    date: '2026-11-27',
+    vi: ['Trang mới "Triết lý sống": Living Zen với mười giá trị', 'Trang Triết lý sống nằm trên menu, sau Câu chuyện: tuyên ngôn, mô hình ba tầng, mười giá trị có thể mở ra đọc, những điều chúng mình chọn không làm và cam kết với cộng đồng, kèm năm hình minh họa động và ảnh thật từ album. Album chuyển xuống mục Khám phá ở chân trang.'],
+    en: ['New Philosophy page: Living Zen and its ten values', 'The Philosophy page sits in the menu after Our story: a manifesto, a three-tier model, ten values you can open and read, what we choose not to do, and our commitments to the community, with five animated illustrations and real photographs from the album. Album moves down to Discover in the footer.'],
+  },
+  {
     version: '2.27.1',
     date: '2026-11-27',
     vi: ['Vì sao là hệ sinh thái: vườn rừng đa tầng, hình động mới', 'Phần giải thích được viết lại theo đúng khái niệm: mô hình đồng nhất so với mô hình hệ sinh thái, như một vườn rừng đa tầng. Hình minh họa động được vẽ lại tinh tế hơn, có ánh nắng, mạng rễ nối nhau và hạt giống nảy mầm ở nơi mới.'],

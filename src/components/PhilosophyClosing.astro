@@ -1,0 +1,17 @@
+---
+// Section 11: a quiet ending. One real photograph of a stone path, one paragraph, no call to action.
+import AlbumImage from './AlbumImage.astro';
+import { philosophyCopy } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].closing;
+---
+<section class="ph-section ph-closing" id="ph-closing" aria-labelledby="ph-closing-title">
+  <div class="ph-closing__photo" data-reveal="fade"><div class="ph-arch"><AlbumImage id="stepping-stones-lawn" {lang} sizes="(min-width: 860px) 24rem, 80vw" /></div></div>
+  <div class="ph-closing__text" data-reveal="up">
+    <h2 id="ph-closing-title">{copy.title}</h2>
+    <p>{copy.text}</p>
+  </div>
+</section>

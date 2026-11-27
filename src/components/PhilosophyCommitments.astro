@@ -1,0 +1,24 @@
+---
+// Section 08: commitments to the community, written as directions we must carry out, never as achievements already reached.
+import AnimatedIcon from './AnimatedIcon.astro';
+import { philosophyCopy } from '../data/philosophy';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].commitments;
+---
+<section class="ph-section ph-commit" id="ph-commitments" aria-labelledby="ph-commit-title">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-commit-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+  </div>
+  <ul class="ph-commit__list">
+    {copy.groups.map(group => <li class="ph-commit__row" data-reveal="up">
+      <span class="landing-icon" aria-hidden="true"><AnimatedIcon name={group.icon as any} /></span>
+      <h3>{group.title}</h3>
+      <p>{group.text}</p>
+    </li>)}
+  </ul>
+</section>

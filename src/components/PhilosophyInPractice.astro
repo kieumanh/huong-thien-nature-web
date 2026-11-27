@@ -1,0 +1,63 @@
+---
+// Section 07: from philosophy to daily life. Six fields, each linking only to a page or project that already exists,
+// under a small animated figure (roots, rising sap and six leaves) and a strip of real photographs from the album.
+import AnimatedIcon from './AnimatedIcon.astro';
+import AlbumStrip from './AlbumStrip.astro';
+import Arrow from './Arrow.astro';
+import { philosophyCopy, type PhilosophyTarget } from '../data/philosophy';
+import { resolveTarget } from '../data/philosophy-links';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = philosophyCopy[lang].practice;
+const leaves: [number, number, string][] = [[150, 104, '-8'], [276, 66, '-4'], [394, 44, '-2'], [566, 44, '2'], [684, 66, '4'], [810, 104, '8']];
+const roots = [
+  'M480 236C468 270 430 292 380 304C330 316 270 318 214 336',
+  'M480 236C492 270 530 292 580 304C630 316 690 318 746 336',
+  'M476 244C470 282 452 318 440 350',
+  'M484 244C490 282 508 318 520 350',
+  'M380 304C350 322 330 338 300 352M580 304C610 322 630 338 660 352',
+  'M430 292C410 306 396 322 388 346M530 292C550 306 564 322 572 346',
+];
+---
+<section class="ph-section ph-practice" id="ph-practice" aria-labelledby="ph-practice-title">
+  <div class="ph-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="ph-practice-title">{copy.title}</h2>
+    <p class="lead">{copy.lead}</p>
+  </div>
+  <figure class="ph-figure ph-practice__figure" data-reveal="fade">
+    <svg class="ph-art ph-practice-art" viewBox="0 0 960 360" role="img" aria-label={copy.figure} preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <linearGradient id="ph-p-soil" x1="0" y1="0" x2="0" y2="1"><stop offset="0" style="stop-color:var(--ph-soil-a)" /><stop offset="1" style="stop-color:var(--ph-soil-b)" /></linearGradient>
+      </defs>
+      <rect class="ph-p-soil" y="232" width="960" height="128" fill="url(#ph-p-soil)" />
+      <path class="ph-p-ground" d="M0 232C160 224 320 236 480 230C640 224 800 236 960 230" />
+      <g class="ph-p-roots">{roots.map(d => <path d={d} />)}</g>
+      <g class="ph-p-sap">
+        <path d="M214 336C270 318 330 316 380 304C430 292 468 270 480 236" />
+        <path d="M746 336C690 318 630 316 580 304C530 292 492 270 480 236" />
+        <path d="M480 236C480 210 480 176 480 150" />
+        {leaves.map(([x, y]) => <path d={`M480 150C${x < 480 ? 480 - 70 : 480 + 70} ${(150 + y) / 2 + 20} ${x} ${y + 40} ${x} ${y + 14}`} />)}
+      </g>
+      <g class="ph-p-branches">
+        <path class="ph-p-trunk" d="M480 236C480 210 480 176 480 150" />
+        {leaves.map(([x, y]) => <path d={`M480 150C${x < 480 ? 480 - 70 : 480 + 70} ${(150 + y) / 2 + 20} ${x} ${y + 40} ${x} ${y + 14}`} />)}
+      </g>
+      {leaves.map(([x, y, tilt], index) => <g transform={`translate(${x} ${y})`}><g class={`ph-p-leaf ph-p-leaf--${index % 3}`} style={`--tilt:${tilt}deg;animation-delay:${-index * 1.3}s`}><path d="M0 14C-20 6 -20 -22 0 -34C20 -22 20 6 0 14Z" /><path class="ph-p-vein" d="M0 14V-20" /></g></g>)}
+    </svg>
+  </figure>
+  <ul class="ph-practice__fields">
+    {copy.fields.map(field => <li class="ph-field" data-reveal="up">
+      <span class="landing-icon" aria-hidden="true"><AnimatedIcon name={field.icon as any} /></span>
+      <h3>{field.title}</h3>
+      <p>{field.text}</p>
+      <p class="ph-field__links">{field.links.map(link => {
+        const target = resolveTarget(lang, link.target as PhilosophyTarget);
+        return <a class="quiet-link" href={target.href} rel={target.external ? 'noopener' : undefined} target={target.external ? '_blank' : undefined}>{link.label} <Arrow /></a>;
+      })}</p>
+    </li>)}
+  </ul>
+  <AlbumStrip {lang} id="ph-moments" balanced extraClass="ph-moments" photos={['seedling-coconut-shell', 'beach-meditate-calm', 'cabbage-rows-red-soil', 'altar-flowers']} title={copy.momentsTitle} intro={copy.momentsIntro} />
+</section>
