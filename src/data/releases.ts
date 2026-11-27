@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.30.1',
+    date: '2026-11-28',
+    vi: ['Câu chủ đạo ở tiêu đề trang chủ và ảnh chia sẻ', 'Tiêu đề trang chủ, thông tin cài đặt trên điện thoại và ảnh chia sẻ mặc định đều dùng câu chủ đạo mới.'],
+    en: ['The tagline in the home title and share image', 'The home page title, the mobile install details and the default share image now use the new tagline.'],
+  },
+  {
     version: '2.30.0',
     date: '2026-11-28',
     vi: ['Câu chủ đạo ở chân trang; khung tìm kiếm cửa hàng gọn hơn', 'Chân trang hiện đủ câu chủ đạo và logo không còn chồng lên tên. Ba không gian cửa hàng có nhóm lọc một dòng, nút xóa bộ lọc và số đếm theo bộ lọc.'],

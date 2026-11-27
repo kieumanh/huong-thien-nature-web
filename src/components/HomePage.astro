@@ -13,6 +13,7 @@ import BreathRing from './BreathRing.astro';
 import LandingFeelings from './LandingFeelings.astro';
 import LandingMotion from './LandingMotion.astro';
 import { homeEmpathy } from '../data/empathy';
+import { philosophyTagline } from '../data/philosophy';
 import { coursePath, frequencyCourse } from '../data/courses';
 import ArticleCard from './ArticleCard.astro';
 import Arrow from './Arrow.astro';
@@ -45,7 +46,7 @@ const welcome = homeEmpathy(lang, {
   ecosystem: journeyPath(lang, 'ecosystem'), article: slug => articlePath(lang, slug),
 });
 ---
-<BaseLayout {lang} title={`Hương Thiền Nature | ${vi ? 'Thiền định, chánh niệm và sống thuận tự nhiên' : 'Meditation, mindfulness and living close to nature'}`} {description} {alternatePath} canonicalPath={`/${lang}/`} aboutOrganization>
+<BaseLayout {lang} title={`Hương Thiền Nature | ${philosophyTagline[lang].join(' ')}`} {description} {alternatePath} canonicalPath={`/${lang}/`} aboutOrganization>
   <Header {lang} {alternatePath} />
   <main id="main-content" class="material-home landing-home" tabindex="-1">
     <section class="shell landing-hero material-hero" aria-labelledby="hero-title">

@@ -18,7 +18,7 @@ const brandImages = { vi: '/media/social/huong-thien-nature-vi.jpg', en: '/media
 const { lang = 'vi', title, description, alternatePath, canonicalPath, image = brandImages[Astro.props.lang === 'en' ? 'en' : 'vi'], imageDetails, ogType = 'website', noindex = false, pageType = 'WebPage', aboutOrganization = false, extraGraph = [] } = Astro.props;
 const imageUrl = new URL(image, 'https://huongthiennature.com').href;
 const brandImage = brandImages[lang === 'en' ? 'en' : 'vi'];
-const brandAlt = lang === 'vi' ? 'Biểu trưng Hương Thiền Nature trên nền tím đêm, cùng dòng chữ Thiền định, chánh niệm và sống thuận tự nhiên.' : 'The Hương Thiền Nature logo on a deep purple background with the words Meditation, mindfulness and living close to nature.';
+const brandAlt = lang === 'vi' ? 'Biểu trưng Hương Thiền Nature trên nền tím đêm, cùng dòng chữ Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.' : 'The Hương Thiền Nature logo on a deep purple background with the words Understand yourself. Live with nature. Live self-directed. Grow together.';
 const socialImage = imageDetails ?? (image === brandImage ? { type: 'image/jpeg', width: 1200, height: 630, alt: brandAlt } : undefined);
 const routePath = Astro.url.pathname;
 const pathname = canonicalPath ?? (routePath.endsWith('/') || /\.[a-z]+$/i.test(routePath) ? routePath : `${routePath}/`);
