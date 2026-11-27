@@ -1,3 +1,10 @@
+## 2.30.2 — Cỡ chữ chân trang hợp lý trên ba loại thiết bị
+
+- Slogan ở chân trang có ba cỡ chữ cố định: điện thoại (dưới 640px) 17px, máy tính bảng (640–959px) 18px, máy tính (từ 960px) 16px.
+- Cột thương hiệu ở máy tính rộng hơn một chút (tỷ lệ 1,1 : 1,4), nên mỗi cụm câu nằm trọn một dòng, cả tiếng Việt và tiếng Anh.
+- Tên "Hương Thiền Nature" nhỏ hơn và đều một cỡ (12px); logo trên điện thoại gọn hơn.
+- Đã đo ở 390, 820, 960, 1080 và 1440px: slogan đúng hai dòng ở cỡ chữ thường. Khi cỡ chữ hệ thống lớn hơn, có thể xuống dòng nhiều hơn, nhưng không còn dòng lẻ một chữ.
+
 ## 2.30.1 — Câu chủ đạo ở tiêu đề trang chủ, file cài đặt và ảnh chia sẻ
 
 - Tiêu đề trang chủ dùng câu chủ đạo: "Hương Thiền Nature | Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." (bản Anh: câu tương ứng).

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.30.2',
+    date: '2026-11-28',
+    vi: ['Cỡ chữ chân trang hợp lý trên ba loại thiết bị', 'Slogan chân trang có ba cỡ chữ cho điện thoại, máy tính bảng và máy tính; mỗi cụm câu nằm trọn một dòng ở máy tính.'],
+    en: ['Footer type sized for three device types', 'The footer slogan has one size each for phones, tablets and desktops, and each phrase pair sits on one line on desktop.'],
+  },
+  {
     version: '2.30.1',
     date: '2026-11-28',
     vi: ['Câu chủ đạo ở tiêu đề trang chủ và ảnh chia sẻ', 'Tiêu đề trang chủ, thông tin cài đặt trên điện thoại và ảnh chia sẻ mặc định đều dùng câu chủ đạo mới.'],
