@@ -47,7 +47,7 @@ Mọi quyết định thiết kế phải phản ánh được ít nhất một 
 
 ## 6. Brand Essence
 
-**Từ thiên nhiên, trở về với chính mình.** Hương Thiền Nature là chỗ giao nhau của thiền định, chánh niệm, trí tuệ phương Đông, tâm lý học ứng dụng, tình yêu thương, sống thuận tự nhiên, nông nghiệp và hệ sinh thái, dinh dưỡng và ẩm thực chay, công nghệ phục vụ con người, và tinh thần phụng sự.
+**Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.** Hương Thiền Nature là chỗ giao nhau của thiền định, chánh niệm, trí tuệ phương Đông, tâm lý học ứng dụng, tình yêu thương, sống thuận tự nhiên, nông nghiệp và hệ sinh thái, dinh dưỡng và ẩm thực chay, công nghệ phục vụ con người, và tinh thần phụng sự.
 
 ## 7. Brand Personality
 
@@ -84,7 +84,7 @@ Không dùng ngôn ngữ gây sợ hãi, áp đặt niềm tin, phán xét ngư�
 
 | Vai trò | Tiếng Việt | English | Khi dùng |
 |---|---|---|---|
-| Tagline chính | Từ thiên nhiên, trở về với chính mình. | Rooted in Nature. Awakened Within. | Logo lockup chiến dịch, bìa, đầu trang giới thiệu |
+| Tagline chính | Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành. | Understand yourself. Live with nature. Live self-directed. Grow together. | Logo lockup chiến dịch, bìa, đầu trang giới thiệu |
 | Lời chào trang chủ | Có mặt trong đời mình. | Be present for your own life. | Hero website, story mạng xã hội |
 | Chiến dịch cộng đồng | Gieo hạt tỉnh thức, nuôi dưỡng yêu thương. | — | Quỹ ủng hộ, sự kiện, túi vải |
 | Lối sống | Sống sâu sắc, sống giản dị, sống thuận tự nhiên. | — | Ấn phẩm, cửa hàng |

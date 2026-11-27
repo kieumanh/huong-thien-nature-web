@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-27, phiên bản 2.29.0 (một câu chủ đạo "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành."; một khối Living Zen; Living Zen Philosophy v1.1 đủ mười ví dụ). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-27, phiên bản 2.29.1 (bộ nhận diện đồng bộ câu chủ đạo mới; khung riêng cho câu bổ sung ở Triết lý sống). Trước đó, 2.29.0 (một câu chủ đạo "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành."; một khối Living Zen; Living Zen Philosophy v1.1 đủ mười ví dụ). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 27/11 | 2.29.1: bộ nhận diện đồng bộ câu chủ đạo mới (`brand/README.md`, brand book và `chapters/02`, `quick-guide.md`, `kits.py` và mẫu SVG/PNG/PDF có chữ, `book.py`, `build.py`, `src/pages/living-zen/index.astro`); font cài qua `build.py` `install_fonts()` trước khi dựng lại mẫu; biển hiệu, bìa Facebook/YouTube/Zalo sửa bố cục; khung `.ph-nature__place` ở Triết lý sống; test quét `brand/` |
 | 27/11 | 2.29.0: câu chủ đạo thống nhất (`living-zen.ts` + `philosophyTagline`); gộp khối Living Zen (`LivingZenValues.astro`, biến thể `compact` ở Hệ sinh thái; xóa `PhilosophyPointer.astro`, `.lz-tiles`, `.lz-not-line`); bỏ câu học hỏi tại Farm ở `ecosystem-why.ts`; Triết lý sống v1.1 (đủ 10 ví dụ, `PhilosophyTarget` thêm `ecosystem`/`history`, `changelog` v1.1); bộ `brand/` và `/living-zen/` chưa đổi câu |
 | 27/11 | 2.28.0: trang "Triết lý sống" (`/vi/triet-ly/`, `/en/philosophy/`; dữ liệu `src/data/philosophy.ts`, 10 thành phần `Philosophy*.astro` + `LivingZenModel.astro`, `src/styles/philosophy.css`, `src/scripts/philosophy-model.ts`); khối `PhilosophyPointer.astro` ở Trang chủ, dòng nối ở Câu chuyện, bản ghi tìm kiếm cho trang và 10 giá trị; Album bỏ khỏi menu, vào footer Khám phá trên "Phiên bản"; thu nhẹ khoảng cách menu 1280–1439px; `docs/living-zen-index.md`; `tests/philosophy.test.ts` |
 | 27/11 | 2.27.1: viết lại "Vì sao là hệ sinh thái" theo khái niệm đồng nhất vs hệ sinh thái (vườn rừng đa tầng, không nhắc Linux) và vẽ lại hình động (`EcosystemWhy.astro`, `ecosystem-why.ts`) |

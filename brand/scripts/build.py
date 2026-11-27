@@ -233,7 +233,7 @@ def build_patterns():
 
 # ------------------------------------------------------------------ typography specimen
 def build_specimen():
-    lines = ['Hương Thiền Nature', 'Từ thiên nhiên, trở về với chính mình.', 'Tình yêu thương vô điều kiện · Nông nghiệp thuận tự nhiên',
+    lines = ['Hương Thiền Nature', 'Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.', 'Tình yêu thương vô điều kiện · Nông nghiệp thuận tự nhiên',
              'Trí tuệ và nhận biết · Thân – Tâm – Trí', 'ă â đ ê ô ơ ư · ằ ẳ ẵ ắ ặ · ề ể ễ ế ệ · ồ ổ ỗ ố ộ · ờ ở ỡ ớ ợ · ừ ử ữ ứ ự · ỳ ỷ ỹ ý ỵ']
     faces = [('Georgia (hiện tại)', 'Georgia, DejaVu Serif'), ('Lora — chọn cho biên tập', 'Lora'), ('Noto Serif', 'Noto Serif, DejaVu Serif'),
              ('Be Vietnam Pro — tài liệu in', 'Be Vietnam Pro'), ('System UI — giao diện web', 'DejaVu Sans'), ('Dancing Script — cảm xúc', 'Dancing Script')]

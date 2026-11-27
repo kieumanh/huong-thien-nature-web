@@ -1,6 +1,6 @@
 # Hương Thiền Nature · Living Zen 2.0 — Brand Kit
 
-Bộ nhận diện thương hiệu độc lập với website. **Rooted in Nature. Awakened Within.** · *Từ thiên nhiên, trở về với chính mình.*
+Bộ nhận diện thương hiệu độc lập với website. **Understand yourself. Live with nature. Live self-directed. Grow together.** · *Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.*
 
 - Đọc trước: `guidelines/brand-book.pdf` (24 trang) hoặc `guidelines/brand-book.md`; đối tác: `guidelines/quick-guide.pdf`.
 - Kiểm kê trước 2.0: `audit/brand-audit-report.md`. Chiến lược: `strategy/`.

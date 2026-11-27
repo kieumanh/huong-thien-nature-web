@@ -74,7 +74,7 @@ def render_html(md_text: str, base: Path, title: str, cover: bool, toc: bool, sm
     if cover:
         logo = (BRAND / 'logos/primary/htn-primary-ivory.svg').as_uri()
         head = (f'<section class="cover"><img src="{logo}" alt=""><p class="title">{title}</p>'
-                '<p class="tag">Rooted in Nature. Awakened Within.</p><p class="meta">Living Zen — Organic Spiritual Design System · Phiên bản thương hiệu 2.0 · 26/11/2026</p></section>')
+                '<p class="tag">Understand yourself. Live with nature. Live self-directed. Grow together.</p><p class="meta">Living Zen — Organic Spiritual Design System · Phiên bản thương hiệu 2.0.1 · 27/11/2026</p></section>')
     if toc:
         items = re.findall(r'<h2>(.*?)</h2>', html)
         head += '<h2>Mục lục</h2><ol class="toc">' + ''.join(f'<li>{re.sub("<[^>]+>", "", item)}</li>' for item in items) + '</ol>'

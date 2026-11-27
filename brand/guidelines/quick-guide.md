@@ -1,6 +1,6 @@
 # Hương Thiền Nature · Living Zen 2.0 — Quick Guide cho đối tác
 
-**Từ thiên nhiên, trở về với chính mình.** *Rooted in Nature. Awakened Within.*
+**Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.** *Understand yourself. Live with nature. Live self-directed. Grow together.*
 
 Hương Thiền Nature là hệ sinh thái học tập, thực hành và nuôi dưỡng đời sống tỉnh thức. Ba phẩm chất: **có gốc rễ trong đất · có khoảng lặng trong tâm · có ánh sáng trong trí** (THÂN · TÂM · TRÍ).
 
