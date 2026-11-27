@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.26.6',
+    date: '2026-11-27',
+    vi: ['Phần kết Hệ sinh thái: ảnh nghỉ chân dưới hàng dừa', 'Ảnh phần kết đổi sang một ảnh thật từ album: người phụ nữ mỉm cười dưới hàng dừa cùng em bé, nhẹ nhàng và bình yên.'],
+    en: ['Ecosystem closing: a rest under the palms', 'The closing photo is now a real album photograph: a smiling woman and a toddler resting in the shade of coconut palms, calm and content.'],
+  },
+  {
     version: '2.26.5',
     date: '2026-11-27',
     vi: ['Phần kết Hệ sinh thái: ảnh ngồi thiền bên biển', 'Ảnh phần kết đổi sang một ảnh thật từ album: người ngồi thiền trên bãi cát, hai tay mở và mỉm cười, giữ tỷ lệ gốc.'],

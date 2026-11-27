@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-26, phiên bản 2.26.5 (phần kết Hệ sinh thái: ảnh beach-meditate-smile). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-26, phiên bản 2.26.6 (phần kết Hệ sinh thái: ảnh beach-palms). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 27/11 | 2.26.6: phần kết Hệ sinh thái dùng ảnh album `beach-palms` (4:3) (`[section].astro`) |
 | 27/11 | 2.26.5: phần kết Hệ sinh thái dùng ảnh album `beach-meditate-smile` (4:3); `.eco-closing__art img` đổi sang `aspect-ratio: 4 / 3` |
 | 27/11 | 2.26.4: phần kết Hệ sinh thái dùng ảnh album `prayer-hands-seashore` (16:9); gỡ `eco-closing-horizon.svg` (`[section].astro`, `.eco-closing__art`) |
 | 26/11 | 2.26.3: phần kết Hệ sinh thái dùng `public/media/illustrations/eco-closing-horizon.svg` (`[section].astro`, `.eco-closing__art` trong `landing.css`) |

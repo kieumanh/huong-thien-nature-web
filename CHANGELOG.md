@@ -1,3 +1,9 @@
+## 2.26.6 — Phần kết Hệ sinh thái: ảnh nghỉ chân dưới hàng dừa
+
+- Đổi ảnh phần kết sang `beach-palms` (1280 × 960, 4:3): người phụ nữ mỉm cười dưới hàng dừa, em bé đang ăn bên cạnh. Ảnh thể hiện sự bình an và hạnh phúc đơn giản, và giữ đúng tỷ lệ gốc nên không bị cắt.
+- Ảnh có trẻ nhỏ: album ghi nhận chủ dự án đã đồng ý đăng ảnh trẻ em và người trong cộng đồng (24/11/2026).
+- Thay `beach-meditate-smile` (2.26.5). Hai ảnh này vẫn còn trong album.
+
 ## 2.26.5 — Phần kết Hệ sinh thái: ảnh ngồi thiền bên biển
 
 - Đổi ảnh phần kết sang `beach-meditate-smile` (870 × 656, tỷ lệ 4:3): một người ngồi xếp bằng trên bãi cát, hai tay mở trên gối và mỉm cười. Khung `.eco-closing__art` giữ đúng tỷ lệ ảnh (4:3) thay vì 16:9.
