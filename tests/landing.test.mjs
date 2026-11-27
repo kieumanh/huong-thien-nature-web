@@ -72,12 +72,13 @@ test('the Home hero is one calm photograph: no slideshow, no extra ornaments', (
   }
 });
 
-test('the Ecosystem page explains why an ecosystem (Linux-style) with an animated figure; Home does not repeat it', () => {
+test('the Ecosystem page explains why an ecosystem (uniform model vs layered forest garden) with an animated figure; Home does not repeat it', () => {
   for (const [lang, route] of [['vi', 'he-sinh-thai'], ['en', 'ecosystem']]) {
     const html = page(`${lang}/${route}/index.html`);
     const section = html.match(/<section[^>]*id="why-ecosystem"[^>]*>([\s\S]*?)<\/section>/)?.[1];
     assert(section, `${lang}: missing the "why an ecosystem" section`);
-    assert(section.includes('Linux'), `${lang}: the section should draw the Linux comparison`);
+    assert(!/Linux/i.test(section), `${lang}: Linux was only the owner's way of pointing at the likeness, so it is not named`);
+    for (const label of lang === 'vi' ? ['Mô hình đồng nhất', 'Mô hình hệ sinh thái', 'vườn rừng'] : ['Uniform model', 'Ecosystem model', 'forest garden']) assert(section.includes(label), `${lang}: missing "${label}"`);
     assert(section.includes('data-eco-why-figure'), `${lang}: missing the animated figure`);
     assert.equal(count(section, /class="eco-why__panel/g), 2, `${lang}: figure compares one lone tree with a layered garden`);
     assert(count(section, /<svg\b[^>]*aria-hidden="true"/g) >= 2, `${lang}: figure artwork is decorative`);
