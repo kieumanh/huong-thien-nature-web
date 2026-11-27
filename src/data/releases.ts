@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.29.3',
+    date: '2026-11-28',
+    vi: ['Sửa menu ở màn hình 1440px', 'Menu không còn làm trang rộng thêm vài điểm ảnh ở 1440px; chữ menu chỉ lớn hơn từ 1600px.'],
+    en: ['Menu fix at 1440px', 'The menu no longer widens the page by a few pixels at 1440px; larger menu text starts at 1600px.'],
+  },
+  {
     version: '2.29.2',
     date: '2026-11-27',
     vi: ['Menu máy tính dễ đọc hơn', 'Trang đang xem có gạch chân, chữ menu lớn dần theo màn hình rộng, nút Liên hệ nổi bật hơn.'],

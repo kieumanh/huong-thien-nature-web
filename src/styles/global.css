@@ -170,7 +170,7 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   .nav-links a, .nav-connect { padding-inline: .4rem; }
 }
 
-/* Desktop menu (2.29.2): the current page reads at a glance, the label grows with the screen, the header uses wide screens, Contact is a clear button. */
+/* Desktop menu (2.29.2, tiers fixed in 2.29.3): the current page reads at a glance, the label grows only from 1600px where the header is wider (a larger size at 1440px overflowed by 2px with the CI fonts), Contact is a clear button. */
 @media (min-width: 1280px) {
   .nav-links a { position: relative; }
   .nav-links a.active, .nav-links a[aria-current] { background: transparent; box-shadow: inset 0 -2px 0 var(--primary); border-radius: var(--radius-input) var(--radius-input) 0 0; }
@@ -179,10 +179,20 @@ figcaption a, .text-link { text-decoration: underline; text-underline-offset: .1
   .nav-actions .nav-connect:is(:hover, :focus-visible), .nav-actions .nav-connect[aria-current] { background: var(--primary); color: var(--on-primary); box-shadow: 0 0 0 2px var(--surface), 0 0 0 4px var(--orchid); }
 }
 @media (min-width: 1440px) {
-  .nav-links a { font-size: .9rem; padding-inline: .5rem; }
+  .topbar .nav { width: min(1560px, calc(100% - 2 * var(--site-gutter))); }
+}
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .nav-links a { padding-inline: .4rem; }
+  .nav-actions .nav-connect { padding-inline: .8rem; }
+}
+@media (min-width: 1280px) and (max-width: 1439px) {
+  .nav { gap: .5rem; }
+  .nav-actions { gap: .4rem; }
+  .nav-links a { padding-inline: .35rem; }
+  .nav-actions .nav-connect { padding-inline: .6rem; }
 }
 @media (min-width: 1600px) {
-  .topbar .nav { width: min(1560px, calc(100% - 2 * var(--site-gutter))); gap: 1.4rem; }
+  .nav { gap: 1.4rem; }
   .nav-links a { font-size: .95rem; padding-inline: .6rem; }
 }
 @media (min-width: 1800px) {
