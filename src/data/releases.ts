@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.27.0',
+    date: '2026-11-27',
+    vi: ['Vì sao là hệ sinh thái: so sánh với Linux, có hình động', 'Trang Hệ sinh thái có thêm phần giải thích vì sao Hương Thiền Nature lan tỏa theo kiểu hệ sinh thái, như cộng đồng Linux cùng xây trên một nền chung, kèm hình động một cây đơn lẻ và một khu vườn nhiều tầng.'],
+    en: ['Why an ecosystem: a Linux-style comparison, animated', 'The Ecosystem page now explains why Hương Thiền Nature grows as an ecosystem, the way Linux communities build on one shared foundation, with an animated picture of a lone tree beside a layered garden.'],
+  },
+  {
     version: '2.26.6',
     date: '2026-11-27',
     vi: ['Phần kết Hệ sinh thái: ảnh nghỉ chân dưới hàng dừa', 'Ảnh phần kết đổi sang một ảnh thật từ album: người phụ nữ mỉm cười dưới hàng dừa cùng em bé, nhẹ nhàng và bình yên.'],

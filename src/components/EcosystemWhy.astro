@@ -1,0 +1,157 @@
+---
+// "Vì sao là hệ sinh thái": Linux-style comparison between one lone tree and a layered garden with shared roots.
+// Words come from src/data/ecosystem-why.ts; the picture is inline SVG moved only by CSS (off when motion is reduced).
+import AnimatedIcon from './AnimatedIcon.astro';
+import { ecosystemWhy } from '../data/ecosystem-why';
+import type { Language } from '../data/site';
+
+interface Props { lang: Language }
+const { lang } = Astro.props as Props;
+const copy = ecosystemWhy[lang];
+
+// Nutrient pulses along the shared roots (pathLength 100 so one dash length works for every path).
+const roots = [
+  { d: 'M172 196 C172 224 140 238 112 246', delay: 0 },
+  { d: 'M172 196 C172 226 212 240 254 246', delay: 0 },
+  { d: 'M100 196 C100 222 104 236 112 246', delay: 1.1 },
+  { d: 'M256 196 C256 220 256 234 254 246', delay: 1.3 },
+  { d: 'M254 246 C288 254 322 244 332 220 L332 196', delay: 1.8 },
+  { d: 'M112 246 C80 250 56 238 46 218 L46 196', delay: 1.8 },
+];
+---
+<section class="journey-section eco-why" id="why-ecosystem" aria-labelledby="eco-why-title">
+  <div class="landing-head" data-reveal="up">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 id="eco-why-title">{copy.title}</h2>
+    <p class="lead eco-why__lead">{copy.lead}</p>
+  </div>
+
+  <figure class="eco-why__figure" data-eco-why-figure data-reveal="fade" role="group" aria-label={copy.figureLabel}>
+    <div class="eco-why__panel eco-why__panel--single">
+      <svg viewBox="0 0 400 280" aria-hidden="true" focusable="false">
+        <rect class="ew-soil" x="16" y="196" width="368" height="68" rx="18" />
+        <g class="ew-roots ew-roots--solo">
+          <path d="M200 196 C200 222 188 236 176 250" />
+          <path d="M200 196 C200 222 212 236 224 250" />
+          <path d="M200 198 C200 218 200 232 200 244" />
+        </g>
+        <g class="ew-tree ew-tree--solo">
+          <rect class="ew-trunk" x="192" y="104" width="16" height="94" rx="6" />
+          <ellipse class="ew-leaf ew-leaf--deep" cx="200" cy="84" rx="68" ry="58" />
+          <ellipse class="ew-leaf ew-leaf--mid" cx="176" cy="74" rx="30" ry="26" />
+        </g>
+        <ellipse class="ew-seed ew-seed--solo" cx="266" cy="100" rx="6.5" ry="4.3" />
+      </svg>
+      <h3>{copy.single.title}</h3>
+      <p>{copy.single.text}</p>
+    </div>
+
+    <div class="eco-why__panel eco-why__panel--eco">
+      <svg viewBox="0 0 400 280" aria-hidden="true" focusable="false">
+        <rect class="ew-soil" x="16" y="196" width="368" height="68" rx="18" />
+        <g class="ew-roots">
+          {roots.map(({ d }) => <path d={d} />)}
+        </g>
+        <g class="ew-pulses">
+          {roots.map(({ d, delay }) => <path class="ew-pulse" d={d} pathLength="100" style={`--d:${delay}s`} />)}
+        </g>
+        <g class="ew-tree ew-tree--a">
+          <rect class="ew-trunk" x="165" y="70" width="14" height="128" rx="6" />
+          <ellipse class="ew-leaf ew-leaf--deep" cx="172" cy="62" rx="52" ry="44" />
+          <ellipse class="ew-leaf ew-leaf--mid" cx="156" cy="54" rx="22" ry="18" />
+        </g>
+        <g class="ew-tree ew-tree--b">
+          <rect class="ew-trunk" x="250.5" y="122" width="11" height="76" rx="5" />
+          <ellipse class="ew-leaf ew-leaf--mid" cx="256" cy="112" rx="40" ry="34" />
+          <ellipse class="ew-leaf ew-leaf--soft" cx="244" cy="104" rx="16" ry="13" />
+        </g>
+        <g class="ew-tree ew-tree--c">
+          <rect class="ew-trunk" x="98" y="188" width="4" height="10" rx="2" />
+          <ellipse class="ew-leaf ew-leaf--soft" cx="100" cy="182" rx="32" ry="20" />
+        </g>
+        <g transform="translate(332 196)"><g class="ew-sprout ew-sprout--r">
+          <path class="ew-stem" d="M0 0 L0 -20" />
+          <path class="ew-leaf ew-leaf--mid" d="M0 -8 C-2 -18 -12 -24 -20 -24 C-18 -14 -10 -8 0 -8Z" />
+          <path class="ew-leaf ew-leaf--deep" d="M0 -14 C2 -24 12 -30 20 -30 C18 -20 10 -14 0 -14Z" />
+        </g></g>
+        <g transform="translate(46 196)"><g class="ew-sprout ew-sprout--l">
+          <path class="ew-stem" d="M0 0 L0 -20" />
+          <path class="ew-leaf ew-leaf--mid" d="M0 -8 C-2 -18 -12 -24 -20 -24 C-18 -14 -10 -8 0 -8Z" />
+          <path class="ew-leaf ew-leaf--deep" d="M0 -14 C2 -24 12 -30 20 -30 C18 -20 10 -14 0 -14Z" />
+        </g></g>
+        <ellipse class="ew-seed ew-seed--r" cx="222" cy="64" rx="6.5" ry="4.3" />
+        <ellipse class="ew-seed ew-seed--l" cx="122" cy="64" rx="6.5" ry="4.3" />
+      </svg>
+      <h3>{copy.eco.title}</h3>
+      <p>{copy.eco.text}</p>
+    </div>
+  </figure>
+
+  <ul class="eco-why__points" role="list">
+    {copy.points.map(point => <li data-reveal="up">
+      <span class="landing-icon" aria-hidden="true"><AnimatedIcon name={point.icon} /></span>
+      <h3>{point.title}</h3>
+      <p>{point.text}</p>
+    </li>)}
+  </ul>
+
+  <p class="eco-why__care" data-reveal="up">{copy.care}</p>
+</section>
+
+<style>
+  .eco-why { --ew-trunk: #8b6a4a; --ew-deep: #5f8055; --ew-mid: #739a68; --ew-soft: #a6b36a; --ew-root: #a07a4c; --ew-pulse: #e3b04b; --ew-soil: color-mix(in srgb, #b08a5e 34%, var(--surface-container)); }
+  .eco-why .landing-head { margin-bottom: clamp(1.6rem, 5vw, 2.6rem); }
+  .eco-why__lead { max-width: 38rem; }
+
+  .eco-why__figure { display: grid; gap: clamp(.9rem, 3vw, 1.5rem); max-width: 62rem; margin: 0 auto; }
+  .eco-why__panel { display: grid; gap: .5rem; align-content: start; padding: clamp(.8rem, 2.6vw, 1.3rem); border: 1px solid var(--border); border-radius: var(--radius-feature); background: var(--surface-raised); text-align: center; }
+  .eco-why__panel--eco { border-color: var(--ew-deep); box-shadow: 0 18px 44px #2a3a2a1f; }
+  .eco-why__panel svg { display: block; width: 100%; height: auto; border-radius: 1rem; background: color-mix(in srgb, var(--surface-container) 62%, var(--surface-raised)); }
+  .eco-why__panel h3 { margin: .4rem 0 0; font-family: var(--serif); font-weight: 500; font-size: clamp(1.2rem, 3vw, 1.45rem); color: var(--primary); }
+  .eco-why__panel p { margin: 0 auto; max-width: 28rem; color: var(--muted); }
+  @media (min-width: 720px) { .eco-why__figure { grid-template-columns: 1fr 1fr; align-items: stretch; } }
+
+  .eco-why__points { display: grid; gap: clamp(1.1rem, 3vw, 1.6rem); margin: clamp(1.8rem, 5vw, 2.8rem) auto 0; padding: 0; list-style: none; max-width: 62rem; }
+  .eco-why__points li { display: grid; justify-items: center; gap: .45rem; text-align: center; }
+  .eco-why__points h3 { margin: .2rem 0 0; font-family: var(--serif); font-weight: 500; font-size: 1.2rem; color: var(--primary); }
+  .eco-why__points p { margin: 0; max-width: 20rem; color: var(--muted); }
+  @media (min-width: 720px) { .eco-why__points { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+
+  .eco-why__care { max-width: 40rem; margin: clamp(1.8rem, 5vw, 2.8rem) auto 0; text-align: center; font-family: var(--serif); font-size: 1.08rem; line-height: 1.7; }
+
+  /* Picture colours */
+  .ew-soil { fill: var(--ew-soil); }
+  .ew-trunk { fill: var(--ew-trunk); }
+  .ew-leaf--deep { fill: var(--ew-deep); }
+  .ew-leaf--mid { fill: var(--ew-mid); }
+  .ew-leaf--soft { fill: var(--ew-soft); }
+  .ew-stem { fill: none; stroke: var(--ew-deep); stroke-width: 3; stroke-linecap: round; }
+  .ew-roots path { fill: none; stroke: var(--ew-root); stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; opacity: .85; }
+  .ew-pulse { fill: none; stroke: var(--ew-pulse); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 9 200; stroke-dashoffset: 9; opacity: 0; }
+  .ew-seed { fill: #f2d98d; stroke: var(--ew-trunk); stroke-width: 1.3; opacity: 0; transform-box: fill-box; transform-origin: center; }
+
+  /* Motion: each part keeps a slow, quiet rhythm */
+  .ew-tree { transform-box: fill-box; transform-origin: 50% 100%; animation: ew-sway 7s ease-in-out infinite alternate; }
+  .ew-tree--b { animation-duration: 8.5s; animation-delay: -2s; }
+  .ew-tree--c { animation-duration: 6s; animation-delay: -4s; }
+  .ew-pulse { animation: ew-flow 4.8s ease-in-out infinite; animation-delay: var(--d, 0s); }
+  .ew-sprout { transform-box: fill-box; transform-origin: 50% 100%; animation: ew-grow 8s ease-in-out infinite; }
+  .ew-sprout--l { animation-delay: -4s; }
+  .ew-seed--solo { animation: ew-seed-solo 8s ease-in-out infinite; }
+  .ew-seed--r { animation: ew-seed-r 8s ease-in-out infinite; }
+  .ew-seed--l { animation: ew-seed-l 8s ease-in-out infinite; animation-delay: -4s; }
+
+  @keyframes ew-sway { from { transform: rotate(-1.4deg); } to { transform: rotate(1.4deg); } }
+  @keyframes ew-flow { 0% { stroke-dashoffset: 9; opacity: 0; } 10% { opacity: 1; } 80% { opacity: 1; } 100% { stroke-dashoffset: -100; opacity: 0; } }
+  @keyframes ew-grow { 0%, 50% { transform: scale(.22); opacity: .4; } 62%, 90% { transform: scale(1); opacity: 1; } 100% { transform: scale(.22); opacity: .4; } }
+  @keyframes ew-seed-solo { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 50% { opacity: 1; transform: translate(-34px, 90px) rotate(80deg); } 64%, 100% { opacity: 0; transform: translate(-34px, 90px) rotate(80deg); } }
+  @keyframes ew-seed-r { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 30% { transform: translate(50px, -26px) rotate(40deg); } 54% { opacity: 1; transform: translate(110px, 128px) rotate(150deg); } 64%, 100% { opacity: 0; transform: translate(110px, 128px) rotate(150deg); } }
+  @keyframes ew-seed-l { 0% { opacity: 0; transform: translate(0, 0); } 10% { opacity: 1; } 30% { transform: translate(-40px, -22px) rotate(-40deg); } 54% { opacity: 1; transform: translate(-76px, 128px) rotate(-150deg); } 64%, 100% { opacity: 0; transform: translate(-76px, 128px) rotate(-150deg); } }
+
+  /* Still picture for visitors who ask for less motion: trees upright, sprouts grown, no travelling seeds or pulses */
+  @media (prefers-reduced-motion: reduce) {
+    .ew-tree, .ew-pulse, .ew-sprout, .ew-seed { animation: none; }
+    .ew-pulse, .ew-seed { opacity: 0; }
+    .ew-sprout { transform: none; opacity: 1; }
+  }
+</style>

@@ -16,8 +16,8 @@ const count = (html, re) => (html.match(re) ?? []).length;
 const budgets = [
   { name: 'Home vi', file: 'vi/index.html', maxWords: 1400, minImages: 14, minIcons: 10 },
   { name: 'Home en', file: 'en/index.html', maxWords: 1150, minImages: 14, minIcons: 10 },
-  { name: 'Ecosystem vi', file: 'vi/he-sinh-thai/index.html', maxWords: 900, minImages: 12, minIcons: 6 },
-  { name: 'Ecosystem en', file: 'en/ecosystem/index.html', maxWords: 760, minImages: 12, minIcons: 6 },
+  { name: 'Ecosystem vi', file: 'vi/he-sinh-thai/index.html', maxWords: 980, minImages: 12, minIcons: 6 },
+  { name: 'Ecosystem en', file: 'en/ecosystem/index.html', maxWords: 820, minImages: 12, minIcons: 6 },
 ];
 
 for (const b of budgets) {
@@ -70,4 +70,29 @@ test('the Home hero is one calm photograph: no slideshow, no extra ornaments', (
     for (const gone of ['data-hero-slide', 'data-hero-toggle', 'data-hero-dot', 'hero-slides']) assert(!html.includes(gone), `${gone} must not return to the Home page`);
     for (const gone of ['landing-orb', 'landing-hero__leaf', 'breath-ring']) assert(!art.includes(gone), `${gone} must not return to the Home hero`);
   }
+});
+
+test('the Ecosystem page explains why an ecosystem (Linux-style) with an animated figure; Home does not repeat it', () => {
+  for (const [lang, route] of [['vi', 'he-sinh-thai'], ['en', 'ecosystem']]) {
+    const html = page(`${lang}/${route}/index.html`);
+    const section = html.match(/<section[^>]*id="why-ecosystem"[^>]*>([\s\S]*?)<\/section>/)?.[1];
+    assert(section, `${lang}: missing the "why an ecosystem" section`);
+    assert(section.includes('Linux'), `${lang}: the section should draw the Linux comparison`);
+    assert(section.includes('data-eco-why-figure'), `${lang}: missing the animated figure`);
+    assert.equal(count(section, /class="eco-why__panel/g), 2, `${lang}: figure compares one lone tree with a layered garden`);
+    assert(count(section, /<svg\b[^>]*aria-hidden="true"/g) >= 2, `${lang}: figure artwork is decorative`);
+    const points = section.match(/<ul[^>]*eco-why__points[^>]*>([\s\S]*?)<\/ul>/)?.[1] ?? '';
+    assert.equal(count(points, /<li\b/g), 3, `${lang}: three reasons`);
+    const home = page(`${lang}/index.html`);
+    assert(!home.includes('why-ecosystem') && !home.includes('data-eco-why-figure'), `${lang}: the explanation lives on the Ecosystem page only`);
+  }
+});
+
+test('the "why an ecosystem" figure uses CSS keyframes only and rests under reduced motion', () => {
+  const src = fs.readFileSync('src/components/EcosystemWhy.astro', 'utf8');
+  assert(!/<animate\b|<animateTransform\b|<set\b/.test(src), 'no SMIL: animation is CSS keyframes only');
+  assert(/@keyframes\s+ew-/.test(src), 'the figure animates with its own keyframes');
+  const reduced = src.match(/@media \(prefers-reduced-motion: reduce\)\s*\{([\s\S]*?)\n  \}/)?.[1] ?? '';
+  assert(reduced.includes('animation: none') || reduced.includes('animation:none'), 'animations stop under reduced motion');
+  assert(!src.includes('data-ecosystem-illustration'), 'must not collide with the two strategy illustrations');
 });
