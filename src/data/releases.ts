@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.29.2',
+    date: '2026-11-27',
+    vi: ['Menu máy tính dễ đọc hơn', 'Trang đang xem có gạch chân, chữ menu lớn dần theo màn hình rộng, nút Liên hệ nổi bật hơn.'],
+    en: ['A clearer desktop menu', 'The current page is underlined, menu text grows on wider screens, and the Contact button stands out.'],
+  },
+  {
     version: '2.29.1',
     date: '2026-11-27',
     vi: ['Bộ nhận diện theo câu chủ đạo mới; khung riêng cho câu bổ sung', 'Bộ nhận diện thương hiệu, mẫu in và mạng xã hội, cùng trang nội bộ /living-zen/ dùng câu chủ đạo mới. Trong Triết lý sống, đoạn "Hương Thiền Nature là hệ sinh thái" nằm trong một khung riêng với nền ngả vàng nhẹ để thể hiện đây là phần bổ sung.'],

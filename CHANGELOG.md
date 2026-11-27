@@ -1,3 +1,10 @@
+## 2.29.2 — Menu máy tính dễ đọc hơn
+
+- Trang đang xem có gạch chân (không chỉ đổi nền nhạt), nhận ra ngay ở chế độ ngày và đêm.
+- Cỡ chữ và khoảng cách mục menu tăng dần theo màn hình: 14px ở 1280–1439px, 14,4px từ 1440px, 15,2px từ 1600px, 16px từ 1800px; từ 1600px thanh menu rộng tới 1560px để các mục thoáng hơn.
+- Nút "Liên hệ" thành nút viên thuốc nền xanh rừng (chữ sáng, viền nổi khi rê chuột/bàn phím).
+- Đã đo ở 1280–2560px, vi/en, nhiều trang: không mục nào xuống dòng, không tràn ngang, khoảng cách tới logo và cụm tìm kiếm ≥ 13px. Chỉ đổi CSS (`global.css`), không đổi nội dung hay thứ tự mục.
+
 ## 2.29.1 — Bộ nhận diện theo câu chủ đạo mới; khung riêng cho câu bổ sung
 
 - **Bộ nhận diện đồng bộ** (`brand/`): brand book, hướng dẫn nhanh, bản chiến lược, README, mẫu in, mạng xã hội, văn phòng phẩm, bao bì, ấn phẩm, chữ ký email, mẫu chữ tiếng Việt và trang nội bộ `/living-zen/` đều dùng câu chủ đạo mới "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." (EN: "Understand yourself. Live with nature. Live self-directed. Grow together."). Logo, màu, font và token không đổi.
