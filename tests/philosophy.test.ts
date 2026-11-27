@@ -158,6 +158,24 @@ test('the philosophy line is the one main line of the website; the old line is g
   }
 });
 
+test('the brand pack and the internal brand page use the same main line (the old line is gone from their sources)', () => {
+  const oldLine = /Từ thiên nhiên, trở về với chính mình|Rooted in Nature\. Awakened Within|Rooted in nature\. Awakened within/;
+  const textFile = /\.(md|svg|py|html|json|css|txt)$/;
+  const files = [...(fs.readdirSync('brand', { recursive: true }) as string[])]
+    .map(name => `brand/${name}`)
+    .filter(file => textFile.test(file) && !file.endsWith('CHANGELOG.md') && !file.includes('/previews/'));
+  files.push('src/pages/living-zen/index.astro');
+  const stale = files.filter(file => oldLine.test(fs.readFileSync(file, 'utf8')));
+  assert.deepEqual(stale, [], 'no brand source still carries the old line');
+});
+
+for (const lang of langs) {
+  test(`${lang} philosophy page shows the complementary note as its own frame`, () => {
+    const page = mainOf(html(lang));
+    assert.equal((page.match(/class="ph-nature__place"/g) ?? []).length, 1, 'one framed note in the Living Zen section');
+  });
+}
+
 for (const lang of langs) {
   test(`${lang} Ecosystem page has one short pointer to the philosophy, not a second copy of it, and no longer cites learning at the farm`, () => {
     const eco = mainOf(fs.readFileSync(`dist${journeyPath(lang, 'ecosystem')}index.html`, 'utf8'));

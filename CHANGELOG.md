@@ -1,3 +1,10 @@
+## 2.29.1 — Bộ nhận diện theo câu chủ đạo mới; khung riêng cho câu bổ sung
+
+- **Bộ nhận diện đồng bộ** (`brand/`): brand book, hướng dẫn nhanh, bản chiến lược, README, mẫu in, mạng xã hội, văn phòng phẩm, bao bì, ấn phẩm, chữ ký email, mẫu chữ tiếng Việt và trang nội bộ `/living-zen/` đều dùng câu chủ đạo mới "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." (EN: "Understand yourself. Live with nature. Live self-directed. Grow together."). Logo, màu, font và token không đổi.
+- **Bố cục các mẫu**: biển hiệu và bìa Facebook/YouTube thu logo lại và tự co cỡ chữ để không chồng lên logo; bìa Zalo xếp logo phía trên, chữ phía dưới (bản cũ đã có chữ đè lên logo).
+- **Triết lý sống**: đoạn "Hương Thiền Nature là hệ sinh thái…" nằm trong một khung riêng, nền ngả vàng nhẹ và viền vàng bên trái, để đọc như phần bổ sung cho đoạn trên. Nội dung chữ không đổi; triết lý vẫn là v1.1.
+- Kiểm thử: `npm run test:philosophy` kiểm thêm việc không còn câu cũ trong `brand/` và trang `/living-zen/`, và khung bổ sung có đúng một lần trên trang.
+
 ## 2.29.0 — Một câu chủ đạo, một khối Living Zen, Triết lý sống v1.1 (đủ mười ví dụ)
 
 - **Câu chủ đạo của website** (chủ dự án chọn): "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." thay cho "Từ thiên nhiên, trở về với chính mình." ở Trang chủ, trang Hệ sinh thái và trang Triết lý. Nguồn duy nhất: `src/data/living-zen.ts` (`tagline`) cho hai trang đầu, `philosophyTagline` cho trang Triết lý (cùng một câu). Chữ nhỏ phía trên tiêu đề hero trang Hệ sinh thái đổi thành "Cùng trưởng thành" để khỏi trùng câu.

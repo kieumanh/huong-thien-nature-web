@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.29.1',
+    date: '2026-11-27',
+    vi: ['Bộ nhận diện theo câu chủ đạo mới; khung riêng cho câu bổ sung', 'Bộ nhận diện thương hiệu, mẫu in và mạng xã hội, cùng trang nội bộ /living-zen/ dùng câu chủ đạo mới. Trong Triết lý sống, đoạn "Hương Thiền Nature là hệ sinh thái" nằm trong một khung riêng với nền ngả vàng nhẹ để thể hiện đây là phần bổ sung.'],
+    en: ['Brand kit synced to the new guiding line; a separate frame for the complement', 'The brand kit, print and social templates, and the internal /living-zen/ page now use the new guiding line. On the Philosophy page, the "Hương Thiền Nature is the ecosystem" paragraph sits in its own frame with a soft warm tint, marking it as the complement.'],
+  },
+  {
     version: '2.29.0',
     date: '2026-11-27',
     vi: ['Một câu chủ đạo, một khối Living Zen, Triết lý sống v1.1', 'Câu chủ đạo của website là "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." Hai khối Living Zen được gộp thành một, phần về Farm trong "Vì sao là hệ sinh thái" được gọn lại, và cả mười giá trị trên trang Triết lý sống đều có ví dụ thật.'],

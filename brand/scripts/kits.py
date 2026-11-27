@@ -134,15 +134,32 @@ def social_avatar(w, dark=False):
     return canvas(w, w, mark(w * .14, w * .12, w * .72, fg), bg)
 
 
-def social_cover(w, h, safe_w, safe_h, dark=False):
+TAGLINE_VI = ['Hiểu mình. Thuận tự nhiên.', 'Sống tự chủ. Cùng trưởng thành.']
+
+
+def fit_tagline(x, y_center, max_w, cap, color, anchor='end', weight=700):
+    """Tagline hai dòng, co cỡ chữ để dòng dài nhất không vượt max_w (tránh đè lên logo)."""
+    size = min(cap, max_w / (.5 * max(len(line) for line in TAGLINE_VI)))
+    return T(x, y_center - .3 * size, '', size, SCRIPT, color, weight, anchor, lines=TAGLINE_VI, leading=1.3)
+
+
+def social_cover(w, h, safe_w, safe_h, dark=False, logo_ratio=.55, stacked=False):
     bg, fg, accent = (FOREST, PAPER, GOLD) if not dark else (NIGHT, GOLD_HI, GOLD)
     sx, sy = (w - safe_w) / 2, (h - safe_h) / 2
-    lh = safe_h * .55
-    lg, lw = logo_h(0, 0, lh, fg)
     body = pattern_fill('terrace-lines', fg, w, h, .1)
-    body += f'<g transform="translate({sx + safe_w * .04} {sy + (safe_h - lh) / 2})">{lg}</g>'
-    body += T(sx + safe_w * .96, sy + safe_h * .48, 'Từ thiên nhiên,', safe_h * .16, SCRIPT, accent, 700, 'end')
-    body += T(sx + safe_w * .96, sy + safe_h * .7, 'trở về với chính mình.', safe_h * .16, SCRIPT, accent, 700, 'end')
+    if stacked:
+        # logo trên, tagline căn giữa bên dưới (logo quá rộng để đặt cạnh chữ)
+        lh = safe_h * .42
+        lg, lw = logo_h(0, 0, lh, fg)
+        body += f'<g transform="translate({sx + (safe_w - lw) / 2} {sy + safe_h * .1})">{lg}</g>'
+        body += fit_tagline(sx + safe_w / 2, sy + safe_h * .1 + lh + safe_h * .2, safe_w * .8, safe_h * .15, accent, 'middle')
+    else:
+        lh = safe_h * logo_ratio
+        lg, lw = logo_h(0, 0, lh, fg)
+        x0 = sx + safe_w * .04
+        right = sx + safe_w * .96
+        body += f'<g transform="translate({x0} {sy + (safe_h - lh) / 2})">{lg}</g>'
+        body += fit_tagline(right, sy + safe_h / 2, right - (x0 + lw) - safe_w * .03, safe_h * .16, accent)
     body += f'<rect x="{sx}" y="{sy}" width="{safe_w}" height="{safe_h}" fill="none" stroke="{accent}" stroke-dasharray="12 10" opacity=".35"><title>Vùng an toàn — xóa khi xuất bản</title></rect>'
     return canvas(w, h, body, bg)
 
@@ -168,9 +185,9 @@ def social_story(w, h, title, text, dark=False):
 
 SOCIAL = {
     'facebook-avatar': lambda: social_avatar(1080),
-    'facebook-cover': lambda: social_cover(1640, 624, 1340, 400),
+    'facebook-cover': lambda: social_cover(1640, 624, 1340, 400, logo_ratio=.45),
     'zalo-avatar': lambda: social_avatar(1080),
-    'zalo-cover': lambda: social_cover(1500, 1000, 1200, 520),
+    'zalo-cover': lambda: social_cover(1500, 1000, 1200, 520, stacked=True),
     'youtube-avatar': lambda: social_avatar(800, dark=True),
     'youtube-banner': lambda: social_cover(2560, 1440, 1546, 423, dark=True),
     'youtube-thumbnail': lambda: social_thumbnail(1280, 720, '[Tiêu đề video ngắn gọn]'),
@@ -196,7 +213,7 @@ def print_canvas(w, h, body, bg=PAPER, bleed=3):
 
 def card_front():
     return print_canvas(90, 55, mark(5, 9, 36, PAPER) + T(46, 26, 'Hương Thiền', 9, SCRIPT, PAPER, 700) + T(58, 32, 'NATURE', 3, SERIF, PAPER, 500, 'middle', .9)
-                        + T(46, 44, 'Từ thiên nhiên, trở về với chính mình.', 2.6, SERIF, GOLD, 400, style='italic'), FOREST)
+                        + T(46, 43, '', 2.4, SERIF, GOLD, 400, style='italic', lines=['Hiểu mình. Thuận tự nhiên.', 'Sống tự chủ. Cùng trưởng thành.']), FOREST)
 
 
 def card_back():
@@ -234,7 +251,7 @@ def qr_card():
 
 def profile_cover():
     body = pattern_fill('contour-field', PAPER, 210, 297, .12, scale=.5) + logo_v(105, 40, 90, PAPER)
-    body += T(105, 175, 'Hồ sơ giới thiệu', 9, SERIF, PAPER, 500, 'middle') + T(105, 190, 'Rooted in Nature. Awakened Within.', 5, SCRIPT, GOLD, 700, 'middle')
+    body += T(105, 175, 'Hồ sơ giới thiệu', 9, SERIF, PAPER, 500, 'middle') + T(105, 190, '', 5, SCRIPT, GOLD, 700, 'middle', lines=['Understand yourself. Live with nature.', 'Live self-directed. Grow together.'])
     body += T(105, 270, f'[Năm] · {SITE}', 3.4, SANS, PAPER, 400, 'middle')
     return print_canvas(210, 297, body, FOREST)
 
@@ -256,7 +273,7 @@ PUBLISHING = {
                                      + T(74, 140, '[Tên sách]', 11, SERIF, PAPER, 500, 'middle') + T(74, 152, '[Phụ đề]', 4.5, SCRIPT, GOLD, 700, 'middle')
                                      + T(74, 168, '[Tác giả]', 3.6, SANS, PAPER, 400, 'middle', 1) + logo_h(48, 188, 9, PAPER)[0], FOREST),
     'ebook-cover': lambda: canvas(1600, 2560, motif(P.lotus_watermark, 200, 300, 1200, GOLD) + T(800, 1700, '[Tên ebook]', 130, SERIF, GOLD_HI, 500, 'middle')
-                                  + T(800, 1860, 'Từ thiên nhiên, trở về với chính mình.', 70, SCRIPT, GOLD, 700, 'middle') + logo_h(560, 2250, 150, GOLD_HI)[0], NIGHT),
+                                  + T(800, 1860, '', 70, SCRIPT, GOLD, 700, 'middle', lines=['Hiểu mình. Thuận tự nhiên.', 'Sống tự chủ. Cùng trưởng thành.']) + logo_h(560, 2250, 150, GOLD_HI)[0], NIGHT),
     'essay-cover': lambda: a5_page(motif(P.old_leaf, 44, 30, 60, MOSS) + T(74, 120, 'Tản văn', 5, SANS, GOLD_ACCENT, 700, 'middle', .8)
                                    + T(74, 135, '[Tên tản văn]', 10, SERIF, FOREST, 500, 'middle') + T(74, 147, '[Tác giả]', 4, SCRIPT, ORCHID, 700, 'middle') + logo_h(48, 188, 9)[0]),
     'chapter-opener': lambda: a5_page(T(20, 40, 'Chương [số]', 4, SANS, GOLD_ACCENT, 700, spacing=.6) + T(20, 56, '[Tên chương]', 10, SERIF, FOREST, 500)
@@ -347,7 +364,7 @@ PACKAGING = {
     'paper-box-dieline': lambda: print_canvas(240, 170, ''.join(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" fill="{PAPER}" stroke="{INK}" stroke-width=".3" stroke-dasharray="{d}"/>' for x, y, w, h, d in [(20, 50, 60, 70, '0'), (80, 50, 80, 70, '0'), (160, 50, 60, 70, '0'), (80, 10, 80, 40, '2 1'), (80, 120, 80, 40, '2 1')])
                                               + logo_v(120, 60, 42) + T(120, 112, '[Tên sản phẩm]', 4, SERIF, FOREST, 600, 'middle') + T(10, 166, 'Nét liền: cắt · nét đứt: gấp. Kích thước minh họa, đo lại theo sản phẩm thật.', 2.6, SANS, CLAY)),
     'paper-bag': lambda: print_canvas(260, 320, f'<rect x="20" y="40" width="220" height="270" rx="4" fill="#C9A77A"/>' + motif(P.ground_cover, 40, 240, 180, FOREST, .5) + logo_v(130, 110, 100, FOREST)
-                                      + T(130, 230, 'Từ thiên nhiên, trở về với chính mình.', 7, SCRIPT, FOREST, 700, 'middle') + f'<path d="M95 40 Q130 0 165 40" stroke="{FOREST}" stroke-width="3" fill="none"/>', '#FFFFFF'),
+                                      + T(130, 226, '', 6.4, SCRIPT, FOREST, 700, 'middle', lines=['Hiểu mình. Thuận tự nhiên.', 'Sống tự chủ. Cùng trưởng thành.']) + f'<path d="M95 40 Q130 0 165 40" stroke="{FOREST}" stroke-width="3" fill="none"/>', '#FFFFFF'),
     'stone-box-card': lambda: print_canvas(90, 90, motif(P.vesica, 25, 8, 40, GOLD_ACCENT, .8) + T(45, 56, '[Tên đá]', 5.4, SERIF, FOREST, 600, 'middle') + T(45, 64, '[Xuất xứ · kích thước · trọng lượng]', 2.6, SANS, INK, anchor='middle')
                                            + T(45, 74, 'Vật phẩm hỗ trợ thực hành và chiêm nghiệm,', 2.4, SANS, INK, anchor='middle', style='italic') + T(45, 78, 'không thay thế chăm sóc y tế.', 2.4, SANS, INK, anchor='middle', style='italic') + placeholder_tag(14, 86, 2.2)),
     'tote-bag': lambda: print_canvas(380, 420, f'<rect x="20" y="60" width="340" height="350" fill="#EFE6D2"/>' + logo_v(190, 140, 150) + T(190, 330, 'Gieo hạt tỉnh thức, nuôi dưỡng yêu thương.', 11, SCRIPT, FOREST, 700, 'middle'), '#FFFFFF'),
@@ -364,8 +381,14 @@ def board(w, h, title, lines, bg=FOREST, fg=PAPER, accent=GOLD, motif_fn=P.lotus
     return print_canvas(w, h, body, bg, bleed=10)
 
 
+def signboard():
+    lh, x0 = 170, 80
+    lg, lw = logo_h(x0, (400 - lh) / 2, lh, PAPER)
+    return print_canvas(1200, 400, lg + fit_tagline(1120, 200, 1120 - (x0 + lw) - 40, 44, GOLD), FOREST, 10)
+
+
 SPACE = {
-    'signboard-1200x400': lambda: print_canvas(1200, 400, logo_h(80, 80, 240, PAPER)[0] + T(1120, 330, 'Từ thiên nhiên, trở về với chính mình.', 44, SCRIPT, GOLD, 700, 'end'), FOREST, 10),
+    'signboard-1200x400': signboard,
     'welcome-board-600x900': lambda: print_canvas(600, 900, logo_v(300, 80, 260) + T(300, 470, 'Chào mừng bạn', 64, SCRIPT, ORCHID, 700, 'middle')
                                                   + T(300, 540, '', 26, SERIF, FOREST, 400, 'middle', lines=['Hãy chậm lại một nhịp.', 'Ở đây, bạn không cần phải vội.'], leading=1.6) + motif(P.ground_cover, 150, 640, 300, MOSS, .5), PAPER, 10),
     'wayfinding-600x200': lambda: print_canvas(600, 200, T(40, 118, 'Phòng thiền', 56, SERIF, PAPER, 500) + f'<path d="M470 100 H560 M525 65 L560 100 L525 135" stroke="{GOLD}" stroke-width="10" fill="none" stroke-linecap="round" stroke-linejoin="round"/>' + mark(330, 40, 120, PAPER), FOREST, 10),
@@ -383,7 +406,7 @@ def mock(w, h, base, body):
 MERCH = {
     'notebook': lambda: mock(800, 600, f'<rect x="230" y="60" width="340" height="460" rx="12" fill="{FOREST}"/><rect x="230" y="60" width="22" height="460" fill="#1A2E24"/>', logo_v(410, 170, 170, PAPER) + T(410, 420, 'Nhật ký thực hành', 22, SCRIPT, GOLD, 700, 'middle')),
     'tote': lambda: mock(800, 600, f'<path d="M330 120 Q400 20 470 120" stroke="#C9B48C" stroke-width="16" fill="none"/><rect x="220" y="120" width="360" height="420" fill="#EFE6D2"/>', logo_v(400, 200, 190) + T(400, 450, 'Có mặt trong đời mình.', 26, SCRIPT, FOREST, 700, 'middle')),
-    'tee': lambda: mock(800, 600, f'<path d="M290 60 L230 100 L170 170 L230 220 L260 190 L260 540 L540 540 L540 190 L570 220 L630 170 L570 100 L510 60 Q400 120 290 60 Z" fill="{PAPER}" stroke="#DDD5BF" stroke-width="3"/>', mark(345, 180, 110) + T(400, 330, 'Rooted in Nature.', 22, SCRIPT, FOREST, 700, 'middle')),
+    'tee': lambda: mock(800, 600, f'<path d="M290 60 L230 100 L170 170 L230 220 L260 190 L260 540 L540 540 L540 190 L570 220 L630 170 L570 100 L510 60 Q400 120 290 60 Z" fill="{PAPER}" stroke="#DDD5BF" stroke-width="3"/>', mark(345, 180, 110) + T(400, 330, 'Understand yourself. Live with nature.', 22, SCRIPT, FOREST, 700, 'middle')),
     'postcard': lambda: mock(800, 600, f'<rect x="120" y="120" width="560" height="360" rx="6" fill="{PAPER}"/>', motif(P.terraces, 140, 150, 300, MOSS, .7) + T(460, 260, '', 30, SCRIPT, ORCHID, 700, lines=['Gửi bạn', 'một chút bình yên.'], leading=1.3) + logo_h(460, 400, 46)[0]),
     'quote-greeting-card': lambda: mock(800, 600, f'<rect x="230" y="80" width="340" height="440" rx="6" fill="{NIGHT}"/>', motif(P.enso_light, 300, 120, 200, GOLD, .9) + T(400, 400, '', 26, SCRIPT, GOLD_HI, 700, 'middle', lines=['Mỗi ngày là một cơ hội', 'để bắt đầu lại.'], leading=1.3)),
     'gift-box': lambda: mock(800, 600, f'<rect x="200" y="200" width="400" height="300" fill="#C9A77A"/><rect x="190" y="160" width="420" height="60" fill="#B8956A"/><rect x="380" y="160" width="40" height="340" fill="{FOREST}"/>', mark(250, 280, 110, FOREST)),
@@ -429,7 +452,7 @@ EMAIL_SIGNATURE = f'''<!-- Hương Thiền Nature email signature. Paste into th
       <strong style="font-family:Georgia,serif;font-size:15px">[Họ và tên]</strong><br />
       <span style="color:#586557">[Vai trò] · Hương Thiền Nature</span><br />
       [Điện thoại / Zalo] · <a href="https://{SITE}/vi/" style="color:#713C63">{SITE}</a><br />
-      <em style="color:#713C63">Từ thiên nhiên, trở về với chính mình.</em>
+      <em style="color:#713C63">Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.</em>
     </td>
   </tr>
 </table>
