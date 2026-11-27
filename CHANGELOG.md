@@ -1,3 +1,10 @@
+## 2.30.1 — Câu chủ đạo ở tiêu đề trang chủ, file cài đặt và ảnh chia sẻ
+
+- Tiêu đề trang chủ dùng câu chủ đạo: "Hương Thiền Nature | Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." (bản Anh: câu tương ứng).
+- `site.webmanifest` (thông tin khi lưu trang ra màn hình điện thoại): mô tả đổi sang câu chủ đạo.
+- Ảnh chia sẻ mặc định (`public/media/social/huong-thien-nature-vi.jpg` và `-en.jpg`) in câu chủ đạo mới; mô tả ảnh (alt) khớp với ảnh. Ảnh Quỹ ủng hộ không đổi.
+- Không còn câu mô tả cũ "Thiền định, chánh niệm và sống thuận tự nhiên" trong `src`, `public`, `scripts`, `tests` và `brand`.
+
 ## 2.30.0 — Câu chủ đạo ở chân trang; khung tìm kiếm cửa hàng gọn hơn
 
 - **Chân trang**: logo giữ nguyên tỷ lệ, không còn cắt tròn, đứng riêng. Bên cạnh là tên thương hiệu và câu chủ đạo đầy đủ "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." (lấy từ `philosophyTagline`, cùng nguồn với trang Triết lý). Bản tiếng Anh dùng câu tương ứng.
