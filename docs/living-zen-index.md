@@ -1,6 +1,6 @@
 # Living Zen Index — bộ tự đánh giá nội bộ (đặc tả và mẫu)
 
-Tài liệu nội bộ, không công khai trên website. Phiên bản triết lý áp dụng: **Living Zen Philosophy v1.0** (27/11/2026).
+Tài liệu nội bộ, không công khai trên website. Phiên bản triết lý áp dụng: **Living Zen Philosophy v1.1** (27/11/2026).
 Nguồn nội dung 10 giá trị: `src/data/philosophy.ts`. Trang công khai: `/vi/triet-ly/`, `/en/philosophy/`.
 
 ## 1. Mục đích và giới hạn
@@ -62,7 +62,7 @@ Khi một rào chắn bị chạm: dừng phát hành, ghi lại vấn đề, n�
 ```
 Đối tượng đánh giá: …………………………………
 Người chấm: …………  Ngày: ……/……/……
-Phiên bản triết lý áp dụng: Living Zen Philosophy v1.0
+Phiên bản triết lý áp dụng: Living Zen Philosophy v1.1
 
 | # | Giá trị | Điểm (0–10) hoặc "Chưa đủ dữ liệu" | Bằng chứng / lý do | Việc cần làm | Phụ trách |
 |---|---------|--------------------------------------|--------------------|--------------|-----------|
@@ -95,7 +95,7 @@ Ngày rà soát tiếp theo: ……/……/……
 ## 6. Hiến chương phát triển lâu dài (versioning triết lý)
 
 - Triết lý có **phiên bản riêng**: v1.0 (công bố), v1.1 (bổ sung hoặc làm rõ nội dung), v2.0 (thay đổi lớn về cấu trúc và định hướng).
-- **Phiên bản triết lý độc lập với phiên bản mã nguồn website** (website hiện là 2.28.0; triết lý là v1.0). Website đổi thường xuyên; triết lý chỉ đổi khi hiểu biết thật sự thay đổi.
+- **Phiên bản triết lý độc lập với phiên bản mã nguồn website** (website hiện là 2.29.0; triết lý là v1.1). Website đổi thường xuyên; triết lý chỉ đổi khi hiểu biết thật sự thay đổi.
 - **Không sửa đổi âm thầm** những cam kết quan trọng. Mỗi thay đổi về bản chất phải ghi lại: nội dung thay đổi, lý do, ngày, tác động đến hệ sinh thái.
 - Rà soát định kỳ mỗi năm một lần (lần tới: 11/2027). Living Zen không phải bộ giáo điều bất biến.
 

@@ -197,8 +197,6 @@
 .landing-eco .album-strip-head { display: grid; justify-items: center; gap: .5rem; text-align: center; margin-inline: auto; }
 .landing-eco .album-strip-head h2 { font-size: clamp(1.9rem, 4.6vw, 3.1rem); line-height: 1.15; }
 .landing-eco .album-strip-more { display: flex; justify-content: center; }
-.landing-eco .lz-tiles { align-items: start; }
-.landing-eco .lz-not-line { margin-top: clamp(2rem, 5vw, 3rem); }
 
 /* Shop doorway on the Home page */
 .landing-shop { display: grid; gap: clamp(1.6rem, 4vw, 2.4rem); margin-block: var(--landing-gap, clamp(3rem, 8vw, 6rem)); }

@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.29.0',
+    date: '2026-11-27',
+    vi: ['Một câu chủ đạo, một khối Living Zen, Triết lý sống v1.1', 'Câu chủ đạo của website là "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." Hai khối Living Zen được gộp thành một, phần về Farm trong "Vì sao là hệ sinh thái" được gọn lại, và cả mười giá trị trên trang Triết lý sống đều có ví dụ thật.'],
+    en: ['One guiding line, one Living Zen block, Philosophy v1.1', 'The website\'s guiding line is now "Understand yourself. Live with nature. Live self-directed. Grow together." The two Living Zen blocks are merged into one, the Farm clause in "Why an ecosystem" is trimmed, and all ten values on the Philosophy page now carry a real example.'],
+  },
+  {
     version: '2.28.0',
     date: '2026-11-27',
     vi: ['Trang mới "Triết lý sống": Living Zen với mười giá trị', 'Trang Triết lý sống nằm trên menu, sau Câu chuyện: tuyên ngôn, mô hình ba tầng, mười giá trị có thể mở ra đọc, những điều chúng mình chọn không làm và cam kết với cộng đồng, kèm năm hình minh họa động và ảnh thật từ album. Album chuyển xuống mục Khám phá ở chân trang.'],

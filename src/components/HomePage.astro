@@ -21,7 +21,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from './Header.astro';
 import Footer from './Footer.astro';
 import LivingZenValues from './LivingZenValues.astro';
-import PhilosophyPointer from './PhilosophyPointer.astro';
 import { getCopy, type Language } from '../data/site';
 import { articlePath, journalPath } from '../data/articles';
 import { homeCopy, featuredArticles } from '../data/home';
@@ -82,8 +81,6 @@ const welcome = homeEmpathy(lang, {
     </section>
 
     <LivingZenValues {lang} />
-
-    <PhilosophyPointer {lang} />
 
     <EcosystemOverview {lang} />
 

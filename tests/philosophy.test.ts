@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
-import { philosophyCopy, philosophyEssays, philosophyTiers, philosophyValues, philosophyVersion, livingZenSeries } from '../src/data/philosophy.ts';
+import { philosophyCopy, philosophyEssays, philosophyTagline, philosophyTiers, philosophyValues, philosophyVersion, livingZenSeries } from '../src/data/philosophy.ts';
 import { resolveTarget } from '../src/data/philosophy-links.ts';
 import { articles } from '../src/data/articles.ts';
 import { journeyPath } from '../src/data/journey-pages.ts';
@@ -48,7 +48,7 @@ test('related essays exist and every link target resolves to a real place', () =
   assert(philosophyEssays.length >= 3 && philosophyEssays.length <= 6);
   for (const lang of langs) {
     for (const value of philosophyValues) {
-      if (!value.example) continue;
+      if (!value.example?.target) continue;
       const { href, external } = resolveTarget(lang, value.example.target);
       assert(external ? href.startsWith('https://') : href.startsWith(`/${lang}/`), `${value.id} example link ${href}`);
     }
@@ -56,11 +56,11 @@ test('related essays exist and every link target resolves to a real place', () =
 });
 
 test('the philosophy has its own version, independent of the website version, with a dated history', () => {
-  assert.equal(philosophyVersion.id, 'v1.0');
+  assert.equal(philosophyVersion.id, 'v1.1');
   assert.notEqual(philosophyVersion.number, pkg.version, 'the philosophy version is not the code version');
   for (const lang of langs) {
     const history = philosophyCopy[lang].changelog;
-    assert(history.length >= 1);
+    assert.deepEqual(history.map(entry => entry.version), ['1.1', '1.0'], 'newest change first, v1.0 kept');
     for (const entry of history as Array<Record<string, string>>) assert(entry.version && entry.date && entry.change && entry.reason && entry.impact, 'each change records content, reason, date and impact');
   }
 });
@@ -136,5 +136,43 @@ for (const lang of langs) {
     assert(listed.length < 5, `Home names ${listed.length} values; it should only point to the page`);
     const story = mainOf(fs.readFileSync(`dist${journeyPath(lang, 'story')}index.html`, 'utf8'));
     assert(hrefsIn(story).includes(journeyPath(lang, 'philosophy')), 'Story links to the philosophy');
+  });
+}
+
+test('every one of the ten values has a real example, and each example points to something that exists on the website', () => {
+  for (const value of philosophyValues) {
+    assert(value.example, `${value.id} needs an example`);
+    for (const lang of langs) assert(value.example.text[lang].length > 30, `${value.id} example ${lang}`);
+    if (value.example.target) assert(value.example.label?.vi && value.example.label?.en, `${value.id}: a linked example needs a label in both languages`);
+  }
+});
+
+test('the philosophy line is the one main line of the website; the old line is gone from public pages', () => {
+  const main = { vi: 'Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành.', en: 'Understand yourself. Live with nature. Live self-directed. Grow together.' };
+  for (const lang of langs) {
+    for (const file of [`dist/${lang}/index.html`, `dist${journeyPath(lang, 'ecosystem')}index.html`, `dist${journeyPath(lang, 'philosophy')}index.html`]) {
+      const page = fs.readFileSync(file, 'utf8');
+      assert(mainOf(page).includes(main[lang]) || philosophyTagline[lang].every(part => mainOf(page).includes(part)), `${file} carries the main line`);
+      assert(!/Từ thiên nhiên, trở về với chính mình|Rooted in nature\. Awakened within|Rooted in Nature\. Awakened Within/.test(page), `${file} still shows the old line`);
+    }
+  }
+});
+
+for (const lang of langs) {
+  test(`${lang} Ecosystem page has one short pointer to the philosophy, not a second copy of it, and no longer cites learning at the farm`, () => {
+    const eco = mainOf(fs.readFileSync(`dist${journeyPath(lang, 'ecosystem')}index.html`, 'utf8'));
+    assert(hrefsIn(eco).includes(journeyPath(lang, 'philosophy')), 'Ecosystem links to the philosophy');
+    assert(!/Tụi mình không phải là|What we are not|lz-tile|lz-not-line/.test(eco), 'the old "what we are not" and promises block is gone from the Ecosystem page');
+    assert(!/học hỏi tại Farm|learning from at Lê Lam Sơn/.test(eco), 'the sentence about learning at the farm is removed');
+    assert((eco.match(/class="lz-values[ "]/g) ?? []).length === 1, 'exactly one Living Zen block');
+    const home = mainOf(fs.readFileSync(`dist/${lang}/index.html`, 'utf8'));
+    assert((home.match(/class="lz-values[ "]/g) ?? []).length === 1, 'exactly one Living Zen block on Home');
+    assert(!home.includes('living-zen-philosophy'), 'the separate pointer section is gone from Home');
+  });
+
+  test(`${lang} philosophy page now holds what the Ecosystem page used to say about what Hương Thiền Nature is not`, () => {
+    const page = mainOf(html(lang));
+    const parts = lang === 'vi' ? ['tổ chức tâm linh huyền bí', 'chỉ bán khóa học', 'Không phán xét người chưa thực hành'] : ['mysterious spiritual organisation', 'only sells courses', 'not judge anyone who has not practised'];
+    for (const part of parts) assert(page.includes(part), `missing: ${part}`);
   });
 }

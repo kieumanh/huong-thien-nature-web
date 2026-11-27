@@ -17,6 +17,8 @@ export function resolveTarget(lang: Language, target: PhilosophyTarget): Resolve
     case 'feedback': return { href: journeyPath(lang, 'feedback'), external: false };
     case 'support': return { href: journeyPath(lang, 'support'), external: false };
     case 'story': return { href: journeyPath(lang, 'story'), external: false };
+    case 'ecosystem': return { href: journeyPath(lang, 'ecosystem'), external: false };
+    case 'history': return { href: `${journeyPath(lang, 'philosophy')}#ph-history`, external: false };
     case 'ecosystem-partners': return { href: `${journeyPath(lang, 'ecosystem')}#partnerships`, external: false };
     case 'journal': return { href: journalPath(lang), external: false };
     case 'shop': return { href: shopPath(lang), external: false };

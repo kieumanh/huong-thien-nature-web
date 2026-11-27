@@ -15,7 +15,7 @@ export type PhilosophyTier = 1 | 2 | 3;
 
 /** Where a link inside the philosophy page may go. The component resolves these to real routes. */
 export type PhilosophyTarget =
-  | { to: 'guidance' | 'practice' | 'journal' | 'ecosystem-partners' | 'shop' | 'shop-food' | 'support' | 'feedback' | 'contact' | 'zenwork' | 'story' }
+  | { to: 'guidance' | 'practice' | 'journal' | 'ecosystem' | 'ecosystem-partners' | 'shop' | 'shop-food' | 'support' | 'feedback' | 'contact' | 'zenwork' | 'story' | 'history' }
   | { to: 'article'; slug: string };
 
 export interface PhilosophyValue {
@@ -33,13 +33,13 @@ export interface PhilosophyValue {
   reflectionQuestion: Bi<string>;
   relatedArticles: string[];
   /** One fact the site already shows; omitted when nothing is confirmed. */
-  example?: { text: Bi<string>; target: PhilosophyTarget; label: Bi<string> };
+  example?: { text: Bi<string>; target?: PhilosophyTarget; label?: Bi<string> };
   version: string;
 }
 
 export const philosophyVersion = {
-  id: 'v1.0',
-  number: '1.0',
+  id: 'v1.1',
+  number: '1.1',
   published: '2026-11-27',
   updated: '2026-11-27',
   nextReview: '2027-11',
@@ -104,7 +104,7 @@ export const philosophyValues: PhilosophyValue[] = [
       target: { to: 'journal' },
       label: { vi: 'Đọc Tản văn', en: 'Read the journal' },
     },
-    version: '1.0',
+    version: '1.1',
   },
   {
     id: 'inner-sovereignty', slug: 'inner-sovereignty', no: 2, titleVi: 'Tự chủ thân, tâm và trí', titleEn: 'Inner Sovereignty', icon: 'inner-sovereignty', tier: 1,
@@ -149,7 +149,15 @@ export const philosophyValues: PhilosophyValue[] = [
       en: 'Am I learning to become more self-directed, or only looking for someone else to decide for me?',
     },
     relatedArticles: ['seven-layers', 'healing-as-coming-home'],
-    version: '1.0',
+    example: {
+      text: {
+        vi: 'Trang Gợi ý có phần hướng dẫn hơi thở một phút để bạn tự làm ngay tại chỗ, không cần tài khoản hay đăng ký.',
+        en: 'The Suggestions page has a one-minute breathing guide you can try right where you are, with no account or sign-up.',
+      },
+      target: { to: 'practice' },
+      label: { vi: 'Mở trang Gợi ý', en: 'Open Suggestions' },
+    },
+    version: '1.1',
   },
   {
     id: 'regenerative-living', slug: 'regenerative-living', no: 3, titleVi: 'Sống thuận tự nhiên và tái sinh', titleEn: 'Regenerative Living', icon: 'regenerative-living', tier: 2,
@@ -204,7 +212,7 @@ export const philosophyValues: PhilosophyValue[] = [
       target: { to: 'ecosystem-partners' },
       label: { vi: 'Gặp người đồng hành', en: 'Meet our partners' },
     },
-    version: '1.0',
+    version: '1.1',
   },
   {
     id: 'interconnected-living', slug: 'interconnected-living', no: 4, titleVi: 'Sống trong sự tương liên', titleEn: 'Interconnected Living', icon: 'interconnected-living', tier: 2,
@@ -249,7 +257,15 @@ export const philosophyValues: PhilosophyValue[] = [
       en: 'Who and what are my seemingly private choices affecting?',
     },
     relatedArticles: ['sun-moon-rhythms', 'listening-to-nature'],
-    version: '1.0',
+    example: {
+      text: {
+        vi: 'Trang Hệ sinh thái cho thấy ba trọng tâm và các đối tác đồng hành (nông trại, không gian thực hành, đá thanh lọc, công nghệ) bổ trợ lẫn nhau thế nào.',
+        en: 'The Ecosystem page shows how our three focal points and our partners (a farm, practice spaces, stones, technology) support one another.',
+      },
+      target: { to: 'ecosystem' },
+      label: { vi: 'Xem hệ sinh thái', en: 'See the ecosystem' },
+    },
+    version: '1.1',
   },
   {
     id: 'conscious-economy', slug: 'conscious-economy', no: 5, titleVi: 'Kinh tế tỉnh thức', titleEn: 'Conscious Economy', icon: 'conscious-economy', tier: 3,
@@ -304,7 +320,7 @@ export const philosophyValues: PhilosophyValue[] = [
       target: { to: 'guidance' },
       label: { vi: 'Xem các khóa thực hành', en: 'See the practice courses' },
     },
-    version: '1.0',
+    version: '1.1',
   },
   {
     id: 'collective-wisdom', slug: 'collective-wisdom', no: 6, titleVi: 'Trí tuệ cộng đồng', titleEn: 'Collective Wisdom', icon: 'collective-wisdom', tier: 2,
@@ -357,7 +373,7 @@ export const philosophyValues: PhilosophyValue[] = [
       target: { to: 'feedback' },
       label: { vi: 'Đọc phản hồi học viên', en: 'Read student feedback' },
     },
-    version: '1.0',
+    version: '1.1',
   },
   {
     id: 'mindful-innovation', slug: 'mindful-innovation', no: 7, titleVi: 'Sáng tạo trong tỉnh thức', titleEn: 'Mindful Innovation', icon: 'mindful-innovation', tier: 3,
@@ -404,7 +420,13 @@ export const philosophyValues: PhilosophyValue[] = [
       en: 'Does the technology I use help me live more deeply, or make it ever harder to be present?',
     },
     relatedArticles: [],
-    version: '1.0',
+    example: {
+      text: {
+        vi: 'Website này không có quảng cáo; nhạc nền chỉ phát khi bạn bật; hình động dừng lại khi bạn chọn giảm chuyển động; các lựa chọn của bạn chỉ được lưu trên máy của bạn.',
+        en: 'This website has no ads; background music plays only when you switch it on; animation stops when you ask for reduced motion; your choices are saved only on your own device.',
+      },
+    },
+    version: '1.1',
   },
   {
     id: 'compassionate-service', slug: 'compassionate-service', no: 8, titleVi: 'Phụng sự bằng lòng từ bi', titleEn: 'Compassionate Service', icon: 'compassionate-service', tier: 3,
@@ -457,7 +479,7 @@ export const philosophyValues: PhilosophyValue[] = [
       target: { to: 'support' },
       label: { vi: 'Đến Quỹ ủng hộ', en: 'Go to the Support fund' },
     },
-    version: '1.0',
+    version: '1.1',
   },
   {
     id: 'embodied-wisdom', slug: 'embodied-wisdom', no: 9, titleVi: 'Trí tuệ từ trải nghiệm sống', titleEn: 'Embodied Wisdom', icon: 'embodied-wisdom', tier: 1,
@@ -510,7 +532,7 @@ export const philosophyValues: PhilosophyValue[] = [
       target: { to: 'article', slug: 'sun-moon-rhythms' },
       label: { vi: 'Đọc bài viết', en: 'Read the piece' },
     },
-    version: '1.0',
+    version: '1.1',
   },
   {
     id: 'freedom-from-attachment', slug: 'freedom-from-attachment', no: 10, titleVi: 'Tự do khỏi chấp trước', titleEn: 'Freedom from Attachment', icon: 'freedom-from-attachment', tier: 1,
@@ -557,7 +579,15 @@ export const philosophyValues: PhilosophyValue[] = [
       en: 'Am I perhaps clinging to the very idea that I am someone who does not cling?',
     },
     relatedArticles: ['returning-attention'],
-    version: '1.0',
+    example: {
+      text: {
+        vi: 'Chính triết lý này có số phiên bản, lịch sử thay đổi được ghi lại ngay trên trang và lịch rà soát mỗi năm một lần.',
+        en: 'This philosophy itself has a version number, a change history recorded on the page and a review once a year.',
+      },
+      target: { to: 'history' },
+      label: { vi: 'Xem lịch sử thay đổi', en: 'See the change history' },
+    },
+    version: '1.1',
   },
 ];
 
@@ -623,7 +653,7 @@ export const philosophyCopy = {
       closing: 'Living Zen không phải câu trả lời cho tất cả những điều ấy. Đó là một lời mời nhẹ nhàng: dừng lại, nhìn rõ, rồi chọn cách sống của chính mình.',
       natureTitle: 'Living Zen là gì, và không là gì',
       nature: 'Living Zen được nuôi dưỡng từ trí tuệ phương Đông, thiền và chánh niệm, tâm lý học hiện đại, tinh thần khoa học, nông nghiệp thuận tự nhiên, tư duy hệ sinh thái, công nghệ có đạo đức, kinh tế bền vững, trí tuệ cộng đồng và tinh thần phụng sự. Chúng mình không tuyệt đối hóa nguồn tri thức nào, không dùng tuyên bố khoa học thiếu căn cứ để hợp thức hóa niềm tin tâm linh, và tôn trọng quyền tự do nhận thức, trải nghiệm và lựa chọn của mỗi người.',
-      place: 'Hương Thiền Nature là hệ sinh thái. Living Zen là nền tảng triết lý định hướng cho hệ sinh thái ấy, không phải một thương hiệu riêng.',
+      place: 'Hương Thiền Nature là hệ sinh thái. Living Zen là nền tảng triết lý định hướng cho hệ sinh thái ấy, không phải một thương hiệu riêng. Hương Thiền Nature không phải một tổ chức tâm linh huyền bí, không phải nơi chỉ bán khóa học và không phải một thương hiệu sản phẩm thiên nhiên đơn lẻ.',
       figure: 'Hình minh họa: những chấm tròn nhỏ ban đầu rải rác rồi từ từ xếp thành một đường thẳng bình yên bên một vầng sáng thở chậm.',
     },
     manifesto: {
@@ -708,7 +738,7 @@ export const philosophyCopy = {
       title: 'Những điều chúng mình cam kết thực hiện',
       lead: 'Đây là những định hướng và cam kết chúng mình cần thực hiện từng ngày, không phải lời khẳng định rằng mọi điều đã hoàn hảo. Nếu bạn thấy việc chúng mình làm chưa đúng với những dòng này, xin hãy cho chúng mình biết.',
       groups: [
-        { id: 'learners', icon: 'sprout', title: 'Học viên', text: 'Tôn trọng quyền tự chủ của bạn: không áp đặt niềm tin, không tạo sự lệ thuộc vào người hướng dẫn, và nói thật về phạm vi và giới hạn của từng phương pháp.' },
+        { id: 'learners', icon: 'sprout', title: 'Học viên', text: 'Tôn trọng quyền tự chủ của bạn: không áp đặt niềm tin, không tạo sự lệ thuộc vào người hướng dẫn, và nói thật về phạm vi và giới hạn của từng phương pháp. Không phán xét người chưa thực hành: ai cũng bắt đầu từ chỗ mình đang đứng.' },
         { id: 'readers', icon: 'book', title: 'Người đọc', text: 'Phân biệt rõ điều đã được kiểm chứng, điều thuộc kinh nghiệm cá nhân và điều thuộc niềm tin; ghi nguồn khi trích dẫn; sửa khi sai.' },
         { id: 'customers', icon: 'heart', title: 'Khách hàng', text: 'Định giá minh bạch, mô tả sản phẩm trung thực, không khai thác nỗi sợ hay sự bất an để bán hàng.' },
         { id: 'users', icon: 'chat', title: 'Người dùng công nghệ', text: 'Hướng tới phần mềm gọn nhẹ, tôn trọng quyền riêng tư và dữ liệu cá nhân, không dùng cơ chế gây nghiện, và minh bạch khi có dùng AI.' },
@@ -739,12 +769,11 @@ export const philosophyCopy = {
       text: 'Chúng mình không mong tất cả mọi người đi cùng một con đường. Chúng mình chỉ mong mỗi người có thể bước đi trên con đường của mình với nhiều hiểu biết, tự do, tình thương và sự hiện diện hơn.',
     },
     changelog: [
+      { version: '1.1', date: '2026-11-27', change: 'Làm rõ và bổ sung: thêm ví dụ có thật cho bốn giá trị (Tự chủ thân, tâm và trí; Sống trong sự tương liên; Sáng tạo trong tỉnh thức; Tự do khỏi chấp trước); thêm ba điều Hương Thiền Nature không phải là và cam kết không phán xét người chưa thực hành; chọn "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành." làm câu chính của website.', reason: 'Gộp phần Living Zen ở trang Hệ sinh thái vào một nơi duy nhất để không nói hai lần, và để mọi giá trị đều có ví dụ kiểm chứng được trên chính website, không dựa vào lời hứa.', impact: 'Không thay đổi sản phẩm hay dịch vụ nào. Trang Hệ sinh thái chỉ còn lối dẫn sang trang này; câu chính của website đổi sang câu của triết lý.' },
       { version: '1.0', date: '2026-11-27', change: 'Công bố lần đầu: tuyên ngôn, mười giá trị cốt lõi, mô hình ba tầng, những điều chúng mình chọn không làm và cam kết với cộng đồng.', reason: 'Gom những nguyên tắc vẫn đang định hướng công việc thành một văn bản mở để mọi người cùng đọc, góp ý và giám sát.', impact: 'Trở thành nền tảng giá trị cho website và các dự án trong hệ sinh thái. Chưa thay đổi sản phẩm hay dịch vụ nào.' },
     ],
     home: {
-      eyebrow: 'Tinh thần Living Zen',
-      title: 'Một định hướng sống mở',
-      text: 'Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành. Living Zen không phải một tôn giáo và không mời ai đi cùng một con đường. Đó là mạch giá trị đứng sau mọi việc chúng mình làm.',
+      text: 'Living Zen không phải một tôn giáo và không mời ai đi cùng một con đường. Đó là mạch giá trị đứng sau mọi việc chúng mình làm, từ một bài tản văn đến một luống rau.',
       link: 'Khám phá triết lý sống',
     },
     story: {
@@ -779,7 +808,7 @@ export const philosophyCopy = {
       closing: 'Living Zen is not an answer to all of this. It is a gentle invitation: pause, see clearly, then choose how to live in your own way.',
       natureTitle: 'What Living Zen is, and is not',
       nature: 'Living Zen is nurtured by Eastern wisdom, meditation and mindfulness, modern psychology, the scientific spirit, natural farming, ecosystem thinking, ethical technology, a sustainable economy, community wisdom and a spirit of service. We do not absolutise any source of knowledge, we do not use unsupported scientific claims to justify spiritual belief, and we respect each person’s freedom to perceive, experience and choose.',
-      place: 'Hương Thiền Nature is the ecosystem. Living Zen is the philosophical foundation that guides it, not a separate brand.',
+      place: 'Hương Thiền Nature is the ecosystem. Living Zen is the philosophical foundation that guides it, not a separate brand. Hương Thiền Nature is not a mysterious spiritual organisation, not a place that only sells courses, and not a single nature-products brand.',
       figure: 'Illustration: small dots, scattered at first, slowly settle into one calm line beside a slowly breathing glow.',
     },
     manifesto: {
@@ -864,7 +893,7 @@ export const philosophyCopy = {
       title: 'What we commit to carrying out',
       lead: 'These are directions and commitments we need to carry out every day, not a claim that everything is already perfect. If you see us falling short of these lines, please tell us.',
       groups: [
-        { id: 'learners', icon: 'sprout', title: 'Students', text: 'To respect your autonomy: no imposed beliefs, no dependence on a guide, and honesty about the scope and limits of each method.' },
+        { id: 'learners', icon: 'sprout', title: 'Students', text: 'To respect your autonomy: no imposed beliefs, no dependence on a guide, and honesty about the scope and limits of each method. We do not judge anyone who has not practised yet: everyone begins where they stand.' },
         { id: 'readers', icon: 'book', title: 'Readers', text: 'To tell apart what has been verified, what is personal experience and what is belief; to name our sources when we cite; to correct ourselves when wrong.' },
         { id: 'customers', icon: 'heart', title: 'Customers', text: 'Transparent pricing, honest product descriptions, and no use of fear or insecurity to sell.' },
         { id: 'users', icon: 'chat', title: 'People who use our technology', text: 'To work toward light software that respects privacy and personal data, avoids addictive mechanisms and is open about where AI is used.' },
@@ -895,12 +924,11 @@ export const philosophyCopy = {
       text: 'We do not hope that everyone will walk the same path. We only hope each person can walk their own with more understanding, freedom, kindness and presence.',
     },
     changelog: [
+      { version: '1.1', date: '2026-11-27', change: 'Clarified and added to: real examples for four more values (Inner Sovereignty, Interconnected Living, Mindful Innovation, Freedom from Attachment); three things Hương Thiền Nature is not, and a commitment not to judge anyone who has not practised yet; "Understand yourself. Live with nature. Live self-directed. Grow together." is now the main line of the website.', reason: 'To bring the Living Zen content from the Ecosystem page into one place instead of saying it twice, and so that every value has an example anyone can check on this very website, not a promise.', impact: 'No product or service has been changed. The Ecosystem page now only points here; the website\'s main line becomes the philosophy\'s line.' },
       { version: '1.0', date: '2026-11-27', change: 'First publication: the manifesto, ten core values, the three-layer model, what we choose not to do, and our commitments to the community.', reason: 'To gather the principles that already guide our work into one open text that everyone can read, question and hold us to.', impact: 'It becomes the value foundation for the website and the projects in the ecosystem. No product or service has been changed.' },
     ],
     home: {
-      eyebrow: 'The spirit of Living Zen',
-      title: 'An open way of living',
-      text: 'Understand yourself. Live with nature. Live self-directed. Grow together. Living Zen is not a religion and does not ask anyone to walk the same path. It is the thread of values behind everything we do.',
+      text: 'Living Zen is not a religion and does not ask anyone to walk the same path. It is the thread of values behind everything we make, from a journal piece to a vegetable bed.',
       link: 'Explore the philosophy',
     },
     story: {
