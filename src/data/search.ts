@@ -4,6 +4,7 @@ import { tarotLanding, tarotResearchCopy, tarotSources } from './tarot-guidance.
 import { contactPath, contactEmail, hotline } from './contact-channels.ts';
 import { articles, articlePath } from './articles.ts';
 import { ecosystemVision } from './ecosystem-vision.ts';
+import { ecosystemWhy } from './ecosystem-why.ts';
 import { journeyPageKeys, journeyPages, journeyPath, partnerProfiles } from './journey-pages.ts';
 import { getCopy, type Language } from './site.ts';
 import { products, productPath, shopPath, productCategories, formatPrice, stockLabel } from './products.ts';
@@ -35,7 +36,7 @@ export function buildSearchIndex(lang: Language): SearchEntry[] {
         journeyPages[page][lang].description,
         page === 'story' ? [t.introCopy, t.founderCopy, 'Carla Phương Cao, Thích Nhất Hạnh, Patriji, Hoàng Thị Phương Thảo, PSSM Việt Nam, Tịnh độ, Quảng Nam'] : '',
         page === 'practice' ? [t.practiceCopy, t.steps] : '',
-        page === 'ecosystem' ? [t.natureCards, t.natureNote, t.phases, ecosystemVision[lang]] : '',
+        page === 'ecosystem' ? [t.natureCards, t.natureNote, t.phases, ecosystemVision[lang], ecosystemWhy[lang]] : '',
         page === 'team' ? partnerProfiles.map(partner => [partner.name, partner[lang], partner.label]) : '',
         page === 'support' ? [supportFund[lang], 'TPBank Tiên Phong'] : '',
       ]),

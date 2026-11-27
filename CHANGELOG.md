@@ -1,3 +1,11 @@
+## 2.27.0 — Trang Hệ sinh thái: vì sao là hệ sinh thái (so sánh với Linux), kèm hình động
+
+- **Phần mới "Vì sao là hệ sinh thái"** (`#why-ecosystem`) đặt trên trang Hệ sinh thái, ngay sau vòng lặp "eco-loop" và trước khối Living Zen. Chọn trang Hệ sinh thái thay vì Trang chủ vì đây là nơi giải thích ý nghĩa; Trang chủ đã dày và có ngân sách chữ chặt. Nội dung mượn hình ảnh Linux mã nguồn mở (nhiều cộng đồng cùng xây trên một nền chung) để giải thích vì sao Hương Thiền Nature lan tỏa theo kiểu hệ sinh thái chứ không theo kiểu một cây đơn lẻ.
+- **Hình minh họa động** `EcosystemWhy.astro` (SVG nội tuyến + CSS keyframes, không SMIL): bên trái một cây đơn lẻ với rễ ngắn, hạt chỉ rơi quanh gốc; bên phải một khu vườn nhiều tầng, rễ nối nhau, xung dinh dưỡng chạy dọc rễ, hạt giống bay từ tán cây lớn xuống rồi mọc thành mầm mới. Cây đung đưa rất nhẹ. Bật giảm chuyển động thì cây đứng yên, mầm đã lớn, không có hạt bay hay xung chạy. Màu sáng/tối đều đọc được.
+- Ba ý ngắn bên dưới: "Chung một nền", "Mỗi nơi một vai", "Lan tỏa như hạt giống", cùng một dòng lưu ý rằng đa dạng vẫn cần người chăm sóc để giữ đúng tinh thần chung. Không hứa hẹn kết quả, không nói về cách làm cụ thể của farm, không lặp Thân/Tâm/Trí.
+- Dữ liệu chữ song ngữ ở `src/data/ecosystem-why.ts` (và được lập chỉ mục tìm kiếm trong `src/data/search.ts`).
+- Nâng ngân sách chữ trang Hệ sinh thái trong `tests/landing.test.mjs`: vi 900 → 980, en 760 → 820. Thêm hai bài kiểm tra cho phần mới (nội dung, hai khung so sánh, ba ý, chỉ có ở trang Hệ sinh thái; CSS keyframes, giảm chuyển động).
+
 ## 2.26.6 — Phần kết Hệ sinh thái: ảnh nghỉ chân dưới hàng dừa
 
 - Đổi ảnh phần kết sang `beach-palms` (1280 × 960, 4:3): người phụ nữ mỉm cười dưới hàng dừa, em bé đang ăn bên cạnh. Ảnh thể hiện sự bình an và hạnh phúc đơn giản, và giữ đúng tỷ lệ gốc nên không bị cắt.

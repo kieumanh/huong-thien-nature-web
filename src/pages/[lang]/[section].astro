@@ -14,6 +14,7 @@ import AlbumStrip from '../../components/AlbumStrip.astro';
 import BreathGuide from '../../components/BreathGuide.astro';
 import TeamProfiles from '../../components/TeamProfiles.astro';
 import EcosystemIllustration from '../../components/EcosystemIllustration.astro';
+import EcosystemWhy from '../../components/EcosystemWhy.astro';
 import EcosystemHero from '../../components/EcosystemHero.astro';
 import LandingMotion from '../../components/LandingMotion.astro';
 import AlbumImage from '../../components/AlbumImage.astro';
@@ -158,6 +159,7 @@ import PillarIcon from '../../components/PillarIcon.astro';
         <h2 id="eco-loop-title" class="sr-only">{vision.loop.title}</h2>
         <EcosystemIllustration {...vision.loop} variant="loop" />
       </section>
+      <EcosystemWhy {lang} />
       <LivingZenValues {lang} variant="full" id="living-zen" />
       <AlbumStrip {lang} id="garden-moments" balanced photos={['banana-grove-house', 'seedling-coconut-shell', 'flowers-red-path', 'veggie-sunset']}
         title={vi ? 'Từ khu vườn Gửi Yêu Thương Vào Đất' : 'From the Gửi Yêu Thương Vào Đất garden'}
