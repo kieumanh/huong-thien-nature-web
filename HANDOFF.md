@@ -1,6 +1,6 @@
 # Bàn giao phát triển Hương Thiền Nature
 
-Cập nhật: 2026-11-28, phiên bản 2.30.3 (tên thương hiệu chân trang lớn hơn câu chủ đạo ở ba loại thiết bị; 2.30.2 cỡ chữ slogan chân trang: điện thoại 17px, máy tính bảng 18px, máy tính 16px; 2.30.1 tiêu đề trang chủ, manifest và ảnh chia sẻ dùng câu chủ đạo; 2.30.0 chân trang có câu chủ đạo đầy đủ; khung lọc cửa hàng gọn hơn; 2.29.3 sửa menu máy tính ở 1440px; 2.29.2 thêm gạch chân trang hiện tại, cỡ chữ lớn từ 1600px, nút Liên hệ viên thuốc). Trước đó, 2.29.1 (bộ nhận diện đồng bộ câu chủ đạo mới; khung riêng cho câu bổ sung ở Triết lý sống). Trước đó, 2.29.0 (một câu chủ đạo "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành."; một khối Living Zen; Living Zen Philosophy v1.1 đủ mười ví dụ). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
+Cập nhật: 2026-11-28, phiên bản 2.30.4 (logo chân trang tròn như đầu trang, cùng ảnh forest; 2.30.3 tên thương hiệu chân trang lớn hơn câu chủ đạo ở ba loại thiết bị; 2.30.2 cỡ chữ slogan chân trang: điện thoại 17px, máy tính bảng 18px, máy tính 16px; 2.30.1 tiêu đề trang chủ, manifest và ảnh chia sẻ dùng câu chủ đạo; 2.30.0 chân trang có câu chủ đạo đầy đủ; khung lọc cửa hàng gọn hơn; 2.29.3 sửa menu máy tính ở 1440px; 2.29.2 thêm gạch chân trang hiện tại, cỡ chữ lớn từ 1600px, nút Liên hệ viên thuốc). Trước đó, 2.29.1 (bộ nhận diện đồng bộ câu chủ đạo mới; khung riêng cho câu bổ sung ở Triết lý sống). Trước đó, 2.29.0 (một câu chủ đạo "Hiểu mình. Thuận tự nhiên. Sống tự chủ. Cùng trưởng thành."; một khối Living Zen; Living Zen Philosophy v1.1 đủ mười ví dụ). Điểm neo trước đợt này: nhánh `anchor/2026-11-26-v2.23.0`.
 
 ## Nguồn sự thật
 
@@ -44,6 +44,7 @@ Repository `kieumanh/huong-thien-nature-web`, nhánh `main`. Hội thoại cũ (
 | 24/11 | 2.17.0: trang Quỹ ủng hộ (vi/en) có hình động, thông tin chuyển khoản + QR TPBank của Kiều Xuân Mạnh; khối Quỹ ủng hộ ở chân trang. |
 | 24/11 | 2.16.2: gỡ dòng số khẩn cấp 115; thêm ZenWork vào Hệ sinh thái; thanh chế độ đọc nằm trong luồng trang; khoảng cách trang Gợi ý. |
 | 24/11 | 2.16.1: gỡ "Khu vườn của tôi" (mục, nút Lưu, nhắc đọc tiếp) khỏi Tản văn; canh giữa nút Liên hệ Trang chủ. |
+| 28/11 | 2.30.4: logo chân trang tròn (`Footer.astro`, `.footer-logo`, ảnh `huong-thien-logo-forest.webp` như đầu trang) |
 | 28/11 | 2.30.3: tên thương hiệu chân trang 18/20/18px, câu chủ đạo 15/16/15px theo ba mốc 640/960px (`Footer.astro`, `.footer-brand`, `.footer-tagline`) |
 | 28/11 | 2.30.2: cỡ chữ slogan chân trang theo ba mốc 640/960px (`Footer.astro`, `.footer-tagline`); cột thương hiệu ở máy tính 1,1 : 1,4 |
 | 28/11 | 2.30.1: tiêu đề trang chủ (`HomePage.astro`), `public/site.webmanifest`, ảnh chia sẻ `public/media/social/huong-thien-nature-{vi,en}.jpg` (mẫu `scripts/social-images/template.html`, `BaseLayout.astro` alt) dùng `philosophyTagline` |
