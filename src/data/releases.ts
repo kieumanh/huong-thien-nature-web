@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.30.3',
+    date: '2026-11-28',
+    vi: ['Tên thương hiệu chân trang lớn hơn câu chủ đạo', 'Ở cả ba loại thiết bị, "Hương Thiền Nature" luôn lớn hơn câu chủ đạo bên dưới; câu chủ đạo vẫn nằm trên hai dòng.'],
+    en: ['The footer name is larger than the tagline', 'On all three device types, "Hương Thiền Nature" is larger than the tagline beneath it, and the tagline stays on two lines.'],
+  },
+  {
     version: '2.30.2',
     date: '2026-11-28',
     vi: ['Cỡ chữ chân trang hợp lý trên ba loại thiết bị', 'Slogan chân trang có ba cỡ chữ cho điện thoại, máy tính bảng và máy tính; mỗi cụm câu nằm trọn một dòng ở máy tính.'],

@@ -1,3 +1,13 @@
+## 2.30.3 — Tên thương hiệu chân trang lớn hơn câu chủ đạo
+
+- Thứ bậc chữ ở chân trang: "Hương Thiền Nature" luôn lớn hơn câu chủ đạo ở cả ba loại thiết bị.
+  - Điện thoại (dưới 640px): tên 18px, câu chủ đạo 15px.
+  - Máy tính bảng (640–959px): tên 20px, câu chủ đạo 16px.
+  - Máy tính (từ 960px): tên 18px, câu chủ đạo 15px.
+- Khoảng cách chữ của tên thương hiệu giảm từ 0,14em xuống 0,12em, để tên vừa một dòng ở cột hẹp nhất.
+- Đã đo ở 320, 360, 390, 639, 640, 820, 959, 960, 1080 và 1440px, cả tiếng Việt lẫn tiếng Anh: tên luôn một dòng và lớn hơn câu chủ đạo; câu chủ đạo luôn hai dòng.
+- Bản 2.30.2 để tên 12px, nhỏ hơn câu chủ đạo 16–18px, nên thứ bậc bị đảo ngược.
+
 ## 2.30.2 — Cỡ chữ chân trang hợp lý trên ba loại thiết bị
 
 - Slogan ở chân trang có ba cỡ chữ cố định: điện thoại (dưới 640px) 17px, máy tính bảng (640–959px) 18px, máy tính (từ 960px) 16px.
