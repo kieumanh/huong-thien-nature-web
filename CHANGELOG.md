@@ -1,3 +1,9 @@
+## 2.30.4 — Logo chân trang tròn như đầu trang
+
+- Logo ở chân trang dùng cùng ảnh và kiểu cắt tròn với logo đầu trang (`huong-thien-logo-forest.webp`), thay cho logo tam giác nằm trong ô vuông bo góc.
+- Viền kem và đĩa xanh giữ như đầu trang, cả chế độ ngày lẫn đêm (ban đêm viền kem thay vì viền tím tối).
+- Kích thước không đổi: 64px trên máy tính, 60px trên điện thoại.
+
 ## 2.30.3 — Tên thương hiệu chân trang lớn hơn câu chủ đạo
 
 - Thứ bậc chữ ở chân trang: "Hương Thiền Nature" luôn lớn hơn câu chủ đạo ở cả ba loại thiết bị.

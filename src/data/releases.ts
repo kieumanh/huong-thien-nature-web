@@ -16,6 +16,12 @@ type Release = {
 
 export const releases: Release[] = [
   {
+    version: '2.30.4',
+    date: '2026-11-28',
+    vi: ['Logo chân trang tròn như đầu trang', 'Logo ở chân trang dùng cùng ảnh và kiểu cắt tròn với logo đầu trang, cả ban ngày lẫn ban đêm.'],
+    en: ['The footer logo is round, like the header', 'The footer logo uses the same image and round crop as the header, by day and at night.'],
+  },
+  {
     version: '2.30.3',
     date: '2026-11-28',
     vi: ['Tên thương hiệu chân trang lớn hơn câu chủ đạo', 'Ở cả ba loại thiết bị, "Hương Thiền Nature" luôn lớn hơn câu chủ đạo bên dưới; câu chủ đạo vẫn nằm trên hai dòng.'],
